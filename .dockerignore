@@ -10,7 +10,7 @@ Dockerfile
 deploy
 prompt.md
 README.md
-README.en.md
+README.zh-Hans.md
 LICENSE
 *.log
 .env
