@@ -1,0 +1,8 @@
+# POPOPX Service Suite portal — crawler policy.
+# Served from this origin only; there is no third-party endpoint to protect.
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+# Canonical host for SEO metadata, Open Graph and this sitemap.
+Sitemap: https://mp.popopx.chat/sitemap.xml

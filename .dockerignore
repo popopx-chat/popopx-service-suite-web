@@ -1,0 +1,23 @@
+# Build context hygiene: the image only needs package files, src/ and public/.
+node_modules
+.next
+out
+dist
+.git
+.gitignore
+Dockerfile
+.dockerignore
+deploy
+prompt.md
+README.md
+README.en.md
+LICENSE
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+.vscode
+.idea
+coverage
+.cache

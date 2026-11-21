@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  POPOPX Service Suite portal sitemap.
+
+  The portal is a single-page static export: every module is an anchor on `/`
+  (`#features`, `#architecture`, `#plugins`, `#sandbox`, `#install`,
+  `#directory`), and the 18 languages are switched client-side rather than by
+  URL. So there is exactly one indexable location — listing anchors or
+  per-language URLs here would point crawlers at pages that do not exist.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mp.popopx.chat/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
