@@ -102,7 +102,10 @@ has_systemd() { [[ -d /run/systemd/system ]]; }
 
 nginx_version() {
   local raw
-  raw="$(nginx -v 2>&1 | sed -E 's|.*/?([0-9]+\.[0-9]+(\.[0-9]+)?).*|\1|')"
+  # `grep -oE`, not a substitution: a greedy `.*` in a `s///` anchor swallows the
+  # leading digits of "nginx version: nginx/1.14.1" and yields 4.1, which reads as
+  # a modern nginx and skips the http2 rewrite this function exists to trigger.
+  raw="$(nginx -v 2>&1 | { grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' || true; } | head -1)"
   [[ -n "$raw" ]] && printf '%s' "$raw" || printf '0.0.0'
 }
 
@@ -261,18 +264,48 @@ else
   sed -e "s/mp\.popopx\.chat/${SITE_HOST}/g" \
       -e "s#/var/www/mp\.popopx\.chat#${WEB_ROOT}#g" \
       "$VHOST_SRC" >"$TMP_CONF"
-  if command -v nginx >/dev/null 2>&1 && ! nginx_supports_http2_on; then
-    warn "nginx $(nginx_version) predates 'http2 on;' — rewriting to the listen parameter"
-    sed -i~ -e 's/^\([[:space:]]*\)http2[[:space:]]\+on;[[:space:]]*$/\1/' \
-            -e 's/listen\(.*\)443 ssl;/listen\1443 ssl http2;/' "$TMP_CONF"
+  # The template ships the portable `listen … 443 ssl http2;` form, so nothing has to
+  # be rewritten on any nginx from 1.9.5 upward. Guard only the way this breaks: an
+  # operator who switches the template to the 1.25.1+ `http2 on;` directive and then
+  # deploys to an older box, where it is an [emerg] that fails the whole config test.
+  if command -v nginx >/dev/null 2>&1; then
+    if grep -qE '^[[:space:]]*http2[[:space:]]+on;' "$TMP_CONF" && ! nginx_supports_http2_on; then
+      die "the vhost uses 'http2 on;' but nginx $(nginx_version) predates that directive (needs >= 1.25.1); use the listen parameter form instead"
+    elif nginx_supports_http2_on; then
+      warn "nginx $(nginx_version) may print a deprecation notice for 'listen … http2' in nginx -t; harmless, and the form still works"
+    fi
   fi
-  cp "$TMP_CONF" "/etc/nginx/conf.d/${NGINX_CONF_NAME}"
+  CONF_TARGET="/etc/nginx/conf.d/${NGINX_CONF_NAME}"
+  CONF_PREV="/tmp/${NGINX_CONF_NAME}.previous.$$"
+  # Keep the file being replaced. An installed vhost that nginx rejects is not a
+  # no-op: it fails `nginx -t` for every later config change on the machine and
+  # silently pins the old runtime config in place.
+  if [[ -f "$CONF_TARGET" ]]; then
+    cp -a "$CONF_TARGET" "$CONF_PREV"
+  fi
+  cp "$TMP_CONF" "$CONF_TARGET"
   rm -f "$TMP_CONF" "$TMP_CONF~"
 fi
 
 if command -v nginx >/dev/null 2>&1 && [[ "$DRY_RUN" -eq 0 ]]; then
   log "nginx -t"
-  run nginx -t
+  if out="$(nginx -t 2>&1)"; then
+    if [[ -n "$out" ]]; then printf '%s\n' "$out"; fi
+  else
+    printf '%s\n' "$out"
+    if [[ -n "${CONF_PREV:-}" && -f "$CONF_PREV" ]]; then
+      cp -a "$CONF_PREV" "$CONF_TARGET"
+      rm -f "$CONF_PREV"
+      warn "restored the previous vhost — ${SITE_HOST} keeps serving exactly what it served before"
+    else
+      rm -f "${CONF_TARGET:-}"
+      warn "removed the new vhost so nginx -t is not left failing on this machine"
+    fi
+    if ! nginx -t >/dev/null 2>&1; then
+      warn "nginx -t still fails after the rollback — the fault is outside this vhost"
+    fi
+    die "vhost rejected by nginx -t: nothing was reloaded, nothing was left installed"
+  fi
 fi
 
 if has_systemd; then
