@@ -6,12 +6,14 @@
 
 简体中文 · English：[`README.md`](README.md)
 
-POPOPX 服务号与零知识加密频道的官方门户网站：一个 Next.js 静态导出工程，把功能说明、
-macOS 与 Ubuntu 两条安装路径、后台操作指引和开放协议速查全部装进同一个单页。`npm run build`
-产出的 `out/` 就是一堆纯 HTML/CSS/JS/SVG，任何静态服务器都能直接把它跑起来。生产主机与
+POPOPX 服务号与零知识加密频道的官方门户网站：一个 Next.js 静态导出工程，把功能说明、三条安装路径
+（Ubuntu 生产部署、macOS 生产部署、macOS 开发启动）、后台操作指引和开放协议速查全部
+装进同一个单页。`npm run build` 产出的 `out/` 就是 HTML、CSS、打包后的 JavaScript、PNG 图标，
+再加上一份 RSC flight payload，任何静态文件服务器都能直接把它发出去，线上不需要 Node 运行时。生产主机与
 SEO / canonical 用的是同一个源：`SITE_HOST` 是 `mp.popopx.chat`，`SITE_ORIGIN` 是
-`https://mp.popopx.chat`，两个值都写在 `src/lib/site.ts`，并由 `next.config.mjs` 以
-`NEXT_PUBLIC_SITE_ORIGIN` / `NEXT_PUBLIC_SITE_HOST` 再导出一次。后端套件在同级仓库
+`https://mp.popopx.chat`，两个值只写在 `src/lib/site.ts` 这一处——`next.config.mjs` 里没有 `env`
+块，也不会把它们再导出一次；那份配置自己的注释说明，把域名在构建配置里再抄一份正是域名漂移的
+起点。后端套件在同级仓库
 `popopx-service-suite`，iOS 客户端在 `popopx-chat`；本工程不链接、不修改、也不重新分发它们的
 任何代码。
 
@@ -54,7 +56,7 @@ popopx-service-suite-web/
 │   ├── deploy_centos.sh          CentOS / RHEL / Rocky / Alma 一键部署
 │   └── nginx-popopx-service.conf 裸机生产 vhost（TLS + 安全头）
 ├── tools/
-│   ├── check-i18n.mjs            多语言文案完整性检查
+│   ├── check-i18n.mjs            多语言文案完整性检查（error 拦构建，warning 只报告）
 │   └── scan-compliance.mjs       对产物跑四条「0」门禁
 ├── public/
 │   ├── logo-popopx.png           官方标识 1024×1024
@@ -70,19 +72,26 @@ popopx-service-suite-web/
     │   ├── page.tsx              单页装配：各模块按锚点顺序串起来
     │   └── globals.css           Tailwind 层、玻璃卡片等 house 类、锚点偏移
     ├── components/
-    │   ├── Navbar.tsx            吸顶导航：锚点、语言胶囊、仓库入口、主 CTA
-    │   ├── HeroSection.tsx       首屏舞台
-    │   ├── Footer.tsx            协议 / 商标 / 隐私 / 身份信息区
-    │   └── ui.tsx                CopyButton / SectionHeading / CodeBlock / StatusDot
+    │   ├── Navbar.tsx                           吸顶导航：锚点、语言胶囊、仓库入口、主 CTA
+    │   ├── LanguageMenu.tsx                     18 语言菜单：完整列表与紧凑胶囊
+    │   ├── HeroSection.tsx                      首屏舞台
+    │   ├── ArchitectureComparison.tsx           五大特点卡片与三方对比表
+    │   ├── PluginsShowcase.tsx                  后台开箱即用的五个插件
+    │   ├── InteractiveSandbox.tsx               后台控制台模拟器与手机预览
+    │   ├── InstallAndUsageGuideSection.tsx      安装标签区与 iPhone 四步图解
+    │   ├── DirectoryAndDocsSection.tsx          二维码墙、目录 JSON、协议速查
+    │   ├── Footer.tsx                           协议 / 商标 / 隐私 / 身份信息区
+    │   └── ui.tsx                               CopyButton / SectionHeading / CodeBlock / StatusDot
     └── lib/
         ├── site.ts               域名、端口、锚点清单、剪贴板 helper
         └── i18n.tsx              多语言引擎：LocaleProvider / useLocale / useCopy / pick
 ```
 
-`src/app/page.tsx` 一共引入八个模块组件，全部与 `ui.tsx` 同放于 `src/components/`：
-`Navbar.tsx`、`HeroSection.tsx`、`ArchitectureComparison.tsx`、`PluginsShowcase.tsx`、
-`InteractiveSandbox.tsx`、`InstallAndUsageGuideSection.tsx`、`DirectoryAndDocsSection.tsx`、
-`Footer.tsx`。本文件只描述各模块在页面上的职责。
+`src/app/page.tsx` 一共引入八个模块组件——`Navbar.tsx`、`HeroSection.tsx`、
+`ArchitectureComparison.tsx`、`PluginsShowcase.tsx`、`InteractiveSandbox.tsx`、
+`InstallAndUsageGuideSection.tsx`、`DirectoryAndDocsSection.tsx`、`Footer.tsx`；连同这八个，
+`src/components/` 里正好是十个文件：第九个是 `LanguageMenu.tsx`，即 `Navbar.tsx` 引入并渲染两次
+（桌面胶囊与窄屏面板）的语言控件，第十个是共享原语 `ui.tsx`。本文件只描述各模块在页面上的职责。
 
 ## 快速开始
 
@@ -102,8 +111,12 @@ npm run build        # next build：静态导出到 out/
 cd out && python3 -m http.server 4173     # 本机自测用
 ```
 
-因为配置里开了 `trailingSlash: true`，`out/` 里每个路由都是「目录 + `index.html`」的形式，
-最普通的文件服务器也能直接访问到，不需要任何重写规则。
+因为配置里开了 `trailingSlash: true`，路由会解析到服务器自己能认下的 `index.html`：`/` 对应
+`out/index.html`，找不到页面对应 `out/404/index.html`（Next 另外留了一份扁平的 `out/404.html`，
+vhost 的 `error_page` 指的就是它），带内容指纹的打包产物在 `out/_next/static/` 下，
+`out/index.txt` 是跟预渲染 HTML 一起发布的 RSC flight payload，`public/` 里的东西原样拷进来。
+矢量图是写在 HTML 里的内联 `<svg>`，因此产物目录本身没有 `.svg` 文件。这些仍然只是一个目录的
+普通文件：最普通的文件服务器也能直接访问到，不需要任何重写规则，也不涉及 Node 运行时。
 
 ## 页面模块
 
@@ -120,7 +133,7 @@ cd out && python3 -m http.server 4173     # 本机自测用
 | 三 特点与架构对比 | `ArchitectureComparison.tsx` | `#features`、`#architecture` | 服务号五大技术特点卡片（本地 WebSocket 隔离、三级底部菜单、三样式动态卡片、成对匿名 H5 签名、零知识频道与 Epoch 轮换），外加与传统社交公众号、中心化 Bot 的三方对比表 |
 | 四 插件矩阵 | `PluginsShowcase.tsx` | `#plugins` | 后台开箱即用的五个扩展插件：隐私 AI 客服、DevOps 告警、零追踪扫码登录、加密问卷与匿名投票、链上资产监控与白名单发卡 |
 | 五 互动体验沙盒 | `InteractiveSandbox.tsx` | `#sandbox` | 左边后台控制台模拟器、右边 1:1 手机预览，可真实点击菜单与卡片，并一键切到「中继服务器视角」看密文与签名摘要 |
-| 六 安装与操作指南 | `InstallAndUsageGuideSection.tsx` | `#install` | Ubuntu 与 macOS 双标签命令区（对应后端仓库的 `install_ubuntu22.sh` / `start_macos.sh`）、后台初始化与配额设置、iPhone 扫码关注到插件启用的四步图解 |
+| 六 安装与操作指南 | `InstallAndUsageGuideSection.tsx` | `#install` | Ubuntu 与 macOS 两个标签，装着后端仓库的三条安装路径：Ubuntu 生产部署（`install_ubuntu22.sh`）、macOS 生产部署（`install_macos.sh`，把网关挂到 launchd 标签 `com.popopx.gateway` 上）、macOS 开发启动（`start_macos.sh`）；再加后台初始化与配额设置、iPhone 扫码关注到插件启用的四步图解 |
 | 七 目录与开放协议 | `DirectoryAndDocsSection.tsx` | `#directory` | 示范二维码展示墙与目录 JSON 生成器，加上信封协议、`::POPOPX_ECO::` 卡片协议、H5 验签接口 `POST /api/v1/verifyH5Auth` 的速查 |
 | 八 页脚 | `Footer.tsx` | 自带区块 id | 协议、商标、隐私与身份信息四块，链接用 `src/lib/site.ts` 导出的 `LICENSE_URL` / `TRADEMARK_URL` / 三个仓库地址，页面上显示的就是 `SITE_HOST` 与 `SITE_ORIGIN` |
 
@@ -150,8 +163,13 @@ cd out && python3 -m http.server 4173     # 本机自测用
   紧凑胶囊用 `LOCALE_SHORT`（`简` / `繁` / `EN` / `DE` 这种最多三字符的写法）。
 - `pick()` 的运行时兜底顺序是：当前语言 → `en` → `zh-Hans` → 把原值当字符串用。`POPOPX`、
   `AGPL-3.0-only`、命令行这类本来不需要翻译的值就直接放进去。
-- `npm run check:i18n` 补编译器看不见的两件事：混进陈旧标签（`zh-CN`/`zh-TW` 这类），以及把同一段
-  字符串粘满所有语言槽的「假翻译」。
+- `npm run check:i18n`（`tools/check-i18n.mjs`）补的是编译器看不见的那部分，结论按严重级别分两类，
+  只有第一类会拦住构建。**错误（error）** 让命令 exit 1：文案对象里混进陈旧标签（`zh-CN`、`zh-TW`）；
+  用一个标注返回 `Localized<…>` 的函数**推导**出文案映射；对无类型映射做 `as Localized<…>` 断言；
+  文案对象里用展开（spread）复制别的映射；文案对象缺了 18 种语言里的任意一个。**警告（warning）**
+  不拦构建：某个非 `en` 槽位与英文原文逐字相同只会被告知——也就是说「把同一段字符串粘满 18 个槽」
+  会被报出来、但不会被拦住。以当前代码树跑一遍的结果是 exit 0、0 error、10 warning。
+  加 `--quiet` 就只打印最后两行汇总，不打印逐条明细。
 
 ## 隐私与自托管保证
 
@@ -188,9 +206,13 @@ cd out && python3 -m http.server 4173     # 本机自测用
   负载均衡）。裸机 CentOS 不要用这份，用下面那份。
 - `deploy/centos/nginx-popopx-service.conf`：裸机生产 vhost，`server_name` 是 `mp.popopx.chat`，
   站点根是 `/var/www/mp.popopx.chat`，带证书路径、HTTP→HTTPS 跳转与整套安全头。
-- `deploy/centos/deploy_centos.sh`：CentOS / RHEL / Rocky / Alma 一键部署脚本，默认值就是上面那两个
-  （`SITE_HOST=mp.popopx.chat`、`WEB_ROOT=/var/www/mp.popopx.chat`），`--web-root` 可以覆盖，脚本会
-  按新的站点根改写它装上去的 vhost。
+- `deploy/centos/deploy_centos.sh`：CentOS / RHEL / Rocky / Alma 一键部署脚本。它的六个默认值
+  （`SITE_HOST`、`SITE_ORIGIN`、`WEB_ROOT`、`SOURCE_DIR`、`CERT_EMAIL`、`NGINX_CONF_NAME`）都先取同名
+  环境变量，并且各自有开关可用：`--host NAME`、`--source DIR`、`--web-root PATH`、`--email ADDRESS`、
+  `--yes`（也接受 `-y`）、`--dry-run`、`--check`、`--no-certbot`，`-h`/`--help` 打印用法；认不出的参数
+  直接终止。要注意 `SITE_ORIGIN` 只有默认值和环境变量两条路，没有对应开关。其中 `SITE_HOST` 与
+  `WEB_ROOT` 的默认值就是上面那两个（`mp.popopx.chat`、`/var/www/mp.popopx.chat`），脚本会按你传进去的
+  值改写它装上去的那份 vhost。
 
 发布动作本身就是「构建 + 铺文件」：`npm run build` 之后把 `out/` 的内容放进站点根。
 
@@ -198,14 +220,34 @@ cd out && python3 -m http.server 4173     # 本机自测用
   严格安全头与缓存策略（内容指纹化的 `/_next/static` 给一年 immutable，图标与 manifest 各自给较短的
   TTL）、不给任何第三方留出口。压缩只开 gzip；brotli 指令在配置里是以注释给出的可选项，需要另装
   nginx 的 brotli 模块才生效。
-- 证书走 `certbot certonly --webroot`（80 端口因此保留 `/.well-known/acme-challenge/` 验证路径）。
-  不加 `--no-certbot` 就必须给 `--email`；加了 `--no-certbot`，证书目录还不存在时 HTTPS 那块也加载不了。脚本会先打印它将做的改动并要求确认，非交互运行必须显式带
-  `--yes`，否则拒绝动这台机器。它还要求站点根里已经有构建好的导出（`out/`，或用 `--source DIR`
-  指过去），少了 `index.html` 就停下。脚本另外打印了备选写法 `certbot --nginx -d mp.popopx.chat` 与
-  续期自检 `certbot renew --dry-run`，日常续期交给 certbot 自带的 systemd timer。
-- 换域名或换站点根：改 `src/lib/site.ts` 的 `SITE_ORIGIN` / `SITE_HOST` 重新构建，再用 `--web-root`
-  和 vhost 里的 `server_name` 对齐；`public/robots.txt` 与 `public/sitemap.xml` 里的 canonical 地址
-  也要一起过一遍。
+- 证书走 `certbot certonly --webroot`（80 端口因此保留 `/.well-known/acme-challenge/` 验证路径），
+  只要不加 `--no-certbot`，`--email` 就是必填项。普通运行在 `Proceed with the steps above? [y/N]` 之前
+  打印的是**预检事实**，不是改动清单：解析出来的域名、站点根与 canonical 源、找到的导出目录里有多少
+  文件、nginx 版本、logo 资源在不在、SELinux 是否 enforcing。真正的变更计划只有 `--dry-run` 会打印——
+  脚本把所有会动文件与服务的调用都收进 `run()`，dry-run 时只回显不执行；`--dry-run` 不问确认，
+  `--check` 则在预检之后直接 exit 0、什么都不改——但它的检查顺序与真实运行一致：root、可读的 vhost
+  模板、构建好的导出，再加 `--email` 与 `--no-certbot` 二选一，都是它开口报告的前提。
+  非交互运行必须显式带 `--yes`，否则拒绝动这台机器。
+  它还要求已经有构建好的导出：没给 `--source DIR` 时先找仓库根的 `out/`，再找 `dist/`，两处都没有
+  `index.html` 就停下。脚本另外打印了备选写法 `certbot --nginx -d mp.popopx.chat` 与续期自检
+  `certbot renew --dry-run`，日常续期交给 certbot 自带的 systemd timer。
+- `--no-certbot` 不是一个安静的「只上 HTTP」模式：脚本会先警告 `/etc/letsencrypt/live/$SITE_HOST`
+  不存在时 HTTPS 那块加载不了，然后照样把 vhost 装上去，`nginx -t` 随即因为缺私钥失败——这也正是正常
+  路径先签证书再装 vhost 的原因（模板里的 `ssl_certificate` / `ssl_certificate_key` 就指向那个目录）。
+  失败会被撤掉：原本有 vhost 就把上一份还原，原来没有就把新文件删掉，然后再跑一次 `nginx -t` 确认回滚
+  干净，最后以非零状态退出——既不 reload，也不会留下一份把整台机器配置测试拖坏的文件。
+- 三处只看开关容易漏掉的动作：只要机器上有 `restorecon`，脚本就会对站点根跑一次 `restorecon -Rv`，
+  让 enforcing 模式的 SELinux 也允许 nginx 读这些文件；firewalld 处于活动状态时永久打开 `http` 与
+  `https` 服务并 reload，没活动就提醒你自查云安全组或 iptables；还有一道 HTTP/2 版本闸门——模板用的
+  是可移植的 `listen … 443 ssl http2;` 写法，一旦换成 1.25.1 才有的 `http2 on;` 而机器上的 nginx 更老，
+  那就是会让整份配置测试失败的 `[emerg]`，脚本选择停下而不是装上去。脚本结尾的汇总给了四条自检命令
+  （`curl -sI https://mp.popopx.chat/`、`curl -s https://mp.popopx.chat/ | grep -c 'POPOPX'`、
+  `nginx -T | grep -E 'server_name|root'`、`certbot renew --dry-run`）以及重新部署的那一行命令。
+- 换域名或换站点根：改 `src/lib/site.ts` 的 `SITE_ORIGIN` / `SITE_HOST` 并重新构建，然后带上 `--host`
+  与 `--web-root`——脚本会把它装上去的那份 vhost 副本里的域名与 `/var/www/mp.popopx.chat` 站点根一起
+  重写掉，`server_name` 不需要你手工对齐。脚本帮不上的两处：`SITE_ORIGIN` 没有对应开关，它只喂给脚本
+  自己的预检与汇总输出，不改它、构建产物也不会跟着变；`public/robots.txt` 与 `public/sitemap.xml` 里
+  写死的 canonical 地址仍然要手工过一遍。
 
 ## 构建与合规门禁
 
@@ -214,7 +256,7 @@ cd out && python3 -m http.server 4173     # 本机自测用
 ```bash
 npm run typecheck    # tsc --noEmit：strict + noUnusedLocals/noUnusedParameters/noImplicitReturns
 npm run build        # next build：类型检查 + 静态导出，产物写到 out/
-npm run check:i18n   # 18 语言文案完整性（陈旧标签、假翻译）
+npm run check:i18n   # 18 语言文案完整性（error 才 exit 1；--quiet 只出汇总）
 npm run check:out    # 对 out/ 跑四条「0」门禁（可传别的目录名）
 ```
 
@@ -230,7 +272,8 @@ npm run check:out    # 对 out/ 跑四条「0」门禁（可传别的目录名�
    `https://github.com/popopx-chat/popopx-service-suite` 的 `<a>` 只是链接、不加载资源，因此是允许的。
 3. **0 本地路径泄露**：产物里不残留开发机主目录那种绝对路径，macOS、Linux、macOS 临时构建树、
    Windows 四种形态都算。
-4. **0 违规敏感词**：文案与产物都不含任务书禁用的那几个词。
+4. **0 违规敏感词**：文案与产物都不含任务书禁用的那五个词（`tools/scan-compliance.mjs` 里的
+   `BANNED_WORDS` 列表）。
 
 这个仓库不带 ESLint 配置文件，也没有测试运行器，`next.config.mjs` 里 `eslint.ignoreDuringBuilds`
 为 `true`；`package.json` 的 `lint` 与 `start` 两条在这个工程里没有可用配套（没有 eslint 配置，

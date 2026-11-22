@@ -7,15 +7,17 @@
 English · 简体中文：[`README.zh-Hans.md`](README.zh-Hans.md)
 
 The official portal for POPOPX service accounts and zero-knowledge encrypted channels. It is a
-Next.js static export: one page carrying the feature tour, both installation paths (macOS and
-Ubuntu), the operator walkthrough and the open-protocol quick reference. `npm run build` leaves you
-with `out/` — plain HTML, CSS, JS and SVG that any static file server can hand out, no Node runtime
+Next.js static export: one page carrying the feature tour, the three installation paths it documents
+(Ubuntu production, macOS production, macOS development), the operator walkthrough and the
+open-protocol quick reference. `npm run build` leaves you with `out/` — HTML, CSS, bundled JavaScript,
+the PNG marks and one RSC flight payload, handed out by any static file server, no Node runtime
 required. One origin serves everything: the production host is `mp.popopx.chat` (`SITE_HOST`), and the
 site origin behind the SEO metadata, the canonical link, the Open Graph URL and the sitemap is
-`https://mp.popopx.chat` (`SITE_ORIGIN`). Both values live in `src/lib/site.ts`
-and are re-exported by `next.config.mjs` as `NEXT_PUBLIC_SITE_ORIGIN` and `NEXT_PUBLIC_SITE_HOST`. The
-backend suite lives in the sibling `popopx-service-suite` repository and the iOS client in
-`popopx-chat`. This portal links against, patches and redistributes none of their code.
+`https://mp.popopx.chat` (`SITE_ORIGIN`). Both values live in `src/lib/site.ts` and only there:
+`next.config.mjs` has no `env` block and re-exports neither of them, because its own comment says a
+second copy of the domain in build config is exactly how a domain drifts. The backend suite lives in the
+sibling `popopx-service-suite` repository and the iOS client in `popopx-chat`. This portal links
+against, patches and redistributes none of their code.
 
 ## Licence and trademarks
 
@@ -60,7 +62,7 @@ popopx-service-suite-web/
 │   ├── deploy_centos.sh          one-shot deploy for CentOS / RHEL / Rocky / Alma
 │   └── nginx-popopx-service.conf bare-metal production vhost (TLS + security headers)
 ├── tools/
-│   ├── check-i18n.mjs            copy completeness across the 18 languages
+│   ├── check-i18n.mjs            18-language copy completeness; errors gate, warnings report
 │   └── scan-compliance.mjs       the four "0" gates, run against the build output
 ├── public/
 │   ├── logo-popopx.png           official mark, 1024×1024
@@ -76,19 +78,27 @@ popopx-service-suite-web/
     │   ├── page.tsx              single-page composition: one module after another
     │   └── globals.css           Tailwind layers, the glass surface classes, anchor offsets
     ├── components/
-    │   ├── Navbar.tsx            sticky nav: anchors, language capsule, repo links, primary CTA
-    │   ├── HeroSection.tsx       the hero stage
-    │   ├── Footer.tsx            licence / trademark / privacy / identity blocks
-    │   └── ui.tsx                CopyButton / SectionHeading / CodeBlock / StatusDot
+    │   ├── Navbar.tsx                           sticky nav: anchors, language capsule, repo links, CTA
+    │   ├── LanguageMenu.tsx                     the 18-language menu: list plus compact capsule
+    │   ├── HeroSection.tsx                      the hero stage
+    │   ├── ArchitectureComparison.tsx           the five capability cards and the three-way table
+    │   ├── PluginsShowcase.tsx                  the five plugins that ship in the admin back end
+    │   ├── InteractiveSandbox.tsx               admin console simulator beside a phone preview
+    │   ├── InstallAndUsageGuideSection.tsx      the install tabs and the iPhone walkthrough
+    │   ├── DirectoryAndDocsSection.tsx          QR wall, directory JSON, protocol quick reference
+    │   ├── Footer.tsx                           licence / trademark / privacy / identity blocks
+    │   └── ui.tsx                               CopyButton / SectionHeading / CodeBlock / StatusDot
     └── lib/
         ├── site.ts               hosts, ports, the anchor list, the clipboard helper
         └── i18n.tsx              language engine: LocaleProvider / useLocale / useCopy / pick
 ```
 
-`src/app/page.tsx` pulls in eight module components, all of them under `src/components/` next to
-`ui.tsx`: `Navbar.tsx`, `HeroSection.tsx`, `ArchitectureComparison.tsx`, `PluginsShowcase.tsx`,
-`InteractiveSandbox.tsx`, `InstallAndUsageGuideSection.tsx`, `DirectoryAndDocsSection.tsx` and
-`Footer.tsx`. This document describes what each module is for on the page.
+`src/app/page.tsx` pulls in eight module components — `Navbar.tsx`, `HeroSection.tsx`,
+`ArchitectureComparison.tsx`, `PluginsShowcase.tsx`, `InteractiveSandbox.tsx`,
+`InstallAndUsageGuideSection.tsx`, `DirectoryAndDocsSection.tsx` and `Footer.tsx` — and together with
+those, `src/components/` holds exactly ten files: the ninth is `LanguageMenu.tsx`, the language control
+`Navbar.tsx` imports and renders twice (the desktop capsule and the narrow-screen panel), and the tenth
+is the shared `ui.tsx`. This document describes what each module is for on the page.
 
 ## Quick start
 
@@ -109,8 +119,13 @@ it like any other static site; the port is yours to pick:
 cd out && python3 -m http.server 4173     # local smoke test only
 ```
 
-`trailingSlash: true` means every route in `out/` is a directory holding an `index.html`, so the
-plainest file server on earth resolves it without a single rewrite rule.
+`trailingSlash: true` means a route resolves to an `index.html` a server picks up by itself: `/` is
+`out/index.html`, the not-found page is `out/404/index.html` (and Next additionally leaves the flat
+`out/404.html` that the vhost's `error_page` points at), the content-hashed bundle lives under
+`out/_next/static/`, `out/index.txt` is the RSC flight payload shipped beside the prerendered HTML, and
+everything from `public/` is copied in verbatim. The vectors are inline `<svg>` in the markup, so the
+export holds no `.svg` file of its own. It is still one directory of ordinary files: the plainest file
+server on earth resolves it without a single rewrite rule, and no Node runtime is involved.
 
 ## Portal sections
 
@@ -128,7 +143,7 @@ the build.
 | 3 · Features and architecture | `ArchitectureComparison.tsx` | `#features`, `#architecture` | The five service-account capabilities (loopback WebSocket isolation, three-level custom menus, three dynamic card styles, pairwise-anonymous HMAC-signed H5, zero-knowledge channels with epoch key rotation), plus a three-way table against classic social accounts and centralised bots |
 | 4 · Plugin matrix | `PluginsShowcase.tsx` | `#plugins` | The five plugins that ship ready in the admin back end: private AI agent, DevOps alert ops, zero-tracking QR sign-in, encrypted polls, on-chain monitoring with whitelist drops |
 | 5 · Interactive sandbox | `InteractiveSandbox.tsx` | `#sandbox` | An admin console simulator beside a 1:1 phone preview; visitors really click menus and cards, and a switch flips the view to the relay's point of view — ciphertext and signature digests only |
-| 6 · Install and usage guide | `InstallAndUsageGuideSection.tsx` | `#install` | Tabbed Ubuntu and macOS command blocks (pointing at `install_ubuntu22.sh` and `start_macos.sh` in the backend repo), console initialisation and quota setup, then the four-step iPhone scan-and-operate walkthrough |
+| 6 · Install and usage guide | `InstallAndUsageGuideSection.tsx` | `#install` | The Ubuntu and macOS tabs, carrying the three install paths of the backend repo: Ubuntu production (`install_ubuntu22.sh`), macOS production (`install_macos.sh`, which puts the gateway behind the launchd label `com.popopx.gateway`) and macOS development (`start_macos.sh`); then console initialisation and quota setup, and the four-step iPhone scan-and-operate walkthrough |
 | 7 · Directory and open protocol | `DirectoryAndDocsSection.tsx` | `#directory` | The sample QR display wall with a directory-JSON generator, and the quick reference for the channel envelope, the `::POPOPX_ECO::` card protocol and the H5 verification endpoint `POST /api/v1/verifyH5Auth` |
 | 8 · Footer | `Footer.tsx` | its own block ids | Licence, trademark, privacy and identity blocks; the links are the `LICENSE_URL`, `TRADEMARK_URL` and repository constants exported by `src/lib/site.ts`, and what the page prints as its address is `SITE_HOST` with `SITE_ORIGIN` |
 
@@ -169,8 +184,14 @@ The engine is `src/lib/i18n.tsx`, mounted as the `<LocaleProvider>` that wraps t
 - `pick()` falls back in this order at runtime: active locale → `en` → `zh-Hans` → the raw value as a
   string. That is how `POPOPX`, `AGPL-3.0-only` and shell commands can be written once and used
   everywhere.
-- `npm run check:i18n` catches the two things the compiler cannot see: stale locale tags mixed into a
-  copy object, and "translations" where the same string was pasted into every one of the 18 slots.
+- `npm run check:i18n` (`tools/check-i18n.mjs`) is the oracle for what the compiler cannot see, and it
+  splits its findings by severity — only the first group stops a build. **Errors** are what make the
+  command exit 1: a stale locale tag (`zh-CN`, `zh-TW`) mixed into a copy object; a copy map *derived*
+  by a function annotated to return `Localized<…>`; an `as Localized<…>` cast over an untyped map; a
+  spread inside a copy object; a copy object that omits any of the 18 locales. **Warnings** do not: a
+  non-`en` slot repeating the English string verbatim is reported, so the "same string pasted into every
+  one of the 18 slots" case is surfaced, not gated. On the current tree the command exits 0 with 0 errors
+  and 10 warnings. `--quiet` prints only the two summary lines.
 
 ## Privacy and self-host guarantees
 
@@ -213,9 +234,14 @@ Four files cover the deployment layer, each with its own job:
 - `deploy/centos/nginx-popopx-service.conf`: the bare-metal production vhost — `server_name
   mp.popopx.chat`, document root `/var/www/mp.popopx.chat`, certificate paths, the HTTP to HTTPS
   redirect and the full header set.
-- `deploy/centos/deploy_centos.sh`: the one-shot deploy script for CentOS, RHEL, Rocky and Alma. Its
-  defaults are those same two values (`SITE_HOST=mp.popopx.chat`, `WEB_ROOT=/var/www/mp.popopx.chat`),
-  `--web-root` overrides the root, and the script rewrites the vhost it installs to match.
+- `deploy/centos/deploy_centos.sh`: the one-shot deploy script for CentOS, RHEL, Rocky and Alma. Its six
+  defaults — `SITE_HOST`, `SITE_ORIGIN`, `WEB_ROOT`, `SOURCE_DIR`, `CERT_EMAIL`, `NGINX_CONF_NAME` — are
+  each taken from an environment variable of the same name and each has a flag: `--host NAME`,
+  `--source DIR`, `--web-root PATH`, `--email ADDRESS`, `--yes` (also `-y`), `--dry-run`, `--check`,
+  `--no-certbot`, and `-h`/`--help` prints the usage block; an unrecognised option is a hard stop. Note
+  that `SITE_ORIGIN` has a default and an environment override but no flag. The two headline defaults are
+  those same values (`SITE_HOST=mp.popopx.chat`, `WEB_ROOT=/var/www/mp.popopx.chat`), and the script
+  rewrites the vhost it installs to match whatever you pass.
 
 Publishing itself is build and copy: run `npm run build`, then lay the contents of `out/` into the
 document root.
@@ -226,16 +252,41 @@ document root.
   door open to a third party. Compression is gzip only in the shipped config; the brotli directives are
   documented there as an option that needs the external nginx brotli module installed.
 - Certificates come from `certbot certonly --webroot`, which is why port 80 keeps
-  `/.well-known/acme-challenge/` reachable. Unless you pass `--no-certbot` you must pass `--email`;
-  with `--no-certbot` the HTTPS block simply will not load until the certificate directory exists. The
-  script prints the changes it is about to make and asks for confirmation, and a non-interactive run
-  has to say `--yes` explicitly or it refuses to touch the machine. It also insists on a finished
-  export — `out/`, or a directory given with `--source` — and stops if `index.html` is missing. Both
-  the alternative issuance form `certbot --nginx -d mp.popopx.chat` and the renewal check
-  `certbot renew --dry-run` are printed for you; day-to-day renewal is the certbot systemd timer's job.
-- Changing domain or document root means editing `SITE_ORIGIN` and `SITE_HOST` in `src/lib/site.ts`
-  and rebuilding, then aligning `--web-root` and `server_name`; the canonical addresses in
-  `public/robots.txt` and `public/sitemap.xml` need the same pass.
+  `/.well-known/acme-challenge/` reachable, and `--email` is mandatory unless you pass `--no-certbot`.
+  What a plain run prints before its `Proceed with the steps above? [y/N]` prompt is **preflight
+  evidence**, not a change plan: the host, document root and origin it resolved, which export it found
+  and how many files it holds, the nginx version, whether the logo assets are there, whether SELinux is
+  enforcing. The mutation plan is only printed by `--dry-run`, which pushes every filesystem and service
+  call through the script's `run()` helper so it is echoed instead of executed — and `--dry-run` skips
+  the prompt, while `--check` stops after the preflight and exits 0 having changed nothing (its gate
+  order is the same as a real run: root, a readable vhost template, a finished export and either
+  `--email` or `--no-certbot` are all required before it reports). A non-interactive run has to say
+  `--yes` explicitly or it refuses to touch the machine. It also insists on a finished export: absent
+  `--source DIR` it looks for `out/` in the repository root and then `dist/`, and stops if neither holds
+  an `index.html`. Both the alternative issuance form `certbot --nginx -d mp.popopx.chat` and the renewal
+  check `certbot renew --dry-run` are printed for you; day-to-day renewal is the certbot systemd timer's
+  job.
+- `--no-certbot` is not a quiet HTTP-only mode. The script warns that the HTTPS block will not load until
+  `/etc/letsencrypt/live/$SITE_HOST` exists, installs the vhost anyway, and `nginx -t` then fails on the
+  missing key — which is exactly why the normal path asks for the certificate before installing the
+  vhost. The rejection is undone before the script stops: the previous vhost is restored when one
+  existed, the new file is removed when it did not, `nginx -t` is re-checked to prove the rollback
+  worked, and the run exits non-zero with nothing reloaded and nothing left installed.
+- Three parts of the run are easy to miss if you only read the flags: `restorecon -Rv` over the document
+  root whenever `restorecon` is available, so nginx may read the files under enforcing SELinux; permanent
+  firewalld openings for `http` and `https` plus a reload, with a warning to check your cloud security
+  group when firewalld is not active; and an HTTP/2 version guard — the shipped template uses the
+  portable `listen … 443 ssl http2;` spelling, and if it is ever switched to the 1.25.1-era `http2 on;`
+  directive against an older nginx, that is an `[emerg]` which fails the whole config test, so the script
+  stops rather than installing it. The summary it ends with prints the verification commands —
+  `curl -sI https://mp.popopx.chat/`, `curl -s https://mp.popopx.chat/ | grep -c 'POPOPX'`,
+  `nginx -T | grep -E 'server_name|root'` and `certbot renew --dry-run` — plus the redeploy one-liner.
+- Changing domain or document root: edit `SITE_ORIGIN` and `SITE_HOST` in `src/lib/site.ts` and rebuild,
+  then pass `--host` and `--web-root` — the script rewrites the host and the `/var/www/mp.popopx.chat`
+  document root inside the copy of the vhost it installs, so `server_name` follows without a hand edit.
+  What the script will not do: `SITE_ORIGIN` has no flag, it only feeds the script's own preflight and
+  summary output, and nothing in the export changes until you rebuild. The canonical addresses written
+  into `public/robots.txt` and `public/sitemap.xml` still need that manual pass.
 
 ## Build and compliance gates
 
@@ -244,7 +295,7 @@ Run all four before a release; each proves something different.
 ```bash
 npm run typecheck    # tsc --noEmit: strict plus noUnusedLocals, noUnusedParameters, noImplicitReturns
 npm run build        # next build: type checking and static export into out/
-npm run check:i18n   # copy completeness across the 18 languages
+npm run check:i18n   # 18-language copy completeness; exits 1 on errors, --quiet = summary only
 npm run check:out    # the four "0" gates against out/ (takes an alternative directory argument)
 ```
 
@@ -264,7 +315,8 @@ read; image binaries are skipped because they carry no code.
    allowed.
 3. **0 local path leakage** — no absolute paths into a developer's home directory, in any of the four
    shapes the scanner knows (macOS, Linux, a macOS temporary build tree, Windows).
-4. **0 banned words** — none of the five terms the build brief disallows, in the copy or in the output.
+4. **0 banned words** — none of the five terms the build brief disallows (the `BANNED_WORDS` list in
+   `tools/scan-compliance.mjs`), in the copy or in the output.
 
 This repository ships no ESLint configuration and no test runner, and `eslint.ignoreDuringBuilds` is
 `true` in `next.config.mjs`. The `lint` and `start` entries in `package.json` have no working counterpart

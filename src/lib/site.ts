@@ -31,7 +31,7 @@ export const LICENSE_URL = `${REPO_URL}/blob/main/LICENSE`;
  */
 export const TRADEMARK_URL = `${IOS_REPO_URL}/blob/master/TRADEMARK-POPOPX.md`;
 
-/** Local gateway console, as `start_macos.sh` and `install_ubuntu22.sh` print it. */
+/** Local gateway console, as `start_macos.sh`, `install_ubuntu22.sh` and `install_macos.sh` print it. */
 export const ADMIN_CONSOLE_URL = "http://127.0.0.1:8080";
 
 /** The open-sourced node only accepts a loopback WebSocket. */
