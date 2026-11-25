@@ -1413,7 +1413,10 @@ export function BusinessScenarios(): ReactElement {
             return (
               <article
                 key={scenario.index}
-                className="glass glass-hover flex flex-col gap-4 p-5"
+                // min-w-0 + inherited overflow-wrap: a single-column grid track never shrinks
+                // below its item's min-content, and one unbreakable env token (
+                // POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300) is wider than the card's content box.
+                className="glass glass-hover flex min-w-0 flex-col gap-4 p-5 [overflow-wrap:anywhere]"
               >
                 <div className="flex items-start justify-between gap-3">
                   <span className={`chip ${tone.chip}`}>

@@ -3364,7 +3364,7 @@ function StepRow({ index, title, caption, code }: { index: number; title: L; cap
 function Note({ tone, title, children }: { tone: "brand" | "mesh" | "warn" | "alert"; title: L; children: ReactNode }): ReactElement {
   const t = useCopy(title);
   return (
-    <div className="glass-inset p-4 sm:p-5">
+    <div className="glass-inset min-w-0 p-4 sm:p-5">
       <div className="flex items-center gap-2">
         <StatusDot tone={tone} />
         <h5 className="text-[13px] font-semibold tracking-wide text-white">{t}</h5>
@@ -3587,7 +3587,7 @@ export function InstallAndUsageGuideSection(): ReactElement {
             <CodeBlock code={T.unauthorized} showCopy={false} caption={pick(T.unauthorizedCap, locale)} />
           </Note>
 
-          <div className="glass p-4 sm:p-5">
+          <div className="glass min-w-0 p-4 sm:p-5">
             <h4 className="text-[13px] font-semibold tracking-wide text-white">{useCopy(T.apiTitle)}</h4>
             <div className="mt-3 space-y-3">
               <CodeBlock code={CMD.apiSetup} caption={useCopy(T.apiSetupCap)} />
@@ -3598,25 +3598,25 @@ export function InstallAndUsageGuideSection(): ReactElement {
         </div>
 
         <div className="mt-4 grid gap-4 lg:grid-cols-2">
-          <div className="glass p-4 sm:p-5">
+          <div className="glass min-w-0 p-4 sm:p-5">
             <CodeBlock code={CMD.redeem} caption={useCopy(T.redeemCap)} />
           </div>
-          <div className="glass p-4 sm:p-5">
+          <div className="glass min-w-0 p-4 sm:p-5">
             <CodeBlock code={CMD.menu} caption={useCopy(T.menuCap)} />
           </div>
-          <div className="glass p-4 sm:p-5">
+          <div className="glass min-w-0 p-4 sm:p-5">
             <CodeBlock code={CMD.sendText} caption={useCopy(T.textCap)} />
           </div>
-          <div className="glass p-4 sm:p-5">
+          <div className="glass min-w-0 p-4 sm:p-5">
             <CodeBlock code={CMD.rotate} caption={useCopy(T.rotateCap)} />
           </div>
-          <div className="glass p-4 sm:p-5 lg:col-span-2">
+          <div className="glass min-w-0 p-4 sm:p-5 lg:col-span-2">
             <CodeBlock code={CMD.plugins} caption={useCopy(T.pluginsCap)} />
           </div>
         </div>
 
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          <div className="glass p-4 sm:p-5">
+          <div className="glass min-w-0 p-4 sm:p-5">
             <h4 className="text-[13px] font-semibold tracking-wide text-white">{useCopy(T.quotaTitle)}</h4>
             <div className="mt-3 space-y-3">
               <div className="glass-inset p-3.5">
@@ -3636,7 +3636,7 @@ export function InstallAndUsageGuideSection(): ReactElement {
             </div>
           </div>
 
-          <div className="glass p-4 sm:p-5">
+          <div className="glass min-w-0 p-4 sm:p-5">
             <h4 className="text-[13px] font-semibold tracking-wide text-white">{useCopy(T.mintTitle)}</h4>
             <div className="mt-3 space-y-3">
               <CodeBlock code={CMD.voucher} caption={useCopy(T.mintCap)} />
@@ -3765,7 +3765,13 @@ export function InstallAndUsageGuideSection(): ReactElement {
                     >
                       {"✓"}
                     </span>
-                    <span className={`text-[12.5px] leading-relaxed ${on ? "text-mute line-through" : "text-white"}`}>{pick(item, locale)}</span>
+                    <span
+                      className={`min-w-0 text-[12.5px] leading-relaxed [overflow-wrap:anywhere] ${
+                        on ? "text-mute line-through" : "text-white"
+                      }`}
+                    >
+                      {pick(item, locale)}
+                    </span>
                   </button>
                 </li>
               );

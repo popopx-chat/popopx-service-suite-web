@@ -2181,7 +2181,7 @@ function QrCard({ entry, onEnlarge }: { entry: WallEntry; onEnlarge: () => void 
   const sample = useCopy(SAMPLE_CHIP);
 
   return (
-    <article className="glass glass-hover flex h-full flex-col p-4">
+    <article className="glass glass-hover flex h-full min-w-0 flex-col p-4">
       <div className="flex items-center justify-between gap-2">
         <p className="eyebrow truncate">{pick(entry.kind, locale)}</p>
         <span className="pill shrink-0 border-warn/40 text-warn">{sample}</span>
@@ -2238,10 +2238,11 @@ function ProtocolSample({
   const heading = useCopy(title);
 
   return (
-    <article className="glass p-5 sm:p-6">
+    <article className="glass min-w-0 p-5 sm:p-6">
       <h3 className="text-[15px] font-semibold text-white sm:text-base">{heading}</h3>
       <div className="mt-4 space-y-4">{children}</div>
-      <ul className="hairline-top mt-5 space-y-2.5">
+      {/* The rules quote whole JSON objects, which are one unbreakable run at 13px. */}
+      <ul className="hairline-top mt-5 space-y-2.5 [overflow-wrap:anywhere]">
         {rules.map((rule, index) => (
           <li key={index} className="flex gap-2.5 text-[13px] leading-relaxed text-mute">
             <span className="mt-2 shrink-0">
@@ -2473,7 +2474,7 @@ export function DirectoryAndDocsSection(): ReactElement {
         {/* ── 2. Directory entry generator ───────────────────────────── */}
         <div className="glass mt-12 p-5 sm:p-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
-            <div className="max-w-3xl">
+            <div className="min-w-0 max-w-3xl [overflow-wrap:anywhere]">
               <h3 className="text-xl font-semibold tracking-tight text-white">{genTitle}</h3>
               <p className="mt-2 text-[13.5px] leading-relaxed text-mute">{genLede}</p>
             </div>
