@@ -1292,7 +1292,7 @@ function PanelCard({ panel }: { readonly panel: Panel }): ReactElement {
   const keysLabel = useCopy(KEYS_LABEL);
 
   return (
-    <article className={`glass glass-hover relative flex flex-col overflow-hidden p-5 sm:p-6 ${panel.wide ? "lg:col-span-2" : ""}`}>
+    <article className={`glass glass-hover relative flex flex-col overflow-hidden p-5 sm:p-6 [overflow-wrap:anywhere] ${panel.wide ? "lg:col-span-2" : ""}`}>
       <span
         aria-hidden
         className={`absolute inset-x-0 top-0 h-px ${

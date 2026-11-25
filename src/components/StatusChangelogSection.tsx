@@ -1141,7 +1141,7 @@ export function StatusChangelogSection(): ReactElement {
           <p className="mt-2 text-[13px] leading-relaxed text-mute">{statusNote}</p>
           <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {STATS.map((stat) => (
-              <div key={stat.key} className="glass glass-hover relative flex flex-col overflow-hidden p-5">
+              <div key={stat.key} className="glass glass-hover relative flex flex-col overflow-hidden p-5 [overflow-wrap:anywhere]">
                 <span aria-hidden className="absolute inset-x-0 top-0 h-px bg-brand-soft opacity-60" />
                 <p className="font-mono text-[11px] tracking-[0.18em] text-faint">{stat.source}</p>
                 <p className="mt-1.5 text-[22px] font-semibold leading-tight text-white">{stat.value}</p>
@@ -1189,14 +1189,16 @@ export function StatusChangelogSection(): ReactElement {
           <h3 className="text-[15px] font-semibold text-white">{portalTitle}</h3>
           <p className="mt-2 text-[13px] leading-relaxed text-mute">{portalLede}</p>
           <dl className="mt-5 space-y-3">
-            <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
+            {/* auto_1fr is unusable in a 238px row: the status label's max-content is 199–210px in
+                Cyrillic and Latin, so the value column collapsed to 0–28px. Stacked below sm. */}
+            <div className="grid grid-cols-1 gap-x-3 gap-y-1 sm:grid-cols-[auto_minmax(0,1fr)]">
               <dt className="flex items-center gap-1.5 pt-0.5 text-[11.5px] font-medium text-faint">
                 <StatusDot tone="mesh" />
                 {portalNoHash}
               </dt>
               <dd className="min-w-0 text-[12.5px] leading-relaxed text-mute [overflow-wrap:anywhere]">{portalUncommitted}</dd>
             </div>
-            <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
+            <div className="grid grid-cols-1 gap-x-3 gap-y-1 sm:grid-cols-[auto_minmax(0,1fr)]">
               <dt className="flex items-center gap-1.5 pt-0.5 text-[11.5px] font-medium text-faint">
                 <StatusDot tone="warn" />
                 {portalManualTitle}

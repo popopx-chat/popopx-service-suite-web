@@ -2316,19 +2316,21 @@ function PluginPanel({ model, index }: { model: PluginModel; index: number }): R
   const number = String(index + 1).padStart(2, "0");
 
   return (
-    <article className="glass glass-hover relative flex flex-col overflow-hidden p-5 sm:p-6">
+    <article className="glass glass-hover relative flex flex-col overflow-hidden p-5 sm:p-6 [overflow-wrap:anywhere]">
       <span
         aria-hidden
         className={`absolute inset-x-0 top-0 h-px ${ACCENT_BAR[model.accent]} opacity-60`}
       />
       <header className="flex flex-wrap items-start gap-3">
-        <div className="min-w-0 flex-1">
+        {/* A full-width basis below sm: the pill is a long word in German or Italian, and with
+            flex-1's 0% basis the title column was left holding the 7px that the pill did not take. */}
+        <div className="min-w-0 flex-1 basis-full sm:basis-0">
           <p className="font-mono text-[11px] tracking-[0.18em] text-faint">
             {number} / {model.code}
           </p>
           <h3 className="mt-1.5 text-[17px] font-semibold leading-snug text-white">{name}</h3>
         </div>
-        <span className="pill shrink-0 whitespace-nowrap">
+        <span className="pill min-w-0 sm:shrink-0 sm:whitespace-nowrap">
           <StatusDot tone={on ? "brand" : "warn"} pulse={on} />
           <span className="text-[11px]">
             {shipLabel} · {shipWord}
