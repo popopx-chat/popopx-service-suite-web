@@ -1754,13 +1754,14 @@ const HELD: readonly Localized<string>[] = [
 function Connector({ label, tone }: { label: string; tone: "brand" | "mesh" }): ReactElement {
   const stroke = tone === "brand" ? "text-brand-soft" : "text-mesh-soft";
   return (
-    <div className="flex flex-col items-center justify-center gap-1 px-1 py-1 text-[10.5px] text-faint md:py-0">
+    <div className="flex min-w-0 flex-col items-center justify-center gap-1 px-1 py-1 text-[10.5px] text-faint md:py-0">
       <svg aria-hidden viewBox="0 0 88 12" className={`h-3 w-full max-w-[88px] ${stroke}`}>
         <line x1="0" y1="6" x2="88" y2="6" stroke="currentColor" strokeWidth="1" strokeDasharray="5 4" />
         <path d="M88 2 L80 6 L88 10 Z" fill="currentColor" />
         <path d="M0 2 L8 6 L0 10 Z" fill="currentColor" />
       </svg>
-      <span className="whitespace-nowrap text-center">{label}</span>
+      {/* nowrap only where there is room for it: at 320px the ru label is wider than the track. */}
+      <span className="text-center [overflow-wrap:anywhere] sm:whitespace-nowrap">{label}</span>
     </div>
   );
 }

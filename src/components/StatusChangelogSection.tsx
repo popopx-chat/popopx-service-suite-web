@@ -1194,14 +1194,14 @@ export function StatusChangelogSection(): ReactElement {
                 <StatusDot tone="mesh" />
                 {portalNoHash}
               </dt>
-              <dd className="text-[12.5px] leading-relaxed text-mute">{portalUncommitted}</dd>
+              <dd className="min-w-0 text-[12.5px] leading-relaxed text-mute [overflow-wrap:anywhere]">{portalUncommitted}</dd>
             </div>
             <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
               <dt className="flex items-center gap-1.5 pt-0.5 text-[11.5px] font-medium text-faint">
                 <StatusDot tone="warn" />
                 {portalManualTitle}
               </dt>
-              <dd className="text-[12.5px] leading-relaxed text-mute">{portalManualBody}</dd>
+              <dd className="min-w-0 text-[12.5px] leading-relaxed text-mute [overflow-wrap:anywhere]">{portalManualBody}</dd>
             </div>
           </dl>
         </div>

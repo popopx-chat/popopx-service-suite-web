@@ -3619,14 +3619,14 @@ export function InstallAndUsageGuideSection(): ReactElement {
           <div className="glass min-w-0 p-4 sm:p-5">
             <h4 className="text-[13px] font-semibold tracking-wide text-white">{useCopy(T.quotaTitle)}</h4>
             <div className="mt-3 space-y-3">
-              <div className="glass-inset p-3.5">
+              <div className="glass-inset p-3.5 [overflow-wrap:anywhere]">
                 <p className="flex items-center gap-2 font-mono text-[11.5px] text-mesh-soft">
                   <StatusDot tone="mesh" />
                   POPOPX_BILLING_REQUIRE_VOUCHER=0
                 </p>
                 <p className="mt-2 text-[12.5px] leading-relaxed text-mute">{useCopy(T.quotaOff)}</p>
               </div>
-              <div className="glass-inset p-3.5">
+              <div className="glass-inset p-3.5 [overflow-wrap:anywhere]">
                 <p className="flex items-center gap-2 font-mono text-[11.5px] text-warn">
                   <StatusDot tone="warn" />
                   POPOPX_BILLING_REQUIRE_VOUCHER=1

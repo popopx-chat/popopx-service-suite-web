@@ -2507,7 +2507,7 @@ export function PluginsShowcase(): ReactElement {
                   </span>
                 </div>
                 <p className="eyebrow mt-3">{roadmapNeeds}</p>
-                <p className="mt-1.5 text-[12.5px] leading-relaxed text-mute">
+                <p className="mt-1.5 min-w-0 text-[12.5px] leading-relaxed text-mute [overflow-wrap:anywhere]">
                   {pick(item.caption, locale)}
                 </p>
               </li>
