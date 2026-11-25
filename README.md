@@ -81,6 +81,7 @@ popopx-service-suite-web/
     │   ├── Navbar.tsx                           sticky nav: anchors, language capsule, repo links, CTA
     │   ├── LanguageMenu.tsx                     the 18-language menu: list plus compact capsule
     │   ├── HeroSection.tsx                      the hero stage
+    │   ├── BusinessScenarios.tsx                four plain-language use-case cards under the hero
     │   ├── PluginsShowcase.tsx                  the five plugins that ship in the admin back end
     │   ├── ArchitectureComparison.tsx           the five capability cards and the three-way table
     │   ├── InteractiveSandbox.tsx               admin console simulator beside a phone preview
@@ -96,12 +97,12 @@ popopx-service-suite-web/
         └── i18n.tsx              language engine: LocaleProvider / useLocale / useCopy / pick
 ```
 
-`src/app/page.tsx` pulls in eleven module components — `Navbar.tsx`, `HeroSection.tsx`,
-`PluginsShowcase.tsx`, `ArchitectureComparison.tsx`, `InteractiveSandbox.tsx`,
+`src/app/page.tsx` pulls in twelve module components — `Navbar.tsx`, `HeroSection.tsx`,
+`BusinessScenarios.tsx`, `PluginsShowcase.tsx`, `ArchitectureComparison.tsx`, `InteractiveSandbox.tsx`,
 `SecurityGovernanceSection.tsx`, `StatusChangelogSection.tsx`, `ProtocolReferenceSection.tsx`,
 `InstallAndUsageGuideSection.tsx`, `DirectoryAndDocsSection.tsx` and `Footer.tsx` — and together with
-those, `src/components/` holds exactly thirteen files: the twelfth is `LanguageMenu.tsx`, the language control
-`Navbar.tsx` imports and renders twice (the desktop capsule and the narrow-screen panel), and the thirteenth
+those, `src/components/` holds exactly fourteen files: the thirteenth is `LanguageMenu.tsx`, the language control
+`Navbar.tsx` imports and renders twice (the desktop capsule and the narrow-screen panel), and the fourteenth
 is the shared `ui.tsx`. This document describes what each module is for on the page.
 
 ## Quick start
@@ -138,21 +139,26 @@ from `NAV_SECTIONS` in `src/lib/site.ts` — `overview`, `plugins`, `architectur
 `changelog` — the module order comes from `src/app/page.tsx`, and `id="top"` on the `<main>` element is
 the back-to-top landing point. `Navbar.tsx` renders `NAV_SECTIONS` straight into `#id` links, and its
 labels are a `Record<NavSectionId, Localized<string>>`, so a missing translation for any anchor fails
-the build.
+the build. The page carries more anchors than the bar lists — `features`, `protocol`, `install`,
+`directory`, and `scenarios`, the four business cards sitting directly under the hero. `scenarios`
+stays out of the bar on purpose: seven labels do not fit the centred row at `xl` next to the logo, the
+ecosystem link, the GitHub pill, the language menu and the CTA, and the block is the second thing on the
+page, so nobody has to jump to reach it.
 
 | Module | Component | Anchor | What it does |
 | --- | --- | --- | --- |
 | 1 · Top navigation | `Navbar.tsx` | links to all six | Sticky glass bar: official mark with the `POPOPX Service Suite` title, the six anchor links, the language capsule, the GitHub entry, the deploy primary button (to `#install`); collapses into a panel on narrow screens |
-| 2 · Hero stage | `HeroSection.tsx` | `#overview` | Dual-mode topology behind the headline, with the metric strip stating the facts outright — 0 global user IDs, 100% end-to-end encryption, AGPL-3.0 across the stack; the two buttons point at `#plugins` and `#sandbox` |
-| 3 · Plugin matrix | `PluginsShowcase.tsx` | `#plugins` | The five plugins that ship ready in the admin back end: private AI agent, DevOps alert ops, zero-tracking QR sign-in, encrypted polls, on-chain monitoring with whitelist drops; category filter, four-step integration path, and a roadmap of planned third-party connectors |
-| 4 · Features and architecture | `ArchitectureComparison.tsx` | `#architecture` | The five service-account capabilities (loopback WebSocket isolation, three-level custom menus, three dynamic card styles, pairwise-anonymous HMAC-signed H5, zero-knowledge channels with epoch key rotation), plus a three-way table against classic social accounts and centralised bots |
-| 5 · Interactive sandbox | `InteractiveSandbox.tsx` | `#sandbox` | An admin console simulator beside a 1:1 phone preview; visitors really click menus and cards, and a switch flips the view to the relay's point of view — ciphertext and signature digests only |
-| 6 · Security and permission governance | `SecurityGovernanceSection.tsx` | `#security` | Credential isolation, HMAC authentication, audit logs, rate limiting, and the admin console deployment guide; each control panel shows what is shipped vs what is planned |
-| 7 · Status and changelog | `StatusChangelogSection.tsx` | `#changelog` | Backend release history, portal status, and the build verification recipe; stats grid plus the exact commands to reproduce the build |
-| 8 · Protocol quick reference | `ProtocolReferenceSection.tsx` | `#protocol` | The channel envelope, the `::POPOPX_ECO::` card protocol, and the H5 verification endpoint `POST /api/v1/verifyH5Auth`; wire formats and byte-level examples |
-| 9 · Install and usage guide | `InstallAndUsageGuideSection.tsx` | `#install` | The Ubuntu and macOS tabs, carrying the three install paths of the backend repo: Ubuntu production (`install_ubuntu22.sh`), macOS production (`install_macos.sh`, which puts the gateway behind the launchd label `com.popopx.gateway`) and macOS development (`start_macos.sh`); then console initialisation and quota setup, and the four-step iPhone scan-and-operate walkthrough |
-| 10 · Directory and open protocol | `DirectoryAndDocsSection.tsx` | `#directory` | The sample QR display wall with a directory-JSON generator, and the quick reference for the channel envelope, the `::POPOPX_ECO::` card protocol and the H5 verification endpoint `POST /api/v1/verifyH5Auth` |
-| 11 · Footer | `Footer.tsx` | its own block ids | Licence, trademark, privacy and identity blocks; the links are the `LICENSE_URL`, `TRADEMARK_URL` and repository constants exported by `src/lib/site.ts`, and what the page prints as its address is `SITE_HOST` with `SITE_ORIGIN` |
+| 2 · Hero stage | `HeroSection.tsx` | `#overview` | Dual-mode topology behind the headline, with the metric strip stating the facts outright — 0 global user IDs, 100% end-to-end encryption, AGPL-3.0 across the stack; the two buttons point at `#install` and `#sandbox` |
+| 3 · Business scenarios | `BusinessScenarios.tsx` | `#scenarios` | The first block below the hero: four plain-language cards — AI customer support, encrypted channel publishing, ops and security alerting, anonymous scan-to-login — each with a three-step flow, the real module file and route on one monospaced line, a state word that keeps "on by factory default" apart from "core gateway behaviour", and a jump into the section that documents it |
+| 4 · Plugin matrix | `PluginsShowcase.tsx` | `#plugins` | The five plugins that ship ready in the admin back end: private AI agent, DevOps alert ops, zero-tracking QR sign-in, encrypted polls, on-chain monitoring with whitelist drops; category filter, four-step integration path, and a roadmap of planned third-party connectors |
+| 5 · Features and architecture | `ArchitectureComparison.tsx` | `#architecture` | The five service-account capabilities (loopback WebSocket isolation, two-level custom menus (3 × 5), three dynamic card styles, pairwise-anonymous HMAC-signed H5, zero-knowledge channels with epoch key rotation), plus a three-way table against classic social accounts and centralised bots |
+| 6 · Interactive sandbox | `InteractiveSandbox.tsx` | `#sandbox` | An admin console simulator beside a 1:1 phone preview; visitors really click menus and cards, and a switch flips the view to the relay's point of view — ciphertext and signature digests only |
+| 7 · Security and permission governance | `SecurityGovernanceSection.tsx` | `#security` | Credential isolation, HMAC authentication, audit logs, rate limiting, and the admin console deployment guide; each control panel shows what is shipped vs what is planned |
+| 8 · Status and changelog | `StatusChangelogSection.tsx` | `#changelog` | Backend release history, portal status, and the build verification recipe; stats grid plus the exact commands to reproduce the build |
+| 9 · Protocol quick reference | `ProtocolReferenceSection.tsx` | `#protocol` | The channel envelope, the `::POPOPX_ECO::` card protocol, and the H5 verification endpoint `POST /api/v1/verifyH5Auth`; wire formats and byte-level examples |
+| 10 · Install and usage guide | `InstallAndUsageGuideSection.tsx` | `#install` | The Ubuntu and macOS tabs, carrying the three install paths of the backend repo: Ubuntu production (`install_ubuntu22.sh`), macOS production (`install_macos.sh`, which puts the gateway behind the launchd label `com.popopx.gateway`) and macOS development (`start_macos.sh`); then console initialisation and quota setup, and the four-step iPhone scan-and-operate walkthrough |
+| 11 · Directory and open protocol | `DirectoryAndDocsSection.tsx` | `#directory` | The sample QR display wall with a directory-JSON generator, and the quick reference for the channel envelope, the `::POPOPX_ECO::` card protocol and the H5 verification endpoint `POST /api/v1/verifyH5Auth` |
+| 12 · Footer | `Footer.tsx` | its own block ids | Licence, trademark, privacy and identity blocks; the links are the `LICENSE_URL`, `TRADEMARK_URL` and repository constants exported by `src/lib/site.ts`, and what the page prints as its address is `SITE_HOST` with `SITE_ORIGIN` |
 
 Every address the copy uses comes from `src/lib/site.ts` and nowhere else: site origin
 `https://mp.popopx.chat`, production host `mp.popopx.chat`, the local gateway console

@@ -1180,7 +1180,7 @@ const STEP_4_COPY: Localized<string> = {
   it: "I consumatori sono due. Un account servizio POPOPX Chat riceve card e fino a tre voci di menu e agisce tramite callback. Un Agent chiama gli stessi endpoint /api/v1 in HTTP col bearer admin: nessuna credenziale aggiuntiva, nessun permesso separato.",
   nl: "Er zijn twee verbruikers. Een POPOPX Chat-dienstaccount krijgt kaarten en maximaal drie menu-items en stuurt via callbacks. Een Agent roept dezelfde /api/v1-eindpunten over HTTP aan met de admin-bearer — geen extra credential, geen aparte toestemming.",
   cs: "Jsou dva spotřebitelé. Servisní účet POPOPX Chat dostává karty a nejvýše tři položky menu a ovládá modul přes callbacky. Agent volá stejné /api/v1 koncovky přes HTTP s admin bearerem — žádný další klíč, žádné extra oprávnění.",
-  "zh-Hans": "消费方只有两个。POPOPX Chat 服务号拿到卡片和最多三级菜单，用回调来驱动插件；Agent 走 HTTP 调同一批 /api/v1 接口，带的还是那把 admin bearer——没有额外的凭据，也没有单独的权限。",
+  "zh-Hans": "消费方只有两个。POPOPX Chat 服务号拿到卡片和最多三项菜单，用回调来驱动插件；Agent 走 HTTP 调同一批 /api/v1 接口，带的还是那把 admin bearer——没有额外的凭据，也没有单独的权限。",
   "zh-Hant": "消費方只有兩個。POPOPX Chat 服務號取得卡片與最多三項菜單，用回調來驅動外掛；Agent 透過 HTTP 呼叫同一批 /api/v1 介面，帶的還是那把 admin bearer——沒有額外憑證，也沒有單獨權限。",
   es: "Hay dos consumidores. Una cuenta de servicio POPOPX Chat recibe tarjetas y hasta tres elementos de menú, y opera mediante callbacks. Un Agent llama a los mismos endpoints /api/v1 por HTTP con el bearer de administración: sin credencial extra, sin permiso aparte.",
   pl: "Są dwa rodzaje odbiorców. Konto usługi POPOPX Chat dostaje karty i do trzech pozycji menu oraz steruje modułem przez callbacki. Agent woła te same punkty /api/v1 przez HTTP z bearerem administratora — bez dodatkowej poświadczenia, bez osobnego uprawnienia.",

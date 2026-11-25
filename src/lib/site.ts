@@ -63,6 +63,14 @@ export const NODE_PORTAL_URL = "https://node.popopx.chat";
  * 18-language copy strings inside `InstallAndUsageGuideSection.tsx` name
  * `#sandbox` and `#directory` in their prose, so renaming an anchor is a
  * translation change in eighteen places, not a one-line edit.
+ *
+ * `overview` is the hero plus `#scenarios`, the four business cards directly
+ * below it. The scenario block gets no entry of its own here on purpose: seven
+ * labels do not fit the centred desktop row at `xl` next to the logo, the
+ * ecosystem link, the GitHub pill, the language menu and the install CTA, and a
+ * nav item that only survives at `2xl` is worse than none. The block is the
+ * second thing on the page, so nobody has to jump to reach it — and every card
+ * links into the deep section that documents it.
  */
 export const NAV_SECTIONS = [
   { id: "overview" },
