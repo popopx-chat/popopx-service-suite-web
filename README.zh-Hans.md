@@ -75,9 +75,12 @@ popopx-service-suite-web/
     │   ├── Navbar.tsx                           吸顶导航：锚点、语言胶囊、仓库入口、主 CTA
     │   ├── LanguageMenu.tsx                     18 语言菜单：完整列表与紧凑胶囊
     │   ├── HeroSection.tsx                      首屏舞台
-    │   ├── ArchitectureComparison.tsx           五大特点卡片与三方对比表
     │   ├── PluginsShowcase.tsx                  后台开箱即用的五个插件
+    │   ├── ArchitectureComparison.tsx           五大特点卡片与三方对比表
     │   ├── InteractiveSandbox.tsx               后台控制台模拟器与手机预览
+    │   ├── SecurityGovernanceSection.tsx        凭证隔离、HMAC 鉴权、审计、限流
+    │   ├── StatusChangelogSection.tsx           后端发布历史与门户状态
+    │   ├── ProtocolReferenceSection.tsx         协议速查
     │   ├── InstallAndUsageGuideSection.tsx      安装标签区与 iPhone 四步图解
     │   ├── DirectoryAndDocsSection.tsx          二维码墙、目录 JSON、协议速查
     │   ├── Footer.tsx                           协议 / 商标 / 隐私 / 身份信息区
@@ -87,11 +90,12 @@ popopx-service-suite-web/
         └── i18n.tsx              多语言引擎：LocaleProvider / useLocale / useCopy / pick
 ```
 
-`src/app/page.tsx` 一共引入八个模块组件——`Navbar.tsx`、`HeroSection.tsx`、
-`ArchitectureComparison.tsx`、`PluginsShowcase.tsx`、`InteractiveSandbox.tsx`、
-`InstallAndUsageGuideSection.tsx`、`DirectoryAndDocsSection.tsx`、`Footer.tsx`；连同这八个，
-`src/components/` 里正好是十个文件：第九个是 `LanguageMenu.tsx`，即 `Navbar.tsx` 引入并渲染两次
-（桌面胶囊与窄屏面板）的语言控件，第十个是共享原语 `ui.tsx`。本文件只描述各模块在页面上的职责。
+`src/app/page.tsx` 一共引入十一个模块组件——`Navbar.tsx`、`HeroSection.tsx`、
+`PluginsShowcase.tsx`、`ArchitectureComparison.tsx`、`InteractiveSandbox.tsx`、
+`SecurityGovernanceSection.tsx`、`StatusChangelogSection.tsx`、`ProtocolReferenceSection.tsx`、
+`InstallAndUsageGuideSection.tsx`、`DirectoryAndDocsSection.tsx`、`Footer.tsx`；连同这十一个，
+`src/components/` 里正好是十三个文件：第十二个是 `LanguageMenu.tsx`，即 `Navbar.tsx` 引入并渲染两次
+（桌面胶囊与窄屏面板）的语言控件，第十三个是共享原语 `ui.tsx`。本文件只描述各模块在页面上的职责。
 
 ## 快速开始
 
@@ -121,7 +125,7 @@ vhost 的 `error_page` 指的就是它），带内容指纹的打包产物在 `o
 ## 页面模块
 
 整站是一页，模块就是锚点区。六个导航锚点的 id 以 `src/lib/site.ts` 的 `NAV_SECTIONS` 为准
-（`features`、`architecture`、`plugins`、`sandbox`、`install`、`directory`），模块顺序以
+（`overview`、`plugins`、`architecture`、`sandbox`、`security`、`changelog`），模块顺序以
 `src/app/page.tsx` 为准，`<main>` 上的 `id="top"` 是回到顶部的落点。`Navbar.tsx` 把
 `NAV_SECTIONS` 直接渲染成 `#id` 链接，锚点文案是 `Record<NavSectionId, Localized<string>>`，
 少一个 id 的翻译就编译不过。
@@ -129,13 +133,16 @@ vhost 的 `error_page` 指的就是它），带内容指纹的打包产物在 `o
 | 模块 | 组件 | 锚点 | 职责 |
 | --- | --- | --- | --- |
 | 一 顶部导航 | `Navbar.tsx` | 指向六个锚点 | 毛玻璃吸顶条：官方 logo 与 `POPOPX Service Suite` 标题、六个锚点链接、语言胶囊、GitHub 入口、部署主按钮（`#install`），窄屏收进一个面板 |
-| 二 首屏舞台 | `HeroSection.tsx` | `#top`（挂在 `<main>` 上） | 双模拓扑背景与主标语，指标条把「0 全局用户 ID」「100% 端到端加密」「AGPL-3.0 全栈开源」这些事实一次说完，两个按钮分别指向 `#install` 与 `#sandbox` |
-| 三 特点与架构对比 | `ArchitectureComparison.tsx` | `#features`、`#architecture` | 服务号五大技术特点卡片（本地 WebSocket 隔离、三级底部菜单、三样式动态卡片、成对匿名 H5 签名、零知识频道与 Epoch 轮换），外加与传统社交公众号、中心化 Bot 的三方对比表 |
-| 四 插件矩阵 | `PluginsShowcase.tsx` | `#plugins` | 后台开箱即用的五个扩展插件：隐私 AI 客服、DevOps 告警、零追踪扫码登录、加密问卷与匿名投票、链上资产监控与白名单发卡 |
+| 二 首屏舞台 | `HeroSection.tsx` | `#overview` | 双模拓扑背景与主标语，指标条把「0 全局用户 ID」「100% 端到端加密」「AGPL-3.0 全栈开源」这些事实一次说完，两个按钮分别指向 `#plugins` 与 `#sandbox` |
+| 三 插件矩阵 | `PluginsShowcase.tsx` | `#plugins` | 后台开箱即用的五个扩展插件：隐私 AI 客服、DevOps 告警、零追踪扫码登录、加密问卷与匿名投票、链上资产监控与白名单发卡；分类筛选、四步接入路径、第三方连接器路线图 |
+| 四 特点与架构对比 | `ArchitectureComparison.tsx` | `#architecture` | 服务号五大技术特点称号卡片（本地 WebSocket 隔离、三级底部菜单、三样式动态卡片、成对匿名 H5 签名、零知识频道与 Epoch 轮换），外加与传统社交公众号、中心化 Bot 的三方对比表 |
 | 五 互动体验沙盒 | `InteractiveSandbox.tsx` | `#sandbox` | 左边后台控制台模拟器、右边 1:1 手机预览，可真实点击菜单与卡片，并一键切到「中继服务器视角」看密文与签名摘要 |
-| 六 安装与操作指南 | `InstallAndUsageGuideSection.tsx` | `#install` | Ubuntu 与 macOS 两个标签，装着后端仓库的三条安装路径：Ubuntu 生产部署（`install_ubuntu22.sh`）、macOS 生产部署（`install_macos.sh`，把网关挂到 launchd 标签 `com.popopx.gateway` 上）、macOS 开发启动（`start_macos.sh`）；再加后台初始化与配额设置、iPhone 扫码关注到插件启用的四步图解 |
-| 七 目录与开放协议 | `DirectoryAndDocsSection.tsx` | `#directory` | 示范二维码展示墙与目录 JSON 生成器，加上信封协议、`::POPOPX_ECO::` 卡片协议、H5 验签接口 `POST /api/v1/verifyH5Auth` 的速查 |
-| 八 页脚 | `Footer.tsx` | 自带区块 id | 协议、商标、隐私与身份信息四块，链接用 `src/lib/site.ts` 导出的 `LICENSE_URL` / `TRADEMARK_URL` / 三个仓库地址，页面上显示的就是 `SITE_HOST` 与 `SITE_ORIGIN` |
+| 六 安全与权限治理 | `SecurityGovernanceSection.tsx` | `#security` | 凭证隔离、HMAC 鉴权、审计日志、限流策略、管理控制台部署指南；每个控制面板都标注已实现与规划中 |
+| 七 状态与更新日志 | `StatusChangelogSection.tsx` | `#changelog` | 后端发布历史、门户状态、构建验证步骤；指标网格加复现构建的完整命令 |
+| 八 协议速查 | `ProtocolReferenceSection.tsx` | `#protocol` | 频道信封、`::POPOPX_ECO::` 卡片协议、H5 验签接口 `POST /api/v1/verifyH5Auth`；线格式与字节级示例 |
+| 九 安装与操作指南 | `InstallAndUsageGuideSection.tsx` | `#install` | Ubuntu 与 macOS 两个标签，装着后端仓库的三条安装路径：Ubuntu 生产部署（`install_ubuntu22.sh`）、macOS 生产部署（`install_macos.sh`，把网关挂到 launchd 标签 `com.popopx.gateway` 上）、macOS 开发启动（`start_macos.sh`）；再加后台初始化与配额设置、iPhone 扫码关注到插件启用的四步图解 |
+| 十 目录与开放协议 | `DirectoryAndDocsSection.tsx` | `#directory` | 示范二维码展示墙与目录 JSON 生成器，加上信封协议、`::POPOPX_ECO::` 卡片协议、H5 验签接口 `POST /api/v1/verifyH5Auth` 的速查 |
+| 十一 页脚 | `Footer.tsx` | 自带区块 id | 协议、商标、隐私与身份信息四块，链接用 `src/lib/site.ts` 导出的 `LICENSE_URL` / `TRADEMARK_URL` / 三个仓库地址，页面上显示的就是 `SITE_HOST` 与 `SITE_ORIGIN` |
 
 文案里出现的地址只有 `src/lib/site.ts` 给定的这几个：站点源 `https://mp.popopx.chat`、生产主机
 `mp.popopx.chat`、本机网关控制台 `http://127.0.0.1:8080`、开源节点的 loopback WebSocket

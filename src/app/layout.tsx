@@ -15,10 +15,10 @@ import "./globals.css";
  * the network: the icon set, the manifest and every font are same-origin assets.
  */
 
-const TITLE = "POPOPX 服务号 · 零知识加密频道生态门户";
+const TITLE = "POPOPX Service Suite · 生态工具、服务号与零知识频道连接控制面";
 
 const DESCRIPTION =
-  "POPOPX 服务号与零知识加密频道官方门户：服务器零内容窥探、无全局 ID 跨站追踪、自有服务器一键部署（macOS / Ubuntu），AGPL-3.0 全栈开源。";
+  "POPOPX Service Suite 为 POPOPX Chat 服务号与 AI Agent 提供统一的连接控制面：可筛选的插件目录与按服务开关、零知识频道信封加密（Ed25519 + ChaCha20-Poly1305）、每次调用的 CP 计量与调用留痕。自有服务器部署（macOS / Ubuntu），纯静态同源、零第三方追踪，后端以 AGPL-3.0 开源。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_ORIGIN),
@@ -33,8 +33,13 @@ export const metadata: Metadata = {
   publisher: "POPOPX",
   keywords: [
     "POPOPX",
+    "POPOPX Service Suite",
     "POPOPX 服务号",
+    "连接控制面",
+    "AI Agent",
+    "插件目录",
     "零知识加密频道",
+    "信封加密",
     "端到端加密",
     "自托管",
     "AGPL-3.0",
@@ -88,7 +93,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#050508",
+  themeColor: "#07080D",
   colorScheme: "dark",
 };
 

@@ -3,7 +3,7 @@
 import { useReducer, type ReactElement } from "react";
 import { pick, useLocale, type Locale, type Localized } from "@/lib/i18n";
 import { CodeBlock, SectionHeading, StatusDot } from "@/components/ui";
-import { ADMIN_CONSOLE_URL, NODE_WS_URL } from "@/lib/site";
+import { ADMIN_CONSOLE_URL, NODE_WS_URL, SITE_HOST } from "@/lib/site";
 
 /**
  * The interactive sandbox: one console, one phone, one relay.
@@ -77,9 +77,18 @@ const MENU_REV = 3;
 const SEVERITY_WARNING = "warning";
 const ALERT_FINGERPRINT = "8c1f42d9be07a351";
 
-/** `smp://<host>/<connId>#key=<key>&auth=<auth>` — the shape `PopopxEcoLink` documents. */
-const SERVICE_ADDRESS =
-  "smp://mp.popopx.chat/Xa9Km2Qp7Rt3Nw5Yb8Ce1Df4Gh6Jk#key=k7Qm3ZxP9dLb2NsRt5Vw8Yc1Ah4Fg6Jm0Lp3Ks&auth=aT5rQ8wZ1cX6vB3nYd2Ef4Gh";
+const STD_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+const URL_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+
+/**
+ * `smp://<host>/<connId>#key=<key>&auth=<auth>` — the shape `PopopxEcoLink`
+ * documents. The three byte groups run through `fakeBytes`/`b64url` below instead
+ * of being typed in, so no credential-shaped literal on this page can be mistaken
+ * for a live key, and nothing here matches anything in the backend repository.
+ */
+const SERVICE_ADDRESS = `smp://${SITE_HOST}/${b64url(fakeBytes(0x5eed10, 21))}#key=${b64url(
+  fakeBytes(0x5eed11, 32),
+)}&auth=${b64url(fakeBytes(0x5eed12, 16))}`;
 
 /** `popopx://service?uri=<address>&ref=<article id>`; opening it sends `::REF::`. */
 const DEEP_LINK = "popopx://service?uri=%s&ref=%s".replace("%s", encodeURIComponent(SERVICE_ADDRESS)).replace("%s", ARTICLE_ID);
@@ -2793,9 +2802,6 @@ function fakeBytes(seed: number, length: number): number[] {
   }
   return out;
 }
-
-const STD_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-const URL_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
 /** Standard padded base64, written out so the padding is the real thing. */
 function b64std(data: readonly number[]): string {

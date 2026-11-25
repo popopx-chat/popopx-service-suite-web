@@ -1,9 +1,12 @@
 import type { ReactElement } from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
-import { ArchitectureComparison } from "@/components/ArchitectureComparison";
 import { PluginsShowcase } from "@/components/PluginsShowcase";
+import { ArchitectureComparison } from "@/components/ArchitectureComparison";
 import { InteractiveSandbox } from "@/components/InteractiveSandbox";
+import { SecurityGovernanceSection } from "@/components/SecurityGovernanceSection";
+import { StatusChangelogSection } from "@/components/StatusChangelogSection";
+import { ProtocolReferenceSection } from "@/components/ProtocolReferenceSection";
 import { InstallAndUsageGuideSection } from "@/components/InstallAndUsageGuideSection";
 import { DirectoryAndDocsSection } from "@/components/DirectoryAndDocsSection";
 import { Footer } from "@/components/Footer";
@@ -20,9 +23,12 @@ export default function Page(): ReactElement {
       <Navbar />
       <main id="top">
         <HeroSection />
-        <ArchitectureComparison />
         <PluginsShowcase />
+        <ArchitectureComparison />
         <InteractiveSandbox />
+        <SecurityGovernanceSection />
+        <StatusChangelogSection />
+        <ProtocolReferenceSection />
         <InstallAndUsageGuideSection />
         <DirectoryAndDocsSection />
       </main>

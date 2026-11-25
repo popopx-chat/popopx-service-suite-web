@@ -3,14 +3,17 @@ import type { Config } from "tailwindcss";
 /**
  * Design tokens for the POPOPX Service Suite portal.
  *
- * Palette (aligned with the iOS client's system colours):
+ * Palette (taken from the main site, not invented here): `https://popopx.chat`
+ * declares its own `:root` in `/_next/static/css/617b069a6f390d47.css` as
+ * `--ink:#07080d; --brand:#6e3ff3; --brand-soft:#9b7bff; --mesh:#10b981;
+ * --mesh-soft:#34e0b4`, and this file uses those four values plus the same
+ * `hair` / `mute` / `faint` alphas, so a visitor who moves between the two sites
+ * sees one brand rather than two. `deep` and `glow` are the only derived steps,
+ * and `warn` / `alert` carry the billing and security signals the suite needs.
+ *
  *  - `ink`        Dark OLED background, near-black with an indigo cast.
- *  - `brand*`     Deep indigo-purple = the "online / encrypted" accent
- *                 (#5856D6 is iOS systemIndigo, #7D7AFF its light variant).
- *  - `mesh*`      Radar teal-green = the "no network / BLE mesh" secondary
- *                 (#00A896 / #00D2B8).
- *  - `warn`       Amber for quota / billing signals, `alert` red for the
- *                 `security` card style.
+ *  - `brand*`     Violet = the "online / encrypted" accent.
+ *  - `mesh*`      Green = the "no network / BLE mesh" secondary.
  *
  * Every colour here is used as a Tailwind utility (`bg-brand`, `text-mesh-soft`,
  * `border-hair`), so adding a token is enough — no CSS file to keep in sync.
@@ -21,23 +24,23 @@ const config: Config = {
     extend: {
       colors: {
         ink: {
-          DEFAULT: "#050508",
+          DEFAULT: "#07080D",
           800: "#0A0A12",
           700: "#101019",
           600: "#16161F",
           500: "#1E1E2A",
         },
         brand: {
-          DEFAULT: "#5856D6",
-          soft: "#7D7AFF",
-          deep: "#3F3DA8",
-          glow: "rgba(125, 122, 255, 0.35)",
+          DEFAULT: "#6E3FF3",
+          soft: "#9B7BFF",
+          deep: "#5832C2",
+          glow: "rgba(155, 123, 255, 0.35)",
         },
         mesh: {
-          DEFAULT: "#00A896",
-          soft: "#00D2B8",
-          deep: "#00756A",
-          glow: "rgba(0, 210, 184, 0.30)",
+          DEFAULT: "#10B981",
+          soft: "#34E0B4",
+          deep: "#0C8B61",
+          glow: "rgba(52, 224, 180, 0.30)",
         },
         warn: {
           DEFAULT: "#F5A524",
@@ -78,18 +81,18 @@ const config: Config = {
       },
       backgroundImage: {
         "brand-halo":
-          "radial-gradient(60% 60% at 50% 45%, rgba(88, 86, 214, 0.28) 0%, rgba(88, 86, 214, 0.10) 40%, transparent 75%)",
+          "radial-gradient(60% 60% at 50% 45%, rgba(110, 63, 243, 0.30) 0%, rgba(110, 63, 243, 0.11) 40%, transparent 75%)",
         "mesh-halo":
-          "radial-gradient(50% 50% at 50% 50%, rgba(0, 168, 150, 0.22) 0%, transparent 72%)",
+          "radial-gradient(50% 50% at 50% 50%, rgba(16, 185, 129, 0.20) 0%, transparent 72%)",
         "flow-brand":
-          "linear-gradient(90deg, transparent 0%, rgba(125, 122, 255, 0.75) 45%, rgba(125, 122, 255, 0.75) 55%, transparent 100%)",
+          "linear-gradient(90deg, transparent 0%, rgba(155, 123, 255, 0.75) 45%, rgba(155, 123, 255, 0.75) 55%, transparent 100%)",
         "flow-mesh":
-          "linear-gradient(90deg, transparent 0%, rgba(0, 210, 184, 0.70) 45%, rgba(0, 210, 184, 0.70) 55%, transparent 100%)",
+          "linear-gradient(90deg, transparent 0%, rgba(52, 224, 180, 0.70) 45%, rgba(52, 224, 180, 0.70) 55%, transparent 100%)",
       },
       boxShadow: {
         glass: "0 1px 0 0 rgba(255,255,255,0.06) inset, 0 24px 60px -30px rgba(0,0,0,0.9)",
-        "brand-ring": "0 0 0 1px rgba(125,122,255,0.45), 0 0 40px -12px rgba(88,86,214,0.65)",
-        "mesh-ring": "0 0 0 1px rgba(0,210,184,0.40), 0 0 40px -12px rgba(0,168,150,0.55)",
+        "brand-ring": "0 0 0 1px rgba(155,123,255,0.45), 0 0 40px -12px rgba(110,63,243,0.65)",
+        "mesh-ring": "0 0 0 1px rgba(52,224,180,0.40), 0 0 40px -12px rgba(16,185,129,0.55)",
       },
       animation: {
         "flow-x": "flowX 6s linear infinite",

@@ -3,19 +3,29 @@
 import { useEffect, useState, type ReactElement } from "react";
 import { pick, useCopy, useLocale, type Localized } from "@/lib/i18n";
 import { LanguageMenu } from "@/components/LanguageMenu";
-import { NAV_SECTIONS, REPO_URL, type NavSectionId } from "@/lib/site";
+import {
+  BOT_STUDIO_URL,
+  MAIN_SITE_URL,
+  NAV_SECTIONS,
+  NODE_PORTAL_URL,
+  REPO_URL,
+  type NavSectionId,
+} from "@/lib/site";
 
 /**
  * Global sticky navbar.
  *
  * Honest constraints this file keeps:
- *  - Every link is a plain `#hash` jump: no router, no history API, no scroll
- *    listener. The portal is one anchored page, so the browser does the work.
+ *  - Every internal link is a plain `#hash` jump: no router, no history API, no
+ *    scroll listener. The portal is one anchored page, so the browser does the work.
  *  - There is deliberately no active-section highlight. A highlighted link would
  *    have to be computed from an IntersectionObserver over the section elements
  *    and this bar does not run one, so it never claims a current section.
  *  - The only image is the same-origin official logo. No webfont, no icon font,
- *    no CDN: the GitHub, menu and chevron glyphs are inline SVG.
+ *    no CDN: the GitHub, menu, chevron and outbound glyphs are inline SVG.
+ *  - The ecosystem and GitHub links are *navigation* to another origin. The bar
+ *    loads nothing from there, which is what the zero-third-party-asset promise
+ *    rests on, and each host was probed live before being published here.
  *  - Copy is authored in all 18 locales the engine declares and typed as a total
  *    `Localized<string>` map, so the compiler rejects a missing variant.
  *  - The language control is `LanguageMenu`, which lists the same 18 locales as
@@ -24,125 +34,125 @@ import { NAV_SECTIONS, REPO_URL, type NavSectionId } from "@/lib/site";
  */
 
 const SECTION_LABELS: Record<NavSectionId, Localized<string>> = {
-  features: {
-    en: "Core features",
-    ru: "Основные возможности",
-    de: "Kernfunktionen",
-    fr: "Fonctionnalités clés",
-    it: "Funzionalità principali",
-    nl: "Kernfuncties",
-    cs: "Hlavní funkce",
-    "zh-Hans": "核心特点",
-    "zh-Hant": "核心特點",
-    es: "Funciones principales",
-    pl: "Funkcje główne",
-    ja: "中核機能",
-    th: "ฟีเจอร์หลัก",
-    fi: "Keskeiset ominaisuudet",
-    uk: "Основні можливості",
-    bg: "Основни възможности",
-    tr: "Temel özellikler",
-    hu: "Alapfunkciók",
-  },
-  architecture: {
-    en: "Dual-core architecture",
-    ru: "Двухъядерная архитектура",
-    de: "Zwei-Kern-Architektur",
-    fr: "Architecture à double cœur",
-    it: "Architettura a doppio core",
-    nl: "Dual-core-architectuur",
-    cs: "Dvojjaderná architektura",
-    "zh-Hans": "双核架构",
-    "zh-Hant": "雙核架構",
-    es: "Arquitectura de doble núcleo",
-    pl: "Architektura dwurdzeniowa",
-    ja: "デュアルコア設計",
-    th: "สถาปัตยกรรมสองแกน",
-    fi: "Kaksisydäinarkkitehtuuri",
-    uk: "Двосядерна архітектура",
-    bg: "Двойоядрена архитектура",
-    tr: "Çift çekirdekli mimari",
-    hu: "Kétmagos architektúra",
+  overview: {
+    en: "Overview",
+    ru: "Обзор",
+    de: "Überblick",
+    fr: "Aperçu",
+    it: "Panoramica",
+    nl: "Overzicht",
+    cs: "Přehled",
+    "zh-Hans": "概览",
+    "zh-Hant": "概覽",
+    es: "Resumen",
+    pl: "Omówienie",
+    ja: "概要",
+    th: "ภาพรวม",
+    fi: "Yleiskatsaus",
+    uk: "Огляд",
+    bg: "Преглед",
+    tr: "Genel bakış",
+    hu: "Áttekintés",
   },
   plugins: {
-    en: "Five built-in plugins",
-    ru: "Пять встроенных плагинов",
-    de: "Fünf integrierte Plugins",
-    fr: "Cinq extensions intégrées",
-    it: "Cinque plugin integrati",
-    nl: "Vijf ingebouwde plug-ins",
-    cs: "Pět vestavěných pluginů",
-    "zh-Hans": "五大扩展插件",
-    "zh-Hant": "五大擴充插件",
-    es: "Cinco complementos integrados",
-    pl: "Pięć wbudowanych wtyczek",
-    ja: "5つの拡張プラグイン",
-    th: "ปลั๊กอินในตัว 5 ตัว",
-    fi: "Viisi sisäänrakennettua lisäosaa",
-    uk: "П’ять вбудованих плагінів",
-    bg: "Пет вградени плъгина",
-    tr: "Beş yerleşik eklenti",
-    hu: "Öt beépített bővítmény",
+    en: "Services & connectors",
+    ru: "Сервисы и коннекторы",
+    de: "Dienste & Konnektoren",
+    fr: "Services et connecteurs",
+    it: "Servizi e connettori",
+    nl: "Services en connectors",
+    cs: "Služby a konektory",
+    "zh-Hans": "服务与连接器",
+    "zh-Hant": "服務與連線器",
+    es: "Servicios y conectores",
+    pl: "Usługi i konektory",
+    ja: "サービスとコネクタ",
+    th: "บริการและตัวเชื่อมต่อ",
+    fi: "Palvelut ja liittimet",
+    uk: "Сервіси та конектори",
+    bg: "Услуги и конектори",
+    tr: "Hizmetler ve bağlayıcılar",
+    hu: "Szolgáltatások és csatlakozók",
+  },
+  architecture: {
+    en: "How it works",
+    ru: "Как это работает",
+    de: "Funktionsweise",
+    fr: "Fonctionnement",
+    it: "Come funziona",
+    nl: "Hoe het werkt",
+    cs: "Jak to funguje",
+    "zh-Hans": "工作原理",
+    "zh-Hant": "工作原理",
+    es: "Cómo funciona",
+    pl: "Jak to działa",
+    ja: "仕組み",
+    th: "หลักการทำงาน",
+    fi: "Miten se toimii",
+    uk: "Як це працює",
+    bg: "Как работи",
+    tr: "Nasıl çalışır",
+    hu: "Működése",
   },
   sandbox: {
-    en: "Interactive sandbox",
-    ru: "Интерактивная песочница",
-    de: "Interaktive Sandbox",
-    fr: "Bac à sable interactif",
-    it: "Sandbox interattivo",
-    nl: "Interactieve sandbox",
-    cs: "Interaktivní pískoviště",
-    "zh-Hans": "互动体验沙盒",
-    "zh-Hant": "互動體驗沙盒",
-    es: "Entorno de pruebas interactivo",
-    pl: "Interaktywna piaskownica",
-    ja: "インタラクティブ沙盒",
-    th: "แซนด์บ็อกซ์เชิงโต้ตอบ",
-    fi: "Interaktiivinen hiekkalaatikko",
-    uk: "Інтерактивна пісочниця",
-    bg: "Интерактивна пясъчница",
-    tr: "Etkileşimli kum havuzu",
-    hu: "Interaktív homokozó",
+    en: "Developers & API",
+    ru: "Разработчикам и API",
+    de: "Entwickler & API",
+    fr: "Développeurs et API",
+    it: "Sviluppatori e API",
+    nl: "Ontwikkelaars en API",
+    cs: "Vývojáři a API",
+    "zh-Hans": "开发者与 API",
+    "zh-Hant": "開發者與 API",
+    es: "Desarrolladores y API",
+    pl: "Programiści i API",
+    ja: "開発者と API",
+    th: "นักพัฒนาและ API",
+    fi: "Kehittäjät ja API",
+    uk: "Розробникам та API",
+    bg: "Разработчици и API",
+    tr: "Geliştiriciler ve API",
+    hu: "Fejlesztők és API",
   },
-  install: {
-    en: "Install and usage guide",
-    ru: "Установка и использование",
-    de: "Installation und Nutzung",
-    fr: "Installation et utilisation",
-    it: "Installazione e uso",
-    nl: "Installatie en gebruik",
-    cs: "Instalace a použití",
-    "zh-Hans": "安装与操作指南",
-    "zh-Hant": "安裝與操作指南",
-    es: "Instalación y uso",
-    pl: "Instalacja i użycie",
-    ja: "インストールと使い方",
-    th: "การติดตั้งและวิธีใช้",
-    fi: "Asennus ja käyttö",
-    uk: "Встановлення та використання",
-    bg: "Инсталация и употреба",
-    tr: "Kurulum ve kullanım",
-    hu: "Telepítés és használat",
+  security: {
+    en: "Security & permissions",
+    ru: "Безопасность и права",
+    de: "Sicherheit & Berechtigungen",
+    fr: "Sécurité et autorisations",
+    it: "Sicurezza e autorizzazioni",
+    nl: "Beveiliging en machtigingen",
+    cs: "Bezpečnost a oprávnění",
+    "zh-Hans": "安全与权限",
+    "zh-Hant": "安全與權限",
+    es: "Seguridad y permisos",
+    pl: "Bezpieczeństwo i uprawnienia",
+    ja: "セキュリティと権限",
+    th: "ความปลอดภัยและการอนุญาต",
+    fi: "Turvallisuus ja käyttöoikeudet",
+    uk: "Безпека та дозволи",
+    bg: "Сигурност и права",
+    tr: "Güvenlik ve izinler",
+    hu: "Biztonság és jogosultságok",
   },
-  directory: {
-    en: "Open protocols and directory",
-    ru: "Открытые протоколы и каталог",
-    de: "Offene Protokolle und Verzeichnis",
-    fr: "Protocoles ouverts et annuaire",
-    it: "Protocolli aperti e directory",
-    nl: "Open protocollen en catalogus",
-    cs: "Otevřené protokoly a adresář",
-    "zh-Hans": "开放协议与目录",
-    "zh-Hant": "開放協定與目錄",
-    es: "Protocolos abiertos y directorio",
-    pl: "Otwarte protokoły i katalog",
-    ja: "オープンプロトコルとカタログ",
-    th: "โปรโตคอลเปิดและไดเรกทอรี",
-    fi: "Avoimet protokollat ja hakemisto",
-    uk: "Відкриті протоколи та каталог",
-    bg: "Отворени протоколи и указател",
-    tr: "Açık protokoller ve dizin",
-    hu: "Nyílt protokollok és könyvtár",
+  changelog: {
+    en: "Status & changelog",
+    ru: "Статус и изменения",
+    de: "Status & Änderungen",
+    fr: "Statut et journal",
+    it: "Stato e novità",
+    nl: "Status en logboek",
+    cs: "Stav a změny",
+    "zh-Hans": "状态与更新日志",
+    "zh-Hant": "狀態與更新日誌",
+    es: "Estado y novedades",
+    pl: "Status i zmiany",
+    ja: "状況と変更履歴",
+    th: "สถานะและอัปเดต",
+    fi: "Tila ja muutokset",
+    uk: "Статус і зміни",
+    bg: "Статус и промени",
+    tr: "Durum ve değişiklikler",
+    hu: "Állapot és változások",
   },
 };
 
@@ -153,9 +163,114 @@ type CopyKey =
   | "menuClose"
   | "panelSections"
   | "panelActions"
-  | "cta";
+  | "cta"
+  | "mainSite"
+  | "mainSiteAria"
+  | "ecosystemGroup"
+  | "botStudio"
+  | "nodePortal";
 
 const COPY: Record<CopyKey, Localized<string>> = {
+  mainSite: {
+    en: "Main site",
+    ru: "Основной сайт",
+    de: "Hauptseite",
+    fr: "Site principal",
+    it: "Sito principale",
+    nl: "Hoofdsite",
+    cs: "Hlavní web",
+    "zh-Hans": "主站",
+    "zh-Hant": "主站",
+    es: "Sitio principal",
+    pl: "Strona główna",
+    ja: "メインサイト",
+    th: "ไซต์หลัก",
+    fi: "Pääsivusto",
+    uk: "Головний сайт",
+    bg: "Основен сайт",
+    tr: "Ana site",
+    hu: "Főoldal",
+  },
+  mainSiteAria: {
+    en: "Go to the POPOPX main site at popopx.chat",
+    ru: "Перейти на основной сайт POPOPX: popopx.chat",
+    de: "Zur POPOPX-Hauptseite unter popopx.chat",
+    fr: "Aller sur le site principal de POPOPX sur popopx.chat",
+    it: "Vai al sito principale di POPOPX su popopx.chat",
+    nl: "Ga naar de POPOPX-hoofdsite op popopx.chat",
+    cs: "Přejít na hlavní web POPOPX na adrese popopx.chat",
+    "zh-Hans": "前往 POPOPX 主站 popopx.chat",
+    "zh-Hant": "前往 POPOPX 主站 popopx.chat",
+    es: "Ir al sitio principal de POPOPX en popopx.chat",
+    pl: "Przejdź do głównej strony POPOPX pod popopx.chat",
+    ja: "popopx.chat の POPOPX メインサイトへ移動します",
+    th: "ไปที่ไซต์หลักของ POPOPX ที่ popopx.chat",
+    fi: "Siirry POPOPX:n pääsivustolle osoitteessa popopx.chat",
+    uk: "Перейти на основний сайт POPOPX за адресою popopx.chat",
+    bg: "Към основния сайт на POPOPX на popopx.chat",
+    tr: "popopx.chat adresindeki POPOPX ana sitesine git",
+    hu: "Ugrás a POPOPX főoldalára a popopx.chat címen",
+  },
+  ecosystemGroup: {
+    en: "Ecosystem",
+    ru: "Экосистема",
+    de: "Ökosystem",
+    fr: "Écosystème",
+    it: "Ecosistema",
+    nl: "Ecosysteem",
+    cs: "Ekosystém",
+    "zh-Hans": "生态入口",
+    "zh-Hant": "生態入口",
+    es: "Ecosistema",
+    pl: "Ekosystem",
+    ja: "エコシステム",
+    th: "ระบบนิเวศ",
+    fi: "Ekosysteemi",
+    uk: "Екосистема",
+    bg: "Екосистема",
+    tr: "Ekosistem",
+    hu: "Ökoszisztéma",
+  },
+  botStudio: {
+    en: "Bot Studio",
+    ru: "Студия ботов",
+    de: "Bot-Studio",
+    fr: "Studio de bots",
+    it: "Studio bot",
+    nl: "Botstudio",
+    cs: "Studio botů",
+    "zh-Hans": "机器人工作台",
+    "zh-Hant": "機器人工作台",
+    es: "Estudio de bots",
+    pl: "Studio botów",
+    ja: "ボットスタジオ",
+    th: "สตูดิโอของบอต",
+    fi: "Bot-studio",
+    uk: "Студія ботів",
+    bg: "Студио за ботове",
+    tr: "Bot Stüdyosu",
+    hu: "Botstúdió",
+  },
+  nodePortal: {
+    en: "Mac node",
+    ru: "Узел Mac",
+    de: "Mac-Knoten",
+    fr: "Nœud Mac",
+    it: "Nodo Mac",
+    nl: "Mac-knooppunt",
+    cs: "Uzel Mac",
+    "zh-Hans": "Mac 自建节点",
+    "zh-Hant": "Mac 自建節點",
+    es: "Nodo Mac",
+    pl: "Węzeł Mac",
+    ja: "Mac ノード",
+    th: "โหนด Mac",
+    fi: "Mac-solmu",
+    uk: "Вузол Mac",
+    bg: "Mac възел",
+    tr: "Mac düğümü",
+    hu: "Mac csomópont",
+  },
   navRegion: {
     en: "Main navigation",
     ru: "Основная навигация",
@@ -336,6 +451,27 @@ function ChevronMark(): ReactElement {
   );
 }
 
+/** Outbound arrow: marks a link that leaves this origin without loading anything. */
+function OutboundMark(): ReactElement {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-3.5 w-3.5 shrink-0"
+    >
+      <path d="M14 4h6v6M20 4l-9 9" />
+      <path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4" />
+    </svg>
+  );
+}
+
 export function Navbar(): ReactElement {
   const { locale } = useLocale();
   const [open, setOpen] = useState(false);
@@ -345,6 +481,11 @@ export function Navbar(): ReactElement {
   const sectionsLabel = useCopy(COPY.panelSections);
   const actionsLabel = useCopy(COPY.panelActions);
   const ctaLabel = useCopy(COPY.cta);
+  const mainSiteLabel = useCopy(COPY.mainSite);
+  const mainSiteAria = useCopy(COPY.mainSiteAria);
+  const ecosystemLabel = useCopy(COPY.ecosystemGroup);
+  const botStudioLabel = useCopy(COPY.botStudio);
+  const nodeLabel = useCopy(COPY.nodePortal);
 
   // Escape closes the small-screen panel. Deliberately no scroll listener: the
   // bar is `position: sticky`, so the browser handles the pinning.
@@ -400,13 +541,25 @@ export function Navbar(): ReactElement {
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <a
+            href={MAIN_SITE_URL}
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label={mainSiteAria}
+            className={`hidden items-center gap-1.5 rounded-full border border-hair bg-white/[0.04] px-3 py-2 text-[12px] text-mute transition-colors duration-200 hover:border-brand/50 hover:text-white lg:inline-flex ${FOCUS}`}
+          >
+            <OutboundMark />
+            {mainSiteLabel}
+          </a>
+
+          <a
             href={REPO_URL}
             target="_blank"
             rel="noreferrer noopener"
             aria-label={githubLabel}
-            className={`hidden h-9 w-9 items-center justify-center rounded-full border border-hair bg-white/[0.04] text-mute transition-colors duration-200 hover:border-hair-strong hover:text-white sm:inline-flex ${FOCUS}`}
+            className={`hidden h-9 items-center gap-2 rounded-full border border-hair bg-white/[0.04] px-3 text-[12px] text-mute transition-colors duration-200 hover:border-hair-strong hover:text-white sm:inline-flex ${FOCUS}`}
           >
             <GitHubMark />
+            GitHub
           </a>
 
           <div className="hidden items-center gap-3 lg:flex">
@@ -464,6 +617,33 @@ export function Navbar(): ReactElement {
                 </li>
               ))}
             </ul>
+            <div className="hairline-top mt-2 px-2 pb-1 pt-3">
+              <p className="eyebrow flex items-center gap-1.5">{ecosystemLabel}</p>
+              <ul className="mt-1 grid gap-0.5">
+                {[
+                  { href: MAIN_SITE_URL, label: mainSiteLabel, host: "popopx.chat" },
+                  { href: BOT_STUDIO_URL, label: botStudioLabel, host: "bot.popopx.chat" },
+                  { href: NODE_PORTAL_URL, label: nodeLabel, host: "node.popopx.chat" },
+                ].map((entry) => (
+                  <li key={entry.href}>
+                    <a
+                      href={entry.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      onClick={closePanel}
+                      className={`flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-[14px] text-mute transition-colors duration-200 hover:bg-white/[0.06] hover:text-white ${FOCUS}`}
+                    >
+                      <span className="min-w-0 truncate">{entry.label}</span>
+                      <span className="flex shrink-0 items-center gap-1.5 font-mono text-[11px] text-faint">
+                        {entry.host}
+                        <OutboundMark />
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <div className="hairline-top mt-2 px-2 pb-1 pt-3">
               <p className="eyebrow mb-2">{actionsLabel}</p>
               <LanguageMenu align="left" compact />

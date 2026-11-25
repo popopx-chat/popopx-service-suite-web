@@ -37,13 +37,40 @@ export const ADMIN_CONSOLE_URL = "http://127.0.0.1:8080";
 /** The open-sourced node only accepts a loopback WebSocket. */
 export const NODE_WS_URL = "ws://127.0.0.1:5225";
 
+/**
+ * Ecosystem entry points. Every one of these is a navigation link, not a loaded
+ * resource, so the 0-third-party-asset promise survives them. Each host was
+ * probed `200` on 2026-11-25; the live main site links back to `mp.popopx.chat`,
+ * so the traffic corridor is two-way. Re-probe before adding one — a dead
+ * ecosystem link is a broken promise on an official page.
+ */
+export const MAIN_SITE_URL = "https://popopx.chat";
+
+export const BOT_STUDIO_URL = "https://bot.popopx.chat";
+
+export const NODE_PORTAL_URL = "https://node.popopx.chat";
+
+/**
+ * The product-portal information architecture, in page order. Each entry is the
+ * entry point of one bucket, and the bucket may hold more sections than the nav
+ * names: `plugins` is the services catalog, `architecture` is the 工作原理 bucket
+ * (the `features` block above it and the `protocol` quick reference below it
+ * belong to the same bucket), `sandbox` is the developer bucket (with
+ * `directory` right behind it), and `security` is the governance bucket (with the
+ * full `install` guide behind it).
+ *
+ * The ids are deliberately the ones the shipped page already uses. Several
+ * 18-language copy strings inside `InstallAndUsageGuideSection.tsx` name
+ * `#sandbox` and `#directory` in their prose, so renaming an anchor is a
+ * translation change in eighteen places, not a one-line edit.
+ */
 export const NAV_SECTIONS = [
-  { id: "features" },
-  { id: "architecture" },
+  { id: "overview" },
   { id: "plugins" },
+  { id: "architecture" },
   { id: "sandbox" },
-  { id: "install" },
-  { id: "directory" },
+  { id: "security" },
+  { id: "changelog" },
 ] as const;
 
 export type NavSectionId = (typeof NAV_SECTIONS)[number]["id"];

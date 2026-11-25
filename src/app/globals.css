@@ -12,11 +12,11 @@
 
 @layer base {
   :root {
-    --ink: #050508;
-    --brand: #5856d6;
-    --brand-soft: #7d7aff;
-    --mesh: #00a896;
-    --mesh-soft: #00d2b8;
+    --ink: #07080d;
+    --brand: #6e3ff3;
+    --brand-soft: #9b7bff;
+    --mesh: #10b981;
+    --mesh-soft: #34e0b4;
     color-scheme: dark;
   }
 
@@ -28,8 +28,8 @@
   body {
     @apply bg-ink text-[#e9e9f5] antialiased;
     background-image:
-      radial-gradient(70% 50% at 50% -10%, rgba(88, 86, 214, 0.20) 0%, transparent 60%),
-      radial-gradient(50% 40% at 100% 20%, rgba(0, 168, 150, 0.10) 0%, transparent 60%);
+      radial-gradient(70% 50% at 50% -10%, rgba(110, 63, 243, 0.20) 0%, transparent 60%),
+      radial-gradient(50% 40% at 100% 20%, rgba(16, 185, 129, 0.10) 0%, transparent 60%);
     background-attachment: fixed;
   }
 
@@ -39,7 +39,7 @@
   }
 
   ::selection {
-    background: rgba(125, 122, 255, 0.35);
+    background: rgba(155, 123, 255, 0.35);
   }
 
   * {
@@ -137,8 +137,8 @@
     background-image: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(125, 122, 255, 0.85) 45%,
-      rgba(125, 122, 255, 0.85) 55%,
+      rgba(155, 123, 255, 0.85) 45%,
+      rgba(155, 123, 255, 0.85) 55%,
       transparent 100%
     );
   }
@@ -147,8 +147,8 @@
     background-image: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(0, 210, 184, 0.8) 45%,
-      rgba(0, 210, 184, 0.8) 55%,
+      rgba(52, 224, 180, 0.8) 45%,
+      rgba(52, 224, 180, 0.8) 55%,
       transparent 100%
     );
   }

@@ -56,66 +56,66 @@ const MESH_LINES: readonly string[] = [
 ];
 
 const EYEBROW: Localized<string> = {
-  en: "POPOPX Service Account · backend suite",
-  ru: "Сервисный аккаунт POPOPX · набор серверных модулей",
-  de: "POPOPX Service-Konto · Backend-Paket",
-  fr: "Compte de service POPOPX · suite serveur",
-  it: "Account di servizio POPOPX · suite backend",
-  nl: "POPOPX-serviceaccount · backend-suite",
-  cs: "Servisní účet POPOPX · sada backendových modulů",
-  "zh-Hans": "POPOPX 服务号 · 后端套件",
-  "zh-Hant": "POPOPX 服務號 · 後端套件",
-  es: "Cuenta de servicio POPOPX · suite de backend",
-  pl: "Konto serwisowe POPOPX · pakiet backendowy",
-  ja: "POPOPX サービスアカウント · バックエンドスイート",
-  th: "บัญชีบริการ POPOPX · ชุดโมดูลฝั่งเซิร์ฟเวอร์",
-  fi: "POPOPX-palvelutili · taustapalvelupaketti",
-  uk: "Сервісний акаунт POPOPX · комплект серверних модулів",
-  bg: "Сервизен акаунт на POPOPX · комплект сървърни модули",
-  tr: "POPOPX Hizmet Hesabı · arka uç paketi",
-  hu: "POPOPX szolgáltatási fiók · backend csomag",
+  en: "POPOPX Service Suite · the connection control plane",
+  ru: "POPOPX Service Suite · панель управления подключениями",
+  de: "POPOPX Service Suite · die Steuerungsebene für Verbindungen",
+  fr: "POPOPX Service Suite · le plan de contrôle des connexions",
+  it: "POPOPX Service Suite · il piano di controllo delle connessioni",
+  nl: "POPOPX Service Suite · het controlepaneel voor verbindingen",
+  cs: "POPOPX Service Suite · řídicí plocha připojení",
+  "zh-Hans": "POPOPX Service Suite · 连接控制面",
+  "zh-Hant": "POPOPX Service Suite · 連線控制面",
+  es: "POPOPX Service Suite · el plano de control de conexiones",
+  pl: "POPOPX Service Suite · panel zarządzania połączeniami",
+  ja: "POPOPX Service Suite · 接続の制御プレーン",
+  th: "POPOPX Service Suite · แผงควบคุมการเชื่อมต่อ",
+  fi: "POPOPX Service Suite · yhteyskontrollitaso",
+  uk: "POPOPX Service Suite · панель керування з’єднаннями",
+  bg: "POPOPX Service Suite · контролният панел на връзките",
+  tr: "POPOPX Service Suite · bağlantı kontrol düzlemi",
+  hu: "POPOPX Service Suite · a kapcsolatok vezérlőfelülete",
 };
 
 const HEADLINE: Localized<string> = {
-  en: "Reshaping decentralised business links: zero-knowledge encrypted channels × federated private service accounts",
-  ru: "Перестраиваем децентрализованные деловые связи: шифрованные каналы с нулевым разглашением × федеративные приватные сервисные аккаунты",
-  de: "Dezentrale Geschäftsverbindungen neu gedacht: zero-knowledge-verschlüsselte Kanäle × föderierte private Service-Konten",
-  fr: "Repenser les liens commerciaux décentralisés : canaux chiffrés à zero knowledge × comptes de service privés fédérés",
-  it: "Riprogettare i legami commerciali decentralizzati: canali cifrati a zero conoscenza × account di servizio privati federati",
-  nl: "Decentrale zakelijke verbindingen opnieuw ingericht: zero-knowledge versleutelde kanalen × gefedereerde privé-serviceaccounts",
-  cs: "Nové pojetí decentralizovaných obchodních vazeb: šifrované kanály s nulovou znalostí × federované soukromé servisní účty",
-  "zh-Hans": "重塑去中心化商业连接：零知识加密频道 × 联邦私域服务号",
-  "zh-Hant": "重塑去中心化商業連接：零知識加密頻道 × 聯邦私域服務號",
-  es: "Repensando los vínculos comerciales descentralizados: canales cifrados de conocimiento cero × cuentas de servicio privadas federadas",
-  pl: "Połączenia biznesowe bez scentralizowania: kanały szyfrowane z zerową znajomością × federowane prywatne konta serwisowe",
-  ja: "分散型のビジネスのつながりを組み替える：ゼロ知識証明の暗号化チャンネル × 連合型のプライベートサービスアカウント",
-  th: "ปรับโฉมการเชื่อมต่อทางธุรกิจแบบกระจายศูนย์: ช่องทางเข้ารหัสแบบ zero-knowledge × บัญชีบริการส่วนตัวแบบสหพันธ์",
-  fi: "Hajautetut kaupalliset yhteydet mietittynä uusiksi: nollatiedon salauksen kanavat × federaatiomaiset yksityiset palvelutilit",
-  uk: "По-новому про децентралізовані ділові зв’язки: шифровані канали з нульовим розкриттям × федеративні приватні сервісні акаунти",
-  bg: "Преосмисляме децентрализираните бизнес връзки: криптирани канали с нулево разкриване × федерирани частни сервизни акаунти",
-  tr: "Merkeziyetsiz ticari bağları yeniden kuruyoruz: sıfır bilgiyle şifrelenmiş kanallar × federatif özel hizmet hesapları",
-  hu: "A decentralizált üzleti kapcsolatok újragondolása: nullaismeret-alapú titkosított csatornák × föderált privát szolgáltatási fiókok",
+  en: "Connect Services. Extend Every Agent.",
+  ru: "Подключайте сервисы — дайте каждому агенту рабочие возможности.",
+  de: "Dienste verbinden — damit jeder Agent wirklich nutzbare Fähigkeiten hat.",
+  fr: "Connectez les services : chaque Agent gagne des capacités réellement utilisables.",
+  it: "Collega i servizi: ogni Agent ottiene capacità effettivamente utilizzabili.",
+  nl: "Verbind diensten — elk Agent krijgt bruikbare mogelijkheden.",
+  cs: "Napojte služby — každý agent získá skutečně použitelné schopnosti.",
+  "zh-Hans": "连接工具与服务，让每个 Agent 都拥有可用能力。",
+  "zh-Hant": "連線工具與服務，讓每個 Agent 都具備可用能力。",
+  es: "Conecta servicios: cada Agent obtiene capacidades realmente utilizables.",
+  pl: "Łącz usługi — każdy agent zyskuje faktycznie użyteczne możliwości.",
+  ja: "サービスを接続し、すべてのエージェントに実践できる力を。",
+  th: "เชื่อมต่อบริการ เพื่อให้ทุก Agent มีความสามารถที่ใช้ได้จริง",
+  fi: "Yhdistä palvelut — jokainen Agent saa oikeasti käyttökelpoiset kyvyt.",
+  uk: "Підключайте сервіси — надайте кожному агенту реально придатні можливості.",
+  bg: "Свързвайте услуги — всеки Agent получава реално приложими възможности.",
+  tr: "Hizmetleri bağlayın — her Agent gerçekten kullanılabilir yetkinlikler kazansın.",
+  hu: "Kössen szolgáltatásokat — minden Agent valóban használható képességeket kapjon.",
 };
 
 const SUBHEADLINE: Localized<string> = {
-  en: "No content inspection by the server · no global ID for cross-site tracking · one-command deployment on your own server · the next generation of encrypted commerce, open source end to end under AGPL-3.0.",
-  ru: "Ноль доступа к содержимому на сервере · никакого глобального ID для отслеживания между сайтами · развёртывание одной командой на вашем сервере · новое поколение шифрованной коммерции, открытое от первой до последней строки под AGPL-3.0.",
-  de: "Keine Inhalteinsicht auf dem Server · keine globale ID für übergreifendes Tracking · Deployment mit einem Befehl auf eigenem Server · die nächste Generation des verschlüsselten Handels, durchgehend Open Source unter AGPL-3.0.",
-  fr: "Aucune inspection du contenu par le serveur · aucun identifiant global pour le suivi entre sites · déploiement en une commande sur votre propre serveur · la prochaine génération du commerce chiffré, open source de bout en bout sous AGPL-3.0.",
-  it: "Nessuna ispezione dei contenuti da parte del server · nessun ID globale per il tracciamento tra siti · deploy con un comando sul tuo server · la prossima generazione del commercio cifrato, open source end-to-end sotto AGPL-3.0.",
-  nl: "Geen inhoudsinspectie door de server · geen globaal ID voor site-overschrijdende tracking · met één commando op je eigen server draaien · de volgende generatie versleutelde handel, end-to-end open source onder AGPL-3.0.",
-  cs: "Žádná kontrola obsahu na serveru · žádné globální ID pro sledování napříč weby · nasazení jedním příkazem na vlastním serveru · další generace šifrovaného obchodu, open source od konce ke konci pod licencí AGPL-3.0.",
-  "zh-Hans": "服务器零内容窥探 · 无全局 ID 跨站追踪 · 自有服务器一键部署 · AGPL-3.0 全栈开源的下一代加密商业生态。",
-  "zh-Hant": "伺服器零內容窺探 · 無全域 ID 跨站追蹤 · 自有伺服器一鍵部署 · AGPL-3.0 全棧開源的下一世代加密商業生態。",
-  es: "Sin inspección de contenido por parte del servidor · sin ID global para rastreo entre sitios · despliegue con un solo comando en tu propio servidor · la próxima generación de comercio cifrado, de código abierto de extremo a extremo bajo AGPL-3.0.",
-  pl: "Brak wglądu serwera w treść · brak globalnego identyfikatora do śledzenia między serwisami · wdrożenie jednym poleceniem na własnym serwerze · kolejna generacja szyfrowanego handlu, wolne oprogramowanie od końca do końca na licencji AGPL-3.0.",
-  ja: "サーバーが内容をのぞくことはゼロ · サイト間追跡用のグローバルIDもゼロ · 自分のサーバーへワンコマンドでデプロイ · AGPL-3.0 のフルスタックOSSで築く次世代の暗号化コマース基盤。",
-  th: "เซิร์ฟเวอร์ไม่เห็นเนื้อหาเลย · ไม่มี ID สากลสำหรับติดตามข้ามไซต์ · ดีพลอยด้วยคำสั่งเดียวบนเซิร์ฟเวอร์ของคุณเอง · ระบบนิเวศพาณิชย์เข้ารหัสรุ่นถัดไปที่เปิดซอร์สทั้งสแต็กใต้ AGPL-3.0",
-  fi: "Palvelin ei näe sisältöä · ei globaalia tunnista sivustojen väliseen seurantaan · käyttöönotto yhdellä komennolla omalle palvelimelle · seuraavan sukupolven salattu kaupankäynti, avoimen lähdekoodin läpi linjan AGPL-3.0-nojalla.",
-  uk: "Сервер не зазирає вмісту · жодного глобального ID для відстеження між сайтами · розгортання однією командою на власному сервері · наступне покоління шифрованої комерції, повністю відкрите під ліцензією AGPL-3.0.",
-  bg: "Без преглед на съдържанието от сървъра · без глобален ID за проследяване между сайтове · внедряване с една команда на ваш собствен сървър · следващото поколение на криптираната търговия, с отворен код навсякъде под AGPL-3.0.",
-  tr: "Sunucunun içeriğe erişimi yok · siteler arası izleme için küresel kimlik yok · kendi sunucunuza tek komutla kurulum · baştan sona AGPL-3.0 altında açık kaynak, şifreli ticaretin yeni nesli.",
-  hu: "A szerver nem lát bele a tartalba · nincs globális azonosító az oldalak közötti követésre · egy parancsból telepítés a saját szerveredre · a titkosított kereskedelem következő generációja, végig nyílt forráskóddal, AGPL-3.0 alatt.",
+  en: "One control plane behind POPOPX Chat service accounts and AI Agents: a browsable plugin catalog, per-service switches, zero-knowledge channel envelope encryption, CP metering per call and an audit trail — on your own server, and this page ships no third-party script.",
+  ru: "Единая панель для сервисных аккаунтов POPOPX Chat и ИИ-агентов: каталог плагинов, отдельные переключатели для каждого сервиса, конвертное шифрование каналов с нулевым разглашением, учёт CP за каждый вызов и журнал действий — на вашем сервере и без сторонних скриптов на этой странице.",
+  de: "Eine Steuerungsebene hinter Service-Konten von POPOPX Chat und KI-Agenten: durchstöberbares Erweiterungskatalog, Schalter pro Dienst, envelope-verschlüsselte Zero-Knowledge-Kanäle, CP-Zählung pro Aufruf und Audit-Protokoll — auf dem eigenen Server, und diese Seite lädt kein Drittanbieter-Skript.",
+  fr: "Un plan de contrôle unique pour les comptes de service POPOPX Chat et les Agents IA : catalogue d’extensions, interrupteur par service, chiffrement d’enveloppe des canaux à zero knowledge, comptage CP par appel et journal d’audit — sur votre serveur, et cette page n’embarque aucun script tiers.",
+  it: "Un unico piano di controllo per gli account di servizio di POPOPX Chat e gli Agent IA: catalogo dei plugin, interruttori per singolo servizio, cifratura envelope dei canali a zero conoscenza, conteggio CP per chiamata e registro di audit — sul tuo server, e questa pagina non carica script di terze parti.",
+  nl: "Eén controlepaneel achter de serviceaccounts van POPOPX Chat en AI-Agents: een plugincatalogus, een schakelaar per dienst, envelope-encryptie voor zero-knowledge kanalen, CP-telling per aanroep en een auditlog — op je eigen server, en deze pagina bevat geen script van derden.",
+  cs: "Jedna řídicí plocha pro servisní účty POPOPX Chat a agenty AI: katalog doplňků, samostatný přepínač za službu, obálkové šifrování kanálů s nulovou znalostí, měření CP za každé volání a audit log — na vlastním serveru a bez skriptů třetích stran na této stránce.",
+  "zh-Hans": "为 POPOPX Chat 服务号与 AI Agent 提供统一的连接控制面：可浏览的插件目录、按服务分开的开关、零知识频道信封加密、每次调用的 CP 计量与调用留痕 —— 全部运行在你自己的服务器上，本页零第三方脚本。",
+  "zh-Hant": "為 POPOPX Chat 服務號與 AI Agent 提供統一的連線控制面：可瀏覽的外掛目錄、按服務分開的開關、零知識頻道信封加密、每次呼叫的 CP 計量與呼叫留痕 —— 全部執行在你自己的伺服器上，本頁零第三方腳本。",
+  es: "Un único plano de control para las cuentas de servicio de POPOPX Chat y los Agents de IA: catálogo de complementos, interruptor por servicio, cifrado tipo sobre de canales de conocimiento cero, medición CP por llamada y registro de auditoría — en tu propio servidor, y esta página no carga scripts de terceros.",
+  pl: "Jeden panel dla kont serwisowych POPOPX Chat i agentów AI: katalog wtyczek, osobny przełącznik dla każdej usługi, szyfrowanie kopertowe kanałów z zerową znajomością, naliczanie CP za każde wywołanie i dziennik audytu — na własnym serwerze, a ta strona nie ładuje skryptów podmiotów trzecich.",
+  ja: "POPOPX Chat のサービスアカウントと AI エージェントのための単一の制御プレーン：プラグインカタログ、サービスごとのスイッチ、ゼロ知識チャンネルのエンベロープ暗号、呼び出し単位の CP 計量、監査ログ ——すべて自分のサーバー上で動き、このページはサードパーティースクリプトを読み込みません。",
+  th: "แผงควบคุมเดียวเบื้องหลังบัญชีบริการของ POPOPX Chat และ Agent AI: แคตตาล็อกปลั๊กอิน, สวิตช์แยกตามบริการ, การเข้ารหัสแบบซองของช่องแบบ zero-knowledge, นับ CP ต่อการเรียกใช้ และบันทึกตรวจสอบ — รันบนเซิร์ฟเวอร์ของคุณเอง และหน้านี้ไม่สคริปต์ของบุคคลที่สาม",
+  fi: "Yksi kontrollitaso POPOPX Chatin palvelutilien ja tekoälyagenttien taalla: laajennusluettelo, erillinen kytkin palvelua kohden, nollatiedon kanavien kuorensalaus, CP-mittaus kutsua kohden ja auditointiloki — omalla palvelimellasi, eikä tämä sivu lataa kolmannen osapuolen skriptiä.",
+  uk: "Єдина панель для сервісних акаунтів POPOPX Chat та AI-агентів: каталог плагінів, окремий перемикач для кожного сервісу, конвертне шифрування каналів із нульовим розкриттям, облік CP за кожний виклик та журнал аудиту — на власному сервері, і ця сторінка не тягне сторонніх скриптів.",
+  bg: "Един контролен панел за сервизните акаунти на POPOPX Chat и AI агентите: каталог с добавки, отделен превключвател за всяка услуга, обвивково криптиране на каналите с нулево разкриване, CP отчитане на всяко повикване и одиторски дневник — на вашия собствен сървър, и тази страница не зарежда скриптове на трети страни.",
+  tr: "POPOPX Chat hizmet hesapları ve Yapay Zekâ Agent’ları için tek kontrol düzlemi: eklenti kataloğu, hizmet başına ayrı anahtar, sıfır bilgiyle şifrelenmiş kanallarda zarf şifreleme, çağrı başına CP ölçümü ve denetim kaydı — kendi sunucunuzda; bu sayfa üçüncü taraf betik yükmez.",
+  hu: "Egy vezérlőfelület a POPOPX Chat szolgáltatási fiókok és MI-ügynökök mögött: bővítménykatalógus, szolgáltatásonkénti kapcsoló, boríték-titkosítás a nullaismeret-alapú csatornákon, hívásonkénti CP-elszámolás és audit napló — a saját szervereden, és ez az oldal nem tölt be harmadik féltől származó scriptet.",
 };
 
 const CORE_LABEL: Localized<string> = {
@@ -486,7 +486,7 @@ export function HeroSection(): ReactElement {
   const note = useCopy(NOTE);
 
   return (
-    <section aria-labelledby="hero-heading" className="relative isolate overflow-hidden">
+    <section id="overview" aria-labelledby="hero-heading" className="relative isolate overflow-hidden">
       {/* Ambient wash behind the whole first screen. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-x-0 -top-24 h-[520px] bg-brand-halo" />
@@ -507,14 +507,14 @@ export function HeroSection(): ReactElement {
           >
             <defs>
               <linearGradient id="hero-brand-fan" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#7D7AFF" stopOpacity="0.05" />
-                <stop offset="70%" stopColor="#7D7AFF" stopOpacity="0.55" />
-                <stop offset="100%" stopColor="#5856D6" stopOpacity="0.9" />
+                <stop offset="0%" stopColor="#9B7BFF" stopOpacity="0.05" />
+                <stop offset="70%" stopColor="#9B7BFF" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="#6E3FF3" stopOpacity="0.9" />
               </linearGradient>
               <linearGradient id="hero-mesh-fan" x1="1" y1="0" x2="0" y2="0">
-                <stop offset="0%" stopColor="#00D2B8" stopOpacity="0.05" />
-                <stop offset="70%" stopColor="#00D2B8" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#00A896" stopOpacity="0.85" />
+                <stop offset="0%" stopColor="#34E0B4" stopOpacity="0.05" />
+                <stop offset="70%" stopColor="#34E0B4" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#10B981" stopOpacity="0.85" />
               </linearGradient>
             </defs>
             <g fill="none" strokeWidth="1" vectorEffect="non-scaling-stroke">
