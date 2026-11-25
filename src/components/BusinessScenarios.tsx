@@ -10,21 +10,25 @@ import { SectionHeading, StatusDot } from "@/components/ui";
  *
  * A visitor who has never read a man page should be able to answer "what would I
  * use this for?" before the page shows a single URL, environment variable or byte
- * order. So this section is the first thing below the fold, it names four
+ * order. So this section is the first thing below the fold, it names six
  * scenarios instead of five modules, and every card is written as what happens
- * for the shop, the editor, the on-call engineer and the site that needs a login.
+ * for the shop, the operator working the queue, the editor, the on-call
+ * engineer, the site that needs a login and the team that runs its own model.
  * The developer half of the audience is not served less: one monospaced line per
- * card carries the real module file and the real route, and the card link jumps
- * to the deep section that documents it (`#plugins`, `#protocol`, `#security`,
- * `#sandbox`). Nothing is promised here that the catalog, the protocol quick
- * reference or the governance section has to walk back.
+ * card carries the real module file or the real environment switch, and the card
+ * link jumps to the deep section that documents it (`#plugins`, `#protocol`,
+ * `#security`, `#sandbox`, `#architecture`, `#install`). Nothing is promised here
+ * that the catalog, the protocol quick reference or the governance section has to
+ * walk back.
  *
  * Two claims are deliberately kept apart, because the page has to be honest
- * rather than flattering: three cards are plugin modules that ship in this
- * release and are on by factory default, and the encrypted channel is core
- * gateway behaviour — not a plugin, and not zero-knowledge with respect to the
- * merchant's own server, which is the issuer holding the channel key pair. The
- * caveat is printed in the card, not hidden below.
+ * rather than flattering: five of the six cards run on plugin modules that ship in
+ * this release and are on by factory default — and three of those cards (support,
+ * enquiry handling, own model) are the *same* `ai_agent` module seen from three
+ * sides, not three modules — while the encrypted channel is core gateway
+ * behaviour: not a plugin, and not zero-knowledge with respect to the merchant's
+ * own server, which is the issuer holding the channel key pair. The caveat is
+ * printed in the card, not hidden below.
  *
  * Copy. Every string is a literal `Localized<string>` map listing all 18 tags
  * `src/lib/i18n.tsx` declares — the same set the iOS client ships — so the
@@ -37,7 +41,7 @@ import { SectionHeading, StatusDot } from "@/components/ui";
  * simplified literal `确认,已处理,ack,resolve` in `PluginsShowcase.tsx`.
  */
 
-type ScenarioIcon = "support" | "channel" | "alert" | "scan";
+type ScenarioIcon = "support" | "auto" | "channel" | "alert" | "scan" | "local";
 
 type Scenario = {
   readonly index: string;
@@ -54,16 +58,16 @@ type Scenario = {
   readonly link: Localized<string>;
 };
 
-/* ── COPY BLOCK START: 38 literal 18-locale maps, authored per language ───── */
+/* ── COPY BLOCK START: 55 literal 18-locale maps, authored per language ───── */
 
 const EYEBROW: Localized<string> = {
   en: "What you can do with it",
   ru: "Что это даёт",
-  de: "Vier Einsatzmöglichkeiten",
+  de: "Sechs Einsatzmöglichkeiten",
   fr: "Cas d’usage",
   it: "Casi d’uso",
-  nl: "Vier praktijkscenario's",
-  cs: "Čtyři scénáře nasazení",
+  nl: "Zes praktijkscenario's",
+  cs: "Šest scénářů nasazení",
   "zh-Hans": "你能用它做什么",
   "zh-Hant": "你能用它做什麼",
   es: "Casos de uso",
@@ -78,24 +82,24 @@ const EYEBROW: Localized<string> = {
 };
 
 const TITLE: Localized<string> = {
-  en: "Four scenarios you can run today: support, publishing, alerting, sign-in",
-  ru: "Четыре сценария, которые можно запустить сегодня: поддержка, рассылка, оповещения, вход",
-  de: "Vier Szenarien für heute: KI-Support, Kanal, Alarme, Login",
-  fr: "Quatre scénarios que vous lancez dès aujourd’hui : support, publication, alertes, connexion",
-  it: "Quattro scenari che puoi usare oggi: assistenza, pubblicazione, avvisi, login",
-  nl: "Vier scenario's die vandaag draaien: support, publiceren, alarmen, inloggen",
-  cs: "Čtyři scénáře, které dnes spuštíte: podpora, vysílání, alarmy, přihlášení",
-  "zh-Hans": "四个今天就能跑起来的场景：客服、发布、告警、登录",
-  "zh-Hant": "四個今天就能跑起來的場景：客服、發布、告警、登入",
-  es: "Cuatro escenarios que puedes usar hoy: soporte, publicación, alertas, acceso",
-  pl: "Cztery scenariusze, które działają dziś: obsługa klienta, publikacja, alerty, logowanie",
-  ja: "今日から動かせる4つのシーン：サポート、配信、アラート、ログイン",
-  th: "ใช้ได้วันนี้ 4 แบบ: สนับสนุน เผยแพร่ แจ้งเตือน และเข้าสู่ระบบ",
-  fi: "Neljä tänään käynnistyvää skenaariota: tuki, julkaisu, hälytykset, kirjautuminen",
-  uk: "Чотири сценарії, які можна запустити сьогодні: підтримка, розсилка, сповіщення, вхід",
-  bg: "Четири сценария, които можете да пуснете днес: поддръжка, публикуване, аларми, вход",
-  tr: "Bugün çalıştırabileceğiniz dört senaryo: destek, yayın, uyarı ve giriş",
-  hu: "Négy ma futtatható forgatókönyv: ügyfélszolgálat, közzététel, riasztás, belépés",
+  en: "Six scenarios you can run today: support, auto-handling, channels, alerts, sign-in, your own model",
+  ru: "Шесть сценариев, которые можно запустить сегодня: поддержка, автоматическая обработка, каналы, оповещения, вход, своя модель",
+  de: "Alle sechs Szenarien für heute: Support, Anfragebearbeitung, Kanäle, Alarme, Login, eigenes Modell",
+  fr: "Six scénarios que vous lancez dès aujourd’hui : support, réponses automatiques, canaux, alertes, connexion, votre propre modèle",
+  it: "Sei scenari che puoi usare oggi: assistenza, gestione automatica delle richieste, canali, avvisi, login, modello proprio",
+  nl: "Overzicht van zes scenario's die vandaag draaien: support, vragenafhandeling, kanalen, alarmen, inloggen, eigen model",
+  cs: "Dnes spuštíte šest scénářů: podpora, vyřizování dotazů, kanály, alarmy, přihlášení, vlastní model",
+  "zh-Hans": "六个今天就能跑起来的场景：客服、自动接待、频道、告警、登录、接入自有模型",
+  "zh-Hant": "六個今天就能跑起來的場景：客服、自動接待、頻道、告警、登入、接入自有模型",
+  es: "Seis escenarios que puedes usar hoy: soporte, gestión automática de consultas, canales, alertas, acceso, modelo propio",
+  pl: "Sześć scenariuszy, które działają dziś: obsługa klienta, automatyczna obsługa zapytań, kanały, alerty, logowanie, własny model",
+  ja: "今日から動かせる6つのシーン：AIサポート、自動応対、チャンネル、アラート、ログイン、自分のモデル",
+  th: "ใช้ได้วันนี้ 6 แบบ: สนับสนุน, รับเรื่องอัตโนมัติ, เผยแพร่, แจ้งเตือน, เข้าสู่ระบบ และโมเดลของคุณเอง",
+  fi: "Kuusi tänään käynnistyvää skenaariota: tuki, automaattinen käsittely, kanavat, hälytykset, kirjautuminen, oma malli",
+  uk: "Шість сценаріїв, які можна запустити сьогодні: підтримка, обробка звернень, канали, сповіщення, вхід, власна модель",
+  bg: "Шест сценария, които можете да пуснете днес: поддръжка, автоматична обработка, канали, аларми, вход, собствен модел",
+  tr: "Bugün çalıştırabileceğiniz altı senaryo: destek, otomatik karşılama, kanal yayını, uyarı, giriş ve kendi modeliniz",
+  hu: "Hat ma futtatható forgatókönyv: ügyfélszolgálat, automatikus ügyintézés, csatornák, riasztások, belépés, saját modell"
 };
 
 const SUBTITLE: Localized<string> = {
@@ -120,24 +124,24 @@ const SUBTITLE: Localized<string> = {
 };
 
 const NOTE: Localized<string> = {
-  en: "Three of these are plugin modules that ship with this release and are on by factory default; the encrypted channel is core gateway behaviour, not a plugin. All of them run on the gateway you deploy yourself, and the page you are reading loads no third-party script.",
-  ru: "Три из них — модули плагинов этой поставки, включённые по умолчанию с завода; шифрованный канал — поведение ядра шлюза, а не плагин. Всё работает на вашем собственном шлюзе, и страница не загружает сторонних скриптов.",
-  de: "Drei davon sind Plugin-Module dieses Releases, ab Werk aktiv; der verschlüsselte Kanal ist Kernverhalten des Gateways, kein Plugin. Alles läuft auf Ihrem eigenen Gateway, und diese Seite lädt kein Skript Dritter.",
-  fr: "Trois sont des modules livrés dans cette version, activés par défaut d’usine ; le canal chiffré relève de la passerelle, pas d’un plugin. Tous tournent sur votre passerelle, et cette page n’embarque aucun script tiers.",
-  it: "Tre sono plugin di questa release, attivi al valore di fabbrica; il canale cifrato è nativo del gateway, non un plugin. Tutti girano sul gateway che dispieghi tu; questa pagina non carica script di terze parti.",
-  nl: "Drie ervan zijn meegeleverde pluginmodules, af fabriek aan; het versleutelde kanaal is kerngedrag van de gateway, geen plugin. Ze draaien op je eigen gateway; deze pagina laadt geen script van derden.",
-  cs: "Tři z nich jsou dodané moduly pluginů, od výroby zapnuté; šifrovaný kanál je chování jádra brány, ne plugin. Vše běží na vaší vlastní bráně a tato stránka nenačítá žádné cizí skripty.",
-  "zh-Hans": "四个场景里，三个是随本版本发布、默认开启的插件模块；加密频道是网关的核心能力，不是插件。它们都跑在你自己部署的网关上，而你现在读的这个页面不加载任何第三方脚本。",
-  "zh-Hant": "四個場景中，三個是隨本版本發布、預設開啟的外掛模組；加密頻道是閘道的核心能力，不是外掛。它們都跑在你自己部署的閘道上，而你現在讀的這個頁面不載入任何第三方腳本。",
-  es: "Tres son complementos de esta versión, activos por valor de fábrica; el canal cifrado es propio de la pasarela, no un complemento. Todo corre en la pasarela que despliegas tú; esta página no carga scripts de terceros.",
-  pl: "Trzy to wtyczki z tej wersji, fabrycznie włączone; kanał szyfrowany to rdzeń bramy, nie wtyczka. Wszystkie działają na bramie, którą sam wdrażasz, a ta strona nie ładuje skryptów podmiotów trzecich.",
-  ja: "4つのうち3つは、このリリースに同梱され、ファクトリーデフォルトでオンのプラグインモジュールです。暗号化チャンネルはプラグインではなくゲートウェイ本体の機能です。いずれもあなたが自分で立てるゲートウェイ上で動き、このページはサードパーティースクリプトを読み込みません。",
-  th: "สามจากสี่อย่างเป็นปลั๊กอินที่มากับเวอร์ชันนี้และเปิดตามค่าเริ่มต้นจากโรงงาน ส่วนช่องทางเข้ารหัสเป็นความสามารถหลักของเกตเวย์ ไม่ใช่ปลั๊กอิน ทั้งหมดรันบนเกตเวย์ที่คุณติดตั้งเอง และหน้านี้ไม่โหลดสคริปต์จากบุคคลที่สาม",
-  fi: "Kolme on tämän julkaisun mukana tulevia lisäosamoduuleita, tehdasasetuksiltaan oletuksena päällä; salattu kanava on yhdyskänteen ydintoiminto, ei lisäosa. Kaikki käyvät yhdyskänteellä, jonka isännöit itse, eikä tämä sivu lataa kolmannen osapuolen skriptiä.",
-  uk: "Три з них — модулі плагінів цього випуску, типово увімкнені із заводу; зашифрований канал — базова поведінка шлюза, а не плагін. Усе працює на вашому власному шлюзі, а сторінка не завантажує чужих скриптів.",
-  bg: "Три от четирите са плъгини от това издание, включени по фабрична настройка; криптираният канал е основно поведение на гейтуейта, не плъгин. Всички работят на собствения ви гейтуейт, а страницата не зарежда чужди скриптове.",
-  tr: "Üçü bu sürümle gelen, fabrika çıkışında varsayılan olarak açık eklenti modülleridir; şifreli kanal eklenti değil ağ geçidinin çekirdek davranışıdır. Hepsi sizin kurduğunuz ağ geçidinde çalışır; bu sayfa üçüncü taraf betik yüklemiyor.",
-  hu: "Három a kiadás bővítménye, gyárilag bekapcsolva; a titkosított csatorna az átjáró alapviselkedése, nem bővítmény. Mind a magad telepítette átjárón fut; ez az oldal nem tölt be harmadik féltől származó szkriptet.",
+  en: "Five of these run on three plugin modules that ship with this release and are on by factory default: support, enquiry handling and your own model are all the one ai_agent module. The encrypted channel is core gateway behaviour, not a plugin. Everything runs on the gateway you deploy yourself, and the page you are reading loads no third-party script.",
+  ru: "Пять из шести сценариев работают на трёх модулях плагинов этой поставки, включённых по умолчанию с завода: поддержка, обработка обращений и своя модель — это один и тот же модуль ai_agent. Шифрованный канал — поведение ядра шлюза, а не плагин. Всё работает на шлюзе, который вы развёртываете сами, и страница, которую вы сейчас читаете, не загружает сторонних скриптов.",
+  de: "Von den sechs Szenarien laufen fünf auf drei Plugin-Modulen dieses Releases, die ab Werk aktiv sind: Support, automatische Anfragebearbeitung und eigenes Modell sind ein und dasselbe Modul ai_agent. Der verschlüsselte Kanal ist Kernverhalten des Gateways, kein Plugin. Alles läuft auf dem Gateway, das Sie selbst einsetzen, und die Seite, die Sie gerade lesen, lädt kein Skript Dritter.",
+  fr: "Cinq des six tournent sur trois plugins livrés dans cette version, activés par défaut d’usine : support, traitement des demandes et votre propre modèle ne sont qu’un seul et même module ai_agent. Le canal chiffré relève de la passerelle, pas d’un plugin. Tout tourne sur la passerelle que vous déployez vous-même, et cette page n’embarque aucun script tiers.",
+  it: "Cinque dei sei girano su tre plugin di questa release, attivi al valore di fabbrica: assistenza, gestione delle richieste e modello proprio sono uno e il medesimo modulo ai_agent. Il canale cifrato è nativo del gateway, non un plugin. Tutto gira sul gateway che dispieghi tu, e questa pagina non carica script di terze parti.",
+  nl: "Van deze zes draaien vijf op drie pluginmodules van deze release, af fabriek aan: support, automatische vragenafhandeling en je eigen model zijn één en dezelfde pluginmodule ai_agent. Het versleutelde kanaal is kerngedrag van de gateway, geen plugin. Alles draait op de gateway die je zelf uitrolt, en de pagina die je nu leest laadt geen script van derden.",
+  cs: "Z šesti scénářů jich pět běží na třech modulech, které tato verze přináší a které jsou od výroby zapnuté: podpora, automatické vyřizování dotazů i vlastní model jsou jeden a tentýž modul ai_agent. Šifrovaný kanál je chování jádra brány, ne plugin. Vše běží na bráně, kterou si sami nasadíte, a tato stránka nenačítá žádné cizí skripty.",
+  "zh-Hans": "六个场景里有五个跑在三个随本版本发布、默认开启的插件模块上：客服、自动接待、接入自有模型用的都是同一个 ai_agent 模块。加密频道是网关的核心能力，不是插件。它们都跑在你自己部署的网关上，而你现在读的这个页面不加载任何第三方脚本。",
+  "zh-Hant": "六個場景裡有五個跑在三個隨本版本發布、預設開啟的外掛模組上：客服、自動接待、接入自有模型用的都是同一個 ai_agent 模組。加密頻道是閘道的核心能力，不是外掛。它們都跑在你自己部署的閘道上，而你現在讀的這個頁面不載入任何第三方腳本。",
+  es: "Cinco de los seis corren sobre tres complementos de esta versión, activos por valor de fábrica: soporte, gestión de consultas y modelo propio, los tres son un mismo módulo ai_agent. El canal cifrado es propio de la pasarela, no un complemento. Todo corre en la pasarela que despliegas tú, y esta página no carga scripts de terceros.",
+  pl: "Pięć z sześciu scenariuszy działa na trzech modułach wtyczek dołączonych do tej wersji, włączonych z ustawienia fabrycznego: obsługa klienta, automatyczna obsługa zapytań i własny model to ten sam moduł ai_agent. Kanał szyfrowany to rdzeń bramy, nie wtyczka. Wszystko działa na bramie, którą sam wdrażasz, a ta strona nie ładuje skryptów podmiotów trzecich.",
+  ja: "6つ中5つは、このリリースに同梱の、ファクトリーデフォルトでオンの3つのプラグインモジュールで動きます。サポート、自動応対、自分のモデルは同じ ai_agent モジュールです。暗号化チャンネルはプラグインでなくゲートウェイ本体の機能で、どれもあなたが自分で立てるゲートウェイで動きます。このページはサードパーティースクリプトを読み込みません。",
+  th: "ห้าจากหกอย่างเป็นปลั๊กอินสามโมดูลที่มากับเวอร์ชันนี้และเปิดตามค่าเริ่มต้นจากโรงงาน: ฝ่ายสนับสนุน การรับเรื่องอัตโนมัติ และการเชื่อมโมเดลของคุณเองล้วนใช้โมดูล ai_agent อันเดียวกันทั้งหมด ส่วนช่องทางเข้ารหัสเป็นความสามารถหลักของเกตเวย์ ไม่ใช่ปลั๊กอิน ทั้งหมดรันบนเกตเวย์ที่คุณติดตั้งเอง และหน้าที่คุณกำลังอ่านอยู่นี้ไม่โหลดสคริปต์จากบุคคลที่สาม",
+  fi: "Viisi kuudesta skenaariota käynnistyy kolmen tämän julkaisun mukana tulevan lisäosamoduulin varassa, tehtaalla oletuksena päällä: tuki, automaattinen käsittely ja oma malli ovat kaikki yhtä ja samaa ai_agent-moduulia. Salattu kanava on yhdyskänteen ydintoiminto, ei lisäosa. Kaikki käyvät yhdyskänteellä, jonka isännöit itse, eikä lukemasi sivu lataa kolmannen osapuolen skriptiä.",
+  uk: "П’ять із шести сценаріїв працюють на трьох модулях плагінів цього випуску, типово увімкнених із заводу: підтримка, обробка звернень і власна модель — це один і той самий модуль ai_agent. Зашифрований канал — базова поведінка шлюза, а не плагін. Усе працює на шлюзі, який розгортаєте ви самі, а сторінка, яку ви зараз читаєте, не завантажує сторонніх скриптів.",
+  bg: "Пет от шестте сценария работят на три плъгин-модула от това издание, включени по фабрична настройка: поддръжка, автоматична обработка и собствен модел — това е един и същ модул ai_agent. Криптираният канал е основно поведение на гейтуейта, не плъгин. Всичко работи на собствения ви гейтуейт, който сами разгръщате, а страницата, която четете сега, не зарежда чужди скриптове.",
+  tr: "Altı senaryonun beşi, bu sürümle gelen ve fabrika çıkışında varsayılan olarak açık olan üç eklenti modülünde çalışır: destek, otomatik karşılama ve kendi modeliniz hepsi aynı ai_agent modülüdür. Şifreli kanal eklenti değil, ağ geçidinin çekirdek davranışıdır. Hepsi sizin kurduğunuz ağ geçidinde çalışır; okuduğunuz bu sayfa üçüncü taraf betik yüklemiyor.",
+  hu: "A hat forgatókönyvből öt a kiadás három bővítménymodulján fut, gyárilag bekapcsolva: az ügyfélszolgálat, az automatikus ügyintézés és a saját modell mind ugyanaz az ai_agent modul. A titkosított csatorna az átjáró alapviselkedése, nem bővítmény. Minden a magad telepítette átjárón fut, és ez az oldal nem tölt be harmadik féltől származó szkriptet."
 };
 
 const STATE_ON: Localized<string> = {
@@ -180,6 +184,27 @@ const STATE_CORE: Localized<string> = {
   bg: "Основно поведение на гейтуейта, не плъгин",
   tr: "Ağ geçidinin çekirdek davranışı, eklenti değil",
   hu: "Az átjáró alapviselkedése, nem bővítmény",
+};
+
+const STATE_ENV: Localized<string> = {
+  en: "An environment switch, no extra plugin",
+  ru: "Переключатель окружения, без дополнительного плагина",
+  de: "Schalter per Umgebungsvariable, kein extra Plugin",
+  fr: "Un commutateur d’environnement, aucun plugin en plus",
+  it: "Un commutatore d’ambiente, nessun plugin in più",
+  nl: "Schakelaar via omgevingswaarden, geen extra plugin",
+  cs: "Přepínač v proměnných prostředí, žádný další plugin",
+  "zh-Hans": "环境变量开关，不额外装插件",
+  "zh-Hant": "環境變數開關，不額外裝外掛",
+  es: "Un conmutador de entorno, no un complemento extra",
+  pl: "Przełącznik w zmiennych środowiskowych, bez dodatkowej wtyczki",
+  ja: "環境変数スイッチ、追加プラグイン不要",
+  th: "สวิตช์ตัวแปรสภาพแวดล้อม ไม่ต้องติดตั้งปลั๊กอินเพิ่ม",
+  fi: "Ympäristökytkin, ei ylimääräistä lisäosaa",
+  uk: "Перемикач середовища, без додаткового плагіна",
+  bg: "Превключвател на средата, без допълнителен плъгин",
+  tr: "Bir ortam anahtarı, ek eklenti gerekmez",
+  hu: "Környezeti kapcsoló, nem külön bővítmény"
 };
 
 const AI_NAME: Localized<string> = {
@@ -348,6 +373,174 @@ const AI_LINK: Localized<string> = {
   bg: "Вижте ключа и потока от данни",
   tr: "Kimlik bilgisine ve veri akışına bakın",
   hu: "Nézd meg a tokenjét és az adatfolyamát",
+};
+
+const AUTO_NAME: Localized<string> = {
+  en: "Automated enquiry handling",
+  ru: "Автоматическая обработка обращений",
+  de: "Automatische Anfragebearbeitung",
+  fr: "Traitement automatique des demandes",
+  it: "Gestione automatica delle richieste",
+  nl: "Automatische vragenafhandeling",
+  cs: "Automatické vyřizování dotazů",
+  "zh-Hans": "自动处理咨询",
+  "zh-Hant": "自動處理諮詢",
+  es: "Gestión automática de consultas",
+  pl: "Automatyczna obsługa zapytań",
+  ja: "問合せ自動応対",
+  th: "รับเรื่องสอบถามอัตโนมัติ",
+  fi: "Tiedustelujen automaattinen käsittely",
+  uk: "Автоматична обробка звернень",
+  bg: "Автоматична обработка на запитвания",
+  tr: "Bilgi taleplerinin otomatik karşılanması",
+  hu: "Kérdések automatikus kezelése"
+};
+
+const AUTO_ACTOR: Localized<string> = {
+  en: "Shop ops · after-sales",
+  ru: "Магазин · послепродажное обслуживание",
+  de: "Shopbetrieb · After-Sales",
+  fr: "Opérations boutique · après-vente",
+  it: "Operazioni punto vendita · post-vendita",
+  nl: "Webshop-teams · after-sales",
+  cs: "Provoz eshopu · poprodejní péče",
+  "zh-Hans": "店铺运营 · 售后",
+  "zh-Hant": "店面營運 · 售後",
+  es: "Operaciones de tienda · posventa",
+  pl: "Sklep · obsługa posprzedażowa",
+  ja: "店舗運営 · アフターケア",
+  th: "ฝ่ายหน้าร้าน · หลังการขาย",
+  fi: "Kauppa · jälkimyynti",
+  uk: "Магазин · післяпродажне обслуговування",
+  bg: "Магазин · следпродабно обслужване",
+  tr: "Mağaza operasyonu · satış sonrası",
+  hu: "Bolt · értékesítés után"
+};
+
+const AUTO_TAGLINE: Localized<string> = {
+  en: "The questions you already have an answer for never reach a person.",
+  ru: "Вопросы, на которые вы уже знаете ответ, не доходят до живого человека.",
+  de: "Fragen, auf die Sie schon eine Antwort haben, erreichen nie eine Person.",
+  fr: "Les questions auxquelles vous avez déjà une réponse n’arrivent jamais à une personne.",
+  it: "Le domande a cui hai già risposto non arrivano mai a una persona.",
+  nl: "Vragen waar je al antwoord op hebt, hoeven nooit een persoon te bereiken.",
+  cs: "Otázky, na které už odpověď máte, nikdy nedorazí k člověku.",
+  "zh-Hans": "你早有答案的那批问题，不必再经人手。",
+  "zh-Hant": "你早有答案的那批問題，不必再經人手。",
+  es: "Las preguntas para las que ya tienes respuesta no llegan a una persona.",
+  pl: "Pytania, na które masz już odpowiedź, w ogóle nie docierają do człowieka.",
+  ja: "答えが決まっている質問は、人に届かなくなります。",
+  th: "คำถามที่คุณมีคำตอบอยู่แล้ว ไม่ต้องส่งไปถึงคนเลย",
+  fi: "Kysymykset, joihin sinulla on jo vastaus, eivät koskaan päädy ihmiselle.",
+  uk: "Питання, на які ви вже маєте відповідь, не потрапляють до живої людини.",
+  bg: "Въпросите, на които вече имате отговор, не стигат до жив човек.",
+  tr: "Zaten yanıtını bildiğiniz sorular bir insana hiç ulaşmaz.",
+  hu: "Azok a kérdések, amelyekre már van válaszod, soha nem érkeznek emberhez."
+};
+
+const AUTO_BODY: Localized<string> = {
+  en: "A two-level bottom menu (3 × 5) carries the standing answers, and pushing it costs no model call; whatever the menu misses goes into the AI reply loop, capped by factory default at POPOPX_AI_RATE_LIMIT_MESSAGES=20 per follower inside POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Every round is filed under the same anonymous pairwise_uid, so a person picking the thread up reads one transcript and answers back with POST /api/v1/send/text.",
+  ru: "Двухуровневое нижнее меню (3 × 5) держит готовые ответы, а нажатие не стоит вызова модели; что меню не покрыло, уходит в цикл AI-ответов под заводским лимитом POPOPX_AI_RATE_LIMIT_MESSAGES=20 на подписчика за POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Раунды записаны под тем же анонимным pairwise_uid: подхвативший диалог человек читает одну ленту переписки и отвечает через POST /api/v1/send/text.",
+  de: "Das zweistufige Menü unten (3 × 5) trägt die Standardantworten, ein Druck kostet keinen Modellaufruf; was es nicht abdeckt, geht in die AI-Schleife, ab Werk begrenzt auf POPOPX_AI_RATE_LIMIT_MESSAGES=20 pro Follower innerhalb von POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Alles liegt unter demselben anonymen pairwise_uid, wer übernimmt, liest ein Protokoll und antwortet mit POST /api/v1/send/text.",
+  fr: "Le menu du bas à deux niveaux (3 × 5) écoule les réponses figées ; le pousser coûte zéro appel de modèle. Le reste va dans la boucle IA, plafonnée par défaut d’usine à POPOPX_AI_RATE_LIMIT_MESSAGES=20 par abonné dans POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Tout s’archive sous le même pairwise_uid anonyme : qui reprend lit un seul historique, répond par POST /api/v1/send/text.",
+  it: "Un menu in basso a due livelli (3 × 5) smaltisce le risposte pronte; premerlo costa zero chiamate al modello. Il resto va nel ciclo IA, limitato al valore di fabbrica a POPOPX_AI_RATE_LIMIT_MESSAGES=20 per follower entro POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Tutto resta sotto lo stesso pairwise_uid anonimo: chi riprende legge una sola cronologia, risponde con POST /api/v1/send/text.",
+  nl: "Het tweelaagse menu onderin (3 × 5) bevat de standaardantwoorden, één tik kost geen modelaanroep; wat het menu mist, gaat de AI-loop in, af fabriek beperkt tot POPOPX_AI_RATE_LIMIT_MESSAGES=20 per volger binnen POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Alles staat onder dezelfde anonieme pairwise_uid, dus wie overneemt leest één transcript en antwoordt met POST /api/v1/send/text.",
+  cs: "Dvouúrovňové menu dole (3 × 5) drží stálé odpovědi a jedno stisknutí stojí nula modelových volání; co menu nepokryje, jde do AI smyčky, od výroby omezené na POPOPX_AI_RATE_LIMIT_MESSAGES=20 na followera uvnitř POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Vše se ukládá pod týmž anonymním pairwise_uid, takže člověk čte jediný přepis a odpoví přes POST /api/v1/send/text.",
+  "zh-Hans": "两级底部菜单（3 × 5）先接掉那些固定问答，推一次菜单不消耗任何模型调用；菜单没盖到的落进 AI 自动应答，出厂默认每位粉丝在 POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS（300 秒）内最多 POPOPX_AI_RATE_LIMIT_MESSAGES（20）条。每一轮都记在同一个匿名 pairwise_uid 下，人接手时只读一份留痕，再用 POST /api/v1/send/text 回一句。",
+  "zh-Hant": "兩級底部選單（3 × 5）先接掉那些固定問答，推一次選單不消耗任何模型呼叫；選單沒蓋到的落進 AI 自動應答，出廠預設每位粉絲在 POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS（300 秒）內最多 POPOPX_AI_RATE_LIMIT_MESSAGES（20）條。每一輪都記在同一個匿名 pairwise_uid 下，人接手時只讀一份留痕，再用 POST /api/v1/send/text 回一句。",
+  es: "El menú inferior de dos niveles (3 × 5) resuelve las respuestas fijas; pulsarlo cuesta cero llamadas al modelo. Lo que no cubre va al bucle IA, limitado por valor de fábrica a POPOPX_AI_RATE_LIMIT_MESSAGES=20 por seguidor dentro de POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Todo queda bajo el mismo pairwise_uid anónimo: quien retoma lee un solo historial, responde con POST /api/v1/send/text.",
+  pl: "Dwupoziomowe menu dolne (3 × 5) niesie gotowe odpowiedzi, a jego otwarcie nie kosztuje wywołania modelu; resztę przejmuje pętla odpowiedzi AI, limitowana fabrycznie do POPOPX_AI_RATE_LIMIT_MESSAGES=20 na obserwującego w oknie POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Każda runda ląduje w tym samym anonimowym pairwise_uid, więc przejmujący wątek czyta jeden zapis i odpowiada przez POST /api/v1/send/text.",
+  ja: "2階層の底部メニュー（3 × 5）が決まり切った問答を受け持ち、メニューを送ってもモデル呼び出しを1回も消費しません。メニューが取りこぼした分は AI 自動応答に入り、ファクトリーデフォルトではフォロワー1人あたり POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 秒以内に POPOPX_AI_RATE_LIMIT_MESSAGES=20 件までです。どの回も同じ匿名の pairwise_uid に記録されるので、人が引き継ぐときはひとつの会話記録を読み、POST /api/v1/send/text で一文返します。",
+  th: "เมนูด้านล่างสองระดับ (3 × 5) รับคำถามที่มีคำตอบสำเร็จไว้ก่อน การส่งเมนูหนึ่งครั้งไม่เปลืองการเรียกโมเดลเลย ส่วนที่เมนูไม่ครอบคลุมก็ตกเข้าวงจร AI อัตโนมัติ ซึ่งจำกัดตามค่าเริ่มต้นจากโรงงานว่าผู้ติดตามแต่ละคนได้ไม่เกิน POPOPX_AI_RATE_LIMIT_MESSAGES=20 ข้อความ ภายใน POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 วินาที ทุกครั้งถูกเก็บไว้ใต้ pairwise_uid แบบไม่ระบุตัวตนอันเดียวกัน คนที่รับช่วงต่อจึงอ่านบันทึกเพียงชุดเดียว แล้วตอบกลับด้วย POST /api/v1/send/text",
+  fi: "Kaksitasoinen alavalikko (3 × 5) kantaa valmiit vastaukset, eikä sen lähettäminen maksa mallikutsua; mitä valikko ei kata, siirtyy AI-vastauskiertoon, joka on rajattu tehtaalla arvoon POPOPX_AI_RATE_LIMIT_MESSAGES=20 seuraajaa kohden ikkunassa POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Jokainen vuoro tallentuu saman anonyymin pairwise_uid:n alle, joten langan poimiva henkilö lukee yhtä ainoaa lokia ja vastaa POST /api/v1/send/text.",
+  uk: "Дворівневе нижнє меню (3 × 5) тримає готові відповіді, а натискання не коштує виклику моделі; що меню не закрыло, іде в цикл AI-відповідей із заводським лімітом POPOPX_AI_RATE_LIMIT_MESSAGES=20 на підписника за POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Раунди пишуться під тим самим анонімним pairwise_uid: людина, що підхоплює розмову, читає одну стрічку й відповідає через POST /api/v1/send/text.",
+  bg: "Двунивковото долно меню (3 × 5) държи готовите отговори, а докосване не коства извик на модела; което менюто не покрие, влиза в AI цикъла с фабрично ограничение POPOPX_AI_RATE_LIMIT_MESSAGES=20 за последовател в POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Размените са под един и същ анонимен pairwise_uid, затова поемащият чете една лента и отговаря с POST /api/v1/send/text.",
+  tr: "İki düzeyli alt menü (3 × 5) hazır yanıtları üstlenir; menüyü bir kez göndermek hiçbir model çağrısı harcatmaz. Menünün kaçırdığı, fabrika çıkışında takipçi başına POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 saniye içinde POPOPX_AI_RATE_LIMIT_MESSAGES=20 mesajla sınırlı AI yanıt döngüsüne düşer. Her tur aynı anonim pairwise_uid altına dosyalanır; devralan kişi tek bir kaydı okur ve yanıtını POST /api/v1/send/text ile verir.",
+  hu: "A kétszintű alsó menü (3 × 5) viszi a rögzített válaszokat, és a kiküldése nem kerül egy modellhívásba sem; ami kimarad, AI-válaszoló hurokba megy, gyári korláttal: követőnként POPOPX_AI_RATE_LIMIT_MESSAGES=20 a POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 másodperces ablakban. Minden kör azonos névtelen pairwise_uid mögé kerül, az átvevő egyetlen leiratot olvas, és POST /api/v1/send/text hívással válaszol."
+};
+
+const AUTO_S1: Localized<string> = {
+  en: "Standing answers go into the two-level menu",
+  ru: "Готовые ответы лежат в двухуровневом меню",
+  de: "Standardantworten stehen im zweistufigen Menü",
+  fr: "Réponses figées dans le menu à deux niveaux",
+  it: "Risposte pronte nel menu a due livelli",
+  nl: "Standaardantwoorden gaan in het tweelaagse menu",
+  cs: "Stálé odpovědi patří do dvouúrovňového menu",
+  "zh-Hans": "固定问答放进两级菜单",
+  "zh-Hant": "固定問答放進兩級選單",
+  es: "Las respuestas fijas van al menú de dos niveles",
+  pl: "Stałe odpowiedzi trafiają do menu dwupoziomowego",
+  ja: "固定の問答を2階層メニューに",
+  th: "ใส่คำตอบสำเร็จไว้ในเมนูสองระดับ",
+  fi: "Vakiovastaukset menevät kaksitasoiseen alavalikkoon",
+  uk: "Готові відповіді лежать у дворівневому меню",
+  bg: "Готовите отговори са в менюто с две нива",
+  tr: "Hazır yanıtları iki düzeyli menü taşısın",
+  hu: "A rögzített válaszok a kétszintű menübe kerülnek"
+};
+
+const AUTO_S2: Localized<string> = {
+  en: "The rest hits the AI loop, rate-limited per follower",
+  ru: "Остальное — в цикл AI-ответов, лимит на подписчика",
+  de: "Der Rest läuft in die AI-Schleife, pro Follower begrenzt",
+  fr: "Le reste : boucle IA plafonnée par abonné",
+  it: "Resto al ciclo IA, con limite per follower",
+  nl: "De rest gaat de AI-loop in, met volgerlimiet",
+  cs: "Zbytek jde do AI smyčky, s limitem na followera",
+  "zh-Hans": "其余进 AI 应答，按粉丝限速",
+  "zh-Hant": "其餘進 AI 應答，按粉絲限速",
+  es: "Resto al bucle IA, con límite por seguidor",
+  pl: "Reszta trafia do pętli AI z limitem na obserwującego",
+  ja: "残りは AI 応答、フォロワー別に制限",
+  th: "ที่เหลือเข้าวงจร AI และจำกัดอัตราตามผู้ติดตาม",
+  fi: "Loput menevät AI-kiertoon, rajoitus seuraajaa kohden",
+  uk: "Решта — в AI-цикл з обмеженням на підписника",
+  bg: "Останалото — в AI цикъла с лимит за последовател",
+  tr: "Kalanı AI döngüsü alır, takipçi başına sınırlı",
+  hu: "A többi az AI-hurokba megy, követőnként korlátozva"
+};
+
+const AUTO_S3: Localized<string> = {
+  en: "A person reads one transcript and replies in one call",
+  ru: "Человек читает одну ленту переписки и отвечает одним вызовом",
+  de: "Ein Mensch liest ein Protokoll, antwortet mit einem Aufruf",
+  fr: "Une personne relit un historique, répond en un appel",
+  it: "Una persona legge una cronologia, risponde in una chiamata",
+  nl: "Eén persoon leest één transcript, antwoordt in één aanroep",
+  cs: "Člověk čte jediný přepis a odpoví jedním voláním",
+  "zh-Hans": "人读同一份留痕，一次调用回一句",
+  "zh-Hant": "人讀同一份留痕，一次呼叫回一句",
+  es: "Una persona lee un historial, responde en una llamada",
+  pl: "Człowiek czyta jeden zapis i odpowiada jednym wywołaniem",
+  ja: "人は同一の履歴を読み、1回の呼び出しで返信",
+  th: "คนอ่านบันทึกชุดเดียวแล้วตอบด้วยการเรียกครั้งเดียว",
+  fi: "Ihminen lukee yhtä lokia ja vastaa yhdellä kutsulla",
+  uk: "Людина читає одну стрічку й відповідає одним викликом",
+  bg: "Човек чете една лента и отговаря с едно извикване",
+  tr: "Bir kişi tek kaydı okur, tek çağrıyla yanıtlar",
+  hu: "Egy ember egyetlen leiratot olvas, egy hívással válaszol"
+};
+
+const AUTO_LINK: Localized<string> = {
+  en: "See the menu shape and what it costs",
+  ru: "Смотреть устройство меню и его стоимость",
+  de: "Menüaufbau und Kosten ansehen",
+  fr: "Voir la structure du menu et son coût",
+  it: "Vedi la forma del menu e cosa costa",
+  nl: "Bekijk menuopbouw en wat het kost",
+  cs: "Zobrazte strukturu menu a co stojí",
+  "zh-Hans": "看菜单结构与计量",
+  "zh-Hant": "看選單結構與計量",
+  es: "Ver la forma del menú y su coste",
+  pl: "Zobacz kształt menu i ile kosztuje",
+  ja: "メニュー構成と計量を見る",
+  th: "ดูโครงสร้างเมนูและการนับเครดิต",
+  fi: "Katso valikon muoto ja mitä se maksaa",
+  uk: "Переглянути будову меню та його вартість",
+  bg: "Вижте устройството на менюто и цената му",
+  tr: "Menü yapısına ve ölçüme bakın",
+  hu: "Nézd meg a menü felépítését és a költségét"
 };
 
 const CHANNEL_NAME: Localized<string> = {
@@ -854,6 +1047,174 @@ const SSO_LINK: Localized<string> = {
   hu: "Futtasd végig a beolvasást a homokozóban",
 };
 
+const LOCAL_NAME: Localized<string> = {
+  en: "Connect your own local agent",
+  ru: "Подключение локального агента",
+  de: "Eigenen lokalen Agent verbinden",
+  fr: "Connectez votre agent local",
+  it: "Collega il tuo agente locale",
+  nl: "Eigen lokale Agent koppelen",
+  cs: "Připojte vlastní lokální Agent",
+  "zh-Hans": "连接本地 Agent",
+  "zh-Hant": "連線本地 Agent",
+  es: "Conecta tu agente local",
+  pl: "Podłącz własny lokalny Agent",
+  ja: "ローカル Agent を接続",
+  th: "เชื่อมต่อ Agent บนเครื่องของคุณเอง",
+  fi: "Yhdistä oma paikallinen Agent",
+  uk: "Підключення локального агента",
+  bg: "Свързване на локален Agent",
+  tr: "Kendi yerel Agent’ınızı bağlayın",
+  hu: "Saját helyi Agent bekötése"
+};
+
+const LOCAL_ACTOR: Localized<string> = {
+  en: "Self-hosted model · intranet",
+  ru: "Своя модель · внутренняя сеть",
+  de: "Selbst gehostetes Modell · Intranet",
+  fr: "Modèle auto-hébergé · intranet",
+  it: "Modello self-hosted · intranet",
+  nl: "Zelf gehost model · intranet",
+  cs: "Model u vás · intranet",
+  "zh-Hans": "自建模型 · 内网",
+  "zh-Hant": "自建模型 · 內網",
+  es: "Modelo autoalojado · intranet",
+  pl: "Własny model · serwer lokalny",
+  ja: "自前モデル · 社内ネット",
+  th: "โมเดลที่ตั้งเอง · ระบบในบริษัท",
+  fi: "Oma malli · paikallinen palvelin",
+  uk: "Власна модель · внутрішня мережа",
+  bg: "Собствен модел · вътрешна мрежа",
+  tr: "Kendi modeliniz · iç ağ",
+  hu: "Saját modell · helyi szerver"
+};
+
+const LOCAL_TAGLINE: Localized<string> = {
+  en: "The service account answers from a model that never leaves your machine.",
+  ru: "Сервисный аккаунт отвечает моделью, которая никогда не покидает ваш сервер.",
+  de: "Das Service-Konto antwortet aus einem Modell, das Ihren Rechner nie verlässt.",
+  fr: "Le compte de service répond depuis un modèle qui ne quitte jamais votre machine.",
+  it: "L’account di servizio risponde con un modello che non lascia mai il tuo computer.",
+  nl: "Het serviceaccount antwoordt vanuit een model dat je machine nooit verlaat.",
+  cs: "Servisní účet odpovídá z modelu, který nikdy neopustí váš stroj.",
+  "zh-Hans": "服务号的回答来自一个从不出你机器的模型。",
+  "zh-Hant": "服務號的回答來自一個從不出你機器的模型。",
+  es: "La cuenta de servicio responde desde un modelo que nunca sale de tu equipo.",
+  pl: "Konto serwisowe odpowiada z modelu, który nigdy nie opuszcza twojego serwera.",
+  ja: "サービスアカウントの回答は、自前マシンから出ないモデル。",
+  th: "บัญชีบริการตอบโดยโมเดลที่ไม่เคยออกจากเครื่องของคุณ",
+  fi: "Palvelutili vastaa mallista, joka ei koskaan poistu sinun koneeltasi.",
+  uk: "Сервісний акаунт відповідає моделлю, яка ніколи не покидає ваш сервер.",
+  bg: "Сервизният акаунт отговаря с модел, който никога не напуска сървъра ви.",
+  tr: "Hizmet hesabı, makinenizden hiç çıkmayan bir modelden yanıtlar.",
+  hu: "A szolgáltatási fiók olyan modellből válaszol, amely soha nem hagyja el a géped."
+};
+
+const LOCAL_BODY: Localized<string> = {
+  en: "POPOPX_AI_BASE_URL takes any OpenAI-compatible chat completions address, so a local Ollama at http://127.0.0.1:11434/v1 is just another value, and POPOPX_AI_MODEL names the model. The address and the key are environment values rather than console fields, so they stay on your server: the AI panel hot-edits six keys only — system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  ru: "POPOPX_AI_BASE_URL принимает любой адрес OpenAI-совместимого chat completions, поэтому локальный Ollama на http://127.0.0.1:11434/v1 — ещё одно значение, а POPOPX_AI_MODEL задаёт модель. Адрес и ключ — значения окружения, а не поля консоли, поэтому остаются на вашем сервере: панель AI горячо правит ровно шесть ключей — system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  de: "POPOPX_AI_BASE_URL nimmt jede OpenAI-kompatible Adresse für chat completions, ein lokales Ollama auf http://127.0.0.1:11434/v1 ist nur ein weiterer Wert; POPOPX_AI_MODEL benennt das Modell. Adresse und Key sind Umgebungswerte, keine Felder in der Konsole, sie bleiben also auf Ihrem Server. Das AI-Panel hot-editiert genau sechs Schlüssel: system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  fr: "POPOPX_AI_BASE_URL prend toute adresse chat completions compatible OpenAI : un Ollama local sur http://127.0.0.1:11434/v1 n’est qu’une valeur de plus ; POPOPX_AI_MODEL nomme le modèle. Adresse et clé sont des valeurs d’environnement, non des champs de console, et restent sur votre serveur. Le panneau IA ne modifie à chaud que six clés exactement : system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  it: "POPOPX_AI_BASE_URL accetta qualunque indirizzo chat completions compatibile con OpenAI: un Ollama locale su http://127.0.0.1:11434/v1 è solo un valore in più; POPOPX_AI_MODEL nomina il modello. Indirizzo e API key sono valori d’ambiente, non campi della console: restano sul tuo server. Il pannello IA si limita a hot-editare esattamente sei chiavi: system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  nl: "POPOPX_AI_BASE_URL accepteert elk OpenAI-compatibel adres voor chat completions, een lokale Ollama op http://127.0.0.1:11434/v1 is gewoon een andere waarde, en POPOPX_AI_MODEL noemt het model. Adres en API-sleutel zijn omgevingswaarden, geen consolevelden; ze blijven dus op je server. Het AI-paneel hot-edit precies zes sleutels: system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  cs: "POPOPX_AI_BASE_URL pojme libovolnou adresu chat completions kompatibilní s OpenAI, lokální Ollama na http://127.0.0.1:11434/v1 je jen další hodnota, a POPOPX_AI_MODEL určuje model. Adresa a klíč jsou hodnoty prostředí, ne pole v konzoli – zůstávají na vašem serveru. Panel AI horkě edituje přesně šest klíčů: system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  "zh-Hans": "POPOPX_AI_BASE_URL 可以填任何 OpenAI 兼容的 chat completions 地址，本机 Ollama（http://127.0.0.1:11434/v1）也只是其中一个值；模型由 POPOPX_AI_MODEL 指定。接入地址和 Key 是环境变量、不是控制台字段，所以一直留在你自己的服务器上：AI 面板只能热改六个键——system_prompt、model、history_size、temperature、max_tokens、exhausted_message。",
+  "zh-Hant": "POPOPX_AI_BASE_URL 可以填任何 OpenAI 相容的 chat completions 位址，本機 Ollama（http://127.0.0.1:11434/v1）也只是其中一個值；模型由 POPOPX_AI_MODEL 指定。接入位址和 Key 是環境變數、不是控制台欄位，所以一直留在你自己的伺服器上：AI 面板只能熱改六個鍵——system_prompt、model、history_size、temperature、max_tokens、exhausted_message。",
+  es: "POPOPX_AI_BASE_URL acepta cualquier dirección chat completions compatible con OpenAI: un Ollama local en http://127.0.0.1:11434/v1 es solo un valor más; POPOPX_AI_MODEL nombra el modelo. Dirección y clave son valores de entorno, no campos de consola: se quedan en tu servidor. El panel IA edita en caliente exactamente seis claves, solo esas: system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  pl: "POPOPX_AI_BASE_URL przyjmuje dowolny adres chat completions zgodny z OpenAI — lokalne Ollama (http://127.0.0.1:11434/v1) to tylko kolejna wartość, a POPOPX_AI_MODEL wskazuje model. Adres i klucz to wartości środowiskowe, nie pola konsoli, więc zostają na twoim serwerze: panel AI edytuje na gorąco dokładnie sześć kluczy — system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  ja: "POPOPX_AI_BASE_URL には OpenAI 互換の chat completions アドレスなら何でも入れられるので、マシン上の Ollama（http://127.0.0.1:11434/v1）も単なる一つの値で、モデルは POPOPX_AI_MODEL が指定します。アドレスとキーはコンソールの入力欄ではなく環境値なので、あなたのサーバーに留まります。AI パネルが hot-edit するのは system_prompt、model、history_size、temperature、max_tokens、exhausted_message の6キーだけです。",
+  th: "POPOPX_AI_BASE_URL ใส่ที่อยู่ chat completions ที่เข้ากันได้กับ OpenAI ได้ทุกแบบ Ollama บนเครื่องตัวเอง (http://127.0.0.1:11434/v1) จึงเป็นแค่ค่าค่าหนึ่ง ส่วนโมเดลให้ POPOPX_AI_MODEL เป็นผู้ระบุ ที่อยู่กับคีย์เป็นค่าจากสภาพแวดล้อม ไม่ใช่ช่องในคอนโซล มันจึงอยู่แต่บนเซิร์ฟเวอร์ของคุณต่อไป แผง AI แก้ไขแบบร้อน ๆ ได้หกคีย์พอดี คือ system_prompt, model, history_size, temperature, max_tokens และ exhausted_message",
+  fi: "POPOPX_AI_BASE_URL:iin kelpaa mikä tahansa OpenAI-yhteensopiva chat completions -osoite, joten paikallinen Ollama osoitteessa http://127.0.0.1:11434/v1 on vain yksi arvo lisää, ja POPOPX_AI_MODEL nimeää mallin. Osoite ja avain ovat ympäristöarvoja eivätkä konsolin kenttiä, joten ne jäävät sinun palvelimellesi: AI-paneeli muokkaa kuumana täsmälleen kuutta avainta — system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  uk: "POPOPX_AI_BASE_URL приймає будь-яку адресу chat completions, сумісну з OpenAI, тож локальне Ollama на http://127.0.0.1:11434/v1 — ще одне значення, а POPOPX_AI_MODEL задає модель. Адреса й ключ — значення середовища, а не поля консолі, тож лишаються на вашому сервері: панель AI гаряче править рівно шість ключів — system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  bg: "POPOPX_AI_BASE_URL приема всеки OpenAI-съвместим chat completions адрес, затова локалното Ollama на http://127.0.0.1:11434/v1 е просто още една стойност, а POPOPX_AI_MODEL назова модела. Адресът и ключът са стойности на средата, не полета в конзолата, и остават на вашия сървър: AI панелът горещо редактира точно шест ключа — system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  tr: "POPOPX_AI_BASE_URL, OpenAI uyumlu her chat completions adresini kabul eder; dolayısıyla makinenizdeki bir Ollama (http://127.0.0.1:11434/v1) yalnızca bir başka değerdir, modeli ise POPOPX_AI_MODEL adlandırır. Adres ve anahtar, konsol alanı değil ortam değerleri olduğu için kendi sunucunuzda kalır: AI paneli hot olarak tam altı anahtarı düzenler — system_prompt, model, history_size, temperature, max_tokens ve exhausted_message.",
+  hu: "POPOPX_AI_BASE_URL elé bármilyen OpenAI-kompatibilis chat completions cím kerülhet, a helyi Ollama (http://127.0.0.1:11434/v1) csak egy további érték, a POPOPX_AI_MODEL megnevezi a modellt. A cím és a kulcs környezeti érték, nem konzolos mező, ezért a saját szervereden marad: az AI-panel melegen pontosan hat kulcsot szerkeszt — system_prompt, model, history_size, temperature, max_tokens, exhausted_message."
+};
+
+const LOCAL_S1: Localized<string> = {
+  en: "Point POPOPX_AI_BASE_URL at your own address",
+  ru: "Укажите в POPOPX_AI_BASE_URL свой адрес",
+  de: "POPOPX_AI_BASE_URL auf Ihre eigene Adresse setzen",
+  fr: "POPOPX_AI_BASE_URL dirigé vers votre adresse",
+  it: "Punta POPOPX_AI_BASE_URL sul tuo indirizzo",
+  nl: "Zet POPOPX_AI_BASE_URL op je eigen adres",
+  cs: "Nastavte POPOPX_AI_BASE_URL na vlastní adresu",
+  "zh-Hans": "把 POPOPX_AI_BASE_URL 指向自己的地址",
+  "zh-Hant": "把 POPOPX_AI_BASE_URL 指向自己的位址",
+  es: "Apunta POPOPX_AI_BASE_URL a tu propia dirección",
+  pl: "Skieruj POPOPX_AI_BASE_URL na własny adres",
+  ja: "POPOPX_AI_BASE_URL を自分のアドレスへ",
+  th: "ชี้ POPOPX_AI_BASE_URL ไปยังที่อยู่ของคุณเอง",
+  fi: "Ohjaa POPOPX_AI_BASE_URL omaan osoitteeseen",
+  uk: "Вкажіть у POPOPX_AI_BASE_URL власну адресу",
+  bg: "Задайте вашия адрес в POPOPX_AI_BASE_URL",
+  tr: "POPOPX_AI_BASE_URL’ı kendi adresinize yöneltin",
+  hu: "Állítsd a POPOPX_AI_BASE_URL értékét a saját címedre"
+};
+
+const LOCAL_S2: Localized<string> = {
+  en: "Name the model in POPOPX_AI_MODEL",
+  ru: "Задайте модель в POPOPX_AI_MODEL",
+  de: "Das Modell in POPOPX_AI_MODEL benennen",
+  fr: "Le modèle nommé dans POPOPX_AI_MODEL",
+  it: "Nomina il modello in POPOPX_AI_MODEL",
+  nl: "Noem het model in POPOPX_AI_MODEL",
+  cs: "Určete model v POPOPX_AI_MODEL",
+  "zh-Hans": "用 POPOPX_AI_MODEL 指定模型",
+  "zh-Hant": "用 POPOPX_AI_MODEL 指定模型",
+  es: "Nombra el modelo en POPOPX_AI_MODEL",
+  pl: "Nazwij model w POPOPX_AI_MODEL",
+  ja: "POPOPX_AI_MODEL でモデルを指定",
+  th: "ระบุโมเดลใน POPOPX_AI_MODEL",
+  fi: "Malli nimetään POPOPX_AI_MODEL-arvolla",
+  uk: "Назвіть модель у POPOPX_AI_MODEL",
+  bg: "Назовете модела в POPOPX_AI_MODEL",
+  tr: "Modeli POPOPX_AI_MODEL ile adlandırın",
+  hu: "Add meg a modellt a POPOPX_AI_MODEL értékben"
+};
+
+const LOCAL_S3: Localized<string> = {
+  en: "Restart once; the answer arrives as a normal message",
+  ru: "Одна перезагрузка — и ответ приходит обычным сообщением",
+  de: "Einmal neu starten, die Antwort kommt als normale Nachricht",
+  fr: "Redémarrez une fois : la réponse arrive en message normal",
+  it: "Riavvia una volta; la risposta arriva come messaggio normale",
+  nl: "Herstart één keer, het antwoord komt als gewoon bericht",
+  cs: "Po jednom restartu přijde odpověď jako běžná zpráva",
+  "zh-Hans": "重启一次；回答就是一条普通消息",
+  "zh-Hant": "重啟一次；回答就是一則普通訊息",
+  es: "Reinicia una vez; la respuesta llega como mensaje normal",
+  pl: "Restartuj raz; odpowiedź przychodzi jako zwykła wiadomość",
+  ja: "1回の再起動で、回答は通常のメッセージ",
+  th: "รีสตาร์ทครั้งเดียว คำตอบก็มาเป็นข้อความปกติ",
+  fi: "Käynnistä uudelleen kerran; vastaus saapuu tavallisena viestinä",
+  uk: "Один перезапуск — і відповідь приходить звичайним повідомленням",
+  bg: "Едно рестартиране — и отговорът идва като обикновено съобщение",
+  tr: "Bir kez yeniden başlatın; yanıt normal mesaj olur",
+  hu: "Indítsd újra egyszer; a válasz normál üzenetként érkezik"
+};
+
+const LOCAL_LINK: Localized<string> = {
+  en: "Open the environment file and the restart step",
+  ru: "Открыть файл окружения и шаг перезапуска",
+  de: "Umgebungsdatei und Neustartschritt öffnen",
+  fr: "Ouvrir le fichier d’environnement et l’étape de redémarrage",
+  it: "Apri file d’ambiente e procedura di riavvio",
+  nl: "Open het .env-bestand en de herstartstap",
+  cs: "Otevřete soubor .env a postup restartu",
+  "zh-Hans": "看环境变量文件与重启步骤",
+  "zh-Hant": "看環境變數檔案與重啟步驟",
+  es: "Abre el archivo de entorno y el reinicio",
+  pl: "Otwórz plik środowiskowy i krok restartu",
+  ja: "環境変数ファイルと再起動を見る",
+  th: "เปิดไฟล์ตัวแปรสภาพแวดล้อมและขั้นตอนรีสตาร์ท",
+  fi: "Avaa ympäristötiedosto ja uudelleenkäynnistyksen vaihe",
+  uk: "Переглянути файл середовища й крок перезапуску",
+  bg: "Отворете файла на средата и стъпката за рестарт",
+  tr: "Ortam dosyasını ve yeniden başlatma adımını açın",
+  hu: "Nyisd meg a környezeti fájlt és az újraindítást"
+};
+
 /* ── COPY BLOCK END ──────────────────────────────────────────────────────── */
 
 const SCENARIOS: readonly Scenario[] = [
@@ -873,6 +1234,20 @@ const SCENARIOS: readonly Scenario[] = [
   },
   {
     index: "02",
+    icon: "auto",
+    accent: "brand",
+    name: AUTO_NAME,
+    actor: AUTO_ACTOR,
+    tagline: AUTO_TAGLINE,
+    body: AUTO_BODY,
+    steps: [AUTO_S1, AUTO_S2, AUTO_S3],
+    state: STATE_ON,
+    tech: "POST /api/v1/menu/push · POST /api/v1/send/text",
+    href: "#architecture",
+    link: AUTO_LINK,
+  },
+  {
+    index: "03",
     icon: "channel",
     accent: "brand",
     name: CHANNEL_NAME,
@@ -886,7 +1261,7 @@ const SCENARIOS: readonly Scenario[] = [
     link: CHANNEL_LINK,
   },
   {
-    index: "03",
+    index: "04",
     icon: "alert",
     accent: "mesh",
     name: ALERT_NAME,
@@ -900,7 +1275,7 @@ const SCENARIOS: readonly Scenario[] = [
     link: ALERT_LINK,
   },
   {
-    index: "04",
+    index: "05",
     icon: "scan",
     accent: "mesh",
     name: SSO_NAME,
@@ -913,6 +1288,20 @@ const SCENARIOS: readonly Scenario[] = [
     href: "#sandbox",
     link: SSO_LINK,
   },
+  {
+    index: "06",
+    icon: "local",
+    accent: "mesh",
+    name: LOCAL_NAME,
+    actor: LOCAL_ACTOR,
+    tagline: LOCAL_TAGLINE,
+    body: LOCAL_BODY,
+    steps: [LOCAL_S1, LOCAL_S2, LOCAL_S3],
+    state: STATE_ENV,
+    tech: "POPOPX_AI_BASE_URL · http://127.0.0.1:11434/v1",
+    href: "#install",
+    link: LOCAL_LINK,
+  },
 ];
 
 /** Hairline glyphs, drawn inline: no icon font and nothing loaded from anywhere. */
@@ -922,6 +1311,13 @@ function ScenarioGlyph({ kind }: { kind: ScenarioIcon }): ReactElement {
       <>
         <path d="M4 5.5h16v10h-7.5L8 19v-3.5H4z" />
         <path d="M8 9.5h8M8 12.5h5" />
+      </>
+    ),
+    auto: (
+      <>
+        <path d="M4 5.5h11.5v8H9.2L6.2 16.3V13.5H4z" />
+        <path d="M6.9 8.6h6M6.9 11.1h4" />
+        <path d="M16.4 15.6l1.9 1.9 3.2-3.7" />
       </>
     ),
     channel: (
@@ -941,6 +1337,14 @@ function ScenarioGlyph({ kind }: { kind: ScenarioIcon }): ReactElement {
       <>
         <path d="M4 8.6V5h3.6M20 8.6V5h-3.6M4 15.4V19h3.6M20 15.4V19h-3.6" />
         <path d="M8.5 12h7" />
+      </>
+    ),
+    local: (
+      <>
+        <rect x="3.6" y="5" width="16.8" height="6.2" rx="1.6" />
+        <rect x="3.6" y="12.8" width="16.8" height="6.2" rx="1.6" />
+        <path d="M6.9 8.1h4.3M6.9 15.9h4.3" />
+        <path d="M16.6 8.1h.01M16.6 15.9h.01" />
       </>
     ),
   };
@@ -991,7 +1395,7 @@ export function BusinessScenarios(): ReactElement {
       <div className="section-wrap">
         <SectionHeading eyebrow={EYEBROW} title={TITLE} subtitle={SUBTITLE} />
 
-        <div className="mt-9 grid gap-4 sm:grid-cols-2">
+        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SCENARIOS.map((scenario) => {
             const tone =
               scenario.accent === "mesh"

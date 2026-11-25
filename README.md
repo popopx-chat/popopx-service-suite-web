@@ -81,7 +81,7 @@ popopx-service-suite-web/
     │   ├── Navbar.tsx                           sticky nav: anchors, language capsule, repo links, CTA
     │   ├── LanguageMenu.tsx                     the 18-language menu: list plus compact capsule
     │   ├── HeroSection.tsx                      the hero stage
-    │   ├── BusinessScenarios.tsx                four plain-language use-case cards under the hero
+    │   ├── BusinessScenarios.tsx                six plain-language use-case cards under the hero
     │   ├── PluginsShowcase.tsx                  the five plugins that ship in the admin back end
     │   ├── ArchitectureComparison.tsx           the five capability cards and the three-way table
     │   ├── InteractiveSandbox.tsx               admin console simulator beside a phone preview
@@ -140,7 +140,7 @@ from `NAV_SECTIONS` in `src/lib/site.ts` — `overview`, `plugins`, `architectur
 the back-to-top landing point. `Navbar.tsx` renders `NAV_SECTIONS` straight into `#id` links, and its
 labels are a `Record<NavSectionId, Localized<string>>`, so a missing translation for any anchor fails
 the build. The page carries more anchors than the bar lists — `features`, `protocol`, `install`,
-`directory`, and `scenarios`, the four business cards sitting directly under the hero. `scenarios`
+`directory`, and `scenarios`, the six business cards sitting directly under the hero. `scenarios`
 stays out of the bar on purpose: seven labels do not fit the centred row at `xl` next to the logo, the
 ecosystem link, the GitHub pill, the language menu and the CTA, and the block is the second thing on the
 page, so nobody has to jump to reach it.
@@ -149,7 +149,7 @@ page, so nobody has to jump to reach it.
 | --- | --- | --- | --- |
 | 1 · Top navigation | `Navbar.tsx` | links to all six | Sticky glass bar: official mark with the `POPOPX Service Suite` title, the six anchor links, the language capsule, the GitHub entry, the deploy primary button (to `#install`); collapses into a panel on narrow screens |
 | 2 · Hero stage | `HeroSection.tsx` | `#overview` | Dual-mode topology behind the headline, with the metric strip stating the facts outright — 0 global user IDs, 100% end-to-end encryption, AGPL-3.0 across the stack; the two buttons point at `#install` and `#sandbox` |
-| 3 · Business scenarios | `BusinessScenarios.tsx` | `#scenarios` | The first block below the hero: four plain-language cards — AI customer support, encrypted channel publishing, ops and security alerting, anonymous scan-to-login — each with a three-step flow, the real module file and route on one monospaced line, a state word that keeps "on by factory default" apart from "core gateway behaviour", and a jump into the section that documents it |
+| 3 · Business scenarios | `BusinessScenarios.tsx` | `#scenarios` | The first block below the hero: six plain-language cards — AI customer support, automated enquiry handling, encrypted channel publishing, ops and security alerting, anonymous scan-to-login, connecting your own local agent — each with a three-step flow, the real module file, route or environment switch on one monospaced line, a state word that keeps "on by factory default" apart from "core gateway behaviour" and "an environment switch, no extra plugin", and a jump into the section that documents it |
 | 4 · Plugin matrix | `PluginsShowcase.tsx` | `#plugins` | The five plugins that ship ready in the admin back end: private AI agent, DevOps alert ops, zero-tracking QR sign-in, encrypted polls, on-chain monitoring with whitelist drops; category filter, four-step integration path, and a roadmap of planned third-party connectors |
 | 5 · Features and architecture | `ArchitectureComparison.tsx` | `#architecture` | The five service-account capabilities (loopback WebSocket isolation, two-level custom menus (3 × 5), three dynamic card styles, pairwise-anonymous HMAC-signed H5, zero-knowledge channels with epoch key rotation), plus a three-way table against classic social accounts and centralised bots |
 | 6 · Interactive sandbox | `InteractiveSandbox.tsx` | `#sandbox` | An admin console simulator beside a 1:1 phone preview; visitors really click menus and cards, and a switch flips the view to the relay's point of view — ciphertext and signature digests only |

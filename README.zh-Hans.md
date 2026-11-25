@@ -75,7 +75,7 @@ popopx-service-suite-web/
     │   ├── Navbar.tsx                           吸顶导航：锚点、语言胶囊、仓库入口、主 CTA
     │   ├── LanguageMenu.tsx                     18 语言菜单：完整列表与紧凑胶囊
     │   ├── HeroSection.tsx                      首屏舞台
-    │   ├── BusinessScenarios.tsx                首屏下方的四张业务场景卡
+    │   ├── BusinessScenarios.tsx                首屏下方的六张业务场景卡
     │   ├── PluginsShowcase.tsx                  后台开箱即用的五个插件
     │   ├── ArchitectureComparison.tsx           五大特点卡片与三方对比表
     │   ├── InteractiveSandbox.tsx               后台控制台模拟器与手机预览
@@ -130,7 +130,7 @@ vhost 的 `error_page` 指的就是它），带内容指纹的打包产物在 `o
 `src/app/page.tsx` 为准，`<main>` 上的 `id="top"` 是回到顶部的落点。`Navbar.tsx` 把
 `NAV_SECTIONS` 直接渲染成 `#id` 链接，锚点文案是 `Record<NavSectionId, Localized<string>>`，
 少一个 id 的翻译就编译不过。页面上的锚点其实比导航条多——`features`、`protocol`、`install`、
-`directory`，以及紧贴首屏的四张业务场景卡 `scenarios`。`scenarios` 故意不进导航条：七个标签在 `xl`
+`directory`，以及紧贴首屏的六张业务场景卡 `scenarios`。`scenarios` 故意不进导航条：七个标签在 `xl`
 宽度下放不下（左边是 logo 与标题，右边还有生态入口、GitHub、语言菜单和部署按钮），而这块内容就在页面第二屏，
 不需要跳转才能看到。
 
@@ -138,7 +138,7 @@ vhost 的 `error_page` 指的就是它），带内容指纹的打包产物在 `o
 | --- | --- | --- | --- |
 | 一 顶部导航 | `Navbar.tsx` | 指向六个锚点 | 毛玻璃吸顶条：官方 logo 与 `POPOPX Service Suite` 标题、六个锚点链接、语言胶囊、GitHub 入口、部署主按钮（`#install`），窄屏收进一个面板 |
 | 二 首屏舞台 | `HeroSection.tsx` | `#overview` | 双模拓扑背景与主标语，指标条把「0 全局用户 ID」「100% 端到端加密」「AGPL-3.0 全栈开源」这些事实一次说完，两个按钮分别指向 `#install` 与 `#sandbox` |
-| 三 业务场景 | `BusinessScenarios.tsx` | `#scenarios` | 首屏下面的第一块：四张面向业务的卡片——AI 客服接待、加密频道发布、运维安全告警、匿名扫码登录——每张给三步流程、一行等宽的真实模块文件与接口、把「默认开启」和「网关核心能力」分开的状态标注，以及跳到对应章节的链接 |
+| 三 业务场景 | `BusinessScenarios.tsx` | `#scenarios` | 首屏下面的第一块：六张面向业务的卡片——AI 客服接待、自动处理咨询、加密频道发布、运维安全告警、匿名扫码登录、连接本地 Agent——每张给三步流程、一行等宽的真实模块文件、接口或环境变量开关、把「默认开启」「网关核心能力」「环境变量开关，不额外装插件」分开的状态标注，以及跳到对应章节的链接 |
 | 四 插件矩阵 | `PluginsShowcase.tsx` | `#plugins` | 后台开箱即用的五个扩展插件：隐私 AI 客服、DevOps 告警、零追踪扫码登录、加密问卷与匿名投票、链上资产监控与白名单发卡；分类筛选、四步接入路径、第三方连接器路线图 |
 | 五 特点与架构对比 | `ArchitectureComparison.tsx` | `#architecture` | 服务号五大技术特点称号卡片（本地 WebSocket 隔离、两级 3 × 5 底部菜单、三样式动态卡片、成对匿名 H5 签名、零知识频道与 Epoch 轮换），外加与传统社交公众号、中心化 Bot 的三方对比表 |
 | 六 互动体验沙盒 | `InteractiveSandbox.tsx` | `#sandbox` | 左边后台控制台模拟器、右边 1:1 手机预览，可真实点击菜单与卡片，并一键切到「中继服务器视角」看密文与签名摘要 |

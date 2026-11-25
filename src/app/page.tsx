@@ -19,7 +19,7 @@ import { Footer } from "@/components/Footer";
  * page reload — and it keeps the static export to one HTML document.
  *
  * Section order is the reading order, and it is deliberately two-tier. A visitor
- * who never reads a man page gets the hero and then four business scenarios, and
+ * who never reads a man page gets the hero and then six business scenarios, and
  * can leave the page understanding what the product is for. Everything that
  * speaks in endpoints, environment switches or byte order — the catalog, the
  * protocol quick reference, the governance block, the install guide — stays in
