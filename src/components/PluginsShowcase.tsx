@@ -8,20 +8,22 @@ import { CodeBlock, SectionHeading, StatusDot } from "@/components/ui";
  * Services & connector catalog.
  *
  * The catalog is the honest answer to "what can this gateway actually do today":
- * five plugin modules that exist as code, four of them on by factory default,
- * `web3_bridge` implemented but switched off, and a separate 规划中 block for the
- * connectors that appear nowhere in the repository. Every card answers the same
- * four questions — capability, credential, data flow, revocation — and the
- * credential question is answered with what really exists: one static
- * `X-Admin-Token` bearer for `/api/v1/plugins/*`, no scopes and no per-key ACL.
- * The filter is a `useState` over category only, so a filtered subset can never
- * come back empty: each of the five categories owns exactly one card.
+ * nine plugin modules that exist as code, four of them on by factory default and
+ * five switched off (`web3_bridge`, `workflow_webhook`, `carddav_connector`,
+ * `caldav_connector`, `slack_discord`), each with its own `POPOPX_PLUGIN_*`
+ * switch. Every card answers the same four questions — capability, credential,
+ * data flow, revocation — and the credential question is answered with what
+ * really exists: the root `POPOPX_ADMIN_TOKEN` bearer, or a scoped `pxa_…` token
+ * minted at `POST /api/v1/admin/tokens`. The filter is a `useState` over category
+ * only, so a filtered subset can never come back empty: the six categories cover
+ * all nine cards, and the four connector cards share one chip.
  */
 
 type Fact = { readonly k: Localized<string>; readonly v: Localized<string> };
 
-type Category = "agent" | "ops" | "identity" | "engagement" | "chain";
+type Category = "agent" | "ops" | "identity" | "engagement" | "chain" | "connectors";
 type ShipState = "default-on" | "default-off" | "roadmap";
+type RoadmapState = "planned" | "declined";
 
 type PluginModel = {
   readonly code: string;
@@ -38,8 +40,8 @@ type PluginModel = {
 
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft/70";
 
-/** The six filter chips: `全部` plus the five categories. Because the five
- *  implemented modules each own exactly one category, every chip selects at
+/** The seven filter chips: `全部` plus the six categories. Because the nine
+ *  implemented modules are covered by those six categories, every chip selects at
  *  least one card, so a filtered grid can never come back empty. */
 const CATEGORY_ALL = "all";
 type FilterValue = Category | typeof CATEGORY_ALL;
@@ -66,47 +68,47 @@ const EYEBROW: Localized<string> = {
 };
 
 const TITLE: Localized<string> = {
-  en: "Catalog state: five plugin modules ship, four are on by factory default, web3_bridge is implemented but off, the remaining connectors are not built",
-  ru: "Состояние каталога: пять модулей плагинов поставляются, четыре включены по умолчанию, web3_bridge реализован, но выключен, остальных коннекторов пока нет",
-  de: "Stand des Katalogs: fünf Plugin-Module sind ausgeliefert, vier sind standardmäßig aktiv, web3_bridge ist implementiert, aber abgeschaltet, die übrigen Konnektoren gibt es noch nicht",
-  fr: "État du catalogue : cinq modules de plugin sont livrés, quatre sont activés par défaut, web3_bridge est implémenté mais éteint, les connecteurs restants ne sont pas développés",
-  it: "Stato del catalogo: cinque moduli plugin sono inclusi, quattro sono attivi per impostazione predefinita, web3_bridge è implementato ma spento, gli altri connettori non sono sviluppati",
-  nl: "Stand van de catalogus: vijf plug-inmodules worden meegeleverd, vier staan standaard aan, web3_bridge is geïmplementeerd maar uit, de overige connectors zijn niet gebouwd",
-  cs: "Stav katalogu: pět modulů pluginů se dodává, čtyři jsou ve výchozím stavu zapnuté, web3_bridge je implementovaný, ale vypnutý, zbývající konektory zatím neexistují",
-  "zh-Hans": "目录现状：五个插件模块随网关发布，四个默认开启，web3_bridge 已实现但默认关闭，其余连接器尚未开发",
-  "zh-Hant": "目錄現況：五個外掛模組隨閘道發布，四個預設開啟，web3_bridge 已實作但預設關閉，其餘連線器尚未開發",
-  es: "Estado del catálogo: se entregan cinco módulos de complemento, cuatro vienen activados de forma predeterminada, web3_bridge está implementado pero apagado, y los conectores restantes no existen",
-  pl: "Stan katalogu: pięć modułów wtyczek jest dostarczanych, cztery są domyślnie włączone, web3_bridge jest zaimplementowany, ale wyłączony, a pozostałe konektory nie powstały",
-  ja: "カタログの現状：5つのプラグインモジュールが出荷に含まれ、4つは既定でオン、web3_bridge は実装済みだが既定でオフ、それ以外のコネクタはまだ作られていません",
-  th: "สภาพของแคตตาล็อก: มีโมดูลปลั๊กอิน 5 ตัวออกมาพร้อมเกตเวย์ สี่ตัวเปิดใช้โดยค่าเริ่มต้น web3_bridge ถูกพัฒนาแล้วแต่ปิดอยู่ ส่วนตัวเชื่อมต่ออื่นยังไม่ถูกสร้าง",
-  fi: "Luettelon tila: mukana tulee viisi lisäosamoduulia, neljä on oletuksena päällä, web3_bridge on toteutettu mutta pois kytketty, eikä muita liittimiä ole vielä tehty",
-  uk: "Стан каталогу: пʼять модулів плагінів постачаються, чотири типово увімкнені, web3_bridge реалізований, але вимкнений, а решту конекторів ще не створено",
-  bg: "Състоянието на каталога: пет модула на плъгини се доставят, четири са включени по подразбиране, web3_bridge е реализиран, но изключен, а останалите конектори все още няма",
-  tr: "Katalog durumu: beş eklenti modülü sevk edilir, dördü varsayılan olarak açık, web3_bridge yazılmış ama kapalı, geri kalan bağlayıcılar henüz yok",
-  hu: "A katalógus állapota: öt bővítménymodul érkezik, négy alapértelmezés szerint bekapcsolva, a web3_bridge megvalósult, de ki van kapcsolva, és a többi csatlakoztató még nem létezik",
+  en: "Catalog state: nine plugin modules ship, four are on and five are off by factory default, all nine are implemented, and the remaining integrations are either not built or declined",
+  ru: "Состояние каталога: поставляются девять модулей плагинов, четыре включены и пять выключены по умолчанию, все девять реализованы, а остальные интеграции либо не сделаны, либо отклонены",
+  de: "Stand des Katalogs: neun Plugin-Module sind ausgeliefert, vier sind standardmäßig an und fünf aus, alle neun sind implementiert, und die übrigen Integrationen sind entweder nicht gebaut oder abgelehnt",
+  fr: "État du catalogue : neuf modules de plugin sont livrés, quatre sont activés et cinq désactivés par défaut, les neuf sont implémentés, et les autres intégrations sont soit non développées, soit refusées",
+  it: "Stato del catalogo: nove moduli plugin sono inclusi, quattro attivi e cinque spenti per impostazione predefinita, tutti e nove implementati, e le altre integrazioni sono o non sviluppate o rifiutate",
+  nl: "Stand van de catalogus: negen plug-inmodules worden meegeleverd, vier staan standaard aan en vijf uit, alle negen zijn geïmplementeerd, en de overige integraties zijn niet gebouwd of afgewezen",
+  cs: "Stav katalogu: dodává se devět modulů pluginů, čtyři jsou ve výchozím stavu zapnuté a pět vypnutých, všech devět je implementováno a zbývající integrace buď neexistují, nebo byly odmítnuty",
+  "zh-Hans": "目录现状：九个插件模块随网关发布，四个默认开启、五个默认关闭；九个全部已实现，其余集成要么尚未开发，要么明确拒绝",
+  "zh-Hant": "目錄現況：九個外掛模組隨閘道發布，四個預設開啟、五個預設關閉；九個全部已實作，其餘整合要麼尚未開發，要麼明確拒絕",
+  es: "Estado del catálogo: se entregan nueve módulos de complemento, cuatro activados y cinco apagados de fábrica, los nueve están implementados, y las integraciones restantes o no existen o se rechazaron",
+  pl: "Stan katalogu: dostarczanych jest dziewięć modułów wtyczek, cztery są domyślnie włączone, a pięć wyłączonych, wszystkie dziewięć jest zaimplementowanych, a pozostałe integracje albo nie powstały, albo zostały odrzucone",
+  ja: "カタログの現状：9つのプラグインモジュールが出荷され、4つは既定でオン、5つは既定でオフ、9つとも実装済みです。残りの連携は未開発か、明確に断っています",
+  th: "สภาพของแคตตาล็อก: มีโมดูลปลั๊กอินเก้าตัวออกมาพร้อมเกตเวย์ สี่ตัวเปิดและห้าตัวปิดโดยค่าเริ่มต้น ทั้งเก้าตัวถูกพัฒนาแล้ว ส่วนการเชื่อมต่อที่เหลือยังไม่ถูกสร้างหรือถูกปฏิเสธอย่างชัดเจน",
+  fi: "Luettelon tila: mukana tulee yhdeksän lisäosamoduulia, neljä on oletuksena päällä ja viisi pois, kaikki yhdeksän on toteutettu, ja loput integraatiot ovat joko tekemättä tai hylätty",
+  uk: "Стан каталогу: постачаються девʼять модулів плагінів, чотири увімкнені й пʼять вимкнені типово, усі девʼять реалізовані, а решта інтеграцій або не створені, або відхилені",
+  bg: "Състоянието на каталога: доставят се девет модула на плъгини, четири са включени и пет изключени по подразбиране, всичките девет са реализирани, а останалите интеграции или не съществуват, или са отказани",
+  tr: "Katalog durumu: dokuz eklenti modülü sevk edilir, dördü varsayılan olarak açık ve beşi kapalı, dokuzu da yazıldı; geri kalan entegrasyonlar ya yok ya da açıkça reddedildi",
+  hu: "A katalógus állapota: kilenc bővítménymodul érkezik, négy alapértelmezés szerint bekapcsolva és öt kikapcsolva, mind a kilenc megvalósult, a többi integráció pedig vagy nem létezik, vagy elutasítottuk",
 };
 
 const SUBTITLE: Localized<string> = {
-  en: "Each entry states what the module does, which credential the call actually needs, what leaves your server, and how to switch it off again. All of it is read out of gateway/app/plugins/, gateway/app/config.py and .env.example; the planned block at the end names the connectors that do not exist in v1.0.0 and promises no date.",
-  ru: "Каждая запись говорит, что делает модуль, какого ключа на самом деле требует вызов, что уходит с вашего сервера и как это снова выключить. Всё это вычитано из gateway/app/plugins/, gateway/app/config.py и .env.example; блок «в планах» внизу перечисляет коннекторы, которых в v1.0.0 нет, и сроков не обещает.",
-  de: "Jeder Eintrag sagt, was das Modul tut, welches Credential ein Aufruf wirklich braucht, was deinen Server verlässt und wie du es wieder abschaltest. Alles ist aus gateway/app/plugins/, gateway/app/config.py und .env.example ausgelesen; der Block „Geplant“ unten listet die Konnektoren, die es in v1.0.0 nicht gibt, und verspricht keine Termine.",
-  fr: "Chaque entrée dit ce que fait le module, quel identifiant l’appel exige vraiment, ce qui quitte votre serveur et comment le rearmer. Tout est lu dans gateway/app/plugins/, gateway/app/config.py et .env.example ; le bloc « prévu » en bas énumère les connecteurs qui n’existent pas dans la v1.0.0 et ne promet aucune date.",
-  it: "Ogni voce indica cosa fa il modulo, quale credenziale serve davvero alla chiamata, cosa lascia il tuo server e come spegnerlo di nuovo. Tutto è stato letto da gateway/app/plugins/, gateway/app/config.py e .env.example; il blocco «in programma» in fondo elenca i connettori che non esistono nella v1.0.0 e non promette date.",
-  nl: "Elke vermelding zegt wat de module doet, welk credential een oproep echt nodig heeft, wat je server verlaat en hoe je het weer uitzet. Alles is uitgelezen uit gateway/app/plugins/, gateway/app/config.py en .env.example; het blok ‘gepland’ onderaan noemt de connectors die er in v1.0.0 niet zijn en belooft geen datums.",
-  cs: "Každý záznam říká, co modul dělá, jaký klíč volání skutečně potřebuje, co opouští váš server a jak to zase vypnout. Vše je přečteno z gateway/app/plugins/, gateway/app/config.py a .env.example; blok „plánováno“ dole vyjmenovává konektory, které v verzi 1.0.0 neexistují, a neslibuje žádná data.",
+  en: "Each entry states what the module does, which credential the call actually needs, what leaves your server, and how to switch it off again. All of it is read out of gateway/app/plugins/, gateway/app/config.py and .env.example; the planned block at the end names the three credential-dependent integrations that do not exist yet and the two families that are declined on purpose, and promises no date.",
+  ru: "Каждая запись говорит, что делает модуль, какого ключа на самом деле требует вызов, что уходит с вашего сервера и как это снова выключить. Всё это вычитано из gateway/app/plugins/, gateway/app/config.py и .env.example; блок внизу называет три интеграции, зависящие от чужих ключей и пока не существующие, и две семьи, отклонённые намеренно, и сроков не обещает.",
+  de: "Jeder Eintrag sagt, was das Modul tut, welches Credential ein Aufruf wirklich braucht, was deinen Server verlässt und wie du es wieder abschaltest. Alles ist aus gateway/app/plugins/, gateway/app/config.py und .env.example ausgelesen; der Block unten nennt die drei credenzialabhängigen Integrationen, die es noch nicht gibt, und die zwei bewusst abgelehnten Familien, und verspricht keine Termine.",
+  fr: "Chaque entrée dit ce que fait le module, quel identifiant l’appel exige vraiment, ce qui quitte votre serveur et comment le désactiver. Tout est lu dans gateway/app/plugins/, gateway/app/config.py et .env.example ; le bloc final nomme les trois intégrations dépendantes d’identifiants externes qui n’existent pas encore et les deux familles refusées volontairement, sans promettre de date.",
+  it: "Ogni voce indica cosa fa il modulo, quale credenziale serve davvero alla chiamata, cosa lascia il tuo server e come spegnerlo di nuovo. Tutto è letto da gateway/app/plugins/, gateway/app/config.py e .env.example; il blocco finale elenca le tre integrazioni che dipendono da credenziali altrui e non esistono ancora, e le due famiglie rifiutate di proposito, senza promettere date.",
+  nl: "Elke vermelding zegt wat de module doet, welk credential een oproep echt nodig heeft, wat je server verlaat en hoe je het weer uitzet. Alles is uitgelezen uit gateway/app/plugins/, gateway/app/config.py en .env.example; het blok onderaan noemt de drie integraties die van externe credentials afhangen en nog niet bestaan, en de twee families die bewust zijn afgewezen, zonder datums te beloven.",
+  cs: "Každý záznam říká, co modul dělá, jaký klíč volání skutečně potřebuje, co opouští váš server a jak to zase vypnout. Vše je přečteno z gateway/app/plugins/, gateway/app/config.py a .env.example; blok dole vyjmenovává tři integrace závislé na cizích klíčích, které ještě neexistují, a dvě rodiny záměrně odmítnuté, a neslibuje žádná data.",
   "zh-Hans":
-    "每一项都写清模块做什么、调用实际需要哪把凭据、什么数据会离开你的服务器、以及怎么再把它关掉。内容逐条取自 gateway/app/plugins/、gateway/app/config.py 与 .env.example；文末的「规划中」列出 v1.0.0 里并不存在的连接器，不承诺任何时间。",
+    "每一项都写清模块做什么、调用实际需要哪把凭据、什么数据会离开你的服务器、以及怎么再把它关掉。内容逐条取自 gateway/app/plugins/、gateway/app/config.py 与 .env.example；文末的区块列出三项目前尚不存在、依赖第三方凭据的集成，以及两类被明确拒绝的集成，不承诺任何时间。",
   "zh-Hant":
-    "每一項都寫清模組做什麼、呼叫實際需要哪把憑證、什麼資料會離開你的伺服器、以及怎麼再把它關掉。內容逐條取自 gateway/app/plugins/、gateway/app/config.py 與 .env.example；文末的「規劃中」列出 v1.0.0 裡並不存在的連線器，不承諾任何時間。",
-  es: "Cada entrada indica qué hace el módulo, qué credencial necesita realmente la llamada, qué datos salen de tu servidor y cómo volver a apagarlo. Todo se leyó de gateway/app/plugins/, gateway/app/config.py y .env.example; el bloque «previsto» al final enumera los conectores que no existen en la v1.0.0 y no promete fechas.",
-  pl: "Każdy wpis mówi, co robi moduł, jakiego klucza naprawdę żąda wywołanie, jakie dane opuszczają twój serwer i jak to znowu wyłączyć. Wszystko przepisano z gateway/app/plugins/, gateway/app/config.py i .env.example; blok „w planach” na końcu wylicza konektory, których w v1.0.0 nie ma, i nie obiecuje terminów.",
-  ja: "各項目は、モジュールの役割、呼び出しが実際に要求する認証キー、サーバーから外へ出るデータ、そして再び止める方法を書いています。内容は gateway/app/plugins/、gateway/app/config.py、.env.example から取り出したもので、末尾の「計画中」は v1.0.0 に存在しないコネクタを列挙するだけ、時期は約束しません。",
-  th: "แต่ละรายการบอกว่าโมดูลทำอะไร, การเรียกใช้ต้องใช้คีย์อะไรจริง ๆ, ข้อมูลไหนออกจากเซิร์ฟเวอร์ของคุณ และจะปิดมันกลับได้อย่างไร ทั้งหมดอ่านมาจาก gateway/app/plugins/, gateway/app/config.py และ .env.example; หัวข้อ «วางแผนไว้» ด้านท้ายระบุตัวเชื่อมต่อที่ไม่มีใน v1.0.0 และไม่สัญญาช่วงเวลาใด",
-  fi: "Kukin kohta kertoo, mitä moduuli tekee, mitä avainta kutsu todella vaatii, mikä data lähtee sinun palvelimeltasi ja miten sammuttat sen uudelleen. Kaikki on luettu kohteista gateway/app/plugins/, gateway/app/config.py ja .env.example; lopussa oleva suunnittelu-lohko luettelee liittimet, joita ei ole versiossa 1.0.0, eikä lupaa päivämääriä.",
-  uk: "Кожен запис каже, що робить модуль, який ключ насправді вимагає виклик, які дані йдуть із вашого сервера і як це знову вимкнути. Усе це зчитано з gateway/app/plugins/, gateway/app/config.py та .env.example; блок «у планах» внизу перелічує конектори, яких у v1.0.0 немає, і не обіцяє строків.",
-  bg: "Всяка запись казва какво прави модулът, какъв ключ наистина изисква извикването, кои данни напускат сървъра ви и как отново да го изключите. Всичко е изчетено от gateway/app/plugins/, gateway/app/config.py и .env.example; блокът «в плановете» на края изброява конекторите, които ги няма в v1.0.0, и не обещава дати.",
-  tr: "Her girdi modülün ne yaptığını, çağrının gerçekten hangi anahtara ihtiyaç duyduğunu, sunucunuzdan çıkan veriyi ve nasıl tekrar kapatılacağını anlatır. Tamamı gateway/app/plugins/, gateway/app/config.py ve .env.example dosyalarından okundu; sondaki «planlanan» bloğu, v1.0.0’da var olmayan bağlayıcıları sıralar ve tarih vaat etmez.",
-  hu: "Minden bejegyzés megmondja, mit csinál a modul, milyen kulcsot igényel tényleg a hívás, milyen adat hagyja el a szerveredet, és hogyan kapcsolhatod ki újra. Az egész a gateway/app/plugins/, a gateway/app/config.py és a .env.example fájlokból van kiolvasva; a végén lévő „tervekben” blokk azokat a csatlakoztatókat sorolja fel, amelyek nem léteznek a v1.0.0-ban, és dátumot nem ígér.",
+    "每一項都寫清模組做什麼、呼叫實際需要哪把憑證、什麼資料會離開你的伺服器、以及怎麼再把它關掉。內容逐條取自 gateway/app/plugins/、gateway/app/config.py 與 .env.example；文末的區塊列出三項目前尚不存在、依賴第三方憑證的整合，以及兩類被明確拒絕的整合，不承諾任何時間。",
+  es: "Cada entrada indica qué hace el módulo, qué credencial necesita realmente la llamada, qué datos salen de tu servidor y cómo volver a apagarlo. Todo se leyó de gateway/app/plugins/, gateway/app/config.py y .env.example; el bloque final nombra las tres integraciones que dependen de credenciales de terceros y aún no existen, y las dos familias rechazadas a propósito, sin prometer fechas.",
+  pl: "Każdy wpis mówi, co robi moduł, jakiego klucza naprawdę żąda wywołanie, jakie dane opuszczają twój serwer i jak to znowu wyłączyć. Wszystko przepisano z gateway/app/plugins/, gateway/app/config.py i .env.example; blok na końcu wymienia trzy integracje zależne od zewnętrznych poświadczeń, których jeszcze nie ma, oraz dwie rodziny świadomie odrzucone, i nie obiecuje terminów.",
+  ja: "各項目は、モジュールの役割、呼び出しが実際に要求する認証キー、サーバーから外へ出るデータ、そして再び止める方法を書いています。内容は gateway/app/plugins/、gateway/app/config.py、.env.example から取り出したもので、末尾のブロックはまだ存在しない第三者認証情報依存の3つの連携と、意図的に断った2つの系統を挙げるだけで、時期は約束しません。",
+  th: "แต่ละรายการบอกว่าโมดูลทำอะไร, การเรียกใช้ต้องใช้คีย์อะไรจริง ๆ, ข้อมูลไหนออกจากเซิร์ฟเวอร์ของคุณ และจะปิดมันกลับได้อย่างไร ทั้งหมดอ่านมาจาก gateway/app/plugins/, gateway/app/config.py และ .env.example; บล็อกท้ายระบุการเชื่อมต่อสามรายการที่ยังไม่มีและต้องพึ่งข้อมูลรับรองจากภายนอก กับการเชื่อมต่อสองกลุ่มที่ปฏิเสธโดยเจตนา และไม่สัญญาช่วงเวลาใด",
+  fi: "Kukin kohta kertoo, mitä moduuli tekee, mitä avainta kutsu todella vaatii, mikä data lähtee sinun palvelimeltasi ja miten sammuttat sen uudelleen. Kaikki on luettu kohteista gateway/app/plugins/, gateway/app/config.py ja .env.example; lopun lohko nimeää kolme ulkoisista tunnuksista riippuvaa integraatiota, joita ei vielä ole, sekä kaksi tarkoituksella hylättyä perhettä, eikä lupaa päivämääriä.",
+  uk: "Кожен запис каже, що робить модуль, який ключ насправді вимагає виклик, які дані йдуть із вашого сервера і як це знову вимкнути. Усе це зчитано з gateway/app/plugins/, gateway/app/config.py та .env.example; блок унизу перелічує три інтеграції, що залежать від чужих ключів і ще не існують, та дві родини, відхилені навмисно, і не обіцяє строків.",
+  bg: "Всяка запись казва какво прави модулът, какъв ключ наистина изисква извикването, кои данни напускат сървъра ви и как отново да го изключите. Всичко е изчетено от gateway/app/plugins/, gateway/app/config.py и .env.example; блокът накрая изброява трите интеграции, зависими от чужди ключове, които още ги няма, и двете семейства, отказани умишлено, и не обещава дати.",
+  tr: "Her girdi modülün ne yaptığını, çağrının gerçekten hangi anahtara ihtiyaç duyduğunu, sunucunuzdan çıkan veriyi ve nasıl tekrar kapatılacağını anlatır. Tamamı gateway/app/plugins/, gateway/app/config.py ve .env.example dosyalarından okundu; sondaki blok, henüz var olmayan ve dış kimlik bilgilerine bağlı üç entegrasyonu ve bilerek reddedilen iki aileyi sıralar, tarih vaat etmez.",
+  hu: "Minden bejegyzés megmondja, mit csinál a modul, milyen kulcsot igényel tényleg a hívás, milyen adat hagyja el a szerveredet, és hogyan kapcsolhatod ki újra. Az egész a gateway/app/plugins/, a gateway/app/config.py és a .env.example fájlokból van kiolvasva; a végén lévő blokk a még nem létező, külső hitelesítőktől függő három integrációt és a szándékosan elutasított két családot sorolja fel, dátumot nem ígér.",
 };
 
 const LEGEND_SOURCE: Localized<string> = {
@@ -152,24 +154,24 @@ const LEGEND_METER: Localized<string> = {
 };
 
 const LEGEND_DISABLED: Localized<string> = {
-  en: "Four on by default; web3_bridge is off by default",
-  ru: "Четыре включены по умолчанию, web3_bridge — выключен",
-  de: "Vier standardmäßig an, web3_bridge standardmäßig aus",
-  fr: "Quatre activés par défaut ; web3_bridge est désactivé par défaut",
-  it: "Quattro attivi per impostazione predefinita; web3_bridge è inattivo",
-  nl: "Vier standaard aan; web3_bridge staat standaard uit",
-  cs: "Čtyři jsou ve výchozím stavu zapnuté, web3_bridge vypnutý",
-  "zh-Hans": "四个默认开启，web3_bridge 默认关闭",
-  "zh-Hant": "四個預設開啟，web3_bridge 預設關閉",
-  es: "Cuatro activados de forma predeterminada; web3_bridge está desactivado",
-  pl: "Cztery domyślnie włączone; web3_bridge domyślnie wyłączony",
-  ja: "4 つは既定でオン、web3_bridge は既定でオフ",
-  th: "สี่ตัวเปิดใช้โดยค่าเริ่มต้น ส่วน web3_bridge ปิดไว้โดยค่าเริ่มต้น",
-  fi: "Neljä on oletuksena päällä, web3_bridge on oletuksena pois",
-  uk: "Чотири типово увімкнені, web3_bridge типово вимкнений",
-  bg: "Четири са включени по подразбиране; web3_bridge е изключен",
-  tr: "Dördü varsayılan olarak açık; web3_bridge varsayılan olarak kapalı",
-  hu: "Négy alapértelmezés szerint bekapcsolva; a web3_bridge alapértelmezés szerint kikapcsolva",
+  en: "Four on and five off by default; each off module has its own POPOPX_PLUGIN_* switch",
+  ru: "Четыре включены и пять выключены по умолчанию; у каждого выключенного модуля свой переключатель POPOPX_PLUGIN_*",
+  de: "Vier standardmäßig an und fünf aus; jedes abgeschaltete Modul hat seinen eigenen POPOPX_PLUGIN_*-Schalter",
+  fr: "Quatre activés et cinq désactivés par défaut ; chaque module éteint a son propre interrupteur POPOPX_PLUGIN_*",
+  it: "Quattro attivi e cinque spenti per impostazione predefinita; ogni modulo spento ha il proprio interruttore POPOPX_PLUGIN_*",
+  nl: "Vier standaard aan en vijf uit; elke uitgeschakelde module heeft zijn eigen POPOPX_PLUGIN_*-schakelaar",
+  cs: "Čtyři jsou ve výchozím stavu zapnuté a pět vypnutých; každý vypnutý modul má vlastní přepínač POPOPX_PLUGIN_*",
+  "zh-Hans": "四个默认开启、五个默认关闭；每个关闭的模块都有自己的 POPOPX_PLUGIN_* 开关",
+  "zh-Hant": "四個預設開啟、五個預設關閉；每個關閉的模組都有自己的 POPOPX_PLUGIN_* 開關",
+  es: "Cuatro activados y cinco apagados de forma predeterminada; cada módulo apagado tiene su propio interruptor POPOPX_PLUGIN_*",
+  pl: "Cztery domyślnie włączone, pięć wyłączonych; każdy wyłączony moduł ma własny przełącznik POPOPX_PLUGIN_*",
+  ja: "4 つは既定でオン、5 つは既定でオフ。オフの各モジュールには専用の POPOPX_PLUGIN_* スイッチがあります",
+  th: "สี่ตัวเปิดและห้าตัวปิดโดยค่าเริ่มต้น; โมดูลที่ปิดแต่ละตัวมีสวิตช์ POPOPX_PLUGIN_* ของตัวเอง",
+  fi: "Neljä on oletuksena päällä ja viisi pois; jokaisella pois kytketyllä moduulilla on oma POPOPX_PLUGIN_*-kytkin",
+  uk: "Чотири увімкнені й пʼять вимкнені типово; кожен вимкнений модуль має власний перемикач POPOPX_PLUGIN_*",
+  bg: "Четири са включени и пет изключени по подразбиране; всеки изключен модул има свой превключвател POPOPX_PLUGIN_*",
+  tr: "Dördü varsayılan olarak açık, beşi kapalı; kapalı her modülün kendi POPOPX_PLUGIN_* anahtarı var",
+  hu: "Négy alapértelmezés szerint bekapcsolva és öt kikapcsolva; minden kikapcsolt modulnak saját POPOPX_PLUGIN_* kapcsolója van",
 };
 
 const STATE_LABEL: Localized<string> = {
@@ -331,53 +333,53 @@ const FILE_LABEL: Localized<string> = {
  *
  * Verified by absence: a case-insensitive scan of every `.py`, `.md`, `.ts`,
  * `.tsx`, `.swift`, `.yml` and `.yaml` file in gateway/app, docs/ and the repo
- * root for stripe|paypal|alipay|slack|discord|shopify|woocommerce|notion|
- * telegram|whatsapp|salesforce|hubspot returns only vendored hits under
- * .venv/. None of these connectors exists, so they get their own array, are
- * never concatenated into `PLUGINS`, and are never offered in the filter. */
+ * root for stripe|paypal|alipay|shopify|woocommerce|notion|telegram|whatsapp|
+ * salesforce|hubspot returns only vendored hits under .venv/. Slack and Discord
+ * are no longer in that scan because that connector now ships and is documented
+ * as a card above. None of the connectors still listed here exists, so they get
+ * their own array, are never concatenated into `PLUGINS`, and are never offered
+ * in the filter. */
 
 const ROADMAP_TITLE: Localized<string> = {
-  en: "Planned, not delivered: these connector families exist nowhere in the v1.0.0 repository",
-  ru: "В планах, не в поставке: этих семейств коннекторов нет ни в одном файле репозитория v1.0.0",
-  de: "Geplant, nicht geliefert: diese Konnektorfamilien existieren im v1.0.0-Repository nirgends",
-  fr: "Prévu, non livré : ces familles de connecteurs n’existent nulle part dans le dépôt v1.0.0",
-  it: "In programma, non consegnato: queste famiglie di connettori non esistono in nessun file del repository v1.0.0",
-  nl: "Gepland, niet meegeleverd: deze connectorfamilies bestaan nergens in de v1.0.0-repository",
-  cs: "Plánováno, nedoděláno: tyto rodiny konektorů v repozitáři 1.0.0 neexistují nikde",
-  "zh-Hans": "规划中，未交付：以下几类连接器在 v1.0.0 的仓库里一个都不存在",
-  "zh-Hant": "規劃中，未交付：以下幾類連線器在 v1.0.0 的倉庫裡一個都不存在",
-  es: "Previsto, no entregado: estas familias de conectores no existen en ninguna parte del repositorio v1.0.0",
-  pl: "W planach, nie w dostawie: tych rodzin konektorów nie ma nigdzie w repozytorium v1.0.0",
-  ja: "計画中であって出荷していません：以下のコネクタ群は v1.0.0 のリポジトリのどこにも存在しません",
-  th: "อยู่ในแผนแต่ยังไม่ถูกส่งมอบ: ตัวเชื่อมต่อกลุ่มนี้ไม่มีอยู่เลยในคลังโค้ด v1.0.0",
-  fi: "Suunniteltu mutta toittamaton: näitä liitinperheitä ei ole v1.0.0-variosta mistään löytyy",
-  uk: "У планах, не у поставці: цих родин конекторів немає жодному файлі репозиторію v1.0.0",
-  bg: "В плановете, не в доставката: тези семейства конектори ги няма никъде в хранилището v1.0.0",
-  tr: "Planlanan, teslim edilmeyen: bu bağlayıcı ailelerinin hiçbir dosyası v1.0.0 deposunda yok",
-  hu: "Tervekben, de nem kézbesítve: ezek a csatlakoztató-családok egyetlen fájlban sem léteznek a v1.0.0 repóban",
+  en: "Nine modules ship and four connector families are already in the grid; the three rows below are planned, the last two are declined",
+  ru: "Девять модулей уже поставляются, четыре семейства коннекторов есть в сетке; три строки ниже — в планах, последние две — отклонены",
+  de: "Neun Module werden ausgeliefert und vier Konnektorfamilien stehen im Raster; die drei Zeilen unten sind geplant, die letzten zwei abgelehnt",
+  fr: "Neuf modules sont livrés et quatre familles de connecteurs figurent déjà dans la grille ; les trois lignes ci-dessous sont prévues, les deux dernières refusées",
+  it: "Nove moduli sono consegnati e quattro famiglie di connettori sono già nella griglia; le tre righe sotto sono in programma, le ultime due rifiutate",
+  nl: "Negen modules worden meegeleverd en vier connectorfamilies staan al in het raster; de drie regels hieronder zijn gepland, de laatste twee afgewezen",
+  cs: "Dodává se devět modulů a v mřížce jsou čtyři rodiny konektorů; tři řádky níže jsou plánované, poslední dva odmítnuté",
+  "zh-Hans": "九个模块已随网关发布，四个连接器家族已经进了网格；下面三行是规划中，最后两行是明确拒绝",
+  "zh-Hant": "九個模組已隨閘道發布，四個連線器家族已經進了網格；下面三行是規劃中，最後兩行是明確拒絕",
+  es: "Se entregan nueve módulos y cuatro familias de conectores ya están en la cuadrícula; las tres filas de abajo están previstas y las dos últimas rechazadas",
+  pl: "Dostarczanych jest dziewięć modułów, a cztery rodziny konektorów są już w siatce; trzy wiersze poniżej są planowane, ostatnie dwa odrzucone",
+  ja: "9つのモジュールが出荷され、4つのコネクタ系統がすでにグリッドにあります。下の3行は計画中、最後の2行は明確に断っています",
+  th: "มีโมดูลเก้าตัวออกมาพร้อมเกตเวย์ และมีตระกูลตัวเชื่อมต่อสี่ตระกูลอยู่ในตารางแล้ว สามแถวด้านล่างอยู่ในแผน สองแถวสุดท้ายถูกปฏิเสธ",
+  fi: "Yhdeksän moduulia toimitetaan ja neljä liitinperhettä on jo ruudukossa; kolme riviä alla on suunnitteilla, kaksi viimeistä hylätty",
+  uk: "Девʼять модулів уже постачаються, чотири родини конекторів є в сітці; три рядки нижче — у планах, останні два — відхилені",
+  bg: "Девет модула се доставят и четири семейства конектори са вече в решетката; трите реда по-долу са планирани, последните два — отказани",
+  tr: "Dokuz modül sevk ediliyor ve dört bağlayıcı ailesi ızgarada; aşağıdaki üç satır planlanıyor, son iki satır reddedildi",
+  hu: "Kilenc modul érkezik, és négy csatlakoztató-család már a rácsban van; az alábbi három sor tervezett, az utolsó kettő elutasított",
 };
 
 const ROADMAP_SUB: Localized<string> = {
-  en: "The gateway has exactly five plugin modules — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — declared in gateway/app/plugins/__init__.py. A brand name below is only a wish written down, never a feature you can call, and it is not an OAuth or SAML integration either.",
-  ru: "У шлюза ровно пять модулей плагинов — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — объявленных в gateway/app/plugins/__init__.py. Название бренда ниже — это записанное желание, а не вызываемая функция; и это не интеграция ни OAuth, ни SAML.",
-  de: "Das Gateway hat genau fünf Plugin-Module — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — erklärt in gateway/app/plugins/__init__.py. Ein Markenname unten ist ein notierter Wunsch, nie ein anrufbares Feature, und auch keine OAuth- oder SAML-Integration.",
-  fr: "La passerelle n’a exactement que cinq modules de plugin — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — déclarés dans gateway/app/plugins/__init__.py. Un nom de marque ci-dessous est un souhait consigné, jamais une fonction que l’on appelle, et ce n’est pas non plus une intégration OAuth ou SAML.",
-  it: "Il gateway ha esattamente cinque moduli plugin — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — dichiarati in gateway/app/plugins/__init__.py. Un nome di marca qui sotto è un desiderio annotato, mai una funzione che puoi chiamare, e non è nemmeno un’integrazione OAuth o SAML.",
-  nl: "De gateway heeft precies vijf pluginmodules — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — gedeclareerd in gateway/app/plugins/__init__.py. Een merknaam hieronder is een opgeschreven wens, nooit een aanroepbare functie, en het is ook geen OAuth- of SAML-integratie.",
-  cs: "Brána má přesně pět modulů pluginů — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — deklarovaných v gateway/app/plugins/__init__.py. Značka níže je pouze sepsané přání, nikdy funkce, kterou lze zavolat, a není to ani integrace OAuth či SAML.",
-  "zh-Hans":
-    "网关一共只有五个插件模块 —— ai_agent、alert_ops、privacy_sso、polls、web3_bridge，声明在 gateway/app/plugins/__init__.py。下面的品牌名只是把愿望写了下来，不是你能调用的功能，也不是 OAuth 或 SAML 对接。",
-  "zh-Hant":
-    "閘道一共只有五個外掛模組 —— ai_agent、alert_ops、privacy_sso、polls、web3_bridge，宣告在 gateway/app/plugins/__init__.py。下面的品牌名只是把願望寫了下來，不是你能呼叫的功能，也不是 OAuth 或 SAML 對接。",
-  es: "La pasarela tiene exactamente cinco módulos de complemento — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — declarados en gateway/app/plugins/__init__.py. Un nombre de marca abajo es un deseo anotado, nunca una función que puedas llamar, y tampoco una integración OAuth o SAML.",
-  pl: "Bramka ma dokładnie pięć modułów wtyczek — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — zadeklarowanych w gateway/app/plugins/__init__.py. Nazwa marki poniżej to tylko zapisane życzenie, a nie coś, co można wywołać, i to nie jest też integracja OAuth ani SAML.",
-  ja: "ゲートのプラグインモジュールは ai_agent、alert_ops、privacy_sso、polls、web3_bridge の5つだけで、gateway/app/plugins/__init__.py に宣言されています。以下のブランド名は書き留めた望みであって、呼び出せる機能ではありません。OAuth や SAML の連携でもありません。",
-  th: "เกตเวย์มีโมดูลปลั๊กอินเพียงห้าตัว — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — ที่ประกาศไว้ใน gateway/app/plugins/__init__.py ชื่อแบรนด์ด้านล่างเป็นเพียงความต้องการที่จดไว้ ไม่ใช่ฟีเจอร์ที่คุณเรียกใช้ได้ และไม่ใช่การเชื่อมกับ OAuth หรือ SAML ด้วย",
-  fi: "Yhdyskaarella on täsmälleen viisi lisäosamoduulia — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — ilmoitettuna tiedostossa gateway/app/plugins/__init__.py. Alla oleva brändinimi on vain ylös kirjoitettu toive, ei koskaan kutsuttava ominaisuus, eikä se ole OAuth- tai SAML-integraatiokaan.",
-  uk: "У шлюза рівно п’ять модулів плагінів — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — оголошених у gateway/app/plugins/__init__.py. Назва бренду нижче — це записане бажання, а не викликава функція, і це не інтеграція ні з OAuth, ні з SAML.",
-  bg: "Шлюзът има точно пет модула на плъгини — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — обявени в gateway/app/plugins/__init__.py. Марката отдолу е само записано желание, никога функция, която можете да извикате, и не е нито OAuth, нито SAML интеграция.",
-  tr: "Ağ geçidinde tam olarak beş eklenti modülü var — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — gateway/app/plugins/__init__.py içinde bildirilmiş. Aşağıdaki marka adı yalnızca kâğıda dökülmüş bir istek, asla çağırabileceğiniz bir işlev değil; üstelik bir OAuth ya da SAML entegrasyonu da değil.",
-  hu: "Az átjárónak pontosan öt bővítménymodulja van — ai_agent, alert_ops, privacy_sso, polls, web3_bridge — amelyek a gateway/app/plugins/__init__.py fájlban vannak deklaráltva. Az alábbi márkanév csak egy lejegyzett kívánság, sosem olyan funkció, amelyet meghívhat, és OAuth- vagy SAML-integráció sem.",
+  en: "The gateway declares nine plugin modules in gateway/app/plugins/__init__.py, and four connector families — workflow_webhook, carddav_connector, caldav_connector and slack_discord — are documented as cards above. The three planned rows depend on provider credentials nobody has wired yet; the last two are declined because they would import the phone numbers or real names the gateway refuses to hold. None of this is an OAuth or SAML integration.",
+  ru: "Шлюз объявляет девять модулей плагинов в gateway/app/plugins/__init__.py, а четыре семейства коннекторов — workflow_webhook, carddav_connector, caldav_connector и slack_discord — уже описаны карточками выше. Три планируемые строки зависят от ключей провайдеров, которых никто ещё не подключил; последние две отклонены, потому что они внесли бы номера телефонов или реальные имена, которые шлюз отказывается хранить. Всё это не интеграции OAuth или SAML.",
+  de: "Das Gateway erklärt neun Plugin-Module in gateway/app/plugins/__init__.py, und vier Konnektorfamilien — workflow_webhook, carddav_connector, caldav_connector und slack_discord — sind oben als Karten dokumentiert. Die drei geplanten Zeilen hängen an Anbieter-Schlüsseln, die noch niemand verdrahtet hat; die letzten zwei sind abgelehnt, weil sie Telefonnummern oder echte Namen importieren würden, die das Gateway nicht halten will. Nichts davon ist eine OAuth- oder SAML-Integration.",
+  fr: "La passerelle déclare neuf modules de plugin dans gateway/app/plugins/__init__.py, et quatre familles de connecteurs — workflow_webhook, carddav_connector, caldav_connector et slack_discord — sont documentées en fiches ci-dessus. Les trois lignes prévues dépendent d’identifiants de fournisseur que personne n’a encore branchés ; les deux dernières sont refusées car elles importeraient les numéros de téléphone ou les noms réels que la passerelle refuse de détenir. Rien de tout cela n’est une intégration OAuth ou SAML.",
+  it: "Il gateway dichiara nove moduli plugin in gateway/app/plugins/__init__.py, e quattro famiglie di connettori — workflow_webhook, carddav_connector, caldav_connector e slack_discord — sono documentate come schede qui sopra. Le tre righe in programma dipendono da credenziali del fornitore che nessuno ha ancora collegato; le ultime due sono rifiutate perché importerebbero i numeri di telefono o i nomi reali che il gateway rifiuta di conservare. Niente di tutto ciò è un’integrazione OAuth o SAML.",
+  nl: "De gateway declareert negen pluginmodules in gateway/app/plugins/__init__.py, en vier connectorfamilies — workflow_webhook, carddav_connector, caldav_connector en slack_discord — zijn hierboven als kaarten gedocumenteerd. De drie geplande regels hangen aan providersleutels die niemand al heeft aangesloten; de laatste twee zijn afgewezen omdat ze de telefoonnummers of echte namen zouden importeren die de gateway weigert te bewaren. Niets hiervan is een OAuth- of SAML-integratie.",
+  cs: "Brána deklaruje devět modulů pluginů v gateway/app/plugins/__init__.py a čtyři rodiny konektorů — workflow_webhook, carddav_connector, caldav_connector a slack_discord — jsou výše zdokumentované jako karty. Tři plánované řádky závisí na klíčích poskytovatelů, které zatím nikdo nezapojil; poslední dva jsou odmítnuté, protože by dovezly telefonní čísla nebo skutečná jména, která brána odmítá držet. Nic z toho není integrace OAuth ani SAML.",
+  "zh-Hans": "网关在 gateway/app/plugins/__init__.py 里声明了九个插件模块，四个连接器家族 —— workflow_webhook、carddav_connector、caldav_connector、slack_discord —— 已经作为卡片列在上面。下面三行规划依赖尚无人接好的第三方凭据；最后两行被拒绝，因为它们会导入这套网关拒绝保存的手机号或真实姓名。这些都不是 OAuth 或 SAML 对接。",
+  "zh-Hant": "閘道在 gateway/app/plugins/__init__.py 裡宣告了九個外掛模組，四個連線器家族 —— workflow_webhook、carddav_connector、caldav_connector、slack_discord —— 已經作為卡片列在上面。下面三行規劃依賴尚無人接好的第三方憑證；最後兩行被拒絕，因為它們會匯入這個閘道拒絕儲存的手機號或真實姓名。這些都不是 OAuth 或 SAML 對接。",
+  es: "La pasarela declara nueve módulos de complemento en gateway/app/plugins/__init__.py, y cuatro familias de conectores — workflow_webhook, carddav_connector, caldav_connector y slack_discord — ya están documentadas como tarjetas arriba. Las tres filas previstas dependen de credenciales de proveedor que nadie ha conectado todavía; las dos últimas se rechazan porque importarían los teléfonos o nombres reales que la pasarela se niega a guardar. Nada de esto es una integración OAuth o SAML.",
+  pl: "Bramka deklaruje dziewięć modułów wtyczek w gateway/app/plugins/__init__.py, a cztery rodziny konektorów — workflow_webhook, carddav_connector, caldav_connector i slack_discord — są już opisane jako karty powyżej. Trzy planowane wiersze zależą od poświadczeń dostawców, których nikt jeszcze nie podłączył; ostatnie dwa są odrzucone, bo wprowadziłyby numery telefonów lub prawdziwe nazwiska, których ta bramka odmawia przechowywać. Nic z tego nie jest integracją OAuth ani SAML.",
+  ja: "ゲートウェイは gateway/app/plugins/__init__.py に9つのプラグインモジュールを宣言し、4つのコネクタ系統 — workflow_webhook、carddav_connector、caldav_connector、slack_discord — は上のカードとして説明済みです。計画中の3行は、まだ誰も接続していない事業者の認証情報に依存します。最後の2行は、ゲートウェイが保持を拒む電話番号や実名を輸入することになるため断っています。いずれも OAuth や SAML の連携ではありません。",
+  th: "เกตเวย์ประกาศโมดูลปลั๊กอินเก้าตัวใน gateway/app/plugins/__init__.py และมีตระกูลตัวเชื่อมต่อสี่ตระกูล — workflow_webhook, carddav_connector, caldav_connector และ slack_discord — อธิบายเป็นการ์ดด้านบนแล้ว สามแถวที่วางแผนต้องพึ่งข้อมูลรับรองของผู้ให้บริการที่ยังไม่มีใครต่อไว้ ส่วนสองแถวสุดท้ายถูกปฏิเสธเพราะจะนำเข้าเบอร์โทรหรือชื่อจริงที่เกตเวย์นี้ปฏิเสธที่จะเก็บ ทั้งหมดนี้ไม่ใช่การเชื่อมต่อ OAuth หรือ SAML",
+  fi: "Yhdyskaari ilmoittaa yhdeksän lisäosamoduulia tiedostossa gateway/app/plugins/__init__.py, ja neljä liitinperhettä — workflow_webhook, carddav_connector, caldav_connector ja slack_discord — on kuvattu kortteina yllä. Kolme suunniteltua riviä riippuvat palveluntarjoajan tunnuksista, joita kukaan ei ole vielä kytkenyt; kaksi viimeistä on hylätty, koska ne toisivat puhelinnumerot tai oikeat nimet, joita yhdyskaari kieltäytyy säilyttämästä. Mikään tästä ei ole OAuth- tai SAML-integraatio.",
+  uk: "Шлюз оголошує девʼять модулів плагінів у gateway/app/plugins/__init__.py, а чотири родини конекторів — workflow_webhook, carddav_connector, caldav_connector і slack_discord — уже описані картками вище. Три заплановані рядки залежать від ключів провайдерів, яких ніхто ще не підключив; останні два відхилені, бо внесли б номери телефонів або справжні імена, які шлюз відмовляється тримати. Ніщо з цього не є інтеграцією OAuth чи SAML.",
+  bg: "Шлюзът обявява девет модула на плъгини в gateway/app/plugins/__init__.py, а четири семейства конектори — workflow_webhook, carddav_connector, caldav_connector и slack_discord — вече са описани като карти отгоре. Трите планирани реда зависят от ключове на доставчици, които никой още не е свързал; последните два са отказани, защото биха внесли телефонните номера или истинските имена, които шлюзът отказва да пази. Нищо от това не е интеграция с OAuth или SAML.",
+  tr: "Ağ geçidi gateway/app/plugins/__init__.py içinde dokuz eklenti modülü bildirir ve dört bağlayıcı ailesi — workflow_webhook, carddav_connector, caldav_connector ve slack_discord — yukarıda kart olarak belgelenmiştir. Planlanan üç satır, kimsenin henüz bağlamadığı sağlayıcı kimlik bilgilerine bağlıdır; son iki satır reddedilmiştir çünkü ağ geçidinin tutmayı reddettiği telefon numaralarını ya da gerçek adları içeri aktarırlardı. Bunların hiçbiri OAuth ya da SAML entegrasyonu değildir.",
+  hu: "Az átjáró kilenc bővítménymodult deklarál a gateway/app/plugins/__init__.py fájlban, és négy csatlakoztató-család — workflow_webhook, carddav_connector, caldav_connector és slack_discord — már kártyaként szerepel fent. A három tervezett sor olyan szolgáltatói hitelesítőktől függ, amelyeket még senki nem kötött be; az utolsó kettőt elutasítottuk, mert olyan telefonszámokat vagy valódi neveket hozna be, amelyeket ez az átjáró nem vállal tárolni. Ezek egyike sem OAuth- vagy SAML-integráció.",
 };
 
 const ROADMAP_NEEDS: Localized<string> = {
@@ -402,32 +404,31 @@ const ROADMAP_NEEDS: Localized<string> = {
 };
 
 const ROADMAP_NO_DATE: Localized<string> = {
-  en: "No delivery date is promised for any row above, and none should be inferred: this block records what is missing, it is not a schedule, and nothing in it works today.",
-  ru: "Ни для одной строки выше не обещан срок, и выводить его не стоит: блок фиксирует отсутствие, это не расписание, и сегодня здесь ничего не работает.",
-  de: "Für keine der Zeilen oben wird ein Liefertermin versprochen, und man sollte auch keinen hineinlesen: dieser Block hält fest, was fehlt, er ist kein Plan, und nichts davon funktioniert heute.",
-  fr: "Aucune date de livraison n’est promise pour les lignes ci-dessus, et il ne faut pas en déduire une : ce bloc consigne ce qui manque, ce n’est pas un calendrier, et rien de son contenu ne fonctionne aujourd’hui.",
-  it: "Per nessuna delle righe sopra viene promessa una data di consegna, e non bisognerebbe dedurla: questo blocco registra ciò che manca, non è un piano, e al momento nulla di ciò che elenca funziona.",
-  nl: "Voor geen van de regels hierboven wordt een leverdatum beloofd, en je mag die er ook niet uit afleiden: dit blok houdt bij wat ontbreekt, het is geen planning, en niets ervan werkt vandaag.",
-  cs: "Za žádným z výše uvedených řádků není slíbené datum dodání, a neměli byste si žádné domýšlet: tento blok zaznamenává, co chybí, není to rozvrh, a nic v něm dnes nefunguje.",
-  "zh-Hans":
-    "上面任何一行都没有承诺交付时间，也不该被读出一个：这一块记录的是「还缺什么」，它不是排期，其中没有一项今天能用。",
-  "zh-Hant":
-    "上面任何一行都沒有承諾交付時間，也不該被讀出一個：這一塊記錄的是「還缺什麼」，它不是排程，其中沒有一項今天能用。",
-  es: "Para ninguna de las filas de arriba se promete una fecha de entrega, y no habría que deducir ninguna: este bloque anota lo que falta, no es un calendario, y nada de lo que enumera funciona hoy.",
-  pl: "Dla żadnego z powyższych wierszy nie obiecano terminu dostawy i nie należy go wywnioskować: ten blok zapisuje to, czego brakuje, nie jest harmonogramem, i nic z tego dziś nie działa.",
-  ja: "上のどの行についても納期は約束していません。そこから読み取ってもいけません。このブロックは「何が足りないか」を書き留めたもので、工程表ではなく、今日動くものは一つもありません。",
-  th: "ไม่มีการสัญญาวันส่งมอบให้กับรายการใด ๆ ด้านบน และไม่ควรถูกอ่านเอาเองว่ามีความนั้น: บล็อกนี้บันทึกเฉพาะว่ายังขาดอะไร ไม่ใช่กำหนดการ และไม่มีข้อไหนที่ใช้งานได้ในวันนี้",
-  fi: "Millekaan yllä olevista riveistä ei luvata toimituspäivää, eikä sellaista pidä päätelläkään: tämä lohko kirjaa puuttuvat asiat, se ei ole aikataulu, eikä mikään sen sisällä toimi tänään.",
-  uk: "Жодному з наведених вище рядків не обіцяють строку постачання, і виводити її не варто: цей блок фіксує, чого бракує, це не розклад, і сьогодні в ньому ніщо не працює.",
-  bg: "За нито един от горните редове не се обещана дата на доставка, и не трябва да се извежда такава: този блок описва какво липсва, той не е график, и нищо от него днес не работи.",
-  tr: "Yukarıdaki satırların hiçbiri için bir teslim tarihi vaat edilmiyor, bir tarih çıkarılmaması da gerekiyor: bu blok neyin eksik olduğunu not eder, bir takvim değildir ve içindeki hiçbir şey bugün çalışmaz.",
-  hu: "A fenti sorok egyikéhez sem ígérnek szállítási dátumot, és ilyet nem is kell belőle kikövetkeztetni: ez a blokk azt rögzíti, ami hiányzik, nem ütemterv, és egyetlen benne felsorolt dolog sem működik ma.",
+  en: "No delivery date is promised for the planned rows, and the declined rows will not be built unless the privacy model itself changes. Nothing in this block works today.",
+  ru: "Ни для одной планируемой строки срок не обещан, а отклонённые строки не будут сделаны, пока не изменится сама модель приватности. Сегодня здесь ничего не работает.",
+  de: "Für die geplanten Zeilen wird kein Liefertermin versprochen, und die abgelehnten Zeilen werden nicht gebaut, solange sich das Datenschutzmodell selbst nicht ändert. Nichts in diesem Block funktioniert heute.",
+  fr: "Aucune date de livraison n’est promise pour les lignes prévues, et les lignes refusées ne seront pas développées à moins que le modèle de confidentialité lui-même change. Rien dans ce bloc ne fonctionne aujourd’hui.",
+  it: "Per le righe in programma non viene promessa una data di consegna, e le righe rifiutate non saranno sviluppate a meno che non cambi il modello di privacy stesso. Nulla in questo blocco funziona oggi.",
+  nl: "Voor de geplande regels wordt geen leverdatum beloofd, en de afgewezen regels worden niet gebouwd tenzij het privacymodel zelf verandert. Niets in dit blok werkt vandaag.",
+  cs: "U plánovaných řádků není slíbeno datum dodání a odmítnuté řádky nevzniknou, dokud se nezmění samotný model soukromí. Nic v tomto bloku dnes nefunguje.",
+  "zh-Hans": "规划中的行不承诺交付时间；被拒绝的行除非隐私模型本身改变，否则不会开发。这一块里没有一项今天能用。",
+  "zh-Hant": "規劃中的行不承諾交付時間；被拒絕的行除非隱私模型本身改變，否則不會開發。這一塊裡沒有一項今天能用。",
+  es: "No se promete fecha de entrega para las filas previstas, y las filas rechazadas no se construirán salvo que cambie el propio modelo de privacidad. Nada de este bloque funciona hoy.",
+  pl: "Dla planowanych wierszy nie obiecuje się terminu dostawy, a odrzucone wiersze nie powstaną, dopóki nie zmieni się sam model prywatności. Nic z tego bloku dziś nie działa.",
+  ja: "計画中の行について納期は約束せず、断った行はプライバシーモデル自体が変わらない限り作りません。このブロックで今日動くものは一つもありません。",
+  th: "แถวที่วางแผนไม่มีการสัญญาวันส่งมอบ และแถวที่ปฏิเสธจะไม่ถูกสร้างเว้นแต่โมเดลความเป็นส่วนตัวเองจะเปลี่ยน ไม่มีสิ่งใดในบล็อกนี้ใช้งานได้ในวันนี้",
+  fi: "Suunnitelluille riveille ei luvata toimituspäivää, eikä hylättyjä rivejä rakenneta, ellei yksityisyysmalli itse muutu. Mikään tässä lohkossa ei toimi tänään.",
+  uk: "Для запланованих рядків строк не обіцяють, а відхилені рядки не будуть зроблені, доки не зміниться сама модель приватності. Сьогодні тут ніщо не працює.",
+  bg: "За планираните редове не се обещава дата на доставка, а отказаните редове няма да бъдат правени, освен ако самият модел на поверителност не се промени. Нищо в този блок днес не работи.",
+  tr: "Planlanan satırlar için teslim tarihi vaat edilmiyor; reddedilen satırlar ise gizlilik modelinin kendisi değişmedikçe yazılmayacak. Bu blokta bugün çalışan hiçbir şey yok.",
+  hu: "A tervezett sorokhoz nem ígérünk szállítási dátumot, az elutasított sorok pedig nem épülnek meg, hacsak maga az adatvédelmi modell nem változik. Ebben a blokkban ma semmi sem működik.",
 };
 
 type RoadmapItem = {
   /** Latin brand string, kept untranslated like `PluginModel.code`: these are
    *  proper nouns, and translating them would be the only way to misname them. */
   readonly brand: string;
+  readonly state: RoadmapState;
   readonly label: Localized<string>;
   readonly caption: Localized<string>;
 };
@@ -435,6 +436,7 @@ type RoadmapItem = {
 const ROADMAP: readonly RoadmapItem[] = [
   {
     brand: "Stripe / PayPal",
+    state: "planned",
     label: {
       en: "Payment gateway",
       ru: "Платёжный шлюз",
@@ -456,75 +458,31 @@ const ROADMAP: readonly RoadmapItem[] = [
       hu: "Fizetési átjáró",
     },
     caption: {
-      en: "No payment provider is wired in anywhere — billing is the internal POPX-CP credit meter with its eight POPOPX_CP_* knobs. A real row would need a merchant secret held on your server, an inbound signed callback, and a refund path; none of the three is written.",
-      ru: "Ни один платёжный провайдер не подключён — расчёт ведёт внутренний учёт POPX-CP с восемью настройками POPOPX_CP_*. Настоящей строке понадобились бы ключ продавца на вашем сервере, входящий подписанный колбэк и путь возврата; ни одна из трёх частей не написана.",
-      de: "Kein Zahlungsanbieter ist irgendwo angebunden — abgerechnet wird intern in POPX-CP mit den acht POPOPX_CP_*-Schaltern. Eine echte Zeile bräuchte einen Händlerkey auf deinem Server, einen signierten eingehenden Callback und einen Erstattungspfad; keines der drei ist geschrieben.",
-      fr: "Aucun prestataire de paiement n’est branché — la facturation passe par le compteur interne POPX-CP avec ses huit réglages POPOPX_CP_*. Une vraie ligne exigerait une clé marchand sur votre serveur, un rappel entrant signé et un chemin de remboursement ; aucun des trois n’est écrit.",
-      it: "Nessun gestore di pagamenti è collegato da nessuna parte — la fatturazione usa il contatore interno POPX-CP con le sue otto levette POPOPX_CP_*. Una riga reale richiederebbe una chiave commerciante sul tuo server, un callback in ingresso firmato e un percorso di rimborso; nessuno dei tre è scritto.",
-      nl: "Er is geen enkele betaalprovider aangesloten — de facturatie loopt via de interne POPX-CP-meter met zijn acht POPOPX_CP_*-knoppen. Een echte rij zou een winkelierssleutel op je server nodig hebben, een handtekeningdragende inkomende callback en een pad voor terugbetalingen; geen van de drie is geschreven.",
-      cs: "Není napojen žádný platební poskytovatel — fakturaci dělá interní měrka POPX-CP s osmi přepínači POPOPX_CP_*. Skutečný řádek by potřeboval obchodníkový klíč na vašem serveru, podepsaný příchozí callback a cestu vrácení peněz; žádná ze tří částí nenapsána.",
+      en: "No payment provider is wired in anywhere — billing is the internal POPX-CP credit meter with its twelve POPOPX_CP_* knobs. A real row would need a merchant secret held on your server, an inbound signed callback, and a refund path; none of the three is written.",
+      ru: "Ни один платёжный провайдер не подключён — расчёт ведёт внутренний учёт POPX-CP с двенадцатью настройками POPOPX_CP_*. Настоящей строке понадобились бы ключ продавца на вашем сервере, входящий подписанный колбэк и путь возврата; ни одна из трёх частей не написана.",
+      de: "Kein Zahlungsanbieter ist irgendwo angebunden — abgerechnet wird intern in POPX-CP mit den zwölf POPOPX_CP_*-Schaltern. Eine echte Zeile bräuchte einen Händlerkey auf deinem Server, einen signierten eingehenden Callback und einen Erstattungspfad; keines der drei ist geschrieben.",
+      fr: "Aucun prestataire de paiement n’est branché — la facturation passe par le compteur interne POPX-CP avec ses douze réglages POPOPX_CP_*. Une vraie ligne exigerait une clé marchand sur votre serveur, un rappel entrant signé et un chemin de remboursement ; aucun des trois n’est écrit.",
+      it: "Nessun gestore di pagamenti è collegato da nessuna parte — la fatturazione usa il contatore interno POPX-CP con le sue dodici levette POPOPX_CP_*. Una riga reale richiederebbe una chiave commerciante sul tuo server, un callback in ingresso firmato e un percorso di rimborso; nessuno dei tre è scritto.",
+      nl: "Er is geen enkele betaalprovider aangesloten — de facturatie loopt via de interne POPX-CP-meter met zijn twaalf POPOPX_CP_*-knoppen. Een echte rij zou een winkelierssleutel op je server nodig hebben, een handtekeningdragende inkomende callback en een pad voor terugbetalingen; geen van de drie is geschreven.",
+      cs: "Není napojen žádný platební poskytovatel — fakturaci dělá interní měrka POPX-CP s dvanácti přepínači POPOPX_CP_*. Skutečný řádek by potřeboval obchodníkový klíč na vašem serveru, podepsaný příchozí callback a cestu vrácení peněz; žádná ze tří částí nenapsána.",
       "zh-Hans":
-        "仓库里没有接任何支付服务商 —— 计费走的是内部 POPX-CP 算力点，只有八颗 POPOPX_CP_* 旋钮。真要加这一行，需要在你服务器上存商户密钥、要有一条带签名的入站回调、还要有退款路径；这三样都没写。",
+        "仓库里没有接任何支付服务商 —— 计费走的是内部 POPX-CP 算力点，只有十二颗 POPOPX_CP_* 旋钮。真要加这一行，需要在你服务器上存商户密钥、要有一条带签名的入站回调、还要有退款路径；这三样都没写。",
       "zh-Hant":
-        "倉庫裡沒有接任何支付服務商 —— 計費走的是內部 POPX-CP 算力點，只有八顆 POPOPX_CP_* 旋鈕。真要加這一行，需要在你的伺服器上存商户金鑰、要有一條帶簽名的入站回呼、還要有退款路徑；這三樣都沒寫。",
-      es: "No hay ningún proveedor de pago integrado en ninguna parte — la facturación usa el medidor interno POPX-CP con sus ocho parámetros POPOPX_CP_*. Una fila real necesitaría una clave de comercio en tu servidor, un callback entrante firmado y una ruta de reembolso; ninguna de las tres está escrita.",
-      pl: "Żaden operator płatności nie jest podłączony — rozliczenia prowadzi wewnętrzny licznik POPX-CP z ośmioma pokrętłami POPOPX_CP_*. Prawdziwy wiersz wymagałby klucza kupca na twoim serwerze, podpisanego przychodzącego wywołania zwrotnego i ścieżki zwrotu; żadna z tych trzech rzeczy nie jest napisana.",
-      ja: "決済プロバイダーはどこにも組み込まれていません —— 課金は内部の POPX-CP ポイントで、八つの POPOPX_CP_* つまみだけです。この行を本物にするには、あなたのサーバー上の加盟店キー、署名付きの受信コールバック、返金経路の三つが必要で、三つとも書かれていません。",
-      th: "ไม่มีผู้ให้บริการชำระเงินใดถูกเชื่อมไว้เลย — การคิดเงินใช้หน่วย POPX-CP ภายในที่มีปุ่ม POPOPX_CP_* แปดปุ่ม แถวที่เป็นจริงต้องมีส่วนลับของผู้ขายเก็บบนเซิร์ฟเวอร์ของคุณ มี callback ขาเข้าที่เซ็นลายมือชื่อ และมีเส้นทางคืนเงิน ซึ่งทั้งสามอย่างไม่ได้ถูกเขียนไว้",
-      fi: "Maksupalveluntarjoajaa ei ole kytketty mihinkään — laskenta käy sisäisellä POPX-CP-mittarilla, jonka kahdeksalla POPOPX_CP_*-säädöllä. Oikea rivi vaatisi kauppiaan avaimen sinun palvelimellesi, sisään tulevan allekirjoitetun callbackin ja palautusreitin; yksikään kolmesta ei ole kirjoitettu.",
-      uk: "Жодного платіжного провайдера не підключено — розрахунки ведуться внутрішнім лічильником POPX-CP із вісьмома регуляторами POPOPX_CP_*. Справжньому рядку потрібні ключ продавця на вашому сервері, вхідний виклик із підписом і шлях повернення коштів; жодна з трьох частин не написана.",
-      bg: "Няма свързан платежен доставчик никъде — отчитът минава през вътрешния измерител POPX-CP с осте му POPOPX_CP_* регулатора. Истински ред би изисквал търговски ключ на вашия сървър, входящо подписано обратното извикване и път за връщане на средства; нито едно от трите е написано.",
-      tr: "Hiçbir yerde bir ödeme sağlayıcısı bağlanmamış — faturalandırma, sekiz POPOPX_CP_* düğmeli dahili POPX-CP sayacı ile yapılıyor. Gerçek bir satır sizin sunucunuzda bir tüccar anahtarı, imzalı bir gelen geri çağırma ve bir iade yolu gerektirirdi; üçünün de kodu yazılmadı.",
-      hu: "Fizetési szolgáltató nincs bekötve sehol — az elszámolás a belső POPX-CP mérővel történik, a nyolc POPOPX_CP_* kapcsolóval. Egy valós sorhoz a szervereden tárolt kereskedői kulcs, egy aláírt bejövő visszahívás és egy visszatérítési útvonal kellene; a három egyike sincs megírva.",
-    },
-  },
-  {
-    brand: "Slack / Discord",
-    label: {
-      en: "Team chat",
-      ru: "Командный чат",
-      de: "Team-Chat",
-      fr: "Messagerie d’équipe",
-      it: "Chat di team",
-      nl: "Teamchat",
-      cs: "Týmový chat",
-      "zh-Hans": "团队协作",
-      "zh-Hant": "團隊協作",
-      es: "Chat de equipo",
-      pl: "Czat zespołu",
-      ja: "チームチャット",
-      th: "แชททีม",
-      fi: "Tiimikeskustelu",
-      uk: "Командний чат",
-      bg: "Отдово чатче",
-      tr: "Ekip sohbeti",
-      hu: "Csapatcsevegés",
-    },
-    caption: {
-      en: "Alerts currently end on the follower’s phone and in the console; nothing pushes them onward. This would be a second outbound transport beside the single loopback node WebSocket that gateway/app/config.py defines, plus its own secret and its own retry rules.",
-      ru: "Сейчас оповещения заканчиваются на телефоне подписчика и в консоли; наружу их никто не отправляет. Это будет второй исходящий транспорт рядом с единственным узлом WebSocket на loopback, который определён в gateway/app/config.py, со своим ключом и своими правилами повторов.",
-      de: "Meldungen enden heute auf dem Handy des Followers und in der Konsole; nichts schiebt sie weiter. Das wäre ein zweiter ausgehender Transport neben dem einen Loopback-Node-WebSocket, den gateway/app/config.py kennt, mit eigenem Schlüssel und eigenen Retry-Regeln.",
-      fr: "Les alertes s’arrêtent aujourd’hui sur le téléphone de l’abonné et dans la console ; rien ne les pousse plus loin. Ce serait un second transport sortant à côté de l’unique WebSocket de nœud en bouclage local défini par gateway/app/config.py, avec son propre secret et ses propres règles de relance.",
-      it: "Gli avvisi oggi finiscono sul telefono del follower e nella console; nulla li inoltra. Sarebbe un secondo trasporto in uscita accanto all’unico WebSocket di nodo su loopback definito da gateway/app/config.py, con un segreto proprio e regole di ritentativo proprie.",
-      nl: "Meldingen eindigen nu op de telefoon van de volger en in de console; niets duwt ze verder. Dit zou een tweede uitgaand transport zijn naast de ene node-WebSocket op loopback die gateway/app/config.py definieert, met een eigen geheim en eigen stallingsregels.",
-      cs: "Výstrahy dnes končí na telefonu sledujícího a v konzoli; nic je neposílá dál. Byl by to druhý odchozí transport vedle jediného uzlového WebSocketu na loopback, který definuje gateway/app/config.py, s vlastním tajemstvím a vlastními pravidly opakování.",
-      "zh-Hans":
-        "告警今天只落到粉丝的手机和后台里，没有任何东西把它们再转发出去。这会是 gateway/app/config.py 里那条唯一的 loopback 节点 WebSocket 之外的第二条出站通道，还要自带一把密钥和一套重试规则。",
-      "zh-Hant":
-        "告警今天只落到粉絲的手機和後台裡，沒有任何東西把它們再轉發出去。這會是 gateway/app/config.py 裡那條唯一的 loopback 節點 WebSocket 之外的第二條出站通道，還要自帶一把金鑰和一套重試規則。",
-      es: "Las alertas terminan hoy en el teléfono del seguidor y en la consola; nada las reenvía. Sería un segundo transporte de salida junto al único WebSocket de nodo en loopback que define gateway/app/config.py, con su propio secreto y sus propias reglas de reintento.",
-      pl: "Alerty kończą się dziś na telefonie obserwującego i w konsoli; nic ich dalej nie wysyła. Byłby to drugi transport wychodzący obok jednego WebSocketu węzła na pętli lokalnej, który definiuje gateway/app/config.py, z własnym sekretem i własnymi regułami ponawiania.",
-      ja: "アラートは今のところフォロワーのスマホとコンソールで止まり、そこから先へ送るものはありません。これは gateway/app/config.py が定義する唯一の loopback ノード WebSocket でもう一つの送信路になり、自分の秘密鍵と自分の再送規則も必要になります。",
-      th: "ปัจจุบันการแจ้งเตือนจบแค่ที่โทรศัพท์ของผู้ติดตามและในคอนโซล ไม่มีสิ่งใดส่งต่อไปข้างนอก นี่จะเป็นช่องทางขาออกที่สองนอกเหนือจาก WebSocket ของโหนดบน loopback เส้นเดียวที่ gateway/app/config.py กำหนดไว้ พร้อมกับคีย์ของตัวเองและกติกาการลองใหม่ของตัวเอง",
-      fi: "Hälytykset päättyvät tällä hetkellä seuraajan puhelimeen ja konsoliin; mikään ei työnnä niitä eteenpäin. Tämä olisi toinen ulostuleva kuljetus gateway/app/config.py:n määrittelemän ainoan loopback-solmu WebSocketin rinnalle, oman salaisuutensa ja omien uudelleenyrityssääntönsä kera.",
-      uk: "Тривоги нині закінчуються на телефоні підписника й у консолі; ніщо не надсилає їх далі. Це був би другий вихідний транспорт поруч із єдиним WebSocket вузла на loopback, який визначає gateway/app/config.py, зі власним секретом і власними правилами повторів.",
-      bg: "Предупрежденията днес свършват на телефона на последователя и в конзолата; нищо не ги препраща. Това би бил втори изходящ транспорт до единствения WebSocket на възел върху loopback, дефиниран от gateway/app/config.py, със собствена тайна и собствени правила за повторение.",
-      tr: "Uyarılar şimdilik takipçinin telefonunda ve konsolda duruyor; hiçbir şey bunları öteye itmıyor. Bu, gateway/app/config.py’nin tanımladığı tek loopback düğüm WebSocket’inin yanına ikinci bir gidiş taşıması olurdu, üstelik kendi sırrı ve kendi yeniden deneme kurallarıyla.",
-      hu: "A riasztások jelenleg a követő telefonján és a konzolban végződnek; semmi továbbítja őket. Ez a gateway/app/config.py által definiált egyetlen loopback csomóponti WebSocket mellé egy második kimenő szállítás lenne, saját titokkal és saját újrapróbálási szabályokkal.",
+        "倉庫裡沒有接任何支付服務商 —— 計費走的是內部 POPX-CP 算力點，只有十二顆 POPOPX_CP_* 旋鈕。真要加這一行，需要在你的伺服器上存商户金鑰、要有一條帶簽名的入站回呼、還要有退款路徑；這三樣都沒寫。",
+      es: "No hay ningún proveedor de pago integrado en ninguna parte — la facturación usa el medidor interno POPX-CP con sus doce parámetros POPOPX_CP_*. Una fila real necesitaría una clave de comercio en tu servidor, un callback entrante firmado y una ruta de reembolso; ninguna de las tres está escrita.",
+      pl: "Żaden operator płatności nie jest podłączony — rozliczenia prowadzi wewnętrzny licznik POPX-CP z dwunastoma pokrętłami POPOPX_CP_*. Prawdziwy wiersz wymagałby klucza kupca na twoim serwerze, podpisanego przychodzącego wywołania zwrotnego i ścieżki zwrotu; żadna z tych trzech rzeczy nie jest napisana.",
+      ja: "決済プロバイダーはどこにも組み込まれていません —— 課金は内部の POPX-CP ポイントで、十二の POPOPX_CP_* つまみだけです。この行を本物にするには、あなたのサーバー上の加盟店キー、署名付きの受信コールバック、返金経路の三つが必要で、三つとも書かれていません。",
+      th: "ไม่มีผู้ให้บริการชำระเงินใดถูกเชื่อมไว้เลย — การคิดเงินใช้หน่วย POPX-CP ภายในที่มีปุ่ม POPOPX_CP_* สิบสองปุ่ม แถวที่เป็นจริงต้องมีส่วนลับของผู้ขายเก็บบนเซิร์ฟเวอร์ของคุณ มี callback ขาเข้าที่เซ็นลายมือชื่อ และมีเส้นทางคืนเงิน ซึ่งทั้งสามอย่างไม่ได้ถูกเขียนไว้",
+      fi: "Maksupalveluntarjoajaa ei ole kytketty mihinkään — laskenta käy sisäisellä POPX-CP-mittarilla, jonka kahdellatoista POPOPX_CP_*-säädöllä. Oikea rivi vaatisi kauppiaan avaimen sinun palvelimellesi, sisään tulevan allekirjoitetun callbackin ja palautusreitin; yksikään kolmesta ei ole kirjoitettu.",
+      uk: "Жодного платіжного провайдера не підключено — розрахунки ведуться внутрішнім лічильником POPX-CP із дванадцятьма регуляторами POPOPX_CP_*. Справжньому рядку потрібні ключ продавця на вашому сервері, вхідний виклик із підписом і шлях повернення коштів; жодна з трьох частин не написана.",
+      bg: "Няма свързан платежен доставчик никъде — отчитът минава през вътрешния измерител POPX-CP с дванадесет POPOPX_CP_* регулатора. Истински ред би изисквал търговски ключ на вашия сървър, входящо подписано обратното извикване и път за връщане на средства; нито едно от трите е написано.",
+      tr: "Hiçbir yerde bir ödeme sağlayıcısı bağlanmamış — faturalandırma, on iki POPOPX_CP_* düğmeli dahili POPX-CP sayacı ile yapılıyor. Gerçek bir satır sizin sunucunuzda bir tüccar anahtarı, imzalı bir gelen geri çağırma ve bir iade yolu gerektirirdi; üçünün de kodu yazılmadı.",
+      hu: "Fizetési szolgáltató nincs bekötve sehol — az elszámolás a belső POPX-CP mérővel történik, a tizenkét POPOPX_CP_* kapcsolóval. Egy valós sorhoz a szervereden tárolt kereskedői kulcs, egy aláírt bejövő visszahívás és egy visszatérítési útvonal kellene; a három egyike sincs megírva.",
     },
   },
   {
     brand: "Shopify / WooCommerce",
+    state: "planned",
     label: {
       en: "Commerce",
       ru: "Коммерция",
@@ -570,6 +528,7 @@ const ROADMAP: readonly RoadmapItem[] = [
   },
   {
     brand: "Google Sheets / Notion",
+    state: "planned",
     label: {
       en: "Spreadsheets and docs",
       ru: "Таблицы и документы",
@@ -615,6 +574,7 @@ const ROADMAP: readonly RoadmapItem[] = [
   },
   {
     brand: "CRM / ERP",
+    state: "declined",
     label: {
       en: "CRM and ERP",
       ru: "CRM и ERP",
@@ -660,6 +620,7 @@ const ROADMAP: readonly RoadmapItem[] = [
   },
   {
     brand: "Telegram / WhatsApp",
+    state: "declined",
     label: {
       en: "Other chat bridges",
       ru: "Другие мосты",
@@ -775,6 +736,27 @@ const Q_DATAFLOW: Localized<string> = {
   hu: "Adatfolyam",
 };
 
+const Q_LIMIT: Localized<string> = {
+  en: "Limit",
+  ru: "Предел",
+  de: "Grenze",
+  fr: "Limite",
+  it: "Limite",
+  nl: "Grens",
+  cs: "Limit",
+  "zh-Hans": "限制",
+  "zh-Hant": "限制",
+  es: "Límite",
+  pl: "Limit",
+  ja: "上限",
+  th: "ขีดจำกัด",
+  fi: "Raja",
+  uk: "Межа",
+  bg: "Граница",
+  tr: "Sınır",
+  hu: "Korlát",
+};
+
 const Q_REVOKE: Localized<string> = {
   en: "Revocation",
   ru: "Отзыв",
@@ -818,24 +800,24 @@ const FILTER_LABEL: Localized<string> = {
 };
 
 const CAT_ALL: Localized<string> = {
-  en: "All five",
-  ru: "Все пять",
-  de: "Alle fünf",
-  fr: "Les cinq",
-  it: "Tutti e cinque",
-  nl: "Alle vijf",
-  cs: "Všech pět",
-  "zh-Hans": "全部五项",
-  "zh-Hant": "全部五項",
-  es: "Los cinco",
-  pl: "Wszystkie pięć",
-  ja: "すべて",
-  th: "ทั้งหมดห้าตัว",
-  fi: "Kaikki viisi",
-  uk: "Усі пʼять",
-  bg: "Всички пет",
-  tr: "Beşi de",
-  hu: "Mind az öt",
+  en: "All nine",
+  ru: "Все девять",
+  de: "Alle neun",
+  fr: "Les neuf",
+  it: "Tutti e nove",
+  nl: "Alle negen",
+  cs: "Všech devět",
+  "zh-Hans": "全部九项",
+  "zh-Hant": "全部九項",
+  es: "Los nueve",
+  pl: "Wszystkie dziewięć",
+  ja: "すべて9つ",
+  th: "ทั้งหมดเก้าตัว",
+  fi: "Kaikki yhdeksän",
+  uk: "Усі девʼять",
+  bg: "Всички девет",
+  tr: "Dokuzu da",
+  hu: "Mind a kilenc",
 };
 
 const CAT_AGENT: Localized<string> = {
@@ -943,12 +925,34 @@ const CAT_CHAIN: Localized<string> = {
   hu: "Láncra írva",
 };
 
+const CAT_CONNECTORS: Localized<string> = {
+  en: "Connectors",
+  ru: "Коннекторы",
+  de: "Konnektoren",
+  fr: "Connecteurs",
+  it: "Connettori",
+  nl: "Connectors",
+  cs: "Konektory",
+  "zh-Hans": "外部连接器",
+  "zh-Hant": "外部連線器",
+  es: "Conectores",
+  pl: "Konektory",
+  ja: "コネクタ",
+  th: "ตัวเชื่อมต่อ",
+  fi: "Liittimet",
+  uk: "Конектори",
+  bg: "Конектори",
+  tr: "Bağlayıcılar",
+  hu: "Csatlakoztatók",
+};
+
 const CATEGORY_COPY: Record<Category, Localized<string>> = {
   agent: CAT_AGENT,
   ops: CAT_OPS,
   identity: CAT_IDENTITY,
   engagement: CAT_ENGAGEMENT,
   chain: CAT_CHAIN,
+  connectors: CAT_CONNECTORS,
 };
 
 const FILTER_CHIPS: readonly { readonly value: FilterValue; readonly copy: Localized<string> }[] = [
@@ -958,6 +962,7 @@ const FILTER_CHIPS: readonly { readonly value: FilterValue; readonly copy: Local
   { value: "identity", copy: CAT_IDENTITY },
   { value: "engagement", copy: CAT_ENGAGEMENT },
   { value: "chain", copy: CAT_CHAIN },
+  { value: "connectors", copy: CAT_CONNECTORS },
 ];
 
 const FILTER_ARIA: Localized<string> = {
@@ -979,6 +984,48 @@ const FILTER_ARIA: Localized<string> = {
   bg: "Филтрирай каталога на услугите по категория",
   tr: "Hizmet kataloğunu kategoriye göre süzüp daralt",
   hu: "Szolgáltatáskatalógus szűrése kategória szerint",
+};
+
+const ROADMAP_DECLINED_LABEL: Localized<string> = {
+  en: "declined",
+  ru: "отклонено",
+  de: "abgelehnt",
+  fr: "refusé",
+  it: "rifiutato",
+  nl: "afgewezen",
+  cs: "odmítnuto",
+  "zh-Hans": "明确拒绝",
+  "zh-Hant": "明確拒絕",
+  es: "rechazado",
+  pl: "odrzucone",
+  ja: "対象外",
+  th: "ปฏิเสธ",
+  fi: "hylätty",
+  uk: "відхилено",
+  bg: "отказано",
+  tr: "reddedildi",
+  hu: "elutasítva",
+};
+
+const ROADMAP_DECLINED_NOTE: Localized<string> = {
+  en: "Declined, not scheduled: this family would require identifiers this gateway refuses to hold, so it will not be built. The row stays here so the refusal is on the record.",
+  ru: "Отклонено, не запланировано: этой семье понадобились бы идентификаторы, которые шлюз отказывается хранить, поэтому она не будет сделана. Строка остаётся здесь, чтобы отказ был зафиксирован.",
+  de: "Abgelehnt, nicht geplant: Diese Familie bräuchte Kennungen, die dieses Gateway nicht halten will, deshalb wird sie nicht gebaut. Die Zeile bleibt hier, damit die Ablehnung festgehalten ist.",
+  fr: "Refusé, non planifié : cette famille exigerait des identifiants que cette passerelle refuse de détenir, elle ne sera donc pas développée. La ligne reste ici pour que le refus figure au dossier.",
+  it: "Rifiutato, non in programma: questa famiglia richiederebbe identificatori che il gateway rifiuta di conservare, quindi non sarà sviluppata. La riga resta qui perché il rifiuto sia messo agli atti.",
+  nl: "Afgewezen, niet gepland: deze familie zou identificatoren vereisen die deze gateway weigert te bewaren, dus ze wordt niet gebouwd. De regel blijft hier zodat de weigering vastligt.",
+  cs: "Odmítnuto, neplánováno: tato rodina by vyžadovala identifikátory, které tato brána odmítá držet, a proto nevznikne. Řádek tu zůstává, aby byl záznam o odmítnutí.",
+  "zh-Hans": "明确拒绝，不排期：这一类需要这套网关拒绝保存的标识符，所以不会开发。这一行留在这里，是为了把拒绝记录下来。",
+  "zh-Hant": "明確拒絕，不排期：這一類需要這個閘道拒絕儲存的識別碼，所以不會開發。這一行留在這裡，是為了把拒絕記錄下來。",
+  es: "Rechazado, no previsto: esta familia exigiría identificadores que esta pasarela se niega a guardar, así que no se construirá. La fila se queda aquí para que el rechazo conste.",
+  pl: "Odrzucone, nieplanowane: ta rodzina wymagałaby identyfikatorów, których ta bramka odmawia przechowywać, więc nie powstanie. Wiersz zostaje tutaj, aby odmowa była zapisana.",
+  ja: "対象外であって、予定ではありません。この系統はこのゲートウェイが保持を拒む識別子を必要とするため、作りません。断ったことを記録に残すために、この行はここに置きます。",
+  th: "ปฏิเสธ ไม่ได้อยู่ในแผน: ตระกูลนี้ต้องใช้ตัวระบุที่เกตเวย์นี้ปฏิเสธที่จะเก็บ จึงจะไม่ถูกสร้าง แถวนี้ยังอยู่ที่นี่เพื่อบันทึกการปฏิเสธไว้",
+  fi: "Hylätty, ei suunniteltu: tämä perhe vaatisi tunnisteita, joita tämä yhdyskaari kieltäytyy säilyttämästä, joten sitä ei rakenneta. Rivi pysyy tässä, jotta hylkäys on kirjattu.",
+  uk: "Відхилено, не заплановано: цій родині потрібні ідентифікатори, які цей шлюз відмовляється тримати, тому її не буде. Рядок лишається тут, щоб відмова була зафіксована.",
+  bg: "Отказано, не е планирано: това семейство би изисквало идентификатори, които този шлюз отказва да пази, затова няма да бъде правено. Редът остава тук, за да е отразен отказът.",
+  tr: "Reddedildi, planlanmadı: bu aile, ağ geçidinin tutmayı reddettiği tanımlayıcıları gerektirir, bu yüzden yazılmayacak. Satır, ret kayıtta kalsın diye burada duruyor.",
+  hu: "Elutasítva, nem tervezett: ez a család olyan azonosítókat igényelne, amelyeket ez az átjáró nem vállal tárolni, ezért nem épül meg. A sor azért marad itt, hogy az elutasítás nyoma meglegyen.",
 };
 
 const ROADMAP_LABEL: Localized<string> = {
@@ -1047,24 +1094,24 @@ const STEP_1_TITLE: Localized<string> = {
 };
 
 const STEP_1_COPY: Localized<string> = {
-  en: "Filter the catalog and read the state chip first: shipped on, shipped off, or not built at all. Only the five cards below exist as code.",
-  ru: "Отфильтруй каталог и сначала посмотри на чип состояния: включён, выключен или вообще не существует. Как код существуют только пять карточек ниже.",
-  de: "Filtere den Katalog und lies zuerst den Zustands-Chip: ausgeliefert an, ausgeliefert aus, oder gar nicht gebaut. Nur die fünf Karten unten existieren als Code.",
-  fr: "Filtrez le catalogue et lisez d’abord la puce d’état : livré activé, livré désactivé, ou jamais développé. Seules les cinq fiches ci-dessous existent en code.",
-  it: "Filtra il catalogo e leggi prima la chip di stato: spedito attivo, spedito inattivo, o proprio non esistente. Solo le cinque schede qui sotto esistono come codice.",
-  nl: "Filter de catalogus en lees eerst de statuschip: meegeleverd aan, meegeleverd uit, of helemaal niet gebouwd. Alleen de vijf kaarten hieronder bestaan als code.",
-  cs: "Filtrujte katalog a nejprve čtěte chip o stavu: dodáno zapnuto, dodáno vypnuto, nebo vůbec neexistuje. Jako kód existuje jen pět karet níže.",
-  "zh-Hans": "先筛选目录，再看状态标签：出厂开启、出厂关闭，或者根本没做。作为代码存在的只有下面五张卡片。",
-  "zh-Hant": "先篩選目錄，再看狀態標籤：出廠開啟、出廠關閉，或者根本沒做。作為程式碼存在的只有下面五張卡片。",
-  es: "Filtra el catálogo y lee primero la etiqueta de estado: entregado activado, entregado apagado o directamente no construido. Solo las cinco tarjetas de abajo existen como código.",
-  pl: "Przefiltruj katalog i najpierw odczytaj plakietkę stanu: dostarczone włączone, dostarczone wyłączone albo wcale niezbudowane. Jako kod istnieje tylko pięć kartek poniżej.",
-  ja: "カタログを絞り込み、まず状態チップを見てください。出荷時にオン、出荷時にオフ、または作られてすらいません。コードとして存在するのは下の5枚だけです。",
-  th: "กรองแคตตาล็อกแล้วอ่านป้ายสถานะก่อน: เปิดมาแต่ต้น ปิดมาแต่ต้น หรือไม่มีการสร้างเลย มีแค่ห้าการ์ดข้างล่างเท่านั้นที่มีอยู่จริงในโค้ด",
-  fi: "Suodata luetteloa ja lue ensin tilamerkki: toimitettu päällä, toimitettu pois tai ei lainkaan toteutettu. Vain alla olevat viisi korttia ovat olemassa koodina.",
-  uk: "Відфільтруйте каталог і спершу подивіться на чип стану: поставлено увімкненим, поставлено вимкненим або взагалі не існує. Як код існують лише пʼять карток нижче.",
-  bg: "Филтрирай каталога и първо прочети етикета на състоянието: доставено включено, доставено изключено или изобщо не е правено. Само петте карти по-долу съществуват като код.",
-  tr: "Kataloğu süz ve önce durum etiketine bak: açık geliyor, kapalı geliyor ya da hiç yazılmamış. Kod olarak var olan tek şey aşağıdaki beş kart.",
-  hu: "Szűrd a katalógust, és először az állapotjelzőt olvasd el: gyárilag bekapcsolva, gyárilag kikapcsolva vagy egyáltalán nem létezik. Csak az alábbi öt kártya létezik kódként.",
+  en: "Filter the catalog and read the state chip first: nine cards exist as code, four ship switched on and five ship switched off. A card marked not built lives in the roadmap block below, never in this grid.",
+  ru: "Отфильтруй каталог и сначала посмотри на чип состояния: девять карточек существуют как код, четыре поставляются включёнными, пять — выключенными. Карточка с пометкой «не реализовано» находится в блоке планов ниже, а не в этой сетке.",
+  de: "Filtere den Katalog und lies zuerst den Zustands-Chip: Neun Karten existieren als Code, vier werden eingeschaltet und fünf ausgeschaltet ausgeliefert. Eine Karte mit „nicht gebaut“ steht im Planungsblock unten, nie in diesem Raster.",
+  fr: "Filtrez le catalogue et lisez d’abord la puce d’état : neuf fiches existent en code, quatre sont livrées activées et cinq désactivées. Une fiche marquée non développé se trouve dans le bloc de planification ci-dessous, jamais dans cette grille.",
+  it: "Filtra il catalogo e leggi prima la chip di stato: nove schede esistono come codice, quattro vengono consegnate attive e cinque spente. Una scheda segnata come non sviluppata sta nel blocco dei piani qui sotto, mai in questa griglia.",
+  nl: "Filter de catalogus en lees eerst de statuschip: negen kaarten bestaan als code, vier worden aangezet en vijf uitgezet meegeleverd. Een kaart met niet gebouwd staat in het planningsblok hieronder, nooit in dit raster.",
+  cs: "Filtrujte katalog a nejprve čtěte stavový štítek: devět karet existuje jako kód, čtyři se dodávají zapnuté a pět vypnuté. Karta označená jako neimplementovaná je v plánovacím bloku níže, nikdy v této mřížce.",
+  "zh-Hans": "先筛选目录，再看状态标签：九张卡片都以代码形式存在，其中四张出厂开启、五张出厂关闭。标着「尚未实现」的卡片只出现在下面的规划区块，不会出现在这个网格里。",
+  "zh-Hant": "先篩選目錄，再看狀態標籤：九張卡片都以程式碼形式存在，其中四張出廠開啟、五張出廠關閉。標著「尚未實作」的卡片只會出現在下面的規劃區塊，不會出現在這個網格裡。",
+  es: "Filtra el catálogo y lee primero la etiqueta de estado: nueve tarjetas existen como código, cuatro se entregan encendidas y cinco apagadas. Una tarjeta marcada como no está hecho aparece en el bloque de planes de abajo, nunca en esta cuadrícula.",
+  pl: "Przefiltruj katalog i najpierw odczytaj plakietkę stanu: dziewięć kart istnieje jako kod, cztery są dostarczane włączone, a pięć wyłączonych. Karta oznaczona jako nie zbudowane trafia do bloku planów poniżej, nigdy do tej siatki.",
+  ja: "カタログを絞り込み、まず状態チップを見てください。9枚のカードがコードとして存在し、4枚はオン、5枚はオフで出荷されます。「未実装」と付いたカードは下の計画ブロックにだけ載り、このグリッドには入りません。",
+  th: "กรองแคตตาล็อกแล้วอ่านป้ายสถานะก่อน: มีการ์ดเก้าใบที่มีอยู่จริงในโค้ด สี่ใบส่งมอบแบบเปิด ห้าใบส่งมอบแบบปิด การ์ดที่ระบุว่ายังไม่ถูกสร้างจะอยู่เฉพาะในบล็อกแผนด้านล่าง ไม่เคยอยู่ในตารางนี้",
+  fi: "Suodata luetteloa ja lue ensin tilamerkki: yhdeksän korttia on olemassa koodina, neljä toimitetaan päällä ja viisi pois. Merkinnällä ei ole tehty varustettu kortti on alla olevassa suunnitelmalohkossa, ei koskaan tässä ruudukossa.",
+  uk: "Відфільтруйте каталог і спершу подивіться на чип стану: девʼять карток існують як код, чотири постачаються увімкненими, пʼять — вимкненими. Картка з позначкою «не реалізовано» лежить у блоці планів нижче, а не в цій сітці.",
+  bg: "Филтрирай каталога и първо прочети етикета на състоянието: девет карти съществуват като код, четири се доставят включени, а пет изключени. Карта с означение „не е изградено“ стои в блока с планове по-долу, никога в тази решетка.",
+  tr: "Kataloğu süz ve önce durum etiketine bak: dokuz kart kod olarak var, dördü açık, beşi kapalı geliyor. «Yazılmadı» işaretli kart aşağıdaki plan bloğunda durur, asla bu ızgarada değil.",
+  hu: "Szűrd a katalógust, és először az állapotjelzőt olvasd el: kilenc kártya létezik kódként, négy bekapcsolva, öt kikapcsolva érkezik. A nincs megépítve jelzéssel ellátott kártya a lenti tervblokkban van, soha nem ebben a rácsban."
 };
 
 const STEP_2_TITLE: Localized<string> = {
@@ -1131,24 +1178,24 @@ const STEP_3_TITLE: Localized<string> = {
 };
 
 const STEP_3_COPY: Localized<string> = {
-  en: "The levers that actually exist are four: the per-plugin switch, binding the gateway to 127.0.0.1:8080 instead of 0.0.0.0, read-only credentials where a service offers them, and the per-plugin caps. Scoped tokens are not one of them.",
-  ru: "Реальных рычагов четыре: переключатель каждого плагина, привязка шлюза к 127.0.0.1:8080 вместо 0.0.0.0, ключи только для чтения там, где сервис это умеет, и лимиты по плагинам. Скоупованных токенов среди них нет.",
-  de: "Es gibt vier Hebel, die wirklich existieren: den Plugin-Schalter, das Binden des Gateways an 127.0.0.1:8080 statt 0.0.0.0, schreibgeschützte Zugangsdaten, wo der Dienst sie anbietet, und Limits pro Modul. Token mit scopes gibt es nicht.",
-  fr: "Quatre leviers existent vraiment : l’interrupteur par module, l’écoute sur 127.0.0.1:8080 au lieu de 0.0.0.0, des identifiants en lecture seule quand le service le permet, et les plafonds par module. Des jetons à scope n’existent pas.",
-  it: "Le leve che esistono davvero sono quattro: l’interruttore per singolo modulo, l’ascolto su 127.0.0.1:8080 invece di 0.0.0.0, credenziali di sola lettura dove il servizio le offre e i limiti per modulo. I token con scope non sono tra queste.",
-  nl: "Er zijn vier hendels die echt bestaan: de per-module schakelaar, de gateway vastzetten op 127.0.0.1:8080 in plaats van 0.0.0.0, alleen-lezen credentials waar de dienst ze biedt, en de per-module plafonds. Scoped tokens behoren er niet toe.",
-  cs: "Reálné páky jsou čtyři: přepínač každého modulu, navázání brány na 127.0.0.1:8080 místo 0.0.0.0, klíče jen pro čtení, kde je služba nabízí, a limity podle modulu. Tokeny s rozsahem mezi nimi nejsou.",
-  "zh-Hans": "真正存在的杠杆只有四根：单个插件的开关、把网关绑到 127.0.0.1:8080 而不是 0.0.0.0、在对方支持的场合用只读凭据、以及每插件限额。带作用域的令牌不在其中。",
-  "zh-Hant": "真正存在的槓桿只有四根：單一外掛的開關、把閘道綁定到 127.0.0.1:8080 而不是 0.0.0.0、在對方支援的場合使用唯讀憑證、以及每外掛額度上限。帶作用域的權杖不在其中。",
-  es: "Las palancas que de verdad existen son cuatro: el interruptor por módulo, enlazar la pasarela a 127.0.0.1:8080 en vez de 0.0.0.0, credenciales de solo lectura cuando el servicio las ofrece y topes por módulo. Los tokens con alcance no están entre ellas.",
-  pl: "Dźwigni, które naprawdę istnieją, są cztery: przełącznik pojedynczego modułu, wiązanie bramy z 127.0.0.1:8080 zamiast 0.0.0.0, poświadczenia tylko do odczytu tam, gdzie usługa je oferuje, oraz limity na moduł. Tokeny zakresowe do nich nie należą.",
-  ja: "実際に使えるレバーは4つだけです。モジュール単位のスイッチ、ゲートウェイを 0.0.0.0 ではなく 127.0.0.1:8080 にバインドすること、相手が対応しているなら読み取り専用の認証情報を使うこと、そしてモジュール単位の上限。スコープ付きトークンは入っていません。",
-  th: "คันโยกที่มีอยู่จริงมีสี่อัน: สวิตช์รายโมดูล, ผูกเกตเวย์ไว้กับ 127.0.0.1:8080 แทน 0.0.0.0, ใช้คีย์อ่านอย่างเดียวในกรณีที่ฝั่งบริการรองรับ, และจำกัดโควตาเป็นรายโมดูล — โทเคนแบบกำหนด scope ไม่มีอยู่ในนี้",
-  fi: "Todellisia vivut ovat neljä: lisäosakohtainen kytkin, gatewayn sitominen 127.0.0.1:8080-osoitteeseen 0.0.0.0 sijaan, vain-luku-tunnukset silloin kun palvelu tarjoaa niitä, ja lisäosakohtaiset katot. Scopeitetut tokenit eivät ole yksi niistä.",
-  uk: "Важелів, які справді існують, чотири: перемикач кожного модуля, привʼязка шлюза до 127.0.0.1:8080 замість 0.0.0.0, ключі лише для читання там, де сервіс їх підтримує, й ліміти за модулями. Скоупованих токенів серед них немає.",
-  bg: "Лостите, които наистина съществуват, са четири: превключвателят по модул, обвързването на гейтуейта с 127.0.0.1:8080 вместо 0.0.0.0, ключовете само за четене, където услугата ги предлага, и лимитите по модул. Токените с обхват не са сред тях.",
-  tr: "Gerçekte var olan dört kaldıraç var: eklenti başına anahtar, ağ geçidini 0.0.0.0 yerine 127.0.0.1:8080ʼe bağlamak, hizmet sunduğunda salt okunur kimlik bilgisi kullanmak ve eklenti başına tavanlar. Kapsamlı tokenlar bunlardan biri değil.",
-  hu: "Négy valódi kar létezik: modulonkénti kapcsoló, az átjáró 127.0.0.1:8080-hoz kötése a 0.0.0.0 helyett, csak olvasható hitelesítők, ahol a szolgáltatás ilyet kínál, és a modulonkénti korlátok. Scope-okkal ellátott token nincs közöttük.",
+  en: "The levers that actually exist are five: the per-plugin switch, binding the gateway to 127.0.0.1:8080 instead of 0.0.0.0, read-only credentials where a service offers them, the per-plugin caps, and scoped pxa_ tokens minted at POST /api/v1/admin/tokens with core:…:ro|rw or plugin:<id>:… scopes, hashed on disk and shown once.",
+  ru: "Реально существуют пять рычагов: переключатель каждого плагина, привязка шлюза к 127.0.0.1:8080 вместо 0.0.0.0, ключи только для чтения там, где сервис это умеет, лимиты по плагинам и скоупованные токены pxa_, выдаваемые в POST /api/v1/admin/tokens с областями core:…:ro|rw или plugin:<id>:…, хранимые на диске в виде хэша и показываемые один раз.",
+  de: "Es gibt fünf Hebel, die wirklich existieren: den Plugin-Schalter, das Binden des Gateways an 127.0.0.1:8080 statt 0.0.0.0, schreibgeschützte Zugangsdaten, wo der Dienst sie anbietet, die Limits pro Modul und gescopte pxa_-Tokens, die unter POST /api/v1/admin/tokens mit core:…:ro|rw- oder plugin:<id>:…-Scopes geprägt, auf der Platte gehasht und einmal angezeigt werden.",
+  fr: "Cinq leviers existent vraiment : l’interrupteur par module, l’écoute sur 127.0.0.1:8080 au lieu de 0.0.0.0, des identifiants en lecture seule quand le service le permet, les plafonds par module, et les jetons pxa_ à portée limitée émis par POST /api/v1/admin/tokens avec des portées core:…:ro|rw ou plugin:<id>:…, hachés sur disque et affichés une seule fois.",
+  it: "Le leve che esistono davvero sono cinque: l’interruttore per singolo modulo, l’ascolto su 127.0.0.1:8080 invece di 0.0.0.0, credenziali di sola lettura dove il servizio le offre, i limiti per modulo e i token pxa_ con scope, emessi da POST /api/v1/admin/tokens con scope core:…:ro|rw o plugin:<id>:…, salvati come hash su disco e mostrati una volta sola.",
+  nl: "Er zijn vijf hendels die echt bestaan: de per-module schakelaar, de gateway vastzetten op 127.0.0.1:8080 in plaats van 0.0.0.0, alleen-lezen credentials waar de dienst ze biedt, de per-module plafonds, en scoped pxa_-tokens die bij POST /api/v1/admin/tokens worden aangemaakt met core:…:ro|rw- of plugin:<id>:…-scopes, gehasht op schijf en één keer getoond.",
+  cs: "Reálných pák je pět: přepínač každého modulu, navázání brány na 127.0.0.1:8080 místo 0.0.0.0, klíče jen pro čtení, kde je služba nabízí, limity podle modulu a tokeny pxa_ s rozsahem vydávané v POST /api/v1/admin/tokens s rozsahy core:…:ro|rw nebo plugin:<id>:…, na disku uložené jako hash a zobrazené jednou.",
+  "zh-Hans": "真正存在的杠杆有五根：单个插件的开关、把网关绑到 127.0.0.1:8080 而不是 0.0.0.0、在对方支持的场合用只读凭据、每插件限额，以及通过 POST /api/v1/admin/tokens 签发的 pxa_ 作用域令牌——作用域形如 core:…:ro|rw 或 plugin:<id>:…，磁盘上只存哈希，明文只显示一次。",
+  "zh-Hant": "真正存在的槓桿有五根：單一外掛的開關、把閘道綁定到 127.0.0.1:8080 而不是 0.0.0.0、在對方支援的場合使用唯讀憑證、每外掛額度上限，以及透過 POST /api/v1/admin/tokens 簽發的 pxa_ 作用域權杖——作用域形如 core:…:ro|rw 或 plugin:<id>:…，磁碟上只存雜湊，明文只顯示一次。",
+  es: "Las palancas que de verdad existen son cinco: el interruptor por módulo, enlazar la pasarela a 127.0.0.1:8080 en vez de 0.0.0.0, credenciales de solo lectura cuando el servicio las ofrece, los topes por módulo, y los tokens pxa_ con alcance emitidos en POST /api/v1/admin/tokens con alcances core:…:ro|rw o plugin:<id>:…, guardados como hash en disco y mostrados una sola vez.",
+  pl: "Dźwigni, które naprawdę istnieją, jest pięć: przełącznik pojedynczego modułu, wiązanie bramy z 127.0.0.1:8080 zamiast 0.0.0.0, poświadczenia tylko do odczytu tam, gdzie usługa je oferuje, limity na moduł oraz tokeny pxa_ z zakresem wydawane w POST /api/v1/admin/tokens z zakresami core:…:ro|rw lub plugin:<id>:…, trzymane na dysku jako hash i pokazywane raz.",
+  ja: "実際に使えるレバーは5つです。モジュール単位のスイッチ、ゲートウェイを 0.0.0.0 ではなく 127.0.0.1:8080 にバインドすること、相手が対応しているなら読み取り専用の認証情報を使うこと、モジュール単位の上限、そして POST /api/v1/admin/tokens で発行するスコープ付き pxa_ トークンです。スコープは core:…:ro|rw または plugin:<id>:… で、ディスクにはハッシュだけを保存し、平文は一度だけ表示します。",
+  th: "คันโยกที่มีอยู่จริงมีห้าอัน: สวิตช์รายโมดูล, ผูกเกตเวย์ไว้กับ 127.0.0.1:8080 แทน 0.0.0.0, ใช้คีย์อ่านอย่างเดียวในกรณีที่ฝั่งบริการรองรับ, จำกัดโควตาเป็นรายโมดูล และโทเคน pxa_ แบบกำหนด scope ที่ออกผ่าน POST /api/v1/admin/tokens ด้วย scope core:…:ro|rw หรือ plugin:<id>:… เก็บเป็นแฮชบนดิสก์และแสดงเพียงครั้งเดียว",
+  fi: "Todellisia vipuja on viisi: lisäosakohtainen kytkin, gatewayn sitominen 127.0.0.1:8080-osoitteeseen 0.0.0.0 sijaan, vain-luku-tunnukset silloin kun palvelu tarjoaa niitä, lisäosakohtaiset katot ja POST /api/v1/admin/tokens -osoitteessa myönnettävät scopeitetut pxa_-tokenit, joiden scope on core:…:ro|rw tai plugin:<id>:…, levyllä vain hashina ja näytettynä kerran.",
+  uk: "Важелів, які справді існують, пʼять: перемикач кожного модуля, привʼязка шлюза до 127.0.0.1:8080 замість 0.0.0.0, ключі лише для читання там, де сервіс їх підтримує, ліміти за модулями й скоуповані токени pxa_, що видаються в POST /api/v1/admin/tokens з областями core:…:ro|rw або plugin:<id>:…, зберігаються на диску як хеш і показуються один раз.",
+  bg: "Лостовете, които наистина съществуват, са пет: превключвателят по модул, обвързването на гейтуейта с 127.0.0.1:8080 вместо 0.0.0.0, ключовете само за четене, където услугата ги предлага, лимитите по модул и токените pxa_ с обхват, издавани в POST /api/v1/admin/tokens с обхвати core:…:ro|rw или plugin:<id>:…, съхранявани на диска като хеш и показвани веднъж.",
+  tr: "Gerçekte var olan beş kaldıraç var: eklenti başına anahtar, ağ geçidini 0.0.0.0 yerine 127.0.0.1:8080ʼe bağlamak, hizmet sunduğunda salt okunur kimlik bilgisi kullanmak, eklenti başına tavanlar ve POST /api/v1/admin/tokens üzerinden core:…:ro|rw ya da plugin:<id>:… kapsamlarıyla üretilen, diskte yalnızca hash olarak tutulan ve bir kez gösterilen kapsamlı pxa_ tokenları.",
+  hu: "Öt valódi kar létezik: modulonkénti kapcsoló, az átjáró 127.0.0.1:8080-hoz kötése a 0.0.0.0 helyett, csak olvasható hitelesítők, ahol a szolgáltatás ilyet kínál, a modulonkénti korlátok, és a POST /api/v1/admin/tokens végponton kiadott, core:…:ro|rw vagy plugin:<id>:… hatókörű pxa_ tokenek, amelyek a lemezen csak hash-ként élnek, és egyszer láthatók."
 };
 
 const STEP_4_TITLE: Localized<string> = {
@@ -1173,70 +1220,70 @@ const STEP_4_TITLE: Localized<string> = {
 };
 
 const STEP_4_COPY: Localized<string> = {
-  en: "Two consumers exist. A POPOPX Chat 服务号 gets cards and up to three menu items, and drives the plugin through callbacks. An Agent calls the same /api/v1 endpoints over HTTP with the admin bearer — no extra credential, no separate permission.",
-  ru: "Потребителя два. Сервис-аккаунт POPOPX Chat получает карточки и до трёх пунктов меню и работает через колбэки. Agent вызывает те же эндпоинты /api/v1 по HTTP с админским bearer — без отдельного ключа и без отдельных прав.",
-  de: "Es gibt zwei Abnehmer. Eine POPOPX-Chat-Dienstkontonummer bekommt Karten und bis zu drei Menüpunkte und arbeitet über Callbacks. Ein Agent ruft dieselben /api/v1-Endpunkte über HTTP mit dem Admin-Bearer auf — kein zusätzliches Credential, keine eigene Berechtigung.",
-  fr: "Deux consommateurs existent. Un compte-service POPOPX Chat reçoit des cartes et trois entrées de menu au plus, et pilote le module par callbacks. Un Agent appelle les mêmes points /api/v1 en HTTP avec le bearer admin — pas d’identifiant supplémentaire, pas de permission distincte.",
-  it: "I consumatori sono due. Un account servizio POPOPX Chat riceve card e fino a tre voci di menu e agisce tramite callback. Un Agent chiama gli stessi endpoint /api/v1 in HTTP col bearer admin: nessuna credenziale aggiuntiva, nessun permesso separato.",
-  nl: "Er zijn twee verbruikers. Een POPOPX Chat-dienstaccount krijgt kaarten en maximaal drie menu-items en stuurt via callbacks. Een Agent roept dezelfde /api/v1-eindpunten over HTTP aan met de admin-bearer — geen extra credential, geen aparte toestemming.",
-  cs: "Jsou dva spotřebitelé. Servisní účet POPOPX Chat dostává karty a nejvýše tři položky menu a ovládá modul přes callbacky. Agent volá stejné /api/v1 koncovky přes HTTP s admin bearerem — žádný další klíč, žádné extra oprávnění.",
-  "zh-Hans": "消费方只有两个。POPOPX Chat 服务号拿到卡片和最多三项菜单，用回调来驱动插件；Agent 走 HTTP 调同一批 /api/v1 接口，带的还是那把 admin bearer——没有额外的凭据，也没有单独的权限。",
-  "zh-Hant": "消費方只有兩個。POPOPX Chat 服務號取得卡片與最多三項菜單，用回調來驅動外掛；Agent 透過 HTTP 呼叫同一批 /api/v1 介面，帶的還是那把 admin bearer——沒有額外憑證，也沒有單獨權限。",
-  es: "Hay dos consumidores. Una cuenta de servicio POPOPX Chat recibe tarjetas y hasta tres elementos de menú, y opera mediante callbacks. Un Agent llama a los mismos endpoints /api/v1 por HTTP con el bearer de administración: sin credencial extra, sin permiso aparte.",
-  pl: "Są dwa rodzaje odbiorców. Konto usługi POPOPX Chat dostaje karty i do trzech pozycji menu oraz steruje modułem przez callbacki. Agent woła te same punkty /api/v1 przez HTTP z bearerem administratora — bez dodatkowej poświadczenia, bez osobnego uprawnienia.",
-  ja: "利用側は2つです。POPOPX Chat のサービスアカウントはカードと最大3項目のメニューを受け取り、コールバックでモジュールを動かします。Agent はまったく同じ /api/v1 エンドポイントを、管理者 bearer を付けて HTTP で呼びます。別の credential も、別個の権限もありません。",
-  th: "มีผู้ใช้งานสองแบบ บัญชีบริการ POPOPX Chat จะได้การ์ดกับเมนูสูงสุด 3 รายการแล้วสั่งงานผ่าน callback ส่วน Agent จะเรียก endpoint /api/v1 ชุดเดิมผ่าน HTTP พร้อม bearer ของผู้ดูแล — ไม่มีคีย์เพิ่มเติม ไม่มีสิทธิ์แยกต่างหาก",
-  fi: "Kuluttaja on kaksi. POPOPX Chat -palvelutili saa kortteja ja korkeintaan kolme valikkokohtaa, ja ohjaa moduulia callbackeilla. Agent kutsuu samoja /api/v1-päätepisteitä HTTP:llä admin-bearerin kanssa — ei uutta tunnusta, ei erillistä lupaa.",
-  uk: "Споживачів двоє. Сервіс-акаунт POPOPX Chat отримує картки й до трьох пунктів меню та керує модулем через callback. Agent викликає ті самі ендпоінти /api/v1 по HTTP з admin-bearer — без додаткового ключа й без окремого дозволу.",
-  bg: "Потребителите са двама. Акаунтът на услугата POPOPX Chat получава карти и до три меню елемента и работи през callback. Един Agent извиква същите /api/v1 крайни точки през HTTP с admin bearer — без допълнителен ключ и без отделно разрешение.",
-  tr: "İki tüketici var. Bir POPOPX Chat hizmet hesabı kartları ve en fazla üç menü öğesini alır, eklentiyi callback üzerinden sürer. Bir Agent aynı /api/v1 uç noktalarını HTTP üzerinden admin bearer ile çağırır — ek kimlik bilgisi yok, ayrı izin yok.",
-  hu: "Két fogyasztó van. Egy POPOPX Chat szolgáltatási fiók kártyákat és legfeljebb három menüpontot kap, s callbackekkel hajtja a modult. Egy Agent ugyanazokat a /api/v1 végpontokat hívja HTTP-n az admin bearerrel — nincs különös kulcs, nincs külön jogosultság.",
+  en: "Two consumers exist. A POPOPX Chat 服务号 gets cards and up to three menu items, and drives the plugin through callbacks. An Agent calls the same /api/v1 endpoints over HTTP with either the root POPOPX_ADMIN_TOKEN bearer or a scoped pxa_ token that carries only the plugin:<id>:ro|rw or core scope it needs.",
+  ru: "Потребителя два. Сервис-аккаунт POPOPX Chat получает карточки и до трёх пунктов меню и работает через колбэки. Agent вызывает те же эндпоинты /api/v1 по HTTP с корневым bearer POPOPX_ADMIN_TOKEN или скоупованным токеном pxa_, несущим только нужную область plugin:<id>:ro|rw или core.",
+  de: "Es gibt zwei Abnehmer. Eine POPOPX-Chat-Dienstkontonummer bekommt Karten und bis zu drei Menüpunkte und arbeitet über Callbacks. Ein Agent ruft dieselben /api/v1-Endpunkte über HTTP mit dem Root-Bearer POPOPX_ADMIN_TOKEN oder einem gescopten pxa_-Token auf, das nur den nötigen Scope plugin:<id>:ro|rw oder core trägt.",
+  fr: "Deux consommateurs existent. Un compte-service POPOPX Chat reçoit des cartes et trois entrées de menu au plus, et pilote le module par callbacks. Un Agent appelle les mêmes points /api/v1 en HTTP avec le bearer racine POPOPX_ADMIN_TOKEN ou un jeton pxa_ à portée limitée qui ne porte que la portée nécessaire plugin:<id>:ro|rw ou core.",
+  it: "I consumatori sono due. Un account servizio POPOPX Chat riceve card e fino a tre voci di menu e agisce tramite callback. Un Agent chiama gli stessi endpoint /api/v1 in HTTP con il bearer radice POPOPX_ADMIN_TOKEN oppure un token pxa_ con scope che porta solo lo scope necessario plugin:<id>:ro|rw o core.",
+  nl: "Er zijn twee verbruikers. Een POPOPX Chat-dienstaccount krijgt kaarten en maximaal drie menu-items en stuurt via callbacks. Een Agent roept dezelfde /api/v1-eindpunten over HTTP aan met de root-bearer POPOPX_ADMIN_TOKEN of een scoped pxa_-token dat alleen de benodigde scope plugin:<id>:ro|rw of core draagt.",
+  cs: "Jsou dva spotřebitelé. Servisní účet POPOPX Chat dostává karty a nejvýše tři položky menu a ovládá modul přes callbacky. Agent volá stejné /api/v1 koncovky přes HTTP s kořenovým bearerem POPOPX_ADMIN_TOKEN nebo tokenem pxa_ s rozsahem, který nese jen potřebný rozsah plugin:<id>:ro|rw nebo core.",
+  "zh-Hans": "消费方只有两个。POPOPX Chat 服务号拿到卡片和最多三项菜单，用回调来驱动插件；Agent 走 HTTP 调同一批 /api/v1 接口，带的既可以是根 bearer POPOPX_ADMIN_TOKEN，也可以是一把只带所需 plugin:<id>:ro|rw 或 core 作用域的 pxa_ 令牌。",
+  "zh-Hant": "消費方只有兩個。POPOPX Chat 服務號取得卡片與最多三項菜單，用回調來驅動外掛；Agent 透過 HTTP 呼叫同一批 /api/v1 介面，帶的既可以是根 bearer POPOPX_ADMIN_TOKEN，也可以是一把只帶所需 plugin:<id>:ro|rw 或 core 作用域的 pxa_ 權杖。",
+  es: "Hay dos consumidores. Una cuenta de servicio POPOPX Chat recibe tarjetas y hasta tres elementos de menú, y opera mediante callbacks. Un Agent llama a los mismos endpoints /api/v1 por HTTP con el bearer raíz POPOPX_ADMIN_TOKEN o con un token pxa_ con alcance que solo lleva el alcance necesario plugin:<id>:ro|rw o core.",
+  pl: "Są dwa rodzaje odbiorców. Konto usługi POPOPX Chat dostaje karty i do trzech pozycji menu oraz steruje modułem przez callbacki. Agent woła te same punkty /api/v1 przez HTTP z głównym bearerem POPOPX_ADMIN_TOKEN albo tokenem pxa_ z zakresem, niosącym tylko potrzebny zakres plugin:<id>:ro|rw lub core.",
+  ja: "利用側は2つです。POPOPX Chat のサービスアカウントはカードと最大3項目のメニューを受け取り、コールバックでモジュールを動かします。Agent はまったく同じ /api/v1 エンドポイントを、ルート bearer の POPOPX_ADMIN_TOKEN、または必要な plugin:<id>:ro|rw か core スコープだけを持つ pxa_ トークンのどちらかを付けて HTTP で呼びます。",
+  th: "มีผู้ใช้งานสองแบบ บัญชีบริการ POPOPX Chat จะได้การ์ดกับเมนูสูงสุด 3 รายการแล้วสั่งงานผ่าน callback ส่วน Agent จะเรียก endpoint /api/v1 ชุดเดิมผ่าน HTTP พร้อม bearer หลัก POPOPX_ADMIN_TOKEN หรือโทเคน pxa_ แบบกำหนด scope ที่พกเฉพาะ scope ที่ต้องใช้คือ plugin:<id>:ro|rw หรือ core",
+  fi: "Kuluttajia on kaksi. POPOPX Chat -palvelutili saa kortteja ja korkeintaan kolme valikkokohtaa, ja ohjaa moduulia callbackeilla. Agent kutsuu samoja /api/v1-päätepisteitä HTTP:llä joko juuri-bearerin POPOPX_ADMIN_TOKEN tai vain tarvittavan plugin:<id>:ro|rw- tai core-scopen sisältävän pxa_-tokenin kanssa.",
+  uk: "Споживачів двоє. Сервіс-акаунт POPOPX Chat отримує картки й до трьох пунктів меню та керує модулем через callback. Agent викликає ті самі ендпоінти /api/v1 по HTTP з кореневим bearer POPOPX_ADMIN_TOKEN або скоупованим токеном pxa_, що несе лише потрібну область plugin:<id>:ro|rw чи core.",
+  bg: "Потребителите са двама. Акаунтът на услугата POPOPX Chat получава карти и до три меню елемента и работи през callback. Един Agent извиква същите /api/v1 крайни точки през HTTP с основния bearer POPOPX_ADMIN_TOKEN или с токен pxa_ с обхват, носещ само нужния обхват plugin:<id>:ro|rw или core.",
+  tr: "İki tüketici var. Bir POPOPX Chat hizmet hesabı kartları ve en fazla üç menü öğesini alır, eklentiyi callback üzerinden sürer. Bir Agent aynı /api/v1 uç noktalarını HTTP üzerinden ya kök bearer POPOPX_ADMIN_TOKEN ya da yalnızca gereken plugin:<id>:ro|rw veya core kapsamını taşıyan kapsamlı bir pxa_ tokenı ile çağırır.",
+  hu: "Két fogyasztó van. Egy POPOPX Chat szolgáltatási fiók kártyákat és legfeljebb három menüpontot kap, s callbackekkel hajtja a modult. Egy Agent ugyanazokat a /api/v1 végpontokat hívja HTTP-n a gyökér POPOPX_ADMIN_TOKEN bearerrel vagy egy olyan hatókörű pxa_ tokennel, amely csak a szükséges plugin:<id>:ro|rw vagy core hatókört hordozza."
 };
 
 /* --- roadmap block -------------------------------------------------------------- */
 
 const ROADMAP_SHIPPED_NOTE: Localized<string> = {
-  en: "The two connectors that do exist are elsewhere: OpenAI-compatible chat completions under ai_agent, and read-only EVM/Solana JSON-RPC under web3_bridge. Both are in the grid above.",
-  ru: "Два реальных коннектора лежат в другом месте: совместимые с OpenAI chat completions в ai_agent и JSON-RPC только для чтения EVM/Solana в web3_bridge. Оба — в сетке выше.",
-  de: "Die beiden Konnektoren, die es wirklich gibt, stehen woanders: OpenAI-kompatible Chat-Completions unter ai_agent und schreibgeschütztes EVM/Solana-JSON-RPC unter web3_bridge — beide im Raster oben.",
-  fr: "Les deux connecteurs qui existent sont ailleurs : les chat completions compatibles OpenAI dans ai_agent, et le JSON-RPC EVM/Solana en lecture seule dans web3_bridge. Les deux sont dans la grille ci-dessus.",
-  it: "I due connettori che esistono davvero sono altrove: i chat completion compatibili OpenAI in ai_agent e il JSON-RPC EVM/Solana di sola lettura in web3_bridge. Entrambi sono nella griglia qui sopra.",
-  nl: "De twee connectors die er wél zijn, staan elders: OpenAI-compatibele chat completions onder ai_agent en alleen-lezen EVM/Solana JSON-RPC onder web3_bridge. Beide zitten in het raster hierboven.",
-  cs: "Dva konektory, které skutečně existují, jsou jinde: chat completions kompatibilní s OpenAI v ai_agent a JSON-RPC EVM/Solana jen pro čtení v web3_bridge. Oba jsou v mřížce výše.",
-  "zh-Hans": "真正存在的那两个连接器在别处：ai_agent 里的 OpenAI 兼容 chat completions，和 web3_bridge 里只读的 EVM/Solana JSON-RPC。两个都在上面的网格里。",
-  "zh-Hant": "實際存在的兩個連線器在別處：ai_agent 裡的 OpenAI 相容 chat completions，以及 web3_bridge 裡唯讀的 EVM/Solana JSON-RPC。兩個都在上面的網格裡。",
-  es: "Los dos conectores que sí existen están en otra parte: los chat completions compatibles con OpenAI en ai_agent y el JSON-RPC de solo lectura de EVM/Solana en web3_bridge. Los dos figuran en la cuadrícula de arriba.",
-  pl: "Dwa konektory, które naprawdę istnieją, są gdzie indziej: chat completions zgodne z OpenAI w ai_agent oraz JSON-RPC EVM/Solana tylko do odczytu w web3_bridge. Oba są w siatce powyżej.",
-  ja: "実在する2つのコネクタは別の場所にあります。ai_agent の OpenAI 互換 chat completions と、web3_bridge の読み取り専用 EVM/Solana JSON-RPC で、どちらも上のグリッドに載っています。",
-  th: "ตัวเชื่อมต่อที่มีอยู่จริงสองตัวอยู่คนละที่: chat completions ที่เข้ากันได้กับ OpenAI ใน ai_agent และ JSON-RPC อ่านอย่างเดียวของ EVM/Solana ใน web3_bridge ทั้งคู่อยู่ในตารางข้างบน",
-  fi: "Kaksi olemassa olevaa liitintä ovat muualla: OpenAI-yhteensopivat chat completionit kohdassa ai_agent ja vain-luku-EVM/Solana-JSON-RPC kohdassa web3_bridge. Molemmat ovat yllä olevassa ruudukossa.",
-  uk: "Два конектори, які справді існують, розташовані інакше: сумісні з OpenAI chat completions у ai_agent і JSON-RPC EVM/Solana лише для читання у web3_bridge. Обидва — у сітці вище.",
-  bg: "Двата конектора, които наистина съществуват, са другаде: chat completions, съвместими с OpenAI, в ai_agent и JSON-RPC за EVM/Solana само за четене в web3_bridge. И двата са в решетката отгоре.",
-  tr: "Gerçekten var olan iki bağlayıcı başka yerde: ai_agent altındaki OpenAI uyumlu chat completions ve web3_bridge altındaki salt okunur EVM/Solana JSON-RPC. İkisi de yukarıdaki ızgarada.",
-  hu: "A két valóban létező csatlakoztató máshol van: az OpenAI-kompatibilis chat completionek az ai_agentben és a csak olvasható EVM/Solana JSON-RPC a web3_bridge-ben — mindkettő a fenti rácsban.",
+  en: "Four connector families are already in the grid above — workflow_webhook, carddav_connector, caldav_connector and slack_discord — and with nine implemented modules that makes the catalog complete as code. None of them has been verified against a live third-party provider here; the cards describe what the code does, not a production certification.",
+  ru: "Четыре семейства коннекторов уже в сетке выше — workflow_webhook, carddav_connector, caldav_connector и slack_discord — и вместе с девятью реализованными модулями каталог полон как код. Ни одно из них не проверялось здесь на живом стороннем провайдере; карточки описывают, что делает код, а не продакшн-сертификацию.",
+  de: "Vier Konnektorfamilien stehen bereits im Raster oben — workflow_webhook, carddav_connector, caldav_connector und slack_discord —, und mit neun implementierten Modulen ist der Katalog als Code vollständig. Keine davon wurde hier gegen einen echten Drittanbieter geprüft; die Karten beschreiben, was der Code tut, keine Produktionszertifizierung.",
+  fr: "Quatre familles de connecteurs figurent déjà dans la grille ci-dessus — workflow_webhook, carddav_connector, caldav_connector et slack_discord — et avec neuf modules implémentés, le catalogue est complet en code. Aucune n’a été vérifiée ici contre un fournisseur tiers réel ; les fiches décrivent ce que fait le code, pas une certification de production.",
+  it: "Quattro famiglie di connettori sono già nella griglia qui sopra — workflow_webhook, carddav_connector, caldav_connector e slack_discord — e con nove moduli implementati il catalogo è completo come codice. Nessuna è stata verificata qui contro un provider terzo reale; le schede descrivono ciò che fa il codice, non una certificazione di produzione.",
+  nl: "Vier connectorfamilies staan al in het raster hierboven — workflow_webhook, carddav_connector, caldav_connector en slack_discord — en met negen geïmplementeerde modules is de catalogus als code compleet. Geen ervan is hier tegen een echte externe provider geverifieerd; de kaarten beschrijven wat de code doet, geen productiecertificering.",
+  cs: "Čtyři rodiny konektorů už jsou v mřížce výše — workflow_webhook, carddav_connector, caldav_connector a slack_discord — a s devíti implementovanými moduly je katalog jako kód úplný. Žádná z nich zde nebyla ověřena proti živému poskytovateli; karty popisují, co kód dělá, ne produkční certifikaci.",
+  "zh-Hans": "上面网格里已经有四个连接器家族 —— workflow_webhook、carddav_connector、caldav_connector 和 slack_discord；加上九个已实现模块，目录作为代码是完整的。它们都没有在这里对真实第三方服务做过验证；卡片描述的是代码行为，不是生产认证。",
+  "zh-Hant": "上面網格裡已經有四個連線器家族 —— workflow_webhook、carddav_connector、caldav_connector 和 slack_discord；加上九個已實作模組，目錄作為程式碼是完整的。它們都沒有在這裡對真實第三方服務做過驗證；卡片描述的是程式碼行為，不是生產認證。",
+  es: "Cuatro familias de conectores ya están en la cuadrícula de arriba — workflow_webhook, carddav_connector, caldav_connector y slack_discord — y con nueve módulos implementados el catálogo está completo como código. Ninguna se ha verificado aquí contra un proveedor externo real; las tarjetas describen lo que hace el código, no una certificación de producción.",
+  pl: "Cztery rodziny konektorów są już w siatce powyżej — workflow_webhook, carddav_connector, caldav_connector i slack_discord — a wraz z dziewięcioma zaimplementowanymi modułami katalog jest kompletny jako kod. Żadnej nie zweryfikowano tu wobec działającego dostawcy zewnętrznego; karty opisują, co robi kod, nie certyfikację produkcyjną.",
+  ja: "4つのコネクタ系統はすでに上のグリッドにあります。workflow_webhook、carddav_connector、caldav_connector、slack_discord です。9つの実装済みモジュールと合わせ、カタログはコードとして揃っています。ただし実際の第三者サービスに対してここで検証したものは一つもなく、カードが書くのはコードの動作であって本番認証ではありません。",
+  th: "มีตระกูลตัวเชื่อมต่อสี่ตระกูลอยู่ในตารางด้านบนแล้ว — workflow_webhook, carddav_connector, caldav_connector และ slack_discord — เมื่อรวมกับเก้าโมดูลที่พัฒนาแล้ว แคตตาล็อกจึงครบถ้วนในฐานะโค้ด แต่ไม่มีตัวใดถูกตรวจสอบกับผู้ให้บริการภายนอกจริงที่นี่ การ์ดอธิบายสิ่งที่โค้ดทำ ไม่ใช่การรับรองสำหรับโปรดักชัน",
+  fi: "Neljä liitinperhettä on jo yllä olevassa ruudukossa — workflow_webhook, carddav_connector, caldav_connector ja slack_discord — ja yhdeksän toteutetun moduulin kanssa luettelo on koodina täydellinen. Yhtäkään niistä ei ole täällä varmennettu oikeaa kolmannen osapuolen palvelua vastaan; kortit kuvaavat koodin toimintaa, eivät tuotantosertifikaatiota.",
+  uk: "Чотири родини конекторів уже в сітці вище — workflow_webhook, carddav_connector, caldav_connector і slack_discord — і разом із девʼятьма реалізованими модулями каталог повний як код. Жодну з них тут не перевірено проти живого стороннього провайдера; картки описують, що робить код, а не виробничу сертифікацію.",
+  bg: "Четири семейства конектори вече са в решетката отгоре — workflow_webhook, carddav_connector, caldav_connector и slack_discord — и с девет реализирани модула каталогът е пълен като код. Никое от тях не е проверено тук срещу реален външен доставчик; картите описват какво прави кодът, не производствен сертификат.",
+  tr: "Dört bağlayıcı ailesi yukarıdaki ızgarada zaten var — workflow_webhook, carddav_connector, caldav_connector ve slack_discord — ve dokuz yazılmış modülle katalog kod olarak eksiksiz. Hiçbiri burada gerçek bir üçüncü taraf sağlayıcıya karşı doğrulanmadı; kartlar kodun ne yaptığını anlatır, üretim sertifikası değil.",
+  hu: "Négy csatlakoztató-család már a fenti rácsban van — workflow_webhook, carddav_connector, caldav_connector és slack_discord —, és a kilenc megvalósított modullal a katalógus kódként teljes. Egyiket sem ellenőrizték itt valódi külső szolgáltatón; a kártyák azt írják le, mit tesz a kód, nem termelési tanúsítványt."
 };
 
 /* --- footer: route census ------------------------------------------------------- */
 
 const CENSUS_TEXT: Localized<string> = {
-  en: "Route census, re-checked 2026-11-25: 91 route registrations across main.py and the five plugins, 82 of them served with the factory defaults, 50 documented core routes. The grep recipe under the sample is the whole method.",
-  ru: "Перепись маршрутов, сверена 2026-11-25: 91 регистрация в main.py и пяти плагинах, 82 из них обслуживаются в типовом наборе, 50 документированных core-маршрутов. Рецепт grep под примером — это и есть весь метод.",
-  de: " Routenzählung, nachgeprüft am 2026-11-25: 91 Registrierungen über main.py und die fünf Plugins, 82 davon werden mit den Auslieferungsdefaults bedient, 50 dokumentierte Core-Routen. Das grep-Rezept unter dem Beispiel ist die ganze Methode.",
-  fr: "Recensement des routes, revérifié le 2026-11-25 : 91 inscriptions entre main.py et les cinq plugins, dont 82 servies avec les valeurs d’usine, et 50 routes cœur documentées. La recette grep sous l’exemple est la méthode entière.",
-  it: "Censimento delle route, ricontrollato il 2026-11-25: 91 registrazioni tra main.py e i cinque plugin, di cui 82 servite con i valori predefiniti, e 50 route core documentate. La ricetta grep sotto lʼesempio è lʼintero metodo.",
-  nl: "Routentelling, herberekend op 2026-11-25: 91 registraties over main.py en de vijf plug-ins, waarvan er 82 met de fabrieksstandaard worden bediend, en 50 gedocumenteerde core-routes. Het grep-recept onder het voorbeeld is de hele methode.",
-  cs: "Sčítání route, znovu zkontrolováno 2026-11-25: 91 registrací v main.py a v pěti modulech, z nichž 82 se servíruje ve výchozím stavu, a 50 zdokumentovaných core route. Recept grep pod ukázkou je celá metoda.",
-  "zh-Hans": "路由普查，2026-11-25 复核：main.py 与五个插件共注册 91 条路由，出厂默认状态下实际服务 82 条，其中核心路由文档化 50 条。示例下面的 grep 命令就是全部统计方法。",
-  "zh-Hant": "路由普查，2026-11-25 複核：main.py 與五個外掛共註冊 91 條路由，出廠預設狀態下實際服務 82 條，其中核心路由文件化 50 條。範例下方的 grep 指令就是全部統計方法。",
-  es: "Censo de rutas, revisado el 2026-11-25: 91 registros entre main.py y los cinco complementos, 82 de ellos servidos con los valores de fábrica y 50 rutas núcleo documentadas. La receta de grep bajo el ejemplo es todo el método.",
-  pl: "Spis tras, sprawdzony 2026-11-25: 91 rejestracji w main.py i pięciu wtyczkach, 82 z nich obsługiwanych przy domyślnych ustawieniach, 50 udokumentowanych tras rdzenia. Przepis grep pod przykładem to cała metoda.",
-  ja: "ルート調査（2026-11-25 再確認）: main と5プラグインでルート登録は 91 件、出荷時のまま実際に提供されるのは 82 件、文書化されたコアルートは 50 件。サンプル下の grep 式が調査方法のすべてです。",
-  th: "การนับเราต์ ทวนเมื่อ 2026-11-25: ลงทะเบียนไว้ 91 รายการใน main.py กับห้าปลั๊กอิน ให้บริการจริง 82 รายการเมื่อใช้ค่าโรงงาน และเราต์แกนที่มีเอกสาร 50 รายการ คำสั่ง grep ใต้ตัวตัวอย่างคือวิธีนับทั้งหมด",
-  fi: "Reittien laskenta, tarkistettu 2026-11-25: 91 rekisteröintiä tiedostoissa main.py ja viidessä lisäosassa, joista 82 palvelee oletusarvoilla, ja 50 dokumentoitua ydinreittiä. Grep-ohje esimerkin alla on koko menetelmä.",
-  uk: "Перепис маршрутів, перевірено 2026-11-25: 91 реєстрація у main.py та пʼяти плагінах, 82 з них обслуговуються за типових налаштувань, 50 документованих core-маршрутів. Рецепт grep під прикладом — увесь метод.",
-  bg: "Преброяване на маршрути, проверено на 2026-11-25: 91 регистрирания в main.py и петте плъгина, 82 от тях се обслужват с фабричните настройки, 50 документирани основни маршрути. Grep рецептата под примера е целият метод.",
-  tr: "Rota sayımı, 2026-11-25ʼte yeniden doğrulandı: main.py ve beş eklentide 91 kayıt, bunlardan 82ʼsi fabrika varsayılanlarıyla sunuluyor, 50 çekirdek rota belgelenmiş. Örneğin altındaki grep tarifi metodun tamamı.",
-  hu: "Útvonalnévsor, 2026-11-25-én újraellenőrizve: 91 regisztráció a main.py és az öt bővítmény szerint, ebből 82 a gyári alapértelmezésekkel kiszolgálva, 50 dokumentált törzsútvonal. A példa alatti grep recept a teljes módszer.",
+  en: "Route census, re-checked 2026-11-26: 129 route registrations — 59 core in main.py plus 70 plugin routes split 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 — with 89 served under the factory defaults (59 core + 30 plugin) and 57 documented core routes. The grep recipe under the sample is the whole method.",
+  ru: "Перепись маршрутов, сверена 2026-11-26: 129 регистраций — 59 core в main.py плюс 70 маршрутов плагинов с разбивкой 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; в типовом наборе обслуживаются 89 (59 core + 30 плагинов), документированных core-маршрутов 57. Рецепт grep под примером — это и есть весь метод.",
+  de: "Routenzählung, nachgeprüft am 2026-11-26: 129 Registrierungen — 59 Core-Routen in main.py plus 70 Plugin-Routen in der Aufteilung 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; mit den Auslieferungsdefaults werden 89 bedient (59 Core + 30 Plugin), dokumentiert sind 57 Core-Routen. Das grep-Rezept unter dem Beispiel ist die ganze Methode.",
+  fr: "Recensement des routes, revérifié le 2026-11-26 : 129 inscriptions — 59 routes cœur dans main.py plus 70 routes de plugin réparties 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 ; 89 sont servies avec les valeurs d’usine (59 cœur + 30 plugin) et 57 routes cœur sont documentées. La recette grep sous l’exemple est la méthode entière.",
+  it: "Censimento delle route, ricontrollato il 2026-11-26: 129 registrazioni — 59 core in main.py più 70 route dei plugin divise 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; con i valori predefiniti ne sono servite 89 (59 core + 30 plugin) e 57 route core sono documentate. La ricetta grep sotto l’esempio è l’intero metodo.",
+  nl: "Routentelling, herberekend op 2026-11-26: 129 registraties — 59 core in main.py plus 70 pluginroutes verdeeld als 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; met de fabrieksstandaard worden 89 routes bediend (59 core + 30 plugin) en 57 coreroutes zijn gedocumenteerd. Het grep-recept onder het voorbeeld is de hele methode.",
+  cs: "Sčítání route, znovu zkontrolováno 2026-11-26: 129 registrací — 59 core v main.py plus 70 rout pluginů v rozdělení 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; ve výchozím stavu se servíruje 89 (59 core + 30 pluginů) a 57 core rout je zdokumentováno. Recept grep pod ukázkou je celá metoda.",
+  "zh-Hans": "路由普查，2026-11-26 复核：共注册 129 条路由——main.py 里 59 条核心路由，加上 70 条插件路由（6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7）；出厂默认状态下实际服务 89 条（59 核心 + 30 插件），核心路由文档化 57 条。示例下面的 grep 命令就是全部统计方法。",
+  "zh-Hant": "路由普查，2026-11-26 複核：共註冊 129 條路由——main.py 裡 59 條核心路由，加上 70 條外掛路由（6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7）；出廠預設狀態下實際服務 89 條（59 核心 + 30 外掛），核心路由文件化 57 條。範例下方的 grep 指令就是全部統計方法。",
+  es: "Censo de rutas, revisado el 2026-11-26: 129 registros — 59 rutas núcleo en main.py más 70 rutas de complemento repartidas 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; con los valores de fábrica se sirven 89 (59 núcleo + 30 complemento) y hay 57 rutas núcleo documentadas. La receta de grep bajo el ejemplo es todo el método.",
+  pl: "Spis tras, sprawdzony 2026-11-26: 129 rejestracji — 59 tras rdzenia w main.py plus 70 tras wtyczek w podziale 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; przy domyślnych ustawieniach obsługiwanych jest 89 (59 rdzenia + 30 wtyczek), a udokumentowanych tras rdzenia jest 57. Przepis grep pod przykładem to cała metoda.",
+  ja: "ルート調査（2026-11-26 再確認）: 登録は 129 件 — main.py のコア 59 件に、プラグイン 70 件（6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7）を加えたものです。出荷時の既定値では 89 件（コア 59 + プラグイン 30）が提供され、文書化されたコアルートは 57 件です。サンプル下の grep 式が調査方法のすべてです。",
+  th: "การนับเราต์ ทวนเมื่อ 2026-11-26: ลงทะเบียนทั้งหมด 129 รายการ — แกน 59 รายการใน main.py บวกเราต์ปลั๊กอิน 70 รายการ แบ่งเป็น 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 เมื่อใช้ค่าโรงงานให้บริการ 89 รายการ (แกน 59 + ปลั๊กอิน 30) และมีเราต์แกนที่มีเอกสาร 57 รายการ คำสั่ง grep ใต้ตัวอย่างคือวิธีนับทั้งหมด",
+  fi: "Reittien laskenta, tarkistettu 2026-11-26: 129 rekisteröintiä — 59 ydinreittiä tiedostossa main.py ja 70 lisäosareittiä jaottelulla 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; oletusarvoilla palvelee 89 (59 ydin + 30 lisäosaa) ja dokumentoituja ydinreittejä on 57. Grep-ohje esimerkin alla on koko menetelmä.",
+  uk: "Перепис маршрутів, перевірено 2026-11-26: 129 реєстрацій — 59 core у main.py плюс 70 маршрутів плагінів із розподілом 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; за типових налаштувань обслуговується 89 (59 core + 30 плагінів), документованих core-маршрутів — 57. Рецепт grep під прикладом — увесь метод.",
+  bg: "Преброяване на маршрути, проверено на 2026-11-26: 129 регистрации — 59 основни в main.py плюс 70 маршрута на плъгини с разпределение 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; с фабричните настройки се обслужват 89 (59 основни + 30 плъгинни) и 57 основни маршрута са документирани. Grep рецептата под примера е целият метод.",
+  tr: "Rota sayımı, 2026-11-26ʼde yeniden doğrulandı: 129 kayıt — main.py içinde 59 çekirdek rota artı 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 dağılımıyla 70 eklenti rotası; fabrika varsayılanlarıyla 89 rota (59 çekirdek + 30 eklenti) sunuluyor ve 57 çekirdek rota belgelenmiş. Örneğin altındaki grep tarifi metodun tamamı.",
+  hu: "Útvonalnévsor, 2026-11-26-én újraellenőrizve: 129 regisztráció — 59 törzsútvonal a main.py-ban, plusz 70 bővítményútvonal 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 bontásban; gyári alapértelmezésekkel 89 útvonalat szolgál ki (59 törzs + 30 bővítmény), és 57 törzsútvonal dokumentált. A példa alatti grep recept a teljes módszer."
 };
 
 const FOOTER_TITLE: Localized<string> = {
@@ -1261,26 +1308,24 @@ const FOOTER_TITLE: Localized<string> = {
 };
 
 const FOOTER_BODY: Localized<string> = {
-  en: "The console calls GET /api/v1/plugins with POPOPX_ADMIN_TOKEN and gets all five gate decisions at once; each plugin also answers GET <its own prefix>/status. The three kinds of 'cannot run' stay distinguishable: a switched-off plugin answers 404 and names the exact key to flip in the body, an unfunded one answers 402 with the balance, a down node answers 503 and is retryable. One honest note: web3_bridge ships as 0 and the merchant has to turn it on.",
-  ru: "Консоль вызывает GET /api/v1/plugins с POPOPX_ADMIN_TOKEN и за один запрос получает все пять вердиктов; каждый плагин дополнительно отвечает на GET <его собственный префикс>/status. Три вида «нельзя выполнить» остаются различимыми: выключенный плагин отвечает 404 и называет в теле ответа конкретный ключ, который надо переключить; при исчерпанном балансе приходит 402 вместе с остатком; упавший узел отвечает 503, и запрос можно повторить. Честная оговорка: web3_bridge поставляется с нулём, и продавец должен включить его сам.",
-  de: "Die Konsole ruft GET /api/v1/plugins mit POPOPX_ADMIN_TOKEN auf und erhält auf einen Schlag alle fünf Tor-Entscheidungen; jedes Plugin beantwortet zusätzlich GET <eigenes Präfix>/status. Die drei Arten von „kann nicht laufen“ bleiben unterscheidbar: ein ausgeschaltetes Plugin antwortet mit 404 und nennt im Body genau den Schlüssel, der zu drehen ist, ein nicht gedecktes antwortet mit 402 samt Restguthaben, ein ausgefallener Knoten antwortet mit 503 und ist wiederholbar. Ein ehrlicher Hinweis: web3_bridge wird als 0 ausgeliefert und der Händler muss es selbst einschalten.",
-  fr: "La console appelle GET /api/v1/plugins avec POPOPX_ADMIN_TOKEN et récupère d’un coup les cinq décisions de contrôle ; chaque plugin répond aussi à GET <préfixe du plugin>/status. Les trois cas d’« impossible d’exécuter » restent distinguables : un plugin éteint répond 404 et nomme dans le corps la clé exacte à activer, un compte non approvisionné répond 402 avec le solde, un nœud hors ligne répond 503 et l’appel est rejouable. Note honnête : web3_bridge est livré à 0 et le marchand doit l’activer lui-même.",
-  it: "La console chiama GET /api/v1/plugins con POPOPX_ADMIN_TOKEN e ottiene in una volta tutte e cinque le decisioni dei controlli; ogni plugin risponde anche a GET <prefisso del plugin>/status. I tre casi di “impossibile eseguire” restano distinguibili: un plugin spento risponde 404 e indica nel corpo la chiave esatta da attivare, uno senza credito risponde 402 con il saldo, un nodo irraggiungibile risponde 503 ed è riprovabile. Una nota onesta: web3_bridge viene consegnato a 0 e tocca al negoziante attivarlo.",
-  nl: "De console roept GET /api/v1/plugins aan met POPOPX_ADMIN_TOKEN en krijgt in één keer alle vijf poortbeslissingen; elke plug-in beantwoordt bovendien GET <eigen voorvoegsel>/status. De drie soorten ‘kan niet draaien’ blijven te onderscheiden: een uitgeschakelde plug-in geeft 404 terug en noemt in de body welke sleutel erom moet, een rekening zonder krediet geeft 402 met het saldo terug, een uitgevallen knoop geeft 503 terug en is opnieuw probeerbaar. Eerlijke noot: web3_bridge wordt als 0 meegeleverd en de verkoper moet hem zelf aanzetten.",
-  cs: "Konzole volá GET /api/v1/plugins s POPOPX_ADMIN_TOKEN a najednou dostane všech pět rozhodnutí; každý plugin navíc odpovídá na GET <vlastní předpona>/status. Tři druhy „nelze spustit“ zůstávají rozlišitelné: vypnutý plugin odpoví 404 a v těle pojmenuje přesný klíč, který se má přepnout, nedotovaný odpoví 402 a zbytkem zůstatku, a spadlý uzel odpoví 503, což je opakovatelné. Upřímná poznámka: web3_bridge se dodává jako 0 a obchodník ho musí zapnout sám.",
-  "zh-Hans":
-    "控制台带 POPOPX_ADMIN_TOKEN 调 GET /api/v1/plugins，一次拿回五张门的判定；每个插件另外回答 GET <自身前缀>/status。三种「不能用」是能被区分的：开关关着答 404 并在 body 里点名要改的那颗键，余额耗尽答 402 并附上余额，节点掉线答 503 且可重试。诚实说一句：web3_bridge 出厂就是 0，需要商家自己把它打开。",
-  "zh-Hant":
-    "控制台帶 POPOPX_ADMIN_TOKEN 呼叫 GET /api/v1/plugins，一次拿回五道門的判定；每個外掛另外回答 GET <自身前綴>/status。三種「不能用」是可區分的：開關關著答 404 並在 body 裡點名要改的那個鍵，餘額耗盡答 402 並附上餘額，節點離線答 503 且可重試。誠實地說一句：web3_bridge 出廠就是 0，需要商家自己把它打開。",
-  es: "La consola llama a GET /api/v1/plugins con POPOPX_ADMIN_TOKEN y recibe de una vez las cinco decisiones de los controles; cada complemento también responde a GET <prefijo propio>/status. Los tres modos de «no puede ejecutarse» siguen siendo distinguibles: un complemento apagado responde 404 y nombra en el cuerpo la clave exacta que hay que cambiar, uno sin fondo responde 402 con el saldo, y un nodo caído responde 503 y se puede reintentar. Nota honesta: web3_bridge se entrega en 0 y el comercio debe activarlo él mismo.",
-  pl: "Konsola wywołuje GET /api/v1/plugins z POPOPX_ADMIN_TOKEN i za jednym razem dostaje wszystkie pięć decyzji bramek; każda wtyczka odpowiada też na GET <własny prefiks>/status. Trzy rodzaje „nie można uruchomić” pozostają rozróżnialne: wyłączona wtyczka zwraca 404 i wskazuje w treści dokładnie ten klucz, brak środków daje 402 razem z saldem, a padnięty węzeł zwraca 503 i żądanie można ponowić. Uczciwa uwaga: web3_bridge jest dostarczany jako 0 i sprzedawca musi sam go włączyć.",
-  ja: "コンソールは POPOPX_ADMIN_TOKEN を付けて GET /api/v1/plugins を呼び、5つのゲートの判定を一括で受け取ります。各プラグイン自身も GET <それぞれのプレフィックス>/status に応答します。「動かない」には3つの種類があり、切り分けられます。スイッチが切れていれば 404 を返し、ボディの中で書き換えるべきキーを名指しします。残高を使い果たすと 402 に残高を添えて返し、ノードが落ちていると 503 を返し、再試行ができます。正直な注記を一つ。web3_bridge は出荷時の値が 0 で、商家自身がオンにする必要があります。",
-  th: "คอนโซลเรียก GET /api/v1/plugins พร้อม POPOPX_ADMIN_TOKEN แล้วได้รับผลการตัดสินของประตูทั้งห้ามาในการเรียกครั้งเดียว; แต่ละปลั๊กอินยังตอบ GET <คำนำหน้าของตัวเอง>/status ด้วย เงื่อนไข “ใช้ไม่ได้” ทั้งสามชนิดยังแยกจากกันได้: ปลั๊กอินที่ถูกปิดจะตอบ 404 พร้อมระบุในบอดี้ว่าต้องกลับคีย์ใด, บัญชีที่ใช้เครดิตหมดตอบ 402 พร้อมยอดคงเหลือ, โหนดที่ล่มตอบ 503 และลองใหม่ได้ ข้อสังเกตแบบตรงไปตรงมา: web3_bridge ถูกส่งออกมาด้วยค่า 0 ผู้ขายต้องเปิดมันเอง",
-  fi: "Konsola kutsuu osoitetta GET /api/v1/plugins POPOPX_ADMIN_TOKENilla ja saa kerralla kaikki viisi portin päätöstä; jokainen lisäosa vastaa myös GET <oma etuliite>/status -kutsuun. Kolme ”ei voi ajaa” -tilannetta pysyvät erottuvina: pois kytketty lisäosa palauttaa 404:n ja nimeää vastausrungossa juuri sen avaimen, joka on käännettävä; loppuun kulunut lisäosa palauttaa 402:n ja jäljellä olevan saldon; kaatunut solmu palauttaa 503:n, ja kutsun voi yrittää uudelleen. Rehellinen huomio: web3_bridge toimitetaan arvolla 0, ja kauppiaan on käännettävä se itse päälle.",
-  uk: "Консоль викликає GET /api/v1/plugins із POPOPX_ADMIN_TOKEN і за один виклик отримує всі п’ять рішень воріт; кожен плагін також відповідає на GET <власний префікс>/status. Три види «не може працювати» розрізнюються: вимкнений плагін відповідає 404 і називає в тілі саме той ключ, який треба перевернути, за відсутності коштів приходить 402 разом із залишком, а відвалений вузол відповідає 503, і запит можна повторити. Справедлива примітка: web3_bridge постачається з 0, і продавець має увімкнути його сам.",
-  bg: "Конзолата извиква GET /api/v1/plugins с POPOPX_ADMIN_TOKEN и наведнъж получава всичките пет решения на контролите; всеки плъгин отговаря и на GET <собствен префикс>/status. Трите вида „не може да работи“ си остават различими: изключен плъгин отговаря с 404 и сочи в тялото точния ключ, изчерпаният баланс отговаря с 402 заедно с остатъка, а паднал възел отговаря с 503 и заявката може да се повтори. Честна бележка: web3_bridge се доставя с 0 и търговецът трябва да го включи сам.",
-  tr: "Konsol, POPOPX_ADMIN_TOKEN ile GET /api/v1/plugins çağrısını yapar ve beş kontrolün kararını tek seferde alır; her eklenti ayrıca GET <kendi ön eki>/status sorusuna da yanıt verir. “Çalışmıyor” durumlarının üç türü birbirinden ayırt edilebilir kalır: kapatılmış bir eklenti 404 döner ve gövdede çevrilecek tam anahtarı söyler, bakiyesi biten 402 ile birlikte kalan bakiyeyi döner, düşmüş bir düğüm 503 döner ve yeniden denenebilir. Dürüst bir not: web3_bridge fabrikadan 0 olarak çıkar ve tüccarın kendisi açması gerekir.",
-  hu: "A konzol POPOPX_ADMIN_TOKEN-nal hívja a GET /api/v1/plugins végpontot, és egyetlen hívással megkapja mind az öt kapu döntését; minden bővítmény a saját GET <saját előtag>/status kérésre is válaszol. A „nem fut el” három fajtája megkülönböztethető marad: a kikapcsolt bővítmény 404-gyel válaszol és a törzsben megnevezi a pontos kulcsot, a credit nélkül lévő 402-vel és az egyenleggel válaszol, a lezuhant csomópont 503-mal, az újrapróbálás pedig adott. Őszinte megjegyzés: a web3_bridge 0 értékkel érkezik, és a kereskedőnek magának kell bekapcsolnia.",
+  en: "The console calls GET /api/v1/plugins with POPOPX_ADMIN_TOKEN and gets all nine gate decisions at once; each plugin also answers GET <its own prefix>/status. The three kinds of 'cannot run' stay distinguishable: a switched-off plugin answers 404 and names the exact key to flip in the body, an unfunded one answers 402 with the balance, a down node answers 503 and is retryable. One honest note: five modules ship as 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector and slack_discord — and the merchant has to turn each one on.",
+  ru: "Консоль вызывает GET /api/v1/plugins с POPOPX_ADMIN_TOKEN и за один запрос получает все девять вердиктов; каждый плагин дополнительно отвечает на GET <его собственный префикс>/status. Три вида «нельзя выполнить» остаются различимыми: выключенный плагин отвечает 404 и называет в теле ответа конкретный ключ, который надо переключить; при исчерпанном балансе приходит 402 вместе с остатком; упавший узел отвечает 503, и запрос можно повторить. Честная оговорка: пять модулей поставляются с нулём — web3_bridge, workflow_webhook, carddav_connector, caldav_connector и slack_discord — и продавец должен включить каждый сам.",
+  de: "Die Konsole ruft GET /api/v1/plugins mit POPOPX_ADMIN_TOKEN auf und erhält auf einen Schlag alle neun Tor-Entscheidungen; jedes Plugin beantwortet zusätzlich GET <eigenes Präfix>/status. Die drei Arten von „kann nicht laufen“ bleiben unterscheidbar: ein ausgeschaltetes Plugin antwortet mit 404 und nennt im Body genau den Schlüssel, der zu drehen ist, ein nicht gedecktes antwortet mit 402 samt Restguthaben, ein ausgefallener Knoten antwortet mit 503 und ist wiederholbar. Ein ehrlicher Hinweis: fünf Module werden als 0 ausgeliefert — web3_bridge, workflow_webhook, carddav_connector, caldav_connector und slack_discord — und der Händler muss jedes selbst einschalten.",
+  fr: "La console appelle GET /api/v1/plugins avec POPOPX_ADMIN_TOKEN et récupère d’un coup les neuf décisions de contrôle ; chaque plugin répond aussi à GET <préfixe du plugin>/status. Les trois cas d’« impossible d’exécuter » restent distinguables : un plugin éteint répond 404 et nomme dans le corps la clé exacte à activer, un compte non approvisionné répond 402 avec le solde, un nœud hors ligne répond 503 et l’appel est rejouable. Note honnête : cinq modules sont livrés à 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector et slack_discord — et le marchand doit activer chacun.",
+  it: "La console chiama GET /api/v1/plugins con POPOPX_ADMIN_TOKEN e ottiene in una volta tutte e nove le decisioni dei controlli; ogni plugin risponde anche a GET <prefisso del plugin>/status. I tre casi di “impossibile eseguire” restano distinguibili: un plugin spento risponde 404 e indica nel corpo la chiave esatta da attivare, uno senza credito risponde 402 con il saldo, un nodo irraggiungibile risponde 503 ed è riprovabile. Una nota onesta: cinque moduli vengono consegnati a 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector e slack_discord — e tocca al negoziante attivare ciascuno.",
+  nl: "De console roept GET /api/v1/plugins aan met POPOPX_ADMIN_TOKEN en krijgt in één keer alle negen poortbeslissingen; elke plug-in beantwoordt bovendien GET <eigen voorvoegsel>/status. De drie soorten ‘kan niet draaien’ blijven te onderscheiden: een uitgeschakelde plug-in geeft 404 terug en noemt in de body welke sleutel erom moet, een rekening zonder krediet geeft 402 met het saldo terug, een uitgevallen knoop geeft 503 terug en is opnieuw probeerbaar. Eerlijke noot: vijf modules worden als 0 meegeleverd — web3_bridge, workflow_webhook, carddav_connector, caldav_connector en slack_discord — en de verkoper moet ze elk zelf aanzetten.",
+  cs: "Konzole volá GET /api/v1/plugins s POPOPX_ADMIN_TOKEN a najednou dostane všech devět rozhodnutí; každý plugin navíc odpovídá na GET <vlastní předpona>/status. Tři druhy „nelze spustit“ zůstávají rozlišitelné: vypnutý plugin odpoví 404 a v těle pojmenuje přesný klíč, který se má přepnout, nedotovaný odpoví 402 se zbytkem zůstatku, a spadlý uzel odpoví 503, což je opakovatelné. Upřímná poznámka: pět modulů se dodává jako 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector a slack_discord — a obchodník musí každý zapnout sám.",
+  "zh-Hans": "控制台带 POPOPX_ADMIN_TOKEN 调 GET /api/v1/plugins，一次拿回九张门的判定；每个插件另外回答 GET <自身前缀>/status。三种「不能用」是能被区分的：开关关着答 404 并在 body 里点名要改的那颗键，余额耗尽答 402 并附上余额，节点掉线答 503 且可重试。诚实说一句：有五个模块出厂就是 0 —— web3_bridge、workflow_webhook、carddav_connector、caldav_connector、slack_discord，需要商家逐个打开。",
+  "zh-Hant": "控制台帶 POPOPX_ADMIN_TOKEN 呼叫 GET /api/v1/plugins，一次拿回九道門的判定；每個外掛另外回答 GET <自身前綴>/status。三種「不能用」是可區分的：開關關著答 404 並在 body 裡點名要改的那個鍵，餘額耗盡答 402 並附上餘額，節點離線答 503 且可重試。誠實地說一句：有五個模組出廠就是 0 —— web3_bridge、workflow_webhook、carddav_connector、caldav_connector、slack_discord，需要商家逐個打開。",
+  es: "La consola llama a GET /api/v1/plugins con POPOPX_ADMIN_TOKEN y recibe de una vez las nueve decisiones de los controles; cada complemento también responde a GET <prefijo propio>/status. Los tres modos de «no puede ejecutarse» siguen siendo distinguibles: un complemento apagado responde 404 y nombra en el cuerpo la clave exacta que hay que cambiar, uno sin fondo responde 402 con el saldo, y un nodo caído responde 503 y se puede reintentar. Nota honesta: cinco módulos se entregan en 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector y slack_discord — y el comercio debe activar cada uno.",
+  pl: "Konsola wywołuje GET /api/v1/plugins z POPOPX_ADMIN_TOKEN i za jednym razem dostaje wszystkie dziewięć decyzji bramek; każda wtyczka odpowiada też na GET <własny prefiks>/status. Trzy rodzaje „nie można uruchomić” pozostają rozróżnialne: wyłączona wtyczka zwraca 404 i wskazuje w treści dokładnie ten klucz, brak środków daje 402 razem z saldem, a padnięty węzeł zwraca 503 i żądanie można ponowić. Uczciwa uwaga: pięć modułów jest dostarczanych jako 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector i slack_discord — i sprzedawca musi włączyć każdy sam.",
+  ja: "コンソールは POPOPX_ADMIN_TOKEN を付けて GET /api/v1/plugins を呼び、9つのゲートの判定を一括で受け取ります。各プラグイン自身も GET <それぞれのプレフィックス>/status に応答します。「動かない」には3つの種類があり、切り分けられます。スイッチが切れていれば 404 を返し、ボディの中で書き換えるべきキーを名指しします。残高を使い果たすと 402 に残高を添えて返し、ノードが落ちていると 503 を返し、再試行ができます。正直な注記を一つ。5つのモジュールは出荷時の値が 0 です — web3_bridge、workflow_webhook、carddav_connector、caldav_connector、slack_discord — 商家自身がそれぞれオンにする必要があります。",
+  th: "คอนโซลเรียก GET /api/v1/plugins พร้อม POPOPX_ADMIN_TOKEN แล้วได้รับผลการตัดสินของประตูทั้งเก้ามาในการเรียกครั้งเดียว; แต่ละปลั๊กอินยังตอบ GET <คำนำหน้าของตัวเอง>/status ด้วย เงื่อนไข “ใช้ไม่ได้” ทั้งสามชนิดยังแยกจากกันได้: ปลั๊กอินที่ถูกปิดจะตอบ 404 พร้อมระบุในบอดี้ว่าต้องกลับคีย์ใด, บัญชีที่ใช้เครดิตหมดตอบ 402 พร้อมยอดคงเหลือ, โหนดที่ล่มตอบ 503 และลองใหม่ได้ ข้อสังเกตแบบตรงไปตรงมา: ห้าโมดูลถูกส่งออกมาด้วยค่า 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector และ slack_discord — ผู้ขายต้องเปิดแต่ละตัวเอง",
+  fi: "Konsola kutsuu osoitetta GET /api/v1/plugins POPOPX_ADMIN_TOKENilla ja saa kerralla kaikki yhdeksän portin päätöstä; jokainen lisäosa vastaa myös GET <oma etuliite>/status -kutsuun. Kolme ”ei voi ajaa” -tilannetta pysyvät erottuvina: pois kytketty lisäosa palauttaa 404:n ja nimeää vastausrungossa juuri sen avaimen, joka on käännettävä; loppuun kulunut lisäosa palauttaa 402:n ja jäljellä olevan saldon; kaatunut solmu palauttaa 503:n, ja kutsun voi yrittää uudelleen. Rehellinen huomio: viisi moduulia toimitetaan arvolla 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector ja slack_discord — ja kauppiaan on kytkettävä jokainen itse päälle.",
+  uk: "Консоль викликає GET /api/v1/plugins із POPOPX_ADMIN_TOKEN і за один виклик отримує всі девʼять рішень воріт; кожен плагін також відповідає на GET <власний префікс>/status. Три види «не може працювати» розрізнюються: вимкнений плагін відповідає 404 і називає в тілі саме той ключ, який треба перевернути, за відсутності коштів приходить 402 разом із залишком, а відвалений вузол відповідає 503, і запит можна повторити. Справедлива примітка: пʼять модулів постачаються з 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector і slack_discord — і продавець має увімкнути кожен сам.",
+  bg: "Конзолата извиква GET /api/v1/plugins с POPOPX_ADMIN_TOKEN и наведнъж получава всичките девет решения на контролите; всеки плъгин отговаря и на GET <собствен префикс>/status. Трите вида „не може да работи“ си остават различими: изключен плъгин отговаря с 404 и сочи в тялото точния ключ, изчерпаният баланс отговаря с 402 заедно с остатъка, а паднал възел отговаря с 503 и заявката може да се повтори. Честна бележка: пет модула се доставят с 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector и slack_discord — и търговецът трябва да включи всеки сам.",
+  tr: "Konsol, POPOPX_ADMIN_TOKEN ile GET /api/v1/plugins çağrısını yapar ve dokuz kontrolün kararını tek seferde alır; her eklenti ayrıca GET <kendi ön eki>/status sorusuna da yanıt verir. “Çalışmıyor” durumlarının üç türü birbirinden ayırt edilebilir kalır: kapatılmış bir eklenti 404 döner ve gövdede çevrilecek tam anahtarı söyler, bakiyesi biten 402 ile birlikte kalan bakiyeyi döner, düşmüş bir düğüm 503 döner ve yeniden denenebilir. Dürüst bir not: beş modül fabrikadan 0 olarak çıkar — web3_bridge, workflow_webhook, carddav_connector, caldav_connector ve slack_discord — ve tüccarın her birini kendisi açması gerekir.",
+  hu: "A konzol POPOPX_ADMIN_TOKEN-nal hívja a GET /api/v1/plugins végpontot, és egyetlen hívással megkapja mind a kilenc kapu döntését; minden bővítmény a saját GET <saját előtag>/status kérésre is válaszol. A „nem fut el” három fajtája megkülönböztethető marad: a kikapcsolt bővítmény 404-gyel válaszol és a törzsben megnevezi a pontos kulcsot, a credit nélkül lévő 402-vel és az egyenleggel válaszol, a lezuhant csomópont 503-mal, az újrapróbálás pedig adott. Őszinte megjegyzés: öt modul 0 értékkel érkezik — web3_bridge, workflow_webhook, carddav_connector, caldav_connector és slack_discord —, és a kereskedőnek mindegyiket magának kell bekapcsolnia."
 };
 
 const FOOTER_SAMPLE_CAPTION: Localized<string> = {
@@ -1563,24 +1608,24 @@ const PLUGINS: readonly PluginModel[] = [
           hu: "Bemenet",
         },
         v: {
-          en: "POST /api/v1/plugins/alerts/webhook is authenticated by POPOPX_ALERT_WEBHOOK_TOKEN (empty rejects every call with 401); POPOPX_ALERT_MIN_SEVERITY defaults to warning and anything below it is stored rather than pushed.",
-          ru: "POST /api/v1/plugins/alerts/webhook проверяется токеном POPOPX_ALERT_WEBHOOK_TOKEN (пустой отбивает каждый вызов кодом 401); POPOPX_ALERT_MIN_SEVERITY по умолчанию равен warning, а всё ниже порога только сохраняется, но не рассылается.",
-          de: "POST /api/v1/plugins/alerts/webhook wird mit POPOPX_ALERT_WEBHOOK_TOKEN geprüft (leer beantwortet jeden Aufruf mit 401); POPOPX_ALERT_MIN_SEVERITY steht standardmäßig auf warning und alles darunter wird nur gespeichert, nicht gepusht.",
-          fr: "POST /api/v1/plugins/alerts/webhook est authentifié par POPOPX_ALERT_WEBHOOK_TOKEN (vide rejette chaque appel par 401) ; POPOPX_ALERT_MIN_SEVERITY vaut warning par défaut et tout ce qui est sous le seuil est stocké sans être poussé.",
-          it: "POST /api/v1/plugins/alerts/webhook è autenticato da POPOPX_ALERT_WEBHOOK_TOKEN (se vuoto rifiuta ogni chiamata con 401); POPOPX_ALERT_MIN_SEVERITY è warning per impostazione predefinita e tutto ciò che sta sotto viene archiviato invece di essere inviato.",
-          nl: "POST /api/v1/plugins/alerts/webhook wordt gecontroleerd met POPOPX_ALERT_WEBHOOK_TOKEN (leeg wijst elke aanroep af met 401); POPOPX_ALERT_MIN_SEVERITY staat standaard op warning en alles daaronder wordt alleen opgeslagen, niet gepusht.",
-          cs: "POST /api/v1/plugins/alerts/webhook se ověřuje pomocí POPOPX_ALERT_WEBHOOK_TOKEN (prázdný odmítne každé volání kódem 401); POPOPX_ALERT_MIN_SEVERITY je výchozí warning a vše pod prahem se jen uloží, neposílá.",
-          "zh-Hans": "POST /api/v1/plugins/alerts/webhook 用 POPOPX_ALERT_WEBHOOK_TOKEN 校验，令牌留空时每一次投递都答 401；POPOPX_ALERT_MIN_SEVERITY 默认 warning，低于门槛的事件只入库、不发卡。",
-          "zh-Hant": "POST /api/v1/plugins/alerts/webhook 以 POPOPX_ALERT_WEBHOOK_TOKEN 驗證，令牌留空時每次投遞都答 401；POPOPX_ALERT_MIN_SEVERITY 預設 warning，低於門檻的事件只入庫、不發卡。",
-          es: "POST /api/v1/plugins/alerts/webhook se autentica con POPOPX_ALERT_WEBHOOK_TOKEN (vacío rechaza cada llamada con 401); POPOPX_ALERT_MIN_SEVERITY vale warning de forma predeterminada y todo lo que está por debajo se almacena en lugar de enviarse.",
-          pl: "POST /api/v1/plugins/alerts/webhook jest uwierzytelniany tokenem POPOPX_ALERT_WEBHOOK_TOKEN (pusty odrzuca każde wywołanie kodem 401); POPOPX_ALERT_MIN_SEVERITY ma domyślnie wartość warning, a wszystko poniżej progu jest zapisywane zamiast wysyłane.",
-          ja: "POST /api/v1/plugins/alerts/webhook は POPOPX_ALERT_WEBHOOK_TOKEN で認証されます。トークンを空にするとすべての配信が 401 で拒否されます。POPOPX_ALERT_MIN_SEVERITY の既定値は warning で、閾値未満のイベントは保存のみ行われ、カードは届きません。",
-          th: "POST /api/v1/plugins/alerts/webhook ตรวจสอบด้วย POPOPX_ALERT_WEBHOOK_TOKEN (ถ้าเว้นว่างจะตอบ 401 กับการส่งทุกครั้ง); POPOPX_ALERT_MIN_SEVERITY ค่าเริ่มต้นคือ warning และเหตุการณ์ที่ต่ำกว่าเกณฑ์จะแค่ถูกเก็บ ไม่ถูกส่งเป็นการ์ด",
-          fi: "POST /api/v1/plugins/alerts/webhook todennetaan POPOPX_ALERT_WEBHOOK_TOKENilla (tyhjö hylkää jokaisen kutsun 401:llä); POPOPX_ALERT_MIN_SEVERITY on oletuksena warning, ja sitä matalampi tallennetaan mutta ei lähetetä.",
-          uk: "POST /api/v1/plugins/alerts/webhook автентифікується токеном POPOPX_ALERT_WEBHOOK_TOKEN (порожній відхиляє кожен виклик із 401); POPOPX_ALERT_MIN_SEVERITY типово дорівнює warning, а все нижче порогу лише зберігається, без розсилки.",
-          bg: "POST /api/v1/plugins/alerts/webhook се удостоверява с POPOPX_ALERT_WEBHOOK_TOKEN (празен отказва всяка заявка с 401); POPOPX_ALERT_MIN_SEVERITY е по подразбиране warning и всичко под прага се съхранява, вместо да се изпраща.",
-          tr: "POST /api/v1/plugins/alerts/webhook, POPOPX_ALERT_WEBHOOK_TOKEN ile doğrulanır (boş bırakılırsa her istek 401 ile reddedilir); POPOPX_ALERT_MIN_SEVERITY varsayılan olarak warning’dır ve eşiğin altındaki olaylar yalnızca saklanır, kart gönderilmez.",
-          hu: "A POST /api/v1/plugins/alerts/webhook végpontot a POPOPX_ALERT_WEBHOOK_TOKEN igazolja (üres token minden hívást 401-gyel elutasít); az POPOPX_ALERT_MIN_SEVERITY alapértelmezése warning, és a küszöb alatti események csak tárolódnak, nem kerülnek kiküldésre.",
+          en: "POST /api/v1/plugins/alerts/webhook checks the inbound token first: an empty or wrong POPOPX_ALERT_WEBHOOK_TOKEN is refused with 401 before any signature work. When POPOPX_ALERT_WEBHOOK_SECRET is set, a timestamped HMAC becomes mandatory — X-Popopx-Timestamp plus X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> over a ±300 s window, with replayed timestamps rejected. With no secret set, the token alone admits the call. POPOPX_ALERT_MIN_SEVERITY defaults to warning and anything below it is stored rather than pushed.",
+          ru: "POST /api/v1/plugins/alerts/webhook сначала проверяет входящий токен: пустой или неверный POPOPX_ALERT_WEBHOOK_TOKEN отклоняется с 401 ещё до работы с подписью. Если задан POPOPX_ALERT_WEBHOOK_SECRET, подпись с меткой времени становится обязательной — X-Popopx-Timestamp и X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> в окне ±300 с, а повторные метки отвергаются. Если секрет не задан, достаточно токена. POPOPX_ALERT_MIN_SEVERITY по умолчанию warning, и всё ниже порога только сохраняется, но не рассылается.",
+          de: "POST /api/v1/plugins/alerts/webhook prüft zuerst das eingehende Token: ein leeres oder falsches POPOPX_ALERT_WEBHOOK_TOKEN wird mit 401 abgelehnt, bevor irgendeine Signaturarbeit beginnt. Ist POPOPX_ALERT_WEBHOOK_SECRET gesetzt, wird eine zeitgestempelte HMAC verpflichtend — X-Popopx-Timestamp und X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> in einem ±300-s-Fenster, wiederholte Zeitstempel werden abgelehnt. Ohne Secret genügt das Token. POPOPX_ALERT_MIN_SEVERITY steht standardmäßig auf warning, und alles darunter wird nur gespeichert, nicht gepusht.",
+          fr: "POST /api/v1/plugins/alerts/webhook vérifie d’abord le jeton entrant : un POPOPX_ALERT_WEBHOOK_TOKEN vide ou faux est refusé par 401 avant tout travail de signature. Si POPOPX_ALERT_WEBHOOK_SECRET est défini, une HMAC horodatée devient obligatoire — X-Popopx-Timestamp et X-Popopx-Signature : v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> dans une fenêtre de ±300 s, les horodatages rejoués étant refusés. Sans secret, le jeton suffit. POPOPX_ALERT_MIN_SEVERITY vaut warning par défaut et tout ce qui est sous le seuil est stocké sans être poussé.",
+          it: "POST /api/v1/plugins/alerts/webhook controlla prima il token in ingresso: un POPOPX_ALERT_WEBHOOK_TOKEN vuoto o errato viene rifiutato con 401 prima di qualsiasi lavoro sulla firma. Se POPOPX_ALERT_WEBHOOK_SECRET è impostato, una HMAC con timestamp diventa obbligatoria — X-Popopx-Timestamp e X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> entro una finestra di ±300 s, con i timestamp ripetuti rifiutati. Senza secret basta il token. POPOPX_ALERT_MIN_SEVERITY è warning per impostazione predefinita e tutto ciò che sta sotto viene archiviato invece di essere inviato.",
+          nl: "POST /api/v1/plugins/alerts/webhook controleert eerst het inkomende token: een leeg of fout POPOPX_ALERT_WEBHOOK_TOKEN wordt met 401 geweigerd voordat er aan een handtekening wordt gerekend. Is POPOPX_ALERT_WEBHOOK_SECRET gezet, dan wordt een HMAC met tijdstempel verplicht — X-Popopx-Timestamp en X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> binnen een venster van ±300 s, waarbij herhaalde tijdstempels worden geweigerd. Zonder secret volstaat het token. POPOPX_ALERT_MIN_SEVERITY staat standaard op warning en alles daaronder wordt alleen opgeslagen, niet gepusht.",
+          cs: "POST /api/v1/plugins/alerts/webhook nejprve ověří příchozí token: prázdný nebo špatný POPOPX_ALERT_WEBHOOK_TOKEN je odmítnut kódem 401 ještě před jakoukoli prací s podpisem. Je-li nastaven POPOPX_ALERT_WEBHOOK_SECRET, stává se HMAC s časovým razítkem povinným — X-Popopx-Timestamp a X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> v okně ±300 s a opakované časové značky jsou odmítnuty. Bez secretu stačí token. POPOPX_ALERT_MIN_SEVERITY je výchozí warning a vše pod prahem se jen uloží, neposílá.",
+          "zh-Hans": "POST /api/v1/plugins/alerts/webhook 先校验入站令牌：POPOPX_ALERT_WEBHOOK_TOKEN 为空或不对，会在做任何签名计算之前就答 401。一旦配置了 POPOPX_ALERT_WEBHOOK_SECRET，带时间戳的 HMAC 就是强制的 —— X-Popopx-Timestamp 加 X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>，窗口 ±300 秒，重放的时间戳会被拒绝。没配 secret 时，令牌本身就放行。POPOPX_ALERT_MIN_SEVERITY 默认 warning，低于门槛的事件只入库、不发卡。",
+          "zh-Hant": "POST /api/v1/plugins/alerts/webhook 先驗證入站權杖：POPOPX_ALERT_WEBHOOK_TOKEN 為空或不正確，會在進行任何簽章計算之前就回 401。一旦設定 POPOPX_ALERT_WEBHOOK_SECRET，帶時間戳的 HMAC 就是強制的 —— X-Popopx-Timestamp 加 X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>，視窗 ±300 秒，重放的時戳會被拒絕。沒設 secret 時，權杖本身就放行。POPOPX_ALERT_MIN_SEVERITY 預設 warning，低於門檻的事件只入庫、不發卡。",
+          es: "POST /api/v1/plugins/alerts/webhook comprueba primero el token entrante: un POPOPX_ALERT_WEBHOOK_TOKEN vacío o incorrecto se rechaza con 401 antes de cualquier trabajo de firma. Si POPOPX_ALERT_WEBHOOK_SECRET está definido, una HMAC con marca de tiempo pasa a ser obligatoria — X-Popopx-Timestamp y X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> dentro de una ventana de ±300 s, y las marcas repetidas se rechazan. Sin secreto basta el token. POPOPX_ALERT_MIN_SEVERITY vale warning de forma predeterminada y todo lo que está por debajo se almacena en lugar de enviarse.",
+          pl: "POST /api/v1/plugins/alerts/webhook najpierw sprawdza token przychodzący: pusty lub błędny POPOPX_ALERT_WEBHOOK_TOKEN jest odrzucany kodem 401, zanim zacznie się jakakolwiek praca z podpisem. Gdy ustawiono POPOPX_ALERT_WEBHOOK_SECRET, HMAC ze znacznikiem czasu staje się obowiązkowy — X-Popopx-Timestamp oraz X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> w oknie ±300 s, a powtórzone znaczniki są odrzucane. Bez sekretu wystarcza token. POPOPX_ALERT_MIN_SEVERITY ma domyślnie wartość warning, a wszystko poniżej progu jest zapisywane zamiast wysyłane.",
+          ja: "POST /api/v1/plugins/alerts/webhook はまず受信トークンを確認します。POPOPX_ALERT_WEBHOOK_TOKEN が空か不一致なら、署名の計算に入る前に 401 で拒否されます。POPOPX_ALERT_WEBHOOK_SECRET を設定すると、タイムスタンプ付き HMAC が必須になります — X-Popopx-Timestamp と X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> を ±300 秒の窓で送り、再送されたタイムスタンプは拒否されます。secret がなければトークンだけで通ります。POPOPX_ALERT_MIN_SEVERITY の既定値は warning で、閾値未満のイベントは保存のみ行われ、カードは届きません。",
+          th: "POST /api/v1/plugins/alerts/webhook ตรวจสอบโทเคนขาเข้าก่อน: POPOPX_ALERT_WEBHOOK_TOKEN ที่ว่างหรือผิดจะถูกปฏิเสธด้วย 401 ก่อนเริ่มคำนวณลายมือชื่อใด ๆ เมื่อตั้ง POPOPX_ALERT_WEBHOOK_SECRET แล้ว HMAC พร้อมเวลาประทับจะกลายเป็นสิ่งบังคับ — X-Popopx-Timestamp กับ X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> ในหน้าต่าง ±300 วินาที และเวลาที่ถูกส่งซ้ำจะถูกปฏิเสธ หากไม่ตั้ง secret โทเคนเพียงอย่างเดียวก็ผ่านได้ POPOPX_ALERT_MIN_SEVERITY ค่าเริ่มต้นคือ warning และเหตุการณ์ที่ต่ำกว่าเกณฑ์จะแค่ถูกเก็บ ไม่ถูกส่งเป็นการ์ด",
+          fi: "POST /api/v1/plugins/alerts/webhook tarkistaa ensin saapuvan tokenin: tyhjä tai väärä POPOPX_ALERT_WEBHOOK_TOKEN hylätään 401:llä ennen mitään allekirjoitustyötä. Kun POPOPX_ALERT_WEBHOOK_SECRET on asetettu, aikaleimattu HMAC tulee pakolliseksi — X-Popopx-Timestamp ja X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> ±300 sekunnin ikkunassa, ja toistetut aikaleimat hylätään. Ilman secretiä token yksin riittää. POPOPX_ALERT_MIN_SEVERITY on oletuksena warning, ja sitä matalampi tallennetaan mutta ei lähetetä.",
+          uk: "POST /api/v1/plugins/alerts/webhook спершу перевіряє вхідний токен: порожній або хибний POPOPX_ALERT_WEBHOOK_TOKEN відхиляється з 401 ще до будь-якої роботи з підписом. Коли задано POPOPX_ALERT_WEBHOOK_SECRET, HMAC із часовою міткою стає обовʼязковим — X-Popopx-Timestamp і X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> у вікні ±300 с, а повторні мітки відхиляються. Без секрету достатньо токена. POPOPX_ALERT_MIN_SEVERITY типово дорівнює warning, а все нижче порогу лише зберігається, без розсилки.",
+          bg: "POST /api/v1/plugins/alerts/webhook първо проверява входящия токен: празен или грешен POPOPX_ALERT_WEBHOOK_TOKEN се отказва с 401 още преди каквато и да е работа с подписа. Когато е зададен POPOPX_ALERT_WEBHOOK_SECRET, HMAC с времеви печат става задължителен — X-Popopx-Timestamp и X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> в прозорец ±300 s, а повторените печати се отхвърлят. Без secret е достатъчен токенът. POPOPX_ALERT_MIN_SEVERITY е по подразбиране warning и всичко под прага се съхранява, вместо да се изпраща.",
+          tr: "POST /api/v1/plugins/alerts/webhook önce gelen tokenı denetler: boş ya da yanlış POPOPX_ALERT_WEBHOOK_TOKEN, herhangi bir imza işi başlamadan 401 ile reddedilir. POPOPX_ALERT_WEBHOOK_SECRET ayarlıysa zaman damgalı HMAC zorunlu hale gelir — ±300 saniyelik pencerede X-Popopx-Timestamp ve X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, tekrarlanan damgalar reddedilir. Secret yoksa token tek başına yeter. POPOPX_ALERT_MIN_SEVERITY varsayılan olarak warning’dır ve eşiğin altındaki olaylar yalnızca saklanır, kart gönderilmez.",
+          hu: "A POST /api/v1/plugins/alerts/webhook először a bejövő tokent ellenőrzi: az üres vagy hibás POPOPX_ALERT_WEBHOOK_TOKEN már 401-gyel elutasításra kerül, mielőtt bármi aláírásmunka elkezdődne. Ha a POPOPX_ALERT_WEBHOOK_SECRET be van állítva, az időbélyeges HMAC kötelezővé válik — X-Popopx-Timestamp és X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> ±300 másodperces ablakban, az ismételt időbélyegek pedig elutasításra kerülnek. Secret nélkül a token önmagában elég. Az POPOPX_ALERT_MIN_SEVERITY alapértelmezése warning, és a küszöb alatti események csak tárolódnak, nem kerülnek kiküldésre.",
         },
       },
       {
@@ -1671,6 +1716,7 @@ const PLUGINS: readonly PluginModel[] = [
     keys: [
       "POPOPX_PLUGIN_ALERT_OPS=1",
       "POPOPX_ALERT_WEBHOOK_TOKEN",
+      "POPOPX_ALERT_WEBHOOK_SECRET",
       "POPOPX_ALERT_MIN_SEVERITY",
       "POPOPX_ALERT_RESOLVE_KEYWORDS",
       "POPOPX_CP_PER_ALERT",
@@ -2223,6 +2269,502 @@ const PLUGINS: readonly PluginModel[] = [
     ],
     route: "POST /api/v1/plugins/web3/watchers",
   },
+  {
+    code: "Workflow Webhook",
+    file: "workflow_webhook_plugin.py",
+    category: "connectors",
+    status: "default-off",
+    accent: "warn",
+    name: {
+      en: "Workflow webhook bridge",
+      ru: "Мост workflow-вебхуков",
+      de: "Workflow-Webhook-Brücke",
+      fr: "Pont webhook workflow",
+      it: "Ponte webhook per workflow",
+      nl: "Workflow-webhookbrug",
+      cs: "Workflowová webhooková brána",
+      "zh-Hans": "工作流 Webhook 桥",
+      "zh-Hant": "工作流程 Webhook 橋",
+      es: "Puente de webhooks de workflow",
+      pl: "Most webhooków workflow",
+      ja: "ワークフロー Webhook ブリッジ",
+      th: "สะพานเว็บฮุกเวิร์กโฟลว์",
+      fi: "Työnkulun webhook-silta",
+      uk: "Міст workflow-вебхуків",
+      bg: "Мост за workflow webhook",
+      tr: "İş akışı webhook köprüsü",
+      hu: "Munkafolyamat-webhook híd",
+    },
+    hook: {
+      en: "Inbound triggers queue while the node is offline, and every outbound action lands as a card a human must approve.",
+      ru: "Входящие триггеры ждут в очереди, пока узел офлайн, а каждое исходящее действие ложится карточкой, которую должен одобрить человек.",
+      de: "Eingehende Trigger warten in der Warteschlange, solange der Knoten offline ist, und jede ausgehende Aktion landet als Karte, die ein Mensch freigeben muss.",
+      fr: "Les déclencheurs entrants patientent pendant que le nœud est hors ligne, et chaque action sortante arrive sous forme de carte qu’un humain doit approuver.",
+      it: "I trigger in ingresso restano in coda mentre il nodo è offline, e ogni azione in uscita arriva come card che una persona deve approvare.",
+      nl: "Inkomende triggers wachten in de wachtrij terwijl de node offline is, en elke uitgaande actie komt binnen als een kaart die een mens moet goedkeuren.",
+      cs: "Příchozí spouštěče čekají ve frontě, dokud je uzel offline, a každá odchozí akce skončí jako karta, kterou musí schválit člověk.",
+      "zh-Hans": "节点离线时入站触发先排队，每个出站动作都变成一张必须由人批准的卡片。",
+      "zh-Hant": "節點離線時入站觸發先排隊，每個出站動作都變成一張必須由人批准的卡片。",
+      es: "Los disparadores entrantes se ponen en cola mientras el nodo está desconectado, y cada acción saliente llega como una tarjeta que una persona debe aprobar.",
+      pl: "Przychodzące wyzwalacze czekają w kolejce, gdy węzeł jest offline, a każda akcja wychodząca trafia jako karta, którą musi zatwierdzić człowiek.",
+      ja: "ノードがオフラインの間、受信トリガーはキューで待ち、外向きのアクションは必ず人が承認するカードとして届きます。",
+      th: "ทริกเกอร์ขาเข้าจะรอในคิวขณะโหนดออฟไลน์ และทุกแอกชันขาออกจะกลายเป็นการ์ดที่ต้องให้คนอนุมัติ",
+      fi: "Saapuvat laukaisimet jonottavat, kun solmu on offline, ja jokainen lähtevä toimenpide saapuu korttina, jonka ihminen hyväksyy.",
+      uk: "Вхідні тригери чекають у черзі, поки вузол офлайн, а кожна вихідна дія надходить карткою, яку має схвалити людина.",
+      bg: "Входящите тригери чакат в опашка, докато възелът е офлайн, а всяко изходящо действие пристига като карта, която човек трябва да одобри.",
+      tr: "Düğüm çevrimdışıyken gelen tetikleyiciler kuyrukta bekler ve her giden işlem, bir insanın onaylaması gereken kart olarak düşer.",
+      hu: "A bejövő eseményindítók a csomópont offline állapotában sorban várnak, minden kimenő művelet pedig olyan kártyaként érkezik, amelyet embernek kell jóváhagynia.",
+    },
+    facts: [
+      {
+        k: Q_CREDENTIAL,
+        v: {
+          en: "Inbound calls carry X-PPX-Workflow-Token, minted at POST /api/v1/plugins/workflow/tokens with message.send or approval.request; only a SHA-256 hash is stored and the plaintext appears once. Each subscription gets its own outbound signing secret, sealed by POPOPX_VAULT_KEY and rotatable. Admin calls take the root bearer or a scoped pxa_ token.",
+          ru: "Входящие вызовы несут X-PPX-Workflow-Token, выпущенный в POST /api/v1/plugins/workflow/tokens с message.send или approval.request; на диске хранится только хеш SHA-256, а открытый текст показывается один раз. У каждой подписки свой исходящий секрет подписи, запечатанный POPOPX_VAULT_KEY и подлежащий ротации. Админ-вызовы принимают корневой bearer или scoped-токен pxa_.",
+          de: "Eingehende Aufrufe tragen X-PPX-Workflow-Token, ausgestellt unter POST /api/v1/plugins/workflow/tokens mit message.send oder approval.request; gespeichert wird nur ein SHA-256-Hash, der Klartext erscheint einmal. Jede Subscription erhält ihr eigenes ausgehendes Signaturgeheimnis, versiegelt mit POPOPX_VAULT_KEY und rotierbar. Admin-Aufrufe nehmen den Root-Bearer oder ein scoped pxa_-Token.",
+          fr: "Les appels entrants portent X-PPX-Workflow-Token, émis via POST /api/v1/plugins/workflow/tokens avec message.send ou approval.request ; seul un hachage SHA-256 est stocké et le texte en clair n’apparaît qu’une fois. Chaque abonnement a son propre secret de signature sortant, scellé par POPOPX_VAULT_KEY et rotatif. Les appels admin prennent le bearer racine ou un jeton pxa_ à portée limitée.",
+          it: "Le chiamate in ingresso portano X-PPX-Workflow-Token, emesso con POST /api/v1/plugins/workflow/tokens e gli scope message.send o approval.request; viene salvato solo un hash SHA-256 e il testo in chiaro appare una volta. Ogni sottoscrizione ha il proprio segreto di firma in uscita, sigillato con POPOPX_VAULT_KEY e ruotabile. Le chiamate admin usano il bearer root o un token pxa_ con scope.",
+          nl: "Inkomende aanroepen dragen X-PPX-Workflow-Token, aangemaakt via POST /api/v1/plugins/workflow/tokens met message.send of approval.request; alleen een SHA-256-hash wordt opgeslagen en de platte tekst verschijnt één keer. Elk abonnement krijgt zijn eigen uitgaande ondertekeningsgeheim, verzegeld met POPOPX_VAULT_KEY en roteerbaar. Admin-aanroepen gebruiken de root-bearer of een scoped pxa_-token.",
+          cs: "Příchozí volání nesou X-PPX-Workflow-Token vydaný na POST /api/v1/plugins/workflow/tokens se scope message.send nebo approval.request; ukládá se jen hash SHA-256 a otevřený text se zobrazí jednou. Každé předplatné má vlastní odchozí podpisové tajemství, zapečetěné POPOPX_VAULT_KEY a rotovatelné. Admin volání berou kořenový bearer nebo scoped token pxa_.",
+          "zh-Hans": "入站调用携带 X-PPX-Workflow-Token，在 POST /api/v1/plugins/workflow/tokens 签发，带 message.send 或 approval.request 权限；磁盘上只存 SHA-256 哈希，明文只显示一次。每个订阅各有自己的出站签名密钥，由 POPOPX_VAULT_KEY 封存、可轮换。管理调用使用根 bearer 或带作用域的 pxa_ 令牌。",
+          "zh-Hant": "入站呼叫攜帶 X-PPX-Workflow-Token，在 POST /api/v1/plugins/workflow/tokens 簽發，帶 message.send 或 approval.request 權限；磁碟上只存 SHA-256 雜湊，明文只顯示一次。每個訂閱各有自己的出站簽章密鑰，由 POPOPX_VAULT_KEY 封存、可輪換。管理呼叫使用根 bearer 或帶範圍的 pxa_ 權杖。",
+          es: "Las llamadas entrantes llevan X-PPX-Workflow-Token, emitido en POST /api/v1/plugins/workflow/tokens con message.send o approval.request; solo se guarda un hash SHA-256 y el texto claro aparece una vez. Cada suscripción tiene su propio secreto de firma saliente, sellado por POPOPX_VAULT_KEY y rotable. Las llamadas de administración usan el bearer raíz o un token pxa_ con alcance.",
+          pl: "Wywołania przychodzące niosą X-PPX-Workflow-Token, wydany w POST /api/v1/plugins/workflow/tokens z message.send lub approval.request; zapisywany jest tylko hash SHA-256, a jawny tekst pokazuje się raz. Każda subskrypcja ma własny wychodzący sekret podpisu, zapieczętowany POPOPX_VAULT_KEY i podlegający rotacji. Wywołania administracyjne używają głównego bearer albo tokenu pxa_ z zakresem.",
+          ja: "受信呼び出しは X-PPX-Workflow-Token を携え、POST /api/v1/plugins/workflow/tokens で message.send または approval.request を付けて発行します。保存されるのは SHA-256 ハッシュだけで、平文は一度しか表示されません。購読ごとに専用の送信署名秘密があり、POPOPX_VAULT_KEY で封印され、ローテーションできます。管理呼び出しはルート bearer かスコープ付き pxa_ トークンを使います。",
+          th: "การเรียกขาเข้ามาพร้อม X-PPX-Workflow-Token ที่ออกที่ POST /api/v1/plugins/workflow/tokens ด้วย message.send หรือ approval.request เก็บเพียงแฮช SHA-256 และข้อความจริงจะแสดงครั้งเดียว แต่ละ subscription มีความลับลายเซ็นขาออกของตัวเอง ผนึกด้วย POPOPX_VAULT_KEY และหมุนเวียนได้ การเรียกของผู้ดูแลใช้ bearer รากหรือโทเคน pxa_ แบบมีขอบเขต",
+          fi: "Saapuvat kutsut kantavat X-PPX-Workflow-Tokenia, joka on myönnetty osoitteessa POST /api/v1/plugins/workflow/tokens scopeilla message.send tai approval.request; tallessa on vain SHA-256-tiiviste ja selväkielinen arvo näytetään kerran. Jokaisella tilauksella on oma lähtevä allekirjoitussalaisuus, joka on sinetöity POPOPX_VAULT_KEY-avaimella ja kierrätettävissä. Ylläpitokutsut käyttävät juuri-beareria tai rajattua pxa_-tokenia.",
+          uk: "Вхідні виклики несуть X-PPX-Workflow-Token, виданий у POST /api/v1/plugins/workflow/tokens зі scope message.send або approval.request; зберігається лише хеш SHA-256, а відкритий текст показується один раз. Кожна підписка має власний вихідний секрет підпису, запечатаний POPOPX_VAULT_KEY і придатний до ротації. Адмін-виклики беруть кореневий bearer або scoped-токен pxa_.",
+          bg: "Входящите повиквания носят X-PPX-Workflow-Token, издаден на POST /api/v1/plugins/workflow/tokens с message.send или approval.request; на диска се пази само SHA-256 хеш, а откритият текст се показва веднъж. Всяко абонаментно ниво има свой изходящ подписен секрет, запечатан с POPOPX_VAULT_KEY и подлежащ на ротация. Админ повикванията използват корен bearer или scoped токен pxa_.",
+          tr: "Gelen çağrılar, POST /api/v1/plugins/workflow/tokens üzerinde message.send veya approval.request ile üretilen X-PPX-Workflow-Token taşır; diskte yalnızca SHA-256 karması tutulur ve düz metin bir kez gösterilir. Her aboneliğin kendi giden imza sırrı vardır; POPOPX_VAULT_KEY ile mühürlenir ve döndürülebilir. Yönetici çağrıları kök bearer’ı veya kapsamlı pxa_ tokenını kullanır.",
+          hu: "A bejövő hívások X-PPX-Workflow-Token fejlécet hoznak, amelyet a POST /api/v1/plugins/workflow/tokens végpont ad ki message.send vagy approval.request hatókörrel; csak SHA-256 hash tárolódik, a nyílt szöveg egyszer jelenik meg. Minden előfizetésnek saját kimenő aláírási titka van, amelyet a POPOPX_VAULT_KEY pecsétel le, és forgatható. Az admin hívások a gyökér bearer tokent vagy egy hatókörrel ellátott pxa_ tokent használnak.",
+        },
+      },
+      {
+        k: Q_DATAFLOW,
+        v: {
+          en: "An action always becomes an approval card with 批准执行 / 拒绝 and is never executed by the gateway. If the node is offline the trigger is queued as 202 queued_local or pending_approval plus standalone_gateway; outbound posts carry X-PPX-Timestamp and X-PPX-Signature: sha256=<hex>, and the audit trail holds no text, URL, token or secret.",
+          ru: "Действие всегда превращается в карточку одобрения с 批准执行 / 拒绝 и никогда не исполняется шлюзом. Если узел офлайн, триггер ставится в очередь как 202 queued_local или pending_approval плюс standalone_gateway; исходящие запросы несут X-PPX-Timestamp и X-PPX-Signature: sha256=<hex>, а аудит не хранит ни текста, ни URL, ни токена, ни секрета.",
+          de: "Eine Aktion wird immer zur Freigabekarte mit 批准执行 / 拒绝 und niemals vom Gateway ausgeführt. Ist der Knoten offline, wird der Trigger als 202 queued_local oder pending_approval plus standalone_gateway eingereiht; ausgehende Posts tragen X-PPX-Timestamp und X-PPX-Signature: sha256=<hex>, und das Audit enthält weder Text noch URL, Token oder Secret.",
+          fr: "Une action devient toujours une carte d’approbation avec 批准执行 / 拒绝 et n’est jamais exécutée par la passerelle. Si le nœud est hors ligne, le déclencheur est mis en file en 202 queued_local ou pending_approval plus standalone_gateway ; les envois sortants portent X-PPX-Timestamp et X-PPX-Signature : sha256=<hex>, et l’audit ne conserve ni texte, ni URL, ni jeton, ni secret.",
+          it: "Un’azione diventa sempre una card di approvazione con 批准执行 / 拒绝 e non viene mai eseguita dal gateway. Se il nodo è offline, il trigger viene messo in coda come 202 queued_local o pending_approval più standalone_gateway; i post in uscita portano X-PPX-Timestamp e X-PPX-Signature: sha256=<hex>, e l’audit non conserva testo, URL, token né segreto.",
+          nl: "Een actie wordt altijd een goedkeuringskaart met 批准执行 / 拒绝 en wordt nooit door de gateway uitgevoerd. Is de node offline, dan wordt de trigger in de wachtrij gezet als 202 queued_local of pending_approval plus standalone_gateway; uitgaande posts dragen X-PPX-Timestamp en X-PPX-Signature: sha256=<hex>, en de audit bevat geen tekst, URL, token of geheim.",
+          cs: "Akce se vždy změní na schvalovací kartu s 批准执行 / 拒绝 a brána ji nikdy nevykoná. Je-li uzel offline, spouštěč se zařadí do fronty jako 202 queued_local nebo pending_approval plus standalone_gateway; odchozí požadavky nesou X-PPX-Timestamp a X-PPX-Signature: sha256=<hex> a audit neuchovává text, URL, token ani tajemství.",
+          "zh-Hans": "动作永远先变成一张带 批准执行 / 拒绝 的审批卡，网关从不自己执行。节点离线时，触发以 202 queued_local 或 pending_approval 加 standalone_gateway 入队；出站请求带 X-PPX-Timestamp 和 X-PPX-Signature: sha256=<hex>，审计里不存正文、URL、令牌或密钥。",
+          "zh-Hant": "動作永遠先變成一張帶 批准執行 / 拒絕 的審批卡，閘道從不自己執行。節點離線時，觸發以 202 queued_local 或 pending_approval 加 standalone_gateway 入隊；出站請求帶 X-PPX-Timestamp 和 X-PPX-Signature: sha256=<hex>，稽核裡不存正文、URL、權杖或密鑰。",
+          es: "Una acción siempre se convierte en una tarjeta de aprobación con 批准执行 / 拒绝 y la pasarela nunca la ejecuta. Si el nodo está desconectado, el disparador se encola como 202 queued_local o pending_approval más standalone_gateway; los envíos salientes llevan X-PPX-Timestamp y X-PPX-Signature: sha256=<hex>, y la auditoría no guarda texto, URL, token ni secreto.",
+          pl: "Akcja zawsze staje się kartą zatwierdzenia z 批准执行 / 拒绝 i nigdy nie jest wykonywana przez bramę. Gdy węzeł jest offline, wyzwalacz trafia do kolejki jako 202 queued_local lub pending_approval plus standalone_gateway; wychodzące żądania niosą X-PPX-Timestamp i X-PPX-Signature: sha256=<hex>, a audyt nie przechowuje tekstu, URL-a, tokenu ani sekretu.",
+          ja: "アクションは必ず 批准执行 / 拒绝 を備えた承認カードになり、ゲートウェイが自ら実行することはありません。ノードがオフラインなら、トリガーは 202 queued_local または pending_approval と standalone_gateway としてキューに入ります。送信リクエストは X-PPX-Timestamp と X-PPX-Signature: sha256=<hex> を携え、監査には本文も URL もトークンも秘密も残りません。",
+          th: "แอกชันจะกลายเป็นการ์ดอนุมัติที่มี 批准执行 / 拒绝 เสมอ และเกตเวย์ไม่เคยลงมือทำเอง เมื่อโหนดออฟไลน์ ทริกเกอร์จะเข้าคิวเป็น 202 queued_local หรือ pending_approval พร้อม standalone_gateway คำขอขาออกมี X-PPX-Timestamp และ X-PPX-Signature: sha256=<hex> และบันทึกตรวจสอบไม่เก็บข้อความ URL โทเคน หรือความลับ",
+          fi: "Toimenpide muuttuu aina hyväksyntäkortiksi, jossa on 批准执行 / 拒绝, eikä yhdyskäytävä koskaan suorita sitä itse. Jos solmu on offline, laukaisin jonotetaan tilana 202 queued_local tai pending_approval sekä standalone_gateway; lähtevät pyynnöt kantavat X-PPX-Timestamp- ja X-PPX-Signature: sha256=<hex> -otsikot, eikä auditointi säilytä tekstiä, URL:ää, tokenia tai salaisuutta.",
+          uk: "Дія завжди стає карткою схвалення з 批准执行 / 拒绝, і шлюз ніколи не виконує її сам. Якщо вузол офлайн, тригер ставиться в чергу як 202 queued_local або pending_approval плюс standalone_gateway; вихідні запити несуть X-PPX-Timestamp і X-PPX-Signature: sha256=<hex>, а аудит не зберігає тексту, URL, токена чи секрету.",
+          bg: "Действието винаги става карта за одобрение с 批准执行 / 拒绝 и шлюзът никога не го изпълнява сам. Ако възелът е офлайн, тригерът се поставя в опашка като 202 queued_local или pending_approval плюс standalone_gateway; изходящите заявки носят X-PPX-Timestamp и X-PPX-Signature: sha256=<hex>, а одитът не пази текст, URL, токен или секрет.",
+          tr: "Bir işlem her zaman 批准执行 / 拒绝 içeren bir onay kartına dönüşür ve ağ geçidi tarafından asla kendiliğinden çalıştırılmaz. Düğüm çevrimdışıysa tetikleyici 202 queued_local veya pending_approval ve standalone_gateway olarak kuyruğa alınır; giden istekler X-PPX-Timestamp ve X-PPX-Signature: sha256=<hex> taşır, denetim kaydında metin, URL, token veya sır tutulmaz.",
+          hu: "A művelet mindig jóváhagyó kártyává válik 批准执行 / 拒绝 gombokkal, és az átjáró soha nem hajtja végre maga. Ha a csomópont offline, az eseményindító 202 queued_local vagy pending_approval állapotban, standalone_gateway kíséretében sorba kerül; a kimenő kérések X-PPX-Timestamp és X-PPX-Signature: sha256=<hex> fejlécet hordoznak, az audit pedig nem tárol szöveget, URL-t, tokent vagy titkot.",
+        },
+      },
+      {
+        k: Q_LIMIT,
+        v: {
+          en: "20 subscriptions and 50 live tokens, 4,000 characters per text; 8 consecutive failures open a 15-minute circuit; deliveries are retained 30 days; a call that was neither sent nor queued returns 502 and is refunded.",
+          ru: "20 подписок и 50 живых токенов, 4 000 символов на текст; 8 сбоев подряд открывают 15-минутный предохранитель; доставки хранятся 30 дней; вызов, который не был ни отправлен, ни поставлен в очередь, возвращает 502 и кредиты.",
+          de: "20 Subscriptions und 50 aktive Tokens, 4.000 Zeichen pro Text; 8 Fehler in Folge öffnen eine 15-minütige Sicherung; Zustellungen bleiben 30 Tage; ein Aufruf, der weder gesendet noch eingereiht wurde, liefert 502 und wird erstattet.",
+          fr: "20 abonnements et 50 jetons actifs, 4 000 caractères par texte ; 8 échecs consécutifs ouvrent un disjoncteur de 15 minutes ; les livraisons sont conservées 30 jours ; un appel ni envoyé ni mis en file renvoie 502 et est remboursé.",
+          it: "20 sottoscrizioni e 50 token attivi, 4.000 caratteri per testo; 8 errori consecutivi aprono un interruttore di 15 minuti; le consegne restano 30 giorni; una chiamata né inviata né accodata restituisce 502 ed è rimborsata.",
+          nl: "20 abonnementen en 50 actieve tokens, 4.000 tekens per tekst; 8 opeenvolgende fouten openen een onderbreker van 15 minuten; leveringen blijven 30 dagen; een aanroep die niet is verzonden en niet in de wachtrij staat, geeft 502 en wordt terugbetaald.",
+          cs: "20 předplatných a 50 živých tokenů, 4 000 znaků na text; 8 selhání v řadě otevře 15minutový jistič; doručení se uchovávají 30 dní; volání, které se ani neodeslalo, ani nezařadilo do fronty, vrátí 502 a částka se vrátí.",
+          "zh-Hans": "20 个订阅、50 个存活令牌，每条正文 4,000 字符；连续 8 次失败打开 15 分钟熔断；投递保留 30 天；既没发出也没入队的调用返回 502 并退款。",
+          "zh-Hant": "20 個訂閱、50 個存活權杖，每條正文 4,000 字元；連續 8 次失敗開啟 15 分鐘熔斷；投遞保留 30 天；既沒送出也沒入隊的呼叫回 502 並退款。",
+          es: "20 suscripciones y 50 tokens vivos, 4.000 caracteres por texto; 8 fallos seguidos abren un cortacircuitos de 15 minutos; las entregas se conservan 30 días; una llamada que no se envió ni se encoló devuelve 502 y se reembolsa.",
+          pl: "20 subskrypcji i 50 żywych tokenów, 4 000 znaków na tekst; 8 kolejnych błędów otwiera 15-minutowy bezpiecznik; dostawy są przechowywane 30 dni; wywołanie, które nie zostało ani wysłane, ani zakolejkowane, zwraca 502 i jest zwracane.",
+          ja: "購読 20 件、有効トークン 50 件、本文は 4,000 文字まで。8 回連続で失敗すると 15 分間のサーキットブレーカーが開きます。配信は 30 日間保持され、送信もキュー投入もできなかった呼び出しは 502 を返して返金されます。",
+          th: "20 subscription และ 50 โทเคนที่ยังใช้งาน ข้อความละ 4,000 ตัวอักษร ผิดพลาดติดกัน 8 ครั้งจะเปิดเซอร์กิต 15 นาที เก็บข้อมูลส่ง 30 วัน และการเรียกที่ไม่ได้ส่งและไม่ได้เข้าคิวจะคืน 502 พร้อมคืนเครดิต",
+          fi: "20 tilausta ja 50 elävää tokenia, 4 000 merkkiä tekstiä kohden; 8 peräkkäistä virhettä avaa 15 minuutin katkaisijan; toimitukset säilytetään 30 päivää; kutsu, jota ei lähetetty eikä jonotettu, palauttaa 502:n ja hyvitetään.",
+          uk: "20 підписок і 50 живих токенів, 4 000 символів на текст; 8 збоїв поспіль відкривають 15-хвилинний запобіжник; доставки зберігаються 30 днів; виклик, який не вдалося ні надіслати, ні поставити в чергу, повертає 502 і кошти.",
+          bg: "20 абонамента и 50 живи токена, 4 000 знака на текст; 8 последователни грешки отварят 15-минутен предпазител; доставките се пазят 30 дни; повикване, което не е нито изпратено, нито в опашка, връща 502 и се възстановява.",
+          tr: "20 abonelik ve 50 canlı token, metin başına 4.000 karakter; üst üste 8 hata 15 dakikalık devre kesiciyi açar; teslimatlar 30 gün saklanır; ne gönderilen ne kuyruğa alınan çağrı 502 döner ve iade edilir.",
+          hu: "20 előfizetés és 50 élő token, szövegenként 4 000 karakter; 8 egymást követő hiba 15 perces áramkör-megszakítót nyit; a kézbesítések 30 napig megmaradnak; a sem elküldött, sem sorba állított hívás 502-t ad és visszatérítésre kerül.",
+        },
+      },
+    ],
+    keys: [
+      "POPOPX_PLUGIN_WORKFLOW_WEBHOOK=0",
+      "POPOPX_VAULT_KEY",
+      "POPOPX_CP_PER_WORKFLOW_EVENT",
+    ],
+    route: "POST /api/v1/workflows/trigger",
+  },
+  {
+    code: "CardDAV",
+    file: "carddav_connector.py",
+    category: "connectors",
+    status: "default-off",
+    accent: "warn",
+    name: {
+      en: "CardDAV contact query",
+      ru: "Запрос контактов CardDAV",
+      de: "CardDAV-Kontaktabfrage",
+      fr: "Requête de contacts CardDAV",
+      it: "Interrogazione contatti CardDAV",
+      nl: "CardDAV-contactzoekopdracht",
+      cs: "Dotaz na kontakty CardDAV",
+      "zh-Hans": "CardDAV 联系人查询",
+      "zh-Hant": "CardDAV 聯絡人查詢",
+      es: "Consulta de contactos CardDAV",
+      pl: "Zapytanie o kontakty CardDAV",
+      ja: "CardDAV 連絡先照会",
+      th: "การสอบถามผู้ติดต่อ CardDAV",
+      fi: "CardDAV-yhteystietokysely",
+      uk: "Запит контактів CardDAV",
+      bg: "Заявка за контакти CardDAV",
+      tr: "CardDAV kişi sorgusu",
+      hu: "CardDAV-névjegylekérdezés",
+    },
+    hook: {
+      en: "Your address book answers five contacts at a time, and only the fields you allowlist ever leave it.",
+      ru: "Адресная книга отвечает по пять контактов за раз, и наружу уходят только поля из вашего белого списка.",
+      de: "Das Adressbuch antwortet mit fünf Kontakten pro Anfrage, und nur die Felder auf deiner Whitelist verlassen es überhaupt.",
+      fr: "Le carnet répond cinq contacts à la fois, et seuls les champs de votre liste blanche en sortent.",
+      it: "La rubrica risponde cinque contatti alla volta e solo i campi della tua whitelist ne escono.",
+      nl: "Het adresboek antwoordt vijf contacten per keer, en alleen de velden op je whitelist verlaten het.",
+      cs: "Adresář odpovídá pěti kontakty najednou a opustí ho jen pole na vašem seznamu povolených.",
+      "zh-Hans": "通讯录一次只答五个联系人，而且只有你放行的字段才出得来。",
+      "zh-Hant": "通訊錄一次只答五個聯絡人，而且只有你放行的欄位才出得來。",
+      es: "La libreta responde cinco contactos cada vez, y solo salen de ella los campos que incluyas en la lista blanca.",
+      pl: "Książka adresowa odpowiada pięcioma kontaktami naraz i wychodzą z niej tylko pola z twojej białej listy.",
+      ja: "アドレス帳は一度に 5 件だけ答え、許可リストに入れた項目しか外へ出ません。",
+      th: "สมุดที่อยู่ตอบครั้งละห้ารายชื่อ และมีเพียงฟิลด์ที่คุณอนุญาตเท่านั้นที่ออกมาได้",
+      fi: "Osoitekirja vastaa viisi yhteystietoa kerrallaan, ja siitä lähtevät vain sallitut kentät.",
+      uk: "Адресна книга відповідає пʼятьма контактами за раз, і назовні виходять лише поля з вашого білого списку.",
+      bg: "Адресникът отговаря с пет контакта наведнъж и от него излизат само полетата от вашия бял списък.",
+      tr: "Adres defteri her seferinde beş kişi yanıtlar ve yalnızca izin listenizdeki alanlar dışarı çıkar.",
+      hu: "A címjegyzék alkalmanként öt névjegyet ad, és csak a fehérlistára tett mezők hagyják el.",
+    },
+    facts: [
+      {
+        k: Q_CREDENTIAL,
+        v: {
+          en: "PUT /api/v1/plugins/carddav/config stores the CardDAV password sealed by POPOPX_VAULT_KEY; admin calls use the root POPOPX_ADMIN_TOKEN bearer or a scoped pxa_ token.",
+          ru: "PUT /api/v1/plugins/carddav/config сохраняет пароль CardDAV запечатанным через POPOPX_VAULT_KEY; админ-вызовы используют корневой bearer POPOPX_ADMIN_TOKEN или scoped-токен pxa_.",
+          de: "PUT /api/v1/plugins/carddav/config speichert das CardDAV-Passwort mit POPOPX_VAULT_KEY versiegelt; Admin-Aufrufe nutzen den Root-Bearer POPOPX_ADMIN_TOKEN oder ein scoped pxa_-Token.",
+          fr: "PUT /api/v1/plugins/carddav/config stocke le mot de passe CardDAV scellé par POPOPX_VAULT_KEY ; les appels admin utilisent le bearer racine POPOPX_ADMIN_TOKEN ou un jeton pxa_ à portée limitée.",
+          it: "PUT /api/v1/plugins/carddav/config salva la password CardDAV sigillata con POPOPX_VAULT_KEY; le chiamate admin usano il bearer root POPOPX_ADMIN_TOKEN o un token pxa_ con scope.",
+          nl: "PUT /api/v1/plugins/carddav/config slaat het CardDAV-wachtwoord verzegeld met POPOPX_VAULT_KEY op; admin-aanroepen gebruiken de root-bearer POPOPX_ADMIN_TOKEN of een scoped pxa_-token.",
+          cs: "PUT /api/v1/plugins/carddav/config ukládá heslo CardDAV zapečetěné pomocí POPOPX_VAULT_KEY; admin volání používají kořenový bearer POPOPX_ADMIN_TOKEN nebo scoped token pxa_.",
+          "zh-Hans": "PUT /api/v1/plugins/carddav/config 保存 CardDAV 密码，用 POPOPX_VAULT_KEY 封存；管理调用使用根 POPOPX_ADMIN_TOKEN bearer 或带作用域的 pxa_ 令牌。",
+          "zh-Hant": "PUT /api/v1/plugins/carddav/config 儲存 CardDAV 密碼，用 POPOPX_VAULT_KEY 封存；管理呼叫使用根 POPOPX_ADMIN_TOKEN bearer 或帶範圍的 pxa_ 權杖。",
+          es: "PUT /api/v1/plugins/carddav/config guarda la contraseña de CardDAV sellada con POPOPX_VAULT_KEY; las llamadas de administración usan el bearer raíz POPOPX_ADMIN_TOKEN o un token pxa_ con alcance.",
+          pl: "PUT /api/v1/plugins/carddav/config zapisuje hasło CardDAV zapieczętowane przez POPOPX_VAULT_KEY; wywołania administracyjne używają głównego bearer POPOPX_ADMIN_TOKEN lub tokenu pxa_ z zakresem.",
+          ja: "PUT /api/v1/plugins/carddav/config は CardDAV のパスワードを POPOPX_VAULT_KEY で封印して保存します。管理呼び出しはルートの POPOPX_ADMIN_TOKEN bearer か、スコープ付き pxa_ トークンを使います。",
+          th: "PUT /api/v1/plugins/carddav/config เก็บรหัสผ่าน CardDAV ที่ผนึกด้วย POPOPX_VAULT_KEY การเรียกของผู้ดูแลใช้ bearer POPOPX_ADMIN_TOKEN รากหรือโทเคน pxa_ แบบมีขอบเขต",
+          fi: "PUT /api/v1/plugins/carddav/config tallentaa CardDAV-salasanan POPOPX_VAULT_KEY-avaimella sinetöitynä; ylläpitokutsut käyttävät juuri-POPOPX_ADMIN_TOKEN-beareria tai rajattua pxa_-tokenia.",
+          uk: "PUT /api/v1/plugins/carddav/config зберігає пароль CardDAV запечатаним через POPOPX_VAULT_KEY; адмін-виклики використовують кореневий bearer POPOPX_ADMIN_TOKEN або scoped-токен pxa_.",
+          bg: "PUT /api/v1/plugins/carddav/config пази паролата за CardDAV, запечатана с POPOPX_VAULT_KEY; админ повикванията използват корен bearer POPOPX_ADMIN_TOKEN или scoped токен pxa_.",
+          tr: "PUT /api/v1/plugins/carddav/config, CardDAV parolasını POPOPX_VAULT_KEY ile mühürleyerek saklar; yönetici çağrıları kök POPOPX_ADMIN_TOKEN bearer’ını veya kapsamlı pxa_ tokenını kullanır.",
+          hu: "A PUT /api/v1/plugins/carddav/config a CardDAV-jelszót a POPOPX_VAULT_KEY kulccsal lepecsételve tárolja; az admin hívások a gyökér POPOPX_ADMIN_TOKEN bearert vagy egy hatókörrel ellátott pxa_ tokent használnak.",
+        },
+      },
+      {
+        k: Q_DATAFLOW,
+        v: {
+          en: "POST /api/v1/plugins/carddav/query returns display_name plus at most 8 allowed fields and 10 tags; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER and X-* are refused, home/private TEL and EMAIL are dropped, and no UID, href or raw vCard comes back.",
+          ru: "POST /api/v1/plugins/carddav/query возвращает display_name, не более 8 разрешённых полей и 10 тегов; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER и X-* отвергаются, домашние и private TEL/EMAIL выбрасываются, а UID, href и сырой vCard не возвращаются.",
+          de: "POST /api/v1/plugins/carddav/query liefert display_name plus höchstens 8 erlaubte Felder und 10 Tags; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER und X-* werden abgelehnt, private bzw. home-TEL und -EMAIL verworfen, und weder UID noch href noch rohe vCard kommen zurück.",
+          fr: "POST /api/v1/plugins/carddav/query renvoie display_name, au plus 8 champs autorisés et 10 étiquettes ; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER et X-* sont refusés, les TEL et EMAIL home/private écartés, et ni UID, ni href, ni vCard brute ne reviennent.",
+          it: "POST /api/v1/plugins/carddav/query restituisce display_name, al massimo 8 campi consentiti e 10 tag; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER e X-* vengono rifiutati, i TEL ed EMAIL home/private scartati, e non tornano né UID né href né vCard grezza.",
+          nl: "POST /api/v1/plugins/carddav/query geeft display_name plus hoogstens 8 toegestane velden en 10 tags; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER en X-* worden geweigerd, home/private TEL en EMAIL weggegooid, en geen UID, href of ruwe vCard komt terug.",
+          cs: "POST /api/v1/plugins/carddav/query vrací display_name, nejvýše 8 povolených polí a 10 štítků; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER a X-* se odmítají, TEL a EMAIL typu home/private se zahazují a UID, href ani surová vCard se nevracejí.",
+          "zh-Hans": "POST /api/v1/plugins/carddav/query 只回 display_name、最多 8 个放行字段和 10 个标签；NOTE、ADR、BDAY、PHOTO、KEY、GEO、TZ、LABEL、GENDER 与 X-* 一律拒绝，home/private 的 TEL 和 EMAIL 直接丢弃，UID、href 和原始 vCard 都不返回。",
+          "zh-Hant": "POST /api/v1/plugins/carddav/query 只回 display_name、最多 8 個放行欄位和 10 個標籤；NOTE、ADR、BDAY、PHOTO、KEY、GEO、TZ、LABEL、GENDER 與 X-* 一律拒絕，home/private 的 TEL 和 EMAIL 直接丟棄，UID、href 和原始 vCard 都不回傳。",
+          es: "POST /api/v1/plugins/carddav/query devuelve display_name, como máximo 8 campos permitidos y 10 etiquetas; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER y X-* se rechazan, los TEL y EMAIL home/private se descartan, y no vuelven UID, href ni vCard en bruto.",
+          pl: "POST /api/v1/plugins/carddav/query zwraca display_name, najwyżej 8 dozwolonych pól i 10 tagów; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER i X-* są odrzucane, TEL i EMAIL home/private odrzucane, a UID, href ani surowa vCard nie wracają.",
+          ja: "POST /api/v1/plugins/carddav/query は display_name と、許可された最大 8 項目・10 タグだけを返します。NOTE、ADR、BDAY、PHOTO、KEY、GEO、TZ、LABEL、GENDER、X-* は拒否し、home/private の TEL と EMAIL は捨て、UID も href も生の vCard も返しません。",
+          th: "POST /api/v1/plugins/carddav/query คืน display_name พร้อมฟิลด์ที่อนุญาตไม่เกิน 8 ฟิลด์และแท็ก 10 แท็ก NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER และ X-* ถูกปฏิเสธ TEL กับ EMAIL แบบ home/private ถูกทิ้ง และไม่คืน UID, href หรือ vCard ดิบ",
+          fi: "POST /api/v1/plugins/carddav/query palauttaa display_name-kentän sekä enintään 8 sallittua kenttää ja 10 tagia; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER ja X-* hylätään, home/private-TEL ja -EMAIL pudotetaan, eikä UID, href tai raaka vCard palaa.",
+          uk: "POST /api/v1/plugins/carddav/query повертає display_name, щонайбільше 8 дозволених полів і 10 тегів; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER та X-* відхиляються, TEL і EMAIL типу home/private відкидаються, а UID, href і сирий vCard не повертаються.",
+          bg: "POST /api/v1/plugins/carddav/query връща display_name, най-много 8 разрешени полета и 10 тага; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER и X-* се отхвърлят, home/private TEL и EMAIL се изхвърлят, а UID, href и суров vCard не се връщат.",
+          tr: "POST /api/v1/plugins/carddav/query display_name ile en fazla 8 izinli alan ve 10 etiket döndürür; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER ve X-* reddedilir, home/private TEL ve EMAIL atılır, UID, href ve ham vCard geri dönmez.",
+          hu: "A POST /api/v1/plugins/carddav/query display_name-t, legfeljebb 8 engedélyezett mezőt és 10 címkét ad vissza; a NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER és X-* elutasításra kerül, a home/private TEL és EMAIL kimarad, UID, href és nyers vCard pedig nem jön vissza.",
+        },
+      },
+      {
+        k: Q_LIMIT,
+        v: {
+          en: "Five contacts per query, an 80-character search term and 240-character field values; nothing is cached, and a failed query is refunded.",
+          ru: "Пять контактов на запрос, поисковый запрос до 80 символов и значения полей до 240 символов; ничего не кешируется, а неудавшийся запрос возвращает кредиты.",
+          de: "Fünf Kontakte pro Abfrage, ein Suchbegriff bis 80 Zeichen und Feldwerte bis 240 Zeichen; nichts wird zwischengespeichert, und eine fehlgeschlagene Abfrage wird erstattet.",
+          fr: "Cinq contacts par requête, un terme de recherche de 80 caractères et des valeurs de champ de 240 caractères ; rien n’est mis en cache et une requête échouée est remboursée.",
+          it: "Cinque contatti per interrogazione, un termine di ricerca di 80 caratteri e valori di campo di 240 caratteri; nulla viene messo in cache e un’interrogazione fallita è rimborsata.",
+          nl: "Vijf contacten per zoekopdracht, een zoekterm van 80 tekens en veldwaarden van 240 tekens; niets wordt gecachet en een mislukte zoekopdracht wordt terugbetaald.",
+          cs: "Pět kontaktů na dotaz, hledaný výraz do 80 znaků a hodnoty polí do 240 znaků; nic se nekešuje a neúspěšný dotaz se vrátí.",
+          "zh-Hans": "每次查询五个联系人，搜索词 80 字符、字段值 240 字符；不缓存任何结果，查询失败就退款。",
+          "zh-Hant": "每次查詢五個聯絡人，搜尋詞 80 字元、欄位值 240 字元；不快取任何結果，查詢失敗就退款。",
+          es: "Cinco contactos por consulta, un término de búsqueda de 80 caracteres y valores de campo de 240 caracteres; no se cachea nada y una consulta fallida se reembolsa.",
+          pl: "Pięć kontaktów na zapytanie, wyszukiwane hasło do 80 znaków i wartości pól do 240 znaków; nic nie jest cache’owane, a nieudane zapytanie jest zwracane.",
+          ja: "1 回の照会で連絡先 5 件、検索語 80 文字、項目値 240 文字まで。何もキャッシュせず、失敗した照会は返金されます。",
+          th: "ห้ารายชื่อต่อการสอบถาม คำค้นไม่เกิน 80 ตัวอักษร และค่าฟิลด์ไม่เกิน 240 ตัวอักษร ไม่มีแคช และการสอบถามที่ล้มเหลวจะคืนเครดิต",
+          fi: "Viisi yhteystietoa kyselyä kohden, 80 merkin hakusana ja 240 merkin kenttäarvot; mitään ei välimuistiteta ja epäonnistunut kysely hyvitetään.",
+          uk: "Пʼять контактів на запит, пошуковий термін до 80 символів і значення полів до 240 символів; нічого не кешується, а невдалий запит повертає кошти.",
+          bg: "Пет контакта на заявка, дума за търсене до 80 знака и стойности на полетата до 240 знака; нищо не се кешира и неуспешната заявка се възстановява.",
+          tr: "Sorgu başına beş kişi, 80 karakterlik arama terimi ve 240 karakterlik alan değerleri; hiçbir şey önbelleğe alınmaz ve başarısız sorgu iade edilir.",
+          hu: "Lekérdezésenként öt névjegy, 80 karakteres keresőkifejezés és 240 karakteres mezőértékek; semmi nem kerül gyorsítótárba, a sikertelen lekérdezés pedig visszatérítésre kerül.",
+        },
+      },
+    ],
+    keys: [
+      "POPOPX_PLUGIN_CARDDAV_CONNECTOR=0",
+      "POPOPX_VAULT_KEY",
+      "POPOPX_CP_PER_CARDDAV_QUERY",
+    ],
+    route: "POST /api/v1/plugins/carddav/query",
+  },
+  {
+    code: "CalDAV",
+    file: "caldav_connector.py",
+    category: "connectors",
+    status: "default-off",
+    accent: "warn",
+    name: {
+      en: "CalDAV free/busy probe",
+      ru: "Проба занятости CalDAV",
+      de: "CalDAV-Free/Busy-Abfrage",
+      fr: "Sonde de disponibilité CalDAV",
+      it: "Sonda di disponibilità CalDAV",
+      nl: "CalDAV-free/busy-peiling",
+      cs: "Sonda volna/zanořeno CalDAV",
+      "zh-Hans": "CalDAV 空闲查询",
+      "zh-Hant": "CalDAV 空閒查詢",
+      es: "Sonda de disponibilidad CalDAV",
+      pl: "Sonda wolny/zajęty CalDAV",
+      ja: "CalDAV 空き時間照会",
+      th: "การตรวจเวลาว่าง CalDAV",
+      fi: "CalDAV-vapaa/varattu-tiedustelu",
+      uk: "Перевірка зайнятості CalDAV",
+      bg: "CalDAV проба за свободно/заето",
+      tr: "CalDAV boş/dolu sorgusu",
+      hu: "CalDAV szabad/foglalt próba",
+    },
+    hook: {
+      en: "It answers when you are free, not what you are doing: titles, guests, descriptions and rooms never leave the calendar.",
+      ru: "Он отвечает, когда вы свободны, а не что вы делаете: названия, гости, описания и комнаты не покидают календарь.",
+      de: "Es antwortet, wann du frei bist, nicht was du tust: Titel, Gäste, Beschreibungen und Räume verlassen den Kalender nie.",
+      fr: "Il répond quand vous êtes libre, pas ce que vous faites : titres, invités, descriptions et salles ne quittent jamais le calendrier.",
+      it: "Risponde quando sei libero, non cosa stai facendo: titoli, invitati, descrizioni e sale non lasciano mai il calendario.",
+      nl: "Het antwoordt wanneer je vrij bent, niet wat je doet: titels, gasten, beschrijvingen en ruimtes verlaten de agenda nooit.",
+      cs: "Odpovídá, kdy máte volno, ne co děláte: názvy, hosté, popisy ani místnosti kalendář nikdy neopustí.",
+      "zh-Hans": "它只答你什么时候有空，不答你在做什么：标题、来宾、描述和会议室都留在日历里。",
+      "zh-Hant": "它只答你什麼時候有空，不答你在做什麼：標題、來賓、描述和會議室都留在日曆裡。",
+      es: "Responde cuándo estás libre, no qué haces: los títulos, invitados, descripciones y salas nunca salen del calendario.",
+      pl: "Odpowiada, kiedy masz wolne, a nie co robisz: tytuły, goście, opisy i sale nigdy nie opuszczają kalendarza.",
+      ja: "空いている時間だけを答え、何をしているかは答えません。予定名、招待者、説明、会議室はカレンダーの外へ出ません。",
+      th: "ตอบแค่ว่าคุณว่างเมื่อไร ไม่ตอบว่าคุณทำอะไร: ชื่อเรื่อง ผู้เข้าร่วม คำอธิบาย และห้องประชุมไม่ออกจากปฏิทิน",
+      fi: "Se vastaa, milloin olet vapaa, ei sitä mitä teet: otsikot, vieraat, kuvaukset ja huoneet eivät koskaan poistu kalenterista.",
+      uk: "Він відповідає, коли ви вільні, а не що ви робите: назви, гості, описи й кімнати не залишають календар.",
+      bg: "Отговаря кога сте свободни, а не какво правите: заглавия, гости, описания и стаи никога не напускат календара.",
+      tr: "Ne yaptığınızı değil, ne zaman müsait olduğunuzu yanıtlar: başlıklar, konuklar, açıklamalar ve odalar takvimden hiç çıkmaz.",
+      hu: "Azt válaszolja meg, mikor vagy szabad, nem azt, hogy mit csinálsz: címek, vendégek, leírások és helyiségek soha nem hagyják el a naptárt.",
+    },
+    facts: [
+      {
+        k: Q_CREDENTIAL,
+        v: {
+          en: "PUT /api/v1/plugins/caldav/config stores the CalDAV password sealed by POPOPX_VAULT_KEY; admin calls use the root POPOPX_ADMIN_TOKEN bearer or a scoped pxa_ token.",
+          ru: "PUT /api/v1/plugins/caldav/config сохраняет пароль CalDAV запечатанным через POPOPX_VAULT_KEY; админ-вызовы используют корневой bearer POPOPX_ADMIN_TOKEN или scoped-токен pxa_.",
+          de: "PUT /api/v1/plugins/caldav/config speichert das CalDAV-Passwort mit POPOPX_VAULT_KEY versiegelt; Admin-Aufrufe nutzen den Root-Bearer POPOPX_ADMIN_TOKEN oder ein scoped pxa_-Token.",
+          fr: "PUT /api/v1/plugins/caldav/config stocke le mot de passe CalDAV scellé par POPOPX_VAULT_KEY ; les appels admin utilisent le bearer racine POPOPX_ADMIN_TOKEN ou un jeton pxa_ à portée limitée.",
+          it: "PUT /api/v1/plugins/caldav/config salva la password CalDAV sigillata con POPOPX_VAULT_KEY; le chiamate admin usano il bearer root POPOPX_ADMIN_TOKEN o un token pxa_ con scope.",
+          nl: "PUT /api/v1/plugins/caldav/config slaat het CalDAV-wachtwoord verzegeld met POPOPX_VAULT_KEY op; admin-aanroepen gebruiken de root-bearer POPOPX_ADMIN_TOKEN of een scoped pxa_-token.",
+          cs: "PUT /api/v1/plugins/caldav/config ukládá heslo CalDAV zapečetěné pomocí POPOPX_VAULT_KEY; admin volání používají kořenový bearer POPOPX_ADMIN_TOKEN nebo scoped token pxa_.",
+          "zh-Hans": "PUT /api/v1/plugins/caldav/config 保存 CalDAV 密码，用 POPOPX_VAULT_KEY 封存；管理调用使用根 POPOPX_ADMIN_TOKEN bearer 或带作用域的 pxa_ 令牌。",
+          "zh-Hant": "PUT /api/v1/plugins/caldav/config 儲存 CalDAV 密碼，用 POPOPX_VAULT_KEY 封存；管理呼叫使用根 POPOPX_ADMIN_TOKEN bearer 或帶範圍的 pxa_ 權杖。",
+          es: "PUT /api/v1/plugins/caldav/config guarda la contraseña de CalDAV sellada con POPOPX_VAULT_KEY; las llamadas de administración usan el bearer raíz POPOPX_ADMIN_TOKEN o un token pxa_ con alcance.",
+          pl: "PUT /api/v1/plugins/caldav/config zapisuje hasło CalDAV zapieczętowane przez POPOPX_VAULT_KEY; wywołania administracyjne używają głównego bearer POPOPX_ADMIN_TOKEN lub tokenu pxa_ z zakresem.",
+          ja: "PUT /api/v1/plugins/caldav/config は CalDAV のパスワードを POPOPX_VAULT_KEY で封印して保存します。管理呼び出しはルートの POPOPX_ADMIN_TOKEN bearer か、スコープ付き pxa_ トークンを使います。",
+          th: "PUT /api/v1/plugins/caldav/config เก็บรหัสผ่าน CalDAV ที่ผนึกด้วย POPOPX_VAULT_KEY การเรียกของผู้ดูแลใช้ bearer POPOPX_ADMIN_TOKEN รากหรือโทเคน pxa_ แบบมีขอบเขต",
+          fi: "PUT /api/v1/plugins/caldav/config tallentaa CalDAV-salasanan POPOPX_VAULT_KEY-avaimella sinetöitynä; ylläpitokutsut käyttävät juuri-POPOPX_ADMIN_TOKEN-beareria tai rajattua pxa_-tokenia.",
+          uk: "PUT /api/v1/plugins/caldav/config зберігає пароль CalDAV запечатаним через POPOPX_VAULT_KEY; адмін-виклики використовують кореневий bearer POPOPX_ADMIN_TOKEN або scoped-токен pxa_.",
+          bg: "PUT /api/v1/plugins/caldav/config пази паролата за CalDAV, запечатана с POPOPX_VAULT_KEY; админ повикванията използват корен bearer POPOPX_ADMIN_TOKEN или scoped токен pxa_.",
+          tr: "PUT /api/v1/plugins/caldav/config, CalDAV parolasını POPOPX_VAULT_KEY ile mühürleyerek saklar; yönetici çağrıları kök POPOPX_ADMIN_TOKEN bearer’ını veya kapsamlı pxa_ tokenını kullanır.",
+          hu: "A PUT /api/v1/plugins/caldav/config a CalDAV-jelszót a POPOPX_VAULT_KEY kulccsal lepecsételve tárolja; az admin hívások a gyökér POPOPX_ADMIN_TOKEN bearert vagy egy hatókörrel ellátott pxa_ tokent használnak.",
+        },
+      },
+      {
+        k: Q_DATAFLOW,
+        v: {
+          en: "POST /api/v1/plugins/caldav/freebusy keeps only DTSTART, DTEND, DURATION, STATUS, TRANSP and RRULE, drops SUMMARY, DESCRIPTION, LOCATION, ATTENDEE and ORGANIZER, skips recurring events while counting them, and labels free slots 可预约.",
+          ru: "POST /api/v1/plugins/caldav/freebusy сохраняет только DTSTART, DTEND, DURATION, STATUS, TRANSP и RRULE, выбрасывает SUMMARY, DESCRIPTION, LOCATION, ATTENDEE и ORGANIZER, пропускает повторяющиеся события, считая их, и помечает свободные слоты 可预约.",
+          de: "POST /api/v1/plugins/caldav/freebusy behält nur DTSTART, DTEND, DURATION, STATUS, TRANSP und RRULE, verwirft SUMMARY, DESCRIPTION, LOCATION, ATTENDEE und ORGANIZER, überspringt wiederkehrende Termine mit Zählung und markiert freie Slots als 可预约.",
+          fr: "POST /api/v1/plugins/caldav/freebusy ne garde que DTSTART, DTEND, DURATION, STATUS, TRANSP et RRULE, écarte SUMMARY, DESCRIPTION, LOCATION, ATTENDEE et ORGANIZER, ignore les événements récurrents en les comptant et marque les créneaux libres 可预约.",
+          it: "POST /api/v1/plugins/caldav/freebusy conserva solo DTSTART, DTEND, DURATION, STATUS, TRANSP e RRULE, scarta SUMMARY, DESCRIPTION, LOCATION, ATTENDEE e ORGANIZER, salta gli eventi ricorrenti contandoli e segna gli slot liberi come 可预约.",
+          nl: "POST /api/v1/plugins/caldav/freebusy bewaart alleen DTSTART, DTEND, DURATION, STATUS, TRANSP en RRULE, gooit SUMMARY, DESCRIPTION, LOCATION, ATTENDEE en ORGANIZER weg, slaat terugkerende afspraken over met telling en markeert vrije slots als 可预约.",
+          cs: "POST /api/v1/plugins/caldav/freebusy ponechává jen DTSTART, DTEND, DURATION, STATUS, TRANSP a RRULE, zahazuje SUMMARY, DESCRIPTION, LOCATION, ATTENDEE a ORGANIZER, opakované události přeskakuje s počítáním a volné sloty označí 可预约.",
+          "zh-Hans": "POST /api/v1/plugins/caldav/freebusy 只保留 DTSTART、DTEND、DURATION、STATUS、TRANSP 和 RRULE，丢掉 SUMMARY、DESCRIPTION、LOCATION、ATTENDEE 和 ORGANIZER，重复事件跳过并计数，空闲时段标为 可预约。",
+          "zh-Hant": "POST /api/v1/plugins/caldav/freebusy 只保留 DTSTART、DTEND、DURATION、STATUS、TRANSP 和 RRULE，丟掉 SUMMARY、DESCRIPTION、LOCATION、ATTENDEE 和 ORGANIZER，重複事件跳過並計數，空閒時段標為 可预约。",
+          es: "POST /api/v1/plugins/caldav/freebusy solo conserva DTSTART, DTEND, DURATION, STATUS, TRANSP y RRULE, descarta SUMMARY, DESCRIPTION, LOCATION, ATTENDEE y ORGANIZER, omite los eventos recurrentes contándolos y marca los huecos libres como 可预约.",
+          pl: "POST /api/v1/plugins/caldav/freebusy zachowuje tylko DTSTART, DTEND, DURATION, STATUS, TRANSP i RRULE, odrzuca SUMMARY, DESCRIPTION, LOCATION, ATTENDEE i ORGANIZER, pomija zdarzenia cykliczne, licząc je, a wolne sloty oznacza 可预约.",
+          ja: "POST /api/v1/plugins/caldav/freebusy は DTSTART、DTEND、DURATION、STATUS、TRANSP、RRULE だけを残し、SUMMARY、DESCRIPTION、LOCATION、ATTENDEE、ORGANIZER を捨て、繰り返し予定は件数を数えて飛ばし、空き枠を 可预约 と示します。",
+          th: "POST /api/v1/plugins/caldav/freebusy เก็บเฉพาะ DTSTART, DTEND, DURATION, STATUS, TRANSP และ RRULE ทิ้ง SUMMARY, DESCRIPTION, LOCATION, ATTENDEE และ ORGANIZER ข้ามเหตุการณ์ซ้ำพร้อมนับจำนวน และทำเครื่องหมายช่วงว่างว่า 可预约",
+          fi: "POST /api/v1/plugins/caldav/freebusy säilyttää vain DTSTART-, DTEND-, DURATION-, STATUS-, TRANSP- ja RRULE-kentät, pudottaa SUMMARY-, DESCRIPTION-, LOCATION-, ATTENDEE- ja ORGANIZER-kentät, ohittaa toistuvat tapahtumat ne laskien ja merkitsee vapaat välit 可预约.",
+          uk: "POST /api/v1/plugins/caldav/freebusy зберігає лише DTSTART, DTEND, DURATION, STATUS, TRANSP і RRULE, відкидає SUMMARY, DESCRIPTION, LOCATION, ATTENDEE й ORGANIZER, повторювані події пропускає з підрахунком, а вільні слоти позначає 可预约.",
+          bg: "POST /api/v1/plugins/caldav/freebusy запазва само DTSTART, DTEND, DURATION, STATUS, TRANSP и RRULE, изхвърля SUMMARY, DESCRIPTION, LOCATION, ATTENDEE и ORGANIZER, пропуска повтарящите се събития, като ги брои, и маркира свободните слотове като 可预约.",
+          tr: "POST /api/v1/plugins/caldav/freebusy yalnızca DTSTART, DTEND, DURATION, STATUS, TRANSP ve RRULE alanlarını tutar; SUMMARY, DESCRIPTION, LOCATION, ATTENDEE ve ORGANIZER alanlarını atar, yinelenen etkinlikleri sayarak atlar ve boş dilimleri 可预约 olarak işaretler.",
+          hu: "A POST /api/v1/plugins/caldav/freebusy csak a DTSTART, DTEND, DURATION, STATUS, TRANSP és RRULE mezőket tartja meg, a SUMMARY, DESCRIPTION, LOCATION, ATTENDEE és ORGANIZER mezőket eldobja, az ismétlődő eseményeket megszámolva kihagyja, a szabad sávokat pedig 可预约 jelöléssel adja.",
+        },
+      },
+      {
+        k: Q_LIMIT,
+        v: {
+          en: "A 31-day window and at most 500 slots of 15–240 minutes; nothing is cached, and a failed query is refunded.",
+          ru: "Окно 31 день и не более 500 слотов по 15–240 минут; ничего не кешируется, а неудавшийся запрос возвращает кредиты.",
+          de: "Ein Fenster von 31 Tagen und höchstens 500 Slots à 15–240 Minuten; nichts wird zwischengespeichert, und eine fehlgeschlagene Abfrage wird erstattet.",
+          fr: "Une fenêtre de 31 jours et au plus 500 créneaux de 15 à 240 minutes ; rien n’est mis en cache et une requête échouée est remboursée.",
+          it: "Una finestra di 31 giorni e al massimo 500 slot da 15–240 minuti; nulla viene messo in cache e un’interrogazione fallita è rimborsata.",
+          nl: "Een venster van 31 dagen en hoogstens 500 slots van 15–240 minuten; niets wordt gecachet en een mislukte zoekopdracht wordt terugbetaald.",
+          cs: "Okno 31 dnů a nejvýše 500 slotů po 15–240 minutách; nic se nekešuje a neúspěšný dotaz se vrátí.",
+          "zh-Hans": "31 天窗口，最多 500 个 15–240 分钟的时段；不缓存任何结果，查询失败就退款。",
+          "zh-Hant": "31 天視窗，最多 500 個 15–240 分鐘的時段；不快取任何結果，查詢失敗就退款。",
+          es: "Una ventana de 31 días y como máximo 500 huecos de 15–240 minutos; no se cachea nada y una consulta fallida se reembolsa.",
+          pl: "Okno 31 dni i najwyżej 500 slotów po 15–240 minut; nic nie jest cache’owane, a nieudane zapytanie jest zwracane.",
+          ja: "31 日間の窓と、15〜240 分の枠を最大 500 件。何もキャッシュせず、失敗した照会は返金されます。",
+          th: "หน้าต่าง 31 วันและช่วงเวลาขนาด 15–240 นาทีไม่เกิน 500 ช่วง ไม่มีแคช และการสอบถามที่ล้มเหลวจะคืนเครดิต",
+          fi: "31 päivän ikkuna ja enintään 500 väliä, kukin 15–240 minuuttia; mitään ei välimuistiteta ja epäonnistunut kysely hyvitetään.",
+          uk: "Вікно 31 день і щонайбільше 500 слотів по 15–240 хвилин; нічого не кешується, а невдалий запит повертає кошти.",
+          bg: "Прозорец от 31 дни и най-много 500 слота по 15–240 минути; нищо не се кешира и неуспешната заявка се възстановява.",
+          tr: "31 günlük pencere ve 15–240 dakikalık en fazla 500 dilim; hiçbir şey önbelleğe alınmaz ve başarısız sorgu iade edilir.",
+          hu: "31 napos ablak és legfeljebb 500, egyenként 15–240 perces sáv; semmi nem kerül gyorsítótárba, a sikertelen lekérdezés pedig visszatérítésre kerül.",
+        },
+      },
+    ],
+    keys: [
+      "POPOPX_PLUGIN_CALDAV_CONNECTOR=0",
+      "POPOPX_VAULT_KEY",
+      "POPOPX_CP_PER_CALDAV_QUERY",
+    ],
+    route: "POST /api/v1/plugins/caldav/freebusy",
+  },
+  {
+    code: "Slack / Discord",
+    file: "slack_discord_plugin.py",
+    category: "connectors",
+    status: "default-off",
+    accent: "warn",
+    name: {
+      en: "Slack and Discord notifications",
+      ru: "Уведомления Slack и Discord",
+      de: "Slack- und Discord-Benachrichtigungen",
+      fr: "Notifications Slack et Discord",
+      it: "Notifiche Slack e Discord",
+      nl: "Slack- en Discord-meldingen",
+      cs: "Oznámení Slack a Discord",
+      "zh-Hans": "Slack 与 Discord 通知",
+      "zh-Hant": "Slack 與 Discord 通知",
+      es: "Notificaciones de Slack y Discord",
+      pl: "Powiadomienia Slack i Discord",
+      ja: "Slack / Discord 通知",
+      th: "การแจ้งเตือน Slack และ Discord",
+      fi: "Slack- ja Discord-ilmoitukset",
+      uk: "Сповіщення Slack і Discord",
+      bg: "Известия в Slack и Discord",
+      tr: "Slack ve Discord bildirimleri",
+      hu: "Slack- és Discord-értesítések",
+    },
+    hook: {
+      en: "Webhook URLs are sealed as bearer secrets, and only the text you write leaves the gateway.",
+      ru: "Webhook-URL хранятся как bearer-секреты, и наружу уходит только написанный вами текст.",
+      de: "Webhook-URLs liegen als Bearer-Secrets versiegelt, und nur der von dir geschriebene Text verlässt das Gateway.",
+      fr: "Les URL de webhook sont scellées comme secrets bearer, et seul le texte que vous écrivez quitte la passerelle.",
+      it: "Gli URL webhook sono sigillati come segreti bearer e solo il testo che scrivi lascia il gateway.",
+      nl: "Webhook-URL’s liggen verzegeld als bearer-geheimen, en alleen de tekst die je schrijft verlaat de gateway.",
+      cs: "Webhookové URL jsou zapečetěné jako bearer tajemství a bránu opustí jen text, který napíšete.",
+      "zh-Hans": "Webhook 地址作为 bearer 密钥封存，出门的只有你自己写的正文。",
+      "zh-Hant": "Webhook 位址作為 bearer 金鑰封存，出門的只有你自己寫的正文。",
+      es: "Las URL de webhook se guardan selladas como secretos bearer, y solo el texto que escribes sale de la pasarela.",
+      pl: "Adresy webhooków są zapieczętowane jako sekrety bearer, a bramę opuszcza tylko napisany przez ciebie tekst.",
+      ja: "Webhook URL は bearer 秘密として封印され、外へ出るのはあなたが書いた本文だけです。",
+      th: "URL ของเว็บฮุกถูกผนึกเป็นความลับแบบ bearer และมีเพียงข้อความที่คุณเขียนเท่านั้นที่ออกจากเกตเวย์",
+      fi: "Webhook-URL-osoitteet sinetöidään bearer-salaisuuksiksi, ja yhdyskäytävästä lähtee vain itse kirjoittamasi teksti.",
+      uk: "Webhook-URL зберігаються запечатаними як bearer-секрети, і назовні виходить лише написаний вами текст.",
+      bg: "Webhook URL адресите са запечатани като bearer тайни и от шлюза излиза само текстът, който напишете.",
+      tr: "Webhook URL’leri bearer sır olarak mühürlenir ve ağ geçidinden yalnızca sizin yazdığınız metin çıkar.",
+      hu: "A webhook URL-ek bearer titokként vannak lezárva, és csak az általad írt szöveg hagyja el az átjárót.",
+    },
+    facts: [
+      {
+        k: Q_CREDENTIAL,
+        v: {
+          en: "The Slack or Discord incoming-webhook URL is a bearer secret sealed by POPOPX_VAULT_KEY and never returned; each workspace also gets a one-time, rotatable HMAC secret. Admin calls use the root bearer or a scoped pxa_ token.",
+          ru: "URL входящего webhook Slack или Discord — это bearer-секрет, запечатанный POPOPX_VAULT_KEY и никогда не возвращаемый; у каждого workspace есть одноразовый, ротируемый HMAC-секрет. Админ-вызовы используют корневой bearer или scoped-токен pxa_.",
+          de: "Die Incoming-Webhook-URL von Slack oder Discord ist ein Bearer-Secret, mit POPOPX_VAULT_KEY versiegelt und nie zurückgegeben; jeder Workspace erhält zusätzlich ein einmaliges, rotierbares HMAC-Secret. Admin-Aufrufe nutzen den Root-Bearer oder ein scoped pxa_-Token.",
+          fr: "L’URL de webhook entrant Slack ou Discord est un secret bearer, scellé par POPOPX_VAULT_KEY et jamais renvoyé ; chaque espace de travail reçoit en plus un secret HMAC à usage unique et rotatif. Les appels admin prennent le bearer racine ou un jeton pxa_ à portée limitée.",
+          it: "L’URL del webhook in ingresso Slack o Discord è un segreto bearer, sigillato con POPOPX_VAULT_KEY e mai restituito; ogni workspace riceve anche un segreto HMAC monouso e ruotabile. Le chiamate admin usano il bearer root o un token pxa_ con scope.",
+          nl: "De inkomende webhook-URL van Slack of Discord is een bearer-geheim, verzegeld met POPOPX_VAULT_KEY en nooit teruggegeven; elke workspace krijgt bovendien een eenmalig, roteerbaar HMAC-geheim. Admin-aanroepen gebruiken de root-bearer of een scoped pxa_-token.",
+          cs: "Příchozí webhooková URL Slacku nebo Discordu je bearer tajemství, zapečetěné POPOPX_VAULT_KEY a nikdy se nevrací; každý workspace navíc dostane jednorázové, rotovatelné HMAC tajemství. Admin volání používají kořenový bearer nebo scoped token pxa_.",
+          "zh-Hans": "Slack 或 Discord 的入站 Webhook 地址是 bearer 密钥，由 POPOPX_VAULT_KEY 封存、永不回传；每个 workspace 另有一枚一次性、可轮换的 HMAC 密钥。管理调用使用根 bearer 或带作用域的 pxa_ 令牌。",
+          "zh-Hant": "Slack 或 Discord 的入站 Webhook 位址是 bearer 密鑰，由 POPOPX_VAULT_KEY 封存、永不回傳；每個 workspace 另有一枚一次性、可輪換的 HMAC 密鑰。管理呼叫使用根 bearer 或帶範圍的 pxa_ 權杖。",
+          es: "La URL de webhook entrante de Slack o Discord es un secreto bearer, sellado con POPOPX_VAULT_KEY y nunca devuelto; cada espacio de trabajo recibe además un secreto HMAC de un solo uso y rotable. Las llamadas de administración usan el bearer raíz o un token pxa_ con alcance.",
+          pl: "Przychodzący URL webhooka Slacka lub Discorda to sekret bearer, zapieczętowany POPOPX_VAULT_KEY i nigdy niezwracany; każda przestrzeń robocza dostaje dodatkowo jednorazowy, rotowalny sekret HMAC. Wywołania administracyjne używają głównego bearer lub tokenu pxa_ z zakresem.",
+          ja: "Slack または Discord の受信 Webhook URL は bearer 秘密として POPOPX_VAULT_KEY で封印され、二度と返されません。ワークスペースごとに一度きりでローテーション可能な HMAC 秘密も渡されます。管理呼び出しはルート bearer かスコープ付き pxa_ トークンを使います。",
+          th: "URL เว็บฮุกขาเข้าของ Slack หรือ Discord เป็นความลับแบบ bearer ที่ผนึกด้วย POPOPX_VAULT_KEY และไม่ส่งคืนเลย แต่ละเวิร์กสเปซยังได้ความลับ HMAC แบบใช้ครั้งเดียวที่หมุนเวียนได้ การเรียกของผู้ดูแลใช้ bearer รากหรือโทเคน pxa_ แบบมีขอบเขต",
+          fi: "Slackin tai Discordin saapuvan webhookin URL on bearer-salaisuus, joka on sinetöity POPOPX_VAULT_KEY-avaimella eikä sitä koskaan palauteta; jokainen työtila saa lisäksi kertakäyttöisen, kierrätettävän HMAC-salaisuuden. Ylläpitokutsut käyttävät juuri-beareria tai rajattua pxa_-tokenia.",
+          uk: "URL вхідного webhook Slack або Discord — це bearer-секрет, запечатаний POPOPX_VAULT_KEY і ніколи не повертається; кожен workspace додатково отримує одноразовий HMAC-секрет із можливістю ротації. Адмін-виклики беруть кореневий bearer або scoped-токен pxa_.",
+          bg: "Входящият webhook URL на Slack или Discord е bearer тайна, запечатана с POPOPX_VAULT_KEY и никога не се връща; всяко работно пространство получава и еднократна, ротираща се HMAC тайна. Админ повикванията използват корен bearer или scoped токен pxa_.",
+          tr: "Slack veya Discord gelen webhook URL’si, POPOPX_VAULT_KEY ile mühürlenen ve asla geri döndürülmeyen bir bearer sırdır; her çalışma alanı ayrıca tek kullanımlık, döndürülebilir bir HMAC sırrı alır. Yönetici çağrıları kök bearer’ı veya kapsamlı pxa_ tokenını kullanır.",
+          hu: "A Slack vagy Discord bejövő webhook URL-je bearer titok, amelyet a POPOPX_VAULT_KEY pecsétel le, és soha nem kerül visszaadásra; minden munkaterület ezenfelül egyszer használatos, forgatható HMAC titkot kap. Az admin hívások a gyökér bearert vagy egy hatókörrel ellátott pxa_ tokent használják.",
+        },
+      },
+      {
+        k: Q_DATAFLOW,
+        v: {
+          en: "POST /api/v1/plugins/slackdiscord/send posts text and title over HTTPS with pinned DNS and no redirects to hooks.slack.com or the Discord host allowlist; every request carries X-Popopx-Timestamp and X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, and the audit trail keeps only action, outcome and status.",
+          ru: "POST /api/v1/plugins/slackdiscord/send отправляет текст и заголовок по HTTPS с закреплённым DNS и без редиректов на hooks.slack.com или хосты из белого списка Discord; каждый запрос несёт X-Popopx-Timestamp и X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, а аудит хранит только действие, результат и статус.",
+          de: "POST /api/v1/plugins/slackdiscord/send sendet Text und Titel per HTTPS mit gepinntem DNS und ohne Weiterleitungen an hooks.slack.com oder die Discord-Host-Allowlist; jede Anfrage trägt X-Popopx-Timestamp und X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, und das Audit hält nur Aktion, Ergebnis und Status.",
+          fr: "POST /api/v1/plugins/slackdiscord/send envoie texte et titre en HTTPS avec DNS épinglé et sans redirection vers hooks.slack.com ou la liste blanche d’hôtes Discord ; chaque requête porte X-Popopx-Timestamp et X-Popopx-Signature : v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, et l’audit ne garde que l’action, le résultat et le statut.",
+          it: "POST /api/v1/plugins/slackdiscord/send invia testo e titolo via HTTPS con DNS bloccato e senza redirect verso hooks.slack.com o la whitelist di host Discord; ogni richiesta porta X-Popopx-Timestamp e X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, e l’audit conserva solo azione, esito e stato.",
+          nl: "POST /api/v1/plugins/slackdiscord/send stuurt tekst en titel over HTTPS met vastgepinde DNS en zonder redirects naar hooks.slack.com of de Discord-hostallowlist; elk verzoek draagt X-Popopx-Timestamp en X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, en de audit bewaart alleen actie, uitkomst en status.",
+          cs: "POST /api/v1/plugins/slackdiscord/send posílá text a titulek přes HTTPS s připnutým DNS a bez přesměrování na hooks.slack.com nebo allowlist hostitelů Discordu; každý požadavek nese X-Popopx-Timestamp a X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> a audit uchovává jen akci, výsledek a stav.",
+          "zh-Hans": "POST /api/v1/plugins/slackdiscord/send 通过 HTTPS 发送正文与标题，DNS 固定、不跟随重定向，只发往 hooks.slack.com 或 Discord 主机白名单；每个请求带 X-Popopx-Timestamp 和 X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>，审计只留动作、结果与状态码。",
+          "zh-Hant": "POST /api/v1/plugins/slackdiscord/send 透過 HTTPS 送出正文與標題，DNS 固定、不跟隨重新導向，只發往 hooks.slack.com 或 Discord 主機白名單；每個請求帶 X-Popopx-Timestamp 和 X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>，稽核只留動作、結果與狀態碼。",
+          es: "POST /api/v1/plugins/slackdiscord/send envía texto y título por HTTPS con DNS fijado y sin redirecciones a hooks.slack.com o a la lista blanca de hosts de Discord; cada petición lleva X-Popopx-Timestamp y X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, y la auditoría solo guarda acción, resultado y estado.",
+          pl: "POST /api/v1/plugins/slackdiscord/send wysyła tekst i tytuł po HTTPS z przypiętym DNS i bez przekierowań do hooks.slack.com lub listy dozwolonych hostów Discorda; każde żądanie niesie X-Popopx-Timestamp i X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, a audyt przechowuje tylko akcję, wynik i status.",
+          ja: "POST /api/v1/plugins/slackdiscord/send は HTTPS で本文とタイトルを送り、DNS を固定してリダイレクトを追わず、宛先は hooks.slack.com か Discord のホスト許可リストだけです。各リクエストは X-Popopx-Timestamp と X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> を携え、監査には操作・結果・ステータスだけが残ります。",
+          th: "POST /api/v1/plugins/slackdiscord/send ส่งข้อความและหัวข้อผ่าน HTTPS โดยปักหมุด DNS และไม่ตาม redirect ไปยัง hooks.slack.com หรือรายการโฮสต์ที่อนุญาตของ Discord ทุกคำขอมี X-Popopx-Timestamp และ X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> และบันทึกตรวจสอบเก็บเพียงแอกชัน ผลลัพธ์ และสถานะ",
+          fi: "POST /api/v1/plugins/slackdiscord/send lähettää tekstin ja otsikon HTTPS:llä kiinnitetyllä DNS:llä eikä seuraa uudelleenohjauksia; kohteena on vain hooks.slack.com tai Discordin sallittujen hostien lista. Jokainen pyyntö kantaa X-Popopx-Timestamp- ja X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> -otsikot, ja auditointiin jää vain toiminto, tulos ja tila.",
+          uk: "POST /api/v1/plugins/slackdiscord/send надсилає текст і заголовок через HTTPS із закріпленим DNS і без переадресацій на hooks.slack.com або до білого списку хостів Discord; кожен запит несе X-Popopx-Timestamp і X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, а аудит зберігає лише дію, результат і статус.",
+          bg: "POST /api/v1/plugins/slackdiscord/send изпраща текст и заглавие по HTTPS със закрепен DNS и без пренасочвания към hooks.slack.com или белия списък с хостове на Discord; всяка заявка носи X-Popopx-Timestamp и X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, а одитът пази само действие, резултат и статус.",
+          tr: "POST /api/v1/plugins/slackdiscord/send metin ve başlığı HTTPS üzerinden, sabitlenmiş DNS ile ve yönlendirme izlemeden yalnızca hooks.slack.com veya Discord host izin listesine gönderir; her istek X-Popopx-Timestamp ve X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> taşır, denetimde yalnızca işlem, sonuç ve durum kalır.",
+          hu: "A POST /api/v1/plugins/slackdiscord/send a szöveget és a címet HTTPS-en, rögzített DNS-sel és átirányítások követése nélkül, kizárólag a hooks.slack.com vagy a Discord engedélyezett hosztlistája felé küldi; minden kérés X-Popopx-Timestamp és X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> fejlécet hordoz, az audit pedig csak a műveletet, az eredményt és az állapotot őrzi meg.",
+        },
+      },
+      {
+        k: Q_LIMIT,
+        v: {
+          en: "10 workspaces, 2,000-character text, a 200-character title and a 10 s timeout; a failed delivery is refunded, and no identity or channel history is read.",
+          ru: "10 workspace, текст до 2 000 символов, заголовок до 200 символов и таймаут 10 с; неудачная доставка возвращает кредиты, а личность и история канала не читаются.",
+          de: "10 Workspaces, 2.000 Zeichen Text, 200 Zeichen Titel und 10 s Timeout; eine fehlgeschlagene Zustellung wird erstattet, und weder Identität noch Kanalverlauf werden gelesen.",
+          fr: "10 espaces de travail, 2 000 caractères de texte, un titre de 200 caractères et un délai de 10 s ; une livraison échouée est remboursée, et ni l’identité ni l’historique du canal ne sont lus.",
+          it: "10 workspace, 2.000 caratteri di testo, un titolo di 200 caratteri e timeout di 10 s; una consegna fallita è rimborsata e non vengono letti né identità né cronologia del canale.",
+          nl: "10 workspaces, 2.000 tekens tekst, een titel van 200 tekens en een timeout van 10 s; een mislukte levering wordt terugbetaald, en er wordt geen identiteit of kanaalgeschiedenis gelezen.",
+          cs: "10 workspace, 2 000 znaků textu, titulek 200 znaků a časový limit 10 s; neúspěšné doručení se vrátí a identita ani historie kanálu se nečte.",
+          "zh-Hans": "10 个 workspace、正文 2,000 字符、标题 200 字符、超时 10 秒；投递失败退款，不读取身份，也不读频道历史。",
+          "zh-Hant": "10 個 workspace、正文 2,000 字元、標題 200 字元、逾時 10 秒；投遞失敗退款，不讀取身分，也不讀頻道歷史。",
+          es: "10 espacios de trabajo, 2.000 caracteres de texto, un título de 200 caracteres y un tiempo de espera de 10 s; una entrega fallida se reembolsa y no se lee identidad ni historial del canal.",
+          pl: "10 przestrzeni roboczych, 2 000 znaków tekstu, tytuł do 200 znaków i limit czasu 10 s; nieudana dostawa jest zwracana, a tożsamość ani historia kanału nie są czytane.",
+          ja: "ワークスペース 10 件、本文 2,000 文字、タイトル 200 文字、タイムアウト 10 秒。失敗した配信は返金され、身元もチャンネル履歴も読みません。",
+          th: "10 เวิร์กสเปซ ข้อความ 2,000 ตัวอักษร หัวข้อ 200 ตัวอักษร และหมดเวลา 10 วินาที การส่งที่ล้มเหลวคืนเครดิต และไม่มีการอ่านตัวตนหรือประวัติแชนแนล",
+          fi: "10 työtilaa, 2 000 merkin teksti, 200 merkin otsikko ja 10 sekunnin aikakatkaisu; epäonnistunut toimitus hyvitetään, eikä identiteettiä tai kanavahistoriaa lueta.",
+          uk: "10 workspace, текст до 2 000 символів, заголовок до 200 символів і тайм-аут 10 с; невдала доставка повертає кошти, а ідентичність і історія каналу не читаються.",
+          bg: "10 работни пространства, 2 000 знака текст, заглавие до 200 знака и таймаут 10 s; неуспешната доставка се възстановява, а самоличност и история на канала не се четат.",
+          tr: "10 çalışma alanı, 2.000 karakter metin, 200 karakter başlık ve 10 s zaman aşımı; başarısız teslimat iade edilir, kimlik veya kanal geçmişi okunmaz.",
+          hu: "10 munkaterület, 2 000 karakteres szöveg, 200 karakteres cím és 10 másodperces időtúllépés; a sikertelen kézbesítés visszatérítésre kerül, személyazonosságot vagy csatornatörténetet pedig nem olvas.",
+        },
+      },
+    ],
+    keys: [
+      "POPOPX_PLUGIN_SLACK_DISCORD=0",
+      "POPOPX_VAULT_KEY",
+      "POPOPX_CP_PER_SLACK_DISCORD_EVENT",
+    ],
+    route: "POST /api/v1/plugins/slackdiscord/send",
+  },
 ];
 
 const ACCENT_BAR: Record<PluginModel["accent"], string> = {
@@ -2231,33 +2773,35 @@ const ACCENT_BAR: Record<PluginModel["accent"], string> = {
   warn: "bg-warn",
 };
 /**
- * The two answers every card owes the visitor that are identical for all five
- * modules, because the gateway really does not vary them: authorisation is one
- * static bearer token with no scope model (`gateway/app/api/admin.py`,
- * `AUTH_HEADER = "Authorization"`), and turning a service off is the
- * `POPOPX_PLUGIN_*` boolean read at `gateway/app/config.py:441-445`. Written as
- * one block rather than five, so the page cannot accidentally promise a
- * per-connection revocation the code does not have.
+ * The two answers every card owes the visitor that are identical for all nine
+ * modules, because the gateway really does not vary them. Authorisation is a
+ * bearer token in `Authorization`: the root `POPOPX_ADMIN_TOKEN`, or a scoped
+ * `pxa_…` token minted at `POST /api/v1/admin/tokens` with `core:<resource>:ro|rw`,
+ * `plugin:<id>:ro|rw` or `*` scopes, stored only as a hash and shown once
+ * (`gateway/app/api/admin.py`). Turning a service off is still the matching
+ * `POPOPX_PLUGIN_*` boolean read at `gateway/app/config.py`. Written as one block
+ * rather than nine, so the page cannot accidentally promise a per-connection
+ * revocation the code does not have.
  */
 const CREDENTIAL_NOTE: Localized<string> = {
-  en: "No scope model and no per-key ACL: every call under /api/v1/plugins/* is authorised by one static bearer token, POPOPX_ADMIN_TOKEN, presented in the Authorization header. What the module brings of its own is only the environment keys listed below.",
-  ru: "Никакой модели доменов доступа и никакого ACL по ключам: каждый вызов в /api/v1/plugins/* авторизует один статичный bearer-токен POPOPX_ADMIN_TOKEN в заголовке Authorization. Собственные секреты модуля — только перечисленные ниже переменные окружения.",
-  de: "Kein Scope-Modell, keine ACL pro Schlüssel: Jeden Aufruf unter /api/v1/plugins/* autorisiert ein einzelner statischer Bearer-Token, POPOPX_ADMIN_TOKEN, im Authorization-Header. Was das Modul selbst mitbringt, sind nur die unten genannten Umgebungsschlüssel.",
-  fr: "Aucun modèle de portées ni d’ACL par clé : chaque appel sous /api/v1/plugins/* est autorisé par un unique jeton bearer statique, POPOPX_ADMIN_TOKEN, présenté dans l’en-tête Authorization. Les secrets propres au module se limitent aux variables d’environnement listées ci-dessous.",
-  it: "Nessun modello di scope e nessuna ACL per singola chiave: ogni chiamata sotto /api/v1/plugins/* è autorizzata da un unico token bearer statico, POPOPX_ADMIN_TOKEN, presentato nell’header Authorization. I segreti propri del modulo sono solo le variabili d’ambiente elencate qui sotto.",
-  nl: "Geen scopemodel en geen ACL per sleutel: elke aanroep onder /api/v1/plugins/* wordt geautoriseerd door één statisch bearertoken, POPOPX_ADMIN_TOKEN, in de Authorization-header. Wat de module zelf meebrengt zijn alleen de hieronder genoemde omgevingsvariabelen.",
-  cs: "Žádný model oprávnění a žádné ACL per key: každý požadavek pod /api/v1/plugins/* autorizuje jeden statický bearer token, POPOPX_ADMIN_TOKEN, v hlavičce Authorization. Vlastní tajné údaje modulu jsou jen níže uvedené proměnné prostředí.",
-  "zh-Hans": "没有权限范围（scope）模型，也没有按 key 的 ACL：/api/v1/plugins/* 下的每一次调用都只由一个静态 bearer token 授权，也就是 Authorization 头里的 POPOPX_ADMIN_TOKEN。模块自己带来的密钥只有下面列出的那几颗环境变量。",
-  "zh-Hant": "沒有權限範圍（scope）模型，也沒有按 key 的 ACL：/api/v1/plugins/* 下的每次呼叫都只由一個靜態 bearer token 授權，也就是 Authorization 標頭裡的 POPOPX_ADMIN_TOKEN。模組自帶的金鑰只有下面列出的那幾顆環境變數。",
-  es: "No hay modelo de alcances ni ACL por clave: cada llamada bajo /api/v1/plugins/* la autoriza un único token bearer estático, POPOPX_ADMIN_TOKEN, en la cabecera Authorization. Lo que el módulo aporta por su parte son solo las variables de entorno listadas abajo.",
-  pl: "Brak modelu zakresów i brak ACL per klucz: każde wywołanie pod /api/v1/plugins/* autoryzuje jeden statyczny token bearer, POPOPX_ADMIN_TOKEN, w nagłówku Authorization. Własne sekrety modułu to tylko wymienione niżej zmienne środowiskowe.",
-  ja: "スコープの模型もキー単位の ACL もありません。/api/v1/plugins/* 配下の呼び出しはすべて、Authorization ヘッダーで送る静的な bearer トークン POPOPX_ADMIN_TOKEN ひとつで認可されます。モジュール自身が持つ秘密情報は、下に並べた環境変数だけです。",
-  th: "ไม่มีโมเดล scope และไม่มีการตั้ง ACL ต่อคีย์: การเรียกใช้ใต้ /api/v1/plugins/* ทุกครั้งได้รับอนุญาตด้วย bearer token สถิติตัวเดียวคือ POPOPX_ADMIN_TOKEN ที่ส่งใน header Authorization ความลับของโม듈เองมีแค่ตัวแปรแวดล้อมที่ระบุไว้ข้างล่าง",
-  fi: "E scope-mallia eikä ACL:ia avainta kohden: jokaisen /api/v1/plugins/* -polun kutsun valtuuttaa yksi staattinen bearer-token, POPOPX_ADMIN_TOKEN, Authorization-otsakkeessa. Moduulin omat salaisuudet ovat vain alla luetellut ympäristömuuttujat.",
-  uk: "Жодної моделі доменів доступу й жодного ACL за ключем: кожен виклик у /api/v1/plugins/* авторизує один статичний bearer-токен POPOPX_ADMIN_TOKEN у заголовку Authorization. Власні секрети модуля — це лише перелічені нижче змінні середовища.",
-  bg: "Няма модел на обхвата и няма ACL по ключ: всяко извикване под /api/v1/plugins/* се оторизира от един статичен bearer токен, POPOPX_ADMIN_TOKEN, в заглавката Authorization. Собствените тайни на модула са само изброените по-долу променливи на средата.",
-  tr: "Kapsam modeli de anahtar başına ACL de yok: /api/v1/plugins/* altındaki her çağrıyı, Authorization başlığıyla gösterilen tek sabit bearer token olan POPOPX_ADMIN_TOKEN yetkilendirir. Modülün kendine ait sırları yalnızca aşağıda listelenen ortam değişkenleridir.",
-  hu: "Nincs scope-modell és kulcsenkénti ACL sem: a /api/v1/plugins/* alatti minden hívást egyetlen statikus bearer token jogosítja, az Authorization fejlécben elküldött POPOPX_ADMIN_TOKEN. A modul saját titkai csak az alább felsorolt környezeti változók.",
+  en: "Every call under /api/v1/plugins/* is authorised by a bearer token in the Authorization header. That is either the root POPOPX_ADMIN_TOKEN or a scoped pxa_ token minted at POST /api/v1/admin/tokens: its scopes are core:<resource>:ro|rw, plugin:<id>:ro|rw or *, it is stored only as a hash and the plaintext is returned once. What the module brings of its own is only the environment keys listed below.",
+  ru: "Каждый вызов в /api/v1/plugins/* авторизует bearer-токен в заголовке Authorization. Это либо корневой POPOPX_ADMIN_TOKEN, либо скоупованный токен pxa_, выданный в POST /api/v1/admin/tokens: его области — core:<resource>:ro|rw, plugin:<id>:ro|rw или *, на диске хранится только хэш, а открытый текст возвращается один раз. Собственные секреты модуля — только перечисленные ниже переменные окружения.",
+  de: "Jeden Aufruf unter /api/v1/plugins/* autorisiert ein Bearer-Token im Authorization-Header. Das ist entweder der Root-Token POPOPX_ADMIN_TOKEN oder ein gescoptes pxa_-Token aus POST /api/v1/admin/tokens: seine Scopes sind core:<resource>:ro|rw, plugin:<id>:ro|rw oder *, gespeichert wird nur ein Hash, der Klartext kommt einmal zurück. Was das Modul selbst mitbringt, sind nur die unten genannten Umgebungsschlüssel.",
+  fr: "Chaque appel sous /api/v1/plugins/* est autorisé par un jeton bearer dans l’en-tête Authorization. C’est soit le jeton racine POPOPX_ADMIN_TOKEN, soit un jeton pxa_ à portée limitée émis par POST /api/v1/admin/tokens : ses portées sont core:<resource>:ro|rw, plugin:<id>:ro|rw ou *, seul un hachage est conservé et le texte clair n’est renvoyé qu’une fois. Les secrets propres au module se limitent aux variables d’environnement listées ci-dessous.",
+  it: "Ogni chiamata sotto /api/v1/plugins/* è autorizzata da un token bearer nell’header Authorization. È il token radice POPOPX_ADMIN_TOKEN oppure un token pxa_ con scope emesso da POST /api/v1/admin/tokens: i suoi scope sono core:<resource>:ro|rw, plugin:<id>:ro|rw o *, su disco resta solo l’hash e il testo in chiaro viene restituito una volta. I segreti propri del modulo sono solo le variabili d’ambiente elencate qui sotto.",
+  nl: "Elke aanroep onder /api/v1/plugins/* wordt geautoriseerd door een bearertoken in de Authorization-header. Dat is de root POPOPX_ADMIN_TOKEN of een scoped pxa_-token dat bij POST /api/v1/admin/tokens is aangemaakt: de scopes zijn core:<resource>:ro|rw, plugin:<id>:ro|rw of *, op schijf staat alleen een hash en de platte tekst komt één keer terug. Wat de module zelf meebrengt zijn alleen de hieronder genoemde omgevingsvariabelen.",
+  cs: "Každý požadavek pod /api/v1/plugins/* autorizuje bearer token v hlavičce Authorization. Je to buď kořenový POPOPX_ADMIN_TOKEN, nebo token pxa_ s rozsahem vydaný v POST /api/v1/admin/tokens: jeho rozsahy jsou core:<resource>:ro|rw, plugin:<id>:ro|rw nebo *, na disku je jen hash a otevřený text se vrací jednou. Vlastní tajné údaje modulu jsou jen níže uvedené proměnné prostředí.",
+  "zh-Hans": "/api/v1/plugins/* 下的每一次调用都由 Authorization 头里的 bearer token 授权，要么是根 POPOPX_ADMIN_TOKEN，要么是在 POST /api/v1/admin/tokens 签发的 pxa_ 作用域令牌：作用域为 core:<resource>:ro|rw、plugin:<id>:ro|rw 或 *，磁盘上只存哈希，明文只返回一次。模块自己带来的密钥只有下面列出的那几颗环境变量。",
+  "zh-Hant": "/api/v1/plugins/* 下的每次呼叫都由 Authorization 標頭裡的 bearer token 授權，要麼是根 POPOPX_ADMIN_TOKEN，要麼是在 POST /api/v1/admin/tokens 簽發的 pxa_ 作用域權杖：作用域為 core:<resource>:ro|rw、plugin:<id>:ro|rw 或 *，磁碟上只存雜湊，明文只回傳一次。模組自帶的金鑰只有下面列出的那幾顆環境變數。",
+  es: "Cada llamada bajo /api/v1/plugins/* la autoriza un token bearer en la cabecera Authorization. Es el POPOPX_ADMIN_TOKEN raíz o un token pxa_ con alcance emitido en POST /api/v1/admin/tokens: sus alcances son core:<resource>:ro|rw, plugin:<id>:ro|rw o *, en disco solo queda un hash y el texto claro se devuelve una vez. Lo que el módulo aporta por su parte son solo las variables de entorno listadas abajo.",
+  pl: "Każde wywołanie pod /api/v1/plugins/* autoryzuje token bearer w nagłówku Authorization. To albo główny POPOPX_ADMIN_TOKEN, albo token pxa_ z zakresem wydany w POST /api/v1/admin/tokens: jego zakresy to core:<resource>:ro|rw, plugin:<id>:ro|rw lub *, na dysku zostaje tylko hash, a tekst jawny wraca raz. Własne sekrety modułu to tylko wymienione niżej zmienne środowiskowe.",
+  ja: "/api/v1/plugins/* 配下の呼び出しはすべて Authorization ヘッダーの bearer トークンで認可されます。ルートの POPOPX_ADMIN_TOKEN か、POST /api/v1/admin/tokens で発行するスコープ付き pxa_ トークンで、スコープは core:<resource>:ro|rw、plugin:<id>:ro|rw、* のいずれかです。ディスクにはハッシュだけを保存し、平文は一度だけ返します。モジュール自身が持つ秘密情報は、下に並べた環境変数だけです。",
+  th: "การเรียกใช้ใต้ /api/v1/plugins/* ทุกครั้งได้รับอนุญาตด้วย bearer token ใน header Authorization ซึ่งเป็นได้ทั้ง POPOPX_ADMIN_TOKEN ตัวหลัก หรือโทเคน pxa_ แบบกำหนด scope ที่ออกที่ POST /api/v1/admin/tokens โดย scope คือ core:<resource>:ro|rw, plugin:<id>:ro|rw หรือ * เก็บบนดิสก์เพียงแฮชและคืนข้อความธรรมดาเพียงครั้งเดียว ความลับของโมดูลเองมีแค่ตัวแปรสภาพแวดล้อมที่ระบุไว้ข้างล่าง",
+  fi: "Jokaisen /api/v1/plugins/* -polun kutsun valtuuttaa Authorization-otsakkeen bearer-token. Se on joko juuri-POPOPX_ADMIN_TOKEN tai POST /api/v1/admin/tokens -osoitteessa myönnetty pxa_-token, jonka scopet ovat core:<resource>:ro|rw, plugin:<id>:ro|rw tai *, levylle jää vain hash ja selkokielinen arvo palautetaan kerran. Moduulin omat salaisuudet ovat vain alla luetellut ympäristömuuttujat.",
+  uk: "Кожен виклик у /api/v1/plugins/* авторизує bearer-токен у заголовку Authorization. Це або кореневий POPOPX_ADMIN_TOKEN, або скоупований токен pxa_, виданий у POST /api/v1/admin/tokens: його області — core:<resource>:ro|rw, plugin:<id>:ro|rw чи *, на диску зберігається лише хеш, а відкритий текст повертається один раз. Власні секрети модуля — це лише перелічені нижче змінні середовища.",
+  bg: "Всяко извикване под /api/v1/plugins/* се оторизира от bearer токен в заглавката Authorization. Това е или основният POPOPX_ADMIN_TOKEN, или токен pxa_ с обхват, издаден в POST /api/v1/admin/tokens: обхватите му са core:<resource>:ro|rw, plugin:<id>:ro|rw или *, на диска се пази само хеш, а откритият текст се връща веднъж. Собствените тайни на модула са само изброените по-долу променливи на средата.",
+  tr: "/api/v1/plugins/* altındaki her çağrıyı Authorization başlığındaki bearer token yetkilendirir. Bu ya kök POPOPX_ADMIN_TOKEN ya da POST /api/v1/admin/tokens üzerinden üretilen kapsamlı bir pxa_ tokenıdır: kapsamları core:<resource>:ro|rw, plugin:<id>:ro|rw ya da * olur, diskte yalnızca hash tutulur ve açık metin bir kez döner. Modülün kendine ait sırları yalnızca aşağıda listelenen ortam değişkenleridir.",
+  hu: "A /api/v1/plugins/* alatti minden hívást az Authorization fejlécben küldött bearer token jogosít. Ez vagy a gyökér POPOPX_ADMIN_TOKEN, vagy a POST /api/v1/admin/tokens végponton kiadott hatókörű pxa_ token: hatókörei core:<resource>:ro|rw, plugin:<id>:ro|rw vagy *, a lemezen csak hash marad, a nyílt szöveg pedig egyszer jön vissza. A modul saját titkai csak az alább felsorolt környezeti változók.",
 };
 
 const REVOKE_NOTE: Localized<string> = {
@@ -2417,6 +2961,8 @@ export function PluginsShowcase(): ReactElement {
   const roadmapNeeds = useCopy(ROADMAP_NEEDS);
   const roadmapNoDate = useCopy(ROADMAP_NO_DATE);
   const roadmapShipped = useCopy(ROADMAP_SHIPPED_NOTE);
+  const roadmapDeclinedLabel = useCopy(ROADMAP_DECLINED_LABEL);
+  const roadmapDeclinedNote = useCopy(ROADMAP_DECLINED_NOTE);
   const stepsTitle = useCopy(STEPS_TITLE);
   const step1Title = useCopy(STEP_1_TITLE);
   const step1Copy = useCopy(STEP_1_COPY);
@@ -2500,20 +3046,32 @@ export function PluginsShowcase(): ReactElement {
           </div>
           <p className="mt-2.5 text-[13px] leading-relaxed text-mute">{roadmapSub}</p>
           <ul className="mt-5 space-y-4">
-            {ROADMAP.map((item) => (
-              <li key={item.brand} className="glass-inset p-4">
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <code className="font-mono text-[11.5px] text-warn">{item.brand}</code>
-                  <span className="text-[13.5px] font-medium text-white">
-                    {pick(item.label, locale)}
-                  </span>
-                </div>
-                <p className="eyebrow mt-3">{roadmapNeeds}</p>
-                <p className="mt-1.5 min-w-0 text-[12.5px] leading-relaxed text-mute [overflow-wrap:anywhere]">
-                  {pick(item.caption, locale)}
-                </p>
-              </li>
-            ))}
+            {ROADMAP.map((item) => {
+              const declined = item.state === "declined";
+              return (
+                <li key={item.brand} className="glass-inset p-4">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <span className="pill whitespace-nowrap">
+                      <StatusDot tone={declined ? "alert" : "warn"} />
+                      {declined ? roadmapDeclinedLabel : roadmapLabel}
+                    </span>
+                    <code className="font-mono text-[11.5px] text-warn">{item.brand}</code>
+                    <span className="text-[13.5px] font-medium text-white">
+                      {pick(item.label, locale)}
+                    </span>
+                  </div>
+                  <p className="eyebrow mt-3">{roadmapNeeds}</p>
+                  <p className="mt-1.5 min-w-0 text-[12.5px] leading-relaxed text-mute [overflow-wrap:anywhere]">
+                    {pick(item.caption, locale)}
+                  </p>
+                  {declined ? (
+                    <p className="mt-1.5 min-w-0 text-[12px] leading-relaxed text-faint [overflow-wrap:anywhere]">
+                      {roadmapDeclinedNote}
+                    </p>
+                  ) : null}
+                </li>
+              );
+            })}
           </ul>
           <p className="mt-5 text-[12.5px] leading-relaxed text-faint">{roadmapNoDate}</p>
           <p className="mt-2.5 text-[12.5px] leading-relaxed text-faint">{roadmapShipped}</p>

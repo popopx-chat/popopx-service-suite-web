@@ -82,7 +82,7 @@ popopx-service-suite-web/
     │   ├── LanguageMenu.tsx                     the 18-language menu: list plus compact capsule
     │   ├── HeroSection.tsx                      the hero stage
     │   ├── BusinessScenarios.tsx                six plain-language use-case cards under the hero
-    │   ├── PluginsShowcase.tsx                  the five plugins that ship in the admin back end
+    │   ├── PluginsShowcase.tsx                  the nine plugin modules that ship in the admin back end
     │   ├── ArchitectureComparison.tsx           the five capability cards and the three-way table
     │   ├── InteractiveSandbox.tsx               admin console simulator beside a phone preview
     │   ├── SecurityGovernanceSection.tsx        credential isolation, HMAC, audit, rate limits
@@ -150,10 +150,10 @@ page, so nobody has to jump to reach it.
 | 1 · Top navigation | `Navbar.tsx` | links to all six | Sticky glass bar: official mark with the `POPOPX Service Suite` title, the six anchor links, the language capsule, the GitHub entry, the deploy primary button (to `#install`); collapses into a panel on narrow screens |
 | 2 · Hero stage | `HeroSection.tsx` | `#overview` | Dual-mode topology behind the headline, with the metric strip stating the facts outright — 0 global user IDs, 100% end-to-end encryption, AGPL-3.0 across the stack; the two buttons point at `#install` and `#sandbox` |
 | 3 · Business scenarios | `BusinessScenarios.tsx` | `#scenarios` | The first block below the hero: six plain-language cards — AI customer support, automated enquiry handling, encrypted channel publishing, ops and security alerting, anonymous scan-to-login, connecting your own local agent — each with a three-step flow, the real module file, route or environment switch on one monospaced line, a state word that keeps "on by factory default" apart from "core gateway behaviour" and "an environment switch, no extra plugin", and a jump into the section that documents it |
-| 4 · Plugin matrix | `PluginsShowcase.tsx` | `#plugins` | The five plugins that ship ready in the admin back end: private AI agent, DevOps alert ops, zero-tracking QR sign-in, encrypted polls, on-chain monitoring with whitelist drops; category filter, four-step integration path, and a roadmap of planned third-party connectors |
+| 4 · Plugin matrix | `PluginsShowcase.tsx` | `#plugins` | The nine plugin modules that ship ready in the admin back end — on by default: private AI agent, DevOps alert ops, zero-tracking QR sign-in, encrypted polls; off by default: on-chain monitoring with whitelist drops, workflow webhooks, the CardDAV and CalDAV connectors, and the Slack/Discord bridge; category filter, four-step integration path, and a roadmap of planned third-party connectors that now records three credential-dependent integrations still planned and two explicitly declined |
 | 5 · Features and architecture | `ArchitectureComparison.tsx` | `#architecture` | The five service-account capabilities (loopback WebSocket isolation, two-level custom menus (3 × 5), three dynamic card styles, pairwise-anonymous HMAC-signed H5, zero-knowledge channels with epoch key rotation), plus a three-way table against classic social accounts and centralised bots |
 | 6 · Interactive sandbox | `InteractiveSandbox.tsx` | `#sandbox` | An admin console simulator beside a 1:1 phone preview; visitors really click menus and cards, and a switch flips the view to the relay's point of view — ciphertext and signature digests only |
-| 7 · Security and permission governance | `SecurityGovernanceSection.tsx` | `#security` | Credential isolation, HMAC authentication, audit logs, rate limiting, and the admin console deployment guide; each control panel shows what is shipped vs what is planned |
+| 7 · Security and permission governance | `SecurityGovernanceSection.tsx` | `#security` | Credential isolation, the credential vault, scoped admin tokens, signed alert intake, audit logs, rate limiting, and the admin console deployment guide; every control panel cites the shipped code behind it and states remaining boundaries — such as the process-local replay cache — as boundaries, not roadmap items |
 | 8 · Status and changelog | `StatusChangelogSection.tsx` | `#changelog` | Backend release history, portal status, and the build verification recipe; stats grid plus the exact commands to reproduce the build |
 | 9 · Protocol quick reference | `ProtocolReferenceSection.tsx` | `#protocol` | The channel envelope, the `::POPOPX_ECO::` card protocol, and the H5 verification endpoint `POST /api/v1/verifyH5Auth`; wire formats and byte-level examples |
 | 10 · Install and usage guide | `InstallAndUsageGuideSection.tsx` | `#install` | The Ubuntu and macOS tabs, carrying the three install paths of the backend repo: Ubuntu production (`install_ubuntu22.sh`), macOS production (`install_macos.sh`, which puts the gateway behind the launchd label `com.popopx.gateway`) and macOS development (`start_macos.sh`); then console initialisation and quota setup, and the four-step iPhone scan-and-operate walkthrough |
@@ -339,8 +339,9 @@ than to `next start`. Those four commands above are the entire acceptance suite.
 ## Related repos
 
 - Backend and protocol: [`popopx-service-suite`](https://github.com/popopx-chat/popopx-service-suite)
-  — the gateway, billing, channel envelope encryption, the five plugins and the browser admin console;
-  every command and port in the portal's install copy is aligned with it.
+  — the gateway, billing, channel envelope encryption, the nine plugin modules (including the
+  workflow bridge, the CardDAV and CalDAV connectors and the Slack/Discord bridge) and the browser
+  admin console; every command and port in the portal's install copy is aligned with it.
 - iOS client: [`popopx-chat`](https://github.com/popopx-chat/popopx-chat) — the official purple mark and
   the set of 18 languages both come from this repository.
 - This portal: [`popopx-service-suite-web`](https://github.com/popopx-chat/popopx-service-suite-web).

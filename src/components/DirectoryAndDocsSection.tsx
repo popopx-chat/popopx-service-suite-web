@@ -35,7 +35,8 @@ import { REPO_URL } from "@/lib/site";
  *  2. A directory-entry generator. There is no directory schema in
  *     `popopx-service-suite`, `popopx-chat` or `popopx.chat-site` (all searched), and the
  *     gateway exposes no submission route — `PUBLIC_ROUTE_KEYS` in `gateway/app/main.py`
- *     lists exactly four token-free endpoints and none takes an entry. So the format here is
+ *     lists exactly five endpoints that bypass the admin token (one still demands its
+ *     own workflow token), and none takes an entry. So the format here is
  *     *this page's proposal*, and the submission path it prints is a pull request.
  *  3. A protocol cheatsheet: the rotation envelope, the `::POPOPX_ECO::` frame family and
  *     `POST /api/v1/verifyH5Auth`, each with the exact rule it encodes.
@@ -361,8 +362,8 @@ const QR_MODAL_NOTE: Localized<string> = {
  * 2. The wall — values
  * ───────────────────────────────────────────────────────────────────────── */
 
-/** An invite address in the form the SSO plugin's own self-test carries. */
-const DEMO_INVITE_ADDRESS = "popopx:/Q7dnHsF8Kz";
+/** An opaque share link the console mints; it decodes to `popopx:/Q7dnHsF8Kz`. */
+const DEMO_INVITE_ADDRESS = "https://popopx.chat/i/v1/jU5dS7lS-MI3vS1Q-N1nnAouAUOEpWoFKIIlaw8nPJVEUCfbG-1xHb-YMPm8bQ";
 
 /** `uri=` is percent-encoded by the producer (`privacy_sso_plugin.py::percent_encode`, RFC 3986 unreserved only). */
 const DEMO_ENCODED_ADDRESS = "popopx%3A%2FQ7dnHsF8Kz";
@@ -1421,24 +1422,24 @@ const GEN_TITLE: Localized<string> = {
 };
 
 const GEN_LEDE: Localized<string> = {
-  en: "The gateway has no directory submission endpoint of any kind — PUBLIC_ROUTE_KEYS lists exactly four token-free routes: /healthz, /, /h5/{article_id} and /api/v1/verifyH5Auth. So the format below is this page's proposal (a draft), and the submission path is a pull request against the source repository. The form runs entirely in your browser and sends nothing anywhere.",
-  ru: "У шлюза нет эндпоинта для подачи в каталог — вообще никакого: в PUBLIC_ROUTE_KEYS ровно четыре маршрута без токена — /healthz, /, /h5/{article_id} и /api/v1/verifyH5Auth. Значит, формат ниже — предложение этой страницы (черновик), а способ подачи — pull request в исходный репозиторий. Форма работает целиком в вашем браузере и никуда ничего не отправляет.",
-  de: "Das Gateway hat keinerlei Endpunkt zur Katalogeinreichung — PUBLIC_ROUTE_KEYS führt genau vier tokenfreie Routen auf: /healthz, /, /h5/{article_id} und /api/v1/verifyH5Auth. Das folgende Format ist deshalb der Vorschlag dieser Seite (ein Entwurf), und der Weg der Einreichung ist ein Pull Request gegen das Quellrepo. Das Formular läuft vollständig in Ihrem Browser und sendet nichts hinaus.",
-  fr: "La passerelle ne propose aucun point d'entrée de soumission à un annuaire — PUBLIC_ROUTE_KEYS ne compte que quatre routes sans jeton : /healthz, /, /h5/{article_id} et /api/v1/verifyH5Auth. Le format ci-dessous est donc la proposition de cette page (un brouillon), et la voie de soumission est une pull request sur le dépôt source. Le formulaire tourne entièrement dans votre navigateur et n'envoie rien.",
-  it: "Il gateway non ha nessun endpoint di sottomissione alla directory — PUBLIC_ROUTE_KEYS elenca esattamente quattro route senza token: /healthz, /, /h5/{article_id} e /api/v1/verifyH5Auth. Il formato qui sotto è quindi la proposta di questa pagina (una bozza), e la via di sottomissione è una pull request verso il repository sorgente. Il modulo gira interamente nel tuo browser e non manda nulla da nessuna parte.",
-  nl: "De gateway heeft in het geheel geen endpoint voor directory-inzending — PUBLIC_ROUTE_KEYS somt precies vier tokenloze routes op: /healthz, /, /h5/{article_id} en /api/v1/verifyH5Auth. Het onderstaande format is daarom het voorstel van deze pagina (een concept), en de inzendingweg is een pull request tegen de bronrepository. Het formulier draait volledig in je browser en verzendt niets.",
-  cs: "Brána nemá žádné rozhraní pro podání do adresáře — PUBLIC_ROUTE_KEYS uvádí přesně čtyři routy bez tokenu: /healthz, /, /h5/{article_id} a /api/v1/verifyH5Auth. Následující formát je proto návrhem této stránky (koncept) a cestou podání je pull request do zdrojového repozitáře. Formulář běží celý ve vašem prohlížeči a nikam nic neposílá.",
-  "zh-Hans": "网关没有目录提交接口，也没有任何收录端点——PUBLIC_ROUTE_KEYS 里只有 /healthz、/、/h5/{article_id} 与 /api/v1/verifyH5Auth 四个免令牌路由。所以下面的格式是本页面提议的收录格式（草案），提交方式是向源码仓库开一个 PR。表单只在你这台设备的浏览器里运行，不发送任何东西。",
-  "zh-Hant": "閘道沒有目錄提交介面，也沒有任何收錄端點——PUBLIC_ROUTE_KEYS 裡只有 /healthz、/、/h5/{article_id} 與 /api/v1/verifyH5Auth 四個免令牌路由。所以下面的格式是本頁面提議的收錄格式（草案），提交方式是對原始碼倉庫開一個 PR。表單只在你這台裝置的瀏覽器裡執行，不傳送任何東西。",
-  es: "La pasarela no tiene ningún endpoint de envío de directorio — PUBLIC_ROUTE_KEYS enumera exactamente cuatro rutas sin token: /healthz, /, /h5/{article_id} y /api/v1/verifyH5Auth. Así que el formato de abajo es la propuesta de esta página (un borrador), y el camino de envío es una pull request contra el repositorio fuente. El formulario corre íntegramente en su navegador y no envía nada a ningún sitio.",
-  pl: "Brama nie ma w ogóle punktu końcowego do zgłaszania wpisów — PUBLIC_ROUTE_KEYS wymienia dokładnie cztery trasy bez tokenu: /healthz, /, /h5/{article_id} i /api/v1/verifyH5Auth. Poniższy format jest więc propozycją tej strony (projektem), a drogą zgłoszenia pull request do repozytorium źródłowego. Formularz działa w całości w Twojej przeglądarce i niczego nie wysyła.",
-  ja: "ゲートウェイにディレクトリ提出用のエンドポイントは存在しない。PUBLIC_ROUTE_KEYS が並べるトークン不要のルートは /healthz、/、/h5/{article_id}、/api/v1/verifyH5Auth の 4 本だけ。したがって下の形式はこのページの提案（ドラフト）で、提出方法はソースリポジトリへのプルリクエストである。このフォームは端末のブラウザだけで動き、外部へ何も送らない。",
-  th: "เกตเวย์ไม่มี endpoint สำหรับส่งรายการเข้าไดเรกทอรีเลย — PUBLIC_ROUTE_KEYS มีเส้นทางไม่ต้องใช้ token อยู่สี่เส้นเท่านั้น คือ /healthz, /, /h5/{article_id} และ /api/v1/verifyH5Auth รูปแบบด้านล่างจึงเป็นข้อเสนอของหน้านี้ (ยังเป็นร่าง) ส่วนวิธีส่งคือเปิด pull request เข้ารีโปซอร์ส เครื่องฟอร์มนี้ทำงานในเบราว์เซอร์ของคุณล้วน ๆ และไม่ส่งอะไรออกไปเลย",
-  fi: "Yhdyskäytävällä ei ole ollenkaan hakemiston lähetyspäätettä — PUBLIC_ROUTE_KEYS listaa täsmälleen neljä todennuksetonta reittiä: /healthz, /, /h5/{article_id} ja /api/v1/verifyH5Auth. Jäljempänä oleva muoto on tämän sivun ehdotus (luonnos), ja lähetystapa on pull request lähdearkistoon. Lomake toimii kokonaan selaimessasi eikä lähetä mitään minnekään.",
-  uk: "У шлюза немає жодного ендпоінта для подання до каталогу — PUBLIC_ROUTE_KEYS містить рівно чотири маршрути без токена: /healthz, /, /h5/{article_id} та /api/v1/verifyH5Auth. Тому формат нижче — це пропозиція цієї сторінки (чернетка), а спосіб подання — pull request до вихідного репозиторію. Форма працює повністю у вашому браузері і нікуди нічого не надсилає.",
-  bg: "Шлюзът няма никакъв крайна точка за подаване в указател — PUBLIC_ROUTE_KEYS изброява точно четири маршрута без токен: /healthz, /, /h5/{article_id} и /api/v1/verifyH5Auth. Затова долният формат е предложението на тази страница (чернова), а начинът на подаване е pull request към изходното хранилище. Формулярът работи изцяло във вашия браузър и нищо не изпраща.",
-  tr: "Ağ geçidinde dizine gönderim için hiçbir uç nokta yok — PUBLIC_ROUTE_KEYS tam olarak dört adet jtonsuz yolu listeliyor: /healthz, /, /h5/{article_id} ve /api/v1/verifyH5Auth. Dolayısıyla aşağıdaki biçim bu sayfanın önerisidir (bir taslak) ve gönderim yolu kaynak depoya bir pull request açmaktır. Form tamamen tarayıcınızda çalışır ve dışarıya hiçbir şey göndermez.",
-  hu: "Az átjárónak egyáltalán nincs könyvtár-benyújtási végpontja — a PUBLIC_ROUTE_KEYS pontosan négy token nélküli útvonalat sorol fel: /healthz, /, /h5/{article_id} és /api/v1/verifyH5Auth. Az alábbi formátum ezért ennek az oldalnak a javaslata (tervezet), a benyújtás módja pedig a forrástárolóhoz nyitott pull request. Az űrlap teljesen a böngészőben fut és semmit nem küld el.",
+  en: "The gateway has no directory submission endpoint of any kind — PUBLIC_ROUTE_KEYS lists exactly five routes that bypass the admin token: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth and /api/v1/workflows/trigger; the last one still authenticates itself with a per-subscription workflow token. So the format below is this page's proposal (a draft), and the submission path is a pull request against the source repository. The form runs entirely in your browser and sends nothing anywhere.",
+  ru: "У шлюза нет эндпоинта для подачи в каталог — вообще никакого: в PUBLIC_ROUTE_KEYS ровно пять маршрутов в обход админ-токена — /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth и /api/v1/workflows/trigger; последний всё равно аутентифицируется собственным токеном рабочего процесса на каждую подписку. Значит, формат ниже — предложение этой страницы (черновик), а способ подачи — pull request в исходный репозиторий. Форма работает целиком в вашем браузере и никуда ничего не отправляет.",
+  de: "Das Gateway hat keinerlei Endpunkt zur Katalogeinreichung — PUBLIC_ROUTE_KEYS führt genau fünf Routen am Admin-Token vorbei auf: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth und /api/v1/workflows/trigger; die letzte authentifiziert sich weiterhin mit einem eigenen Workflow-Token pro Abonnement. Das folgende Format ist deshalb der Vorschlag dieser Seite (ein Entwurf), und der Weg der Einreichung ist ein Pull Request gegen das Quellrepo. Das Formular läuft vollständig in Ihrem Browser und sendet nichts hinaus.",
+  fr: "La passerelle ne propose aucun point d'entrée de soumission à un annuaire — PUBLIC_ROUTE_KEYS compte exactement cinq routes contournant le jeton d'administration : /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth et /api/v1/workflows/trigger ; la dernière s'authentifie toujours avec un jeton de workflow propre à chaque abonnement. Le format ci-dessous est donc la proposition de cette page (un brouillon), et la voie de soumission est une pull request sur le dépôt source. Le formulaire tourne entièrement dans votre navigateur et n'envoie rien.",
+  it: "Il gateway non ha nessun endpoint di sottomissione alla directory — PUBLIC_ROUTE_KEYS elenca esattamente cinque route che aggirano il token di amministrazione: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth e /api/v1/workflows/trigger; l'ultima si autentica comunque con un token di workflow per singolo abbonamento. Il formato qui sotto è quindi la proposta di questa pagina (una bozza), e la via di sottomissione è una pull request verso il repository sorgente. Il modulo gira interamente nel tuo browser e non manda nulla da nessuna parte.",
+  nl: "De gateway heeft in het geheel geen endpoint voor directory-inzending — PUBLIC_ROUTE_KEYS somt precies vijf routes op die het admin-token omzeilen: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth en /api/v1/workflows/trigger; de laatste authenticeert zich nog steeds met een eigen workflowtoken per abonnement. Het onderstaande format is daarom het voorstel van deze pagina (een concept), en de inzendingweg is een pull request tegen de bronrepository. Het formulier draait volledig in je browser en verzendt niets.",
+  cs: "Brána nemá žádné rozhraní pro podání do adresáře — PUBLIC_ROUTE_KEYS uvádí přesně pět rout obcházejících admin token: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth a /api/v1/workflows/trigger; poslední se přesto autentizuje vlastním workflow tokenem pro každý odběr. Následující formát je proto návrhem této stránky (koncept) a cestou podání je pull request do zdrojového repozitáře. Formulář běží celý ve vašem prohlížeči a nikam nic neposílá.",
+  "zh-Hans": "网关没有目录提交接口，也没有任何收录端点——PUBLIC_ROUTE_KEYS 里只有 /healthz、/、/h5/{article_id}、/api/v1/verifyH5Auth 与 /api/v1/workflows/trigger 五条绕过管理员令牌的路由；最后一条仍要用每订阅的工作流令牌自行认证。所以下面的格式是本页面提议的收录格式（草案），提交方式是向源码仓库开一个 PR。表单只在你这台设备的浏览器里运行，不发送任何东西。",
+  "zh-Hant": "閘道沒有目錄提交介面，也沒有任何收錄端點——PUBLIC_ROUTE_KEYS 裡只有 /healthz、/、/h5/{article_id}、/api/v1/verifyH5Auth 與 /api/v1/workflows/trigger 五條繞過管理員權杖的路由；最後一條仍要用每訂閱的工作流程權杖自行認證。所以下面的格式是本頁面提議的收錄格式（草案），提交方式是對原始碼倉庫開一個 PR。表單只在你這台裝置的瀏覽器裡執行，不傳送任何東西。",
+  es: "La pasarela no tiene ningún endpoint de envío de directorio — PUBLIC_ROUTE_KEYS enumera exactamente cinco rutas que evitan el token de administración: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth y /api/v1/workflows/trigger; la última se autentica igualmente con un token de flujo de trabajo por suscripción. Así que el formato de abajo es la propuesta de esta página (un borrador), y el camino de envío es una pull request contra el repositorio fuente. El formulario corre íntegramente en su navegador y no envía nada a ningún sitio.",
+  pl: "Brama nie ma w ogóle punktu końcowego do zgłaszania wpisów — PUBLIC_ROUTE_KEYS wymienia dokładnie pięć tras omijających token administratora: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth i /api/v1/workflows/trigger; ostatnia nadal uwierzytelnia się własnym tokenem przepływu pracy dla każdej subskrypcji. Poniższy format jest więc propozycją tej strony (projektem), a drogą zgłoszenia pull request do repozytorium źródłowego. Formularz działa w całości w Twojej przeglądarce i niczego nie wysyła.",
+  ja: "ゲートウェイにディレクトリ提出用のエンドポイントは存在しない。PUBLIC_ROUTE_KEYS が並べる管理トークンを迂回するルートは /healthz、/、/h5/{article_id}、/api/v1/verifyH5Auth、/api/v1/workflows/trigger の 5 本だけだが、最後の 1 本は購読ごとのワークフロートークンで別途認証する。したがって下の形式はこのページの提案（ドラフト）で、提出方法はソースリポジトリへのプルリクエストである。このフォームは端末のブラウザだけで動き、外部へ何も送らない。",
+  th: "เกตเวย์ไม่มี endpoint สำหรับส่งรายการเข้าไดเรกทอรีเลย — PUBLIC_ROUTE_KEYS มีเส้นทางที่ข้าม token ผู้ดูแลอยู่ห้าเส้นเท่านั้น คือ /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth และ /api/v1/workflows/trigger โดยเส้นสุดท้ายยังต้องยืนยันตัวด้วย token ของ workflow แยกตามแต่ละการสมัคร รูปแบบด้านล่างจึงเป็นข้อเสนอของหน้านี้ (ยังเป็นร่าง) ส่วนวิธีส่งคือเปิด pull request เข้ารีโปซอร์ส ฟอร์มนี้ทำงานในเบราว์เซอร์ของคุณล้วน ๆ และไม่ส่งอะไรออกไปเลย",
+  fi: "Yhdyskäytävällä ei ole ollenkaan hakemiston lähetyspäätettä — PUBLIC_ROUTE_KEYS listaa täsmälleen viisi ylläpitotunnisteen ohittavaa reittiä: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth ja /api/v1/workflows/trigger; viimeinen todentaa itsensä silti jokaiselle tilaukselle omalla työnkulkutunnisteella. Jäljempänä oleva muoto on tämän sivun ehdotus (luonnos), ja lähetystapa on pull request lähdearkistoon. Lomake toimii kokonaan selaimessasi eikä lähetä mitään minnekään.",
+  uk: "У шлюза немає жодного ендпоінта для подання до каталогу — PUBLIC_ROUTE_KEYS містить рівно п'ять маршрутів в обхід адмін-токена: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth та /api/v1/workflows/trigger; останній усе одно автентифікується власним токеном робочого процесу на кожну підписку. Тому формат нижче — це пропозиція цієї сторінки (чернетка), а спосіб подання — pull request до вихідного репозиторію. Форма працює повністю у вашому браузері і нікуди нічого не надсилає.",
+  bg: "Шлюзът няма никаква крайна точка за подаване в указател — PUBLIC_ROUTE_KEYS изброява точно пет маршрута, заобикалящи административния токен: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth и /api/v1/workflows/trigger; последният все пак се удостоверява със собствен токен за работен поток за всеки абонамент. Затова долният формат е предложението на тази страница (чернова), а начинът на подаване е pull request към изходното хранилище. Формулярът работи изцяло във вашия браузър и нищо не изпраща.",
+  tr: "Ağ geçidinde dizine gönderim için hiçbir uç nokta yok — PUBLIC_ROUTE_KEYS yönetici jetonunu atlayan tam olarak beş yol listeliyor: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth ve /api/v1/workflows/trigger; sonuncusu yine de her abonelik için kendi iş akışı jetonuyla kimlik doğrular. Dolayısıyla aşağıdaki biçim bu sayfanın önerisidir (bir taslak) ve gönderim yolu kaynak depoya bir pull request açmaktır. Form tamamen tarayıcınızda çalışır ve dışarıya hiçbir şey göndermez.",
+  hu: "Az átjárónak egyáltalán nincs könyvtár-benyújtási végpontja — a PUBLIC_ROUTE_KEYS pontosan öt, az admin tokent megkerülő útvonalat sorol fel: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth és /api/v1/workflows/trigger; az utolsó mégis előfizetésenként saját munkafolyamat-tokennel hitelesít. Az alábbi formátum ezért ennek az oldalnak a javaslata (tervezet), a benyújtás módja pedig a forrástárolóhoz nyitott pull request. Az űrlap teljesen a böngészőben fut és semmit nem küld el.",
 };
 
 const GEN_CTA: Localized<string> = {
@@ -1715,44 +1716,44 @@ const FIELD = {
   address: {
     id: "dir-address",
     label: {
-      en: "SMP / relay address",
-      ru: "SMP / адрес ретранслятора",
-      de: "SMP- / Relay-Adresse",
-      fr: "Adresse SMP / relais",
-      it: "Indirizzo SMP / relay",
-      nl: "SMP- / relayadres",
-      cs: "SMP / adresa relay",
-      "zh-Hans": "SMP / 中继地址",
-      "zh-Hant": "SMP / 中繼位址",
-      es: "Dirección SMP / relay",
-      pl: "Adres SMP / przekaźnika",
-      ja: "SMP／リレーアドレス",
-      th: "ที่อยู่ SMP / ตัวกลาง",
-      fi: "SMP- / välityspalvelinosoite",
-      uk: "SMP / адреса ретранслятора",
-      bg: "SMP / адрес на реле",
-      tr: "SMP / aktarma adresi",
-      hu: "SMP / relay cím",
+      en: "Invite link",
+      ru: "Ссылка-приглашение",
+      de: "Einladungslink",
+      fr: "Lien d'invitation",
+      it: "Link d'invito",
+      nl: "Uitnodigingslink",
+      cs: "Odkaz pozvánky",
+      "zh-Hans": "邀请链接",
+      "zh-Hant": "邀請連結",
+      es: "Enlace de invitación",
+      pl: "Łącze zaproszenia",
+      ja: "招待リンク",
+      th: "ลิงก์เชิญ",
+      fi: "Kutsulinkki",
+      uk: "Посилання-запрошення",
+      bg: "Връзка-покана",
+      tr: "Davet bağlantısı",
+      hu: "Meghívó hivatkozás",
     },
     hint: {
-      en: "The account's own invite address, of the form popopx:/Q7dnHsF8Kz. It is a secret: hand it to reviewers inside the pull request rather than pasting it publicly.",
-      ru: "Собственный адрес-приглашение аккаунта вида popopx:/Q7dnHsF8Kz. Это секрет: передавайте его ревьюерам внутри pull request, а не публикуйте.",
-      de: "Die eigene Einladungsadresse des Kontos, Form popopx:/Q7dnHsF8Kz. Sie ist ein Geheimnis: geben Sie sie Prüfern im Pull Request, statt sie öffentlich einzufügen.",
-      fr: "La propre adresse d'invitation du compte, de la forme popopx:/Q7dnHsF8Kz. C'est un secret : remettez-la aux relecteurs dans la pull request, ne la collez pas publiquement.",
-      it: "L'indirizzo d'invito dell'account stesso, nella forma popopx:/Q7dnHsF8Kz. È un segreto: dagli ai revisori dentro la pull request invece di incollarlo pubblicamente.",
-      nl: "Het eigen uitnodigingsadres van de account, in de vorm popopx:/Q7dnHsF8Kz. Het is een geheim: geef het aan reviewers in de pull request in plaats van het openbaar te plakken.",
-      cs: "Vlastní adresa pozvánky účtu, ve tvaru popopx:/Q7dnHsF8Kz. Je to tajemství: předejte ji recenzentům uvnitř pull requestu, nevkládejte ji veřejně.",
-      "zh-Hans": "服务号自己的邀请地址，形如 popopx:/Q7dnHsF8Kz。它是秘密：在 PR 里只交给审阅者，不要公开粘贴。",
-      "zh-Hant": "服務號自己的邀請位址，形如 popopx:/Q7dnHsF8Kz。它是秘密：在 PR 裡只交給審閱者，不要公開貼上。",
-      es: "La propia dirección de invitación de la cuenta, con forma popopx:/Q7dnHsF8Kz. Es un secreto: entréguesela a los revisores dentro de la pull request en lugar de pegarla públicamente.",
-      pl: "Własny adres zaproszenia konta, w postaci popopx:/Q7dnHsF8Kz. To tajemnica: przekaż go recenzentom wewnątrz pull request, zamiast wklejać publicznie.",
-      ja: "アカウント自身の招待アドレスで、形は popopx:/Q7dnHsF8Kz。これは秘密情報だ。公開で貼り付けるのではなく、PR の中でレビュアーにだけ渡す。",
-      th: "ที่อยู่เชิญของบัญชีบริการนี้เอง มีรูปแบบเป็น popopx:/Q7dnHsF8Kz — มันเป็นความลับ ส่งให้ผู้ตรวจโค้ดใน pull request อย่าเอาไปวางเผยแพร่",
-      fi: "Tilin oma kutsuosoite, muotoa popopx:/Q7dnHsF8Kz. Se on salaisuus: anna se tarkastajille pull requestin sisällä, älä liitä sitä julkisesti.",
-      uk: "Власна адреса-запрошення облікового запису, вигляду popopx:/Q7dnHsF8Kz. Це таємниця: передайте її рецензентам у межах pull request, а не публікуйте.",
-      bg: "Собственият адрес-покана на акаунта, от вида popopx:/Q7dnHsF8Kz. Той е тайна: предайте го на прегледачите вътре в pull request, вместо да го лепите публично.",
-      tr: "Hesabın kendi davet adresi, biçimi popopx:/Q7dnHsF8Kz. Bu bir sırdır: onu herkese yapıştırmak yerine pull request içinde inceleyenlere verin.",
-      hu: "A fiók saját meghívó címe, alakja popopx:/Q7dnHsF8Kz. Ez titok: a pull requesten belül adja át a bírálóknak, ne illessze be nyilvánosan.",
+      en: "The link the console mints for this account, of the form https://popopx.chat/i/v1/<code>. It is a capability, so treat it as a secret: hand it to reviewers inside the pull request rather than pasting it publicly. The raw popopx:/… address it seals stays under the console's advanced diagnostics.",
+      ru: "Ссылка, которую консоль выпускает для этого аккаунта, вида https://popopx.chat/i/v1/<code>. Это мандат доступа, поэтому обращайтесь с ней как с секретом: передайте её ревьюерам внутри pull request, а не публикуйте. Исходный адрес popopx:/…, который она запечатывает, остаётся в «расширенной диагностике» консоли.",
+      de: "Der Link, den die Konsole für dieses Konto ausstellt, Form https://popopx.chat/i/v1/<code>. Er ist ein Zugangsmittel, behandeln Sie ihn also als Geheimnis: geben Sie ihn Prüfern im Pull Request, statt ihn öffentlich einzufügen. Die rohe popopx:/…-Adresse, die er versiegelt, bleibt in der erweiterten Diagnose der Konsole.",
+      fr: "Le lien que la console émet pour ce compte, de la forme https://popopx.chat/i/v1/<code>. C'est un droit d'accès : traitez-le comme un secret et remettez-le aux relecteurs dans la pull request, sans le coller publiquement. L'adresse brute popopx:/… qu'il scelle reste dans les diagnostics avancés de la console.",
+      it: "Il link che la console conia per questo account, nella forma https://popopx.chat/i/v1/<code>. È una capacità d'accesso, quindi trattalo come un segreto: consegnalo ai revisori dentro la pull request invece di incollarlo in pubblico. L'indirizzo grezzo popopx:/… che sigilla resta nella diagnostica avanzata della console.",
+      nl: "De link die de console voor dit account maakt, in de vorm https://popopx.chat/i/v1/<code>. Het is een toegangsbewijs, dus behandel hem als een geheim: geef hem aan reviewers in de pull request in plaats van hem openbaar te plakken. Het ruwe popopx:/…-adres dat hij verzegelt, blijft onder de geavanceerde diagnostiek van de console.",
+      cs: "Odkaz, který pro tento účet vydá konzole, ve tvaru https://popopx.chat/i/v1/<code>. Je to přístupový prostředek, proto s ním zacházejte jako s tajemstvím: předejte ho recenzentům uvnitř pull requestu, nevkládejte ho veřejně. Surová adresa popopx:/…, kterou zapečeťuje, zůstává v rozšířené diagnostice konzole.",
+      "zh-Hans": "控制台为这个服务号生成的邀请链接，形如 https://popopx.chat/i/v1/<code>。它本身就是访问凭据，请当作秘密：只在 PR 里交给审阅者，不要公开粘贴。它封装的原生 popopx:/… 地址留在控制台的「高级诊断」里。",
+      "zh-Hant": "控制台為這個服務帳號生成的邀請連結，形如 https://popopx.chat/i/v1/<code>。它本身就是存取憑證，請當作秘密：只在 PR 裡交給審閱者，不要公開貼上。它封裝的原生 popopx:/… 位址留在控制台的「進階診斷」裡。",
+      es: "El enlace que la consola emite para esta cuenta, con forma https://popopx.chat/i/v1/<code>. Es una capacidad de acceso, así que trátelo como un secreto: entréguelo a los revisores dentro de la pull request en lugar de pegarlo públicamente. La dirección cruda popopx:/… que sella queda en el diagnóstico avanzado de la consola.",
+      pl: "Łącze, które konsola wydaje dla tego konta, w postaci https://popopx.chat/i/v1/<code>. To poświadczenie dostępu, więc traktuj je jak tajemnicę: przekaż je recenzentom wewnątrz pull request, zamiast wklejać publicznie. Surowy adres popopx:/…, który ono pieczętuje, pozostaje w zaawansowanej diagnostyce konsoli.",
+      ja: "コンソールがこのアカウントのために発行する招待リンクで、形は https://popopx.chat/i/v1/<code>。これはアクセス権そのものなので秘密として扱い、公開で貼らず PR の中でレビュアーにだけ渡す。封入されている生の popopx:/… アドレスはコンソールの「詳細診断」に残る。",
+      th: "ลิงก์ที่คอนโซลออกให้บัญชีนี้ มีรูปแบบเป็น https://popopx.chat/i/v1/<code> — ตัวมันเองคือสิทธิ์เข้าถึง จึงต้องถือเป็นความลับ ส่งให้ผู้ตรวจโค้ดใน pull request อย่าเอาไปวางเผยแพร่ ส่วนที่อยู่ดิบ popopx:/… ที่มันผนึกไว้ยังอยู่ใน «การวินิจฉัยขั้นสูง» ของคอนโซล",
+      fi: "Konsolin tälle tilille myöntämä linkki, muotoa https://popopx.chat/i/v1/<code>. Se on käyttöoikeus, joten kohtele sitä salaisuutena: anna se tarkastajille pull requestin sisällä äläkä liitä sitä julkisesti. Sen sinetöimä raaka popopx:/…-osoite pysyy konsolin lisädignostiikassa.",
+      uk: "Посилання, яке консоль видає для цього акаунта, вигляду https://popopx.chat/i/v1/<code>. Це право доступу, тож поводьтеся з ним як із таємницею: передайте його рецензентам у межах pull request, а не публікуйте. Сиру адресу popopx:/…, яку воно запечатує, видно в «розширеній діагностиці» консолі.",
+      bg: "Връзката, която конзолата издава за този акаунт, от вида https://popopx.chat/i/v1/<code>. Тя е право за достъп, затова я третирайте като тайна: предайте я на прегледачите вътре в pull request, вместо да я лепите публично. Суровият адрес popopx:/…, който тя запечатва, остава в разширената диагностика на конзолата.",
+      tr: "Konsolun bu hesap için ürettiği bağlantı, biçimi https://popopx.chat/i/v1/<code>. Bu bir erişim yetkisidir, dolayısıyla sır gibi davranın: herkese yapıştırmak yerine pull request içinde inceleyenlere verin. Mühürlediği ham popopx:/… adresi konsolun gelişmiş tanılama bölümünde kalır.",
+      hu: "A hivatkozás, amelyet a konzol ehhez a fiókhoz kiad, alakja https://popopx.chat/i/v1/<code>. Ez hozzáférési jogosultság, ezért kezelje titokként: a pull requesten belül adja át a bírálóknak, ne illessze be nyilvánosan. A lepecsételt nyers popopx:/… cím a konzol speciális diagnosztikája alatt marad.",
     },
     sample: DEMO_INVITE_ADDRESS,
   },
@@ -1904,24 +1905,24 @@ const GEN_FIELDS: readonly FieldSpec[] = [
 
 const GEN_STEPS: readonly Localized<string>[] = [
   {
-    en: "Replace the sample with real information and treat the two address fields differently: invite_address is a secret for reviewers inside the pull request, contact_url must be something you are willing to publish.",
-    ru: "Замените пример настоящими данными и разделите два адресных поля: invite_address — секрет, его видят только ревьюеры внутри pull request, contact_url обязан быть тем, что вы готовы опубликовать.",
-    de: "Ersetzen Sie das Beispiel durch echte Angaben und unterscheiden Sie die zwei Adressfelder: invite_address ist ein Geheimnis für Prüfer im Pull Request, contact_url muss etwas sein, das Sie veröffentlichen wollen.",
-    fr: "Remplacez l'exemple par de vraies informations et distinguez les deux champs d'adresse : invite_address est un secret réservé aux relecteurs dans la pull request, contact_url doit être quelque chose que vous acceptez de publier.",
-    it: "Sostituisci l'esempio con informazioni reali e tratta diversamente i due campi indirizzo: invite_address è un segreto per i revisori dentro la pull request, contact_url deve essere qualcosa che sei disposto a pubblicare.",
-    nl: "Vervang het voorbeeld door echte gegevens en scheid de twee adresvelden: invite_address is een geheim voor reviewers in de pull request, contact_url moet iets zijn dat u publicerbaar vindt.",
-    cs: "Nahraďte ukázku skutečnými údaji a rozlište dvě pole adres: invite_address je tajemství pro recenzenty uvnitř pull requestu, contact_url musí být něco, co jste ochotni zveřejnit.",
-    "zh-Hans": "把表单换成真实信息，并区分两类字段：invite_address 是秘密，只在 PR 里给审阅者；contact_url 必须是你愿意公开的地址。",
-    "zh-Hant": "把表單換成真實資訊，並區分兩類欄位：invite_address 是秘密，只在 PR 裡給審閱者；contact_url 必須是你願意公開的位址。",
-    es: "Sustituya el ejemplo por información real y distinga los dos campos de dirección: invite_address es un secreto para los revisores dentro de la pull request, contact_url debe ser algo que esté dispuesto a publicar.",
-    pl: "Zastąp przykład prawdziwymi danymi i rozróżnij dwa pola adresowe: invite_address jest sekretem dla recenzentów wewnątrz pull request, contact_url musi być czymś, co jesteś gotów opublikować.",
-    ja: "サンプルを実情報に置き換え、二つのアドレス欄は区別して扱う。invite_address は秘密で、PR の中でレビュアーにだけ見せる。contact_url は公開を前提にできるアドレスでなければならない。",
-    th: "เปลี่ยนข้อมูลตัวอย่างเป็นข้อมูลจริง แล้วแยกฟิลด์ที่อยู่สองชนิดออกจากกัน: invite_address เป็นความลับให้แต่ผู้ตรวจโค้ดใน pull request ส่วน contact_url ต้องเป็นที่อยู่ที่ยอมเผยแพร่ได้",
-    fi: "Korvaa esimerkki oikeilla tiedoilla ja käsittele kaksi osoitekenttää eri lailla: invite_address on salaisuus tarkastajille pull requestin sisällä, contact_url on oltava jotakin, jonka suostut julkaisemaan.",
-    uk: "Замініть приклад справжніми даними й розрізніть два адресні поля: invite_address — таємниця для рецензентів у межах pull request, contact_url має бути тим, що ви готові оприлюднити.",
-    bg: "Заменете примера с истинска информация и разделете двете адресни полета: invite_address е тайна за прегледачите вътре в pull request, contact_url трябва да е нещо, което сте готови да публикувате.",
-    tr: "Örneği gerçek bilgiyle değiştirin ve iki adres alanını ayrı tutun: invite_address pull request içinde inceleyenler için bir sırdır, contact_url ise yayınlamayı göze aldığınız bir adres olmalı.",
-    hu: "Cserélje le a példát valódi adatokra, és a két címmezőt különböztessen meg: az invite_address titok, csak a pull requestben lévő bírálók lássák, a contact_url pedig legyen valami olyan, amit közzétenne.",
+    en: "Replace the sample with real information and treat the two address fields differently: invite_link is a secret for reviewers inside the pull request, contact_url must be something you are willing to publish.",
+    ru: "Замените пример настоящими данными и разделите два адресных поля: invite_link — секрет, его видят только ревьюеры внутри pull request, contact_url обязан быть тем, что вы готовы опубликовать.",
+    de: "Ersetzen Sie das Beispiel durch echte Angaben und unterscheiden Sie die zwei Adressfelder: invite_link ist ein Geheimnis für Prüfer im Pull Request, contact_url muss etwas sein, das Sie veröffentlichen wollen.",
+    fr: "Remplacez l'exemple par de vraies informations et distinguez les deux champs d'adresse : invite_link est un secret réservé aux relecteurs dans la pull request, contact_url doit être quelque chose que vous acceptez de publier.",
+    it: "Sostituisci l'esempio con informazioni reali e tratta diversamente i due campi indirizzo: invite_link è un segreto per i revisori dentro la pull request, contact_url deve essere qualcosa che sei disposto a pubblicare.",
+    nl: "Vervang het voorbeeld door echte gegevens en scheid de twee adresvelden: invite_link is een geheim voor reviewers in de pull request, contact_url moet iets zijn dat u publicerbaar vindt.",
+    cs: "Nahraďte ukázku skutečnými údaji a rozlište dvě pole adres: invite_link je tajemství pro recenzenty uvnitř pull requestu, contact_url musí být něco, co jste ochotni zveřejnit.",
+    "zh-Hans": "把表单换成真实信息，并区分两类字段：invite_link 是秘密，只在 PR 里给审阅者；contact_url 必须是你愿意公开的地址。",
+    "zh-Hant": "把表單換成真實資訊，並區分兩類欄位：invite_link 是秘密，只在 PR 裡給審閱者；contact_url 必須是你願意公開的位址。",
+    es: "Sustituya el ejemplo por información real y distinga los dos campos de dirección: invite_link es un secreto para los revisores dentro de la pull request, contact_url debe ser algo que esté dispuesto a publicar.",
+    pl: "Zastąp przykład prawdziwymi danymi i rozróżnij dwa pola adresowe: invite_link jest sekretem dla recenzentów wewnątrz pull request, contact_url musi być czymś, co jesteś gotów opublikować.",
+    ja: "サンプルを実情報に置き換え、二つのアドレス欄は区別して扱う。invite_link は秘密で、PR の中でレビュアーにだけ見せる。contact_url は公開を前提にできるアドレスでなければならない。",
+    th: "เปลี่ยนข้อมูลตัวอย่างเป็นข้อมูลจริง แล้วแยกฟิลด์ที่อยู่สองชนิดออกจากกัน: invite_link เป็นความลับให้แต่ผู้ตรวจโค้ดใน pull request ส่วน contact_url ต้องเป็นที่อยู่ที่ยอมเผยแพร่ได้",
+    fi: "Korvaa esimerkki oikeilla tiedoilla ja käsittele kaksi osoitekenttää eri lailla: invite_link on salaisuus tarkastajille pull requestin sisällä, contact_url on oltava jotakin, jonka suostut julkaisemaan.",
+    uk: "Замініть приклад справжніми даними й розрізніть два адресні поля: invite_link — таємниця для рецензентів у межах pull request, contact_url має бути тим, що ви готові оприлюднити.",
+    bg: "Заменете примера с истинска информация и разделете двете адресни полета: invite_link е тайна за прегледачите вътре в pull request, contact_url трябва да е нещо, което сте готови да публикувате.",
+    tr: "Örneği gerçek bilgiyle değiştirin ve iki adres alanını ayrı tutun: invite_link pull request içinde inceleyenler için bir sırdır, contact_url ise yayınlamayı göze aldığınız bir adres olmalı.",
+    hu: "Cserélje le a példát valódi adatokra, és a két címmezőt különböztessen meg: az invite_link titok, csak a pull requestben lévő bírálók lássák, a contact_url pedig legyen valami olyan, amit közzétenne.",
   },
   {
     en: "Copy the generated JSON, add it to the source repository as directory/<slug>.json, and open a pull request. The repository link is at the end of this section.",
@@ -2023,7 +2024,7 @@ function buildEntry(values: FormValues): string {
     categories: [valueOf(values, FIELD.category)],
     summary: valueOf(values, FIELD.summary),
     contact_url: valueOf(values, FIELD.contact),
-    service_account: { invite_address: valueOf(values, FIELD.address) },
+    service_account: { invite_link: valueOf(values, FIELD.address) },
     protocol: {
       eco_marker: "::POPOPX_ECO::",
       frame_types: ["sh", "mc", "sc", "ku"],

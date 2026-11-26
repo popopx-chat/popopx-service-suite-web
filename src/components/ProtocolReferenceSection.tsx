@@ -7,7 +7,7 @@ import { CodeBlock, SectionHeading, StatusDot } from "@/components/ui";
 /**
  * 协议速查 — section `protocol`, the technical block inside 工作原理.
  *
- * Envelope bytes, epoch custody, menu and card limits, the one real HMAC. Every
+ * Envelope bytes, epoch custody, menu and card limits, the phone-side HMAC. Every
  * number is printed as the constant's own name plus its `file:line`, mono values
  * stay byte-identical in all 18 languages and every caption around them is
  * authored 18 times — a reader who trusts this table writes a client from it.
@@ -133,24 +133,24 @@ const TITLE: Localized<string> = {
 };
 
 const SUBTITLE: Localized<string> = {
-  en: "A cheat sheet, not a second specification. Each value was read off gateway/app/crypto_service.py, gateway/app/database.py and gateway/app/config.py on 2026-11-25; the file:line is printed under every card. The one question a table cannot answer — who holds the keys — has its own card.",
-  ru: "Это шпаргалка, а не вторая спецификация. Каждое значение взято из gateway/app/crypto_service.py, gateway/app/database.py и gateway/app/config.py (проверено 2026-11-25); file:line напечатан под каждой карточкой. Единственный вопрос, на который таблица не отвечает, — кто держит ключи, — вынесен в отдельную карточку.",
-  de: "Ein Spickzettel, keine zweite Spezifikation. Jeder Wert ist am 2026-11-25 aus gateway/app/crypto_service.py, gateway/app/database.py und gateway/app/config.py abgelesen; file:line steht unter jeder Karte. Die eine Frage, die keine Tabelle beantworten kann — wer die Schlüssel hält — hat eine eigene Karte.",
-  fr: "Un aide-mémoire, pas une seconde spécification. Chaque valeur a été lue le 2026-11-25 dans gateway/app/crypto_service.py, gateway/app/database.py et gateway/app/config.py ; le file:line est imprimé sous chaque carte. La seule question qu’aucun tableau ne résout — qui détient les clés — a sa propre carte.",
-  it: "Un promemoria, non una seconda specifica. Ogni valore è stato letto il 2026-11-25 da gateway/app/crypto_service.py, gateway/app/database.py e gateway/app/config.py; il file:line è stampato sotto ogni card. L’unica domanda a cui una tabella non risponde — chi custodisce le chiavi — ha una card propria.",
-  nl: "Een spiekbrief, geen tweede specificatie. Elke waarde is op 2026-11-25 uit gateway/app/crypto_service.py, gateway/app/database.py en gateway/app/config.py gelezen; de file:line staat onder elke kaart. De ene vraag die een tabel niet beantwoordt — wie de sleutels bezit — krijgt een eigen kaart.",
-  cs: "Tahák, ne druhá specifikace. Každá hodnota byla 2026-11-25 přečtena z gateway/app/crypto_service.py, gateway/app/database.py a gateway/app/config.py; file:line je vytištěn pod každou kartou. Jediná otázka, na kterou tabulka neodpoví — kdo drží klíče — má vlastní kartu.",
-  "zh-Hans": "这是一份速查表，不是第二份规范。每个取值都是 2026-11-25 从 gateway/app/crypto_service.py、gateway/app/database.py 与 gateway/app/config.py 里读出来的，file:line 印在每张卡片下面。表格回答不了的那一个问题——密钥在谁手上——单独一张卡。",
-  "zh-Hant": "這是一份速查表，不是第二份規格。每個數值都是 2026-11-25 從 gateway/app/crypto_service.py、gateway/app/database.py 與 gateway/app/config.py 讀出來的，file:line 印在每張卡片下面。表格回答不了的那一個問題——密鑰在誰手上——單獨一張卡。",
-  es: "Una chuleta, no una segunda especificación. Cada valor se leyó el 2026-11-25 de gateway/app/crypto_service.py, gateway/app/database.py y gateway/app/config.py; el file:line se imprime bajo cada tarjeta. La única pregunta que ninguna tabla responde — quién guarda las claves — tiene su propia tarjeta.",
-  pl: "Ściąga, a nie druga specyfikacja. Każdą wartość odczytano 2026-11-25 z gateway/app/crypto_service.py, gateway/app/database.py i gateway/app/config.py; file:line jest drukowany pod każdą kartą. Jedyne pytanie, na które tabela nie odpowiada — kto trzyma klucze — ma własną kartę.",
-  ja: "早見表であり、二番目の仕様書ではありません。すべての値を 2026-11-25 に gateway/app/crypto_service.py、gateway/app/database.py、gateway/app/config.py から読み出し、file:line を各カードの下に印字しました。表では答えられないたった一つの問い——鍵を誰が握っているか——には専用のカードを設けています。",
-  th: "นี่คือสรุปทางลัด ไม่ใช่สเปกฉบับที่สอง ค่าแต่ละค่าถูกอ่านมาจาก gateway/app/crypto_service.py, gateway/app/database.py และ gateway/app/config.py เมื่อวันที่ 2026-11-25 โดย file:line จะพิมพ์ไว้ใต้ทุกการ์ด ส่วนคำถามเดียวที่ตารางตอบไม่ได้คือใครเป็นผู้ถือคีย์ ก็มีการ์ดของตัวเอง",
-  fi: "Tämä on muistilappu, ei toinen spesifikaatio. Jokainen arvo luettiin 2026-11-25 kohteista gateway/app/crypto_service.py, gateway/app/database.py ja gateway/app/config.py, ja file:line on painettu jokaisen kortin alle. Vain kysymykselle, johon taulukko ei vastaa — kuka pitää avaimia hallussaan — on oma korttinsa.",
-  uk: "Це шпаргалка, а не друга специфікація. Кожне значення прочитано 2026-11-25 із gateway/app/crypto_service.py, gateway/app/database.py та gateway/app/config.py; file:line надруковано під кожною карткою. Єдине питання, на яке таблиця не відповідає — хто тримає ключі, — має власну картку.",
-  bg: "Това е обзорна таблица, не втора спецификация. Всяка стойност е прочетена на 2026-11-25 от gateway/app/crypto_service.py, gateway/app/database.py и gateway/app/config.py; file:line е отпечатан под всяка картичка. Единственият въпрос, на който таблица не отговаря — кой пази ключовете — си има собствена картичка.",
-  tr: "Bu bir kopya kağıdı, ikinci bir şartname değil. Her değer 2026-11-25 tarihinde gateway/app/crypto_service.py, gateway/app/database.py ve gateway/app/config.py dosyalarından okundu; file:line her kartın altına basıldı. Hiçbir tablonun yanıtlayamadığı tek soru — anahtarları kim tutuyor — kendi kartına sahip.",
-  hu: "Ez gyorsfüzet, nem második specifikáció. Minden értéket 2026-11-25-én olvastuk ki a gateway/app/crypto_service.py, gateway/app/database.py és gateway/app/config.py fájlokból, és a file:line minden kártya alatt ki van írva. Az egyetlen kérdésre, amelyet egy táblázat nem tud megválaszolni — ki tartja a kulcsokat — saját kártya tartozik.",
+  en: "A cheat sheet, not a second specification. Each value was read off gateway/app/crypto_service.py, gateway/app/database.py and gateway/app/config.py on 2026-11-26; the file:line is printed under every card. The one question a table cannot answer — who holds the keys — has its own card.",
+  ru: "Это шпаргалка, а не вторая спецификация. Каждое значение взято из gateway/app/crypto_service.py, gateway/app/database.py и gateway/app/config.py (проверено 2026-11-26); file:line напечатан под каждой карточкой. Единственный вопрос, на который таблица не отвечает, — кто держит ключи, — вынесен в отдельную карточку.",
+  de: "Ein Spickzettel, keine zweite Spezifikation. Jeder Wert ist am 2026-11-26 aus gateway/app/crypto_service.py, gateway/app/database.py und gateway/app/config.py abgelesen; file:line steht unter jeder Karte. Die eine Frage, die keine Tabelle beantworten kann — wer die Schlüssel hält — hat eine eigene Karte.",
+  fr: "Un aide-mémoire, pas une seconde spécification. Chaque valeur a été lue le 2026-11-26 dans gateway/app/crypto_service.py, gateway/app/database.py et gateway/app/config.py ; le file:line est imprimé sous chaque carte. La seule question qu’aucun tableau ne résout — qui détient les clés — a sa propre carte.",
+  it: "Un promemoria, non una seconda specifica. Ogni valore è stato letto il 2026-11-26 da gateway/app/crypto_service.py, gateway/app/database.py e gateway/app/config.py; il file:line è stampato sotto ogni card. L’unica domanda a cui una tabella non risponde — chi custodisce le chiavi — ha una card propria.",
+  nl: "Een spiekbrief, geen tweede specificatie. Elke waarde is op 2026-11-26 uit gateway/app/crypto_service.py, gateway/app/database.py en gateway/app/config.py gelezen; de file:line staat onder elke kaart. De ene vraag die een tabel niet beantwoordt — wie de sleutels bezit — krijgt een eigen kaart.",
+  cs: "Tahák, ne druhá specifikace. Každá hodnota byla 2026-11-26 přečtena z gateway/app/crypto_service.py, gateway/app/database.py a gateway/app/config.py; file:line je vytištěn pod každou kartou. Jediná otázka, na kterou tabulka neodpoví — kdo drží klíče — má vlastní kartu.",
+  "zh-Hans": "这是一份速查表，不是第二份规范。每个取值都是 2026-11-26 从 gateway/app/crypto_service.py、gateway/app/database.py 与 gateway/app/config.py 里读出来的，file:line 印在每张卡片下面。表格回答不了的那一个问题——密钥在谁手上——单独一张卡。",
+  "zh-Hant": "這是一份速查表，不是第二份規格。每個數值都是 2026-11-26 從 gateway/app/crypto_service.py、gateway/app/database.py 與 gateway/app/config.py 讀出來的，file:line 印在每張卡片下面。表格回答不了的那一個問題——密鑰在誰手上——單獨一張卡。",
+  es: "Una chuleta, no una segunda especificación. Cada valor se leyó el 2026-11-26 de gateway/app/crypto_service.py, gateway/app/database.py y gateway/app/config.py; el file:line se imprime bajo cada tarjeta. La única pregunta que ninguna tabla responde — quién guarda las claves — tiene su propia tarjeta.",
+  pl: "Ściąga, a nie druga specyfikacja. Każdą wartość odczytano 2026-11-26 z gateway/app/crypto_service.py, gateway/app/database.py i gateway/app/config.py; file:line jest drukowany pod każdą kartą. Jedyne pytanie, na które tabela nie odpowiada — kto trzyma klucze — ma własną kartę.",
+  ja: "早見表であり、二番目の仕様書ではありません。すべての値を 2026-11-26 に gateway/app/crypto_service.py、gateway/app/database.py、gateway/app/config.py から読み出し、file:line を各カードの下に印字しました。表では答えられないたった一つの問い——鍵を誰が握っているか——には専用のカードを設けています。",
+  th: "นี่คือสรุปทางลัด ไม่ใช่สเปกฉบับที่สอง ค่าแต่ละค่าถูกอ่านมาจาก gateway/app/crypto_service.py, gateway/app/database.py และ gateway/app/config.py เมื่อวันที่ 2026-11-26 โดย file:line จะพิมพ์ไว้ใต้ทุกการ์ด ส่วนคำถามเดียวที่ตารางตอบไม่ได้คือใครเป็นผู้ถือคีย์ ก็มีการ์ดของตัวเอง",
+  fi: "Tämä on muistilappu, ei toinen spesifikaatio. Jokainen arvo luettiin 2026-11-26 kohteista gateway/app/crypto_service.py, gateway/app/database.py ja gateway/app/config.py, ja file:line on painettu jokaisen kortin alle. Vain kysymykselle, johon taulukko ei vastaa — kuka pitää avaimia hallussaan — on oma korttinsa.",
+  uk: "Це шпаргалка, а не друга специфікація. Кожне значення прочитано 2026-11-26 із gateway/app/crypto_service.py, gateway/app/database.py та gateway/app/config.py; file:line надруковано під кожною карткою. Єдине питання, на яке таблиця не відповідає — хто тримає ключі, — має власну картку.",
+  bg: "Това е обзорна таблица, не втора спецификация. Всяка стойност е прочетена на 2026-11-26 от gateway/app/crypto_service.py, gateway/app/database.py и gateway/app/config.py; file:line е отпечатан под всяка картичка. Единственият въпрос, на който таблица не отговаря — кой пази ключовете — си има собствена картичка.",
+  tr: "Bu bir kopya kağıdı, ikinci bir şartname değil. Her değer 2026-11-26 tarihinde gateway/app/crypto_service.py, gateway/app/database.py ve gateway/app/config.py dosyalarından okundu; file:line her kartın altına basıldı. Hiçbir tablonun yanıtlayamadığı tek soru — anahtarları kim tutuyor — kendi kartına sahip.",
+  hu: "Ez gyorsfüzet, nem második specifikáció. Minden értéket 2026-11-26-én olvastuk ki a gateway/app/crypto_service.py, gateway/app/database.py és gateway/app/config.py fájlokból, és a file:line minden kártya alatt ki van írva. Az egyetlen kérdésre, amelyet egy táblázat nem tud megválaszolni — ki tartja a kulcsokat — saját kártya tartozik.",
 };
 
 const PILL_CITED: Localized<string> = {
@@ -583,24 +583,24 @@ const C2_B3: Localized<string> = {
 };
 
 const C2_FEE_NOTE: Localized<string> = {
-  en: "The price lives in the same .env block as card, menu_push, ai_message, alert, sso_login, poll and web3_event; every one of the eight meters can be repriced there.",
-  ru: "Цена стоит в том же блоке .env, что card, menu_push, ai_message, alert, sso_login, poll и web3_event; все восемь счётчиков можно переставить там же.",
-  de: "Der Preis steht im selben .env-Block wie card, menu_push, ai_message, alert, sso_login, poll und web3_event; alle acht Messuhren lassen sich dort umstellen.",
-  fr: "Le tarif se trouve dans le même bloc .env que card, menu_push, ai_message, alert, sso_login, poll et web3_event ; les huit compteurs se reprogramment là.",
-  it: "Il prezzo si trova nello stesso blocco .env di card, menu_push, ai_message, alert, sso_login, poll e web3_event; tutti gli otto contatori si possono ritoccare lì.",
-  nl: "De prijs staat in hetzelfde .env-blok als card, menu_push, ai_message, alert, sso_login, poll en web3_event; alle acht meters zijn er te herprijzen.",
-  cs: "Cena sídlí ve stejném bloku .env jako card, menu_push, ai_message, alert, sso_login, poll a web3_event; všech osm měřičků tam lze přecenit.",
-  "zh-Hans": "单价与 card、menu_push、ai_message、alert、sso_login、poll、web3_event 在同一个 .env 块里，八个计量项都可以在那里改价。",
-  "zh-Hant": "單價與 card、menu_push、ai_message、alert、sso_login、poll、web3_event 在同一個 .env 區塊裡，八個計量項都可以在那裡改價。",
-  es: "El precio vive en el mismo bloque .env que card, menu_push, ai_message, alert, sso_login, poll y web3_event; los ocho medidores se recalculan ahí.",
-  pl: "Cena znajduje się w tym samym bloku .env co card, menu_push, ai_message, alert, sso_login, poll i web3_event; wszystkie osiem liczników można tam przycenić.",
-  ja: "単価は card、menu_push、ai_message、alert、sso_login、poll、web3_event と同じ .env ブロックにあり、8 つの計量項目はすべてそこで変更できます。",
-  th: "ราคาค่าหมุนเวียนอยู่ในบล็อก .env เดียวกับ card, menu_push, ai_message, alert, sso_login, poll และ web3_event โดยตัววัดทั้งแปดสามารถปรับราคาใหม่ได้ที่นั่น",
-  fi: "Hinta on samassa .env-lohkossa kuin card, menu_push, ai_message, alert, sso_login, poll ja web3_event; kaikki kahdeksan mittaria voi hinnoitella uudelleen siellä.",
-  uk: "Ціна стоїть у тому самому блоці .env, що й card, menu_push, ai_message, alert, sso_login, poll та web3_event; усі вісім лічильників можна переоцінити там.",
-  bg: "Цената е в същия .env блок като card, menu_push, ai_message, alert, sso_login, poll и web3_event; всичките осем брояча се преоценяват там.",
-  tr: "Birim fiyat, card, menu_push, ai_message, alert, sso_login, poll ve web3_event ile aynı .env bloğunda yer alır; sekiz sayacın tamamı orada yeniden fiyatlandırılabilir.",
-  hu: "Az ár ugyanabban a .env-blokkban lakik, mint a card, menu_push, ai_message, alert, sso_login, poll és web3_event; mind a nyolc mérőóra ott árazható át.",
+  en: "The price lives in the same .env block as card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query and slack_discord_event; every one of the twelve meters can be repriced there.",
+  ru: "Цена стоит в том же блоке .env, что card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query и slack_discord_event; все двенадцать счётчиков можно переставить там же.",
+  de: "Der Preis steht im selben .env-Block wie card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query und slack_discord_event; alle zwölf Messuhren lassen sich dort umstellen.",
+  fr: "Le tarif se trouve dans le même bloc .env que card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query et slack_discord_event ; les douze compteurs se reprogramment là.",
+  it: "Il prezzo si trova nello stesso blocco .env di card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query e slack_discord_event; tutti e dodici i contatori si possono ritoccare lì.",
+  nl: "De prijs staat in hetzelfde .env-blok als card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query en slack_discord_event; alle twaalf meters zijn er te herprijzen.",
+  cs: "Cena sídlí ve stejném bloku .env jako card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query a slack_discord_event; všech dvanáct měřičů tam lze přecenit.",
+  "zh-Hans": "单价与 card、menu_push、key_rotation、ai_message、alert、sso_login、poll、web3_event、workflow_event、carddav_query、caldav_query、slack_discord_event 在同一个 .env 块里，十二个计量项都可以在那里改价。",
+  "zh-Hant": "單價與 card、menu_push、key_rotation、ai_message、alert、sso_login、poll、web3_event、workflow_event、carddav_query、caldav_query、slack_discord_event 在同一個 .env 區塊裡，十二個計量項都可以在那裡改價。",
+  es: "El precio vive en el mismo bloque .env que card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query y slack_discord_event; los doce medidores se recalculan ahí.",
+  pl: "Cena znajduje się w tym samym bloku .env co card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query i slack_discord_event; wszystkie dwanaście liczników można tam przycenić.",
+  ja: "単価は card、menu_push、key_rotation、ai_message、alert、sso_login、poll、web3_event、workflow_event、carddav_query、caldav_query、slack_discord_event と同じ .env ブロックにあり、12 の計量項目はすべてそこで変更できます。",
+  th: "ราคาอยู่ในบล็อก .env เดียวกับ card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query และ slack_discord_event โดยตัววัดทั้งสิบสองสามารถปรับราคาใหม่ได้ที่นั่น",
+  fi: "Hinta on samassa .env-lohkossa kuin card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query ja slack_discord_event; kaikki kaksitoista mittaria voi hinnoitella uudelleen siellä.",
+  uk: "Ціна стоїть у тому самому блоці .env, що й card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query та slack_discord_event; усі дванадцять лічильників можна переоцінити там.",
+  bg: "Цената е в същия .env блок като card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query и slack_discord_event; всичките дванадесет брояча се преоценяват там.",
+  tr: "Birim fiyat, card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query ve slack_discord_event ile aynı .env bloğunda yer alır; on iki sayacın tamamı orada yeniden fiyatlandırılabilir.",
+  hu: "Az ár ugyanabban a .env-blokkban lakik, mint a card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query és slack_discord_event; mind a tizenkét mérőóra ott árazható át.",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -1204,49 +1204,49 @@ const C5_HINT: Localized<string> = {
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
- * 8. Card 6 — H5 launch authorisation, the only real HMAC
+ * 8. Card 6 — H5 launch authorisation, the phone-side HMAC
  * ───────────────────────────────────────────────────────────────────────── */
 
 const C6_TITLE: Localized<string> = {
-  en: "H5 launch authorisation: the one place HMAC exists",
-  ru: "Авторизация запуска H5: единственное место, где есть HMAC",
-  de: "H5-Startautorisierung: der einzige Ort, an dem HMAC existiert",
-  fr: "Autorisation de lancement H5 : le seul endroit où le HMAC existe",
-  it: "Autorizzazione di avvio H5: l'unico punto in cui l'HMAC esiste",
-  nl: "H5-startautorisatie: de enige plek waar HMAC bestaat",
-  cs: "Autorizace spuštění H5: jediné místo, kde HMAC existuje",
-  "zh-Hans": "H5 启动授权：HMAC 唯一真正存在的地方",
-  "zh-Hant": "H5 啟動授權：HMAC 唯一真正存在的地方",
-  es: "Autorización de arranque H5: el único lugar donde existe HMAC",
-  pl: "Autoryzacja uruchomienia H5: jedyne miejsce, gdzie HMAC naprawdę istnieje",
-  ja: "H5 起動の認可：HMAC が実際に存在する唯一の場所",
-  th: "การอนุญาตเปิดหน้า H5: ที่เดียวที่ HMAC มีอยู่จริง",
-  fi: "H5-käynnistyksen valtuutus: ainoa paikka, jossa HMAC on olemassa",
-  uk: "Авторизація запуску H5: єдине місце, де HMAC справді існує",
-  bg: "Упълномощаване на H5 старт: единственото място, където HMAC съществува",
-  tr: "H5 açma yetkisi: HMAC'ın gerçekten var olduğu tek yer",
-  hu: "H5-indítás engedélyezése: az egyetlen hely, ahol HMAC tényleg létezik",
+  en: "H5 launch authorisation: the phone-side HMAC",
+  ru: "Авторизация запуска H5: HMAC на стороне телефона",
+  de: "H5-Startautorisierung: der HMAC auf der Telefonseite",
+  fr: "Autorisation de lancement H5 : le HMAC côté téléphone",
+  it: "Autorizzazione di avvio H5: l'HMAC lato telefono",
+  nl: "H5-startautorisatie: de HMAC aan de telefoonkant",
+  cs: "Autorizace spuštění H5: HMAC na straně telefonu",
+  "zh-Hans": "H5 启动授权：手机侧的 HMAC",
+  "zh-Hant": "H5 啟動授權：手機端的 HMAC",
+  es: "Autorización de arranque H5: el HMAC del lado del teléfono",
+  pl: "Autoryzacja uruchomienia H5: HMAC po stronie telefonu",
+  ja: "H5 起動の認可：スマートフォン側の HMAC",
+  th: "การอนุญาตเปิดหน้า H5: HMAC ฝั่งโทรศัพท์",
+  fi: "H5-käynnistyksen valtuutus: puhelimen puolen HMAC",
+  uk: "Авторизація запуску H5: HMAC на боці телефона",
+  bg: "Упълномощаване на H5 старт: HMAC от страната на телефона",
+  tr: "H5 açma yetkisi: telefon tarafındaki HMAC",
+  hu: "H5-indítás engedélyezése: a telefon oldali HMAC",
 };
 
 const C6_LEDE: Localized<string> = {
-  en: "Alert intake is a static token compared in constant time, and the admin surface is one bearer token. HMAC-SHA256 is used for exactly one thing: signing the URL that opens an H5 page for one follower.",
-  ru: "Приём алертов — это статический токен, сравниваемый за постоянное время, а админ-поверхность закрыта одним bearer-токеном. HMAC-SHA256 используется ровно для одного: подписать URL, открывающий H5-страницу одному подписчику.",
-  de: "Alarm-Intake ist ein statisch verglichener Token in konstanter Zeit, und die Admin-Fläche ist ein einziger Bearer-Token. HMAC-SHA256 dient genau einem Zweck: die URL zu signieren, die einer Followerin die H5-Seite öffnet.",
-  fr: "L’ingestion d’alertes est un jeton statique comparé en temps constant, et la surface d’administration est un unique bearer token. Le HMAC-SHA256 ne sert qu’à une chose : signer l’URL qui ouvre la page H5 d’un abonné.",
-  it: "L'acquisizione degli avvisi è un token statico confrontato in tempo costante, e la superficie di amministrazione è un unico bearer token. L'HMAC-SHA256 serve a una cosa sola: firmare l'URL che apre la pagina H5 di un singolo follower.",
-  nl: "Alertinname is een statische token die in constante tijd wordt vergeleken, en het beheervlak is één bearer token. HMAC-SHA256 wordt voor precies één ding gebruikt: het signeren van de URL die een H5-pagina voor één volger opent.",
-  cs: "Příjem alertů je statický token porovnávaný v konstantním čase a admin rozhraní chrání jediný bearer token. HMAC-SHA256 se používá na přesně jednu věc: podepsat URL, která otevírá H5 stránku jednomu odběrateli.",
-  "zh-Hans": "告警接入用的是常量时间比对的静态令牌，管理面也只有一个 bearer 令牌。HMAC-SHA256 只干一件事：给某个关注者的 H5 页面启动链接签名。",
-  "zh-Hant": "告警接入用的是常數時間比對的静态權杖，管理面也只有一個 bearer 權杖。HMAC-SHA256 只做一件事：替某個關注者的 H5 頁面啟動連結簽名。",
-  es: "La ingesta de alertas es un token estático comparado en tiempo constante, y la superficie de administración es un único bearer token. HMAC-SHA256 se usa para exactamente una cosa: firmar la URL que abre la página H5 de un seguidor.",
-  pl: "Przyjmowanie alertów to statyczny token porównywany w stałym czasie, a powierzchnia administracyjna to jeden bearer token. HMAC-SHA256 służy dokładnie do jednego: podpisania URL-a otwierającego stronę H5 jednemu obserwującemu.",
-  ja: "アラート受け口は定数時間で比較される静的トークン、管理面はベアラートークン 1 本です。HMAC-SHA256 が使われるのはただ 1 つ、フォロワー 1 人の H5 ページを開く URL に署名する処理だけです。",
-  th: "การรับแจ้งเหตุใช้โทเคนคงที่ที่เปรียบเทียบในเวลาคงที่ และพื้นที่ผู้ดูแลก็มี bearer token เดียว ส่วน HMAC-SHA256 ถูกใช้เรื่องเดียวคือเซ็น URL ที่เปิดหน้า H5 ให้ผู้ติดตามคนหนึ่ง",
-  fi: "Hälytysten vastaanotto on vakioajassa vertailtava staattinen tunniste, ja hallintapinta on yksi bearer-tunniste. HMAC-SHA256:ta käytetään täsmälleen yhteen asiaan: sen URL:n allekirjoittamiseen, joka avaa H5-sivun yhdelle seuraajalle.",
-  uk: "Приймання сповіщень — це статичний токен, порівнюваний за сталий час, а адмінський бік закритий одним bearer-токеном. HMAC-SHA256 вживається рівно для одного: підписати URL, що відкриває H5-сторінку одному підписнику.",
-  bg: "Поемането на аларми е статичен токен, сравняван за постоянно време, а администраторската повърхност е един bearer токен. HMAC-SHA256 се ползва за точно едно нещо: да подпише URL-а, който отваря H5 страницата на един последовател.",
-  tr: "Uyarı girişi sabit sürede karşılaştırılan durağan bir jetondur ve yönetim yüzeyi tek bir bearer jetondan ibarettir. HMAC-SHA256 tam olarak tek bir iş için kullanılır: bir takipçinin H5 sayfasını açan URL'yi imzalamak.",
-  hu: "A riasztásbevitel statikus, állandó idő alatt összehasonlított token, a kezelési felület pedig egyetlen bearer token. Az HMAC-SHA256 pontosan egy dologra szolgál: annak az URL-nek az aláírására, amely egy követő H5 oldalát nyitja meg.",
+  en: "Alert intake checks a per-source static token first; when POPOPX_ALERT_WEBHOOK_SECRET is set it also demands X-Popopx-Timestamp and X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> within ±300 s, with a process-local replay cache. Admin access is the root token — X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer or ?token= — plus scoped pxa_ tokens: SHA-256 at rest, core:/plugin: scopes, expiry, revocation and audit. HMAC-SHA256 signs the H5 launch URL here, and Slack/Discord and workflow deliveries carry their own outbound HMACs.",
+  ru: "Приём алертов сначала проверяет статический токен источника; если задан POPOPX_ALERT_WEBHOOK_SECRET, он дополнительно требует X-Popopx-Timestamp и X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> в пределах ±300 с, с кешем повторов, локальным для процесса. Доступ в админку — это корневой токен (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer или ?token=) плюс ограниченные по областям токены pxa_: SHA-256 в хранилище, области core:/plugin:, срок действия, отзыв и аудит. HMAC-SHA256 здесь подписывает URL запуска H5, а доставки Slack/Discord и workflow несут собственные исходящие HMAC.",
+  de: "Der Alarm-Intake prüft zuerst einen statischen Token pro Quelle; ist POPOPX_ALERT_WEBHOOK_SECRET gesetzt, verlangt er zusätzlich X-Popopx-Timestamp und X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> innerhalb von ±300 s, mit einem prozesslokalen Replay-Cache. Der Admin-Zugang besteht aus dem Root-Token (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer oder ?token=) plus bereichsgebundenen pxa_-Tokens: SHA-256 im Speicher, core:/plugin:-Scopes, Ablauf, Widerruf und Audit. HMAC-SHA256 signiert hier die H5-Start-URL, und Slack/Discord- sowie Workflow-Zustellungen tragen ihre eigenen ausgehenden HMACs.",
+  fr: "L’ingestion d’alertes vérifie d’abord un jeton statique par source ; lorsque POPOPX_ALERT_WEBHOOK_SECRET est défini, elle exige en plus X-Popopx-Timestamp et X-Popopx-Signature : v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> à ±300 s près, avec un cache de rejeu local au processus. L’accès admin, c’est le jeton racine (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer ou ?token=) plus des jetons pxa_ à portée limitée : SHA-256 au repos, portées core:/plugin:, expiration, révocation et audit. Le HMAC-SHA256 signe ici l’URL de lancement H5, et les livraisons Slack/Discord et workflow portent leurs propres HMAC sortants.",
+  it: "L’acquisizione degli avvisi controlla prima un token statico per fonte; quando POPOPX_ALERT_WEBHOOK_SECRET è impostato richiede anche X-Popopx-Timestamp e X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> entro ±300 s, con una cache di replay locale al processo. L’accesso admin è il token root (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer o ?token=) più token pxa_ con scope: SHA-256 a riposo, scope core:/plugin:, scadenza, revoca e audit. Qui HMAC-SHA256 firma l’URL di avvio H5, mentre le consegne Slack/Discord e workflow portano i propri HMAC in uscita.",
+  nl: "Alertinname controleert eerst een statische token per bron; staat POPOPX_ALERT_WEBHOOK_SECRET ingesteld, dan eist het ook X-Popopx-Timestamp en X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> binnen ±300 s, met een proceslokale replaycache. Beheerderstoegang is het root-token (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer of ?token=) plus pxa_-tokens met scopes: SHA-256 in rust, core:/plugin:-scopes, vervaldatum, intrekking en audit. HMAC-SHA256 ondertekent hier de H5-start-URL, en Slack/Discord- en workflowleveringen dragen hun eigen uitgaande HMAC’s.",
+  cs: "Příjem alertů nejprve ověří statický token daného zdroje; je-li nastaven POPOPX_ALERT_WEBHOOK_SECRET, vyžaduje navíc X-Popopx-Timestamp a X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> v rozmezí ±300 s, s procesně lokální cache pro opakování. Přístup do administrace je kořenový token (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer nebo ?token=) plus tokeny pxa_ s rozsahy: SHA-256 při uložení, rozsahy core:/plugin:, platnost, odvolání a audit. HMAC-SHA256 zde podepisuje URL pro spuštění H5 a doručení Slack/Discord i workflow nesou vlastní odchozí HMAC.",
+  "zh-Hans": "告警接入先校验按来源的静态令牌；配置了 POPOPX_ALERT_WEBHOOK_SECRET 时，还会要求 X-Popopx-Timestamp 与 X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")>，时间窗 ±300 秒，并带进程内重放缓存。管理面是根令牌（X-Popopx-Admin-Token、X-Admin-Token、Authorization: Bearer 或 ?token= 四种写法）加带作用域的 pxa_ 令牌：落库只存 SHA-256，作用域为 core:/plugin:，支持过期、吊销与审计。HMAC-SHA256 在这里给 H5 启动链接签名，Slack/Discord 与工作流投递则各自携带自己的出站 HMAC。",
+  "zh-Hant": "告警接入先驗證依來源的靜態權杖；設定了 POPOPX_ALERT_WEBHOOK_SECRET 時，還會要求 X-Popopx-Timestamp 與 X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")>，時間窗 ±300 秒，並附程序內重放快取。管理面是根權杖（X-Popopx-Admin-Token、X-Admin-Token、Authorization: Bearer 或 ?token= 四種寫法）加上帶作用域的 pxa_ 權杖：落庫只存 SHA-256，作用域為 core:/plugin:，支援到期、撤銷與稽核。HMAC-SHA256 在這裡替 H5 啟動連結簽名，Slack/Discord 與工作流程投遞則各自帶著自己的出站 HMAC。",
+  es: "La ingesta de alertas comprueba primero un token estático por origen; si POPOPX_ALERT_WEBHOOK_SECRET está definido, exige además X-Popopx-Timestamp y X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> dentro de ±300 s, con una caché de repetición local al proceso. El acceso de administración es el token raíz (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer o ?token=) más tokens pxa_ con alcance: SHA-256 en reposo, alcances core:/plugin:, caducidad, revocación y auditoría. Aquí HMAC-SHA256 firma la URL de lanzamiento H5, y las entregas de Slack/Discord y de workflow llevan sus propios HMAC de salida.",
+  pl: "Przyjmowanie alertów najpierw sprawdza statyczny token źródła; gdy ustawiono POPOPX_ALERT_WEBHOOK_SECRET, wymaga dodatkowo X-Popopx-Timestamp i X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> w oknie ±300 s, z procesowym cache′em powtórzeń. Dostęp administracyjny to token główny (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer lub ?token=) plus tokeny pxa_ z zakresami: SHA-256 w spoczynku, zakresy core:/plugin:, wygaśnięcie, odwołanie i audyt. HMAC-SHA256 podpisuje tutaj adres startowy H5, a dostarczenia Slack/Discord i workflow niosą własne wychodzące HMAC.",
+  ja: "アラート受け口はまず送信元ごとの静的トークンを検証し、POPOPX_ALERT_WEBHOOK_SECRET が設定されていれば X-Popopx-Timestamp と X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> を ±300 秒の範囲で追加要求します（プロセス内のリプレイキャッシュ付き）。管理面はルートトークン（X-Popopx-Admin-Token、X-Admin-Token、Authorization: Bearer、?token= の4通り）に加え、スコープ付き pxa_ トークンです。保存時は SHA-256、スコープは core:/plugin:、有効期限・失効・監査を備えます。ここでは HMAC-SHA256 が H5 起動 URL に署名し、Slack/Discord とワークフローの配信はそれぞれ独自の送信用 HMAC を携えます。",
+  th: "ช่องรับการแจ้งเตือนตรวจโทเคนสถิติต่อแหล่งที่มาก่อน หากตั้ง POPOPX_ALERT_WEBHOOK_SECRET ไว้ จะต้องมี X-Popopx-Timestamp และ X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> ภายใน ±300 วินาที พร้อมแคชกัน replay ระดับโปรเซส การเข้าถึงผู้ดูแลคือโทเคนหลัก (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer หรือ ?token=) บวกโทเคน pxa_ แบบมีขอบเขต: เก็บเป็น SHA-256, ขอบเขต core:/plugin:, มีวันหมดอายุ การเพิกถอน และการตรวจสอบย้อนหลัง HMAC-SHA256 ใช้เซ็น URL เปิดหน้า H5 ที่นี่ ส่วนการส่งไป Slack/Discord และ workflow มี HMAC ขาออกของตัวเอง",
+  fi: "Hälytysten vastaanotto tarkistaa ensin lähdekohtaisen staattisen tunnisteen; jos POPOPX_ALERT_WEBHOOK_SECRET on asetettu, se vaatii lisäksi X-Popopx-Timestamp- ja X-Popopx-Signature-otsikot: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> ±300 sekunnin sisällä, prosessikohtaisella toistovälimuistilla. Hallintapääsy on juuritunniste (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer tai ?token=) sekä rajatuin valtuuksin varustetut pxa_-tunnisteet: SHA-256 tallennuksessa, core:/plugin:-rajaukset, vanheneminen, mitätöinti ja auditointi. HMAC-SHA256 allekirjoittaa täällä H5-käynnistys-URL:n, ja Slack/Discord- sekä workflow-toimituksilla on omat lähtevät HMAC:nsa.",
+  uk: "Приймання сповіщень спершу перевіряє статичний токен джерела; якщо задано POPOPX_ALERT_WEBHOOK_SECRET, воно додатково вимагає X-Popopx-Timestamp і X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> у межах ±300 с, із кешем повторів, локальним для процесу. Доступ до адмінки — це кореневий токен (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer або ?token=) плюс токени pxa_ зі скоупами: SHA-256 у сховищі, скоупи core:/plugin:, термін дії, відкликання й аудит. HMAC-SHA256 тут підписує URL запуску H5, а доставки Slack/Discord і workflow несуть власні вихідні HMAC.",
+  bg: "Приемането на известия първо проверява статичен токен за всеки източник; когато е зададен POPOPX_ALERT_WEBHOOK_SECRET, то изисква още X-Popopx-Timestamp и X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> в рамките на ±300 s, с локален за процеса кеш за повторения. Достъпът до администрацията е главният токен (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer или ?token=) плюс токени pxa_ с обхвати: SHA-256 при съхранение, обхвати core:/plugin:, изтичане, отнемане и одит. Тук HMAC-SHA256 подписва URL адреса за стартиране на H5, а доставките към Slack/Discord и workflow носят собствени изходящи HMAC.",
+  tr: "Uyarı girişi önce kaynak başına statik bir jetonu kontrol eder; POPOPX_ALERT_WEBHOOK_SECRET ayarlıysa ayrıca X-Popopx-Timestamp ve X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> başlıklarını ±300 s penceresinde ister ve süreç yerelinde bir yeniden oynatma önbelleği tutar. Yönetim erişimi, kök jeton (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer veya ?token=) ile kapsamlı pxa_ jetonlarından oluşur: saklarken SHA-256, core:/plugin: kapsamları, süre sonu, iptal ve denetim. Burada HMAC-SHA256, H5 açma URL'sini imzalar; Slack/Discord ve workflow teslimatları ise kendi giden HMAC'larını taşır.",
+  hu: "A riasztásbevitel először forrásonkénti statikus tokent ellenőriz; ha a POPOPX_ALERT_WEBHOOK_SECRET be van állítva, emellett X-Popopx-Timestamp és X-Popopx-Signature fejlécet is követel: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> ±300 s ablakon belül, folyamaton belüli visszajátszás-gyorsítótárral. Az admin hozzáférés a gyökér token (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer vagy ?token=) plusz hatókörözött pxa_ tokenek: SHA-256 a tárolóban, core:/plugin: hatókörök, lejárat, visszavonás és audit. Az HMAC-SHA256 itt az H5-indító URL-t írja alá, a Slack/Discord és workflow kézbesítések pedig saját kimenő HMAC-ot hordoznak.",
 };
 
 const C6_R_ALG: Localized<string> = {
@@ -1778,7 +1778,7 @@ const ROTATION_CARD: CardModel = {
   wide: false,
   title: C2_TITLE,
   lede: null,
-  cite: "crypto_service.py:1166 · :1077 · main.py:1641 · config.py:426",
+  cite: "crypto_service.py:1166 · :1077 · main.py:1679 · config.py:420-423",
   rows: [{ code: "fee", k: CAP_FEE, v: V_ROTATE_METER }],
   bullets: [C2_B1, C2_B2, C2_B3, C2_FEE_NOTE],
   chipsCap: null,
@@ -1838,7 +1838,7 @@ const H5_CARD: CardModel = {
   wide: true,
   title: C6_TITLE,
   lede: C6_LEDE,
-  cite: "crypto_service.py:869-876 · :929-947 · :104-107 · main.py:3287",
+  cite: "crypto_service.py:869-876 · :929-947 · :104-107 · main.py:3664",
   rows: [
     { code: "alg", k: C6_R_ALG, v: V_H5_ALG },
     { code: "preimage", k: C6_R_PRE, v: V_H5_PRE },
