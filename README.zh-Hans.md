@@ -56,7 +56,8 @@ popopx-service-suite-web/
 │   ├── deploy_centos.sh          CentOS / RHEL / Rocky / Alma 一键部署
 │   └── nginx-popopx-service.conf 裸机生产 vhost（TLS + 安全头）
 ├── tools/
-│   ├── check-i18n.mjs            多语言文案完整性检查（error 拦构建，warning 只报告）
+│   ├── check-i18n.mjs            21 语言文案完整性检查（error 拦构建，warning 只报告）
+│   ├── check-rtl.mjs             RTL + LTR 隔离契约（--self-test 先验证判定器）
 │   └── scan-compliance.mjs       对产物跑四条「0」门禁
 ├── public/
 │   ├── logo-popopx.png           官方标识 1024×1024
@@ -73,7 +74,7 @@ popopx-service-suite-web/
     │   └── globals.css           Tailwind 层、玻璃卡片等 house 类、锚点偏移
     ├── components/
     │   ├── Navbar.tsx                           吸顶导航：锚点、语言胶囊、仓库入口、主 CTA
-    │   ├── LanguageMenu.tsx                     18 语言菜单：完整列表与紧凑胶囊
+    │   ├── LanguageMenu.tsx                     21 语言菜单：完整列表与紧凑胶囊
     │   ├── HeroSection.tsx                      首屏舞台
     │   ├── BusinessScenarios.tsx                首屏下方的六张业务场景卡
     │   ├── PluginsShowcase.tsx                  后台开箱即用的九个插件模块
@@ -155,33 +156,44 @@ vhost 的 `error_page` 指的就是它），带内容指纹的打包产物在 `o
 
 ## 多语言切换
 
-语言集不再是三语，而是与 iOS 客户端完全对齐的 18 种。引擎在 `src/lib/i18n.tsx`，挂载点是
-`layout.tsx` 里包住整棵树的 `<LocaleProvider>`。
+门户现在提供 21 种语言：iOS 客户端在 `CFBundleLocalizations` 里声明的 18 种，加上巴西葡萄牙语
+（`pt-BR`）、韩语（`ko`）与阿拉伯语（`ar`）——`ar` 是第一个从右到左（RTL）的语言。引擎在
+`src/lib/i18n.tsx`，挂载点是 `layout.tsx` 里包住整棵树的 `<LocaleProvider>`。
 
-- `LOCALES` 的 18 个标签与顺序照搬 iOS 客户端声明的本地化：`en`、`ru`、`de`、`fr`、`it`、`nl`、`cs`、`zh-Hans`、`zh-Hant`、`es`、`pl`、`ja`、`th`、`fi`、`uk`、`bg`、`tr`、`hu`（`LOCALE_COUNT` 就是 18）。`Localized<T>` 是对这 18 个 key 的**全量** `Record`：少写任何一种语言的文案，`npm run typecheck` 直接编译不过——「某语言漏翻」不是等上线才发现的坑。
-- 默认 `zh-Hans`（简体中文），`layout.tsx` 首屏就按它输出 `<html lang>`。
+- `LOCALES` 的 21 个标签：前 18 个与顺序照搬 iOS 客户端声明的本地化——`en`、`ru`、`de`、`fr`、`it`、`nl`、`cs`、`zh-Hans`、`zh-Hant`、`es`、`pl`、`ja`、`th`、`fi`、`uk`、`bg`、`tr`、`hu`——再追加 `pt-BR`、`ko`、`ar`（`LOCALE_COUNT` 就是 21）。`Localized<T>` 是对这 21 个 key 的**全量** `Record`：少写任何一种语言的文案，`npm run typecheck` 直接编译不过——「某语言漏翻」不是等上线才发现的坑。整棵树的每个文案对象都带满 21 个槽位——891 个对象、18,711 个槽位——`npm run check:i18n` 会重新数一遍。
+- 默认 `zh-Hans`（简体中文）。静态导出只有一份文档，首屏写死 `<html lang="zh-Hans" dir="ltr">`；
+  `LocaleProvider` 在运行时同步这两个属性，切到 `ar` 时 `dir="rtl"`、`lang="ar"`。
 - 文案内联在各组件里，`useCopy()` 按当前语言取一份。切换是一次纯 re-render：不刷新、不路由跳转、
   不发请求，也没有远端语言包；URL 不随语言变，所以 `public/sitemap.xml` 里只有一个可索引地址 `/`。
 - 访客的选择写进浏览器自己的 `localStorage`，键名 `popopx.locale`（常量 `STORAGE_KEY`），
   下次访问优先于浏览器探测。
 - 探测只发生在 `useEffect` 里：`detectLocale()` 依次看 `navigator.language` 与
-  `navigator.languages`，按主语言子标签命中 18 个标签之一就用；`zh-HK`/`zh-MO`/`zh-TW`/带 `hant`
-  的归 `zh-Hant`，其余 `zh-*` 归 `zh-Hans`；全都识别不出就保持默认 `zh-Hans`——那也正是服务端与
-  首帧画出来的内容，因为渲染期读 `navigator` 会造成 hydration 不一致。
-- 切换时同步 `document.documentElement.lang`（`HTML_LANG` 给每个标签的 BCP 47 写法）与 `dir`；
-  18 种语言里没有右到左书写，`isRightToLeft()` 目前一律返回 `false`，`dir` 保持 `ltr`——这个函数
-  存在的意义是让「将来加 RTL 语言」必须是一次有意识的改动。
-- 语言菜单用自己的文字称呼自己（`LOCALE_NATIVE`：English、Deutsch、日本語、简体中文、繁體中文等），
-  紧凑胶囊用 `LOCALE_SHORT`（`简` / `繁` / `EN` / `DE` 这种最多三字符的写法）。
+  `navigator.languages`，按主语言子标签命中 21 个标签之一就用；`zh-HK`/`zh-MO`/`zh-TW`/带 `hant`
+  的归 `zh-Hant`，其余 `zh-*` 归 `zh-Hans`，`pt`/`pt-*` 一律归 `pt-BR`，`ko`/`ar` 按主语言子标签
+  匹配（带不带地区后缀都行）；全都识别不出就保持默认 `zh-Hans`——那也正是服务端与首帧画出来的内容，
+  因为渲染期读 `navigator` 会造成 hydration 不一致。
+- `ar` 是 RTL 语言：`isRightToLeft()` 把 `dir` 翻成 `rtl`；布局工具类全部用逻辑方向
+  （`text-start`/`text-end`、`ps`/`pe`、`ms`/`me`、`start-0`/`end-0`、`border-s`），表单、表头、
+  状态徽章随页面镜像。技术性内容保持 LTR：`code`、`pre`、`kbd`、`samp` 由 `globals.css` 统一隔离，
+  代码块与等宽值用 `dir="ltr"` 或 `<bdi dir="ltr">`（后者保留外层的逻辑对齐），目录的地址与联系人
+  输入框带 `dir="ltr"`，下拉菜单用 `start`/`end` 锚定。英雄区的装饰拓扑有意保留物理 `left`/`right`
+  ——标签是贴着画出来的连线摆放的——RTL 门禁只放行这几个类。
+- 语言菜单用自己的文字称呼自己（`LOCALE_NATIVE`：English、Deutsch、日本語、简体中文、
+  Português (Brasil)、한국어、العربية 等），紧凑胶囊用 `LOCALE_SHORT`（`简` / `繁` / `EN` / `PT` /
+  `KO` / `AR` 这种最多三字符的写法）。
 - `pick()` 的运行时兜底顺序是：当前语言 → `en` → `zh-Hans` → 把原值当字符串用。`POPOPX`、
   `AGPL-3.0-only`、命令行这类本来不需要翻译的值就直接放进去。
 - `npm run check:i18n`（`tools/check-i18n.mjs`）补的是编译器看不见的那部分，结论按严重级别分两类，
-  只有第一类会拦住构建。**错误（error）** 让命令 exit 1：文案对象里混进陈旧标签（`zh-CN`、`zh-TW`）；
-  用一个标注返回 `Localized<…>` 的函数**推导**出文案映射；对无类型映射做 `as Localized<…>` 断言；
-  文案对象里用展开（spread）复制别的映射；文案对象缺了 18 种语言里的任意一个。**警告（warning）**
-  不拦构建：某个非 `en` 槽位与英文原文逐字相同只会被告知——也就是说「把同一段字符串粘满 18 个槽」
-  会被报出来、但不会被拦住。以当前代码树跑一遍的结果是 exit 0、0 error、10 warning。
-  加 `--quiet` 就只打印最后两行汇总，不打印逐条明细。
+  只有第一类会拦住构建。**错误（error）** 让命令 exit 1：文案对象里混进陈旧标签（`zh-CN`、`zh-TW`、
+  `pt`、`pt-PT`）；用一个标注返回 `Localized<…>` 的函数**推导**出文案映射；对无类型映射做
+  `as Localized<…>` 断言；文案对象里用展开（spread）复制别的映射；文案对象缺了 21 种语言里的任意一个。
+  **警告（warning）** 不拦构建：某个非 `en` 槽位与英文原文逐字相同只会被告知——也就是说「把同一段
+  字符串粘满 21 个槽」会被报出来、但不会被拦住。以当前代码树跑一遍的结果是 exit 0、0 error、
+  28 warning。加 `--quiet` 就只打印最后两行汇总，不打印逐条明细。
+- `npm run check:rtl`（`tools/check-rtl.mjs`）在源码层证明 RTL 契约：21 语言注册表与
+  `check-i18n.mjs` 一致、`ar` 在 RTL 列表里、`LocaleProvider` 会写 `dir` 与 `lang`、首屏文档带着
+  默认的 `lang="zh-Hans" dir="ltr"`、代码类表面隔离为 LTR、允许名单之外不出现物理方向工具类；
+  `--self-test` 先证明判定器本身能拒绝坏输入（当前代码树 12/12）。
 
 ## 隐私与自托管保证
 
@@ -263,12 +275,13 @@ vhost 的 `error_page` 指的就是它），带内容指纹的打包产物在 `o
 
 ## 构建与合规门禁
 
-发布前跑这四条，各自证明的东西不同：
+发布前跑这五条，各自证明的东西不同：
 
 ```bash
 npm run typecheck    # tsc --noEmit：strict + noUnusedLocals/noUnusedParameters/noImplicitReturns
 npm run build        # next build：类型检查 + 静态导出，产物写到 out/
-npm run check:i18n   # 18 语言文案完整性（error 才 exit 1；--quiet 只出汇总）
+npm run check:i18n   # 21 语言文案完整性（error 才 exit 1；--quiet 只出汇总）
+npm run check:rtl    # RTL + LTR 隔离契约（--self-test 先验证判定器）
 npm run check:out    # 对 out/ 跑四条「0」门禁（可传别的目录名）
 ```
 
@@ -289,12 +302,12 @@ npm run check:out    # 对 out/ 跑四条「0」门禁（可传别的目录名�
 
 这个仓库不带 ESLint 配置文件，也没有测试运行器，`next.config.mjs` 里 `eslint.ignoreDuringBuilds`
 为 `true`；`package.json` 的 `lint` 与 `start` 两条在这个工程里没有可用配套（没有 eslint 配置，
-而交付物 `out/` 是交给静态服务器的，不走 `next start`）。上面这四条命令就是全部的验收手段。
+而交付物 `out/` 是交给静态服务器的，不走 `next start`）。上面这五条命令就是全部的验收手段。
 
 ## 相关仓库
 
 - 后端与协议：[`popopx-service-suite`](https://github.com/popopx-chat/popopx-service-suite)——
   网关、计费、频道信封加密、九个插件模块（含工作流桥接、CardDAV 与 CalDAV 连接器、Slack/Discord 桥接）和浏览器管理后台，本门户的安装文案与端口都对着它。
-- iOS 客户端：[`popopx-chat`](https://github.com/popopx-chat/popopx-chat)——官方紫色 logo 原图与
-  18 种语言的语言集都来自这个仓库。
+- iOS 客户端：[`popopx-chat`](https://github.com/popopx-chat/popopx-chat)——官方紫色 logo 原图来自这个
+  仓库，它在 `CFBundleLocalizations` 里声明的 18 个语言标签是门户再加 pt-BR、ko、ar 的基础。
 - 本门户：[`popopx-service-suite-web`](https://github.com/popopx-chat/popopx-service-suite-web)。

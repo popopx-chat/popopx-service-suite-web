@@ -1,18 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactElement, ReactNode } from "react";
-import { DEFAULT_LOCALE, HTML_LANG, LocaleProvider } from "@/lib/i18n";
+import { LocaleProvider } from "@/lib/i18n";
 import { SITE_ORIGIN, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 /**
  * Root layout.
  *
- * The portal ships the same 18 languages as the POPOPX iOS client (see
- * `src/lib/i18n.tsx`). Because this is a static export, only ONE HTML document
- * exists: the language switch happens client-side, so metadata and the
- * document `<html lang>` are emitted for the default locale (`zh-Hans`) and
- * `LocaleProvider` keeps `lang`/`dir` in sync at runtime. Nothing here reaches
- * the network: the icon set, the manifest and every font are same-origin assets.
+ * The portal ships 21 languages: the POPOPX iOS client's 18 (see
+ * `src/lib/i18n.tsx`) plus pt-BR, ko and ar, where ar is the first
+ * right-to-left locale. Because this is a static export, only ONE HTML
+ * document exists: the language switch happens client-side, so metadata and
+ * the document `<html lang>`/`dir` are emitted for the default locale
+ * (`zh-Hans`, ltr) and `LocaleProvider` keeps `lang`/`dir` in sync at runtime
+ * (`ar` flips `dir` to `rtl`). Nothing here reaches the network: the icon set,
+ * the manifest and every font are same-origin assets.
  */
 
 const TITLE = "POPOPX Service Suite · 生态工具、服务号与零知识频道连接控制面";
@@ -99,7 +101,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }): ReactElement {
   return (
-    <html lang={HTML_LANG[DEFAULT_LOCALE]} dir="ltr" suppressHydrationWarning>
+    // `lang`/`dir` for the first paint are literals on purpose: importing
+    // HTML_LANG here compiles to a client reference on the server, so the
+    // attribute was silently dropped from the exported document. The literal
+    // must stay equal to HTML_LANG[DEFAULT_LOCALE] (zh-Hans); `check:rtl`
+    // enforces that, and LocaleProvider re-syncs both at runtime.
+    <html lang="zh-Hans" dir="ltr" suppressHydrationWarning>
       <body>
         <LocaleProvider>{children}</LocaleProvider>
       </body>

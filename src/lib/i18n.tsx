@@ -14,11 +14,13 @@ import {
 /**
  * Multi-language switch engine.
  *
- * The language set is **identical to the POPOPX iOS client's declared
- * localizations**: `CFBundleLocalizations` in
- * `apps/ios/POPOPX--iOS--Info.plist` lists exactly these 18 tags, in this order,
- * and the app builds one `.lproj` per tag. So the portal offers the same 18
- * languages as the phone, in the same order, and never a subset.
+ * The first **18** tags are the POPOPX iOS client's declared localizations:
+ * `CFBundleLocalizations` in `apps/ios/POPOPX--iOS--Info.plist` lists exactly
+ * these tags, in this order, and the app builds one `.lproj` per tag. The portal
+ * keeps that order and appends three portal additions: `pt-BR`, `ko` and `ar`.
+ * The client's `.xcloc` catalogs for those three exist, but its
+ * `CFBundleLocalizations` entries do not yet — so the portal must not claim the
+ * phone already ships them.
  *
  * Rules this file implements:
  *  - Default locale is `zh-Hans` (Simplified Chinese). The server pass and the
@@ -26,13 +28,14 @@ import {
  *    happens inside `useEffect` — a render-time `navigator` read would be a
  *    hydration mismatch.
  *  - `Localized<T>` is a **total** map: TypeScript only compiles when every copy
- *    slot exists in all 18 languages. That is the build-time proof that no
+ *    slot exists in all 21 languages. That is the build-time proof that no
  *    visitor silently falls back to another language.
  *  - The visitor's choice persists to `localStorage` under `popopx.locale` and
  *    wins over browser detection on the next visit.
  *  - `document.documentElement.lang` follows the active locale, and `dir` is set
- *    for right-to-left candidates (none of the 18 is RTL, so it stays `ltr` —
- *    see `isRightToLeft`).
+ *    for right-to-left candidates. `ar` is the first RTL locale the portal
+ *    ships, so switching to it flips the document to `rtl`; technical surfaces
+ *    stay LTR through `dir="ltr"` / `unicode-bidi: isolate` (see `globals.css`).
  *  - Nothing here fetches: copy lives inside each component, so switching is a
  *    pure re-render — no reload, no route change, no network round trip.
  */
@@ -56,11 +59,14 @@ export const LOCALES = [
   "bg",
   "tr",
   "hu",
+  "pt-BR",
+  "ko",
+  "ar",
 ] as const;
 
 export type Locale = (typeof LOCALES)[number];
 
-/** A copy value that must exist in all 18 languages the iOS client ships. */
+/** A copy value that must exist in all 21 languages the portal ships. */
 export type Localized<T = string> = Record<Locale, T>;
 
 export const STORAGE_KEY = "popopx.locale";
@@ -88,6 +94,9 @@ export const LOCALE_NATIVE: Record<Locale, string> = {
   bg: "Български",
   tr: "Türkçe",
   hu: "Magyar",
+  "pt-BR": "Português (Brasil)",
+  ko: "한국어",
+  ar: "العربية",
 };
 
 /**
@@ -116,6 +125,9 @@ export const LOCALE_SHORT: Record<Locale, string> = {
   bg: "BG",
   tr: "TR",
   hu: "HU",
+  "pt-BR": "PT",
+  ko: "KO",
+  ar: "AR",
 };
 
 /** `lang` attribute values, i.e. the BCP 47 form of each tag. */
@@ -138,6 +150,9 @@ export const HTML_LANG: Record<Locale, string> = {
   bg: "bg",
   tr: "tr",
   hu: "hu",
+  "pt-BR": "pt-BR",
+  ko: "ko",
+  ar: "ar",
 };
 
 export const DEFAULT_LOCALE: Locale = "zh-Hans";
@@ -145,7 +160,7 @@ export const DEFAULT_LOCALE: Locale = "zh-Hans";
 /**
  * Fallback order used by `pick` when a slot is somehow absent at runtime:
  * the requested language, then English, then the default. Typing already
- * requires all 18, so this is defence-in-depth for data read from storage.
+ * requires all 21, so this is defence-in-depth for data read from storage.
  */
 const FALLBACK_CHAIN: readonly Locale[] = ["en", DEFAULT_LOCALE];
 
@@ -156,20 +171,22 @@ function isLocale(value: unknown): value is Locale {
 }
 
 /**
- * None of the 18 shipped localizations is right-to-left, so the document stays
- * `ltr`. The helper exists because adding an RTL language to the list must be a
- * deliberate, checked change rather than an accident.
+ * `ar` is the portal's first right-to-left locale: switching to it sets
+ * `dir="rtl"` on the document root. The other entries are kept so a future
+ * Hebrew/Persian/Urdu addition is a data change, not a behaviour change.
  */
 export function isRightToLeft(locale: Locale): boolean {
   return (["ar", "he", "fa", "ur"] as readonly string[]).includes(locale);
 }
 
 /**
- * Browser language detection mapped onto the 18 supported tags.
+ * Browser language detection mapped onto the 21 supported tags.
  *
  * `zh-TW` / `zh-HK` / `zh-MO` / `zh-Hant` map to Traditional Chinese, any other
- * `zh-*` to Simplified. An unrecognised browser language keeps the default
- * (`zh-Hans`), which is what the first paint renders too.
+ * `zh-*` to Simplified. Every `pt*` tag maps to `pt-BR` (the only Portuguese
+ * variant the portal ships), and `ko*` / `ar*` match their primary subtag. An
+ * unrecognised browser language keeps the default (`zh-Hans`), which is what
+ * the first paint renders too.
  */
 export function detectLocale(candidates: readonly string[] = []): Locale {
   for (const raw of candidates) {
@@ -179,6 +196,9 @@ export function detectLocale(candidates: readonly string[] = []): Locale {
     const tag = raw.toLowerCase().replace(/_/g, "-");
     if (tag.startsWith("zh")) {
       return /-(hk|mo|tw)|hant/.test(tag) ? "zh-Hant" : "zh-Hans";
+    }
+    if (tag === "pt" || tag.startsWith("pt-")) {
+      return "pt-BR";
     }
     const primary = tag.split("-")[0];
     if (isLocale(primary)) {
@@ -199,27 +219,52 @@ function browserCandidates(): string[] {
 }
 
 /**
+ * Isolate ASCII runs so they keep left-to-right byte order inside RTL prose.
+ *
+ * Without it the bidi algorithm re-orders a token that starts with a neutral
+ * character: in Arabic, `/api/v1/plugins` paints as `api/v1/plugins/`, and
+ * `?token=` / `>=` mirror the same way. U+2066 (LRI) and U+2069 (PDI) are the
+ * Unicode isolate controls — the same mechanism as CSS `unicode-bidi: isolate`
+ * — wrapped around each run at render time so the authored copy stays plain
+ * text. `en` and the other 19 locales are byte-for-byte untouched.
+ */
+export function isolateBidiRuns(text: string, locale: Locale): string {
+  if (locale !== "ar") {
+    return text;
+  }
+  return text.replace(/[!-~]+/g, (run) => `\u2066${run}\u2069`);
+}
+
+/**
  * Resolve a copy slot for the active locale.
  *
  * Accepts either a plain string (already locale-free, e.g. `POPOPX`,
  * `AGPL-3.0-only`, a shell command) or a `Localized` object, so component copy
- * can mix the two freely.
+ * can mix the two freely. Strings rendered for `ar` go through
+ * `isolateBidiRuns`; every other locale is returned as-is.
  */
 export function pick<T>(value: Localized<T> | T, locale: Locale): T {
+  let resolved: T | undefined;
   if (value !== null && typeof value === "object" && !Array.isArray(value)) {
     const dict = value as Partial<Record<Locale, T>>;
     const found = dict[locale];
     if (found !== undefined) {
-      return found;
-    }
-    for (const fallback of FALLBACK_CHAIN) {
-      const alt = dict[fallback];
-      if (alt !== undefined) {
-        return alt;
+      resolved = found;
+    } else {
+      for (const fallback of FALLBACK_CHAIN) {
+        const alt = dict[fallback];
+        if (alt !== undefined) {
+          resolved = alt;
+          break;
+        }
       }
     }
   }
-  return value as T;
+  const result = resolved !== undefined ? resolved : (value as T);
+  if (typeof result === "string") {
+    return isolateBidiRuns(result, locale) as T;
+  }
+  return result;
 }
 
 type LocaleContextValue = {

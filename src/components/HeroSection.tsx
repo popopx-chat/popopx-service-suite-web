@@ -21,7 +21,7 @@ import { pick, useCopy, useLocale, type Localized } from "@/lib/i18n";
  *
  * Copy.
  *
- * Every string below is a literal `Localized<string>` map listing all 18 tags
+ * Every string below is a literal `Localized<string>` map listing all 21 tags
  * `src/lib/i18n.tsx` declares — the same set the iOS client ships. Because the
  * type is a total record, the compiler is the completeness oracle: drop one
  * language and this file stops building. Nothing derives a slot from another
@@ -74,6 +74,9 @@ const EYEBROW: Localized<string> = {
   bg: "POPOPX Service Suite · контролният панел на връзките",
   tr: "POPOPX Service Suite · bağlantı kontrol düzlemi",
   hu: "POPOPX Service Suite · a kapcsolatok vezérlőfelülete",
+  "pt-BR": "POPOPX Service Suite · o plano de controle de conexões",
+  ko: "POPOPX Service Suite · 연결 제어 평면",
+  ar: "POPOPX Service Suite · مستوى التحكم في الاتصال",
 };
 
 const HEADLINE: Localized<string> = {
@@ -95,6 +98,9 @@ const HEADLINE: Localized<string> = {
   bg: "Свързвайте услуги — всеки Agent получава реално приложими възможности.",
   tr: "Hizmetleri bağlayın — her Agent gerçekten kullanılabilir yetkinlikler kazansın.",
   hu: "Kössen szolgáltatásokat — minden Agent valóban használható képességeket kapjon.",
+  "pt-BR": "Conecte serviços. Amplie cada Agent.",
+  ko: "서비스를 연결하고, 모든 Agent를 확장하십시오.",
+  ar: "اربط الخدمات. وسّع كل Agent.",
 };
 
 const SUBHEADLINE: Localized<string> = {
@@ -116,6 +122,9 @@ const SUBHEADLINE: Localized<string> = {
   bg: "Един контролен панел за сервизните акаунти на POPOPX Chat и AI агентите: каталог с добавки, отделен превключвател за всяка услуга, обвивково криптиране на каналите с нулево разкриване, CP отчитане на всяко повикване и одиторски дневник — на вашия собствен сървър, и тази страница не зарежда скриптове на трети страни.",
   tr: "POPOPX Chat hizmet hesapları ve Yapay Zekâ Agent’ları için tek kontrol düzlemi: eklenti kataloğu, hizmet başına ayrı anahtar, sıfır bilgiyle şifrelenmiş kanallarda zarf şifreleme, çağrı başına CP ölçümü ve denetim kaydı — kendi sunucunuzda; bu sayfa üçüncü taraf betik yükmez.",
   hu: "Egy vezérlőfelület a POPOPX Chat szolgáltatási fiókok és MI-ügynökök mögött: bővítménykatalógus, szolgáltatásonkénti kapcsoló, boríték-titkosítás a nullaismeret-alapú csatornákon, hívásonkénti CP-elszámolás és audit napló — a saját szervereden, és ez az oldal nem tölt be harmadik féltől származó scriptet.",
+  "pt-BR": "Um único plano de controle por trás das contas de serviço do POPOPX Chat e dos Agents de IA: um catálogo de plug-ins navegável, interruptores por serviço, criptografia de envelope de canais com conhecimento zero, medição de CP por chamada e uma trilha de auditoria — no seu próprio servidor, e esta página não carrega nenhum script de terceiros.",
+  ko: "POPOPX Chat 서비스 계정과 AI Agent 뒤에 있는 하나의 제어 평면입니다. 탐색 가능한 플러그인 카탈로그, 서비스별 스위치, 영지식 채널 봉투 암호화, 호출당 CP 계량, 감사 추적을 갖추었고, 모두 사용자의 서버에서 동작하며 이 페이지에는 서드파티 스크립트가 없습니다.",
+  ar: "مستوى تحكم واحد خلف حسابات خدمة POPOPX Chat ووكلاء AI Agents: كتالوج إضافات قابل للتصفح، ومفاتيح تشغيل لكل خدمة، وتشفير مغلف القنوات بالمعرفة الصفرية، وقياس CP مع كل نداء، وسجل تدقيق — على خادمك أنت، وهذه الصفحة لا تحمل أي سكربت من طرف ثالث.",
 };
 
 const CORE_LABEL: Localized<string> = {
@@ -137,6 +146,9 @@ const CORE_LABEL: Localized<string> = {
   bg: "Защитено ядро",
   tr: "Güvenli çekirdek",
   hu: "Biztonságos mag",
+  "pt-BR": "Núcleo seguro",
+  ko: "보안 코어",
+  ar: "نواة آمنة",
 };
 
 const CORE_SUB: Localized<string> = {
@@ -158,6 +170,9 @@ const CORE_SUB: Localized<string> = {
   bg: "собственият сървър на търговеца",
   tr: "satıcının kendi sunucusu",
   hu: "a kereskedő saját szervere",
+  "pt-BR": "o servidor do próprio comerciante",
+  ko: "판매자 자체 서버",
+  ar: "خادم التاجر نفسه",
 };
 
 const LOGO_ALT: Localized<string> = {
@@ -179,6 +194,9 @@ const LOGO_ALT: Localized<string> = {
   bg: "лого POPOPX",
   tr: "POPOPX logosu",
   hu: "POPOPX-logó",
+  "pt-BR": "Logotipo da POPOPX",
+  ko: "POPOPX 로고",
+  ar: "شعار POPOPX",
 };
 
 const BRAND_TITLE: Localized<string> = {
@@ -200,6 +218,9 @@ const BRAND_TITLE: Localized<string> = {
   bg: "Излъчващи канали в голям мащаб",
   tr: "Büyük ölçekli yayın kanalları",
   hu: "Nagy horderejű broadcast-csatornák",
+  "pt-BR": "Canais de transmissão em larga escala",
+  ko: "대규모 브로드캐스트 채널",
+  ar: "قنوات بث واسعة النطاق",
 };
 
 const BRAND_SUB: Localized<string> = {
@@ -221,6 +242,9 @@ const BRAND_SUB: Localized<string> = {
   bg: "канали с нулево разкриване, разпръскване от сляпо хранилище",
   tr: "sıfır bilgi kanalları, kör depodan yayma",
   hu: "nullaismeret-csatornák, szétosztás vak tárolóból",
+  "pt-BR": "canais de conhecimento zero, distribuição a partir de armazenamento cego",
+  ko: "영지식 채널, 블라인드 스토어 팬아웃",
+  ar: "قنوات المعرفة الصفرية، وتوزيع التخزين الأعمى",
 };
 
 const MESH_TITLE: Localized<string> = {
@@ -242,6 +266,9 @@ const MESH_TITLE: Localized<string> = {
   bg: "Едно-към-едно опашки, криптирани край до край",
   tr: "Bire bir, uçtan uca şifreli kuyruklar",
   hu: "Egy-az-egy, végpontok között titkosított sorok",
+  "pt-BR": "Filas individuais com criptografia de ponta a ponta",
+  ko: "일대일 종단 간 암호화 큐",
+  ar: "طوابير فردية مشفّرة من طرف إلى طرف",
 };
 
 const MESH_SUB: Localized<string> = {
@@ -263,6 +290,9 @@ const MESH_SUB: Localized<string> = {
   bg: "федерирани частни сервизни акаунти",
   tr: "federatif özel hizmet hesapları",
   hu: "föderált privát szolgáltatási fiókok",
+  "pt-BR": "contas de serviço privadas federadas",
+  ko: "연합형 프라이빗 서비스 계정",
+  ar: "حسابات خدمة خاصة اتحادية",
 };
 
 const CTA_PRIMARY: Localized<string> = {
@@ -284,6 +314,9 @@ const CTA_PRIMARY: Localized<string> = {
   bg: "Ръководство за внедряване с една команда (macOS / Ubuntu)",
   tr: "Tek komutla kurulum rehberi (macOS / Ubuntu)",
   hu: "Telepítési útmutató egyetlen paranccsal (macOS / Ubuntu)",
+  "pt-BR": "Guia de implantação com um único comando (macOS / Ubuntu)",
+  ko: "한 명령 배포 가이드 (macOS / Ubuntu)",
+  ar: "دليل النشر بأمر واحد (macOS / Ubuntu)",
 };
 
 const CTA_SECONDARY: Localized<string> = {
@@ -305,6 +338,9 @@ const CTA_SECONDARY: Localized<string> = {
   bg: "Пробвайте пясъчницата на сервизния акаунт",
   tr: "Hizmet hesabı deneme ortamını deneyin",
   hu: "Próbáld ki a szolgáltatási fiók homokozóját",
+  "pt-BR": "Experimente o sandbox de conta de serviço",
+  ko: "서비스 계정 샌드박스 체험하기",
+  ar: "جرّب بيئة اختبار حساب الخدمة",
 };
 
 const METRICS_HEADING: Localized<string> = {
@@ -326,6 +362,9 @@ const METRICS_HEADING: Localized<string> = {
   bg: "Крепките числа на този комплект",
   tr: "Bu paketin somut rakamları",
   hu: "A csomag kemény számai",
+  "pt-BR": "Os números concretos por trás deste pacote",
+  ko: "이 제품군을 뒷받침하는 확실한 숫자",
+  ar: "الأرقام الصلبة وراء هذه الحزمة",
 };
 
 const NOTE: Localized<string> = {
@@ -347,6 +386,9 @@ const NOTE: Localized<string> = {
   bg: "Тази страница е обикновена статична компилация: само системни шрифтове, всички икони и изображения идват от един и същи източник, и никакъв скрипт, шрифт или аналитичен код на трета страна. Резултатът е папка с обикновени файлове, които могат да се разпространяват и отварят офлайн.",
   tr: "Bu sayfa sade bir statik derlemedir: yalnızca sistem yazı tipleri, tüm simgeler ve görseller aynı kaynaktan sunulur ve hiçbir üçüncü taraf betiği, yazı tipi veya analiz kodu yüklenmez. Ortaya, çevrimdışı paylaşılıp açılabilecek sıradan dosyalardan oluşan bir klasör çıkar.",
   hu: "Ez az oldal egy közönséges statikus build: csak rendszerbetűtípusok, minden ikon és kép ugyanonnan a forrásból érkezik, és semmilyen harmadik féltől származó szkript, betűtípus vagy elemző kód nem töltődik be. Az eredmény egy mappányi hétköznapi fájl, amely offline terjeszthető és megnyitható.",
+  "pt-BR": "Esta página é uma build estática simples: apenas fontes do sistema, cada ícone e imagem servidos desta mesma origem, e nenhum script, fonte ou código de análise de terceiros. O resultado é uma pasta de arquivos comuns que pode ser distribuída e aberta offline.",
+  ko: "이 페이지는 평범한 정적 빌드입니다. 시스템 폰트만 사용하고, 모든 아이콘과 이미지는 이 출처에서 제공하며, 서드파티 스크립트나 폰트, 분석 코드는 전혀 없습니다. 결과물은 오프라인에서도 배포하고 열 수 있는 평범한 파일 폴더입니다.",
+  ar: "هذه الصفحة بناء ساكن بسيط: خطوط النظام فقط، وكل أيقونة وصورة تُقدَّم من هذا الأصل نفسه، ولا سكربت أو خط أو شيفرة تحليلات من طرف ثالث إطلاقًا. والمخرج مجلد من ملفات عادية يمكن توزيعه وفتحه دون اتصال.",
 };
 
 /** Values are locale-free tokens; only the caption is a copy slot. */
@@ -372,6 +414,9 @@ const METRICS: readonly { value: string; caption: Localized<string> }[] = [
       bg: "глобални потребителски ID-та",
       tr: "küresel kullanıcı kimliği",
       hu: "globális felhasználói azonosító",
+      "pt-BR": "IDs globais de usuário",
+      ko: "전역 사용자 ID",
+      ar: "معرّفات مستخدم عالمية",
     },
   },
   {
@@ -395,6 +440,9 @@ const METRICS: readonly { value: string; caption: Localized<string> }[] = [
       bg: "съдържанието на съобщенията е криптирано край до край",
       tr: "mesaj içeriği uçtan uca şifreli",
       hu: "az üzenettartalom végpontok között titkosított",
+      "pt-BR": "do conteúdo das mensagens com E2EE",
+      ko: "메시지 내용 E2EE 적용",
+      ar: "من محتوى الرسائل مشفّر من طرف إلى طرف",
     },
   },
   {
@@ -418,6 +466,9 @@ const METRICS: readonly { value: string; caption: Localized<string> }[] = [
       bg: "сляпо съхранение в криптирани канали",
       tr: "şifreli kanallarda kör depolama",
       hu: "vak tárolás titkosított csatornákon",
+      "pt-BR": "canais com armazenamento cego",
+      ko: "블라인드 스토어 채널",
+      ar: "قنوات تخزين أعمى",
     },
   },
   {
@@ -441,6 +492,9 @@ const METRICS: readonly { value: string; caption: Localized<string> }[] = [
       bg: "отворен код на всички нива",
       tr: "her katmanda açık kaynak",
       hu: "nyílt forráskód minden rétegben",
+      "pt-BR": "código aberto em todas as camadas",
+      ko: "전 계층 오픈소스",
+      ar: "مفتوح المصدر في كل الطبقات",
     },
   },
   {
@@ -464,6 +518,9 @@ const METRICS: readonly { value: string; caption: Localized<string> }[] = [
       bg: "два офлайн режима в клиента",
       tr: "istemci tarafında iki çevrimdışı mod",
       hu: "két offline mód az ügyféloldalon",
+      "pt-BR": "modo duplo offline no cliente",
+      ko: "클라이언트 오프라인 듀얼 모드",
+      ar: "وضعان دون اتصال على العميل",
     },
   },
 ];
@@ -593,14 +650,14 @@ export function HeroSection(): ReactElement {
           </div>
 
           {/* Fan endpoints, labelled. */}
-          <div className="absolute left-0 top-0 max-w-[46%] text-left">
+          <div className="absolute left-0 top-0 max-w-[46%] text-start">
             <span className="chip border-brand/45 bg-brand/10 text-white">
               <StatusDot tone="brand" />
               {brandTitle}
             </span>
             <span className="mt-1.5 block text-[11px] leading-snug text-faint">{brandSub}</span>
           </div>
-          <div className="absolute right-0 top-0 max-w-[46%] text-right">
+          <div className="absolute right-0 top-0 max-w-[46%] text-end">
             <span className="chip border-mesh/45 bg-mesh/10 text-white">
               <StatusDot tone="mesh" />
               {meshTitle}

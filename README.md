@@ -62,7 +62,8 @@ popopx-service-suite-web/
 │   ├── deploy_centos.sh          one-shot deploy for CentOS / RHEL / Rocky / Alma
 │   └── nginx-popopx-service.conf bare-metal production vhost (TLS + security headers)
 ├── tools/
-│   ├── check-i18n.mjs            18-language copy completeness; errors gate, warnings report
+│   ├── check-i18n.mjs            21-language copy completeness; errors gate, warnings report
+│   ├── check-rtl.mjs             RTL + LTR-isolation contract; --self-test proves the predicates
 │   └── scan-compliance.mjs       the four "0" gates, run against the build output
 ├── public/
 │   ├── logo-popopx.png           official mark, 1024×1024
@@ -79,7 +80,7 @@ popopx-service-suite-web/
     │   └── globals.css           Tailwind layers, the glass surface classes, anchor offsets
     ├── components/
     │   ├── Navbar.tsx                           sticky nav: anchors, language capsule, repo links, CTA
-    │   ├── LanguageMenu.tsx                     the 18-language menu: list plus compact capsule
+    │   ├── LanguageMenu.tsx                     the 21-language menu: list plus compact capsule
     │   ├── HeroSection.tsx                      the hero stage
     │   ├── BusinessScenarios.tsx                six plain-language use-case cards under the hero
     │   ├── PluginsShowcase.tsx                  the nine plugin modules that ship in the admin back end
@@ -166,16 +167,20 @@ Every address the copy uses comes from `src/lib/site.ts` and nowhere else: site 
 
 ## Language switch
 
-This is no longer a three-language switch: the portal offers the same 18 languages as the iOS client.
+The portal offers 21 languages: the 18 locale tags the iOS client declares in `CFBundleLocalizations`,
+plus Brazilian Portuguese (`pt-BR`), Korean (`ko`) and Arabic (`ar`) — the first right-to-left locale.
 The engine is `src/lib/i18n.tsx`, mounted as the `<LocaleProvider>` that wraps the whole tree in
 `layout.tsx`.
 
-- `LOCALES` carries the 18 tags in the order the iOS client declares its localizations: `en`, `ru`,
-  `de`, `fr`, `it`, `nl`, `cs`, `zh-Hans`, `zh-Hant`, `es`, `pl`, `ja`, `th`, `fi`, `uk`, `bg`, `tr`,
-  `hu` (`LOCALE_COUNT` is 18). `Localized<T>` is a **total** `Record` over those 18 keys. Write copy
-  in 17 languages and `npm run typecheck` refuses to compile, so a missing translation is caught at
-  build time rather than discovered by a visitor.
-- `zh-Hans` (Simplified Chinese) is the default, and `layout.tsx` emits `<html lang>` for it up front.
+- `LOCALES` carries the 21 tags: the 18 iOS tags in their declared order — `en`, `ru`, `de`, `fr`, `it`,
+  `nl`, `cs`, `zh-Hans`, `zh-Hant`, `es`, `pl`, `ja`, `th`, `fi`, `uk`, `bg`, `tr`, `hu` — then
+  `pt-BR`, `ko` and `ar` (`LOCALE_COUNT` is 21). `Localized<T>` is a **total** `Record` over those 21
+  keys: write copy in 20 languages and `npm run typecheck` refuses to compile, so a missing translation
+  is caught at build time rather than discovered by a visitor. Every copy object carries all 21
+  slots — 891 objects, 18,711 slots — and `npm run check:i18n` re-counts them.
+- `zh-Hans` (Simplified Chinese) is the default. The static export emits one document,
+  `<html lang="zh-Hans" dir="ltr">`; `LocaleProvider` re-syncs both attributes at runtime, so choosing
+  `ar` sets `dir="rtl"` and `lang="ar"`.
 - Copy lives inline inside each component and `useCopy()` resolves it against the active locale.
   Switching is a pure re-render: no reload, no route change, no request, no remote language pack. The
   URL never changes with language, which is why `public/sitemap.xml` declares exactly one indexable
@@ -183,28 +188,38 @@ The engine is `src/lib/i18n.tsx`, mounted as the `<LocaleProvider>` that wraps t
 - The visitor's choice is written to that visitor's own `localStorage` under `popopx.locale`
   (`STORAGE_KEY`) and beats browser detection on the next visit.
 - Detection runs inside `useEffect` only. `detectLocale()` walks `navigator.language` and
-  `navigator.languages`, matching the primary subtag against the 18 tags; `zh-HK`, `zh-MO`, `zh-TW`
-  and anything marked `hant` resolve to `zh-Hant`, every other `zh-*` to `zh-Hans`, and a language
-  none of the tags cover keeps the default `zh-Hans` — which is also exactly what the server pass and
-  the first client pass paint, because reading `navigator` during render would be a hydration
-  mismatch.
-- Switching keeps `document.documentElement.lang` (BCP 47 forms from `HTML_LANG`) and `dir` in sync.
-  None of the 18 writes right-to-left, so `isRightToLeft()` currently always answers `false` and `dir`
-  stays `ltr`; the helper exists so that adding an RTL language has to be a deliberate change.
+  `navigator.languages`, matching the primary subtag against the 21 tags; `zh-HK`, `zh-MO`, `zh-TW`
+  and anything marked `hant` resolve to `zh-Hant`, every other `zh-*` to `zh-Hans`, every `pt`/`pt-*`
+  tag to `pt-BR`, and `ko`/`ar` by primary subtag whatever the region suffix. A language none of the
+  tags cover keeps the default `zh-Hans` — which is also exactly what the server pass and the first
+  client pass paint, because reading `navigator` during render would be a hydration mismatch.
+- `ar` is the right-to-left locale. `isRightToLeft()` flips `dir` to `rtl`; layout utilities are
+  logical (`text-start`/`text-end`, `ps`/`pe`, `ms`/`me`, `start-0`/`end-0`, `border-s`), so forms,
+  table headers and status badges mirror with the page. Technical surfaces stay LTR: `code`, `pre`,
+  `kbd` and `samp` are isolated by `globals.css`, code blocks and monospaced values carry `dir="ltr"`
+  or `<bdi dir="ltr">` (keeping the surrounding logical alignment), the directory's address and
+  contact inputs take `dir="ltr"`, and the dropdown anchors with `start`/`end`. The hero's decorative
+  topology keeps physical `left`/`right` on purpose — its labels are attached to hand-drawn lines —
+  and the RTL gate allowlists exactly those classes.
 - The language menu calls each language by its own name (`LOCALE_NATIVE`: English, Deutsch, 日本語,
-  简体中文, 繁體中文 and so on); the compact capsule uses `LOCALE_SHORT`, at most three characters per
-  tag (`简`, `繁`, `EN`, `DE` and the like).
+  简体中文, Português (Brasil), 한국어, العربية and so on); the compact capsule uses `LOCALE_SHORT`,
+  at most three characters per tag (`简`, `繁`, `EN`, `PT`, `KO`, `AR` and the like).
 - `pick()` falls back in this order at runtime: active locale → `en` → `zh-Hans` → the raw value as a
   string. That is how `POPOPX`, `AGPL-3.0-only` and shell commands can be written once and used
   everywhere.
 - `npm run check:i18n` (`tools/check-i18n.mjs`) is the oracle for what the compiler cannot see, and it
   splits its findings by severity — only the first group stops a build. **Errors** are what make the
-  command exit 1: a stale locale tag (`zh-CN`, `zh-TW`) mixed into a copy object; a copy map *derived*
-  by a function annotated to return `Localized<…>`; an `as Localized<…>` cast over an untyped map; a
-  spread inside a copy object; a copy object that omits any of the 18 locales. **Warnings** do not: a
-  non-`en` slot repeating the English string verbatim is reported, so the "same string pasted into every
-  one of the 18 slots" case is surfaced, not gated. On the current tree the command exits 0 with 0 errors
-  and 10 warnings. `--quiet` prints only the two summary lines.
+  command exit 1: a stale locale tag (`zh-CN`, `zh-TW`, `pt`, `pt-PT`) mixed into a copy object; a copy
+  map *derived* by a function annotated to return `Localized<…>`; an `as Localized<…>` cast over an
+  untyped map; a spread inside a copy object; a copy object that omits any of the 21 locales.
+  **Warnings** do not: a non-`en` slot repeating the English string verbatim is reported, so the "same
+  string pasted into every one of the 21 slots" case is surfaced, not gated. On the current tree the
+  command exits 0 with 0 errors and 28 warnings. `--quiet` prints only the two summary lines.
+- `npm run check:rtl` (`tools/check-rtl.mjs`) proves the right-to-left contract in the source: the
+  21-locale registry agrees with `check-i18n.mjs`, `ar` is in the RTL list, `LocaleProvider` writes
+  `dir` and `lang`, the SSR document carries the default `lang="zh-Hans" dir="ltr"`, code surfaces are
+  isolated LTR, and no physical direction utility appears outside the allowlist. `--self-test` proves
+  the predicates reject bad input (12/12 on this tree).
 
 ## Privacy and self-host guarantees
 
@@ -303,12 +318,13 @@ document root.
 
 ## Build and compliance gates
 
-Run all four before a release; each proves something different.
+Run all five before a release; each proves something different.
 
 ```bash
 npm run typecheck    # tsc --noEmit: strict plus noUnusedLocals, noUnusedParameters, noImplicitReturns
 npm run build        # next build: type checking and static export into out/
-npm run check:i18n   # 18-language copy completeness; exits 1 on errors, --quiet = summary only
+npm run check:i18n   # 21-language copy completeness; exits 1 on errors, --quiet = summary only
+npm run check:rtl    # RTL + LTR-isolation contract; --self-test proves the predicates
 npm run check:out    # the four "0" gates against out/ (takes an alternative directory argument)
 ```
 
@@ -334,7 +350,7 @@ read; image binaries are skipped because they carry no code.
 This repository ships no ESLint configuration and no test runner, and `eslint.ignoreDuringBuilds` is
 `true` in `next.config.mjs`. The `lint` and `start` entries in `package.json` have no working counterpart
 here — there is no ESLint config to run, and the deliverable `out/` is handed to a static server rather
-than to `next start`. Those four commands above are the entire acceptance suite.
+than to `next start`. Those five commands above are the entire acceptance suite.
 
 ## Related repos
 
@@ -342,6 +358,7 @@ than to `next start`. Those four commands above are the entire acceptance suite.
   — the gateway, billing, channel envelope encryption, the nine plugin modules (including the
   workflow bridge, the CardDAV and CalDAV connectors and the Slack/Discord bridge) and the browser
   admin console; every command and port in the portal's install copy is aligned with it.
-- iOS client: [`popopx-chat`](https://github.com/popopx-chat/popopx-chat) — the official purple mark and
-  the set of 18 languages both come from this repository.
+- iOS client: [`popopx-chat`](https://github.com/popopx-chat/popopx-chat) — the official purple mark comes
+  from this repository, and its `CFBundleLocalizations` declare the 18 locale tags the portal extends
+  with pt-BR, ko and ar.
 - This portal: [`popopx-service-suite-web`](https://github.com/popopx-chat/popopx-service-suite-web).

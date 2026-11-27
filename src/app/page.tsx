@@ -14,7 +14,7 @@ import { Footer } from "@/components/Footer";
 
 /**
  * The portal is a single page: every module is an anchored section so that the
- * navbar links are plain `#hash` jumps. That is what makes the 18-language switch
+ * navbar links are plain `#hash` jumps. That is what makes the 21-language switch
  * and the interactive sandbox work with no router, no server calls and no full
  * page reload — and it keeps the static export to one HTML document.
  *

@@ -71,6 +71,28 @@
   pre {
     @apply text-[13px] leading-relaxed;
   }
+
+  /*
+   * Technical surfaces keep byte order and left alignment in every locale,
+   * including Arabic. Inline <code> is isolated so an /api/... path inside an
+   * RTL sentence cannot drag its surrounding punctuation into LTR; <pre>
+   * blocks (commands, JSON, wire samples) are always LTR and left aligned.
+   */
+  code,
+  pre,
+  kbd,
+  samp {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  pre {
+    text-align: left;
+  }
+
+  [dir="ltr"] {
+    unicode-bidi: isolate;
+  }
 }
 
 @layer components {

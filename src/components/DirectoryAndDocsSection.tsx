@@ -30,7 +30,7 @@ import { REPO_URL } from "@/lib/site";
  *       `popopx://channel?p=&t=&e=&s=`          PopopxBadgeCreditsModels.swift `wireString`
  *       `?popopx_uid=&ts=&sig=`                 crypto_service.py `sign_h5_url`
  *     filled with placeholder values and labelled as demo data in every one of
- *     the 18 languages (`SAMPLE_CHIP`), because
+ *     the 21 languages (`SAMPLE_CHIP`), because
  *     none of them resolves to a live service account, channel or merchant page.
  *  2. A directory-entry generator. There is no directory schema in
  *     `popopx-service-suite`, `popopx-chat` or `popopx.chat-site` (all searched), and the
@@ -83,6 +83,9 @@ const HEYEBROW: Localized<string> = {
   bg: "Отворен протокол и указател",
   tr: "Açık protokol ve dizin",
   hu: "Nyílt protokoll és könyvtár",
+  "pt-BR": "Protocolo aberto e diretório",
+  ko: "공개 프로토콜과 디렉터리",
+  ar: "بروتوكول ودليل مفتوحان",
 };
 
 const HEADLINE: Localized<string> = {
@@ -104,6 +107,9 @@ const HEADLINE: Localized<string> = {
   bg: "Стена с QR кодове · формат на указателя · упътване за протокола",
   tr: "QR duvarı · dizin biçimi · protokol kopya kâğıdı",
   hu: "QR-fal · könyvtári formátum · protokoll-csal",
+  "pt-BR": "Mural de QR · formato do diretório · referência rápida do protocolo",
+  ko: "QR 월 · 디렉터리 형식 · 프로토콜 요약표",
+  ar: "جدار QR · صيغة الدليل · ورقة مرجعية للبروتوكول",
 };
 
 const SUBHEAD: Localized<string> = {
@@ -125,6 +131,9 @@ const SUBHEAD: Localized<string> = {
   bg: "Всеки долен код се изрисува локално като SVG в момента на изчертаване — без онлайн QR услуга и без изображение от друг произход. Сканира се и без мрежа.",
   tr: "Aşağıdaki her kod, boyama anında cihazda yerel SVG olarak çizilir — çevrimiçi QR servisi yok, başka kaynaktan görsel yok. Ağ kapalıyken de taranır.",
   hu: "Az alábbi kódok mindegyike rajzoláskor helyileg SVG-ként jön létre — nincs online QR-szolgáltatás, nincs idegen tartományról betöltött kép. Hálózat nélkül is beolvasható.",
+  "pt-BR": "Todo código abaixo é renderizado como SVG local no momento da pintura — nenhum serviço de QR online, nenhuma imagem de outra origem. Ele ainda é lido com a rede desconectada.",
+  ko: "아래의 모든 코드는 렌더링 시점에 로컬 SVG로 생성됩니다. 온라인 QR 서비스도, 다른 오리진의 이미지도 사용하지 않습니다. 네트워크를 분리해도 스캔됩니다.",
+  ar: "كل رمز أدناه يُرسَم كـ SVG محلي وقت العرض — لا خدمة QR عبر الإنترنت ولا صورة من أصل خارجي. ويظل قابلًا للمسح والشبكة مفصولة.",
 };
 
 const NOTICE: Localized<string> = {
@@ -146,6 +155,9 @@ const NOTICE: Localized<string> = {
   bg: "Примерни / запълващи данни: кодовете, кадрите и JSON по-долу показват само формат и имена на полета. Никой от тях не сочи към реален сервизен акаунт, канал или страница на търговец и не е запис в указателя.",
   tr: "Örnek / yer tutucu demo verileri: aşağıdaki kodlar, çerçeveler ve JSON yalnızca biçimi ve alan adlarını gösterir. Hiçbiri gerçek bir hizmet hesabına, kanala veya satıcı sayfasına işaret etmez; hiçbiri bir dizin kaydı değildir.",
   hu: "Minta- / helyőző adatok: az alábbi kódok, frame-ek és a JSON csak a formátumot és a mezőneveket mutatják. Egyikük sem mutat valós szolgáltatási fiókra, csatornára vagy kereskedő oldalára, és egyikük sem könyvtári bejegyzés.",
+  "pt-BR": "Dados de demonstração de exemplo / provisórios: os códigos, frames e JSON abaixo demonstram apenas o formato e os nomes dos campos. Nenhum deles aponta para uma conta de serviço, canal ou página de comerciante ativa, e nenhum deles constitui uma entrada de diretório.",
+  ko: "샘플/자리표시자 데모 데이터: 아래의 코드, 프레임, JSON은 형식과 필드 이름만 보여 줍니다. 어느 것도 실제 서비스 계정, 채널, 판매자 페이지를 가리키지 않으며, 어느 것도 실제 등록 정보가 아닙니다.",
+  ar: "بيانات تجريبية نموذجية / عناصر نائبة: الرموز والأُطر وJSON أدناه توضح الصيغة وأسماء الحقول فقط. ولا يشير أي منها إلى حساب خدمة أو قناة أو صفحة تاجر حقيقية، وليس أي منها إدراجًا في الدليل.",
 };
 
 const WALL_TITLE: Localized<string> = {
@@ -167,6 +179,9 @@ const WALL_TITLE: Localized<string> = {
   bg: "Стена с QR кодове на референтната екосистема",
   tr: "Referans ekosistemin QR duvarı",
   hu: "A referencia-ökoszisztéma QR-fala",
+  "pt-BR": "Mural de QR do ecossistema de referência",
+  ko: "참조 에코시스템 QR 월",
+  ar: "جدار QR مرجعي للمنظومة",
 };
 
 const WALL_HINT: Localized<string> = {
@@ -188,6 +203,9 @@ const WALL_HINT: Localized<string> = {
   bg: "Докоснете код или „Докосване за уголемяване“, за да видите по-голямо изображение и пълната връзка; „Копиране на връзка“ слага суровия низ в буфера.",
   tr: "Daha büyük görüntü ve tam bağlantı için bir koda veya “Büyütmek için dokun”a dokunun; “Bağlantıyı kopyala” ham diziyi panoya koyar.",
   hu: "Koppints egy kódra vagy a „Koppints a nagyításhoz” gombra a nagyobb ábráért és a teljes hivatkozásért; a „Hivatkozás másolása” a nyers szöveget a vágólapra teszi.",
+  "pt-BR": "Toque em um código ou em “Toque para ampliar” para obter uma renderização maior e o link completo; “Copiar link” coloca a string bruta na área de transferência.",
+  ko: "코드 또는 “크게 보기”를 탭하면 더 큰 이미지와 전체 링크를 볼 수 있고, “링크 복사”는 원본 문자열을 클립보드에 넣습니다.",
+  ar: "اضغط على رمز أو على «اضغط للتكبير» للحصول على عرض أكبر والرابط الكامل؛ و«نسخ الرابط» تضع السلسلة الخام في الحافظة.",
 };
 
 const ENLARGE: Localized<string> = {
@@ -209,6 +227,9 @@ const ENLARGE: Localized<string> = {
   bg: "Докоснете за уголемяване",
   tr: "Büyütmek için dokun",
   hu: "Koppints a nagyításhoz",
+  "pt-BR": "Toque para ampliar",
+  ko: "크게 보기",
+  ar: "اضغط للتكبير",
 };
 
 const COPY_LINK: Localized<string> = {
@@ -230,6 +251,9 @@ const COPY_LINK: Localized<string> = {
   bg: "Копиране на връзка",
   tr: "Bağlantıyı kopyala",
   hu: "Hivatkozás másolása",
+  "pt-BR": "Copiar link",
+  ko: "링크 복사",
+  ar: "نسخ الرابط",
 };
 
 const COPIED_LINK: Localized<string> = {
@@ -251,6 +275,9 @@ const COPIED_LINK: Localized<string> = {
   bg: "Копирано",
   tr: "Kopyalandı",
   hu: "Másolva",
+  "pt-BR": "Copiado",
+  ko: "복사됨",
+  ar: "تم النسخ",
 };
 
 const CLOSE: Localized<string> = {
@@ -272,6 +299,9 @@ const CLOSE: Localized<string> = {
   bg: "Затвори",
   tr: "Kapat",
   hu: "Bezárás",
+  "pt-BR": "Fechar",
+  ko: "닫기",
+  ar: "إغلاق",
 };
 
 const FULL_LINK: Localized<string> = {
@@ -293,6 +323,9 @@ const FULL_LINK: Localized<string> = {
   bg: "Пълна връзка",
   tr: "Tam bağlantı",
   hu: "Teljes hivatkozás",
+  "pt-BR": "Link completo",
+  ko: "전체 링크",
+  ar: "الرابط الكامل",
 };
 
 const FOOTER_NOTE: Localized<string> = {
@@ -314,6 +347,9 @@ const FOOTER_NOTE: Localized<string> = {
   bg: "Тази страница не заресъс ресурси от друг произход: кодовете, шрифтовете и скриптовете идват оттук.",
   tr: "Bu sayfa başka bir kaynaktan kaynak yüklemez: kodlar, yazı tipleri ve betiklerin hepsi bu kaynaktan gelir.",
   hu: "Ez az oldal nem tölt be idegen forrásból származó elemeket: a kódok, betűkészletek és parancsfájlok mind ugyanonnan a tartományról jönnek.",
+  "pt-BR": "Esta página não carrega nenhum recurso de outra origem: os códigos, as fontes e os scripts vêm todos desta origem.",
+  ko: "이 페이지는 다른 오리진의 리소스를 불러오지 않습니다. 코드, 폰트, 스크립트가 모두 이 오리진에서 제공됩니다.",
+  ar: "لا تحمّل هذه الصفحة أي مورد من أصل خارجي: فالرموز والخطوط والسكربتات كلها من هذا الأصل نفسه.",
 };
 
 const SAMPLE_CHIP: Localized<string> = {
@@ -335,6 +371,9 @@ const SAMPLE_CHIP: Localized<string> = {
   bg: "Пример",
   tr: "Örnek",
   hu: "Példa",
+  "pt-BR": "Exemplo",
+  ko: "샘플",
+  ar: "نموذج",
 };
 
 const QR_MODAL_NOTE: Localized<string> = {
@@ -356,6 +395,9 @@ const QR_MODAL_NOTE: Localized<string> = {
   bg: "Това изображение е локален векторен изход: остава остро при уголемяване, а сканирането от екрана и печатът използват едни и същи байтове. Съдържанието е демонстрация на формата — клиентът предава всеки низ на анализатора, който отговаря на вида му.",
   tr: "Bu resim yerel vektör çıktısıdır: büyütüldüğünde net kalır, ekrandan tarama ile yazdırma aynı baytları kullanır. İçerik bir biçim demosudur — istemci her diziyi kendi biçimine ayrıştırcıya verir.",
   hu: "Ez a kép helyi vektoros kimenet: nagyítva is éles marad, és a képernyőről olvasás valamint a nyomtatás ugyanazokat a bájtokat használja. A tartalom formátum-bemutató — az ügyfél minden szöveget az alakjának megfelelő elemzőnek ad.",
+  "pt-BR": "Esta imagem é uma saída vetorial local: continua nítida quando ampliada, e a leitura na tela e a impressão usam os mesmos bytes. O conteúdo é uma demonstração de formato — o cliente entrega cada string ao analisador que corresponde ao formato dela.",
+  ko: "이 그림은 로컬 벡터 출력이므로 확대해도 선명하며, 화면 스캔과 인쇄가 동일한 바이트를 사용합니다. 내용은 형식 데모이며, 클라이언트는 각 문자열을 그 형태에 맞는 파서에 넘깁니다.",
+  ar: "هذه الصورة ناتج متجهي محلي: تبقى حادة عند التكبير، ويستخدم المسح على الشاشة والطباعة البايتات نفسها. والمحتوى عرض توضيحي للصيغة — يسلّم العميل كل سلسلة إلى المحلّل الذي يطابق شكلها.",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -414,6 +456,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Следване",
       tr: "Takip",
       hu: "Követés",
+      "pt-BR": "Seguir",
+      ko: "팔로우",
+      ar: "متابعة",
     },
     title: {
       en: "Service-account follow link",
@@ -434,6 +479,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Връзка за следване на сервизен акаунт",
       tr: "Hesabı takip bağlantısı",
       hu: "Szolgáltatási fiók követési hivatkozása",
+      "pt-BR": "Link de seguir da conta de serviço",
+      ko: "서비스 계정 팔로우 링크",
+      ar: "رابط متابعة حساب خدمة",
     },
     caption: {
       en: "Follows the account and reports the article it came from as a silent ::REF::.",
@@ -454,6 +502,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Следва акаунта и безшумно съобщава за статията източник чрез ::REF::.",
       tr: "Hesabı takip eder ve geldiği makaleyi ::REF:: ile sessizce bildirir.",
       hu: "Követi a fiókot, és néma ::REF:: jelzéssel jelzi a forráscikket.",
+      "pt-BR": "Segue a conta e informa o artigo de origem como um ::REF:: silencioso.",
+      ko: "계정을 팔로우하고, 링크가 실려 있던 글을 조용한 ::REF::로 보고합니다.",
+      ar: "يتابع الحساب ويبلّغ عن المقال الذي جاء منه كـ ::REF:: صامت.",
     },
     value: `popopx://service?uri=${DEMO_ENCODED_ADDRESS}&ref=welcome-2026`,
   },
@@ -478,6 +529,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Канал",
       tr: "Kanal",
       hu: "Csatorna",
+      "pt-BR": "Canal",
+      ko: "채널",
+      ar: "قناة",
     },
     title: {
       en: "Channel public link",
@@ -498,6 +552,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Публична връзка на канала",
       tr: "Kanalın herkese açık bağlantısı",
       hu: "A csatorna nyilvános hivatkozása",
+      "pt-BR": "Link público do canal",
+      ko: "채널 공개 링크",
+      ar: "رابط القناة العام",
     },
     caption: {
       en: "Two path segments with the read key in the fragment; nothing after # is ever sent to a relay.",
@@ -518,6 +575,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Два сегмента от пътя, ключът за четене е във фрагмента; нищо след # не се изпраща на реле.",
       tr: "İki yol bölümü ve okuma anahtarı parça içinde; # sonrasındaki hiçbir şey röleye gitmez.",
       hu: "Két útvonalszegmens, az olvasási kulcs a törtben; a # jele után semmi sem megy átjátszónak.",
+      "pt-BR": "Dois segmentos de caminho com a chave de leitura no fragmento; nada depois de # é enviado a um relay.",
+      ko: "경로 세그먼트 두 개로 구성되고 읽기 키는 프래그먼트에 있습니다. # 뒤의 내용은 릴레이로 전송되지 않습니다.",
+      ar: "مقطعان في المسار ومفتاح القراءة في الجزء اللاحق للعلامة #؛ ولا يُرسَل أي شيء بعد # إلى المرحّل أبدًا.",
     },
     value: DEMO_CHANNEL_URI,
   },
@@ -542,6 +602,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Влизане",
       tr: "Giriş",
       hu: "Bejelentkezés",
+      "pt-BR": "Login",
+      ko: "로그인",
+      ar: "تسجيل الدخول",
     },
     title: {
       en: "SSO scan-to-sign-in link",
@@ -562,6 +625,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Връзка за вход чрез SSO сканиране",
       tr: "SSO tarayarak giriş bağlantısı",
       hu: "SSO bejelentkezési hivatkozás beolvasással",
+      "pt-BR": "Link SSO de login por digitalização",
+      ko: "SSO 스캔 로그인 링크",
+      ar: "رابط تسجيل الدخول بالمسح عبر SSO",
     },
     caption: {
       en: "The camera recognises a third-party login code and sends ::SSO_SCAN:: silently; the account raises the consent card.",
@@ -582,6 +648,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Камерата разпознава входен код на трета страна и изпраща безшумно ::SSO_SCAN::; акаунтът показва картата за съгласие.",
       tr: "Kamera üçüncü tarafın giriş kodunu tanır ve sessizce ::SSO_SCAN:: gönderir; hesap onay kartını açar.",
       hu: "A kamera felismeri egy harmadik fél bejelentkezési kódját, és néma ::SSO_SCAN:: küldést indít; a fiók hozzájárulási kártyát dob fel.",
+      "pt-BR": "A câmera reconhece um código de login de terceiros e envia ::SSO_SCAN:: silenciosamente; a conta levanta o cartão de consentimento.",
+      ko: "카메라가 서드파티 로그인 코드를 인식하면 ::SSO_SCAN::을 조용히 전송하고, 계정이 동의 카드를 띄웁니다.",
+      ar: "تتعرّف الكاميرا على رمز تسجيل دخول طرف ثالث وترسل ::SSO_SCAN:: بصمت؛ فيُظهر الحساب بطاقة الموافقة.",
     },
     value: `popopx://sso?uri=${DEMO_ENCODED_ADDRESS}&session=a1b2c3d4e5f60718`,
   },
@@ -606,6 +675,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Удостоверение",
       tr: "Kimlik bilgisi",
       hu: "Hitelesítő adat",
+      "pt-BR": "Credencial",
+      ko: "자격 증명",
+      ar: "بيانات الاعتماد",
     },
     title: {
       en: "Paid channel access credential",
@@ -626,6 +698,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Удостоверение за платен достъп до канал",
       tr: "Ücretli kanal erişim bilgisi",
       hu: "Fizetős csatorna hozzáférési hitelesítője",
+      "pt-BR": "Credencial de acesso a canal pago",
+      ko: "유료 채널 접근 자격 증명",
+      ar: "بيانات اعتماد الوصول إلى قناة مدفوعة",
     },
     caption: {
       en: "Also opens with popopx://channel, but a query rather than a path — neither parser accepts the other's shape.",
@@ -646,6 +721,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Също започва с popopx://channel, но с заявка, а не с път — нито един анализатор не приема формата на другия.",
       tr: "O da popopx://channel ile başlar ama yol yerine sorgu kullanır — iki ayrıştırıcı da diğerinin biçimini kabul etmez.",
       hu: "Szintén popopx://channel-lel indul, de útvonal helyett lekérdezéssel — egyik elemző sem fogadja el a másik alakját.",
+      "pt-BR": "Também abre com popopx://channel, mas como consulta e não como caminho — nenhum dos dois analisadores aceita o formato do outro.",
+      ko: "popopx://channel로 열리기도 하지만 경로가 아닌 쿼리 형태이며, 어느 파서도 상대의 형태를 받아들이지 않습니다.",
+      ar: "يُفتح أيضًا بـ popopx://channel، لكن كاستعلام لا كمسار — ولا يقبل أي من المحلّلين شكل الآخر.",
     },
     value:
       "popopx://channel?p=200&t=1767225600123" +
@@ -673,6 +751,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Подписан H5",
       tr: "İmzalı H5",
       hu: "Aláírt H5",
+      "pt-BR": "H5 assinado",
+      ko: "서명된 H5",
+      ar: "H5 موقّعة",
     },
     title: {
       en: "Signed H5 article link",
@@ -693,6 +774,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Подписана връзка към H5 статия",
       tr: "İmzalı H5 makale bağlantısı",
       hu: "Aláírt H5 cikk-hivatkozás",
+      "pt-BR": "Link de artigo H5 assinado",
+      ko: "서명된 H5 글 링크",
+      ar: "رابط مقال H5 موقّع",
     },
     caption: {
       en: "Parameter order is popopx_uid, ts, sig; the signature covers uid= and ts= only — never the host name.",
@@ -713,6 +797,9 @@ const WALL_ENTRIES: WallEntry[] = [
       bg: "Редът на параметрите е popopx_uid, ts, sig; подписът покрива само uid= и ts=, никога името на хоста.",
       tr: "Parametre sırası popopx_uid, ts, sig; imza yalnızca uid= ve ts= kapsar, ana bilgisayar adını asla.",
       hu: "A paraméterek sorrendje popopx_uid, ts, sig; az aláírás csak a uid= és ts= mezőket fedi le, a gépinevet soha.",
+      "pt-BR": "A ordem dos parâmetros é popopx_uid, ts, sig; a assinatura cobre apenas uid= e ts= — nunca o nome do host.",
+      ko: "매개변수 순서는 popopx_uid, ts, sig이며, 서명은 uid=와 ts=만 대상으로 하고 호스트 이름은 대상으로 하지 않습니다.",
+      ar: "ترتيب المعاملات هو popopx_uid ثم ts ثم sig؛ والتوقيع يغطي uid= وts= فقط — ولا يغطي اسم المضيف أبدًا.",
     },
     value: DEMO_SIGNED_H5_URL,
   },
@@ -836,6 +923,9 @@ const ENVELOPE_TITLE: Localized<string> = {
   bg: "Обвивката на ключа на канала popopx.channel.enc.v1",
   tr: "Kanal anahtarı zarfı popopx.channel.enc.v1",
   hu: "A csatornakulcs-boríték popopx.channel.enc.v1",
+  "pt-BR": "O envelope de chave de canal popopx.channel.enc.v1",
+  ko: "채널 키 봉투 popopx.channel.enc.v1",
+  ar: "مغلف مفتاح القناة popopx.channel.enc.v1",
 };
 
 const ENVELOPE_JSON_LABEL: Localized<string> = {
@@ -857,6 +947,9 @@ const ENVELOPE_JSON_LABEL: Localized<string> = {
   bg: "JSON на обвивката",
   tr: "Zarf JSON’u",
   hu: "Boríték JSON",
+  "pt-BR": "JSON do envelope",
+  ko: "봉투 JSON",
+  ar: "JSON المغلف",
 };
 
 const KU_FRAME_LABEL: Localized<string> = {
@@ -878,6 +971,9 @@ const KU_FRAME_LABEL: Localized<string> = {
   bg: "Външният ku кадър (компактен, на един ред)",
   tr: "Kapsayan ku çerçevesi (kompakt, tek satır)",
   hu: "A körülvevő ku frame (tömören, egy sorban)",
+  "pt-BR": "O frame ku envolvente (compacto, uma linha)",
+  ko: "이를 감싸는 ku 프레임(압축된 한 줄)",
+  ar: "إطار ku المحيط (مضغوط في سطر واحد)",
 };
 
 const ENVELOPE_RULES: readonly Localized<string>[] = [
@@ -900,6 +996,9 @@ const ENVELOPE_RULES: readonly Localized<string>[] = [
     bg: "Пет полета са цялата обвивка: protocol, epoch, nonce (12 байта), ciphertext и signature (Ed25519, 64 байта). Трите байтови полета са стандартен base64 с подравняване, не base64url.",
     tr: "Beş alan zarfın tamamıdır: protocol, epoch, nonce (12 bayt), ciphertext ve signature (Ed25519, 64 bayt). Üç bayt alanı, dolgulu standart base64’tir, base64url değildir.",
     hu: "Öt mező a teljes boríték: protocol, epoch, nonce (12 bájt), ciphertext és signature (Ed25519, 64 bájt). A három bájtos mező kitöltött szabványos base64, nem base64url.",
+    "pt-BR": "Cinco campos são o envelope inteiro: protocol, epoch, nonce (12 bytes), texto cifrado e assinatura (Ed25519, 64 bytes). Os três campos de bytes usam base64 padrão com preenchimento, não base64url.",
+    ko: "봉투 전체는 다섯 개의 필드로 이루어집니다. protocol, epoch, nonce(12바이트), ciphertext, signature(Ed25519, 64바이트)입니다. 세 개의 바이트 필드는 base64url이 아니라 패딩이 있는 표준 base64입니다.",
+    ar: "خمسة حقول هي المغلف كله: protocol وepoch وnonce (12 بايتًا) وciphertext وsignature (Ed25519، 64 بايتًا). والحقول الثلاثة للبايتات بترميز base64 القياسي مع حشو، لا base64url.",
   },
   {
     en: "The AAD is protocol ‖ 0x7C ‖ channelId ‖ 0x7C ‖ ASCII(epoch) ‖ 0x7C ‖ the 32-byte identity public key. The channel id is not in the envelope; it comes from update.ch one level up — without it, a cross-channel replay could only be caught by trying every stored key.",
@@ -920,6 +1019,9 @@ const ENVELOPE_RULES: readonly Localized<string>[] = [
     bg: "AAD е protocol ‖ 0x7C ‖ channelId ‖ 0x7C ‖ ASCII(epoch) ‖ 0x7C ‖ 32-байтовият публичен ключ за самоличност. Идентификаторът на канала не е в обвивката — идва от update.ch с ниво по-нагоре; без него препращане между канали би се хванало само с изпробване на всеки съхранен ключ.",
     tr: "AAD şu dizidir: protocol ‖ 0x7C ‖ channelId ‖ 0x7C ‖ ASCII(epoch) ‖ 0x7C ‖ 32 baytlık kimlik açık anahtarı. Kanal kimliği zarfın içinde değil, bir üstteki update.ch alanından gelir — o olmadan kanallar arası tekrar ancak kayıtlı tüm anahtarları deneyerek yakalanabilirdi.",
     hu: "Az AAD: protocol ‖ 0x7C ‖ channelId ‖ 0x7C ‖ ASCII(epoch) ‖ 0x7C ‖ a 32 bájtos identitás nyilvános kulcs. A csatorna-azonosító nem a borítékban van, hanem egy szinttel feljebb, az update.ch mezőben — nélküle a csatornák közti visszajátszást csak az összes tárolt kulcs kipróbálásával lehetne kiszűrni.",
+    "pt-BR": "O AAD é protocol ‖ 0x7C ‖ channelId ‖ 0x7C ‖ ASCII(epoch) ‖ 0x7C ‖ a chave pública de identidade de 32 bytes. O id do canal não está no envelope; ele vem de update.ch um nível acima — sem ele, uma repetição entre canais só poderia ser detectada tentando todas as chaves armazenadas.",
+    ko: "AAD는 protocol ‖ 0x7C ‖ channelId ‖ 0x7C ‖ ASCII(epoch) ‖ 0x7C ‖ 32바이트 신원 공개 키입니다. 채널 id는 봉투 안에 없으며 한 단계 위의 update.ch에서 옵니다. 이것이 없으면 채널 간 재전송은 저장된 모든 키를 시도해야만 잡아낼 수 있습니다.",
+    ar: "قيمة AAD هي protocol ‖ 0x7C ‖ channelId ‖ 0x7C ‖ ASCII(epoch) ‖ 0x7C ‖ المفتاح العام للهوية البالغ 32 بايتًا. ومعرّف القناة ليس داخل المغلف؛ بل يأتي من update.ch في المستوى الأعلى — وبدونه لا يمكن كشف إعادة التشغيل عبر قناة أخرى إلا بتجربة كل مفتاح مخزّن.",
   },
   {
     en: "The signature covers different bytes again: the AAD layout, then ‖ 0x7C ‖ nonce ‖ 0x7C ‖ ciphertext. The separators kill an ambiguity — concatenating epoch and nonce plainly makes epoch 1 followed by a nonce starting with “1” byte-identical to epoch 11.",
@@ -940,6 +1042,9 @@ const ENVELOPE_RULES: readonly Localized<string>[] = [
     bg: "Подписът покрива отново други байтове: подредбата на AAD, после ‖ 0x7C ‖ nonce ‖ 0x7C ‖ ciphertext. Разделителите премахват двусмислие — обикновеното слепване на epoch и nonce би направило epoch 1 с nonce, започващ с „1“, идентичен байт по байт с epoch 11.",
     tr: "İmza yine başka baytları kapsar: AAD düzeni, ardından ‖ 0x7C ‖ nonce ‖ 0x7C ‖ ciphertext. Ayraçlar bir belirsizliği giderir — epoch ile nonce’u doğrudan bitiştirmek, “1” ile başlayan bir nonce’a sahip epoch 1’i epoch 11 ile bayt düzeyinde aynı yapardı.",
     hu: "Az aláírás ismét más bájtokra szól: az AAD elrendezés, majd ‖ 0x7C ‖ nonce ‖ 0x7C ‖ ciphertext. Az elválasztók egy kétértelműséget szüntetnek meg — az epoch és a nonce puszta összefűzése az epoch 1-et egy „1”-gyel kezdődő nonce-zal bájtonként azonosná tenné az epoch 11-gyel.",
+    "pt-BR": "A assinatura cobre outros bytes ainda: o layout do AAD e depois ‖ 0x7C ‖ nonce ‖ 0x7C ‖ texto cifrado. Os separadores eliminam uma ambiguidade — concatenar epoch e nonce sem mais nada faz epoch 1 seguido de um nonce que começa com “1” ficar idêntico byte a byte a epoch 11.",
+    ko: "서명은 또 다른 바이트를 대상으로 합니다. AAD 구성에 이어 ‖ 0x7C ‖ nonce ‖ 0x7C ‖ ciphertext입니다. 구분자가 모호성을 없앱니다. epoch와 nonce를 그냥 이어 붙이면 “1”로 시작하는 nonce가 뒤따르는 epoch 1이 epoch 11과 바이트 단위로 동일해집니다.",
+    ar: "التوقيع يغطي بايتات مختلفة مرة أخرى: تخطيط AAD، ثم ‖ 0x7C ‖ nonce ‖ 0x7C ‖ ciphertext. والفواصل تُزيل التباسًا — فمجرّد دمج epoch مع nonce يجعل epoch 1 متبوعًا بـ nonce يبدأ بالبايت «1» مطابقًا بايتًا ببايت لـ epoch 11.",
   },
   {
     en: "ciphertext is the ChaCha20-Poly1305 body with the 16-byte tag appended — not the nonce-first combined form; the client splits it back apart with dropLast(16) and suffix(16). The plaintext inside the box is the new epoch key, e.g. {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\"}, where the optional publicKeyBase64URL means an identity handover and the optional expiresAtMs a promised expiry, as in {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\",\"publicKeyBase64URL\":\"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyA\",\"expiresAtMs\":1775001600000}.",
@@ -960,6 +1065,9 @@ const ENVELOPE_RULES: readonly Localized<string>[] = [
     bg: "ciphertext е тялото на ChaCha20-Poly1305 с добавен 16-байтов маркер — не combined формата с nonce отпред; клиентът го разделя обратно с dropLast(16) и suffix(16). Отвореният текст в кутията е новият ключ на епохата, напр. {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\"}; незадължителният publicKeyBase64URL означава прехвърляне на самоличност, а незадължителният expiresAtMs — обещано изтичане, както в {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\",\"publicKeyBase64URL\":\"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyA\",\"expiresAtMs\":1775001600000}.",
     tr: "ciphertext, sonuna 16 baytluk tag eklenmiş ChaCha20-Poly1305 gövdesidir — başta nonce bulunan combined biçimi değil; istemci bunu dropLast(16) ve suffix(16) ile ayırır. Kutunun içindeki düz metin yeni dönem anahtarıdır, örneğin {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\"}; isteğe bağlı publicKeyBase64URL kimlik devrini, isteğe bağlı expiresAtMs ise vaat edilen sona ermeyi belirtir, {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\",\"publicKeyBase64URL\":\"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyA\",\"expiresAtMs\":1775001600000} örneğinde olduğu gibi.",
     hu: "a ciphertext a ChaCha20-Poly1305 törzs a végére fűzött 16 bájtos címkével — nem az elején nonce-ot tartalmaz combined alak; az ügyfél a dropLast(16) és suffix(16) hívásokkal bontja szét újra. A dobozban lévő nyílt szöveg az új epochakulcs, például {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\"}; az opcionális publicKeyBase64URL személyiségátadást, az opcionális expiresAtMs ígért lejárati időt jelent, mint a {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\",\"publicKeyBase64URL\":\"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyA\",\"expiresAtMs\":1775001600000} példában.",
+    "pt-BR": "ciphertext é o corpo ChaCha20-Poly1305 com a tag de 16 bytes anexada — não a forma combinada com o nonce primeiro; o cliente o separa de volta com dropLast(16) e suffix(16). O plaintext dentro da caixa é a nova chave de epoch, por exemplo {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\"}, onde o publicKeyBase64URL opcional significa uma transferência de identidade e o expiresAtMs opcional uma expiração prometida, como em {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\",\"publicKeyBase64URL\":\"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyA\",\"expiresAtMs\":1775001600000}.",
+    ko: "ciphertext는 16바이트 태그가 뒤에 붙은 ChaCha20-Poly1305 본문입니다 — nonce가 앞에 오는 결합 형식이 아닙니다. 클라이언트는 dropLast(16)과 suffix(16)으로 이를 다시 분리합니다. 상자 안의 평문은 새로운 epoch 키입니다. 예: {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\"}. 여기서 선택적 publicKeyBase64URL은 신원 인계를, 선택적 expiresAtMs는 약속된 만료를 의미하며, 다음 예와 같습니다: {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\",\"publicKeyBase64URL\":\"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyA\",\"expiresAtMs\":1775001600000}.",
+    ar: "قيمة ciphertext هي متن ChaCha20-Poly1305 مع لاحقة الوسم المكوّن من 16 بايتًا — لا الصيغة المدمجة التي تبدأ بالـ nonce؛ ويفصلها العميل مرة أخرى باستخدام dropLast(16) وsuffix(16). والنص الواضح داخل الصندوق هو مفتاح epoch الجديد، مثل {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\"}، حيث يعني publicKeyBase64URL الاختياري تسليم هوية، ويعني expiresAtMs الاختياري انتهاءً موعودًا، كما في {\"epoch\":3,\"keyBase64URL\":\"ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0A\",\"publicKeyBase64URL\":\"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyA\",\"expiresAtMs\":1775001600000}.",
   },
   {
     en: "The client's isSane flatly requires se != env.epoch: a rotation frame must be sealed under the OLD epoch. Decrypting yourself with the key you are replacing leaves no way to detect a replay. Both epoch and se run from 1 to 1000000.",
@@ -980,6 +1088,9 @@ const ENVELOPE_RULES: readonly Localized<string>[] = [
     bg: "Клиентското isSane изисква категорично se != env.epoch: кадровът на ротация трябва да е запечатан под СТАРАТА епоха. Дешифрирането със самия ключ, който заменяш, не оставя начин да се засече препращане. И epoch, и se са в диапазона 1 до 1000000.",
     tr: "İstemcinin isSane kontrolüsü kayıtsız şartsız se != env.epoch ister: bir döngü çerçevesi ESKİ dönemle mühürlenmiş olmalıdır. Değiştirdiğiniz anahtarla kendinizi çözmek, tekrarı tespit etmenin hiçbir yolunu bırakmaz. Hem epoch hem de se 1 ile 1000000 arasındadır.",
     hu: "Az ügyfél isSane ellenőrzése feltétlenül megköveteli, hogy se != env.epoch: a rotációs frame-et a RÉGI epocha alá kell lepecsételni. Ha a kicserélt kulccsal fejted magad, nem marad mód a visszajátszás észlelésére. Az epoch és a se is 1 és 1000000 között lehet.",
+    "pt-BR": "O isSane do cliente exige terminantemente se != env.epoch: um frame de rotação precisa ser selado sob a epoch ANTIGA. Descriptografar usando a própria chave que se está substituindo não deixa nenhum modo de detectar uma repetição. Tanto epoch quanto se vão de 1 a 1000000.",
+    ko: "클라이언트의 isSane은 se != env.epoch를 엄격히 요구합니다. 교체 프레임은 반드시 이전(OLD) epoch로 봉인되어야 합니다. 교체 대상 키로 직접 복호화하면 재전송을 탐지할 방법이 남지 않습니다. epoch와 se는 모두 1부터 1000000까지입니다.",
+    ar: "دالة isSane في العميل تشترط بصراحة se != env.epoch: يجب أن يكون إطار التدوير مختومًا بمفتاح epoch القديم. ففك التشفير ذاتيًا بالمفتاح الذي تستبدله لا يترك أي وسيلة لكشف إعادة التشغيل. وكل من epoch وse يتراوح من 1 إلى 1000000.",
   },
   {
     en: "Outside the envelope sits the ku frame, whose update object carries exactly four keys — ch, se, rp and env — and the ku frame printed above this list is one complete instance of it (ch is \"announcements\", se is 2, rp is false, env is the envelope JSON shown above). rp=true revokes every epoch older than the new one. The key never appears in plaintext — a relay only ever sees base64.",
@@ -1000,6 +1111,9 @@ const ENVELOPE_RULES: readonly Localized<string>[] = [
     bg: "Извън обвивката е ku кадровът: обектът update носи точно четири ключа — ch, se, rp и env — а ku кадрът, изписан по-горе в този списък, е негов пълен екземпляр (ch е \"announcements\", se е 2, rp е false, env е показаният по-горе JSON на обвивката). rp=true отменя всички епохи по-стари от новата. Ключът никога не се появява в чист текст — рележда само base64.",
     tr: "Zarfın dışında ku çerçevesi bulunur: update nesnesinde tam olarak dört anahtar vardır — ch, se, rp ve env — ve bu listenin üstünde basılan ku çerçevesi onun eksiksiz bir örneğidir (ch \"announcements\", se 2, rp false, env yukarıda gösterilen zarf JSON’u). rp=true, yenisinden eski tüm dönemleri iptal eder. Anahtar asla düz metin olarak görünmez — röle yalnızca base64 görür.",
     hu: "A borítékán kívül áll a ku frame: az update objektum pontosan négy kulcsot tartalmaz — ch, se, rp és env — és a lista felett látható ku frame ennek egy teljes példánya (ch értéke \"announcements\", se értéke 2, rp értéke false, env a fenti boríték-JSON). Az rp=true minden újabb epochánál régebbi epochát visszavon. A kulcs soha nem jelenik meg nyílt szövegként — az átjátszó csak base64-et lát.",
+    "pt-BR": "Fora do envelope fica o frame ku, cujo objeto update carrega exatamente quatro chaves — ch, se, rp e env — e o frame ku impresso acima desta lista é uma instância completa dele (ch é \"announcements\", se é 2, rp é false, env é o JSON do envelope mostrado acima). rp=true revoga todas as epochs anteriores à nova. A chave nunca aparece em texto claro — um relay só vê base64.",
+    ko: "봉투 바깥에는 ku 프레임이 있으며, 그 update 객체는 정확히 네 개의 키(ch, se, rp, env)를 가집니다. 이 목록 위에 표시된 ku 프레임이 그 완전한 예 하나입니다(ch는 \"announcements\", se는 2, rp는 false, env는 위에 표시된 봉투 JSON). rp=true이면 새 epoch보다 오래된 모든 epoch가 폐기됩니다. 키는 평문으로 나타나지 않으며, 릴레이는 base64만 봅니다.",
+    ar: "خارج المغلف يقع إطار ku، وكائن update فيه يحمل أربعة مفاتيح بالضبط — ch وse وrp وenv — وإطار ku المطبوع أعلى هذه القائمة مثال كامل عليه (ch هو \"announcements\"، وse هو 2، وrp هو false، وenv هو JSON المغلف الموضح أعلاه). وrp=true يُبطل كل epoch أقدم من الجديد. والمفتاح لا يظهر أبدًا كنص واضح — فالمرحّل لا يرى إلا base64.",
   },
 ];
 
@@ -1022,6 +1136,9 @@ const CARD_TITLE: Localized<string> = {
   bg: "Картовият протокол ::POPOPX_ECO::",
   tr: "::POPOPX_ECO:: kart protokolü",
   hu: "A ::POPOPX_ECO:: kártyaprotokoll",
+  "pt-BR": "O protocolo de cartão ::POPOPX_ECO::",
+  ko: "::POPOPX_ECO:: 카드 프로토콜",
+  ar: "بروتوكول البطاقات ::POPOPX_ECO::",
 };
 
 const CARD_LABEL: Localized<string> = {
@@ -1043,6 +1160,9 @@ const CARD_LABEL: Localized<string> = {
   bg: "sc картеният кадър",
   tr: "sc kart çerçevesi",
   hu: "Az sc kártya-frame",
+  "pt-BR": "O frame de cartão sc",
+  ko: "sc 카드 프레임",
+  ar: "إطار البطاقة sc",
 };
 
 const MENU_LABEL: Localized<string> = {
@@ -1064,6 +1184,9 @@ const MENU_LABEL: Localized<string> = {
   bg: "mc менюният кадър",
   tr: "mc menü çerçevesi",
   hu: "Az mc menüframe",
+  "pt-BR": "O frame de menu mc",
+  ko: "mc 메뉴 프레임",
+  ar: "إطار القائمة mc",
 };
 
 const HANDSHAKE_LABEL: Localized<string> = {
@@ -1085,6 +1208,9 @@ const HANDSHAKE_LABEL: Localized<string> = {
   bg: "sh ръкостискане кадър",
   tr: "sh el sıkışma çerçevesi",
   hu: "Az sh kézfogás frame",
+  "pt-BR": "O frame de handshake sh",
+  ko: "sh 핸드셰이크 프레임",
+  ar: "إطار المصافحة sh",
 };
 
 const CARD_RULES: readonly Localized<string>[] = [
@@ -1107,6 +1233,9 @@ const CARD_RULES: readonly Localized<string>[] = [
     bg: "Кадърът е маркерът ::POPOPX_ECO:: и веднага след него един ред компактен JSON — без подравняващи интервали, без пренасяне. Четири вида: sc карта, sh ръкостискане, mc меню, ku смяна на ключове. Освен напълно нова карта, кадрът трябва да е цялото съобщение — добавете изказ и клиентът го изхвърля мълчаливо.",
     tr: "Bir çerçeve, ::POPOPX_ECO:: işaretinin hemen ardından gelen tek satır sıkışık JSON demektir — dolgu boşluğu yok, satır sonu yok. Dört tür: sc kartı, sh el sıkışma, mc menüsü, ku anahtar dönüşümü. Sıfırdan oluşturulan kart dışında çerçeve bütün mesaj olmak zorundadır: sonuna bir cümle eklersen istemci mesajı sessizce çöpe atar.",
     hu: "A keret a ::POPOPX_ECO:: jelölés és közvetlenül utána egy sor tömör JSON — nincs kitöltő szóköz, nincs sortörés. Négy típus: sc kártya, sh kézfogás, mc menü, ku kulcscsere. Az egészen új kártyán kívül a keretnek az egész üzenetnek kell lennie: szúrjelé a végére egy mondatot, és a kliens néma csendben eldobja.",
+    "pt-BR": "Um frame é o marcador ::POPOPX_ECO:: seguido imediatamente de uma linha de JSON compacto — sem espaços de preenchimento, sem quebra de linha. Quatro tipos: cartão sc, handshake sh, menu mc, rotação de chaves ku. Exceto no caso de um cartão totalmente novo, o frame precisa ser a mensagem inteira: acrescente uma frase e o cliente o descarta silenciosamente.",
+    ko: "프레임은 마커 ::POPOPX_ECO:: 바로 뒤에 한 줄의 압축 JSON이 오는 형태입니다. 채움 공백도 줄바꿈도 없습니다. 유형은 네 가지로 sc 카드, sh 핸드셰이크, mc 메뉴, ku 키 교체입니다. 완전히 새 카드인 경우를 제외하면 프레임은 메시지 전체여야 하며, 문장을 덧붙이면 클라이언트가 조용히 버립니다.",
+    ar: "الإطار هو العلامة ::POPOPX_ECO:: متبوعة فورًا بسطر واحد من JSON المضغوط — بلا مسافات حشو ولا فاصل سطر. أربعة أنواع: sc بطاقة، وsh مصافحة، وmc قائمة، وku تدوير مفاتيح. وباستثناء بطاقة جديدة تمامًا، يجب أن يكون الإطار هو الرسالة كلها: أضف جملة واحدة فيُسقطه العميل بصمت.",
   },
   {
     en: "A card frame is {\"t\":\"sc\",\"m\":\"c\",\"card\":{\"id\":\"order-2026-0417\",\"v\":\"receipt\",\"title\":\"Order paid\",\"ut\":1767225600123}} or the same with \"m\":\"u\". m=c renders a new bubble; m=u replaces the same card in place by card id — that is the mechanism behind a vote's progress bar moving without a second message. If any of id, v, title or ut is missing, the card does not render degraded, it does not exist.",
@@ -1127,6 +1256,9 @@ const CARD_RULES: readonly Localized<string>[] = [
     bg: "Кадрът на карта е {\"t\":\"sc\",\"m\":\"c\",\"card\":{\"id\":\"order-2026-0417\",\"v\":\"receipt\",\"title\":\"Поръчката е платена\",\"ut\":1767225600123}} или същият с \"m\":\"u\". m=c рисува нов балон; m=u замества на място същата карта по card id — така лентата на прогреса при гласуване мърдва без второ съобщение. Ако липсва id, v, title или ut, картата не се изобразява влошено — тя не съществува.",
     tr: "Kart çerçevesi şudur: {\"t\":\"sc\",\"m\":\"c\",\"card\":{\"id\":\"order-2026-0417\",\"v\":\"receipt\",\"title\":\"Sipariş ödendi\",\"ut\":1767225600123}} ya da aynısının \"m\":\"u\" hâli. m=c yeni bir balon oluşturur; m=u aynı kartı card id ile yerinde değiştirir — oylamanın ilerleme çubuğunun ikinci mesaj üretmeden hareket etmesinin sebebi bu. id, v, title veya ut'dan biri eksikse kart bozuk çizilmez, hiç var olmaz.",
     hu: "A kártyakeret {\"t\":\"sc\",\"m\":\"c\",\"card\":{\"id\":\"order-2026-0417\",\"v\":\"receipt\",\"title\":\"A rendelés kifizetve\",\"ut\":1767225600123}}, vagy ugyanaz \"m\":\"u\"-val. Az m=c új buborékot rajzol; az m=u ugyanazt a kártyát helyben cseréli ki a card id alapján — így mozdul meg egy szavazás haladássávja második üzenet nélkül. Ha az id, a v, a title vagy az ut hiányzik, a kártya nem romlottan jelenik meg, hanem egyáltalán nem létezik.",
+    "pt-BR": "Um frame de cartão é {\"t\":\"sc\",\"m\":\"c\",\"card\":{\"id\":\"order-2026-0417\",\"v\":\"receipt\",\"title\":\"Order paid\",\"ut\":1767225600123}} ou o mesmo com \"m\":\"u\". m=c renderiza um novo balão; m=u substitui o mesmo cartão no lugar, pelo id do cartão — esse é o mecanismo que faz a barra de progresso de uma votação avançar sem uma segunda mensagem. Se faltar qualquer um entre id, v, title ou ut, o cartão não é renderizado de forma degradada: ele não existe.",
+    ko: "카드 프레임은 {\"t\":\"sc\",\"m\":\"c\",\"card\":{\"id\":\"order-2026-0417\",\"v\":\"receipt\",\"title\":\"Order paid\",\"ut\":1767225600123}} 또는 여기서 \"m\":\"u\"로 바꾼 같은 형태입니다. m=c는 새 말풍선을 렌더링하고, m=u는 카드 id를 기준으로 같은 카드를 제자리에서 교체합니다 — 투표의 진행 표시줄이 두 번째 메시지 없이 움직이는 원리가 바로 이것입니다. id, v, title, ut 중 하나라도 빠지면 카드는 저하된 형태로 렌더링되는 것이 아니라 존재하지 않습니다.",
+    ar: "إطار البطاقة هو {\"t\":\"sc\",\"m\":\"c\",\"card\":{\"id\":\"order-2026-0417\",\"v\":\"receipt\",\"title\":\"Order paid\",\"ut\":1767225600123}} أو نفسه مع \"m\":\"u\". والقيمة m=c ترسم فقاعة جديدة؛ وm=u تستبدل البطاقة نفسها في مكانها بمعرّف البطاقة — تلك هي الآلية التي تجعل شريط تقدّم تصويت يتحرك دون رسالة ثانية. وإذا غاب أي من id أو v أو title أو ut، فإن البطاقة لا تُرسم بشكل منقوص، بل لا وجود لها.",
   },
   {
     en: "The card's wire keys are exactly these short names: id, v (style), title, ut (millisecond timestamp), body, fields:[{k,v,mono}], progress:{l,p,d}, actions and et (expiry in milliseconds). Three styles: standard for announcements, receipt for a key/value grid, security for consent and alerts.",
@@ -1147,6 +1279,9 @@ const CARD_RULES: readonly Localized<string>[] = [
     bg: "Ключовете на картата по жицата са точно тези кратки имена: id, v (стил), title, ut (милисекунден time stamp), body, fields:[{k,v,mono}], progress:{l,p,d}, actions и et (изтичане в милисекунди). Стилът е три: standard за обявления, receipt за таблица ключ/стойност, security за съгласия и предупреждения.",
     tr: "Kartın tel anahtarları tam olarak bu kısa adlar: id, v (biçim), title, ut (milisaniye zaman damgası), body, fields:[{k,v,mono}], progress:{l,p,d}, actions ve et (milisaniye cinsinden son kullanma). Üç biçim: duyuru için standard, anahtar/değer tablosu için receipt, izin ve uyarılar için security.",
     hu: "A kártya drótkulcsai pontosan ezek a rövid nevek: id, v (stílus), title, ut (ezredmásodperc időbélyeg), body, fields:[{k,v,mono}], progress:{l,p,d}, actions és et (lejárat ezredmásodpercben). Három stílus: standard bejelentésekre, receipt kulcs/érték rácshoz, security engedélyekhez és riasztásokhoz.",
+    "pt-BR": "As chaves de protocolo do cartão são exatamente estes nomes curtos: id, v (estilo), title, ut (timestamp em milissegundos), body, fields:[{k,v,mono}], progress:{l,p,d}, actions e et (expiração em milissegundos). Três estilos: standard para comunicados, receipt para uma grade de chave/valor, security para consentimento e alertas.",
+    ko: "카드의 와이어 키는 정확히 다음과 같은 짧은 이름들입니다: id, v(스타일), title, ut(밀리초 타임스탬프), body, fields:[{k,v,mono}], progress:{l,p,d}, actions 그리고 et(밀리초 단위 만료). 스타일은 세 가지입니다: 공지에는 standard, 키/값 그리드에는 receipt, 동의와 경고에는 security입니다.",
+    ar: "مفاتيح البطاقة على الشبكة هي هذه الأسماء القصيرة بالضبط: id وv (النمط) وtitle وut (طابع زمني بالمللي ثانية) وbody وfields:[{k,v,mono}] وprogress:{l,p,d} وactions وet (الانتهاء بالمللي ثانية). وثلاثة أنماط: standard للإعلانات، وreceipt لشبكة مفتاح/قيمة، وsecurity للموافقة والتنبيهات.",
   },
   {
     en: "A button is {id,title,action,style,payload|url|amount,confirm}. action is the behaviour, style is the colour, and both are enums: kinds are callback / pay_credits / open_url / open_channel / send_cmd / none, colours are primary / secondary / destructive. One unknown string anywhere costs the whole frame, not just that button.",
@@ -1167,6 +1302,9 @@ const CARD_RULES: readonly Localized<string>[] = [
     bg: "Бутонът е {id,title,action,style,payload|url|amount,confirm}. action е поведението, style е цветът, и двете са изброими типове: поведения callback / pay_credits / open_url / open_channel / send_cmd / none, цветове primary / secondary / destructive. Един непознат низ където и да е коства целия кадър, не само този бутон.",
     tr: "Bir düğme {id,title,action,style,payload|url|amount,confirm} şeklindedir. action davranışı, style rengi belirler ve ikisi de enum'dur: davranışlar callback / pay_credits / open_url / open_channel / send_cmd / none, renkler primary / secondary / destructive. Herhangi bir yere yazılan bilinmeyen bir metin bütün çerçeveye mal olur, yalnızca o düğmeye değil.",
     hu: "A gomb {id,title,action,style,payload|url|amount,confirm}. az action a viselkedés, a style a szín, és mindkettő felsorolásos típus: viselkedések callback / pay_credits / open_url / open_channel / send_cmd / none, színek primary / secondary / destructive. Egy ismeretlen szöveg bárhol az egész keretbe kerül, nemcsak abba a gombba.",
+    "pt-BR": "Um botão é {id,title,action,style,payload|url|amount,confirm}. action é o comportamento, style é a cor, e ambos são enums: os tipos são callback / pay_credits / open_url / open_channel / send_cmd / none, as cores são primary / secondary / destructive. Uma única string desconhecida em qualquer lugar custa o frame inteiro, e não apenas aquele botão.",
+    ko: "버튼은 {id,title,action,style,payload|url|amount,confirm}입니다. action은 동작이고 style은 색이며, 둘 다 열거형입니다: 종류는 callback / pay_credits / open_url / open_channel / send_cmd / none이고, 색은 primary / secondary / destructive입니다. 어디에서든 알 수 없는 문자열이 하나라도 있으면 해당 버튼만이 아니라 프레임 전체가 무효가 됩니다.",
+    ar: "الزر هو {id,title,action,style,payload|url|amount,confirm}. وaction هو السلوك، وstyle هو اللون، وكلاهما تعداد: الأنواع هي callback / pay_credits / open_url / open_channel / send_cmd / none، والألوان هي primary / secondary / destructive. وأي نص واحد غير معروف في أي موضع يُسقط الإطار كله، لا ذلك الزر وحده.",
   },
   {
     en: "Limits worth memorising: 8192 characters per frame (characters, not bytes — which is why CJK goes into the JSON raw instead of \\u-escaped), fields ≤ 8, actions ≤ 4, menu items ≤ 3, sub-items ≤ 5 and only two levels deep. card id ≤ 64, title ≤ 120, body ≤ 2000, field label ≤ 80, field value ≤ 240, payload ≤ 512, URL ≤ 2048, progress 0–100, pay_credits 1–100000.",
@@ -1187,6 +1325,9 @@ const CARD_RULES: readonly Localized<string>[] = [
     bg: "Границите, които заслужават запомняне: 8192 знака на кадър — знаци, не байтове, затова CJK влиза в JSON суров, вместо \\u-екраниран; fields ≤ 8, actions ≤ 4, елементи на менюто ≤ 3, поделементи ≤ 5 и само две нива дълбочина. card id ≤ 64, title ≤ 120, body ≤ 2000, име на поле ≤ 80, стойност на поле ≤ 240, payload ≤ 512, URL ≤ 2048, progress 0–100, pay_credits 1–100000.",
     tr: "Akılda tutulmaya değer sınırlar: çerçeve başına 8192 karakter — bayt değil karakter sayılır, bu yüzden Uzak Doğu alfabeleri JSON'a \\u ile kaçırılmadan olduğu gibi yazılır; fields ≤ 8, actions ≤ 4, menü öğesi ≤ 3, alt öğe ≤ 5 ve en fazla iki seviye derinlik. card id ≤ 64, title ≤ 120, body ≤ 2000, alan adı ≤ 80, alan değeri ≤ 240, payload ≤ 512, URL ≤ 2048, progress 0–100, pay_credits 1–100000.",
     hu: "Megjegyzésre érdemes korlátok: keretenként 8192 karakter — karakter, nem bájt, ezért a CJK nyersen megy a JSON-ba a \\u-átírás helyett; fields ≤ 8, actions ≤ 4, menüpont ≤ 3, alpont ≤ 5 és csak két szintnyi mélység. card id ≤ 64, title ≤ 120, body ≤ 2000, mezőnév ≤ 80, mezőérték ≤ 240, payload ≤ 512, URL ≤ 2048, progress 0–100, pay_credits 1–100000.",
+    "pt-BR": "Limites que vale memorizar: 8192 caracteres por frame (caracteres, não bytes — é por isso que CJK entra no JSON cru em vez de escapado com \\u), fields ≤ 8, actions ≤ 4, menu items ≤ 3, sub-items ≤ 5 e apenas dois níveis de profundidade. card id ≤ 64, title ≤ 120, body ≤ 2000, field label ≤ 80, field value ≤ 240, payload ≤ 512, URL ≤ 2048, progress 0–100, pay_credits 1–100000.",
+    ko: "기억해 둘 한도: 프레임당 8192자(바이트가 아닌 문자 수이므로 CJK는 \\u 이스케이프 대신 원문 그대로 JSON에 들어갑니다), 필드 ≤ 8, 액션 ≤ 4, 메뉴 항목 ≤ 3, 하위 항목 ≤ 5, 깊이는 2단계까지입니다. card id ≤ 64, title ≤ 120, body ≤ 2000, field label ≤ 80, field value ≤ 240, payload ≤ 512, URL ≤ 2048, progress 0–100, pay_credits 1–100000.",
+    ar: "حدود تستحق الحفظ: 8192 حرفًا لكل إطار (حروف لا بايتات — ولهذا يدخل نص CJK إلى JSON خامًا بدلًا من ترميزه بـ \\u)، والحقول ≤ 8، والإجراءات ≤ 4، وعناصر القائمة ≤ 3، والعناصر الفرعية ≤ 5 وعلى مستويين فقط. معرّف البطاقة ≤ 64، والعنوان ≤ 120، والمتن ≤ 2000، وتسمية الحقل ≤ 80، وقيمة الحقل ≤ 240، وpayload ≤ 512، وURL ≤ 2048، والتقدم 0–100، وpay_credits من 1 إلى 100000.",
   },
   {
     en: "The menu frame {\"t\":\"mc\",\"menu\":{\"items\":[{\"title\":\"Orders\",\"kind\":\"click\",\"action\":\"callback\",\"payload\":\"kw:orders\",\"sub\":[]}],\"rev\":7}} keys its items as title, kind, action, payload, url and sub. Kinds are click / view / scancode / location / click_text, and a menu item may only carry open_url, send_cmd, open_channel or callback — payment belongs on a card whose amount the user can read, not on a menu label. The submenu key is sub, never the Swift property name.",
@@ -1207,6 +1348,9 @@ const CARD_RULES: readonly Localized<string>[] = [
     bg: "Кадрът на менюто {\"t\":\"mc\",\"menu\":{\"items\":[{\"title\":\"Поръчки\",\"kind\":\"click\",\"action\":\"callback\",\"payload\":\"kw:orders\",\"sub\":[]}],\"rev\":7}} ключва елементите си като title, kind, action, payload, url и sub. kind е click / view / scancode / location / click_text, а елемент от менюто може да носи само open_url, send_cmd, open_channel или callback — плащането е върху карта, чието потребителят вижда сумата, не върху етикет на меню. Ключът на подменюто е sub, никога името на свойството в Swift.",
     tr: "Menü çerçevesi {\"t\":\"mc\",\"menu\":{\"items\":[{\"title\":\"Siparişler\",\"kind\":\"click\",\"action\":\"callback\",\"payload\":\"kw:orders\",\"sub\":[]}],\"rev\":7}} öğelerini title, kind, action, payload, url ve sub anahtarlarıyla taşır. kind değeri click / view / scancode / location / click_text olabilir ve bir menü öğesi yalnızca open_url, send_cmd, open_channel ya da callback taşıyabilir — ödeme, kullanıcının tutarını okuyabildiği kartta yapılır, bir menü etiketinde değil. Alt menünün anahtarı sub'dır, Swift'teki özellik adı asla.",
     hu: "A {\"t\":\"mc\",\"menu\":{\"items\":[{\"title\":\"Rendelések\",\"kind\":\"click\",\"action\":\"callback\",\"payload\":\"kw:orders\",\"sub\":[]}],\"rev\":7}} menükeret a pontjait title, kind, action, payload, url és sub kulcsokkal viszi. A kind értéke click / view / scancode / location / click_text, és egy menüpont csak open_url, send_cmd, open_channel vagy callback műveletet vihet — a fizetés arra a kártyára tartozik, amelynek összegét a felhasználó elolvashatja, nem egy menücímkére. Az alamenu kulcsa a sub, soha nem a Swift property-neve.",
+    "pt-BR": "O frame de menu {\"t\":\"mc\",\"menu\":{\"items\":[{\"title\":\"Orders\",\"kind\":\"click\",\"action\":\"callback\",\"payload\":\"kw:orders\",\"sub\":[]}],\"rev\":7}} usa como chaves dos seus itens title, kind, action, payload, url e sub. Os tipos são click / view / scancode / location / click_text, e um item de menu só pode carregar open_url, send_cmd, open_channel ou callback — pagamento pertence a um cartão cujo valor o usuário consegue ler, não a um rótulo de menu. A chave do submenu é sub, nunca o nome da propriedade Swift.",
+    ko: "메뉴 프레임 {\"t\":\"mc\",\"menu\":{\"items\":[{\"title\":\"Orders\",\"kind\":\"click\",\"action\":\"callback\",\"payload\":\"kw:orders\",\"sub\":[]}],\"rev\":7}}은 항목의 키로 title, kind, action, payload, url, sub를 사용합니다. 종류는 click / view / scancode / location / click_text이고, 메뉴 항목은 open_url, send_cmd, open_channel, callback만 담을 수 있습니다 — 결제는 사용자가 금액을 읽을 수 있는 카드에 속하며 메뉴 레이블에 속하지 않습니다. 하위 메뉴 키는 sub이며, 결코 Swift 속성 이름이 아닙니다.",
+    ar: "إطار القائمة {\"t\":\"mc\",\"menu\":{\"items\":[{\"title\":\"Orders\",\"kind\":\"click\",\"action\":\"callback\",\"payload\":\"kw:orders\",\"sub\":[]}],\"rev\":7}} يسمّي مفاتيح عناصره title وkind وaction وpayload وurl وsub. والأنواع هي click / view / scancode / location / click_text، ولا يجوز أن يحمل عنصر القائمة إلا open_url أو send_cmd أو open_channel أو callback — فالدفع مكانه بطاقة يستطيع المستخدم قراءة مبلغها، لا تسمية في قائمة. ومفتاح القائمة الفرعية هو sub، وليس اسم الخاصية في Swift أبدًا.",
   },
   {
     en: "It is the handshake frame {\"t\":\"sh\",\"uid\":\"u_7Qk2Lp9Rt3Vx\",\"sec\":\"0f1e2d3c4b5a69788796a5b4c3d2e1f00f1e2d3c4b5a69788796a5b4c3d2e1f0\",\"svc\":\"popopx.official\"} that makes a phone treat this service account as a peer allowed to raise a payment card. sec is 2–64 hex characters (1–32 bytes, and the length must be even); an odd length decodes to nothing and the whole frame disappears.",
@@ -1227,6 +1371,9 @@ const CARD_RULES: readonly Localized<string>[] = [
     bg: "Точно ръкостискането {\"t\":\"sh\",\"uid\":\"u_7Qk2Lp9Rt3Vx\",\"sec\":\"0f1e2d3c4b5a69788796a5b4c3d2e1f00f1e2d3c4b5a69788796a5b4c3d2e1f0\",\"svc\":\"popopx.official\"} кара телефона да разглежда този сервисен акаунт като партньор, на който му е позволено да повдигне карта за плащане. sec е 2–64 шестнадесетични знака (1–32 байта, а дължината трябва да е четна); нечетна дължина се разкодира в нищо и целият кадър изчезва.",
     tr: "Telefon bu hizmet hesabını ödeme kartı açmasına izin verilen bir eş gibi ele aldıran şey, el sıkışma çerçevesidir: {\"t\":\"sh\",\"uid\":\"u_7Qk2Lp9Rt3Vx\",\"sec\":\"0f1e2d3c4b5a69788796a5b4c3d2e1f00f1e2d3c4b5a69788796a5b4c3d2e1f0\",\"svc\":\"popopx.official\"}. sec 2–64 onaltılık karakterdir (1–32 bayt ve uzunluk çift olmak zorundadır); tek uzunluk hiçliğe çözülür ve bütün çerçeve kaybolur.",
     hu: "Pontosan a kézfogáskeret {\"t\":\"sh\",\"uid\":\"u_7Qk2Lp9Rt3Vx\",\"sec\":\"0f1e2d3c4b5a69788796a5b4c3d2e1f00f1e2d3c4b5a69788796a5b4c3d2e1f0\",\"svc\":\"popopx.official\"} veszi rá a telefont, hogy ezt a szolgáltatási fiókot olyan párként kezelje, amelyik fizetési kártyát emelhet. A sec 2–64 hexadecimális karakter (1–32 bájt, és a hossznek párosnak kell lennie); páratlan hossz semmire oldódik, és az egész keret eltűnik.",
+    "pt-BR": "É o frame de handshake {\"t\":\"sh\",\"uid\":\"u_7Qk2Lp9Rt3Vx\",\"sec\":\"0f1e2d3c4b5a69788796a5b4c3d2e1f00f1e2d3c4b5a69788796a5b4c3d2e1f0\",\"svc\":\"popopx.official\"} que faz o celular tratar esta conta de serviço como um par autorizado a emitir um cartão de pagamento. sec tem de 2 a 64 caracteres hex (de 1 a 32 bytes, e o comprimento precisa ser par); um comprimento ímpar não decodifica nada e o frame inteiro desaparece.",
+    ko: "휴대폰이 이 서비스 계정을 결제 카드를 띄울 수 있는 피어로 취급하게 만드는 것은 핸드셰이크 프레임 {\"t\":\"sh\",\"uid\":\"u_7Qk2Lp9Rt3Vx\",\"sec\":\"0f1e2d3c4b5a69788796a5b4c3d2e1f00f1e2d3c4b5a69788796a5b4c3d2e1f0\",\"svc\":\"popopx.official\"}입니다. sec는 2–64개의 hex 문자(1–32바이트, 길이는 짝수여야 함)입니다. 길이가 홀수이면 아무것도 디코딩되지 않고 프레임 전체가 사라집니다.",
+    ar: "إنه إطار المصافحة {\"t\":\"sh\",\"uid\":\"u_7Qk2Lp9Rt3Vx\",\"sec\":\"0f1e2d3c4b5a69788796a5b4c3d2e1f00f1e2d3c4b5a69788796a5b4c3d2e1f0\",\"svc\":\"popopx.official\"} الذي يجعل الهاتف يعامل حساب الخدمة هذا كنظير مسموح له برفع بطاقة دفع. وsec من 2 إلى 64 حرفًا سادس عشريًا (1–32 بايتًا، ويجب أن يكون الطول زوجيًا)؛ والطول الفردي يفك إلى لا شيء ويختفي الإطار كله.",
   },
 ];
 
@@ -1249,6 +1396,9 @@ const H5_TITLE: Localized<string> = {
   bg: "Включване на H5 от трета страна: POST /api/v1/verifyH5Auth",
   tr: "Üçüncü taraf H5 bağlantısı: POST /api/v1/verifyH5Auth",
   hu: "Harmadik féltől származó H5 csatlakozás: POST /api/v1/verifyH5Auth",
+  "pt-BR": "Integração H5 de terceiros: POST /api/v1/verifyH5Auth",
+  ko: "서드파티 H5 온보딩: POST /api/v1/verifyH5Auth",
+  ar: "تأهيل H5 لطرف ثالث: POST /api/v1/verifyH5Auth",
 };
 
 const H5_PYTHON_LABEL: Localized<string> = {
@@ -1270,6 +1420,9 @@ const H5_PYTHON_LABEL: Localized<string> = {
   bg: "Python: преизчисли байтовете, които телефонът е подписал",
   tr: "Python: telefonun imzaladığı baytları yeniden hesapla",
   hu: "Python: számold újra a telefon által aláírt bájtokat",
+  "pt-BR": "Python: recalcule os bytes que o telefone assinou",
+  ko: "Python: 휴대폰이 서명한 바이트를 다시 계산",
+  ar: "Python: إعادة حساب البايتات التي وقّعها الهاتف",
 };
 
 const H5_JS_LABEL: Localized<string> = {
@@ -1291,6 +1444,9 @@ const H5_JS_LABEL: Localized<string> = {
   bg: "JavaScript: страницата пита собствения си сървър",
   tr: "JavaScript: sayfa kendi sunucusuna soruyor",
   hu: "JavaScript: az oldal a saját szerverét kérdezi meg",
+  "pt-BR": "JavaScript: a página pergunta ao próprio servidor",
+  ko: "JavaScript: 페이지가 자체 서버에 요청",
+  ar: "JavaScript: الصفحة تسأل خادمها",
 };
 
 const H5_RULES: readonly Localized<string>[] = [
@@ -1313,6 +1469,9 @@ const H5_RULES: readonly Localized<string>[] = [
     bg: "Подписът е HMAC-SHA256 с ключ суровите байтове на тайната на сесията на този последовател, върху низа с UTF-8 uid=<pairwise_uid>&ts=<unix-seconds>, изпратен като 64 малки шестнадесетични знака.",
     tr: "İmza, o takipçinin oturum sırrının ham baytları üzerine kurulmuş HMAC-SHA256'dır; UTF-8 dizisi uid=<pairwise_uid>&ts=<unix-seconds> üzerinden hesaplanır ve 64 küçük harfli onaltılık karakter olarak verilir.",
     hu: "Az aláírás HMAC-SHA256, a kulcs az adott követ munkamenetének titkos nyers bájtai, az üzenet a UTF-8 uid=<pairwise_uid>&ts=<unix-seconds> karakterlánc, kimenete 64 kisbetűs hexadecimális karakter.",
+    "pt-BR": "A assinatura é HMAC-SHA256 cuja chave são os bytes brutos do segredo de sessão daquele seguidor, calculada sobre a string UTF-8 uid=<pairwise_uid>&ts=<unix-seconds> e emitida como 64 caracteres hex minúsculos.",
+    ko: "서명은 해당 팔로워 세션 시크릿의 원시 바이트를 키로 하는 HMAC-SHA256이며, UTF-8 문자열 uid=<pairwise_uid>&ts=<unix-seconds>에 대해 계산되어 64자의 소문자 hex 문자로 출력됩니다.",
+    ar: "التوقيع هو HMAC-SHA256 بمفتاح هو البايتات الخام لسر جلسة ذلك المتابع، على السلسلة UTF-8 uid=<pairwise_uid>&ts=<unix-seconds>، ويُصدر على شكل 64 حرفًا سادس عشريًا صغيرًا.",
   },
   {
     en: "One real asymmetry: the query parameter is popopx_uid while the preimage spells it uid=. They are deliberately different, and a server that \"normalises\" them starts rejecting every phone.",
@@ -1333,6 +1492,9 @@ const H5_RULES: readonly Localized<string>[] = [
     bg: "Една реална асиметрия: параметърът в URL е popopx_uid, а в преизображението е записано uid=. Те са различни по дизайн, и сървър, който ги „уеднакви“, започва да отхвърля всеки телефон.",
     tr: "Gerçek bir asimetri var: sorgu parametresinin adı popopx_uid, oysa ön görüntü onu uid= olarak yazar. Kasıtlı olarak farklıdırlar ve onları \"düzelterek birleştiren\" bir sunucu her telefonu reddetmeye başlar.",
     hu: "Egy valós aszimmetria: a lekérdezés paramétere popopx_uid, míg a preimage uid=-ként írja. Szándékosan különböznek, és egy szerver, amely „egységesíti“ őket, elkezdi elutasítani minden telefont.",
+    "pt-BR": "Uma assimetria real: o parâmetro de consulta é popopx_uid, enquanto a pré-imagem o escreve como uid=. Eles são deliberadamente diferentes, e um servidor que os \"normaliza\" começa a rejeitar todos os telefones.",
+    ko: "실제로 존재하는 비대칭이 하나 있습니다. 쿼리 매개변수는 popopx_uid인데 서명 대상 원문에서는 uid=로 표기합니다. 이는 의도적으로 다르며, 이를 \"정규화\"하는 서버는 모든 휴대폰을 거부하기 시작합니다.",
+    ar: "عدم تماثل حقيقي واحد: معامل الاستعلام هو popopx_uid بينما تكتبه الصورة الأولية uid=. والاختلاف مقصود، والخادم الذي «يُوحّد» بينهما يبدأ في رفض كل هاتف.",
   },
   {
     en: "The replay window is ±300 seconds and it is checked in both directions — otherwise a phone running 20 minutes fast could mint a credential that stays valid twice as long.",
@@ -1353,6 +1515,9 @@ const H5_RULES: readonly Localized<string>[] = [
     bg: "Прозорецът срещу повторно изпращане е ±300 секунди и се проверява в двете посоки — иначе телефон, бързащ с 20 минути, може да отпечата удостоверение с двойна валидност.",
     tr: "Yeniden oynatma penceresi ±300 saniyedir ve iki yönde de denetlenir — aksi hâlde 20 dakika ileri alan bir telefon iki katı geçerli bir kimlik üretmiş olur.",
     hu: "Az ismétlés-gátlás ablaka ±300 másodperc, és mindkét irányban ellenőrizzük — különben 20 perccel siető telefon kétszer olyan hosszú ideig érvényes hitelszerzőt bocsáthatna ki.",
+    "pt-BR": "A janela de repetição é de ±300 segundos e é verificada nos dois sentidos — caso contrário, um telefone adiantado em 20 minutos poderia emitir uma credencial que permanece válida pelo dobro do tempo.",
+    ko: "재전송 허용 창은 ±300초이며 양방향으로 검사합니다. 그렇지 않으면 20분 빠른 휴대폰이 두 배 더 오래 유효한 자격 증명을 발급할 수 있습니다.",
+    ar: "نافذة إعادة التشغيل ±300 ثانية وتُفحص في الاتجاهين — وإلا أمكن لهاتف ساعته متقدمة 20 دقيقة أن يُصدر بيانات اعتماد تبقى صالحة ضعف المدة.",
   },
   {
     en: "The host name is not signed, so a wrong POPOPX_PUBLIC_BASE_URL is a reachability failure and never a signature mismatch. The endpoint needs no admin token — the HMAC is the authorisation — which is exactly why rate limiting belongs in front of it.",
@@ -1373,6 +1538,9 @@ const H5_RULES: readonly Localized<string>[] = [
     bg: "Името на хоста не се подписва, затова грешен POPOPX_PUBLIC_BASE_URL е проблем с достъпността и никога с несъвпадение на подписа. Крайната точка не се нуждае от администраторски токен — HMAC е самото разрешение — и точно затова ограничението на честота седи пред нея.",
     tr: "Ana bilgisayar adı imzalanmaz, bu yüzden yanlış POPOPX_PUBLIC_BASE_URL bir erişilebilirlik hatasıdır, asla imza uyuşmazlığı değil. Bu uç noktanın yönetici jetonuna ihtiyacı yok — yetkilendirmenin kendisi HMAC'tır — işte bu yüzden hız sınırlama onun önünde durmalıdır.",
     hu: "A gépnév nincs aláírva, ezért egy hibás POPOPX_PUBLIC_BASE_URL elérhetetlenségi hiba, soha nem aláíráseltérés. A végpontnak nincs szüksége admin tokenre — a HMAC maga az engedélyezés — éppen ezért a sebességkorlátozás elé tartozik.",
+    "pt-BR": "O nome do host não é assinado, então um POPOPX_PUBLIC_BASE_URL errado é uma falha de alcance e nunca uma divergência de assinatura. O ponto de extremidade não precisa de token de administração — o HMAC é a autorização — e é exatamente por isso que a limitação de taxa deve ficar na frente dele.",
+    ko: "호스트 이름은 서명되지 않으므로 POPOPX_PUBLIC_BASE_URL이 잘못되면 도달 불가 문제가 되며 서명 불일치가 되지는 않습니다. 이 엔드포인트는 관리자 토큰이 필요 없고 HMAC이 곧 인가이므로, 속도 제한을 그 앞에 두어야 하는 이유도 바로 여기에 있습니다.",
+    ar: "اسم المضيف غير موقّع، لذا فإن POPOPX_PUBLIC_BASE_URL الخاطئ يعني فشل وصول ولا يعني أبدًا عدم تطابق توقيع. والنقطة الطرفية لا تحتاج رمز إدارة — فـ HMAC هو التفويض — ولهذا بالضبط يجب أن يكون تحديد المعدل أمامها.",
   },
   {
     en: "The body is {ok, valid, reason, service_id}, and on success also contact_id, pairwise_uid and ts_seconds. A true valid answers 200, a false one 401, same shape. reason is ok, unknown_uid, revoked, or a complaint about the signature or the timestamp.",
@@ -1393,6 +1561,9 @@ const H5_RULES: readonly Localized<string>[] = [
     bg: "Тялото е {ok, valid, reason, service_id}, а при успех още contact_id, pairwise_uid и ts_seconds. Вярно valid отговаря 200, невярно 401, същата форма. reason е ok, unknown_uid, revoked или оплакване за подписа или time stamp-а.",
     tr: "Gövde {ok, valid, reason, service_id} şeklindedir, başarıda ayrıca contact_id, pairwise_uid ve ts_seconds gelir. Doğru bir valid 200 ile, yanlış olanı 401 ile aynı biçimde yanıt verir. reason değerleri ok, unknown_uid, revoked ya da imza ve zaman damgasına dair bir sızlanmadır.",
     hu: "A törzs {ok, valid, reason, service_id}, és sikeres válasz esetén Contact_id, pairwise_uid és ts_seconds is. Egy igaz valid 200-assal, egy hamis 401-gyel válaszol, ugyanabban a formában. A reason értéke ok, unknown_uid, revoked, vagy egy panasz az aláírásra illetve az időbélyegre.",
+    "pt-BR": "O corpo é {ok, valid, reason, service_id}, e em caso de sucesso também contact_id, pairwise_uid e ts_seconds. Um valid true responde 200, um false responde 401, com a mesma forma. reason é ok, unknown_uid, revoked ou uma reclamação sobre a assinatura ou o timestamp.",
+    ko: "본문은 {ok, valid, reason, service_id}이며, 성공 시에는 contact_id, pairwise_uid, ts_seconds도 포함합니다. valid가 true이면 200으로, false이면 401로 같은 형태로 응답합니다. reason은 ok, unknown_uid, revoked이거나 서명 또는 타임스탬프에 대한 이의 제기입니다.",
+    ar: "المتن هو {ok, valid, reason, service_id}، وعند النجاح أيضًا contact_id وpairwise_uid وts_seconds. وقيمة valid الصحيحة تجيب بـ 200، والكاذبة بـ 401، بالشكل نفسه. وreason هي ok أو unknown_uid أو revoked أو شكوى بشأن التوقيع أو الطابع الزمني.",
   },
 ];
 
@@ -1419,6 +1590,9 @@ const GEN_TITLE: Localized<string> = {
   bg: "Генератор на JSON за децентрализиран указател",
   tr: "Merkeziyetsiz dizin JSON üreticisi",
   hu: "Decentralizált könyvtár JSON generátor",
+  "pt-BR": "Gerador de JSON do diretório descentralizado",
+  ko: "탈중앙화 디렉터리 JSON 생성기",
+  ar: "مولّد JSON للدليل اللامركزي",
 };
 
 const GEN_LEDE: Localized<string> = {
@@ -1440,6 +1614,9 @@ const GEN_LEDE: Localized<string> = {
   bg: "Шлюзът няма никаква крайна точка за подаване в указател — PUBLIC_ROUTE_KEYS изброява точно пет маршрута, заобикалящи административния токен: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth и /api/v1/workflows/trigger; последният все пак се удостоверява със собствен токен за работен поток за всеки абонамент. Затова долният формат е предложението на тази страница (чернова), а начинът на подаване е pull request към изходното хранилище. Формулярът работи изцяло във вашия браузър и нищо не изпраща.",
   tr: "Ağ geçidinde dizine gönderim için hiçbir uç nokta yok — PUBLIC_ROUTE_KEYS yönetici jetonunu atlayan tam olarak beş yol listeliyor: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth ve /api/v1/workflows/trigger; sonuncusu yine de her abonelik için kendi iş akışı jetonuyla kimlik doğrular. Dolayısıyla aşağıdaki biçim bu sayfanın önerisidir (bir taslak) ve gönderim yolu kaynak depoya bir pull request açmaktır. Form tamamen tarayıcınızda çalışır ve dışarıya hiçbir şey göndermez.",
   hu: "Az átjárónak egyáltalán nincs könyvtár-benyújtási végpontja — a PUBLIC_ROUTE_KEYS pontosan öt, az admin tokent megkerülő útvonalat sorol fel: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth és /api/v1/workflows/trigger; az utolsó mégis előfizetésenként saját munkafolyamat-tokennel hitelesít. Az alábbi formátum ezért ennek az oldalnak a javaslata (tervezet), a benyújtás módja pedig a forrástárolóhoz nyitott pull request. Az űrlap teljesen a böngészőben fut és semmit nem küld el.",
+  "pt-BR": "O gateway não tem nenhum endpoint de envio para o diretório, de nenhum tipo — PUBLIC_ROUTE_KEYS lista exatamente cinco rotas que ignoram o token de administração: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth e /api/v1/workflows/trigger; a última ainda se autentica com um token de workflow por assinatura. Portanto, o formato abaixo é a proposta desta página (um rascunho), e o caminho de envio é um pull request contra o repositório de código-fonte. O formulário roda inteiramente no seu navegador e não envia nada a lugar algum.",
+  ko: "게이트웨이에는 어떤 종류의 디렉터리 제출 엔드포인트도 없습니다 — PUBLIC_ROUTE_KEYS는 관리자 토큰을 우회하는 라우트를 정확히 다섯 개 나열합니다: /healthz, /, /h5/{article_id}, /api/v1/verifyH5Auth 그리고 /api/v1/workflows/trigger이며, 마지막 라우트는 여전히 구독별 워크플로 토큰으로 스스로 인증합니다. 따라서 아래 형식은 이 페이지의 제안(초안)이고, 제출 경로는 소스 저장소에 대한 풀 리퀘스트입니다. 이 폼은 전적으로 브라우저에서 실행되며 어디로도 아무것도 전송하지 않습니다.",
+  ar: "لا تملك البوابة أي نقطة نهاية لإرسال الدليل من أي نوع — فـ PUBLIC_ROUTE_KEYS يسرد خمسة مسارات بالضبط تتجاوز رمز المدير: /healthz و/ و/h5/{article_id} و/api/v1/verifyH5Auth و/api/v1/workflows/trigger؛ والمسار الأخير لا يزال يصادق نفسه برمز سير عمل لكل اشتراك. لذا فالصيغة أدناه اقتراح هذه الصفحة (مسودة)، ومسار الإرسال هو طلب سحب على المستودع المصدر. والنموذج يعمل بالكامل في متصفحك ولا يرسل شيئًا إلى أي مكان.",
 };
 
 const GEN_CTA: Localized<string> = {
@@ -1461,6 +1638,9 @@ const GEN_CTA: Localized<string> = {
   bg: "Отвори генератора на указател",
   tr: "Dizin üreticisini aç",
   hu: "Könyvtárgenerátor megnyitása",
+  "pt-BR": "Abrir o gerador de diretório",
+  ko: "디렉터리 생성기 열기",
+  ar: "فتح مولّد الدليل",
 };
 
 const PROPOSAL_CHIP: Localized<string> = {
@@ -1482,6 +1662,9 @@ const PROPOSAL_CHIP: Localized<string> = {
   bg: "Формат, предложен от тази страница",
   tr: "Bu sayfanın önerdiği biçim",
   hu: "Az oldal által javasolt formátum",
+  "pt-BR": "Formato proposto por esta página",
+  ko: "이 페이지가 제안하는 형식",
+  ar: "صيغة مقترحة من هذه الصفحة",
 };
 
 const GEN_DISCLAIMER: Localized<string> = {
@@ -1503,6 +1686,9 @@ const GEN_DISCLAIMER: Localized<string> = {
   bg: "Примерни / запълващи демонстрационни данни — този формат е чернова, не съществуваща спецификация. Изходът остава на тази страница и никога не се изпраща.",
   tr: "Örnek / yer tutucu gösteri verisi — bu biçim bir taslaktır, var olan bir özellik değildir. Çıktı bu sayfada kalır ve hiçbir yere gönderilmez.",
   hu: "Példa / helykitöltő bemutató adatok — ez a formátum tervezet, nem létező specifikáció. A kimenet ezen az oldalon marad, és sehova nem kerül elküldésre.",
+  "pt-BR": "Dados de demonstração de exemplo / provisórios — este formato é um rascunho, não uma especificação existente. A saída fica nesta página e nunca é enviada a lugar nenhum.",
+  ko: "샘플/자리표시자 데모 데이터 — 이 형식은 초안이며 기존 사양이 아닙니다. 출력은 이 페이지에 머무르며 어디로도 전송되지 않습니다.",
+  ar: "بيانات تجريبية نموذجية / عناصر نائبة — هذه الصيغة مسودة وليست مواصفة قائمة. والمخرجات تبقى في هذه الصفحة ولا تُرسَل إلى أي مكان أبدًا.",
 };
 
 const GEN_RESTORE: Localized<string> = {
@@ -1524,6 +1710,9 @@ const GEN_RESTORE: Localized<string> = {
   bg: "Възстанови примера",
   tr: "Örneği geri yükle",
   hu: "Példa visszaállítása",
+  "pt-BR": "Restaurar o exemplo",
+  ko: "샘플 복원",
+  ar: "استعادة النموذج",
 };
 
 const GEN_REPO_LINK: Localized<string> = {
@@ -1545,6 +1734,9 @@ const GEN_REPO_LINK: Localized<string> = {
   bg: "Изходно хранилище",
   tr: "Kaynak depo",
   hu: "Forrástároló",
+  "pt-BR": "Repositório de código-fonte",
+  ko: "소스 저장소",
+  ar: "المستودع المصدر",
 };
 
 const GEN_OUTPUT_LABEL: Localized<string> = {
@@ -1566,6 +1758,9 @@ const GEN_OUTPUT_LABEL: Localized<string> = {
   bg: "Генериран запис",
   tr: "Oluşturulan kayıt",
   hu: "Legenerált bejegyzés",
+  "pt-BR": "Entrada gerada",
+  ko: "생성된 항목",
+  ar: "الإدخال المولّد",
 };
 
 const GEN_STEPS_TITLE: Localized<string> = {
@@ -1587,6 +1782,9 @@ const GEN_STEPS_TITLE: Localized<string> = {
   bg: "Подаване като pull request на общността",
   tr: "Topluluk pull request'i olarak göndermek",
   hu: "Benyújtás közösségi pull requestként",
+  "pt-BR": "Enviando-a como pull request da comunidade",
+  ko: "커뮤니티 pull request로 제출하기",
+  ar: "تقديمه كـ pull request من المجتمع",
 };
 
 const GEN_EMPTY_HINT: Localized<string> = {
@@ -1608,6 +1806,9 @@ const GEN_EMPTY_HINT: Localized<string> = {
   bg: "Оставено празно поле се връща към примерната си стойност.",
   tr: "Boş bırakılan alan kendi örnek değerine döner.",
   hu: "Egy üresen hagyott mező a példaértékére esik vissza.",
+  "pt-BR": "Um campo deixado em branco usa o valor de exemplo dele.",
+  ko: "비워 둔 필드는 샘플 값으로 대체됩니다.",
+  ar: "أي حقل يُترك فارغًا يعود إلى قيمته النموذجية.",
 };
 
 type FieldSpec = {
@@ -1646,6 +1847,9 @@ const FIELD = {
       bg: "Име на услугата",
       tr: "Hizmet adı",
       hu: "Szolgáltatás neve",
+      "pt-BR": "Nome do serviço",
+      ko: "서비스 이름",
+      ar: "اسم الخدمة",
     },
     hint: {
       en: "The name shown in the listing; the slug is folded from it.",
@@ -1666,6 +1870,9 @@ const FIELD = {
       bg: "Името, показано в списъка; slug се сгъва от него.",
       tr: "Kayıtta gösterilen ad; slug onundan katlanır.",
       hu: "A listában megjelenő név; a slug ebből áll elő.",
+      "pt-BR": "O nome exibido na listagem; o slug é derivado dele.",
+      ko: "목록에 표시되는 이름이며, 슬러그는 이 이름에서 변환됩니다.",
+      ar: "الاسم المعروض في الإدراج؛ ويُشتق منه مُعرّف slug.",
     },
     sample: "POPOPX Service Suite",
   },
@@ -1690,6 +1897,9 @@ const FIELD = {
       bg: "Оператор",
       tr: "İşleten",
       hu: "Üzemeltető",
+      "pt-BR": "Operador",
+      ko: "운영자",
+      ar: "المشغّل",
     },
     hint: {
       en: "A person, a team or a company. A listing has to name somebody accountable.",
@@ -1710,6 +1920,9 @@ const FIELD = {
       bg: "Лице, екип или фирма. Записът трябва да сочи отговорен субект.",
       tr: "Bir kişi, bir ekip ya da bir şirket. Bir kaydın sorumlu birini adlandırması gerekir.",
       hu: "Személy, csapat vagy cég. Egy bejegyzésnek nevet kell adnia a felelősnek.",
+      "pt-BR": "Uma pessoa, uma equipe ou uma empresa. Uma listagem precisa nomear alguém responsável.",
+      ko: "개인, 팀 또는 회사입니다. 등록 정보에는 책임 주체를 반드시 명시해야 합니다.",
+      ar: "شخص أو فريق أو شركة. ويجب أن يسمّي الإدراج جهة مسؤولة.",
     },
     sample: "POPOPX Community",
   },
@@ -1734,6 +1947,9 @@ const FIELD = {
       bg: "Връзка-покана",
       tr: "Davet bağlantısı",
       hu: "Meghívó hivatkozás",
+      "pt-BR": "Link de convite",
+      ko: "초대 링크",
+      ar: "رابط الدعوة",
     },
     hint: {
       en: "The link the console mints for this account, of the form https://popopx.chat/i/v1/<code>. It is a capability, so treat it as a secret: hand it to reviewers inside the pull request rather than pasting it publicly. The raw popopx:/… address it seals stays under the console's advanced diagnostics.",
@@ -1754,6 +1970,9 @@ const FIELD = {
       bg: "Връзката, която конзолата издава за този акаунт, от вида https://popopx.chat/i/v1/<code>. Тя е право за достъп, затова я третирайте като тайна: предайте я на прегледачите вътре в pull request, вместо да я лепите публично. Суровият адрес popopx:/…, който тя запечатва, остава в разширената диагностика на конзолата.",
       tr: "Konsolun bu hesap için ürettiği bağlantı, biçimi https://popopx.chat/i/v1/<code>. Bu bir erişim yetkisidir, dolayısıyla sır gibi davranın: herkese yapıştırmak yerine pull request içinde inceleyenlere verin. Mühürlediği ham popopx:/… adresi konsolun gelişmiş tanılama bölümünde kalır.",
       hu: "A hivatkozás, amelyet a konzol ehhez a fiókhoz kiad, alakja https://popopx.chat/i/v1/<code>. Ez hozzáférési jogosultság, ezért kezelje titokként: a pull requesten belül adja át a bírálóknak, ne illessze be nyilvánosan. A lepecsételt nyers popopx:/… cím a konzol speciális diagnosztikája alatt marad.",
+      "pt-BR": "O link que o console emite para esta conta, no formato https://popopx.chat/i/v1/<code>. Ele é uma capacidade, então trate-o como um segredo: entregue-o aos revisores dentro do pull request em vez de colá-lo publicamente. O endereço bruto popopx:/… que ele sela permanece sob os diagnósticos avançados do console.",
+      ko: "콘솔이 이 계정을 위해 발급하는 링크로, https://popopx.chat/i/v1/<code> 형식입니다. 이 링크는 그 자체로 하나의 접근 권한이므로 시크릿으로 취급하십시오: 공개적으로 붙여넣지 말고 풀 리퀘스트 안에서 검토자에게 전달하십시오. 이 링크가 봉인하는 원본 popopx:/… 주소는 콘솔의 고급 진단 아래에 남습니다.",
+      ar: "الرابط الذي تصدره وحدة التحكم لهذا الحساب، على الصيغة https://popopx.chat/i/v1/<code>. وهو قدرة وصول، فتعامل معه كسر: سلّمه للمراجعين داخل طلب السحب بدل لصقه علنًا. والعنوان الخام popopx:/… الذي يختمه يبقى تحت «التشخيصات المتقدمة» في وحدة التحكم.",
     },
     sample: DEMO_INVITE_ADDRESS,
   },
@@ -1778,6 +1997,9 @@ const FIELD = {
       bg: "Категория",
       tr: "Kategori",
       hu: "Kategória",
+      "pt-BR": "Categoria",
+      ko: "카테고리",
+      ar: "الفئة",
     },
     hint: {
       en: "The draft's own vocabulary; the selector is the whole list.",
@@ -1798,6 +2020,9 @@ const FIELD = {
       bg: "Собственият речник на черновата; селекторът е целият списък.",
       tr: "Taslığın kendi sözcük dağarcığı; seçicideki liste bütün listedir.",
       hu: "A tervezet saját szókincse; a választó tartalmazza az egész listát.",
+      "pt-BR": "O vocabulário do próprio rascunho; o seletor é a lista inteira.",
+      ko: "초안 자체의 어휘를 사용하며, 선택 목록이 전체 목록입니다.",
+      ar: "مفردات المسودة نفسها؛ والقائمة المنسدلة تضم القائمة كاملة.",
     },
     sample: "tools",
     options: ["tools", "commerce", "news", "devops", "community", "research"],
@@ -1823,6 +2048,9 @@ const FIELD = {
       bg: "Описание",
       tr: "Açıklama",
       hu: "Leírás",
+      "pt-BR": "Descrição",
+      ko: "설명",
+      ar: "الوصف",
     },
     hint: {
       en: "One sentence. The draft caps it at 240 characters, the same budget as a card field value.",
@@ -1843,6 +2071,9 @@ const FIELD = {
       bg: "Едно изречение. Черновата го ограничава до 240 знака — същият бюджет като стойност на поле от карта.",
       tr: "Bir cümle. Taslak onu 240 karakterle sınırlıyor; bu, bir kart alanı değerinin bütçesiyle aynı.",
       hu: "Egy mondat. A tervezet 240 karakterben szab limitet, ugyanakkora keretben, mint egy kártyamező értéke.",
+      "pt-BR": "Uma frase. O rascunho limita a 240 caracteres, o mesmo orçamento de um valor de campo de cartão.",
+      ko: "한 문장입니다. 초안에서는 카드 필드 값과 같은 240자로 제한합니다.",
+      ar: "جملة واحدة. وتحدّها المسودة بـ 240 حرفًا، وهو الحد نفسه المخصّص لقيمة حقل البطاقة.",
     },
     sample:
       "Reference service account for the open protocol: cards, menus, channel key rotation, traceless scan-to-sign-in.",
@@ -1869,6 +2100,9 @@ const FIELD = {
       bg: "Връзка за контакт",
       tr: "İletişim bağlantısı",
       hu: "Kapcsolattartási hivatkozás",
+      "pt-BR": "Link de contato",
+      ko: "연락처 링크",
+      ar: "رابط التواصل",
     },
     hint: {
       en: "An absolute https URL with a host, which is exactly the check an open_url card action has to pass.",
@@ -1889,6 +2123,9 @@ const FIELD = {
       bg: "Абсолютен https URL с хост — точно проверката, която действието open_url на картата трябва да мине.",
       tr: "Mutlak bir https adresi, barındırma adı içermeli — karttaki open_url eyleminin geçmek zorunda olduğu denetim tam olarak budur.",
       hu: "Abszolút https URL gépnévvel — pontosan ezt a vizsgát kell teljesítenie egy kártya open_url műveletének.",
+      "pt-BR": "Uma URL https absoluta com host, que é exatamente a verificação que uma ação de cartão open_url precisa passar.",
+      ko: "호스트가 있는 절대 https URL이며, open_url 카드 액션이 통과해야 하는 검사와 정확히 같습니다.",
+      ar: "عنوان URL مطلق بـ https مع اسم مضيف، وهو بالضبط الفحص الذي يجب أن يجتازه إجراء open_url في البطاقة.",
     },
     sample: "https://service.example.com/contact",
   },
@@ -1923,6 +2160,9 @@ const GEN_STEPS: readonly Localized<string>[] = [
     bg: "Заменете примера с истинска информация и разделете двете адресни полета: invite_link е тайна за прегледачите вътре в pull request, contact_url трябва да е нещо, което сте готови да публикувате.",
     tr: "Örneği gerçek bilgiyle değiştirin ve iki adres alanını ayrı tutun: invite_link pull request içinde inceleyenler için bir sırdır, contact_url ise yayınlamayı göze aldığınız bir adres olmalı.",
     hu: "Cserélje le a példát valódi adatokra, és a két címmezőt különböztessen meg: az invite_link titok, csak a pull requestben lévő bírálók lássák, a contact_url pedig legyen valami olyan, amit közzétenne.",
+    "pt-BR": "Substitua o exemplo por informações reais e trate os dois campos de endereço de forma diferente: invite_link é um segredo para os revisores dentro do pull request, contact_url precisa ser algo que você aceite publicar.",
+    ko: "샘플을 실제 정보로 바꾸고 두 주소 필드를 다르게 다루십시오. invite_link는 pull request 내부의 검토자에게 전달하는 시크릿이고, contact_url은 공개할 의향이 있는 주소여야 합니다.",
+    ar: "استبدل النموذج بمعلومات حقيقية وعامل حقلي العنوان بشكل مختلف: فـ invite_link سرّ للمراجعين داخل pull request، وcontact_url يجب أن يكون شيئًا تقبل نشره.",
   },
   {
     en: "Copy the generated JSON, add it to the source repository as directory/<slug>.json, and open a pull request. The repository link is at the end of this section.",
@@ -1943,6 +2183,9 @@ const GEN_STEPS: readonly Localized<string>[] = [
     bg: "Копирайте генерирания JSON, добавете го в изходното хранилище като directory/<slug>.json и отворете pull request. Връзката към хранилището е в края на тази секция.",
     tr: "Üretilen JSON'u kopyalayın, kaynak depoya directory/<slug>.json olarak ekleyin ve bir pull request açın. Depo bağlantısı bu bölümün en sonunda.",
     hu: "Másolja le a generált JSON-t, adja hozzá a forrástárolóhoz directory/<slug>.json néven, és nyisson egy pull requestet. A tároló hivatkozása e szakasz végén található.",
+    "pt-BR": "Copie o JSON gerado, adicione-o ao repositório de código-fonte como directory/<slug>.json e abra um pull request. O link do repositório está no final desta seção.",
+    ko: "생성된 JSON을 복사해 directory/<slug>.json으로 소스 저장소에 추가하고 풀 리퀘스트를 생성하십시오. 저장소 링크는 이 섹션 끝에 있습니다.",
+    ar: "انسخ JSON المولّد، وأضفه إلى المستودع المصدر باسم directory/<slug>.json، وافتح طلب سحب. ورابط المستودع في نهاية هذا القسم.",
   },
   {
     en: "Attach this account's own handshake frame plus one real card frame to the pull request so a reviewer can verify the format on a device. Where a field name or a limit disagrees with the client, the client source is authoritative.",
@@ -1963,6 +2206,9 @@ const GEN_STEPS: readonly Localized<string>[] = [
     bg: "Приложете към pull request кадрът на ръкостискане на този акаунт плюс един истински кадър на карта, за да може преглеждащият да провери формата на устройство. Ако име на поле или граница се разминава с клиента, меродавен е изходният код на клиента.",
     tr: "Pull request'e bu hesabın kendi el sıkışma çerçevesini ve gerçek bir kart çerçevesini ekleyin; inceleme yapan biri biçimi bir aygıtta doğrulayabilsin. Bir alan adı ya da sınır istemciyle çelişirse bağlayıcı olan istemcinin kaynak kodudur.",
     hu: "Csatolja a pull requesthez ennek a fióknak a kézfogáskeretét meg egy valódi kártyakeretet, hogy egy bíráló egy eszközön ellenőrizhesse a formátumot. Ha egy mezőnév vagy korlát ellentmond a kliensnek, a kliens forráskódja a mérvadó.",
+    "pt-BR": "Anexe ao pull request o frame de handshake desta própria conta mais um frame de cartão real, para que um revisor possa verificar o formato em um dispositivo. Onde um nome de campo ou um limite divergir do cliente, o código-fonte do cliente é a autoridade.",
+    ko: "검토자가 기기에서 형식을 확인할 수 있도록 이 계정 자체의 핸드셰이크 프레임과 실제 카드 프레임 하나를 pull request에 첨부하십시오. 필드 이름이나 한도가 클라이언트와 다를 경우 클라이언트 소스가 기준입니다.",
+    ar: "أرفق بـ pull request إطار المصافحة الخاص بهذا الحساب مع إطار بطاقة حقيقي واحد كي يتمكّن المراجع من التحقق من الصيغة على جهاز. وحيثما يختلف اسم حقل أو حد مع العميل، فشيفرة العميل هي المرجع.",
   },
   {
     en: "The directory stays decentralised: any site may list this entry or not. The JSON grants nothing and does not make the gateway declare anybody official.",
@@ -1983,6 +2229,9 @@ const GEN_STEPS: readonly Localized<string>[] = [
     bg: "Указателят остава децентрализиран: всеки сайт може да включи този запис или не. Този JSON нищо не отпуска и не кара шлюзът да обявява когото и да е за официален.",
     tr: "Dizin merkeziyetsiz kalır: her site bu kaydı alır ya da almaz. Bu JSON hiçbir yetki vermez ve ağ geçidine kimseyi resmî ilan ettirmez.",
     hu: "A könyvtár decentralizált marad: bármely oldal felveheti ezt a bejegyzést vagy sem. A JSON semmit nem ruház át, és nem kényszeríti az átjárót, hogy valakit hivatalosnak nyilváníson.",
+    "pt-BR": "O diretório continua descentralizado: qualquer site pode listar esta entrada ou não. O JSON não concede nada e não faz o gateway declarar ninguém oficial.",
+    ko: "디렉터리는 탈중앙화를 유지합니다. 어떤 사이트든 이 항목을 게시할 수도, 하지 않을 수도 있습니다. JSON은 아무 권한도 부여하지 않으며, 게이트웨이가 누군가를 공식으로 선언하게 만들지도 않습니다.",
+    ar: "يبقى الدليل لا مركزيًا: وأي موقع قد يدرج هذا الإدخال أو لا يفعل. وJSON لا يمنح أي شيء ولا يجعل البوابة تُعلن أي جهة رسمية.",
   },
 ];
 
@@ -2294,6 +2543,7 @@ function GeneratorBody({
           const label = pick(field.label, locale);
           const hint = pick(field.hint, locale);
           const current = values[field.id] ?? "";
+          const technical = field.id === "dir-address" || field.id === "dir-contact";
           const controlClass =
             "mt-1 w-full rounded-lg border border-hair bg-black/40 px-3 py-2 text-sm text-white outline-none placeholder:text-faint focus:border-brand-soft";
           return (
@@ -2303,6 +2553,7 @@ function GeneratorBody({
                 {field.options === undefined ? null : (
                   <select
                     id={field.id}
+                    dir="ltr"
                     value={current.length > 0 ? current : field.sample}
                     onChange={handle(field.id)}
                     className={controlClass}
@@ -2328,6 +2579,7 @@ function GeneratorBody({
                   <input
                     id={field.id}
                     type="text"
+                    dir={technical ? "ltr" : undefined}
                     value={current}
                     placeholder={field.sample}
                     spellCheck={false}

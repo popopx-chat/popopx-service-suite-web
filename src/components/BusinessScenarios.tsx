@@ -30,7 +30,7 @@ import { SectionHeading, StatusDot } from "@/components/ui";
  * own server, which is the issuer holding the channel key pair. The caveat is
  * printed in the card, not hidden below.
  *
- * Copy. Every string is a literal `Localized<string>` map listing all 18 tags
+ * Copy. Every string is a literal `Localized<string>` map listing all 21 tags
  * `src/lib/i18n.tsx` declares — the same set the iOS client ships — so the
  * compiler and `tools/check-i18n.mjs` both see every language a visitor gets.
  * No slot is derived from another language, nothing is cast, nothing is spread.
@@ -79,6 +79,9 @@ const EYEBROW: Localized<string> = {
   bg: "Какво реално дава",
   tr: "Bunlarla neler yapılır",
   hu: "Mire használhatod",
+  "pt-BR": "O que você pode fazer com ele",
+  ko: "이것으로 할 수 있는 일",
+  ar: "ما يمكنك فعله بها",
 };
 
 const TITLE: Localized<string> = {
@@ -99,7 +102,10 @@ const TITLE: Localized<string> = {
   uk: "Шість сценаріїв, які можна запустити сьогодні: підтримка, обробка звернень, канали, сповіщення, вхід, власна модель",
   bg: "Шест сценария, които можете да пуснете днес: поддръжка, автоматична обработка, канали, аларми, вход, собствен модел",
   tr: "Bugün çalıştırabileceğiniz altı senaryo: destek, otomatik karşılama, kanal yayını, uyarı, giriş ve kendi modeliniz",
-  hu: "Hat ma futtatható forgatókönyv: ügyfélszolgálat, automatikus ügyintézés, csatornák, riasztások, belépés, saját modell"
+  hu: "Hat ma futtatható forgatókönyv: ügyfélszolgálat, automatikus ügyintézés, csatornák, riasztások, belépés, saját modell",
+  "pt-BR": "Seis cenários que você pode executar hoje: suporte, tratamento automático de consultas, canais, alertas, login e seu próprio modelo",
+  ko: "지금 운영할 수 있는 여섯 가지 시나리오: 고객 지원, 자동 응대, 채널, 알림, 로그인, 자체 모델",
+  ar: "ستة سيناريوهات يمكنك تشغيلها اليوم: الدعم، والمعالجة التلقائية، والقنوات، والتنبيهات، وتسجيل الدخول، ونموذجك الخاص",
 };
 
 const SUBTITLE: Localized<string> = {
@@ -121,6 +127,9 @@ const SUBTITLE: Localized<string> = {
   bg: "Картите казват само какво се случва за бизнеса. Имената на модулите, крайните точки, превключвателите и криптирането остават по-надолу: в каталога, справочника по протокола и раздела за сигурност, където разработчикът намира всяко число.",
   tr: "Bu kartlar yalnızca iş tarafında ne olduğunu anlatır. Modül adları, uç noktalar, ortam anahtarları ve şifreleme ayrıntıları sayfanın ilerisinde — hizmet kataloğu, protokol hızlı bakışı, yetki yönetişimi — geliştirici her sayıyı yine bulabilir.",
   hu: "A kártyák csak azt írják le, mi történik az üzletben. A modul-, végpont- és kapcsolónevek, a titkosítás részletei lejebb maradnak: szolgáltatáskatalógus, protokoll-gyorsreferencia, biztonság — így a fejlesztő is minden számot megnézhet.",
+  "pt-BR": "Estes cartões dizem apenas o que acontece para o negócio. Nomes de módulos, endpoints, interruptores de ambiente e o detalhe criptográfico ficam mais abaixo na página — no catálogo de serviços, na referência rápida do protocolo e na seção de governança — para que um desenvolvedor ainda possa conferir cada número.",
+  ko: "이 카드들은 업무에서 실제로 무슨 일이 일어나는지만 설명합니다. 모듈 이름, 엔드포인트, 환경 변수 스위치, 암호화 세부 사항은 페이지 아래쪽의 서비스 카탈로그, 프로토콜 빠른 참조, 거버넌스 섹션에 남겨 두었으므로 개발자는 여전히 모든 수치를 확인할 수 있습니다.",
+  ar: "لا تقول هذه البطاقات إلا ما يحدث على صعيد العمل. أما أسماء الوحدات ونقاط النهاية ومفاتيح تبديل البيئة والتفاصيل التشفيرية فتبقى في موضع لاحق من الصفحة — في كتالوج الخدمات، والمرجع السريع للبروتوكول، وقسم الحوكمة — كي يظل بإمكان المطوّر الرجوع إلى كل رقم.",
 };
 
 const NOTE: Localized<string> = {
@@ -141,7 +150,10 @@ const NOTE: Localized<string> = {
   uk: "П’ять із шести сценаріїв працюють на трьох модулях плагінів цього випуску, типово увімкнених із заводу: підтримка, обробка звернень і власна модель — це один і той самий модуль ai_agent. Зашифрований канал — базова поведінка шлюза, а не плагін. Усе працює на шлюзі, який розгортаєте ви самі, а сторінка, яку ви зараз читаєте, не завантажує сторонніх скриптів.",
   bg: "Пет от шестте сценария работят на три плъгин-модула от това издание, включени по фабрична настройка: поддръжка, автоматична обработка и собствен модел — това е един и същ модул ai_agent. Криптираният канал е основно поведение на гейтуейта, не плъгин. Всичко работи на собствения ви гейтуейт, който сами разгръщате, а страницата, която четете сега, не зарежда чужди скриптове.",
   tr: "Altı senaryonun beşi, bu sürümle gelen ve fabrika çıkışında varsayılan olarak açık olan üç eklenti modülünde çalışır: destek, otomatik karşılama ve kendi modeliniz hepsi aynı ai_agent modülüdür. Şifreli kanal eklenti değil, ağ geçidinin çekirdek davranışıdır. Hepsi sizin kurduğunuz ağ geçidinde çalışır; okuduğunuz bu sayfa üçüncü taraf betik yüklemiyor.",
-  hu: "A hat forgatókönyvből öt a kiadás három bővítménymodulján fut, gyárilag bekapcsolva: az ügyfélszolgálat, az automatikus ügyintézés és a saját modell mind ugyanaz az ai_agent modul. A titkosított csatorna az átjáró alapviselkedése, nem bővítmény. Minden a magad telepítette átjárón fut, és ez az oldal nem tölt be harmadik féltől származó szkriptet."
+  hu: "A hat forgatókönyvből öt a kiadás három bővítménymodulján fut, gyárilag bekapcsolva: az ügyfélszolgálat, az automatikus ügyintézés és a saját modell mind ugyanaz az ai_agent modul. A titkosított csatorna az átjáró alapviselkedése, nem bővítmény. Minden a magad telepítette átjárón fut, és ez az oldal nem tölt be harmadik féltől származó szkriptet.",
+  "pt-BR": "Cinco deles rodam em três módulos de plug-in que acompanham esta versão e vêm ligados por padrão de fábrica: suporte, tratamento de consultas e seu próprio modelo são todos o mesmo módulo ai_agent. O canal criptografado é comportamento central do gateway, não um plug-in. Tudo roda no gateway que você mesmo implanta, e a página que você está lendo não carrega nenhum script de terceiros.",
+  ko: "이 중 다섯 가지는 이번 릴리스에 포함되어 출고 기본값으로 켜져 있는 세 개의 플러그인 모듈에서 동작합니다. 고객 지원, 문의 처리, 자체 모델은 모두 하나의 ai_agent 모듈입니다. 암호화 채널은 플러그인이 아니라 게이트웨이 코어의 동작입니다. 모든 것은 직접 배포한 게이트웨이에서 실행되며, 지금 보고 있는 페이지는 서드파티 스크립트를 전혀 불러오지 않습니다.",
+  ar: "خمسة من هذه السيناريوهات تعمل على ثلاث وحدات إضافات تأتي مع هذا الإصدار ومفعّلة افتراضيًا من المصنع: الدعم، ومعالجة الاستفسارات، ونموذجك الخاص كلها الوحدة نفسها ai_agent. أما القناة المشفّرة فهي سلوك أصيل في البوابة وليست إضافة. وكل شيء يعمل على البوابة التي تنشرها بنفسك، والصفحة التي تقرأها الآن لا تحمّل أي سكربت من طرف ثالث.",
 };
 
 const STATE_ON: Localized<string> = {
@@ -163,6 +175,9 @@ const STATE_ON: Localized<string> = {
   bg: "Включен по фабрична настройка",
   tr: "Fabrika çıkışında varsayılan olarak açık",
   hu: "Gyárilag alapértelmezés szerint bekapcsolva",
+  "pt-BR": "Ligado por padrão de fábrica",
+  ko: "출고 기본값으로 켜짐",
+  ar: "مفعّلة افتراضيًا من المصنع",
 };
 
 const STATE_CORE: Localized<string> = {
@@ -184,6 +199,9 @@ const STATE_CORE: Localized<string> = {
   bg: "Основно поведение на гейтуейта, не плъгин",
   tr: "Ağ geçidinin çekirdek davranışı, eklenti değil",
   hu: "Az átjáró alapviselkedése, nem bővítmény",
+  "pt-BR": "Comportamento central do gateway, não um plug-in",
+  ko: "플러그인이 아닌 게이트웨이 코어 동작",
+  ar: "سلوك أصيل في البوابة، لا إضافة",
 };
 
 const STATE_ENV: Localized<string> = {
@@ -204,7 +222,10 @@ const STATE_ENV: Localized<string> = {
   uk: "Перемикач середовища, без додаткового плагіна",
   bg: "Превключвател на средата, без допълнителен плъгин",
   tr: "Bir ortam anahtarı, ek eklenti gerekmez",
-  hu: "Környezeti kapcsoló, nem külön bővítmény"
+  hu: "Környezeti kapcsoló, nem külön bővítmény",
+  "pt-BR": "Um interruptor de ambiente, sem plug-in extra",
+  ko: "환경 변수 스위치만으로 동작, 추가 플러그인 없음",
+  ar: "مفتاح في إعدادات البيئة، دون أي إضافة",
 };
 
 const AI_NAME: Localized<string> = {
@@ -226,6 +247,9 @@ const AI_NAME: Localized<string> = {
   bg: "AI поддръжка на клиенти",
   tr: "Yapay zekâ müşteri desteği",
   hu: "Ügyfélszolgálat MI-ügynökkel",
+  "pt-BR": "Suporte ao cliente com IA",
+  ko: "AI 고객 지원",
+  ar: "دعم العملاء بالذكاء الاصطناعي",
 };
 
 const AI_ACTOR: Localized<string> = {
@@ -247,6 +271,9 @@ const AI_ACTOR: Localized<string> = {
   bg: "Поддръжка · търговска зала",
   tr: "Destek · satış noktası",
   hu: "Ügyfélszolgálat · bolt",
+  "pt-BR": "Suporte · loja",
+  ko: "고객 지원 · 매장 현장",
+  ar: "الدعم · صالة المتجر",
 };
 
 const AI_TAGLINE: Localized<string> = {
@@ -268,6 +295,9 @@ const AI_TAGLINE: Localized<string> = {
   bg: "Последовател пита в сервизния акаунт, отговаря моделът, който сте настроили.",
   tr: "Takipçi hizmet hesabında sorar; sizin yapılandırdığınız model yanıtlar.",
   hu: "Egy követő kérdez a szolgáltatási fiókban; az általad beállított modell válaszol.",
+  "pt-BR": "Um seguidor pergunta na conta de serviço; o modelo que você configurou responde.",
+  ko: "팔로워가 서비스 계정에서 질문하면 설정한 모델이 답변합니다.",
+  ar: "يسأل أحد المتابعين في حساب الخدمة، فيجيب النموذج الذي أعددته.",
 };
 
 const AI_BODY: Localized<string> = {
@@ -289,6 +319,9 @@ const AI_BODY: Localized<string> = {
   bg: "Разговорите се записват в таблицата ai_messages на собствения ви сървър под анонимен pairwise_uid, а фабричният системен подканващ текст изрично казва да не се искат лични данни. За ход без отговор на модела не се таксува.",
   tr: "Konuşmalar, kendi sunucunuzdaki ai_messages tablosunda anonim bir pairwise_uid altında dosyalanır ve fabrika sistem istemi hiçbir kişisel tanımlayıcı istenmediğini açıkça yazar. Modelin yanıtlayamadığı tur ölçüme girmez.",
   hu: "A beszélgetéseket egy névtelen pairwise_uid jelöli a saját szervered ai_messages táblájában, és a gyári rendszer-utasítás nyíltan kimondja, hogy nem kér személyes azonosítót. Azt a kört, amelyre a modell nem tud válaszolni, nem számolja fel.",
+  "pt-BR": "As conversas ficam arquivadas sob um pairwise_uid anônimo na tabela ai_messages do seu próprio servidor, e o prompt de sistema de fábrica declara abertamente que nenhum identificador pessoal é solicitado. Uma rodada que o modelo não consegue responder não é cobrada.",
+  ko: "대화는 자체 서버의 ai_messages 테이블에 익명 pairwise_uid 기준으로 저장되며, 출고 기본 시스템 프롬프트에는 개인 식별자를 요청하지 않는다고 명시되어 있습니다. 모델이 답변하지 못한 턴은 과금되지 않습니다.",
+  ar: "تُحفظ المحادثات تحت معرّف مجهول pairwise_uid في جدول ai_messages على خادمك الخاص، وينص توجيه النظام الافتراضي صراحةً على عدم طلب أي معرّف شخصي. ولا تُحتسب رسوم عن دور لا يستطيع النموذج الإجابة عنه.",
 };
 
 const AI_S1: Localized<string> = {
@@ -310,6 +343,9 @@ const AI_S1: Localized<string> = {
   bg: "Последовател задава въпрос",
   tr: "Takipçi hizmet hesabında sorar",
   hu: "Egy követő kérdez",
+  "pt-BR": "Um seguidor faz uma pergunta",
+  ko: "팔로워가 질문합니다",
+  ar: "يطرح أحد المتابعين سؤالًا",
 };
 
 const AI_S2: Localized<string> = {
@@ -331,6 +367,9 @@ const AI_S2: Localized<string> = {
   bg: "Гейтуейтът извиква вашия модел",
   tr: "Ağ geçidi sizin modelinizi çağırır",
   hu: "Az átjáró hívja a te modelled",
+  "pt-BR": "O gateway chama o seu modelo",
+  ko: "게이트웨이가 모델을 호출합니다",
+  ar: "تستدعي البوابة النموذج الخاص بك",
 };
 
 const AI_S3: Localized<string> = {
@@ -352,6 +391,9 @@ const AI_S3: Localized<string> = {
   bg: "Разговорът остава във вашата база",
   tr: "Kayıt kendi veritabanınızda kalır",
   hu: "A leirat a saját adatbázisodban marad",
+  "pt-BR": "O histórico fica no seu próprio banco de dados",
+  ko: "대화 기록은 자체 데이터베이스에 남습니다",
+  ar: "يبقى النص الكامل للمحادثة في قاعدة بياناتك",
 };
 
 const AI_LINK: Localized<string> = {
@@ -373,6 +415,9 @@ const AI_LINK: Localized<string> = {
   bg: "Вижте ключа и потока от данни",
   tr: "Kimlik bilgisine ve veri akışına bakın",
   hu: "Nézd meg a tokenjét és az adatfolyamát",
+  "pt-BR": "Ver o fluxo de credencial e de dados",
+  ko: "자격 증명과 데이터 흐름 확인하기",
+  ar: "اطّلع على مسار بيانات الاعتماد والبيانات",
 };
 
 const AUTO_NAME: Localized<string> = {
@@ -393,7 +438,10 @@ const AUTO_NAME: Localized<string> = {
   uk: "Автоматична обробка звернень",
   bg: "Автоматична обработка на запитвания",
   tr: "Bilgi taleplerinin otomatik karşılanması",
-  hu: "Kérdések automatikus kezelése"
+  hu: "Kérdések automatikus kezelése",
+  "pt-BR": "Tratamento automatizado de consultas",
+  ko: "자동 문의 처리",
+  ar: "معالجة الاستفسارات تلقائيًا",
 };
 
 const AUTO_ACTOR: Localized<string> = {
@@ -414,7 +462,10 @@ const AUTO_ACTOR: Localized<string> = {
   uk: "Магазин · післяпродажне обслуговування",
   bg: "Магазин · следпродабно обслужване",
   tr: "Mağaza operasyonu · satış sonrası",
-  hu: "Bolt · értékesítés után"
+  hu: "Bolt · értékesítés után",
+  "pt-BR": "Operação da loja · pós-venda",
+  ko: "매장 운영 · 애프터서비스",
+  ar: "عمليات المتجر · خدمة ما بعد البيع",
 };
 
 const AUTO_TAGLINE: Localized<string> = {
@@ -435,7 +486,10 @@ const AUTO_TAGLINE: Localized<string> = {
   uk: "Питання, на які ви вже маєте відповідь, не потрапляють до живої людини.",
   bg: "Въпросите, на които вече имате отговор, не стигат до жив човек.",
   tr: "Zaten yanıtını bildiğiniz sorular bir insana hiç ulaşmaz.",
-  hu: "Azok a kérdések, amelyekre már van válaszod, soha nem érkeznek emberhez."
+  hu: "Azok a kérdések, amelyekre már van válaszod, soha nem érkeznek emberhez.",
+  "pt-BR": "As perguntas para as quais você já tem resposta nunca chegam a uma pessoa.",
+  ko: "이미 답이 있는 질문은 상담원에게 도달하지 않습니다.",
+  ar: "الأسئلة التي لديك إجابة عنها مسبقًا لا تصل إلى أي شخص.",
 };
 
 const AUTO_BODY: Localized<string> = {
@@ -456,7 +510,10 @@ const AUTO_BODY: Localized<string> = {
   uk: "Дворівневе нижнє меню (3 × 5) тримає готові відповіді, а натискання не коштує виклику моделі; що меню не закрыло, іде в цикл AI-відповідей із заводським лімітом POPOPX_AI_RATE_LIMIT_MESSAGES=20 на підписника за POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Раунди пишуться під тим самим анонімним pairwise_uid: людина, що підхоплює розмову, читає одну стрічку й відповідає через POST /api/v1/send/text.",
   bg: "Двунивковото долно меню (3 × 5) държи готовите отговори, а докосване не коства извик на модела; което менюто не покрие, влиза в AI цикъла с фабрично ограничение POPOPX_AI_RATE_LIMIT_MESSAGES=20 за последовател в POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Размените са под един и същ анонимен pairwise_uid, затова поемащият чете една лента и отговаря с POST /api/v1/send/text.",
   tr: "İki düzeyli alt menü (3 × 5) hazır yanıtları üstlenir; menüyü bir kez göndermek hiçbir model çağrısı harcatmaz. Menünün kaçırdığı, fabrika çıkışında takipçi başına POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 saniye içinde POPOPX_AI_RATE_LIMIT_MESSAGES=20 mesajla sınırlı AI yanıt döngüsüne düşer. Her tur aynı anonim pairwise_uid altına dosyalanır; devralan kişi tek bir kaydı okur ve yanıtını POST /api/v1/send/text ile verir.",
-  hu: "A kétszintű alsó menü (3 × 5) viszi a rögzített válaszokat, és a kiküldése nem kerül egy modellhívásba sem; ami kimarad, AI-válaszoló hurokba megy, gyári korláttal: követőnként POPOPX_AI_RATE_LIMIT_MESSAGES=20 a POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 másodperces ablakban. Minden kör azonos névtelen pairwise_uid mögé kerül, az átvevő egyetlen leiratot olvas, és POST /api/v1/send/text hívással válaszol."
+  hu: "A kétszintű alsó menü (3 × 5) viszi a rögzített válaszokat, és a kiküldése nem kerül egy modellhívásba sem; ami kimarad, AI-válaszoló hurokba megy, gyári korláttal: követőnként POPOPX_AI_RATE_LIMIT_MESSAGES=20 a POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 másodperces ablakban. Minden kör azonos névtelen pairwise_uid mögé kerül, az átvevő egyetlen leiratot olvas, és POST /api/v1/send/text hívással válaszol.",
+  "pt-BR": "Um menu inferior de dois níveis (3 × 5) carrega as respostas prontas, e enviá-lo não custa nenhuma chamada ao modelo; o que o menu não cobre entra no ciclo de respostas de IA, limitado por padrão de fábrica a POPOPX_AI_RATE_LIMIT_MESSAGES=20 por seguidor dentro de POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. Cada rodada fica arquivada sob o mesmo pairwise_uid anônimo, então uma pessoa que assume a conversa lê um único histórico e responde com POST /api/v1/send/text.",
+  ko: "2단계 하단 메뉴(3 × 5)에 상시 답변을 담아 두며, 메뉴를 푸시하는 데는 모델 호출이 들지 않습니다. 메뉴가 놓친 질문은 AI 응답 루프로 넘어가고, 출고 기본값으로 팔로워당 POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 이내에 POPOPX_AI_RATE_LIMIT_MESSAGES=20회로 제한됩니다. 모든 라운드는 동일한 익명 pairwise_uid로 기록되므로, 상담원이 스레드를 이어받아 대화 기록 하나를 읽고 POST /api/v1/send/text로 답장합니다.",
+  ar: "تحمل قائمة سفلية من مستويين (3 × 5) الإجابات الجاهزة، وإرسالها لا يكلّف أي استدعاء للنموذج؛ وما لا تغطيه القائمة يدخل حلقة الرد بالذكاء الاصطناعي، المقيّدة افتراضيًا من المصنع عند POPOPX_AI_RATE_LIMIT_MESSAGES=20 لكل متابع ضمن POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300. وتُحفظ كل جولة تحت معرّف pairwise_uid المجهول نفسه، فيقرأ من يتولّى المحادثة نصًا واحدًا كاملًا ويرد عبر POST /api/v1/send/text.",
 };
 
 const AUTO_S1: Localized<string> = {
@@ -477,7 +534,10 @@ const AUTO_S1: Localized<string> = {
   uk: "Готові відповіді лежать у дворівневому меню",
   bg: "Готовите отговори са в менюто с две нива",
   tr: "Hazır yanıtları iki düzeyli menü taşısın",
-  hu: "A rögzített válaszok a kétszintű menübe kerülnek"
+  hu: "A rögzített válaszok a kétszintű menübe kerülnek",
+  "pt-BR": "As respostas prontas entram no menu de dois níveis",
+  ko: "상시 답변은 2단계 메뉴에 담깁니다",
+  ar: "تُدرج الإجابات الجاهزة في القائمة ذات المستويين",
 };
 
 const AUTO_S2: Localized<string> = {
@@ -498,7 +558,10 @@ const AUTO_S2: Localized<string> = {
   uk: "Решта — в AI-цикл з обмеженням на підписника",
   bg: "Останалото — в AI цикъла с лимит за последовател",
   tr: "Kalanı AI döngüsü alır, takipçi başına sınırlı",
-  hu: "A többi az AI-hurokba megy, követőnként korlátozva"
+  hu: "A többi az AI-hurokba megy, követőnként korlátozva",
+  "pt-BR": "O restante cai no ciclo de IA, com limite de taxa por seguidor",
+  ko: "나머지는 팔로워별로 제한된 AI 루프로 들어갑니다",
+  ar: "وما تبقّى يصل إلى حلقة الذكاء الاصطناعي، بمعدّل محدود لكل متابع",
 };
 
 const AUTO_S3: Localized<string> = {
@@ -519,7 +582,10 @@ const AUTO_S3: Localized<string> = {
   uk: "Людина читає одну стрічку й відповідає одним викликом",
   bg: "Човек чете една лента и отговаря с едно извикване",
   tr: "Bir kişi tek kaydı okur, tek çağrıyla yanıtlar",
-  hu: "Egy ember egyetlen leiratot olvas, egy hívással válaszol"
+  hu: "Egy ember egyetlen leiratot olvas, egy hívással válaszol",
+  "pt-BR": "Uma pessoa lê um único histórico e responde em uma chamada",
+  ko: "상담원이 기록 하나를 읽고 한 번의 호출로 답장합니다",
+  ar: "يقرأ أحد أفراد الفريق نصًا واحدًا ويرد باستدعاء واحد",
 };
 
 const AUTO_LINK: Localized<string> = {
@@ -540,7 +606,10 @@ const AUTO_LINK: Localized<string> = {
   uk: "Переглянути будову меню та його вартість",
   bg: "Вижте устройството на менюто и цената му",
   tr: "Menü yapısına ve ölçüme bakın",
-  hu: "Nézd meg a menü felépítését és a költségét"
+  hu: "Nézd meg a menü felépítését és a költségét",
+  "pt-BR": "Ver o formato do menu e quanto ele custa",
+  ko: "메뉴 구조와 비용 확인하기",
+  ar: "اطّلع على بنية القائمة وتكلفتها",
 };
 
 const CHANNEL_NAME: Localized<string> = {
@@ -562,6 +631,9 @@ const CHANNEL_NAME: Localized<string> = {
   bg: "Публикуване в криптиран канал",
   tr: "Şifreli kanal yayıncılığı",
   hu: "Közzététel titkosított csatornán",
+  "pt-BR": "Publicação em canal criptografado",
+  ko: "암호화 채널 게시",
+  ar: "النشر في قناة مشفّرة",
 };
 
 const CHANNEL_ACTOR: Localized<string> = {
@@ -583,6 +655,9 @@ const CHANNEL_ACTOR: Localized<string> = {
   bg: "Съдържание · бранд акаунт",
   tr: "İçerik · marka hesabı",
   hu: "Tartalom · márkafiók",
+  "pt-BR": "Conteúdo · conta da marca",
+  ko: "콘텐츠 · 브랜드 계정",
+  ar: "المحتوى · حساب علامة تجارية",
 };
 
 const CHANNEL_TAGLINE: Localized<string> = {
@@ -604,6 +679,9 @@ const CHANNEL_TAGLINE: Localized<string> = {
   bg: "Едно публикуване — всички последователи получават, ретранслаторът вижда само шифротекст.",
   tr: "Tek yayın her aboneye ulaşır; röle yalnızca şifreli metni görür.",
   hu: "Egyetlen közzététel, minden tag megkapja, és a közvetítő mindig csak titkosított szöveget lát.",
+  "pt-BR": "Publique uma vez, todos os assinantes recebem, e o relay só vê texto cifrado.",
+  ko: "한 번 게시하면 모든 구독자가 받고, 릴레이는 언제나 암호문만 봅니다.",
+  ar: "انشر مرة واحدة، فيتلقاه كل مشترك، ولا يرى المرحّل سوى نص مشفّر.",
 };
 
 const CHANNEL_BODY: Localized<string> = {
@@ -625,6 +703,9 @@ const CHANNEL_BODY: Localized<string> = {
   bg: "Постът се запечатва с ключа на epoch преди разпръскването, затова ретранслаторът пази на сляпо кадри, които не може да прочете. Честното уточнение: издателят е собственият ви гейтуейт, който държи двойката Ed25519 на канала и всеки ключ на epoch.",
   tr: "Bir gönderi, dağıtılmadan önce kanalın epoch anahtarıyla mühürlendiği için röle okuyamadığı kareleri içeriğe bakmadan saklar. Dürüst not: çıkarıcı taraf sizin kendi ağ geçidinizdir; kanalın Ed25519 çiftini ve her epoch anahtarını elinde tutan odur.",
   hu: "A bejegyzést a csatorna epoch-kulcsával pecsételjük a szétosztás előtt, ezért a közvetítő olvashatatlan kereteket tárol vakon. Az őszinte megjegyzés: a kibocsátó a saját átjáród, amely birtokában van a csatorna Ed25519 kulcspárjának és minden epoch-kulcsnak.",
+  "pt-BR": "Uma publicação é selada com a chave de epoch do canal antes de ser distribuída, então o relay armazena às cegas quadros que não consegue ler. A ressalva honesta: o seu próprio gateway é o emissor e detém o par Ed25519 do canal e todas as chaves de epoch.",
+  ko: "게시물은 팬아웃 전에 채널의 epoch 키로 봉인되므로, 릴레이는 읽을 수 없는 프레임을 그대로 보관할 뿐입니다. 솔직한 단서: 발급자는 자체 게이트웨이이며, 게이트웨이가 채널의 Ed25519 키 쌍과 모든 epoch 키를 보유합니다.",
+  ar: "يُختم المنشور بمفتاح الحقبة الخاص بالقناة قبل توزيعه، فيخزّن المرحّل الحزم تخزينًا أعمى دون أن يستطيع قراءتها. والتحفّظ الصادق: بوابتك أنت هي المُصدِر، وهي تحتفظ بزوج مفاتيح Ed25519 الخاص بالقناة وبكل مفتاح حقبة.",
 };
 
 const CHANNEL_S1: Localized<string> = {
@@ -646,6 +727,9 @@ const CHANNEL_S1: Localized<string> = {
   bg: "Напишете публикацията",
   tr: "Gönderiyi yazın",
   hu: "Írd meg a bejegyzést",
+  "pt-BR": "Componha a publicação",
+  ko: "게시물 작성",
+  ar: "حرّر المنشور",
 };
 
 const CHANNEL_S2: Localized<string> = {
@@ -667,6 +751,9 @@ const CHANNEL_S2: Localized<string> = {
   bg: "Запечатан с ключа на epoch",
   tr: "epoch anahtarıyla mühürlenir",
   hu: "Pecsételés epoch-kulccsal",
+  "pt-BR": "Selado com a chave de epoch",
+  ko: "epoch 키로 봉인",
+  ar: "مختوم بمفتاح الحقبة",
 };
 
 const CHANNEL_S3: Localized<string> = {
@@ -688,6 +775,9 @@ const CHANNEL_S3: Localized<string> = {
   bg: "Сляпо разпръскване към кутиите на последователите",
   tr: "İçeriği görünmeden abonelerin gelen kutusuna dağıtılır",
   hu: "Vak szétosztás a tagok postaládáiba",
+  "pt-BR": "Distribuição cega para as caixas de entrada dos assinantes",
+  ko: "구독자 수신함으로 블라인드 팬아웃",
+  ar: "توزيع أعمى إلى صناديق وارد المشتركين",
 };
 
 const CHANNEL_LINK: Localized<string> = {
@@ -709,6 +799,9 @@ const CHANNEL_LINK: Localized<string> = {
   bg: "Вижте обвивката и собственика на ключовете",
   tr: "Zarf biçimine ve anahtar sahipliğine bakın",
   hu: "Burkolat és a kulcsok birtoklása",
+  "pt-BR": "Consultar o envelope e a posse das chaves",
+  ko: "봉투와 키 소유 구조 확인하기",
+  ar: "راجع بنية المغلف وملكية المفاتيح",
 };
 
 const ALERT_NAME: Localized<string> = {
@@ -730,6 +823,9 @@ const ALERT_NAME: Localized<string> = {
   bg: "Дежурни аларми и безопасност",
   tr: "Operasyon ve güvenlik uyarıları",
   hu: "Üzemeltetési és biztonsági riasztások",
+  "pt-BR": "Alertas de operação e segurança",
+  ko: "운영 및 보안 알림",
+  ar: "تنبيهات التشغيل والأمن",
 };
 
 const ALERT_ACTOR: Localized<string> = {
@@ -751,6 +847,9 @@ const ALERT_ACTOR: Localized<string> = {
   bg: "Дежурен · сигурност",
   tr: "Nöbetçi operasyon · güvenlik",
   hu: "Riasztásüzemeltetés · biztonság",
+  "pt-BR": "Plantão de operação · segurança",
+  ko: "당직 운영 · 보안",
+  ar: "التشغيل المناوب · الأمن",
 };
 
 const ALERT_TAGLINE: Localized<string> = {
@@ -772,6 +871,9 @@ const ALERT_TAGLINE: Localized<string> = {
   bg: "Един Webhook от мониторинга става картичка, която се потвърждава с докосване.",
   tr: "İzleme sisteminizin tek Webhook’u, telefonda onaylanabilir bir karta dönüşür.",
   hu: "A megfigyelésed egy Webhook-hívása nyugtázható kártyává válik a telefonján.",
+  "pt-BR": "Um webhook do seu monitoramento vira um cartão confirmável no celular.",
+  ko: "모니터링에서 보낸 웹훅 하나가 휴대폰에서 확인 버튼이 달린 카드가 됩니다.",
+  ar: "يتحوّل ويب هوك واحد من نظام المراقبة إلى بطاقة قابلة للإقرار على الهاتف.",
 };
 
 const ALERT_BODY: Localized<string> = {
@@ -793,6 +895,9 @@ const ALERT_BODY: Localized<string> = {
   bg: "Grafana или Alertmanager стигат до Webhook с проверка на токена; под прага на тежестта събитията се пазят без картичка, а дежурният потвърждава с докосване по картичката. Един отпечатък се таксува в CP веднъж, колкото и пъти да се препраща.",
   tr: "Grafana ya da Alertmanager, jeton denetimli bir Webhook’a gönderir; eşik altı olaylar kart çıkarmadan kaydedilir. Yanıtlayan kişi onayı doğrudan kartın üstünde verir. Aynı olay parmak izi, kaç kez yeniden gönderilirse gönderilsin yalnızca bir kez ölçülür.",
   hu: "A Grafana vagy Alertmanager tokennel őrzött Webhook-címre küld; a súlyossági küszöb alatti események csak tárolódnak, kártya nem kel belőlük, az ügyeletes pedig a kártyán koppintva nyugtázza. Egy esemény lenyomata egyszer kerül felszámításra, bárhányszor küldik újra.",
+  "pt-BR": "O Grafana ou o Alertmanager envia para um webhook verificado por token, eventos abaixo do piso de severidade são armazenados sem gerar um cartão, e o responsável toca em confirmar direto no cartão. A impressão digital de um evento é medida uma única vez, não importa quantas vezes ele seja reenviado.",
+  ko: "Grafana 또는 Alertmanager가 토큰으로 검증되는 웹훅으로 이벤트를 보내고, 심각도 하한 미만의 이벤트는 카드를 만들지 않고 저장만 됩니다. 대응 담당자는 카드에서 바로 확인을 탭합니다. 하나의 이벤트 지문은 몇 번을 다시 보내든 한 번만 계량됩니다.",
+  ar: "يرسل Grafana أو Alertmanager طلبه إلى ويب هوك محمي برمز، وتُخزَّن الأحداث الأدنى من حد الخطورة دون إنشاء بطاقة، ويضغط المستجيب على «إقرار» مباشرة على البطاقة. وتُحتسب بصمة الحدث الواحدة مرة واحدة، مهما تكرّر إرسالها.",
 };
 
 const ALERT_S1: Localized<string> = {
@@ -814,6 +919,9 @@ const ALERT_S1: Localized<string> = {
   bg: "Мониторингът изпраща Webhook",
   tr: "İzleme bir Webhook gönderir",
   hu: "A megfigyelés Webhook-üzenetet küld",
+  "pt-BR": "O monitoramento envia um webhook",
+  ko: "모니터링이 웹훅을 전송합니다",
+  ar: "يرسل نظام المراقبة ويب هوك",
 };
 
 const ALERT_S2: Localized<string> = {
@@ -835,6 +943,9 @@ const ALERT_S2: Localized<string> = {
   bg: "Прагът на тежестта решава дали става картичка",
   tr: "Eşik kartı çıkarıp çıkarmamaya karar verir",
   hu: "A súlyossági küszöb dönt a kártyáról",
+  "pt-BR": "A barreira de severidade gera o cartão",
+  ko: "심각도 게이트가 카드를 생성합니다",
+  ar: "بوابة الخطورة تُنشئ البطاقة",
 };
 
 const ALERT_S3: Localized<string> = {
@@ -856,6 +967,9 @@ const ALERT_S3: Localized<string> = {
   bg: "Докосване потвърждава, напредъкът се запълва на място",
   tr: "Onaylayın, ilerleme aynı kartta dolar",
   hu: "Nyugta koppintva, a sáv a helyén telik",
+  "pt-BR": "Toque em confirmar; o progresso avança ali mesmo",
+  ko: "확인을 탭하면 진행 상태가 제자리에서 채워집니다",
+  ar: "اضغط «إقرار»، فيُستكمل التقدّم في مكانه",
 };
 
 const ALERT_LINK: Localized<string> = {
@@ -877,6 +991,9 @@ const ALERT_LINK: Localized<string> = {
   bg: "Вижте оторизацията, ограничителя и дневника",
   tr: "Yetkilendirme, hız sınırı ve denetim kaydı",
   hu: "Hitelesítés, korlát és audit átnézése",
+  "pt-BR": "Revisar autenticação, limite de taxa e auditoria",
+  ko: "인증, 레이트 리밋, 감사 검토하기",
+  ar: "راجع المصادقة وتحديد المعدّل والتدقيق",
 };
 
 const SSO_NAME: Localized<string> = {
@@ -898,6 +1015,9 @@ const SSO_NAME: Localized<string> = {
   bg: "QR вход без проследяване",
   tr: "İz bırakmayan QR girişi",
   hu: "Névtelen belépés QR-olvasással",
+  "pt-BR": "Login anônimo por escaneamento",
+  ko: "익명 스캔 로그인",
+  ar: "تسجيل دخول مجهول بالمسح",
 };
 
 const SSO_ACTOR: Localized<string> = {
@@ -919,6 +1039,9 @@ const SSO_ACTOR: Localized<string> = {
   bg: "Сайт · вътрешна система",
   tr: "Web sitesi · iç sistem",
   hu: "Weboldal · belső rendszer",
+  "pt-BR": "Um site · um sistema interno",
+  ko: "웹사이트 · 내부 시스템",
+  ar: "موقع ويب · نظام داخلي",
 };
 
 const SSO_TAGLINE: Localized<string> = {
@@ -940,6 +1063,9 @@ const SSO_TAGLINE: Localized<string> = {
   bg: "Нито телефонен номер, нито имейл: сканирането завършва влизането.",
   tr: "Telefon numarası yok, e-posta yok: telefonla taramak giriş için yeterli.",
   hu: "Nincs telefonszám, nincs e-mail: a telefonnal beolvasva bejelentkezik.",
+  "pt-BR": "Sem número de telefone, sem e-mail: escanear com o celular autentica o usuário.",
+  ko: "전화번호도 이메일도 없이, 휴대폰으로 스캔하면 로그인됩니다.",
+  ar: "لا رقم هاتف ولا بريد إلكتروني: المسح بالهاتف يسجّل دخول المستخدم.",
 };
 
 const SSO_BODY: Localized<string> = {
@@ -961,6 +1087,9 @@ const SSO_BODY: Localized<string> = {
   bg: "Сайтът рисува QR със случайно id; страницата за сканиране пита само състоянието и никога не получава самоличност, а входният ключ се издава еднократно при проверка на токена и изгаря при употреба. QR не струва нищо, таксата идва при потвърждение.",
   tr: "Siteniz rastgele bir oturum id’si taşıyan bir QR çizer; tarama sayfası yalnızca durumu yoklar, kimlik almaz. Kimlik bilgisi tek kez, jeton denetimli verify çağrısıyla verilir ve ilk kullanımda tükenir. QR çizimi ölçüme girmez; sayaç kullanıcı onayladığında ilerler.",
   hu: "Oldalod egy véletlen munkamenet-id-t vivő QR-kódot rajzol; az olvasólap csak az állapotot kérdezi, személyazonosságot nem. A tokennel őrzött verify hívás állítja ki a belépési igazolást; egyszer használható. A QR nem mérhető, a mérő nyugtázáskor indul.",
+  "pt-BR": "Seu site desenha um QR que carrega um id de sessão aleatório; a página de escaneamento consulta apenas o status e nunca recebe uma identidade, enquanto a própria credencial é entregue uma única vez, pela chamada de verificação protegida por token, e é consumida no primeiro uso. Desenhar o QR não custa nada — o medidor avança quando o usuário confirma.",
+  ko: "사이트가 임의의 세션 ID를 담은 QR을 표시하고, 스캔 페이지는 상태만 폴링하며 신원 정보는 결코 받지 않습니다. 자격 증명 자체는 토큰으로 검증되는 verify 호출을 통해 한 번만 발급되고 첫 사용 시 소진됩니다. QR을 그리는 데는 비용이 들지 않으며, 사용자가 확인할 때 계량기가 움직입니다.",
+  ar: "يعرض موقعك رمز QR يحمل معرّف جلسة عشوائيًا؛ وصفحة المسح تستعلم عن الحالة فقط ولا تتلقى أي هوية، أما بيانات الاعتماد نفسها فتُسلَّم مرة واحدة عبر استدعاء التحقق المحمي برمز، وتُستهلك عند أول استخدام. عرض رمز QR لا يكلّف شيئًا — فالعداد يتحرك عندما يؤكّد المستخدم.",
 };
 
 const SSO_S1: Localized<string> = {
@@ -982,6 +1111,9 @@ const SSO_S1: Localized<string> = {
   bg: "Сайтът рисува QR код",
   tr: "Site bir QR kodu çizer",
   hu: "Az oldal QR-kódot rajzol",
+  "pt-BR": "O site desenha um código QR",
+  ko: "사이트가 QR 코드를 표시합니다",
+  ar: "يعرض الموقع رمز QR",
 };
 
 const SSO_S2: Localized<string> = {
@@ -1003,6 +1135,9 @@ const SSO_S2: Localized<string> = {
   bg: "Потребителят сканира и потвърждава",
   tr: "Kullanıcı tarar ve onaylar",
   hu: "A felhasználó beolvassa és nyugtázza",
+  "pt-BR": "O usuário escaneia e confirma",
+  ko: "사용자가 스캔하고 확인합니다",
+  ar: "يمسح المستخدم ويؤكّد",
 };
 
 const SSO_S3: Localized<string> = {
@@ -1024,6 +1159,9 @@ const SSO_S3: Localized<string> = {
   bg: "Еднократният ключ се връща в сайта",
   tr: "Tek kullanımlık kimlik bilgisi siteye döner",
   hu: "Egyszeri igazolás megy vissza az oldalnak",
+  "pt-BR": "Uma credencial de uso único volta para o site",
+  ko: "일회용 자격 증명이 사이트로 반환됩니다",
+  ar: "تعود بيانات اعتماد لمرة واحدة إلى الموقع",
 };
 
 const SSO_LINK: Localized<string> = {
@@ -1045,6 +1183,9 @@ const SSO_LINK: Localized<string> = {
   bg: "Пуснете QR потока в пясъчницата",
   tr: "Tarama akışını kum havuzunda çalıştırın",
   hu: "Futtasd végig a beolvasást a homokozóban",
+  "pt-BR": "Executar o fluxo de escaneamento no sandbox",
+  ko: "샌드박스에서 스캔 흐름 실행하기",
+  ar: "شغّل مسار المسح في بيئة الاختبار",
 };
 
 const LOCAL_NAME: Localized<string> = {
@@ -1065,7 +1206,10 @@ const LOCAL_NAME: Localized<string> = {
   uk: "Підключення локального агента",
   bg: "Свързване на локален Agent",
   tr: "Kendi yerel Agent’ınızı bağlayın",
-  hu: "Saját helyi Agent bekötése"
+  hu: "Saját helyi Agent bekötése",
+  "pt-BR": "Conectar o seu próprio agente local",
+  ko: "자체 로컬 에이전트 연결",
+  ar: "اربط الوكيل المحلي الخاص بك",
 };
 
 const LOCAL_ACTOR: Localized<string> = {
@@ -1086,7 +1230,10 @@ const LOCAL_ACTOR: Localized<string> = {
   uk: "Власна модель · внутрішня мережа",
   bg: "Собствен модел · вътрешна мрежа",
   tr: "Kendi modeliniz · iç ağ",
-  hu: "Saját modell · helyi szerver"
+  hu: "Saját modell · helyi szerver",
+  "pt-BR": "Modelo auto-hospedado · intranet",
+  ko: "자체 호스팅 모델 · 인트라넷",
+  ar: "نموذج مستضاف ذاتيًا · شبكة داخلية",
 };
 
 const LOCAL_TAGLINE: Localized<string> = {
@@ -1107,7 +1254,10 @@ const LOCAL_TAGLINE: Localized<string> = {
   uk: "Сервісний акаунт відповідає моделлю, яка ніколи не покидає ваш сервер.",
   bg: "Сервизният акаунт отговаря с модел, който никога не напуска сървъра ви.",
   tr: "Hizmet hesabı, makinenizden hiç çıkmayan bir modelden yanıtlar.",
-  hu: "A szolgáltatási fiók olyan modellből válaszol, amely soha nem hagyja el a géped."
+  hu: "A szolgáltatási fiók olyan modellből válaszol, amely soha nem hagyja el a géped.",
+  "pt-BR": "A conta de serviço responde a partir de um modelo que nunca sai da sua máquina.",
+  ko: "서비스 계정이 자체 머신을 벗어나지 않는 모델로 답변합니다.",
+  ar: "يجيب حساب الخدمة من نموذج لا يغادر جهازك أبدًا.",
 };
 
 const LOCAL_BODY: Localized<string> = {
@@ -1128,7 +1278,10 @@ const LOCAL_BODY: Localized<string> = {
   uk: "POPOPX_AI_BASE_URL приймає будь-яку адресу chat completions, сумісну з OpenAI, тож локальне Ollama на http://127.0.0.1:11434/v1 — ще одне значення, а POPOPX_AI_MODEL задає модель. Адреса й ключ — значення середовища, а не поля консолі, тож лишаються на вашому сервері: панель AI гаряче править рівно шість ключів — system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
   bg: "POPOPX_AI_BASE_URL приема всеки OpenAI-съвместим chat completions адрес, затова локалното Ollama на http://127.0.0.1:11434/v1 е просто още една стойност, а POPOPX_AI_MODEL назова модела. Адресът и ключът са стойности на средата, не полета в конзолата, и остават на вашия сървър: AI панелът горещо редактира точно шест ключа — system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
   tr: "POPOPX_AI_BASE_URL, OpenAI uyumlu her chat completions adresini kabul eder; dolayısıyla makinenizdeki bir Ollama (http://127.0.0.1:11434/v1) yalnızca bir başka değerdir, modeli ise POPOPX_AI_MODEL adlandırır. Adres ve anahtar, konsol alanı değil ortam değerleri olduğu için kendi sunucunuzda kalır: AI paneli hot olarak tam altı anahtarı düzenler — system_prompt, model, history_size, temperature, max_tokens ve exhausted_message.",
-  hu: "POPOPX_AI_BASE_URL elé bármilyen OpenAI-kompatibilis chat completions cím kerülhet, a helyi Ollama (http://127.0.0.1:11434/v1) csak egy további érték, a POPOPX_AI_MODEL megnevezi a modellt. A cím és a kulcs környezeti érték, nem konzolos mező, ezért a saját szervereden marad: az AI-panel melegen pontosan hat kulcsot szerkeszt — system_prompt, model, history_size, temperature, max_tokens, exhausted_message."
+  hu: "POPOPX_AI_BASE_URL elé bármilyen OpenAI-kompatibilis chat completions cím kerülhet, a helyi Ollama (http://127.0.0.1:11434/v1) csak egy további érték, a POPOPX_AI_MODEL megnevezi a modellt. A cím és a kulcs környezeti érték, nem konzolos mező, ezért a saját szervereden marad: az AI-panel melegen pontosan hat kulcsot szerkeszt — system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  "pt-BR": "POPOPX_AI_BASE_URL aceita qualquer endereço de chat completions compatível com OpenAI, então um Ollama local em http://127.0.0.1:11434/v1 é apenas mais um valor, e POPOPX_AI_MODEL dá nome ao modelo. O endereço e a chave são valores de ambiente, e não campos do console, por isso ficam no seu servidor: o painel de IA edita a quente apenas seis chaves — system_prompt, model, history_size, temperature, max_tokens, exhausted_message.",
+  ko: "POPOPX_AI_BASE_URL은 OpenAI 호환 chat completions 주소라면 무엇이든 받아들이므로 http://127.0.0.1:11434/v1에 있는 로컬 Ollama도 또 하나의 값일 뿐이고, POPOPX_AI_MODEL이 모델 이름을 지정합니다. 주소와 키는 콘솔 필드가 아니라 환경 값이므로 서버에 그대로 남습니다: AI 패널이 즉석에서 편집하는 키는 system_prompt, model, history_size, temperature, max_tokens, exhausted_message 여섯 개뿐입니다.",
+  ar: "يقبل POPOPX_AI_BASE_URL أي عنوان chat completions متوافق مع OpenAI، لذا فإن Ollama محليًا على http://127.0.0.1:11434/v1 ليس إلا قيمة أخرى، ويسمّي POPOPX_AI_MODEL الطراز. والعنوان والمفتاح قيمتا بيئة لا حقول في وحدة التحكم، لذا يبقيان على خادمك: لوحة الذكاء الاصطناعي تعدّل آنيًا ستة مفاتيح فقط — system_prompt وmodel وhistory_size وtemperature وmax_tokens وexhausted_message.",
 };
 
 const LOCAL_S1: Localized<string> = {
@@ -1149,7 +1302,10 @@ const LOCAL_S1: Localized<string> = {
   uk: "Вкажіть у POPOPX_AI_BASE_URL власну адресу",
   bg: "Задайте вашия адрес в POPOPX_AI_BASE_URL",
   tr: "POPOPX_AI_BASE_URL’ı kendi adresinize yöneltin",
-  hu: "Állítsd a POPOPX_AI_BASE_URL értékét a saját címedre"
+  hu: "Állítsd a POPOPX_AI_BASE_URL értékét a saját címedre",
+  "pt-BR": "Aponte POPOPX_AI_BASE_URL para o seu próprio endereço",
+  ko: "POPOPX_AI_BASE_URL을 자체 주소로 지정",
+  ar: "وجّه POPOPX_AI_BASE_URL إلى عنوانك الخاص",
 };
 
 const LOCAL_S2: Localized<string> = {
@@ -1170,7 +1326,10 @@ const LOCAL_S2: Localized<string> = {
   uk: "Назвіть модель у POPOPX_AI_MODEL",
   bg: "Назовете модела в POPOPX_AI_MODEL",
   tr: "Modeli POPOPX_AI_MODEL ile adlandırın",
-  hu: "Add meg a modellt a POPOPX_AI_MODEL értékben"
+  hu: "Add meg a modellt a POPOPX_AI_MODEL értékben",
+  "pt-BR": "Indique o modelo em POPOPX_AI_MODEL",
+  ko: "POPOPX_AI_MODEL에 모델 이름 지정",
+  ar: "حدّد اسم النموذج في POPOPX_AI_MODEL",
 };
 
 const LOCAL_S3: Localized<string> = {
@@ -1191,7 +1350,10 @@ const LOCAL_S3: Localized<string> = {
   uk: "Один перезапуск — і відповідь приходить звичайним повідомленням",
   bg: "Едно рестартиране — и отговорът идва като обикновено съобщение",
   tr: "Bir kez yeniden başlatın; yanıt normal mesaj olur",
-  hu: "Indítsd újra egyszer; a válasz normál üzenetként érkezik"
+  hu: "Indítsd újra egyszer; a válasz normál üzenetként érkezik",
+  "pt-BR": "Reinicie uma vez; a resposta chega como uma mensagem normal",
+  ko: "한 번 재시작하면 답변이 일반 메시지로 도착합니다",
+  ar: "أعد التشغيل مرة واحدة، فيصل الرد كرسالة عادية",
 };
 
 const LOCAL_LINK: Localized<string> = {
@@ -1212,7 +1374,10 @@ const LOCAL_LINK: Localized<string> = {
   uk: "Переглянути файл середовища й крок перезапуску",
   bg: "Отворете файла на средата и стъпката за рестарт",
   tr: "Ortam dosyasını ve yeniden başlatma adımını açın",
-  hu: "Nyisd meg a környezeti fájlt és az újraindítást"
+  hu: "Nyisd meg a környezeti fájlt és az újraindítást",
+  "pt-BR": "Abrir o arquivo de ambiente e a etapa de reinício",
+  ko: "환경 파일과 재시작 절차 보기",
+  ar: "افتح ملف البيئة وخطوة إعادة التشغيل",
 };
 
 /* ── COPY BLOCK END ──────────────────────────────────────────────────────── */

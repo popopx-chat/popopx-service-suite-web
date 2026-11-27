@@ -60,9 +60,9 @@ export const NODE_PORTAL_URL = "https://node.popopx.chat";
  * full `install` guide behind it).
  *
  * The ids are deliberately the ones the shipped page already uses. Several
- * 18-language copy strings inside `InstallAndUsageGuideSection.tsx` name
+ * 21-language copy strings inside `InstallAndUsageGuideSection.tsx` name
  * `#sandbox` and `#directory` in their prose, so renaming an anchor is a
- * translation change in eighteen places, not a one-line edit.
+ * translation change in twenty-one places, not a one-line edit.
  *
  * `overview` is the hero plus `#scenarios`, the six business cards directly
  * below it. The scenario block gets no entry of its own here on purpose: seven

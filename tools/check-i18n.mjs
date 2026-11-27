@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * i18n completeness checker — the oracle behind "the portal speaks the same 18
- * languages as the iOS client".
+ * i18n completeness checker — the oracle behind "the portal speaks 21
+ * languages: the iOS client's 18 plus pt-BR, ko and ar".
  *
- * TypeScript already proves a `Localized<T>` object lists all 18 locales (it is
+ * TypeScript already proves a `Localized<T>` object lists all 21 locales (it is
  * a total `Record`), so `npm run typecheck` catches a missing key. This script
  * catches the two things the compiler cannot see:
  *
@@ -28,14 +28,19 @@ import ts from "typescript";
 const ROOT = process.cwd();
 const SRC = join(ROOT, "src");
 
-/** The 18 tags from `CFBundleLocalizations` in apps/ios/POPOPX--iOS--Info.plist. */
+/**
+ * The 18 tags from `CFBundleLocalizations` in apps/ios/POPOPX--iOS--Info.plist,
+ * then the three this portal adds (pt-BR, ko, ar). Keep this list in sync with
+ * `LOCALES` in `src/lib/i18n.tsx`; `npm run check:rtl` fails if the two drift.
+ */
 const LOCALES = [
   "en", "ru", "de", "fr", "it", "nl", "cs", "zh-Hans", "zh-Hant", "es",
   "pl", "ja", "th", "fi", "uk", "bg", "tr", "hu",
+  "pt-BR", "ko", "ar",
 ];
 
-/** Tags that must never appear in copy objects (old tri-lingual scheme). */
-const STALE = ["zh-CN", "zh-TW"];
+/** Tags that must never appear in copy objects (old or BCP-47-loose schemes). */
+const STALE = ["zh-CN", "zh-TW", "pt", "pt-PT"];
 
 const LOCALE_SET = new Set(LOCALES);
 const QUIET = process.argv.includes("--quiet");
@@ -47,11 +52,12 @@ const QUIET = process.argv.includes("--quiet");
  */
 function isTechnical(text) {
   if (text.length <= 3) return true;
-  if (/^[A-Z0-9 .*:/#%&()+,;=_/\\[\]{}<>-]+$/.test(text)) return true; // ASCII caps/digits
-  if (/^(https?:|ws?:|popopx:\/\/|\/|\.\/)/.test(text)) return true;
-  if (/[${}<>|`]/.test(text)) return true;
-  if (/^(POPOPX|AGPL|SPDX|ISO|EVM|Solana|macOS|Ubuntu|CentOS|Docker|Nginx|FastAPI|SQLite)/.test(text)) return true;
   if (/^[0-9.,:%\-–—\s]+$/.test(text)) return true;
+  // No run of lowercase letters means no sentence: brands, identifiers, wire
+  // tokens. A product name followed by prose ("POPOPX logo …") no longer hides
+  // behind this test, which is the failure the 21-locale pass must surface.
+  if (!/[a-zà-ÿ]{2,}/.test(text)) return true;
+  if (/^(https?:|wss?:|popopx:\/\/)\S+$/.test(text)) return true;
   return false;
 }
 
@@ -111,7 +117,7 @@ for (const file of files) {
     ) {
       const name = ts.isFunctionDeclaration(node) && node.name ? ` ${node.name.getText()}` : "";
       errors.push(
-        `${rel}${at(node)}: function${name} returns Localized<…> — a derived map hides unauthored languages from this oracle and from tsc. Author literal 18-key objects instead.`,
+        `${rel}${at(node)}: function${name} returns Localized<…> — a derived map hides unauthored languages from this oracle and from tsc. Author literal 21-key objects instead.`,
       );
     }
 
@@ -127,7 +133,7 @@ for (const file of files) {
       const isMapType = t.includes("Localized<") || t.includes("Record<Locale") || mapAliases.has(t);
       if (isMapType && !t.includes("Partial<")) {
         errors.push(
-          `${rel}${at(node)}: as ${t} casts an untyped map into the total locale type — 18 languages are not proven here; write the literal (or use \`satisfies\`, which checks)`,
+          `${rel}${at(node)}: as ${t} casts an untyped map into the total locale type — 21 languages are not proven here; write the literal (or use \`satisfies\`, which checks)`,
         );
       }
     }
@@ -160,7 +166,7 @@ for (const file of files) {
         const spreads = node.properties.filter((prop) => ts.isSpreadAssignment(prop));
         if (spreads.length > 0) {
           errors.push(
-            `${rel}${at(node)}: copy object spreads ${spreads.length} map(s) — every one of the 18 slots must be written literally or the oracle cannot see a missing language`,
+            `${rel}${at(node)}: copy object spreads ${spreads.length} map(s) — every one of the 21 slots must be written literally or the oracle cannot see a missing language`,
           );
         }
         if (missing.length > 0) {

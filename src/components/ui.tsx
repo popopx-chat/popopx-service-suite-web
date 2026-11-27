@@ -38,6 +38,9 @@ export const COPY_FEEDBACK: Localized<string> = {
   bg: "Копирано",
   tr: "Kopyalandı",
   hu: "Másolva",
+  "pt-BR": "Copiado",
+  ko: "복사됨",
+  ar: "تم النسخ",
 };
 
 export const COPY_LABEL: Localized<string> = {
@@ -59,6 +62,9 @@ export const COPY_LABEL: Localized<string> = {
   bg: "Копиране",
   tr: "Kopyala",
   hu: "Másolás",
+  "pt-BR": "Copiar",
+  ko: "복사",
+  ar: "نسخ",
 };
 
 /** An all-empty slot, used when an optional string was not supplied. */
@@ -81,6 +87,9 @@ const EMPTY: Localized<string> = {
   bg: "",
   tr: "",
   hu: "",
+  "pt-BR": "",
+  ko: "",
+  ar: "",
 };
 
 /** Resets the "copied" tick after this many milliseconds. */
@@ -192,7 +201,7 @@ export function CodeBlock({
 }): ReactElement {
   return (
     <div className="glass-inset relative">
-      <pre className={`code-surface border-0 bg-transparent ${maxHeightClass ?? ""}`} tabIndex={0}>
+      <pre dir="ltr" className={`code-surface border-0 bg-transparent ${maxHeightClass ?? ""}`} tabIndex={0}>
         <code>{code}</code>
       </pre>
       {showCopy ? (

@@ -65,6 +65,9 @@ const EYEBROW: Localized<string> = {
   bg: "Статус и журнал на промените",
   tr: "Durum ve değişiklik günlüğü",
   hu: "Állapot és változásnapló",
+  "pt-BR": "Status e changelog",
+  ko: "상태 및 변경 이력",
+  ar: "الحالة وسجل التغييرات",
 };
 
 const TITLE: Localized<string> = {
@@ -86,6 +89,9 @@ const TITLE: Localized<string> = {
   bg: "Статус и журнал: какво важи на 2026-11-26 и кой комит го предизвика",
   tr: "Durum ve değişiklik günlüğü: 2026-11-26 itibarıyla ne geçerli ve hangi kayıt bunu sağladı",
   hu: "Állapot és változásnapló: 2026-11-26-én mi áll fenn, és melyik commit hozta létre",
+  "pt-BR": "Status e changelog: o que vale em 2026-11-26 e qual commit fez isso valer",
+  ko: "상태 및 변경 이력: 2026-11-26에 성립하는 것과, 그것을 성립시킨 커밋",
+  ar: "الحالة وسجل التغييرات: ما يظل صحيحًا في 2026-11-26، وأي إيداع جعله كذلك",
 };
 
 const SUBTITLE: Localized<string> = {
@@ -107,6 +113,9 @@ const SUBTITLE: Localized<string> = {
   bg: "В тази секция няма индикатор, защото няма какво да се показва: няма статус страница, няма ъптайм поток, няма аналитика. Всичко по-долу е прочетено от двете хранилища на 2026-11-26, а командите, които възпроизвеждат числата, са отпечатани до тях.",
   tr: "Bu bölümde canlı durum ışığı yok, çünkü aydınlatılacak bir şey yok: durum sayfası yok, çalışma süresi akışı yok, analitik yok. Aşağıdaki her şey 2026-11-26’te iki depodan okundu ve bu sayıları yeniden üreten komutlar yanlarında basılı.",
   hu: "Ebben a fejezetben nincs élő jelző, mert nincs mit kijelezni: nincs statuszoldal, nincs uptime-hírcsatorna, nincs analitika. Az alábbiak mind a két repóból származnak 2026-11-26 keltezéssel, és a számokat újra előállító parancsok mellettük találhatók.",
+  "pt-BR": "Não há nenhuma luz de status nesta seção, porque não há nada para acender: nenhuma página de status, nenhum feed de disponibilidade, nenhuma análise. Tudo abaixo foi lido dos dois repositórios em 2026-11-26, e os comandos que recalculam os números estão impressos ao lado deles.",
+  ko: "이 섹션에는 상태 표시등이 없습니다. 표시할 것이 없기 때문입니다. 상태 페이지도, 업타임 피드도, 분석 도구도 없습니다. 아래의 모든 내용은 2026-11-26에 두 저장소에서 읽어 왔으며, 수치를 다시 도출하는 명령이 옆에 함께 표시되어 있습니다.",
+  ar: "لا يوجد ضوء حالة في هذا القسم، لأنه لا شيء يُضاء: لا صفحة حالة، ولا تغذية لوقت التشغيل، ولا تحليلات. وكل ما أدناه قُرئ من المستودعين في 2026-11-26، والأوامر التي تعيد استخراج الأرقام مطبوعة إلى جانبها.",
 };
 
 const PILL_ASOF: Localized<string> = {
@@ -128,6 +137,9 @@ const PILL_ASOF: Localized<string> = {
   bg: "Прочетено от хранилищата на 2026-11-26",
   tr: "2026-11-26’te depolardan okundu",
   hu: "A repókból leolvasva 2026-11-26-kor",
+  "pt-BR": "Lido dos repositórios em 2026-11-26",
+  ko: "2026-11-26에 저장소에서 읽음",
+  ar: "مقروء من المستودعين في 2026-11-26",
 };
 
 const PILL_STATIC: Localized<string> = {
@@ -149,6 +161,9 @@ const PILL_STATIC: Localized<string> = {
   bg: "Нищо не се проверя периодично, следователно нищо тук не е на живо",
   tr: "Hiçbir şey yoklanmadığı için burada hiçbir şey canlı değil",
   hu: "Semmit nem kérdezünk le, így itt semmi nincs élőben",
+  "pt-BR": "Nada é consultado periodicamente, então nada aqui é em tempo real",
+  ko: "폴링하는 것이 없으므로 여기의 어떤 것도 실시간이 아닙니다",
+  ar: "لا يجري استقصاء دوري لأي شيء، لذا لا شيء هنا مباشر",
 };
 
 const PILL_RECIPE: Localized<string> = {
@@ -170,6 +185,9 @@ const PILL_RECIPE: Localized<string> = {
   bg: "Всяко число е публикувано с командата си",
   tr: "Her sayım, komutuyla birlikte yayımlanıyor",
   hu: "Minden szám a hozzá tartozó paranccsal jelenik meg",
+  "pt-BR": "Cada contagem é publicada junto com o seu comando",
+  ko: "모든 집계는 명령과 함께 게시됩니다",
+  ar: "كل عدد يُنشر مع الأمر الخاص به",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -195,6 +213,9 @@ const STATUS_TITLE: Localized<string> = {
   bg: "Факти към 2026-11-26",
   tr: "2026-11-26 itibarıyla gerçekler",
   hu: "Tények 2026-11-26-i állapottal",
+  "pt-BR": "Fatos em 2026-11-26",
+  ko: "2026-11-26 기준 사실",
+  ar: "وقائع بتاريخ 2026-11-26",
 };
 
 const STATUS_NOTE: Localized<string> = {
@@ -216,6 +237,9 @@ const STATUS_NOTE: Localized<string> = {
   bg: "Статичен HTML, статични числа. Нищо на тази страница не знае дали гейтуейт работи в момента; за това попитайте собствения си хост с GET /api/v1/status. Стойностите по-долу са свойства на дървото с код, проверени на посочената по-горе дата.",
   tr: "Statik HTML, statik sayılar. Bu sayfadaki hiçbir şey bir ağ geçidinin şu anda çalışıp çalışmadığını bilmez; bunun için kendi sunucunuza GET /api/v1/status ile sorun. Aşağıdaki değerler kaynak ağacının özellikleridir ve yukarıda belirtilen tarihte kontrol edilmiştir.",
   hu: "Statikus HTML, statikus számok. Az oldal nem tudja, fut-e éppen egy átjáró; ezért a saját kiszolgálóját kérdezze meg a GET /api/v1/status hívással. Az alábbi értékek a forrásfa tulajdonságai, a fent megadott napon ellenőrizve.",
+  "pt-BR": "HTML estático, números estáticos. Nada nesta página sabe se um gateway está rodando agora; para isso, pergunte ao seu próprio host com GET /api/v1/status. Os valores abaixo descrevem propriedades da árvore de código-fonte e foram verificados na data indicada acima.",
+  ko: "정적 HTML, 정적 수치입니다. 이 페이지의 어느 부분도 게이트웨이가 지금 실행 중인지 알지 못합니다. 그것은 GET /api/v1/status로 자체 호스트에 물어보십시오. 아래 값은 소스 트리의 속성이며, 위에 명시한 날짜에 확인한 것입니다.",
+  ar: "HTML ثابت وأرقام ثابتة. لا شيء في هذه الصفحة يعرف ما إذا كانت بوابة ما تعمل الآن؛ ولذلك اسأل مضيفك عبر GET /api/v1/status. والقيم أدناه خصائص لشجرة المصدر، فُحصت في التاريخ المذكور أعلاه.",
 };
 
 const STATS: readonly Stat[] = [
@@ -242,6 +266,9 @@ const STATS: readonly Stat[] = [
       bg: "Дата, на която всяка стойност на страницата е прочетена от двете работни копия",
       tr: "Bu sayfadaki her değerin iki depodan okunduğu tarih",
       hu: "Dátum, amikor az oldal minden értékét a két munkamásolatból olvastuk",
+      "pt-BR": "Data em que cada valor desta página foi lido dos dois checkouts",
+      ko: "이 페이지의 모든 값을 두 체크아웃에서 읽어 온 날짜",
+      ar: "التاريخ الذي قُرئت فيه كل قيمة في هذه الصفحة من كلا النسختين المحليتين",
     },
   },
   {
@@ -267,6 +294,9 @@ const STATS: readonly Stat[] = [
       bg: "Версия на гейтуейта; същият низ връща GET /api/v1/status",
       tr: "Ağ geçidi sürümü; GET /api/v1/status aynı dizeyi döndürür",
       hu: "Az átjáró verziója; ugyanezt a karaktersort adja vissza a GET /api/v1/status",
+      "pt-BR": "Versão do gateway, e a mesma string que GET /api/v1/status retorna",
+      ko: "게이트웨이 버전이며, GET /api/v1/status가 반환하는 문자열과 같습니다",
+      ar: "إصدار البوابة، وهو السلسلة نفسها التي يعيدها GET /api/v1/status",
     },
   },
   {
@@ -292,6 +322,9 @@ const STATS: readonly Stat[] = [
       bg: "SCHEMA_VERSION: една схема на базата данни, без стълба от миграции зад нея",
       tr: "SCHEMA_VERSION: tek veritabanı şeması, arkasında göç merdiveni yok",
       hu: "SCHEMA_VERSION: egy adatbázis-séma, nincs mögötte migrációs létra",
+      "pt-BR": "SCHEMA_VERSION: um único esquema de banco de dados, sem escada de migrações por trás",
+      ko: "SCHEMA_VERSION: 하나의 데이터베이스 스키마이며, 그 뒤에 마이그레이션 사다리는 없습니다",
+      ar: "SCHEMA_VERSION: مخطط واحد لقاعدة البيانات، لا سلّم ترحيل خلفه",
     },
   },
   {
@@ -317,6 +350,9 @@ const STATS: readonly Stat[] = [
       bg: "Единият релийз маркер в хранилището; сочи към комит f727323 от 2026-11-21",
       tr: "Depodaki tek sürüm etiketi; 2026-11-21 tarihli f727323 kaydına işaret ediyor",
       hu: "A repó egyetlen kiadási tagje; a 2026-11-21-i f727323 commitre mutat",
+      "pt-BR": "A única tag de versão no repositório; ela aponta para o commit f727323, datado de 2026-11-21",
+      ko: "저장소의 유일한 릴리스 태그이며, 2026-11-21 날짜의 커밋 f727323을 가리킵니다",
+      ar: "وسم الإصدار الوحيد في المستودع؛ يشير إلى الإيداع f727323 بتاريخ 2026-11-21",
     },
   },
   {
@@ -342,6 +378,9 @@ const STATS: readonly Stat[] = [
       bg: "Лиценз на бекенда, изписан като SPDX идентификаторът, който идва с кода",
       tr: "Arka uç lisansı, kodla birlikte gelen SPDX tanımlayıcısı olarak yazılmış",
       hu: "A backend licenc a kóddal együtt szállított SPDX-azonosítóval írva",
+      "pt-BR": "Licença do backend, escrita como o identificador SPDX que acompanha o código",
+      ko: "백엔드 라이선스이며, 코드에 포함된 SPDX 식별자 그대로 표기합니다",
+      ar: "رخصة الواجهة الخلفية، مكتوبة بالمعرّف SPDX الذي تأتي به الشيفرة",
     },
   },
   {
@@ -367,6 +406,9 @@ const STATS: readonly Stat[] = [
       bg: "Нативни плъгини в пакета: общо девет, четири са включени по подразбиране (ai_agent, alert_ops, privacy_sso, polls); останалите пет идват като истински код, но изключени",
       tr: "Paketteki yerleşik eklentiler: toplam dokuz, dördü varsayılan olarak açık (ai_agent, alert_ops, privacy_sso, polls); diğer beşi gerçek kod olarak geliyor ama kapalı",
       hu: "Natív bővítmények a csomagban: összesen kilenc, négy alapból bekapcsolva (ai_agent, alert_ops, privacy_sso, polls); a többi öt valódi kód, de kikapcsolva",
+      "pt-BR": "Plug-ins nativos no pacote: nove no total, quatro ligados por padrão (ai_agent, alert_ops, privacy_sso, polls); os outros cinco vêm como código real, mas desligados",
+      ko: "패키지의 네이티브 플러그인: 총 9개이며, 4개는 기본으로 켜져 있습니다(ai_agent, alert_ops, privacy_sso, polls). 나머지 5개는 실제 코드로 포함되어 있지만 꺼져 있습니다",
+      ar: "الإضافات الأصلية في الحزمة: تسع إجمالًا، أربع منها مفعّلة افتراضيًا (ai_agent وalert_ops وprivacy_sso وpolls)؛ والخمس الأخرى تأتي شيفرة حقيقية لكنها معطّلة",
     },
   },
   {
@@ -392,6 +434,9 @@ const STATS: readonly Stat[] = [
       bg: "Декоратори на пътища, регистрирани в кода: 59 върху ядрото плюс 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70 в деветте файла с плъгини",
       tr: "Kaynakta kayıtlı rota dekoratörleri: çekirdek uygulamada 59, dokuz eklenti dosyasında 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70",
       hu: "A forrásban regisztrált útvonal-dekorátorok: a törzsön 59, plusz 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70 a kilenc bővítményfájlban",
+      "pt-BR": "Decoradores de rota registrados no código-fonte: 59 no app principal, mais 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70 nos nove arquivos de plug-in",
+      ko: "소스에 등록된 라우트 데코레이터: 코어 앱에 59개, 그리고 9개 플러그인 파일에 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70개",
+      ar: "مزيّنات المسارات المسجلة في المصدر: 59 في التطبيق الأساسي إضافةً إلى 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70 في ملفات الإضافات التسعة",
     },
   },
   {
@@ -417,6 +462,9 @@ const STATS: readonly Stat[] = [
       bg: "Заводските стойности обслужват 89 пътя: 59 от ядрото плюс 30 от четирите включени плъгина (ai_agent 6, alert_ops 10, privacy_sso 6, polls 8); останалите пет остават изключени",
       tr: "Fabrika ayarları 89 rotaya yanıt verir: 59 çekirdek artı varsayılan açık dört eklentiden 30 (ai_agent 6, alert_ops 10, privacy_sso 6, polls 8); diğer beşi kapalı kalır",
       hu: "A gyári beállítások 89 útvonalat szolgálnak ki: 59 törzs plusz 30 a négy alapból bekapcsolt bővítményből (ai_agent 6, alert_ops 10, privacy_sso 6, polls 8); a másik öt kikapcsolva marad",
+      "pt-BR": "Os padrões de fábrica servem 89 rotas: 59 principais mais 30 dos quatro plug-ins que iniciam ligados (ai_agent 6, alert_ops 10, privacy_sso 6, polls 8); os outros cinco permanecem desligados",
+      ko: "출고 기본값으로 89개 라우트를 제공합니다: 코어 59개에 켜져 있는 4개 플러그인의 30개(ai_agent 6, alert_ops 10, privacy_sso 6, polls 8)를 더하며, 나머지 5개는 꺼진 상태로 남습니다",
+      ar: "تخدم الإعدادات الافتراضية من المصنع 89 مسارًا: 59 مسارًا أساسيًا إضافةً إلى 30 من الإضافات الأربع التي تبدأ مفعّلة (ai_agent 6، وalert_ops 10، وprivacy_sso 6، وpolls 8)؛ وتبقى الخمس الأخرى معطّلة",
     },
   },
   {
@@ -442,6 +490,9 @@ const STATS: readonly Stat[] = [
       bg: "Документирани основни пътища: два от 59 носят include_in_schema=False, затова 57 са изброени, макар всичките 59 да се обслужват",
       tr: "Belgelenmiş çekirdek rotalar: 59ʼdan ikisinde include_in_schema=False var, bu yüzden 57 listeleniyor ama 59ʼu da sunuluyor",
       hu: "Dokumentált törzs-útvonalak: az 59-ből kettőn include_in_schema=False áll, ezért 57 szerepel a listán, pedig mind az 59 kiszolgálva van",
+      "pt-BR": "Rotas principais documentadas: duas das 59 carregam include_in_schema=False, então 57 são listadas, embora todas as 59 sejam servidas",
+      ko: "문서화된 코어 라우트: 59개 중 2개가 include_in_schema=False를 가지므로, 59개 모두 제공되지만 목록에는 57개만 표시됩니다",
+      ar: "المسارات الأساسية الموثقة: مسارَان من أصل 59 يحملان include_in_schema=False، لذا تُسرد 57 رغم أن المسارات الـ59 كلها مخدومة",
     },
   },
   {
@@ -467,6 +518,9 @@ const STATS: readonly Stat[] = [
       bg: "Броячи на изчислителни кредити POPX-CP, всеки оценен със собствен ключ POPOPX_CP_* в средата",
       tr: "POPX-CP hesaplama kredisi sayaçları; her biri ortam dosyasındaki kendi POPOPX_CP_* anahtarıyla fiyatlanır",
       hu: "POPX-CP számítási kreditmérők, mindegyik a saját POPOPX_CP_* kulcsával árazva a környezeti fájlban",
+      "pt-BR": "Medidores de créditos de computação do POPX-CP, cada um com preço definido pela sua própria chave POPOPX_CP_* no arquivo de ambiente",
+      ko: "POPX-CP 컴퓨트 크레딧 미터이며, 각각 환경 파일의 자체 POPOPX_CP_* 키로 가격이 정해집니다",
+      ar: "عدّادات أرصدة الحوسبة POPX-CP، ولكل منها سعره بمفتاحه الخاص POPOPX_CP_* في ملف البيئة",
     },
   },
   {
@@ -492,31 +546,37 @@ const STATS: readonly Stat[] = [
       bg: "Комити в бекенд хранилището — цялата му публична история, изброена запис по запис по-долу",
       tr: "Arka uç deposundaki işlemler — tamamı açık geçmiş, aşağıda kayıt kayıt listelenmiş",
       hu: "Commitek a backend repóban — a teljes nyilvános előzmény, lent bejegyzésenként kilistázva",
+      "pt-BR": "Commits no repositório do backend — todo o seu histórico público, listado entrada por entrada abaixo",
+      ko: "백엔드 저장소의 커밋 — 전체 공개 이력이며, 아래에 항목별로 나열합니다",
+      ar: "الإيداعات في مستودع الواجهة الخلفية — تاريخه العام بأكمله، مسرودة إيداعًا إيداعًا أدناه",
     },
   },
   {
     key: "languages",
-    value: "18",
-    source: "apps/ios/POPOPX--iOS--Info.plist",
+    value: "21",
+    source: "src/lib/i18n.tsx",
     caption: {
-      en: "Portal languages: exactly the 18 tags in the iOS client’s CFBundleLocalizations, same order",
-      ru: "Языки портала: ровно те 18 тегов, что в CFBundleLocalizations клиента iOS, в том же порядке",
-      de: "Portal-Sprachen: exakt die 18 Tags aus CFBundleLocalizations des iOS-Clients, gleiche Reihenfolge",
-      fr: "Langues du portail : exactement les 18 tags de CFBundleLocalizations du client iOS, dans le même ordre",
-      it: "Lingue del portale: esattamente i 18 tag di CFBundleLocalizations del client iOS, stesso ordine",
-      nl: "Portaltalen: precies de 18 tags uit CFBundleLocalizations van de iOS-cliënt, zelfde volgorde",
-      cs: "Jazyky portálu: přesně 18 tagů z CFBundleLocalizations iOS klienta, ve stejném pořadí",
-      "zh-Hans": "门户语言数：与 iOS 客户端 CFBundleLocalizations 里的 18 个标签完全一致，顺序相同",
-      "zh-Hant": "入口語言數：與 iOS 用戶端 CFBundleLocalizations 裡的 18 個標籤完全一致，順序相同",
-      es: "Idiomas del portal: exactamente las 18 etiquetas de CFBundleLocalizations del cliente iOS, en el mismo orden",
-      pl: "Języki portalu: dokładnie te 18 tagów co CFBundleLocalizations klienta iOS, w tej samej kolejności",
-      ja: "ポータルの言語数。iOS クライアントの CFBundleLocalizations に並ぶ 18 タグと同一で、並び順も同じです",
-      th: "จำนวนภาษาของพอร์ทัล: ตรงกับ 18 แท็กใน CFBundleLocalizations ของไคลเอนต์ iOS และเรียงลำดับเหมือนกัน",
-      fi: "Portaalin kielet: täsmälleen ne 18 tagiä kuin iOS-asiakkaan CFBundleLocalizations, samassa järjestyksessä",
-      uk: "Мови порталу: рівно ті 18 тегів, що в CFBundleLocalizations клієнта iOS, у тому ж порядку",
-      bg: "Езици на портала: точно 18-те етикета в CFBundleLocalizations на iOS клиента, в същия ред",
-      tr: "Portal dilleri: iOS istemcisindeki CFBundleLocalizations etiketlerinin tam 18’i, aynı sırayla",
-      hu: "A portál nyelvei: pontosan az iOS ügyfél CFBundleLocalizations értékében lévő 18 tag, azonos sorrendben",
+      en: "Portal languages: the 18 tags in the iOS client’s CFBundleLocalizations plus pt-BR, ko and ar",
+      ru: "Языки портала: 18 тегов из CFBundleLocalizations клиента iOS плюс pt-BR, ko и ar",
+      de: "Portal-Sprachen: die 18 Tags aus CFBundleLocalizations des iOS-Clients plus pt-BR, ko und ar",
+      fr: "Langues du portail : les 18 tags de CFBundleLocalizations du client iOS, plus pt-BR, ko et ar",
+      it: "Lingue del portale: i 18 tag di CFBundleLocalizations del client iOS più pt-BR, ko e ar",
+      nl: "Portaltalen: de 18 tags uit CFBundleLocalizations van de iOS-cliënt plus pt-BR, ko en ar",
+      cs: "Jazyky portálu: 18 tagů z CFBundleLocalizations iOS klienta plus pt-BR, ko a ar",
+      "zh-Hans": "门户语言数：iOS 客户端 CFBundleLocalizations 里的 18 个标签，加上 pt-BR、ko、ar",
+      "zh-Hant": "入口語言數：iOS 用戶端 CFBundleLocalizations 裡的 18 個標籤，加上 pt-BR、ko、ar",
+      es: "Idiomas del portal: las 18 etiquetas de CFBundleLocalizations del cliente iOS, más pt-BR, ko y ar",
+      pl: "Języki portalu: 18 tagów z CFBundleLocalizations klienta iOS plus pt-BR, ko i ar",
+      ja: "ポータルの言語数です。iOS クライアントの CFBundleLocalizations の 18 タグに、pt-BR・ko・ar を加えた数です",
+      th: "จำนวนภาษาของพอร์ทัล: 18 แท็กใน CFBundleLocalizations ของไคลเอนต์ iOS บวก pt-BR, ko และ ar",
+      fi: "Portaalin kielet: iOS-asiakkaan CFBundleLocalizations-tagit (18) sekä pt-BR, ko ja ar",
+      uk: "Мови порталу: 18 тегів із CFBundleLocalizations клієнта iOS плюс pt-BR, ko і ar",
+      bg: "Езици на портала: 18-те етикета в CFBundleLocalizations на iOS клиента плюс pt-BR, ko и ar",
+      tr: "Portal dilleri: iOS istemcisinin CFBundleLocalizations etiketlerindeki 18 dil ile pt-BR, ko ve ar",
+      hu: "A portál nyelvei: az iOS ügyfél CFBundleLocalizations értékében lévő 18 tag, valamint a pt-BR, a ko és az ar",
+      "pt-BR": "Idiomas do portal: as 18 etiquetas do CFBundleLocalizations do cliente iOS, mais pt-BR, ko e ar",
+      ko: "포털 언어 수: iOS 클라이언트의 CFBundleLocalizations 태그 18개에 pt-BR, ko, ar을 더한 값",
+      ar: "لغات البوابة: 18 وسمًا من CFBundleLocalizations في عميل iOS، إضافةً إلى pt-BR وko وar",
     },
   },
 ];
@@ -544,6 +604,9 @@ const RECIPE_TITLE: Localized<string> = {
   bg: "Как е получено всяко число",
   tr: "Her sayı nasıl üretildi",
   hu: "Hogy készült minden egyes szám",
+  "pt-BR": "Como cada número foi produzido",
+  ko: "각 수치가 산출된 방식",
+  ar: "كيف أُنتج كل رقم",
 };
 
 const RECIPE_LEDE: Localized<string> = {
@@ -565,6 +628,9 @@ const RECIPE_LEDE: Localized<string> = {
   bg: "Страница, която публикува бройки, дължи на читателя начин да ги провери. Тези команди работят върху същото дърво, което този портал документира, от корена на хранилището на портала; очакваните изходи са в коментарите. Нищо не излиза в мрежата.",
   tr: "Sayım yayımlayan bir sayfa, okuyucuya bunları nasıl denetleyeceğini borçludur. Bu komutlar bu portalın belgelediği aynı ağaca, portal deposunun kökünden çalışır; beklenen çıktılar yorumlarda yazar. Buradaki hiçbir şey ağa ulaşmaz.",
   hu: "Egy oldal, amely számokat közöl, tartozik az ellenőrzés módjával is. Ezek a parancsok ugyanarra a fán futnak, amelyet ez a portál dokumentál, a portál repójának gyökeréből; a várt kimenetek a kommentekben vannak. Semmi sem érinti a hálózatot.",
+  "pt-BR": "Uma página que publica contagens deve ao leitor a maneira de verificá-las. Estes comandos rodam contra a mesma árvore que este portal documenta, a partir da raiz do repositório do portal; as saídas esperadas ficam nos comentários. Nada aqui acessa a rede.",
+  ko: "집계를 게시하는 페이지는 독자에게 그것을 확인할 방법을 빚지고 있습니다. 이 명령들은 이 포털이 문서화하는 것과 같은 트리를 대상으로, 포털 저장소 루트에서 실행합니다. 예상 출력은 주석에 들어 있습니다. 여기의 어떤 것도 네트워크에 접속하지 않습니다.",
+  ar: "الصفحة التي تنشر أعدادًا تدين للقارئ بطريقة التحقق منها. وتُشغَّل هذه الأوامر على الشجرة نفسها التي توثّقها هذه البوابة، من جذر مستودع البوابة؛ والمخرجات المتوقعة موضوعة في التعليقات. ولا شيء هنا يصل إلى الشبكة.",
 };
 
 /** Locale-free: shell commands and file paths, byte-identical for every reader. */
@@ -608,6 +674,9 @@ const RECIPE_CAPTION: Localized<string> = {
   bg: "Изпълнено и проверено на 2026-11-26: 59 регистрации на ядрото, регистрации на плъгини 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70, общо 129 декоратора на пътища, 89 обслужвани със заводските стойности, 57 документирани основни пътя, един маркер v1.0.0, четиринадесет комита и няма директория .github в това хранилище.",
   tr: "2026-11-26 tarihinde çalıştırılıp doğrulandı: 59 çekirdek kaydı, eklenti kayıtları 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70, toplam 129 rota dekoratörü, fabrika ayarlarıyla 89 rota sunuluyor, 57 belgelenmiş çekirdek rota, v1.0.0 adında tek etiket, on dört kayıt ve bu depoda .github dizini yok.",
   hu: "2026-11-26-én lefuttatva és ellenőrizve: 59 törzs-nyilvántartás, bővítmény-nyilvántartások 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70, összesen 129 útvonal-dekorátor, 89 kiszolgálva gyári beállításokkal, 57 dokumentált törzs-útvonal, egy v1.0.0 nevű tag, tizennégy commit, és nincs .github könyvtár ebben a repóban.",
+  "pt-BR": "Executado e verificado em 2026-11-26: 59 registros principais, registros de plug-in 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70, 129 decoradores de rota no total, 89 servidas com os padrões de fábrica, 57 rotas principais documentadas, uma tag chamada v1.0.0, quatorze commits e nenhum diretório .github neste repositório.",
+  ko: "2026-11-26에 실행 및 검증: 코어 등록 59개, 플러그인 등록 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70개, 라우트 데코레이터 총 129개, 출고 기본값으로 제공되는 라우트 89개, 문서화된 코어 라우트 57개, v1.0.0이라는 이름의 태그 1개, 커밋 14개, 그리고 이 저장소에는 .github 디렉터리가 없습니다.",
+  ar: "شُغِّل وتُحقِّق منه في 2026-11-26: 59 تسجيلًا أساسيًا، وتسجيلات الإضافات 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 = 70، و129 مزيّن مسار إجمالًا، و89 مسارًا مخدومًا بالإعدادات الافتراضية، و57 مسارًا أساسيًا موثقًا، ووسم واحد اسمه v1.0.0، وأربعة عشر إيداعًا، ولا دليل .github في هذا المستودع.",
 };
 
 const RECIPE_HINT: Localized<string> = {
@@ -629,6 +698,9 @@ const RECIPE_HINT: Localized<string> = {
   bg: "Два от 59 основни пътя се обслужват, но са извадени от схемата, затова 129 регистрации и 89 обслужвани пътя не стават 129 документирани крайни точки: документирани са 57 основни пътя.",
   tr: "59 çekirdek rotadan ikisi sunulur ama şemanın dışındadır, bu yüzden 129 kayıt ve 89 sunulan rota 129 belgelenmiş uç noktaya dönüşmez: belgelenmiş çekirdek rota sayısı 57.",
   hu: "Az 59 törzs-útvonalból kettő kiszolgálva van, de ki van hagyva a sémából, ezért a 129 nyilvántartás és 89 kiszolgált útvonal nem válik 129 dokumentált végponttá: 57 törzs-útvonal dokumentált.",
+  "pt-BR": "Duas das 59 rotas principais são servidas, mas excluídas do esquema, então 129 registros e 89 rotas servidas não se transformam em 129 endpoints documentados: 57 rotas principais estão documentadas.",
+  ko: "59개 코어 라우트 중 2개는 제공되지만 스키마에서 제외되므로, 등록 129개와 제공 89개가 문서화된 엔드포인트 129개로 이어지지는 않습니다. 문서화된 코어 라우트는 57개입니다.",
+  ar: "مسارَان من أصل 59 مسارًا أساسيًا مخدومان لكنهما مستبعدان من المخطط، لذا لا تتحول 129 تسجيلًا و89 مسارًا مخدومًا إلى 129 نقطة نهاية موثقة: بل تُوثَّق 57 مسارًا أساسيًا.",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -654,6 +726,9 @@ const BACKEND_TITLE: Localized<string> = {
   bg: "Журнал на бекенда: четиринадесетте записа, които съществуват",
   tr: "Arka uç değişiklik günlüğü: var olan on dört kayıt",
   hu: "Backend változásnapló: a tizennégy létező bejegyzés",
+  "pt-BR": "Changelog do backend: as quatorze entradas que existem",
+  ko: "백엔드 변경 이력: 실제로 존재하는 열네 개 항목",
+  ar: "سجل تغييرات الواجهة الخلفية: المدخلات الأربعة عشر الموجودة",
 };
 
 const BACKEND_LEDE: Localized<string> = {
@@ -675,6 +750,9 @@ const BACKEND_LEDE: Localized<string> = {
   bg: "В бекенд хранилището няма файл CHANGELOG, затова по-долу е самата история на комитите: четиринадесет записа, групирани по дати, най-старият пръв. Нищо не е добавено и нищо не е пропуснато. Всеки ред носи собствения си заглавие на комит буквално и един ред за това какво променя той за хората, които управляват гейтуейта.",
   tr: "Arka uç deposunda CHANGELOG dosyası yok, bu yüzden aşağıdaki doğrudan işlem geçmişi: on dört kayıt, tarihe göre gruplanmış, eskiden yeniye. Ne bir şey eklendi ne de atlandı. Her satır kendi işlem başlığını aynen taşır ve ağ geçidini çalıştıran kişi için o işlemin neyi değiştirdiğini tek satırda söyler.",
   hu: "A backend repóban nincs CHANGELOG fájl, ezért itt maga a commitelőzmény: tizennégy bejegyzés dátum szerint csoportosítva, a legrégebbi elöl. Nem adtunk hozzá és nem hagytunk ki semmit. Minden sor tartalmazza a saját commit-címét szó szerint, plusz egy sort arról, mit jelent az az átjáró üzemeltetőjének.",
+  "pt-BR": "O repositório do backend não tem arquivo CHANGELOG, então este é o próprio histórico de commits: quatorze entradas, agrupadas por data, das mais antigas para as mais novas. Nada foi adicionado e nada ficou de fora. Cada linha traz o seu próprio assunto de commit, palavra por palavra, e uma linha sobre o que aquele commit muda para quem opera o gateway.",
+  ko: "백엔드 저장소에는 CHANGELOG 파일이 없으므로, 이것이 곧 커밋 이력입니다. 열네 개 항목을 날짜별로 묶고 오래된 것부터 배치했습니다. 아무것도 추가하지 않았고 아무것도 빼지 않았습니다. 각 행에는 해당 커밋 제목이 그대로 실리고, 게이트웨이를 운영하는 사람에게 그 커밋이 무엇을 바꾸는지 한 줄로 덧붙였습니다.",
+  ar: "لا يوجد في مستودع الواجهة الخلفية ملف CHANGELOG، فهذا هو سجل الإيداعات نفسه: أربعة عشر مدخلًا، مجمعة حسب التاريخ، من الأقدم أولًا. لم يُضف إليها شيء ولم يُحذف منها شيء. ويحمل كل صف عنوان إيداعه كما هو حرفيًا، وسطرًا واحدًا عمّا يغيّره ذلك الإيداع لمن يشغّل البوابة.",
 };
 
 
@@ -708,6 +786,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Историята започва тук: кодът на гейтуейта влиза в хранилището с един комит.",
           tr: "Geçmiş burada başlıyor: ağ geçidi kaynağı depoya tek bir kayıtla giriyor.",
           hu: "A előzmények itt kezdődnek: az átjáró forrása egyetlen committal kerül a repóba.",
+          "pt-BR": "A história começa aqui: o código-fonte do gateway entra no repositório em um único commit.",
+          ko: "이력은 여기서 시작합니다: 게이트웨이 소스가 하나의 커밋으로 저장소에 들어옵니다.",
+          ar: "يبدأ التاريخ هنا: تصل شيفرة البوابة إلى المستودع في إيداع واحد.",
         },
       },
       {
@@ -736,6 +817,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Лицензът се фиксира като AGPL-3.0-only и файлът LICENSE идва с кода, затова задълженията са стандартните.",
           tr: "Lisans AGPL-3.0-only olarak sabitlendi ve LICENSE dosyası kodla birlikte geliyor, yükümlülükleriniz de standart.",
           hu: "A licenc AGPL-3.0-only-ra rögzül, a LICENSE fájl pedig a kóddal együtt jár, tehát a kötelezettségek a szabványosak.",
+          "pt-BR": "A licença está fixada como AGPL-3.0-only e o arquivo LICENSE acompanha o código, então as suas obrigações são as padrão.",
+          ko: "라이선스는 AGPL-3.0-only로 확정되었고 LICENSE 파일이 코드와 함께 배포되므로, 의무는 표준적인 것입니다.",
+          ar: "تُثبَّت الرخصة على AGPL-3.0-only ويأتي ملف LICENSE مع الشيفرة، لذا فالتزاماتك هي الالتزامات المعتادة.",
         },
       },
       {
@@ -764,6 +848,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Стартирането и спирането преминаха към lifespan във FastAPI, а елемент от менюто приема деца под ключа за предаване sub. Второто ниво на менюто се появява в iOS клиента благодаря на този комит, преди това не.",
           tr: "Açılış ve kapanış FastAPI lifespanʼına taşındı ve bir menü öğesi artık iletim anahtarı sub altında alt öğe kabul ediyor. iOS istemcisinde ikinci menü seviyesinin görünmesinin sebebi bu kayıttır, öncesinde görünmüyordu.",
           hu: "Az indítást és a leállítást a FastAPI lifespanje alá helyezték, egy menüpont pedig fogad alrendelt elemeket a sub átviszi kulcs alatt. A menü második szintje az iOS ügyfélen emiatt a commit miatt jelenik meg, azelőtt nem.",
+          "pt-BR": "A inicialização e o encerramento passaram para o lifespan do FastAPI, e um item de menu agora aceita filhos sob a chave wire sub. O segundo nível de menu aparece no cliente iOS por causa deste commit e não antes dele.",
+          ko: "시작과 종료가 FastAPI lifespan으로 옮겨졌고, 이제 메뉴 항목이 와이어 키 sub 아래의 자식 항목을 받습니다. 두 번째 메뉴 단계가 iOS 클라이언트에 나타나는 것은 이 커밋 덕분이며, 그 이전에는 나타나지 않았습니다.",
+          ar: "انتقل البدء والإيقاف إلى FastAPI lifespan، وأصبح عنصر القائمة يقبل عناصر فرعية تحت المفتاح sub على الشبكة. ويظهر المستوى الثاني للقائمة في عميل iOS بفضل هذا الإيداع وليس قبله.",
         },
       },
       {
@@ -792,6 +879,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Двете README вече вървят раздел по раздел успоредно, а инструкциите за инсталация съвпадат със съществуващите скриптове.",
           tr: "İki README artık bölüm bölüm paralel ilerliyor ve kurulum talimatları gerçekte var olan betiklerle uyuşuyor.",
           hu: "A két README most szakaszról szakaszra párhuzamosan halad, és a telepítési utasítások a valóban létező szkriptekkel egyeznek.",
+          "pt-BR": "Os dois READMEs agora seguem seção por seção em paralelo, e suas instruções de instalação correspondem aos scripts que existem.",
+          ko: "두 README가 이제 섹션별로 나란히 진행되며, 설치 지침이 실제로 존재하는 스크립트와 일치합니다.",
+          ar: "أصبح دليلا README يسيران قسمًا بقسم بالتوازي، وأصبحت تعليمات التثبيت فيهما مطابقة للسكربتات الموجودة.",
         },
       },
     ],
@@ -825,6 +915,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Появява се install_macos.sh: гейтуейтът се регистрира като LaunchDaemon със собствен сервисен акаунт, а стъпката за внедряване изключва файлове, които не трябва да напуснат машината.",
           tr: "install_macos.sh ortaya çıkıyor: ağ geçidi kendi hizmet hesabı altında LaunchDaemon olarak kaydediliyor ve dağıtım adımı makineden çıkmaması gereken dosyaları dışarıda bırakıyor.",
           hu: "Megjelenik az install_macos.sh: az átjáró saját szolgáltatási fiókkal LaunchDaemon-ként regisztrálódik, a deploy lépés pedig kizárja a gépről ki nem kerülő fájlokat.",
+          "pt-BR": "install_macos.sh aparece: o gateway é registrado como um LaunchDaemon sob a sua própria conta de serviço, e a etapa de deploy agora exclui arquivos que não devem sair da máquina.",
+          ko: "install_macos.sh가 등장합니다: 게이트웨이는 자체 서비스 계정 아래 LaunchDaemon으로 등록되고, 배포 단계는 이제 머신을 떠나서는 안 되는 파일을 제외합니다.",
+          ar: "يظهر install_macos.sh: إذ تُسجَّل البوابة كـ LaunchDaemon تحت حساب خدمة خاص بها، وتستبعد خطوة النشر الآن الملفات التي يجب ألا تغادر الجهاز.",
         },
       },
       {
@@ -853,6 +946,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Рестартът вече изчаква приключването на bootout извикването на launchd, преди нов bootstrap, презареждането на услугата вече не се състезава само със себе си.",
           tr: "Yeniden başlatma artık sıradaki bootstrapʼtan önce launchdʼnin bootout çağrısının bitmesini bekler, böylece hizmeti yeniden yüklemek kendisiyle yarışmaz.",
           hu: "Újrainításkor a rendszer megvárja a launchd bootout hívását, mielőtt újra bootstrapelne, így a szolgáltatás újratöltése nem versenyz önmagával.",
+          "pt-BR": "Um reinício agora espera o launchd terminar a chamada bootout antes de fazer o bootstrap novamente, então recarregar o serviço não corre mais contra si mesmo.",
+          ko: "이제 재시작은 launchd가 bootout 호출을 마칠 때까지 기다린 뒤 다시 부트스트랩하므로, 서비스를 다시 로드할 때 스스로와 경쟁하지 않습니다.",
+          ar: "أصبحت إعادة التشغيل تنتظر انتهاء launchd من استدعاء bootout قبل إعادة التهيئة، فلم تعد إعادة تحميل الخدمة تتسابق مع نفسها.",
         },
       },
       {
@@ -881,6 +977,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Примерът channel-rotate може да се постави и изпълни точно както е отпечатан, а два списъка с полета описват това, което кодът наистина приема.",
           tr: "channel-rotate örneği basıldığı gibi yapıştırılıp çalıştırılabiliyor ve iki alan listesi artık kodun gerçekte ne kabul ettiğini anlatıyor.",
           hu: "A channel-rotate példa úgy illeszthető be és futtatható, ahogy a szövegkörnyezetben szerepel, és két mezőlista a kód által ténylegesen elfogadott mezőket írja le.",
+          "pt-BR": "O exemplo de channel-rotate pode ser colado e executado como está impresso, e duas listas de campos agora dizem o que o código de fato aceita.",
+          ko: "channel-rotate 예제를 인쇄된 그대로 붙여 넣어 실행할 수 있으며, 두 필드 목록이 이제 코드가 실제로 받아들이는 내용을 설명합니다.",
+          ar: "أصبح مثال channel-rotate قابلًا للّصق والتشغيل كما هو مطبوع، وأصبحت قائمتا حقول تذكران ما تقبله الشيفرة فعليًا.",
         },
       },
       {
@@ -909,6 +1008,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Проверката throttle-key вече не зависи от системния часовник, затова зелен тестов резултат означава, че ключът на ограничителя е верен, а не е случайност.",
           tr: "throttle-key denetimi artık sistem saatine bağlı değil, bu yüzden yeşil bir test koşumu limit anahtarının doğru olduğunu gösterir, şansını değil.",
           hu: "A throttle-key ellenőrzés már nem függ a rendszerórától, tehát a zöld tesztfuttatás azt jelenti, hogy a limiter kulcsa helyes, nem szerencse.",
+          "pt-BR": "A verificação da chave de throttle não depende mais do tempo do relógio de parede, então uma execução de teste que passa significa que a chave do limitador está certa, e não que teve sorte.",
+          ko: "스로틀 키 검사가 더 이상 벽시계 타이밍에 의존하지 않으므로, 테스트가 통과하면 리미터 키가 운 좋게 맞은 것이 아니라 실제로 올바르다는 뜻입니다.",
+          ar: "لم يعد فحص مفتاح التقييد يعتمد على توقيت الساعة الحقيقية، لذا فإن نجاح تشغيل الاختبار يعني أن مفتاح المحدِّد صحيح لا أنه محظوظ.",
         },
       },
       {
@@ -937,6 +1039,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Резервното копие на .env се казва точно така, както инсталаторът го пише, затова обещаният rollback наистина намира файла.",
           tr: ".env yedeği, kurulumun yazdığı adla birebir aynı adlandırılıyor, böylece vaat edilen geri alma dosyayı gerçekten bulabiliyor.",
           hu: "A .env biztonsági mentése pontosan azzal a névvel készül, amit a telepítő ír, így az ígért rollback valóban megtalálja a fájlt.",
+          "pt-BR": "O backup do .env tem exatamente o nome que o instalador grava, então o rollback que o script promete consegue de fato encontrar o arquivo.",
+          ko: ".env 백업의 이름이 설치 프로그램이 기록하는 방식과 정확히 같아서, 스크립트가 약속하는 롤백이 실제로 파일을 찾을 수 있습니다.",
+          ar: "سُمّيت نسخة .env الاحتياطية بالطريقة نفسها التي يكتبها بها المثبّت، فيستطيع التراجع الذي يَعِده السكربت أن يجد الملف فعلًا.",
         },
       },
     ],
@@ -970,6 +1075,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Инсталаторът за macOS може сам да свали възела popopx-chat и да го провери по SHA256, преди да стартира каквото и да е, така че на чиста машина ръчното изтегляне отпада.",
           tr: "macOS kurucusu popopx-chat düğümünü kendi indirir ve bir şey başlatmadan önce SHA256 ile doğrular, böylece yeni bir makinede elle indirme adımı kalmıyor.",
           hu: "A macOS telepítő maga tölti le a popopx-chat csomópontot, és SHA256-vel ellenőrzi, mielőtt bármit elindítane, így egy új gépen nem kell kézzel letölteni.",
+          "pt-BR": "O instalador do macOS consegue buscar o próprio nó popopx-chat e verificá-lo contra um SHA256 antes de qualquer coisa iniciar, então uma máquina nova não precisa de nenhuma etapa manual de download.",
+          ko: "macOS 설치 프로그램이 popopx-chat 노드를 직접 내려받아 무엇이든 시작하기 전에 SHA256으로 검증할 수 있으므로, 새 머신에 수동 다운로드 단계가 필요 없습니다.",
+          ar: "أصبح مثبّت macOS قادرًا على جلب عقدة popopx-chat بنفسه والتحقق منها مقابل SHA256 قبل بدء أي شيء، فلا يحتاج جهاز جديد إلى خطوة تنزيل يدوية.",
         },
       },
     ],
@@ -1003,6 +1111,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Добавят се три опционални конекторни плъгина, всички изключени по подразбиране: workflow мост за Node-RED/Activepieces във workflow_webhook_plugin.py и CardDAV/CalDAV конектори в carddav_connector.py и caldav_connector.py, споделящи gateway/app/connectors.py. Съществуваща инсталация не се променя, докато някой не включи един от тях.",
           tr: "İsteğe bağlı üç bağlayıcı eklentisi geliyor, hepsi varsayılan olarak kapalı: workflow_webhook_plugin.py içinde bir Node-RED/Activepieces iş akışı köprüsü ve carddav_connector.py ile caldav_connector.py içinde gateway/app/connectors.py dosyasını paylaşan CardDAV/CalDAV bağlayıcıları. Mevcut bir kurulum, biri bunlardan birini açana kadar değişmez.",
           hu: "Három opcionális összekötő bővítmény érkezik, mind alapból kikapcsolva: egy Node-RED/Activepieces munkafolyamat-híd a workflow_webhook_plugin.py-ban, valamint CardDAV/CalDAV összekötők a carddav_connector.py-ban és caldav_connector.py-ban, amelyek a gateway/app/connectors.py-t használják közösen. A meglévő telepítés nem változik, amíg valaki be nem kapcsol egyet.",
+          "pt-BR": "Chegam três plug-ins de conector opcionais, todos desligados por padrão: uma ponte de workflow Node-RED/Activepieces em workflow_webhook_plugin.py e conectores CardDAV/CalDAV em carddav_connector.py e caldav_connector.py, compartilhando gateway/app/connectors.py. Instalações existentes não veem mudança até que um comerciante habilite um deles.",
+          ko: "세 가지 옵트인 커넥터 플러그인이 추가되며, 모두 기본적으로 꺼져 있습니다: workflow_webhook_plugin.py의 Node-RED/Activepieces 워크플로 브리지와 carddav_connector.py, caldav_connector.py의 CardDAV/CalDAV 커넥터이며, gateway/app/connectors.py를 공유합니다. 판매자가 하나를 켜기 전까지 기존 설치에는 아무 변화가 없습니다.",
+          ar: "تصل ثلاث إضافات ربط اختيارية، جميعها معطّلة افتراضيًا: جسر سير عمل Node-RED/Activepieces في workflow_webhook_plugin.py، وموصّلات CardDAV/CalDAV في carddav_connector.py وcaldav_connector.py، تشترك في gateway/app/connectors.py. ولا ترى عمليات التثبيت القائمة أي تغيير حتى يفعّل تاجر إحداها.",
         },
       },
       {
@@ -1031,6 +1142,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Входящите workflow тригери вече не се провалят, когато чат възелът е офлайн: плъгинът записва тригера в outbox или workflow_approvals и отговаря 202 със статус queued_local или pending_approval плюс delivery_mode standalone_gateway; само тригер, който не е нито изпратен, нито на опашка, получава 502. Променя gateway/app/main.py и workflow_webhook_plugin.py.",
           tr: "Sohbet düğümü çevrimdışıyken gelen workflow tetikleyicileri artık başarısız olmuyor: eklenti tetikleyiciyi outbox veya workflow_approvals içine kaydeder ve queued_local ya da pending_approval durumu ile delivery_mode standalone_gateway ekleyerek 202 döndürür; yalnızca ne gönderilen ne de kuyruğa alınan tetikleyici 502 olur. gateway/app/main.py ve workflow_webhook_plugin.py dosyalarını değiştirir.",
           hu: "A bejövő workflow-eseményindítók már nem hibáznak, ha a chat-csomópont offline: a bővítmény az outbox vagy workflow_approvals táblába menti az eseményindítót, és 202-t válaszol queued_local vagy pending_approval állapottal, delivery_mode standalone_gateway kíséretében; csak az a kiváltó kap 502-t, amelyet sem elküldeni, sem sorba állítani nem sikerült. A gateway/app/main.py és a workflow_webhook_plugin.py fájlt módosítja.",
+          "pt-BR": "Gatilhos de workflow de entrada não falham mais quando o nó de chat está offline: o plug-in salva o gatilho em outbox ou workflow_approvals e responde 202 com status queued_local ou pending_approval e delivery_mode standalone_gateway; só um gatilho que não foi nem enviado nem enfileirado é um 502. Altera gateway/app/main.py e workflow_webhook_plugin.py.",
+          ko: "이제 채팅 노드가 오프라인이어도 인바운드 워크플로 트리거가 실패하지 않습니다: 플러그인이 트리거를 outbox 또는 workflow_approvals에 저장하고 status queued_local 또는 pending_approval과 delivery_mode standalone_gateway를 담아 202로 응답합니다. 전송되지도 대기열에 들어가지도 않은 트리거만 502입니다. gateway/app/main.py와 workflow_webhook_plugin.py를 변경합니다.",
+          ar: "لم تعد محفّزات سير العمل الواردة تفشل عندما تكون عقدة المحادثة غير متصلة: فالإضافة تحفظ المحفّز في outbox أو workflow_approvals وتجيب بالرمز 202 مع الحالة queued_local أو pending_approval إضافةً إلى delivery_mode standalone_gateway؛ ولا يكون 502 إلا لمحفّز لم يُرسل ولم يُدرج في قائمة الانتظار. يغيّر gateway/app/main.py وworkflow_webhook_plugin.py.",
         },
       },
       {
@@ -1059,6 +1173,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Линковете за покани на сервизни акаунти стават непрозрачни и криптирани, с QR кодове: gateway/app/opaque_invite_codec.py (плюс opaque_invite_vectors.json) запечатва линка зад POST /api/v1/invite-links, а invite_link_audit пази само created_at_ms, kind, subject_id и code_prefix — никога линка или relay URI.",
           tr: "Hizmet hesabı davet bağlantıları opak ve şifreli hale geliyor, QR kodlarıyla: gateway/app/opaque_invite_codec.py (ve opaque_invite_vectors.json) bağlantıyı POST /api/v1/invite-links arkasında mühürler ve invite_link_audit yalnızca created_at_ms, kind, subject_id ile code_prefix saklar — bağlantıyı ya da relay URIʼsini asla.",
           hu: "A szolgáltatásfiókok meghívólinkjei átláthatatlan, titkosított formára váltanak, QR-kódokkal: a gateway/app/opaque_invite_codec.py (és az opaque_invite_vectors.json) a POST /api/v1/invite-links mögött pecsételi le a linket, az invite_link_audit pedig csak created_at_ms, kind, subject_id és code_prefix mezőket tárol — soha nem magát a linket vagy a relay URI-t.",
+          "pt-BR": "Os links de convite de conta de serviço ficam opacos e criptografados, com códigos QR: gateway/app/opaque_invite_codec.py (mais opaque_invite_vectors.json) sela o link por trás de POST /api/v1/invite-links, e invite_link_audit armazena apenas created_at_ms, kind, subject_id e code_prefix — nunca o link nem a URI do relay.",
+          ko: "서비스 계정 초대 링크가 QR 코드와 함께 불투명하고 암호화된 형태가 됩니다: gateway/app/opaque_invite_codec.py(opaque_invite_vectors.json 포함)가 POST /api/v1/invite-links 뒤에서 링크를 봉인하며, invite_link_audit는 created_at_ms, kind, subject_id, code_prefix만 저장하고 링크나 릴레이 URI는 결코 저장하지 않습니다.",
+          ar: "تصبح روابط دعوة حسابات الخدمة معتمة ومشفّرة، مع رموز QR: يختم gateway/app/opaque_invite_codec.py (مع opaque_invite_vectors.json) الرابط خلف POST /api/v1/invite-links، ولا يخزّن invite_link_audit سوى created_at_ms وkind وsubject_id وcode_prefix — ولا يخزّن الرابط أو URI المرحّل أبدًا.",
         },
       },
       {
@@ -1087,6 +1204,9 @@ const BACKEND_GROUPS: readonly Group[] = [
           bg: "Комитът, който завършва портала: трезор, държан от оператора (POPOPX_VAULT_KEY, седем запечатани колони, python3 -m app.main --migrate-secrets), ограничени pxa_ администраторски токени с одит, HMAC с времеви печат за alert webhook-ове, плъгинът Slack/Discord и pytest адаптер върху самотестовете. Добавя gateway/app/vault.py, admin_auth.py и plugins/slack_discord_plugin.py и разширява alert_ops_plugin.py и tests/.",
           tr: "Portalı tamamlayan kayıt: operatörün elinde tuttuğu kasa (POPOPX_VAULT_KEY, yedi mühürlü sütun, python3 -m app.main --migrate-secrets), denetim izli kapsamlı pxa_ yönetici belirteçleri, alert webhook'ları için zaman damgalı HMAC, Slack/Discord eklentisi ve öz testler üzerinde bir pytest bağdaştırıcısı. gateway/app/vault.py, admin_auth.py ve plugins/slack_discord_plugin.py dosyalarını ekler; alert_ops_plugin.py ve tests/ dosyalarını genişletir.",
           hu: "A portált lezáró commit: operátor kezében tartott széf (POPOPX_VAULT_KEY, hét lepecsételt oszlop, python3 -m app.main --migrate-secrets), hatáskörrel rendelkező pxa_ admin tokenek auditnyommal, időbélyeges HMAC az alert webhookokhoz, a Slack/Discord bővítmény és a selftesztek fölötti pytest adapter. Hozzáadja a gateway/app/vault.py, admin_auth.py és plugins/slack_discord_plugin.py fájlt, valamint bővíti az alert_ops_plugin.py-t és a tests/ könyvtárat.",
+          "pt-BR": "O commit de conclusão do portal: um cofre mantido pelo operador (POPOPX_VAULT_KEY, sete colunas seladas, python3 -m app.main --migrate-secrets), tokens de administração pxa_ com escopo e trilha de auditoria, um HMAC com carimbo de data e hora para webhooks de alerta, o plug-in Slack/Discord e um adaptador pytest sobre os autotestes. Adiciona gateway/app/vault.py, admin_auth.py e plugins/slack_discord_plugin.py, e estende alert_ops_plugin.py e tests/.",
+          ko: "포털 완성 커밋: 운영자가 보유하는 볼트(POPOPX_VAULT_KEY, 봉인된 7개 컬럼, python3 -m app.main --migrate-secrets), 감사 추적이 붙은 스코프 pxa_ 관리자 토큰, 알림 웹훅용 타임스탬프 HMAC, Slack/Discord 플러그인, 그리고 자체 테스트 위의 pytest 어댑터입니다. gateway/app/vault.py, admin_auth.py, plugins/slack_discord_plugin.py를 추가하고 alert_ops_plugin.py와 tests/를 확장합니다.",
+          ar: "إيداع استكمال البوابة: خزنة يحتفظ بها مشغّل النظام (POPOPX_VAULT_KEY، وسبعة أعمدة مختومة، وpython3 -m app.main --migrate-secrets)، ورموز إدارية pxa_ محددة النطاق مع مسار تدقيق، وHMAC بطابع زمني لويب هوك التنبيهات، وإضافة Slack/Discord، ومهايئ pytest فوق الاختبارات الذاتية. يضيف gateway/app/vault.py وadmin_auth.py وplugins/slack_discord_plugin.py، ويوسّع alert_ops_plugin.py وtests/.",
         },
       },
     ],
@@ -1116,6 +1236,9 @@ const PORTAL_TITLE: Localized<string> = {
   bg: "Собствената дата по дата история на портала",
   tr: "Bu portalın kendi tarihli geçmişi",
   hu: "Ennek a portálnak a saját dátumozott előzménye",
+  "pt-BR": "O histórico datado deste portal",
+  ko: "이 포털 자체의 날짜별 이력",
+  ar: "تاريخ هذه البوابة نفسه، موثّقًا بالتواريخ",
 };
 
 const PORTAL_LEDE: Localized<string> = {
@@ -1137,6 +1260,9 @@ const PORTAL_LEDE: Localized<string> = {
   bg: "Същото правило важи и за тази страница: редовете по-долу са комити в хранилището на портала с истинските им дати от git log. Два от тях нямат хеш, защото никога не са били комити — внедряване, което някой пуска ръчно на сървъра, и ревизията, която четете сега.",
   tr: "Aynı kural bu sayfa için de geçerli: aşağıdaki satırlar portal deposundaki işlemlerdir ve tarihleri git logʼdan alınmıştır. İkisinde karma yok, çünkü hiç işlem olmadılar — sunucuda birinin elle çalıştırdığı bir dağıtım ve şu an okuduğunuz sürüm.",
   hu: "Ugyanez a szabály él magára az oldalra: az alábbi sorok a portál repójában lévő commitok, a dátumaik a git logból valók. Kettő nem tartalmaz hash-t, mert sosem voltak commitok — egy kézzel futtatott telepítés a szerveren, és az a javítás, amelyet most olvas.",
+  "pt-BR": "A mesma regra vale para esta página: as linhas abaixo são commits do repositório do portal, lidos do git log com as suas datas reais. Duas delas não trazem hash, porque nunca foram commits — um deploy que alguém executou à mão no servidor, e a revisão que você está vendo agora.",
+  ko: "같은 규칙이 이 페이지에도 적용됩니다: 아래 행들은 포털 저장소의 커밋이며, 실제 날짜와 함께 git log에서 읽어 왔습니다. 두 행에는 해시가 없는데, 커밋이 아니었기 때문입니다. 누군가 서버에서 손으로 실행한 배포와, 지금 보고 있는 리비전입니다.",
+  ar: "تنطبق القاعدة نفسها على هذه الصفحة: الصفوف أدناه إيداعات في مستودع البوابة، مقروءة من git log بتواريخها الحقيقية. واثنان منها بلا تجزئة، لأنهما لم يكونا إيداعين قط — نشرٌ شغّله أحدهم يدويًا على الخادم، والمراجعة التي تنظر إليها الآن.",
 };
 
 const PORTAL_NOHASH: Localized<string> = {
@@ -1158,6 +1284,9 @@ const PORTAL_NOHASH: Localized<string> = {
   bg: "без комит · изпълнено ръчно",
   tr: "kayıt yok · elle çalıştırıldı",
   hu: "nincs commit · kézzel futtatva",
+  "pt-BR": "sem commit · executado à mão",
+  ko: "커밋 없음 · 수동 실행",
+  ar: "بلا إيداع · تشغيل يدوي",
 };
 
 const PORTAL_UNCOMMITTED: Localized<string> = {
@@ -1179,6 +1308,9 @@ const PORTAL_UNCOMMITTED: Localized<string> = {
   bg: "все още не е комитнато",
   tr: "henüz işlenmedi",
   hu: "még nincs commitalva",
+  "pt-BR": "ainda não commitado",
+  ko: "아직 커밋되지 않음",
+  ar: "لم يُودَع بعد",
 };
 
 const PORTAL_MANUAL_TITLE: Localized<string> = {
@@ -1200,6 +1332,9 @@ const PORTAL_MANUAL_TITLE: Localized<string> = {
   bg: "Внедряването си остава ръчно, по решение",
   tr: "Dağıtımelle yapılır, bu bir karar",
   hu: "A telepítés szándékosan maradt kézi",
+  "pt-BR": "A implantação continua manual, por decisão",
+  ko: "배포는 결정에 따라 수동으로 유지됩니다",
+  ar: "يبقى النشر يدويًا، بقرار",
 };
 
 const PORTAL_MANUAL_BODY: Localized<string> = {
@@ -1221,6 +1356,9 @@ const PORTAL_MANUAL_BODY: Localized<string> = {
   bg: "В това хранилище няма директория .github и няма workflow файл, нищо не изгражда и не публикува тази страница от само себе си. Релийзът е някой, който пусне deploy/centos/deploy_centos.sh срещу сървъра, а nginx -t решава дали презареждането минава. Решението е записано тук като текст, а не като значка, защото страница за статус не трябва да намеква за фурия, която никто не е построил.",
   tr: "Bu depoda .github dizini de workflow dosyası da yok, yani bu sayfayı kendi kendine derleyen ya da yayınlayan bir şey yok. Sürüm, birinin sunucuya karşı deploy/centos/deploy_centos.sh çalıştırmasıdır ve yeniden yüklemeyi nginx -t onaylar. Bu tercih burada rozet yerine metin olarak duruyor, çünkü durum üzerine bir sayfanın kimsenin kurmadığı bir hattı ima etmemesi gerekir.",
   hu: "Ebben a repóban nincs .github könyvtár és nincs workflow fájl, tehát semmi nem fordítja és nem teszi közzé ezt az oldalt magától. A kiadás azt jelenti, hogy valaki lefuttatja a deploy/centos/deploy_centos.sh parancsot a szerver ellen, és az nginx -t dönt a reloadról. Ez a választás itt szövegként van rögzítve, nem jelvényként, mert egy státuszt tárgyyaló oldalnak nem kell olyan folyamatot sejtetnie, amelyet senki nem épített.",
+  "pt-BR": "Este repositório não contém diretório .github nem arquivo de workflow, então nada compila ou publica esta página sozinho. Um lançamento é alguém executando deploy/centos/deploy_centos.sh contra o servidor, com nginx -t barrando o reload. Essa escolha fica registrada aqui em vez de um selo, porque uma página sobre status não deve sugerir um pipeline que ninguém construiu.",
+  ko: "이 저장소에는 .github 디렉터리도 워크플로 파일도 없으므로, 이 페이지를 스스로 빌드하거나 게시하는 것은 아무것도 없습니다. 릴리스는 누군가 서버를 대상으로 deploy/centos/deploy_centos.sh를 실행하는 일이며, nginx -t가 리로드를 통제합니다. 그 선택은 배지 대신 여기에 기록됩니다. 상태를 다루는 페이지가 아무도 만들지 않은 파이프라인을 암시해서는 안 되기 때문입니다.",
+  ar: "لا يحتوي هذا المستودع دليل .github ولا ملف سير عمل، فلا شيء يبني هذه الصفحة أو ينشرها من تلقاء نفسه. فالإصدار هو أن يشغّل أحدهم deploy/centos/deploy_centos.sh على الخادم، مع nginx -t كبوابة لإعادة التحميل. وهذا الخيار مسجّل هنا بدل شارة، لأن صفحة عن الحالة ينبغي ألا توحي بخط أنابيب لم يبنه أحد.",
 };
 
 export function StatusChangelogSection(): ReactElement {
@@ -1262,7 +1400,7 @@ export function StatusChangelogSection(): ReactElement {
             {STATS.map((stat) => (
               <div key={stat.key} className="glass glass-hover relative flex flex-col overflow-hidden p-5 [overflow-wrap:anywhere]">
                 <span aria-hidden className="absolute inset-x-0 top-0 h-px bg-brand-soft opacity-60" />
-                <p className="font-mono text-[11px] tracking-[0.18em] text-faint">{stat.source}</p>
+                <p className="font-mono text-[11px] tracking-[0.18em] text-faint"><bdi dir="ltr">{stat.source}</bdi></p>
                 <p className="mt-1.5 text-[22px] font-semibold leading-tight text-white">{stat.value}</p>
                 <p className="mt-2 text-[12.5px] leading-relaxed text-mute">{pick(stat.caption, "en")}</p>
               </div>
@@ -1287,14 +1425,14 @@ export function StatusChangelogSection(): ReactElement {
           <div className="mt-5 space-y-6">
             {BACKEND_GROUPS.map((group) => (
               <div key={group.date} className="glass p-5">
-                <p className="font-mono text-[11px] tracking-[0.18em] text-faint">{group.date}</p>
+                <p className="font-mono text-[11px] tracking-[0.18em] text-faint"><bdi dir="ltr">{group.date}</bdi></p>
                 <ul className="mt-3 space-y-2">
                   {group.entries.map((entry) => (
                     <li key={entry.key} className="text-[12.5px] leading-relaxed text-mute">
-                      <code className="mr-2 font-mono text-[10.5px] text-brand-soft">{entry.hash?.slice(0, 7) ?? "—"}</code>
-                      <span className="mr-2 font-mono text-[10.5px] text-faint">[{entry.type}]</span>
+                      <code className="me-2 font-mono text-[10.5px] text-brand-soft">{entry.hash?.slice(0, 7) ?? "—"}</code>
+                      <span className="me-2 font-mono text-[10.5px] text-faint"><bdi dir="ltr">[{entry.type}]</bdi></span>
                       {entry.subject}
-                      {entry.marker && <span className="ml-2 text-[11px] text-warn">({pick(entry.marker, "en")})</span>}
+                      {entry.marker && <span className="ms-2 text-[11px] text-warn">({pick(entry.marker, "en")})</span>}
                     </li>
                   ))}
                 </ul>

@@ -26,10 +26,11 @@ import {
  *  - The ecosystem and GitHub links are *navigation* to another origin. The bar
  *    loads nothing from there, which is what the zero-third-party-asset promise
  *    rests on, and each host was probed live before being published here.
- *  - Copy is authored in all 18 locales the engine declares and typed as a total
+ *  - Copy is authored in all 21 locales the engine declares and typed as a total
  *    `Localized<string>` map, so the compiler rejects a missing variant.
- *  - The language control is `LanguageMenu`, which lists the same 18 locales as
- *    the iOS client. A three-segment capsule cannot hold 18 options without
+ *  - The language control is `LanguageMenu`, which lists the same 21 locales as
+ *    the engine — the iOS client's 18 plus pt-BR, ko and ar. A three-segment
+ *    capsule cannot hold 21 options without
  *    overflowing, so it is not used here.
  */
 
@@ -53,6 +54,9 @@ const SECTION_LABELS: Record<NavSectionId, Localized<string>> = {
     bg: "Преглед",
     tr: "Genel bakış",
     hu: "Áttekintés",
+    "pt-BR": "Visão geral",
+    ko: "개요",
+    ar: "نظرة عامة",
   },
   plugins: {
     en: "Services & connectors",
@@ -73,6 +77,9 @@ const SECTION_LABELS: Record<NavSectionId, Localized<string>> = {
     bg: "Услуги и конектори",
     tr: "Hizmetler ve bağlayıcılar",
     hu: "Szolgáltatások és csatlakozók",
+    "pt-BR": "Serviços e conectores",
+    ko: "서비스 및 커넥터",
+    ar: "الخدمات والموصّلات",
   },
   architecture: {
     en: "How it works",
@@ -93,6 +100,9 @@ const SECTION_LABELS: Record<NavSectionId, Localized<string>> = {
     bg: "Как работи",
     tr: "Nasıl çalışır",
     hu: "Működése",
+    "pt-BR": "Como funciona",
+    ko: "작동 방식",
+    ar: "كيف يعمل",
   },
   sandbox: {
     en: "Developers & API",
@@ -113,6 +123,9 @@ const SECTION_LABELS: Record<NavSectionId, Localized<string>> = {
     bg: "Разработчици и API",
     tr: "Geliştiriciler ve API",
     hu: "Fejlesztők és API",
+    "pt-BR": "Desenvolvedores e API",
+    ko: "개발자 및 API",
+    ar: "المطوّرون وAPI",
   },
   security: {
     en: "Security & permissions",
@@ -133,6 +146,9 @@ const SECTION_LABELS: Record<NavSectionId, Localized<string>> = {
     bg: "Сигурност и права",
     tr: "Güvenlik ve izinler",
     hu: "Biztonság és jogosultságok",
+    "pt-BR": "Segurança e permissões",
+    ko: "보안 및 권한",
+    ar: "الأمان والأذونات",
   },
   changelog: {
     en: "Status & changelog",
@@ -153,6 +169,9 @@ const SECTION_LABELS: Record<NavSectionId, Localized<string>> = {
     bg: "Статус и промени",
     tr: "Durum ve değişiklikler",
     hu: "Állapot és változások",
+    "pt-BR": "Status e changelog",
+    ko: "상태 및 변경 이력",
+    ar: "الحالة وسجل التغييرات",
   },
 };
 
@@ -190,6 +209,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Основен сайт",
     tr: "Ana site",
     hu: "Főoldal",
+    "pt-BR": "Site principal",
+    ko: "메인 사이트",
+    ar: "الموقع الرئيسي",
   },
   mainSiteAria: {
     en: "Go to the POPOPX main site at popopx.chat",
@@ -210,6 +232,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Към основния сайт на POPOPX на popopx.chat",
     tr: "popopx.chat adresindeki POPOPX ana sitesine git",
     hu: "Ugrás a POPOPX főoldalára a popopx.chat címen",
+    "pt-BR": "Ir para o site principal da POPOPX em popopx.chat",
+    ko: "popopx.chat의 POPOPX 메인 사이트로 이동",
+    ar: "انتقل إلى موقع POPOPX الرئيسي على popopx.chat",
   },
   ecosystemGroup: {
     en: "Ecosystem",
@@ -230,6 +255,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Екосистема",
     tr: "Ekosistem",
     hu: "Ökoszisztéma",
+    "pt-BR": "Ecossistema",
+    ko: "생태계",
+    ar: "المنظومة",
   },
   botStudio: {
     en: "Bot Studio",
@@ -250,6 +278,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Студио за ботове",
     tr: "Bot Stüdyosu",
     hu: "Botstúdió",
+    "pt-BR": "Bot Studio",
+    ko: "Bot Studio",
+    ar: "استوديو البوتات",
   },
   nodePortal: {
     en: "Mac node",
@@ -270,6 +301,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Mac възел",
     tr: "Mac düğümü",
     hu: "Mac csomópont",
+    "pt-BR": "Nó Mac",
+    ko: "Mac 노드",
+    ar: "عقدة Mac",
   },
   navRegion: {
     en: "Main navigation",
@@ -290,6 +324,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Основна навигация",
     tr: "Ana gezinme",
     hu: "Fő navigáció",
+    "pt-BR": "Navegação principal",
+    ko: "주 내비게이션",
+    ar: "التنقل الرئيسي",
   },
   github: {
     en: "View the backend suite source on GitHub",
@@ -310,6 +347,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Вижте изходния код на бекенда в GitHub",
     tr: "Arka uç paketinin kaynağını GitHub’da görüntüle",
     hu: "A backend csomag forráskódja a GitHubon",
+    "pt-BR": "Ver o código-fonte do pacote de backend no GitHub",
+    ko: "GitHub에서 백엔드 제품군 소스 보기",
+    ar: "اعرض شيفرة حزمة الخادم على GitHub",
   },
   menuOpen: {
     en: "Open navigation menu",
@@ -330,6 +370,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Отвори менюто",
     tr: "Menüyü aç",
     hu: "Menü megnyitása",
+    "pt-BR": "Abrir o menu de navegação",
+    ko: "내비게이션 메뉴 열기",
+    ar: "افتح قائمة التنقل",
   },
   menuClose: {
     en: "Close navigation menu",
@@ -350,6 +393,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Затвори менюто",
     tr: "Menüyü kapat",
     hu: "Menü bezárása",
+    "pt-BR": "Fechar o menu de navegação",
+    ko: "내비게이션 메뉴 닫기",
+    ar: "أغلق قائمة التنقل",
   },
   panelSections: {
     en: "All sections",
@@ -370,6 +416,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Всички раздели",
     tr: "Tüm bölümler",
     hu: "Összes szakasz",
+    "pt-BR": "Todas as seções",
+    ko: "전체 섹션",
+    ar: "كل الأقسام",
   },
   panelActions: {
     en: "Language and actions",
@@ -390,6 +439,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Език и действия",
     tr: "Dil ve işlemler",
     hu: "Nyelv és műveletek",
+    "pt-BR": "Idioma e ações",
+    ko: "언어 및 작업",
+    ar: "اللغة والإجراءات",
   },
   cta: {
     en: "Deploy a service account",
@@ -410,6 +462,9 @@ const COPY: Record<CopyKey, Localized<string>> = {
     bg: "Разгърни сервисен акаунт",
     tr: "Hizmet hesabını dağıt",
     hu: "Szolgáltatásfiók telepítése",
+    "pt-BR": "Implantar uma conta de serviço",
+    ko: "서비스 계정 배포",
+    ar: "انشر حساب خدمة",
   },
 };
 

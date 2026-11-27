@@ -18,7 +18,7 @@ import { SITE_ORIGIN } from "@/lib/site";
  * fail-closed webhook token, the per-follower H5 launch HMAC, an append-only
  * ledger — and any control that is missing stays marked `planned`, never quietly dropped.
  * Env names, header names, HTTP codes and file paths stay untranslated; only the
- * prose is authored in all 18 languages.
+ * prose is authored in all 21 languages.
  */
 
 type L = Localized<string>;
@@ -70,6 +70,9 @@ const EYEBROW: L = {
   bg: "Сигурност и управление на правата",
   tr: "Güvenlik ve yetki yönetişimi",
   hu: "Biztonság és jogosultságkezelés",
+  "pt-BR": "Governança de segurança e permissões",
+  ko: "보안 및 권한 거버넌스",
+  ar: "حوكمة الأمن والأذونات",
 };
 
 const TITLE: L = {
@@ -91,6 +94,9 @@ const TITLE: L = {
   bg: "Този гейтуейт се пази от три неща: админ токени pxa_ с обхват, незадължителен трезор, който запечатва тайните в покой, и уебхукове с HMAC подпис и времеви печат",
   tr: "Bu ağ geçidini üç şey korur: kapsamlı pxa_ yönetici token’ları, sırları depoda mühürleyen isteğe bağlı bir kasa ve zaman damgalı HMAC imzalı webhook’lar",
   hu: "Ezt az átjárót három dolog védi: a scope-os pxa_ admin tokenek, a titkokat nyugvó állapotban lepecsételő opcionális trezor és az időbélyeges HMAC-aláírású webhookok",
+  "pt-BR": "Três controles protegem este gateway: tokens de administração pxa_ com escopo, um cofre opcional que sela segredos em repouso e assinaturas HMAC de webhook com carimbo de data e hora",
+  ko: "세 가지 통제가 이 게이트웨이를 지킵니다: 스코프가 지정된 pxa_ 관리자 토큰, 저장 상태의 시크릿을 봉인하는 선택적 볼트, 타임스탬프가 붙은 HMAC 웹훅 서명",
+  ar: "ثلاثة ضوابط تحمي هذه البوابة: رموز إدارية pxa_ محددة النطاق، وخزنة اختيارية تختم الأسرار في حالة السكون، وتوقيعات ويب هوك HMAC بطوابع زمنية",
 };
 
 const SUBTITLE: L = {
@@ -112,6 +118,9 @@ const SUBTITLE: L = {
   bg: "Всичко тук е препрочетено от изходните кодове на 2026-11-26 — gateway/app/vault.py, gateway/app/admin_auth.py, gateway/app/main.py и модулите на плъгините. Ключът на трезора, токените с обхват и подписаният вход вече са в кода; всеки ред продължава да казва точно какво прави кодът и къде е границата му.",
   tr: "Buradaki her şey 2026-11-26 tarihinde kaynaklardan yeniden okundu — gateway/app/vault.py, gateway/app/admin_auth.py, gateway/app/main.py ve eklenti modülleri. Kasa anahtarı, kapsamlı token’lar ve imzalı giriş artık kodda; her satır hâlâ kodun tam olarak ne yaptığını ve sınırının nerede olduğunu söylüyor.",
   hu: "Minden itt 2026-11-26-án, a forrásokból újra elolvasott sor — gateway/app/vault.py, gateway/app/admin_auth.py, gateway/app/main.py és a bővítménymodulok. A trezor kulcsa, a scope-os tokenek és az aláírt bemenet már a kódban van; minden sor továbbra is pontosan megmondja, mit tesz a kód, és hol a határa.",
+  "pt-BR": "Tudo aqui foi relido nas fontes em 2026-11-26 — gateway/app/vault.py, gateway/app/admin_auth.py, gateway/app/main.py e os módulos de plug-in. A chave do cofre, os tokens com escopo e a entrada assinada já acompanham o código; cada linha ainda diz exatamente o que o código faz e onde fica o seu limite.",
+  ko: "여기의 모든 내용은 2026-11-26에 gateway/app/vault.py, gateway/app/admin_auth.py, gateway/app/main.py 및 플러그인 모듈 소스에서 다시 읽어 확인했습니다. 볼트 키, 스코프 토큰, 서명된 수신은 모두 출시되어 있으며, 각 행은 코드가 실제로 무엇을 하는지와 그 한계가 어디에 있는지를 그대로 밝힙니다.",
+  ar: "أُعيدت قراءة كل ما هنا من الشيفرة المصدرية في 2026-11-26 — gateway/app/vault.py وgateway/app/admin_auth.py وgateway/app/main.py ووحدات الإضافات. ومفتاح الخزنة والرموز محددة النطاق والاستقبال الموقّع كلها مُضمّنة في الإصدار؛ ومع ذلك يذكر كل صف بالضبط ما تفعله الشيفرة وأين يقع حدّه.",
 };
 
 const LEGEND_SOURCE: L = {
@@ -133,6 +142,9 @@ const LEGEND_SOURCE: L = {
   bg: "Изходни кодове v1.0.0, препрочетени на 2026-11-26",
   tr: "v1.0.0 kaynakları, 2026-11-26 tarihinde yeniden okundu",
   hu: "v1.0.0 források, 2026-11-26-én útolvasva",
+  "pt-BR": "Fontes da v1.0.0, relidas em 2026-11-26",
+  ko: "v1.0.0 소스, 2026-11-26 재확인",
+  ar: "مصادر v1.0.0، أعيدت قراءتها في 2026-11-26",
 };
 
 const LEGEND_PLANNED: L = {
@@ -154,6 +166,9 @@ const LEGEND_PLANNED: L = {
   bg: "Тук няма планирани редове — всички са в кода",
   tr: "Burada planlandı işaretli satır yok — hepsi kodda",
   hu: "Itt egyetlen sor sincs tervezve — mindegyik a kódban van",
+  "pt-BR": "Nenhuma linha aqui é planejada — cada uma está no código hoje",
+  ko: "여기에서 계획된 행은 하나도 없습니다 — 모든 행이 오늘 코드에 있습니다",
+  ar: "لا صف هنا مخطط له — فكل صف موجود في الشيفرة اليوم",
 };
 
 const LEGEND_NOSECRET: L = {
@@ -175,6 +190,9 @@ const LEGEND_NOSECRET: L = {
   bg: "Примерите показват имена на променливи, никога истинска тайна",
   tr: "Örnekler yalnızca ortam değişkeni adı gösterir, gerçek sır asla",
   hu: "A példák csak környezeti változó neveit mutatják, valódi titkot soha",
+  "pt-BR": "As amostras mostram nomes de variáveis de ambiente, nunca um segredo em uso",
+  ko: "샘플에는 환경 변수 이름만 나오며 실제 시크릿은 나오지 않습니다",
+  ar: "تعرض الأمثلة أسماء متغيرات البيئة، ولا تعرض أبدًا سرًّا فعليًا",
 };
 
 const STATE_SHIPPED: L = {
@@ -196,6 +214,9 @@ const STATE_SHIPPED: L = {
   bg: "в кода",
   tr: "kodda",
   hu: "kódban",
+  "pt-BR": "no código",
+  ko: "코드에 있음",
+  ar: "في الشيفرة",
 };
 
 const STATE_PLANNED: L = {
@@ -217,6 +238,9 @@ const STATE_PLANNED: L = {
   bg: "планирано",
   tr: "planlandı",
   hu: "tervezve",
+  "pt-BR": "planejado",
+  ko: "계획됨",
+  ar: "مخطط له",
 };
 
 const FILTER_LABEL: L = {
@@ -238,6 +262,9 @@ const FILTER_LABEL: L = {
   bg: "Филтрирай редовете в тази секция",
   tr: "Bu bölümdeki satırları süz",
   hu: "Szekció sorainak szűrése",
+  "pt-BR": "Filtrar as linhas desta seção",
+  ko: "이 섹션의 행 필터",
+  ar: "تصفية الصفوف في هذا القسم",
 };
 
 const FILTER_ALL: L = {
@@ -259,6 +286,9 @@ const FILTER_ALL: L = {
   bg: "Всички редове",
   tr: "Tüm satırlar",
   hu: "Minden sor",
+  "pt-BR": "Todas as linhas",
+  ko: "모든 행",
+  ar: "كل الصفوف",
 };
 
 const FILTER_EMPTY: L = {
@@ -280,6 +310,9 @@ const FILTER_EMPTY: L = {
   bg: "Нито един ред в тази карта не носи този маркер.",
   tr: "Bu karttaki hiçbir satır o işareti taşımıyor.",
   hu: "Ebben a kártyában egyetlen sor sem viseli ezt a jelölést.",
+  "pt-BR": "Nenhuma linha deste cartão carrega essa marca.",
+  ko: "이 카드에는 해당 표시가 붙은 행이 없습니다.",
+  ar: "لا يحمل أي صف في هذه البطاقة تلك العلامة.",
 };
 
 const KEYS_LABEL: L = {
@@ -301,6 +334,9 @@ const KEYS_LABEL: L = {
   bg: "Ключове и файлове",
   tr: "Anahtarlar ve dosyalar",
   hu: "Kulcsok és fájlok",
+  "pt-BR": "Chaves e arquivos",
+  ko: "키와 파일",
+  ar: "المفاتيح والملفات",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -387,6 +423,9 @@ const WEBHOOK_CAPTION: L = {
   bg: "Маршрутът на уебхука е изваден от админ middleware, защото неговият подвикващ е системата за известия, не операторът. Ако POPOPX_ALERT_WEBHOOK_SECRET е зададена, освен токена са задължителни заглавките за време и подпис.",
   tr: "Webhook rotası yönetici ara katmanından muaftır, çünkü onu çağıran operatör değil uyarı sistemidir. POPOPX_ALERT_WEBHOOK_SECRET ayarlıysa token’a ek olarak zaman damgası ve imza başlıkları da zorunludur.",
   hu: "A webhook útvonal ki van véve az admin middleware alól, mert a hívója a riasztási rendszer, nem az operátor. Ha a POPOPX_ALERT_WEBHOOK_SECRET be van állítva, a token mellett kötelező az időbélyeg- és az aláírásfejléc is.",
+  "pt-BR": "A rota de webhook é isenta do middleware de administração porque quem a chama é o sistema de alertas, e não o operador. Com POPOPX_ALERT_WEBHOOK_SECRET definido, os cabeçalhos de timestamp e de assinatura passam a ser obrigatórios além do token.",
+  ko: "웹훅 경로는 관리자 미들웨어에서 제외됩니다. 호출자가 운영자가 아니라 알림 시스템이기 때문입니다. POPOPX_ALERT_WEBHOOK_SECRET이 설정되어 있으면 토큰에 더해 타임스탬프와 서명 헤더가 필수입니다.",
+  ar: "مسار الويب هوك معفى من وسيط الإدارة لأن المستدعي هو نظام التنبيهات، لا مشغّل النظام. وعند تعيين POPOPX_ALERT_WEBHOOK_SECRET، يصبح ترويسا الطابع الزمني والتوقيع مطلوبين إضافةً إلى الرمز.",
 };
 
 const H5_CAPTION: L = {
@@ -408,6 +447,9 @@ const H5_CAPTION: L = {
   bg: "В това извикване нарочно няма токен. Крайната точка съществува, за да може уеб сървърът на търговеца да провери стартиране, без никога да притежава удостоверяване на гейтуейта.",
   tr: "Bu çağrıda bilerek token yok. Uç nokta, tüccarın web sunucusunun bir ağ geçidi kimlik bilgisi hiç elinde tutmadan bir başlatmayı doğrulayabilmesi için var.",
   hu: "Ebben a hívásban szándékosan nincs token. A végpont azért létezik, hogy a kereskedő webkiszolgálója végrehajthasson egy indítás-ellenőrzést anélkül, hogy valaha átjáró-hitelesítőt birtokolna.",
+  "pt-BR": "Sem token nesta chamada, de propósito. O endpoint existe para que o servidor web de um comerciante possa verificar um lançamento sem jamais deter uma credencial do gateway.",
+  ko: "이 호출에는 의도적으로 토큰이 없습니다. 이 엔드포인트는 판매자의 웹 서버가 게이트웨이 자격 증명을 전혀 보유하지 않고도 실행을 검증할 수 있도록 존재합니다.",
+  ar: "لا رمز في هذا الاستدعاء، عن قصد. فوُجدت نقطة النهاية كي يتمكن خادم الويب الخاص بالتاجر من التحقق من عملية تشغيل دون أن يحتفظ أبدًا ببيانات اعتماد للبوابة.",
 };
 
 const LIMITS_CAPTION: L = {
@@ -429,6 +471,9 @@ const LIMITS_CAPTION: L = {
   bg: "Два ключа, и двата за последовател. Трети превключвател за глобален лимит на гейтуейта няма, защото такъв ограничител гейтуейтът няма.",
   tr: "İki anahtar, ikisi de takipçi başına. Ağ geçidinin geneli için üçüncü bir anahtar yok, çünkü ağ geçidinde öyle bir sınırlayıcı yok.",
   hu: "Kulcsból kettő van, mindkét követőre vetítve. Nincs harmadik kapcsoló átjáró-szintű korláthoz, mert ilyen korlátozó az átjáróban nincs.",
+  "pt-BR": "Duas chaves, ambas por seguidor. Não existe um terceiro interruptor para um limite global do gateway, porque o gateway não tem esse limitador.",
+  ko: "팔로워별 키 두 개입니다. 게이트웨이 전체에 걸리는 한도를 위한 세 번째 스위치는 없습니다. 게이트웨이에 그런 리미터가 없기 때문입니다.",
+  ar: "مفتاحان، كلاهما لكل متابع. ولا يوجد مفتاح ثالث لحد على مستوى البوابة كله، لأن البوابة لا تحتوي على محدِّد من هذا النوع.",
 };
 
 const METERS_CAPTION: L = {
@@ -450,6 +495,9 @@ const METERS_CAPTION: L = {
   bg: "Дванадесетте мерни единици, фабричните им цени и четирите отговора, които отказано извикване може да получи. Всички са различими по замисъл.",
   tr: "On iki ölçer, fabrika fiyatları ve reddedilen bir çağrının alabileceği dört yanıt. Dördü de bilinçli olarak birbirinden ayırt edilebilir.",
   hu: "A tizenkét mérő, a gyári áraik és a négy válasz, amit egy elutasított hívás kaphat. Mind a négy szándékosan megkülönböztethető.",
+  "pt-BR": "Os doze medidores, seus preços de fábrica e as quatro respostas que uma chamada recusada pode receber. Todas são distinguíveis de propósito.",
+  ko: "열두 미터, 그 출고 가격, 그리고 거부된 호출이 받을 수 있는 네 가지 응답입니다. 네 가지 모두 의도적으로 구분됩니다.",
+  ar: "العدّادات الاثنا عشر، وأسعارها الافتراضية من المصنع، والاستجابات الأربع التي قد يحصل عليها استدعاء مرفوض. وكلها قابلة للتمييز عن قصد.",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -484,6 +532,9 @@ const PANELS: readonly Panel[] = [
       bg: "Работа с тайните — по подразбиране открито, с вашия ключ — запечатано",
       tr: "Kimlik bilgisi yönetimi — varsayılan düz metin, anahtarınızla mühürlü",
       hu: "A titkok kezelése — alapból nyílt szöveg, a te kulcsoddal lepecsételve",
+      "pt-BR": "Tratamento de credenciais — texto claro por padrão, selado com uma chave que você detém",
+      ko: "자격 증명 처리 — 기본은 평문, 직접 보유한 키로 봉인",
+      ar: "التعامل مع بيانات الاعتماد — نص واضح افتراضيًا، ومختومة بمفتاح تحتفظ به أنت",
     },
     hook: {
       en: "POPOPX_VAULT_KEY is optional. Set it and gateway/app/vault.py seals seven columns with ChaCha20-Poly1305 before they reach SQLite; leave it unset and the same columns stay plaintext, which is the shipped default.",
@@ -504,6 +555,9 @@ const PANELS: readonly Panel[] = [
       bg: "POPOPX_VAULT_KEY е незадължителен. Зададен ли е, gateway/app/vault.py запечатва седем колони с ChaCha20-Poly1305, преди да стигнат до SQLite; без него същите колони остават открити — това е доставената настройка по подразбиране.",
       tr: "POPOPX_VAULT_KEY isteğe bağlıdır. Ayarlarsanız gateway/app/vault.py yedi sütunu SQLite’a ulaşmadan önce ChaCha20-Poly1305 ile mühürler; ayarlamazsanız aynı sütunlar düz metin kalır — gönderilen varsayılan budur.",
       hu: "A POPOPX_VAULT_KEY opcionális. Ha beállítod, a gateway/app/vault.py hét oszlopot pecsétel le ChaCha20-Poly1305-tel, mielőtt az SQLite-ba kerülnek; ha nem, ugyanezek az oszlopok nyílt szövegben maradnak — ez a szállított alapértelmezés.",
+      "pt-BR": "POPOPX_VAULT_KEY é opcional. Defina-a e gateway/app/vault.py sela sete colunas com ChaCha20-Poly1305 antes de elas chegarem ao SQLite; deixe-a sem definir e as mesmas colunas permanecem em texto claro, que é o padrão distribuído.",
+      ko: "POPOPX_VAULT_KEY는 선택 사항입니다. 이를 설정하면 gateway/app/vault.py가 일곱 개 컬럼을 SQLite에 도달하기 전에 ChaCha20-Poly1305로 봉인합니다. 설정하지 않으면 같은 컬럼이 평문으로 남으며, 이것이 기본 배포 상태입니다.",
+      ar: "POPOPX_VAULT_KEY اختياري. اضبطه فيختم gateway/app/vault.py سبعة أعمدة بـ ChaCha20-Poly1305 قبل وصولها إلى SQLite؛ واتركه غير مضبوط فتبقى الأعمدة نفسها نصًا واضحًا، وهو الافتراضي المشحون.",
     },
     rows: [
       {
@@ -527,6 +581,9 @@ const PANELS: readonly Panel[] = [
           bg: "Файл .env",
           tr: ".env dosyası",
           hu: ".env fájl",
+          "pt-BR": "Arquivo .env",
+          ko: ".env 파일",
+          ar: "ملف .env",
         },
         v: {
           en: "load_config warns when .env is readable by group or other — 0600 is the only quiet mode. A warning, not a gate: refusing to boot over one permission bit would take a working deployment offline.",
@@ -547,6 +604,9 @@ const PANELS: readonly Panel[] = [
           bg: "load_config предупреждава, когато .env се чете от групата или от всички — 0600 е единственият тих режим. Предупреждение, не бариера: отказът да стартира заради един бит за права би свалял работеща инсталация.",
           "tr": "load_config, .env dosyası grup veya diğerleri tarafından okunabiliyorsa uyarır — tek sessiz mod 0600’dır. Bu bir uyarıdır, engel değil: tek bir izin biti için açılmayı reddetmek çalışan bir kurulumu çevrimdışı bırakırdı.",
           "hu": "A load_config figyelmeztet, ha a .env fájlt a csoport vagy bárki olvashatja — a 0600 az egyetlen csendes mód. Figyelmeztetés, nem kapu: egyetlen jogosultsági bit miatt megtagadni az indulást offline-ra tenné a működő telepítést.",
+          "pt-BR": "load_config avisa quando o .env é legível por grupo ou por outros — 0600 é o único modo silencioso. Um aviso, não uma barreira: recusar a inicialização por causa de um bit de permissão tiraria do ar uma implantação que funciona.",
+          ko: "load_config는 .env가 그룹이나 기타 사용자에게 읽힐 수 있으면 경고합니다 — 0600만이 아무 경고 없이 통과하는 모드입니다. 차단이 아니라 경고입니다. 권한 비트 하나 때문에 부팅을 거부하면 정상 동작하는 배포가 오프라인으로 떨어지기 때문입니다.",
+          ar: "يحذّر load_config عندما يكون .env قابلًا للقراءة من المجموعة أو من الآخرين — و0600 هو النمط الصامت الوحيد. إنه تحذير لا حاجز: فرفض الإقلاع بسبب بت أذونات واحد كان سيُخرج نشرًا عاملًا من الخدمة.",
         },
       },
       {
@@ -570,6 +630,9 @@ const PANELS: readonly Panel[] = [
           bg: "Админ токен",
           "tr": "Yönetici token’ı",
           hu: "Rendszergazdai token",
+          "pt-BR": "Token de administração",
+          ko: "관리자 토큰",
+          ar: "رمز الإدارة",
         },
         v: {
           en: "POPOPX_ADMIN_TOKEN shorter than 24 characters, or equal to an example value such as change-me, refuses to load; the error line itself suggests openssl rand -hex 32.",
@@ -590,6 +653,9 @@ const PANELS: readonly Panel[] = [
           bg: "POPOPX_ADMIN_TOKEN с по-малко от 24 знака или равен на примерна стойност като change-me отказва да се зареди; редът с грешката сама подсказва openssl rand -hex 32.",
           "tr": "24 karakterden kısa veya change-me gibi bir örnek değere eşit POPOPX_ADMIN_TOKEN yüklenmeyi reddeder; hata satırının kendisi openssl rand -hex 32 önerir.",
           "hu": "A 24 karakternél rövidebb, vagy a change-me mintájú értékkel egyező POPOPX_ADMIN_TOKEN megtagadja a betöltést; a hibaüzenet maga javasolja az openssl rand -hex 32 parancsot.",
+          "pt-BR": "Um POPOPX_ADMIN_TOKEN com menos de 24 caracteres, ou igual a um valor de exemplo como change-me, se recusa a carregar; a própria linha de erro sugere openssl rand -hex 32.",
+          ko: "POPOPX_ADMIN_TOKEN이 24자 미만이거나 change-me 같은 예시 값과 같으면 로드를 거부하며, 오류 줄 자체가 openssl rand -hex 32를 제안합니다.",
+          ar: "POPOPX_ADMIN_TOKEN الأقصر من 24 حرفًا، أو المساوي قيمة مثال مثل change-me، يرفض التحميل؛ وسطر الخطأ نفسه يقترح openssl rand -hex 32.",
         },
       },
       {
@@ -613,6 +679,9 @@ const PANELS: readonly Panel[] = [
           "bg": "Токен на сесията",
           "tr": "Oturum token’ı",
           hu: "Munkamenet-token",
+          "pt-BR": "Token de sessão",
+          ko: "세션 토큰",
+          ar: "رمز الجلسة",
         },
         v: {
           en: "The SSO store keeps only a one-way image — an HMAC-SHA256 over the session preimage, or a SHA256 seal tagged with the key source. The token itself is never persisted.",
@@ -633,6 +702,9 @@ const PANELS: readonly Panel[] = [
           bg: "SSO хранилището пази само еднопосочен отпечатък — HMAC-SHA256 върху преизображението на сесията или SHA256 печат с етикет на източника на ключа. Самият токен никога не се съхранява.",
           "tr": "SSO deposu yalnızca tek yönlü bir görüntü saklar — oturum preimage’ı üzerinde bir HMAC-SHA256, ya da anahtar kaynağı etiketli bir SHA256 mührü. Token’ın kendisi asla kalıcı hale getirilmez.",
           "hu": "Az SSO tároló csak egyirányú képet őriz — HMAC-SHA256 a munkamenet preimage-jén, vagy a kulcs forrásával megjelölt SHA256-lényeg. Magát a tokent soha nem írjuk le.",
+          "pt-BR": "O armazenamento de SSO guarda apenas uma imagem de mão única — um HMAC-SHA256 sobre a pré-imagem da sessão, ou um selo SHA256 marcado com a origem da chave. O token em si nunca é persistido.",
+          ko: "SSO 저장소는 단방향 이미지만 보관합니다 — 세션 원문에 대한 HMAC-SHA256, 또는 키 출처가 태그된 SHA256 봉인입니다. 토큰 자체는 결코 저장되지 않습니다.",
+          ar: "لا يحتفظ مخزن SSO إلا بصورة أحادية الاتجاه — HMAC-SHA256 على الصورة الأولية للجلسة، أو ختم SHA256 موسوم بمصدر المفتاح. ولا يُحفظ الرمز نفسه أبدًا.",
         },
       },
       {
@@ -656,6 +728,9 @@ const PANELS: readonly Panel[] = [
           bg: "Логове и банер",
           "tr": "Günlükler ve banner",
           hu: "Naplók és banner",
+          "pt-BR": "Logs e banner",
+          ko: "로그와 배너",
+          ar: "السجلات ولافتة البدء",
         },
         v: {
           en: "The boot banner prints listen host, port, node URL, db path and the switch states — never a secret value. Credentials inside a web3 RPC URL are redacted before anything is logged.",
@@ -676,6 +751,9 @@ const PANELS: readonly Panel[] = [
           "bg": "Банерът при стартиране отпечатва listen host, порт, URL на възела, пътя до базата и състоянията на превключвателите — никога стойност на тайна. Удостоверенията в URL на web3 RPC се цензурират, преди нещо да влезе в лога.",
           "tr": "Açılış banner’ı yalnızca dinleme ana makinesini, portu, düğüm URL’sini, veritabanı yolunu ve anahtar durumlarını yazar — asla bir sır değeri. web3 RPC URL’sinin içindeki kimlik bilgileri, günlüğe bir şey düşmeden önce sansürlenir.",
           "hu": "Az indulási banner a kilistelt hostot, a portot, a csomópont URL-jét, az adatbázis útvonalát és a kapcsolók állapotát írja ki — titok értékét soha. A web3 RPC URL-ben lévő hitelesítő adatokat kitöröljük, mielőtt bármi a naplóba kerülne.",
+          "pt-BR": "O banner de inicialização imprime o host de escuta, a porta, a URL do nó, o caminho do banco de dados e os estados dos interruptores — nunca um valor secreto. Credenciais dentro de uma URL de RPC web3 são ocultadas antes de qualquer registro em log.",
+          ko: "부팅 배너는 수신 호스트, 포트, 노드 URL, DB 경로, 스위치 상태를 출력하며 시크릿 값은 결코 출력하지 않습니다. web3 RPC URL 안의 자격 증명은 무엇이든 로그로 남기기 전에 가려집니다.",
+          ar: "تطبع لافتة البدء المضيف المستمع والمنفذ وعنوان URL للعقدة ومسار قاعدة البيانات وحالات المفاتيح — ولا تطبع أي قيمة سرية أبدًا. وتُحجب بيانات الاعتماد داخل عنوان RPC لـ web3 قبل تسجيل أي شيء.",
         },
       },
       {
@@ -699,6 +777,9 @@ const PANELS: readonly Panel[] = [
           bg: "Тайни в покой",
           "tr": "Depolanan sırlar",
           hu: "Nyugvó titkok",
+          "pt-BR": "Segredos em repouso",
+          ko: "저장 상태의 시크릿",
+          ar: "الأسرار في حالة السكون",
         },
         v: {
           en: "Shipped: set POPOPX_VAULT_KEY and gateway/app/vault.py derives a per-column key with HKDF-SHA256, then seals seven columns with ChaCha20-Poly1305 — eco_sessions.secret_hex, channels.identity_sec_b64url, channel_epochs.key_b64url, workflow_subscriptions.secret, dav_endpoints.password and both slack_discord_workspaces columns. AAD is popopx.vault.v1|<table>|<column>|<subject>, sealed values carry a vault1: prefix, and plaintext rows still read. The gateway still holds the Ed25519 channel identity and can decrypt what it stores: zero-knowledge holds against the relay, not against your own gateway.",
@@ -719,6 +800,9 @@ const PANELS: readonly Panel[] = [
           bg: "В кода: при зададен POPOPX_VAULT_KEY gateway/app/vault.py извежда ключ за всяка колона чрез HKDF-SHA256 и запечатва седем колони с ChaCha20-Poly1305 — eco_sessions.secret_hex, channels.identity_sec_b64url, channel_epochs.key_b64url, workflow_subscriptions.secret, dav_endpoints.password и двете колони на slack_discord_workspaces. AAD е popopx.vault.v1|<table>|<column>|<subject>, запечатаните стойности носят префикс vault1:, а редовете в чист текст продължават да се четат. Гейтуейтът все още държи Ed25519 идентичността на канала и може да разшифрова това, което пази: нулевото знание важи срещу relaya, не срещу собствения ти гейтуейт.",
           tr: "Kodda: POPOPX_VAULT_KEY ayarlıysa gateway/app/vault.py HKDF-SHA256 ile sütun başına anahtar türetir, ardından yedi sütunu ChaCha20-Poly1305 ile mühürler — eco_sessions.secret_hex, channels.identity_sec_b64url, channel_epochs.key_b64url, workflow_subscriptions.secret, dav_endpoints.password ve slack_discord_workspaces’in iki sütunu. AAD, popopx.vault.v1|<table>|<column>|<subject> biçimindedir, mühürlü değerler vault1: öneki taşır ve düz metin satırlar okunmaya devam eder. Ağ geçidi kanalın Ed25519 kimliğini hâlâ elinde tutar ve sakladığını çözebilir: sıfır bilgi aktarana karşı geçerlidir, kendi ağ geçidine karşı değil.",
           hu: "Már a kódban: ha a POPOPX_VAULT_KEY be van állítva, a gateway/app/vault.py HKDF-SHA256-tal oszloponkénti kulcsot vezet le, majd ChaCha20-Poly1305-tel lepecsétel hét oszlopot — eco_sessions.secret_hex, channels.identity_sec_b64url, channel_epochs.key_b64url, workflow_subscriptions.secret, dav_endpoints.password és a slack_discord_workspaces mindkét oszlopa. Az AAD a popopx.vault.v1|<table>|<column>|<subject>, a lepecsételt értékek vault1: előtagot hordoznak, a nyílt szövegű sorok pedig továbbra is olvashatók. Az átjáró továbbra is birtokolja a csatorna Ed25519 azonosságát, és vissza tudja fejteni, amit tárol: a zero-knowledge a relay ellen áll, nem a saját átjáród ellen.",
+          "pt-BR": "Distribuído: defina POPOPX_VAULT_KEY e gateway/app/vault.py deriva uma chave por coluna com HKDF-SHA256 e então sela sete colunas com ChaCha20-Poly1305 — eco_sessions.secret_hex, channels.identity_sec_b64url, channel_epochs.key_b64url, workflow_subscriptions.secret, dav_endpoints.password e as duas colunas de slack_discord_workspaces. O AAD é popopx.vault.v1|<table>|<column>|<subject>, os valores selados carregam o prefixo vault1:, e linhas em texto claro ainda são lidas. O gateway ainda detém a identidade Ed25519 do canal e pode descriptografar o que armazena: o conhecimento zero vale contra o relay, não contra o seu próprio gateway.",
+          ko: "기본 배포 상태: POPOPX_VAULT_KEY를 설정하면 gateway/app/vault.py가 HKDF-SHA256으로 컬럼별 키를 유도한 뒤 일곱 개 컬럼을 ChaCha20-Poly1305로 봉인합니다 — eco_sessions.secret_hex, channels.identity_sec_b64url, channel_epochs.key_b64url, workflow_subscriptions.secret, dav_endpoints.password 그리고 slack_discord_workspaces의 두 컬럼입니다. AAD는 popopx.vault.v1|<table>|<column>|<subject>이고, 봉인된 값에는 vault1: 접두사가 붙으며, 평문 행도 여전히 읽힙니다. 게이트웨이는 여전히 Ed25519 채널 신원을 보유하고 저장한 내용을 복호화할 수 있습니다: 영지식은 릴레이에 대해 성립하며 여러분 자신의 게이트웨이에 대해서는 성립하지 않습니다.",
+          ar: "المشحون: اضبط POPOPX_VAULT_KEY فيشتق gateway/app/vault.py مفتاحًا لكل عمود بـ HKDF-SHA256، ثم يختم سبعة أعمدة بـ ChaCha20-Poly1305 — eco_sessions.secret_hex وchannels.identity_sec_b64url وchannel_epochs.key_b64url وworkflow_subscriptions.secret وdav_endpoints.password وكلا عمودي slack_discord_workspaces. وقيمة AAD هي popopx.vault.v1|<table>|<column>|<subject>، والقيم المختومة تحمل بادئة vault1:، والصفوف النصية الواضحة ما زالت تُقرأ. ولا تزال البوابة تحمل هوية القناة Ed25519 وتستطيع فك ما تخزنه: فالمعرفة الصفرية تصمد أمام المرحّل، لا أمام بوابتك أنت.",
         },
       },
       {
@@ -742,6 +826,9 @@ const PANELS: readonly Panel[] = [
           bg: "Какво добавя операторът",
           "tr": "Operatörün üstlendiği",
           hu: "Amit az operátor pótol",
+          "pt-BR": "Controles do operador",
+          ko: "운영자 측 통제",
+          ar: "ضوابط مشغّل النظام",
         },
         v: {
           en: "The boundary is the host and the key: 0600 on .env, a service user nobody else can become, a default bind on 127.0.0.1:8080, and a POPOPX_VAULT_KEY that lives in the environment, never in the database or its backup. The key is deliberately not derived from POPOPX_ADMIN_TOKEN, and losing it makes sealed rows unreadable. To seal existing rows run python3 -m app.main --migrate-secrets once — it is idempotent and leaves empty values alone. Without the cryptography wheel the vault fails loud with VaultUnavailable instead of writing plaintext.",
@@ -762,6 +849,9 @@ const PANELS: readonly Panel[] = [
           bg: "Границата сега са хостът и ключът: 0600 върху .env, сервисен потребител, в който никой друг не може да се превърне, bind по подразбиране на 127.0.0.1:8080 и POPOPX_VAULT_KEY, който живее в средата, никога в базата или нейното резервно копие. Ключът умишлено не се извежда от POPOPX_ADMIN_TOKEN и загубата му прави запечатаните редове нечетими. За да запечатате съществуващите редове, пуснете веднъж python3 -m app.main --migrate-secrets — идемпотентно е и не пипа празните стойности. Без wheel-а cryptography трезорът се проваля шумно с VaultUnavailable, вместо да пише чист текст.",
           tr: "Sınır artık hem ana makine hem anahtar: .env üzerinde 0600, kimsenin olamadığı bir servis kullanıcısı, varsayılan 127.0.0.1:8080 bind’i ve yalnızca ortamda yaşayan, veritabanına ya da yedeğine asla girmeyen bir POPOPX_VAULT_KEY. Anahtar bilinçli olarak POPOPX_ADMIN_TOKEN’dan türetilmez; kaybı, mühürlü satırları okunamaz kılar. Var olan satırları mühürlemek için python3 -m app.main --migrate-secrets komutunu bir kez çalıştırın — idempotenttir ve boş değerlere dokunmaz. cryptography wheel’i yoksa kasa, düz metin yazmak yerine VaultUnavailable ile yüksek sesle başarısız olur.",
           hu: "A határ most a gép és a kulcs: 0600 a .env-re, egy szolgáltatás-felhasználó, amely senki más nem lehet, alapértelmezett bind a 127.0.0.1:8080 címre, és egy POPOPX_VAULT_KEY, amely csak a környezetben él, az adatbázisban vagy annak mentésében soha. A kulcs szándékosan nem a POPOPX_ADMIN_TOKEN-ból származik, elvesztése pedig olvashatatlanná teszi a lepecsételt sorokat. A meglévő sorok lepecsételéséhez futtasd egyszer a python3 -m app.main --migrate-secrets parancsot — idempotens, és az üres értékeket békén hagyja. A cryptography wheel nélkül a trezor hangosan VaultUnavailable hibával áll le, ahelyett hogy nyílt szöveget írna.",
+          "pt-BR": "A fronteira é o host e a chave: 0600 no .env, um usuário de serviço que mais ninguém consegue assumir, um bind padrão em 127.0.0.1:8080 e uma POPOPX_VAULT_KEY que vive no ambiente, nunca no banco de dados nem no backup dele. A chave, de propósito, não é derivada de POPOPX_ADMIN_TOKEN, e perdê-la torna as linhas seladas ilegíveis. Para selar as linhas existentes, execute python3 -m app.main --migrate-secrets uma vez — é idempotente e deixa os valores vazios em paz. Sem o wheel cryptography, o cofre falha de forma ruidosa com VaultUnavailable em vez de gravar texto claro.",
+          ko: "경계는 호스트와 키입니다: .env의 0600, 다른 누구도 될 수 없는 서비스 사용자, 127.0.0.1:8080의 기본 바인드, 그리고 데이터베이스나 그 백업이 아니라 환경에만 존재하는 POPOPX_VAULT_KEY입니다. 이 키는 의도적으로 POPOPX_ADMIN_TOKEN에서 파생되지 않으며, 키를 잃으면 봉인된 행을 읽을 수 없게 됩니다. 기존 행을 봉인하려면 python3 -m app.main --migrate-secrets를 한 번 실행하십시오 — 멱등적이며 빈 값은 그대로 둡니다. cryptography wheel이 없으면 볼트는 평문을 쓰는 대신 VaultUnavailable과 함께 즉시 실패합니다.",
+          ar: "الحد هو المضيف والمفتاح: 0600 على .env، ومستخدم خدمة لا يستطيع أحد سواه أن يصبح إياه، وربط افتراضي على 127.0.0.1:8080، وPOPOPX_VAULT_KEY يقيم في البيئة، لا في قاعدة البيانات ولا في نسخها الاحتياطية. والمفتاح غير مشتق عمدًا من POPOPX_ADMIN_TOKEN، وفقدانه يجعل الصفوف المختومة غير قابلة للقراءة. لختم الصفوف القائمة شغّل python3 -m app.main --migrate-secrets مرة واحدة — فهو لا يغيّر النتيجة عند تكراره ويترك القيم الفارغة كما هي. وبدون حزمة cryptography تتعطل الخزنة بخطأ صريح VaultUnavailable بدل كتابة نص واضح.",
         },
       },
     ],
@@ -791,6 +881,9 @@ const PANELS: readonly Panel[] = [
       bg: "Оторизация на админа: root токен плюс pxa_ токени с обхват",
       tr: "Yönetici yetkilendirmesi: root token artı kapsamlı pxa_ token’ları",
       hu: "Admin-hitelesítés: root token és scope-os pxa_ tokenek",
+      "pt-BR": "Autorização de administração: um token raiz mais tokens pxa_ com escopo",
+      ko: "관리자 인가: 루트 토큰과 스코프가 지정된 pxa_ 토큰",
+      ar: "تفويض الإدارة: رمز جذري إضافةً إلى رموز pxa_ محددة النطاق",
     },
     hook: {
       en: "The root POPOPX_ADMIN_TOKEN still opens everything and is the only credential that can mint, list or revoke scoped tokens. A pxa_ token is stored as its SHA-256 hash only and carries 1–16 scopes.",
@@ -811,6 +904,9 @@ const PANELS: readonly Panel[] = [
       bg: "Root POPOPX_ADMIN_TOKEN продължава да отваря всичко и е единственото удостоверение, с което могат да се издават, изброяват и отменят токени с обхват. Токенът pxa_ се пази само като SHA-256 хеш и носи 1–16 обхвата.",
       tr: "Root POPOPX_ADMIN_TOKEN hâlâ her şeyi açar ve kapsamlı token’ları üretebilen, listeleyebilen ve iptal edebilen tek kimlik bilgisidir. Bir pxa_ token’ı yalnızca SHA-256 karması olarak saklanır ve 1–16 kapsam taşır.",
       hu: "A root POPOPX_ADMIN_TOKEN továbbra is mindent kinyit, és csak vele lehet scope-os tokent kibocsátani, listázni és visszavonni. A pxa_ token csak SHA-256-ként tárolódik, és 1–16 scope-ot hordoz.",
+      "pt-BR": "O POPOPX_ADMIN_TOKEN raiz ainda abre tudo e é a única credencial capaz de emitir, listar ou revogar tokens com escopo. Um token pxa_ é armazenado apenas como seu hash SHA-256 e carrega de 1 a 16 escopos.",
+      ko: "루트 POPOPX_ADMIN_TOKEN은 여전히 모든 것을 열며, 스코프 토큰을 발급, 나열, 폐기할 수 있는 유일한 자격 증명입니다. pxa_ 토큰은 SHA-256 해시로만 저장되며 1–16개의 스코프를 가집니다.",
+      ar: "الرمز الجذري POPOPX_ADMIN_TOKEN ما زال يفتح كل شيء، وهو بيانات الاعتماد الوحيدة القادرة على إصدار الرموز محددة النطاق أو سردها أو إبطالها. ويُخزَّن رمز pxa_ كتجزئة SHA-256 له فقط، ويحمل 1–16 نطاقًا.",
     },
     rows: [
       {
@@ -834,6 +930,9 @@ const PANELS: readonly Panel[] = [
           bg: "Удостоверение",
           tr: "Kimlik bilgisi",
           hu: "Hitelesítő",
+          "pt-BR": "Credencial",
+          ko: "자격 증명",
+          ar: "بيانات الاعتماد",
         },
         v: {
           en: "Four spellings are accepted: X-Popopx-Admin-Token and its older X-Admin-Token alias, Authorization: Bearer, or ?token= in the query. A root token is compared in constant time against POPOPX_ADMIN_TOKEN; an empty configured token is a refusal, never a wildcard.",
@@ -854,6 +953,9 @@ const PANELS: readonly Panel[] = [
           bg: "Приемат се четири форми: X-Popopx-Admin-Token и по-стария му псевдоним X-Admin-Token, Authorization: Bearer или ?token= в заявката. Root токенът се сравнява с постоянно време срещу POPOPX_ADMIN_TOKEN; празен конфигуриран токен е отказ, никога не е заместител.",
           "tr": "Dört yazım kabul edilir: X-Popopx-Admin-Token ve eski takma adı X-Admin-Token, Authorization: Bearer ya da sorgudaki ?token=. Root token, POPOPX_ADMIN_TOKEN ile sabit zamanda karşılaştırılır; boş bırakılmış token bir rettir, asla joker değildir.",
           "hu": "Négy írásmód elfogadott: a X-Popopx-Admin-Token és a régebbi X-Admin-Token álneve, az Authorization: Bearer, vagy a queryben a ?token=. A root tokent állandó idejű összehasonlítással vetjük össze a POPOPX_ADMIN_TOKEN-nal; az üresen hagyott token elutasítás, soha nem helyettesítő karakter.",
+          "pt-BR": "Quatro grafias são aceitas: X-Popopx-Admin-Token e o seu alias mais antigo X-Admin-Token, Authorization: Bearer, ou ?token= na consulta. Um token raiz é comparado em tempo constante com POPOPX_ADMIN_TOKEN; um token configurado vazio é recusa, nunca um curinga.",
+          ko: "네 가지 표기가 허용됩니다: X-Popopx-Admin-Token과 그보다 오래된 별칭 X-Admin-Token, Authorization: Bearer, 또는 쿼리의 ?token=입니다. 루트 토큰은 POPOPX_ADMIN_TOKEN과 상수 시간으로 비교되며, 설정된 토큰이 비어 있으면 와일드카드가 아니라 거부로 처리됩니다.",
+          ar: "تُقبل أربع صيغ: X-Popopx-Admin-Token واسمها البديل الأقدم X-Admin-Token، وAuthorization: Bearer، أو ?token= في الاستعلام. ويُقارن الرمز الجذري بزمن ثابت مع POPOPX_ADMIN_TOKEN؛ والرمز المضبوط الفارغ رفضٌ، لا حرف بدلٍ مطلق أبدًا.",
         },
       },
       {
@@ -877,6 +979,9 @@ const PANELS: readonly Panel[] = [
           bg: "Къде хапе",
           tr: "Nerede devreye giriyor",
           hu: "Hol ütközik ki",
+          "pt-BR": "Onde isso atua",
+          ko: "적용 지점",
+          ar: "أين يظهر الأثر",
         },
         v: {
           en: "Middleware now guards plugin routes and every non-public /api/v1/ route: unknown, expired or revoked tokens get 401 {\"ok\":false,\"error\":\"unauthorized\"}, and a known token missing the route's scope gets 403 {\"ok\":false,\"error\":\"forbidden\"} plus an audit row, before any handler runs.",
@@ -897,6 +1002,9 @@ const PANELS: readonly Panel[] = [
           "bg": "Middleware-ът вече пази пътищата на плъгините и всеки непубличен път под /api/v1/: непознат, изтекъл или отменен токен получава 401 {\"ok\":false,\"error\":\"unauthorized\"}, а познат токен без нужния обхват получава 403 {\"ok\":false,\"error\":\"forbidden\"} и запис в одита, преди който и да е handler да се изпълни.",
           "tr": "Ara katman artık eklenti rotalarını ve /api/v1/ altındaki her genel olmayan rotayı koruyor: bilinmeyen, süresi dolmuş ya da iptal edilmiş token 401 {\"ok\":false,\"error\":\"unauthorized\"}, gereken kapsamı olmayan bilinen bir token ise 403 {\"ok\":false,\"error\":\"forbidden\"} ve bir denetim satırı alır; bunların hepsi bir işleyici çalışmadan önce olur.",
           "hu": "A middleware most a bővítmény-útvonalakat és minden nem nyilvános /api/v1/ útvonalat véd: az ismeretlen, lejárt vagy visszavont token 401 {\"ok\":false,\"error\":\"unauthorized\"}, a ismert, de a szükséges scope-tal nem rendelkező token 403 {\"ok\":false,\"error\":\"forbidden\"} és egy audit-sor választ kap, még mielőtt bármely kezelő lefutna.",
+          "pt-BR": "O middleware agora protege as rotas de plug-in e todas as rotas /api/v1/ não públicas: tokens desconhecidos, expirados ou revogados recebem 401 {\"ok\":false,\"error\":\"unauthorized\"}, e um token conhecido sem o escopo da rota recebe 403 {\"ok\":false,\"error\":\"forbidden\"} mais uma linha de auditoria, antes de qualquer handler rodar.",
+          ko: "이제 미들웨어가 플러그인 라우트와 모든 비공개 /api/v1/ 라우트를 보호합니다: 알 수 없거나 만료되었거나 폐기된 토큰은 401 {\"ok\":false,\"error\":\"unauthorized\"}를 받고, 라우트의 범위가 없는 알려진 토큰은 어떤 핸들러보다도 먼저 403 {\"ok\":false,\"error\":\"forbidden\"}과 감사 행을 받습니다.",
+          ar: "تحرس البرمجية الوسيطة الآن مسارات الإضافات وكل مسار /api/v1/ غير عام: فالرموز المجهولة أو المنتهية أو المبطة تحصل على 401 {\"ok\":false,\"error\":\"unauthorized\"}، والرمز المعروف الذي يفتقد نطاق المسار يحصل على 403 {\"ok\":false,\"error\":\"forbidden\"} مع صف تدقيق، قبل تشغيل أي معالج.",
         },
       },
       {
@@ -920,6 +1028,9 @@ const PANELS: readonly Panel[] = [
           bg: "Публично по замисъл",
           tr: "Bilinçli olarak açık",
           hu: "Szándékosan nyilvános",
+          "pt-BR": "Público de propósito",
+          ko: "설계상 공개",
+          ar: "عام بحكم التصميم",
         },
         v: {
           en: "Plugin exemptions are narrow: paths ending /webhook, /verify or /callback, plus GET /api/v1/plugins/sso/sessions/{session_id} for the QR poll. The core adds exactly five token-free routes — GET /healthz, GET /, GET /h5/{article_id}, POST /api/v1/verifyH5Auth and POST /api/v1/workflows/trigger — and each authenticates its caller another way.",
@@ -940,6 +1051,9 @@ const PANELS: readonly Panel[] = [
           bg: "Изключенията за плъгини остават тесни: пътища, завършващи на /webhook, /verify или /callback, плюс GET /api/v1/plugins/sso/sessions/{session_id} за допитването на QR. Ядрото добавя точно пет маршрута без токен — GET /healthz, GET /, GET /h5/{article_id}, POST /api/v1/verifyH5Auth и POST /api/v1/workflows/trigger — и всеки удостоверява подвикващия по друг начин.",
           tr: "Eklenti muafiyetleri dar kalır: /webhook, /verify veya /callback ile biten yollar ve QR yoklaması için GET /api/v1/plugins/sso/sessions/{session_id}. Çekirdek ise tam olarak beş tokensiz rota ekler — GET /healthz, GET /, GET /h5/{article_id}, POST /api/v1/verifyH5Auth ve POST /api/v1/workflows/trigger — ve her biri çağıranı başka bir yolla doğrular.",
           hu: "A bővítmény-kivételek szűkek maradnak: a /webhook, /verify vagy /callback végű útvonalak, valamint a GET /api/v1/plugins/sso/sessions/{session_id} a QR-lekérdezéshez. A mag pontosan öt token nélküli útvonalat ad hozzá — GET /healthz, GET /, GET /h5/{article_id}, POST /api/v1/verifyH5Auth és POST /api/v1/workflows/trigger — és mindegyik másképp hitelesíti a hívót.",
+          "pt-BR": "As isenções de plug-in são estreitas: caminhos terminados em /webhook, /verify ou /callback, mais GET /api/v1/plugins/sso/sessions/{session_id} para a consulta do QR. O núcleo acrescenta exatamente cinco rotas sem token — GET /healthz, GET /, GET /h5/{article_id}, POST /api/v1/verifyH5Auth e POST /api/v1/workflows/trigger — e cada uma autentica seu chamador de outra forma.",
+          ko: "플러그인 예외는 좁습니다: /webhook, /verify, /callback으로 끝나는 경로와 QR 폴링을 위한 GET /api/v1/plugins/sso/sessions/{session_id}입니다. 코어는 정확히 다섯 개의 토큰 없는 라우트 — GET /healthz, GET /, GET /h5/{article_id}, POST /api/v1/verifyH5Auth, POST /api/v1/workflows/trigger — 를 추가하며, 각각은 다른 방식으로 호출자를 인증합니다.",
+          ar: "إعفاءات الإضافات ضيقة: المسارات المنتهية بـ /webhook أو /verify أو /callback، إضافة إلى GET /api/v1/plugins/sso/sessions/{session_id} لاستقصاء QR. ويضيف النواة خمسة مسارات خالية من الرموز بالضبط — GET /healthz وGET / وGET /h5/{article_id} وPOST /api/v1/verifyH5Auth وPOST /api/v1/workflows/trigger — وكل منها يصادق مستدعيه بطريقة أخرى.",
         },
       },
       {
@@ -963,6 +1077,9 @@ const PANELS: readonly Panel[] = [
           bg: "Страницата на конзолата",
           "tr": "Konsol sayfası",
           hu: "A konzol oldala",
+          "pt-BR": "A página do console",
+          ko: "콘솔 페이지",
+          ar: "صفحة لوحة التحكم",
         },
         v: {
           en: "GET / serves the static SPA from gateway/app/static/index.html with no token, deliberately. The page is a shell and every write carries the token, so a leaked page is not a leaked gateway.",
@@ -983,6 +1100,9 @@ const PANELS: readonly Panel[] = [
           "bg": "GET / съзнателно обслужва статичното SPA от gateway/app/static/index.html без токен. Страницата е обвивка и всяко записване носи токена, следователно отекла страница не е отекъл гейтуейт.",
           "tr": "GET / bilinçli olarak statik SPA’yı gateway/app/static/index.html üzerinden token vermeden sunar. Sayfa yalnızca bir kabuktur ve her yazma işlemi token’ı taşır; bu yüzden sızan bir sayfa sızan bir ağ geçidi değildir.",
           "hu": "A GET / szándékosan, token nélkül kiszolgálja a gateway/app/static/index.html statikus SPA-t. Az oldal csak egy héj, és minden írás viseli a tokent, így egy kiszivárgott oldal nem kiszivárgott átjárót jelent.",
+          "pt-BR": "GET / serve a SPA estática a partir de gateway/app/static/index.html sem token, deliberadamente. A página é uma casca e toda escrita carrega o token, então uma página vazada não é um gateway vazado.",
+          ko: "GET /는 gateway/app/static/index.html에서 정적 SPA를 토큰 없이 제공하며, 이는 의도된 것입니다. 페이지는 껍데기일 뿐이고 모든 쓰기에는 토큰이 실리므로, 페이지가 유출되어도 게이트웨이가 유출되는 것은 아닙니다.",
+          ar: "يخدم GET / تطبيق SPA الثابت من gateway/app/static/index.html دون رمز، وذلك عمدًا. فالصفحة هيكل فقط وكل عملية كتابة تحمل الرمز، لذا تسريب الصفحة ليس تسريبًا للبوابة.",
         },
       },
       {
@@ -1006,6 +1126,9 @@ const PANELS: readonly Panel[] = [
           bg: "Фино зърнести права",
           tr: "İnce taneli yetkiler",
           hu: "Finom jogok",
+          "pt-BR": "Direitos granulares",
+          ko: "세분화된 권한",
+          ar: "أذونات دقيقة",
         },
         v: {
           en: "shipped: POST /api/v1/admin/tokens mints a pxa_ token, shown in plaintext once and stored only as SHA-256. Scopes follow a closed grammar — *, core:<resource>:ro|rw, plugin:<id>:ro|rw — 1 to 16 per token, core:admin is not grantable, ro means GET and HEAD only. Expiry runs 1 to 3650 days, revocation is immediate, and the audit keeps the last 5,000 rows.",
@@ -1026,6 +1149,9 @@ const PANELS: readonly Panel[] = [
           bg: "доставено: POST /api/v1/admin/tokens издава токен pxa_, показан в явен вид веднъж и съхраняван само като SHA-256. Обхватите следват затворена граматика — *, core:<resource>:ro|rw, plugin:<id>:ro|rw — от 1 до 16 на токен, core:admin не може да се дава, ro означава само GET и HEAD. Срок 1 до 3650 дни, отмяната е незабавна, одитът пази последните 5000 реда.",
           tr: "hazır: POST /api/v1/admin/tokens bir pxa_ token üretir; düz metin yalnızca bir kez gösterilir ve yalnızca SHA-256 olarak saklanır. Kapsamlar kapalı bir dilbilgisine uyar — *, core:<resource>:ro|rw, plugin:<id>:ro|rw — token başına 1 ile 16 arası, core:admin verilemez, ro yalnızca GET ve HEAD demektir. Geçerlilik 1–3650 gün, iptal anındadır, denetim son 5.000 satırı tutar.",
           hu: "szállítva: a POST /api/v1/admin/tokens pxa_ tokent bocsát ki, amely egyszer jelenik meg nyílt szövegként, és csak SHA-256-ként tárolódik. A scope-ok zárt nyelvtant követnek — *, core:<resource>:ro|rw, plugin:<id>:ro|rw — tokennként 1–16, a core:admin nem adható ki, a ro csak GET és HEAD jelent. Lejárat 1–3650 nap, a visszavonás azonnali, az audit az utolsó 5000 sort őrzi.",
+          "pt-BR": "distribuído: POST /api/v1/admin/tokens emite um token pxa_, mostrado em texto claro uma única vez e armazenado apenas como SHA-256. Os escopos seguem uma gramática fechada — *, core:<resource>:ro|rw, plugin:<id>:ro|rw — de 1 a 16 por token, core:admin não é concedível, ro significa apenas GET e HEAD. A validade vai de 1 a 3650 dias, a revogação é imediata, e a auditoria guarda as últimas 5000 linhas.",
+          ko: "기본 배포 상태: POST /api/v1/admin/tokens가 pxa_ 토큰을 발급하며, 평문으로 한 번 표시되고 SHA-256으로만 저장됩니다. 범위는 닫힌 문법을 따릅니다 — *, core:<resource>:ro|rw, plugin:<id>:ro|rw — 토큰당 1~16개이고, core:admin은 부여할 수 없으며, ro는 GET과 HEAD만을 의미합니다. 만료는 1일에서 3650일까지이고, 폐기는 즉시 적용되며, 감사에는 최근 5,000개 행이 보관됩니다.",
+          ar: "المشحون: POST /api/v1/admin/tokens يصدر رمز pxa_، يُعرض نصًا واضحًا مرة واحدة ويُخزَّن كـ SHA-256 فقط. والنطاقات تتبع قواعد مغلقة — * وcore:<resource>:ro|rw وplugin:<id>:ro|rw — من 1 إلى 16 لكل رمز، وcore:admin غير قابل للمنح، وro يعني GET وHEAD فقط. والصلاحية تمتد من 1 إلى 3650 يومًا، والإبطال فوري، ويحتفظ التدقيق بآخر 5,000 صف.",
         },
       },
     ],
@@ -1055,6 +1181,9 @@ const PANELS: readonly Panel[] = [
       bg: "Вход за уебхуки: първо споделен токен, после HMAC с времеви печат, щом е зададена тайна",
       tr: "Webhook girişi: önce paylaşılan token, secret ayarlıysa ardından zaman damgalı HMAC",
       hu: "Webhook-bemenet: először közös token, majd – ha a titok be van állítva – időbélyeges HMAC",
+      "pt-BR": "Entrada de webhook: primeiro um token compartilhado, depois um HMAC com carimbo de data e hora quando o segredo está definido",
+      ko: "웹훅 수신: 먼저 공유 토큰, 시크릿이 설정되면 타임스탬프가 붙은 HMAC",
+      ar: "استقبال الويب هوك: رمز مشترك أولًا، ثم HMAC بطابع زمني بمجرد تعيين السر",
     },
     hook: {
       en: "The shared token is checked first and always; it must still be present even when signing. If POPOPX_ALERT_WEBHOOK_SECRET is set, a valid token is only the first gate: the request then needs X-Popopx-Timestamp and X-Popopx-Signature. With the secret unset, token-only deliveries are still accepted.",
@@ -1075,6 +1204,9 @@ const PANELS: readonly Panel[] = [
       bg: "Споделеният токен се проверява винаги пръв; той трябва да присъства и при подписване. Ако POPOPX_ALERT_WEBHOOK_SECRET е зададена, валидният токен е само първата врата: заявката изисква още X-Popopx-Timestamp и X-Popopx-Signature. Без тайна доставките само с токен продължават да се приемат.",
       tr: "Paylaşılan token her zaman önce denetlenir; imzalarken bile bulunmak zorundadır. POPOPX_ALERT_WEBHOOK_SECRET ayarlıysa geçerli bir token yalnızca ilk kapıdır: istek ayrıca X-Popopx-Timestamp ve X-Popopx-Signature taşımalıdır. Secret ayarlı değilse yalnızca token’lı teslimler hâlâ kabul edilir.",
       hu: "A közös tokent mindig először ellenőrizzük, és aláíráskor is jelen kell lennie. Ha a POPOPX_ALERT_WEBHOOK_SECRET be van állítva, az érvényes token csak az első kapu: a kérésnek ilyenkor X-Popopx-Timestamp és X-Popopx-Signature fejlécet is kell hoznia. Ha a titok nincs beállítva, a csak tokennel érkező átvitel továbbra is elfogadott.",
+      "pt-BR": "O token compartilhado é verificado primeiro e sempre; ele ainda precisa estar presente mesmo quando há assinatura. Se POPOPX_ALERT_WEBHOOK_SECRET estiver definido, um token válido é apenas a primeira barreira: a requisição então precisa de X-Popopx-Timestamp e X-Popopx-Signature. Com o segredo indefinido, entregas apenas com token continuam sendo aceitas.",
+      ko: "공유 토큰은 항상 가장 먼저 검사되며, 서명할 때도 반드시 있어야 합니다. POPOPX_ALERT_WEBHOOK_SECRET이 설정되어 있으면 유효한 토큰은 첫 번째 관문일 뿐이며, 요청에는 X-Popopx-Timestamp와 X-Popopx-Signature가 추가로 필요합니다. 시크릿이 설정되지 않은 경우 토큰만 있는 전달도 여전히 허용됩니다.",
+      ar: "يُفحص الرمز المشترك أولًا ودائمًا؛ ويجب أن يكون حاضرًا حتى عند التوقيع. وإذا عُيّن POPOPX_ALERT_WEBHOOK_SECRET، فإن الرمز الصالح ليس سوى البوابة الأولى: إذ يحتاج الطلب حينها إلى X-Popopx-Timestamp وX-Popopx-Signature. وإذا لم يُعيَّن السر، تظل عمليات التسليم المعتمدة على الرمز وحده مقبولة.",
     },
     sample: WEBHOOK_SAMPLE,
     sampleCaption: WEBHOOK_CAPTION,
@@ -1100,6 +1232,9 @@ const PANELS: readonly Panel[] = [
           bg: "Две форми на заглавка",
           tr: "İki başlık biçimi",
           hu: "Két fejlécalak",
+          "pt-BR": "Duas formas de cabeçalho",
+          ko: "두 가지 헤더 형식",
+          ar: "صيغتان للترويسة",
         },
         v: {
           en: "Either X-Popopx-Alert-Token or Authorization: Bearer, matched against POPOPX_ALERT_WEBHOOK_TOKEN in constant time. This check comes first and cannot be skipped: when POPOPX_ALERT_WEBHOOK_SECRET is also set, the token only unlocks the second gate.",
@@ -1120,6 +1255,9 @@ const PANELS: readonly Panel[] = [
           bg: "Или X-Popopx-Alert-Token, или Authorization: Bearer, сравнено с постоянно време срещу POPOPX_ALERT_WEBHOOK_TOKEN. Тази проверка винаги е първа и не може да се прескочи: ако е зададена и POPOPX_ALERT_WEBHOOK_SECRET, токенът отваря само втората врата.",
           tr: "Ya X-Popopx-Alert-Token ya da Authorization: Bearer; değer POPOPX_ALERT_WEBHOOK_TOKEN ile sabit zamanda karşılaştırılır. Bu denetim her zaman ilk sıradadır ve atlanamaz: POPOPX_ALERT_WEBHOOK_SECRET de ayarlıysa token yalnızca ikinci kapıyı açar.",
           hu: "Vagy X-Popopx-Alert-Token, vagy Authorization: Bearer, állandó idejű összevetéssel a POPOPX_ALERT_WEBHOOK_TOKEN-nal. Ez az ellenőrzés mindig első, és nem hagyható ki: ha a POPOPX_ALERT_WEBHOOK_SECRET is be van állítva, a token csak a második kaput nyitja.",
+          "pt-BR": "X-Popopx-Alert-Token ou Authorization: Bearer, comparados com POPOPX_ALERT_WEBHOOK_TOKEN em tempo constante. Esta verificação vem primeiro e não pode ser pulada: quando POPOPX_ALERT_WEBHOOK_SECRET também está definido, o token só destranca a segunda barreira.",
+          ko: "X-Popopx-Alert-Token 또는 Authorization: Bearer 중 하나이며, POPOPX_ALERT_WEBHOOK_TOKEN과 상수 시간으로 대조됩니다. 이 검사는 항상 먼저 수행되고 건너뛸 수 없습니다. POPOPX_ALERT_WEBHOOK_SECRET도 설정되어 있으면 토큰은 두 번째 관문을 여는 역할만 합니다.",
+          ar: "إما X-Popopx-Alert-Token أو Authorization: Bearer، ويُطابَق مع POPOPX_ALERT_WEBHOOK_TOKEN بزمن ثابت. وهذا الفحص يأتي أولًا ولا يمكن تجاوزه: فعندما يكون POPOPX_ALERT_WEBHOOK_SECRET معينًا أيضًا، لا يفتح الرمز إلا البوابة الثانية.",
         },
       },
       {
@@ -1143,6 +1281,9 @@ const PANELS: readonly Panel[] = [
           bg: "Незададен токен",
           tr: "Ayarlanmamış token",
           hu: "Be nem állított token",
+          "pt-BR": "Token não definido",
+          ko: "토큰 미설정",
+          ar: "رمز غير معيّن",
         },
         v: {
           en: "If POPOPX_ALERT_WEBHOOK_TOKEN is empty, every delivery is refused with 401, and the detail names the missing variable: an unconfigured webhook must not be able to mint red cards by accident.",
@@ -1163,6 +1304,9 @@ const PANELS: readonly Panel[] = [
           bg: "Ако POPOPX_ALERT_WEBHOOK_TOKEN е празен, всяка доставка се отхвърля с 401 и детайлът назовава липсващата променлива: нек конфигуриран уебхук не трябва да може случайно да с кове червени карти.",
           "tr": "POPOPX_ALERT_WEBHOOK_TOKEN boşsa her teslim 401 ile reddedilir ve detail eksik değişkeni adıyla söyler: yapılandırılmamış bir webhook yanlışlıkla kırmızı kart basmamalıdır.",
           "hu": "Ha a POPOPX_ALERT_WEBHOOK_TOKEN üres, minden átvitel 401-gyel elutasításra kerül, és a detail kimondja a hiányzó változót: be nem állított webhook véletlenül sem üthet ki piros kártyát.",
+          "pt-BR": "Se POPOPX_ALERT_WEBHOOK_TOKEN estiver vazio, toda entrega é recusada com 401, e o detalhe nomeia a variável ausente: um webhook não configurado não pode emitir cartões vermelhos por acidente.",
+          ko: "POPOPX_ALERT_WEBHOOK_TOKEN이 비어 있으면 모든 전달이 401로 거부되며, detail 필드에 누락된 변수 이름이 표시됩니다. 설정되지 않은 웹훅이 실수로 빨간 카드를 발급해서는 안 되기 때문입니다.",
+          ar: "إذا كان POPOPX_ALERT_WEBHOOK_TOKEN فارغًا، تُرفض كل عملية تسليم بالرمز 401، ويسمّي التفصيل المتغير المفقود: فويب هوك غير مهيأ يجب ألا يكون قادرًا على إنشاء بطاقات حمراء عن غير قصد.",
         },
       },
       {
@@ -1186,6 +1330,9 @@ const PANELS: readonly Panel[] = [
           bg: "Праг на тежестта",
           "tr": "Önem eşiği",
           "hu": "Súlyességi küszöb",
+          "pt-BR": "Barreira de severidade",
+          ko: "심각도 게이트",
+          ar: "بوابة الخطورة",
         },
         v: {
           en: "POPOPX_ALERT_MIN_SEVERITY=warning drops everything below the gate before a card is ever built. The accepted values are debug|info|warning|critical, matched case-insensitively; an unknown word is a ConfigError.",
@@ -1206,6 +1353,9 @@ const PANELS: readonly Panel[] = [
           bg: "POPOPX_ALERT_MIN_SEVERITY=warning хвърля всичко под прага, преди изобщо да се построи карта. Позволените стойности са debug|info|warning|critical без оглед на главните букви; непозната дума е ConfigError.",
           "tr": "POPOPX_ALERT_MIN_SEVERITY=warning, bir kart kurulmadan önce eşiğin altındaki her şeyi düşürür. Kabul edilen değerler debug|info|warning|critical biçimindedir, büyük/küçük harf ayrımı yapılmaz; bilinmeyen kelime ConfigError üretir.",
           "hu": "A POPOPX_ALERT_MIN_SEVERITY=warning a kártya létrejötte előtt eldob minden a küszöb alól. Elfogadott értékek: debug|info|warning|critical, kis-/nagybetű nélkül; egy ismeretlen szó ConfigError.",
+          "pt-BR": "POPOPX_ALERT_MIN_SEVERITY=warning descarta tudo o que fica abaixo do portão antes de qualquer cartão ser criado. Os valores aceitos são debug|info|warning|critical, comparados sem diferenciar maiúsculas de minúsculas; uma palavra desconhecida é um ConfigError.",
+          ko: "POPOPX_ALERT_MIN_SEVERITY=warning은 카드가 만들어지기 전에 기준선 아래의 모든 것을 버립니다. 허용되는 값은 debug|info|warning|critical이며 대소문자를 구분하지 않고 일치시키고, 알 수 없는 단어는 ConfigError입니다.",
+          ar: "POPOPX_ALERT_MIN_SEVERITY=warning يُسقط كل ما دون البوابة قبل بناء أي بطاقة أصلًا. والقيم المقبولة هي debug|info|warning|critical، تُطابَق دون حساسية لحالة الأحرف؛ وأي كلمة غير معروفة هي ConfigError.",
         },
       },
       {
@@ -1229,6 +1379,9 @@ const PANELS: readonly Panel[] = [
           bg: "Идемпотентност",
           tr: "İdempotens",
           hu: "Idempotencia",
+          "pt-BR": "Idempotência",
+          ko: "멱등성",
+          ar: "اللاتكرارية",
         },
         v: {
           en: "An incident’s identity is its fingerprint, so the ledger key alert:<fingerprint> charges POPOPX_CP_PER_ALERT=2 exactly once; a re-fire updates the same card in place and costs nothing.",
@@ -1249,6 +1402,9 @@ const PANELS: readonly Panel[] = [
           bg: "Самоличността на един инцидент е неговият fingerprint, затова ключът на дневника alert:<fingerprint> таксува POPOPX_CP_PER_ALERT=2 точно веднъж; повторно задействане обновява същата карта и не струва нищо.",
           "tr": "Bir olayın kimliği fingerprint’ıdır; bu yüzden defter anahtarı alert:<fingerprint> POPOPX_CP_PER_ALERT=2 ücretini tam olarak bir kez alır, aynı olay yeniden tetiklendiğinde ise mevcut kartı günceller ve hiçbir şey ücretlendirmez.",
           "hu": "Egy incidens azonossága a fingerprintje, ezért a naplókulcs alert:<fingerprint> pontosan egyszer számol fel POPOPX_CP_PER_ALERT=2-t; az újraváltás ugyanazt a kártyát frissíti, és semibe sem kerül.",
+          "pt-BR": "A identidade de um incidente é a sua impressão digital, então a chave do livro-razão alert:<fingerprint> cobra POPOPX_CP_PER_ALERT=2 exatamente uma vez; um novo disparo atualiza o mesmo cartão no lugar e não custa nada.",
+          ko: "인시던트의 정체성은 지문이므로 원장 키 alert:<fingerprint>는 POPOPX_CP_PER_ALERT=2를 정확히 한 번 청구합니다. 재발생은 같은 카드를 제자리에서 갱신하며 비용이 들지 않습니다.",
+          ar: "هوية الحادث هي بصمته، لذا فمفتاح السجل alert:<fingerprint> يحصّل POPOPX_CP_PER_ALERT=2 مرة واحدة بالضبط؛ وإعادة الإطلاق تحدّث البطاقة نفسها في مكانها ولا تكلف شيئًا.",
         },
       },
       {
@@ -1272,6 +1428,9 @@ const PANELS: readonly Panel[] = [
           bg: "Подписан вход",
           tr: "İmzalı giriş",
           hu: "Aláírt bemenet",
+          "pt-BR": "Entrada assinada",
+          ko: "서명된 수신",
+          ar: "الاستقبال الموقّع",
         },
         v: {
           en: "shipped: once POPOPX_ALERT_WEBHOOK_SECRET is set, passing the token is not enough. X-Popopx-Timestamp carries unix seconds and X-Popopx-Signature carries v1=<hex HMAC-SHA256(secret, \"<timestamp>.<raw body>\")>; then a ±300 s window and a constant-time compare run, and a 2,048-entry replay cache rejects a second delivery of the same signed request. The cache is process-local, so it is not shared across workers.",
@@ -1292,6 +1451,9 @@ const PANELS: readonly Panel[] = [
           bg: "доставено: щом е зададена POPOPX_ALERT_WEBHOOK_SECRET, само токен вече не стига. X-Popopx-Timestamp носи unix секунди, а X-Popopx-Signature носи v1=<hex HMAC-SHA256(secret, \"<timestamp>.<raw body>\")>; следват прозорец от ±300 s и сравнение с постоянно време, после кеш срещу повторение с 2048 записа отхвърля второ доставяне на същата подписана заявка. Кешът живее в процеса и не се споделя между worker-и.",
           tr: "hazır: POPOPX_ALERT_WEBHOOK_SECRET ayarlandığı anda token yeterli olmaz. X-Popopx-Timestamp unix saniyesini, X-Popopx-Signature ise v1=<hex HMAC-SHA256(secret, \"<timestamp>.<raw body>\")> değerini taşır; ardından ±300 s’lik bir pencere ve sabit zamanlı karşılaştırma, sonra 2.048 girişlik yeniden oynatma önbelleği aynı imzalı isteğin ikinci teslimini reddeder. Önbellek süreç içindedir, worker’lar arasında paylaşılmaz.",
           hu: "szállítva: amint a POPOPX_ALERT_WEBHOOK_SECRET be van állítva, a token már nem elég. A X-Popopx-Timestamp unix másodperceket, a X-Popopx-Signature pedig v1=<hex HMAC-SHA256(secret, \"<timestamp>.<raw body>\")> értéket hordoz; ezt ±300 s-es ablak és állandó idejű összehasonlítás követi, majd egy 2048 bejegyzéses replay-gyorsítótár utasítja el ugyanazon aláírt kérés második átvitelét. A gyorsítótár a folyamaton belül él, workerek között nem oszlik meg.",
+          "pt-BR": "distribuído: depois que POPOPX_ALERT_WEBHOOK_SECRET é definido, passar o token não basta. X-Popopx-Timestamp carrega segundos unix e X-Popopx-Signature carrega v1=<hex HMAC-SHA256(secret, \"<timestamp>.<raw body>\")>; em seguida rodam uma janela de ±300 s e uma comparação em tempo constante, e um cache de replay de 2048 entradas rejeita uma segunda entrega da mesma requisição assinada. O cache é local ao processo, portanto não é compartilhado entre workers.",
+          ko: "기본 배포 상태: POPOPX_ALERT_WEBHOOK_SECRET이 설정되면 토큰을 통과하는 것만으로는 충분하지 않습니다. X-Popopx-Timestamp는 유닉스 초를 담고 X-Popopx-Signature는 v1=<hex HMAC-SHA256(secret, \"<timestamp>.<raw body>\")>를 담습니다. 그러면 ±300 s 범위 검사와 상수 시간 비교가 실행되고, 2,048개 항목의 재전송 캐시가 동일한 서명 요청의 두 번째 전달을 거부합니다. 캐시는 프로세스 로컬이므로 워커 간에 공유되지 않습니다.",
+          ar: "المشحون: بمجرد ضبط POPOPX_ALERT_WEBHOOK_SECRET، لا يكفي تمرير الرمز. يحمل X-Popopx-Timestamp ثواني unix ويحمل X-Popopx-Signature القيمة v1=<hex HMAC-SHA256(secret, \"<timestamp>.<raw body>\")>؛ ثم تُجرى نافذة ±300 ثانية ومقارنة بزمن ثابت، وترفض ذاكرة مؤقتة لإعادة التشغيل بسعة 2,048 مدخلًا تسليمًا ثانيًا للطلب الموقّع نفسه. والذاكرة محلية للعملية، فلا تُشارَك بين العمال.",
         },
       },
     ],
@@ -1330,7 +1492,7 @@ function PanelCard({ panel }: { readonly panel: Panel }): ReactElement {
           ))}
         </svg>
         <div className="min-w-0 flex-1">
-          <p className="font-mono text-[11px] tracking-[0.18em] text-faint">{panel.code}</p>
+          <p className="font-mono text-[11px] tracking-[0.18em] text-faint"><bdi dir="ltr">{panel.code}</bdi></p>
           <h3 className="mt-1.5 text-[17px] font-semibold leading-snug text-white">{name}</h3>
         </div>
       </header>
@@ -1349,7 +1511,7 @@ function PanelCard({ panel }: { readonly panel: Panel }): ReactElement {
               <dd className="text-[12.5px] leading-relaxed text-mute">
                 {v}
                 {!shipped && (
-                  <span className="ml-2 font-mono text-[10.5px] text-warn">
+                  <span className="ms-2 font-mono text-[10.5px] text-warn">
                     ({statePlanned})
                   </span>
                 )}
@@ -1432,7 +1594,7 @@ export function SecurityGovernanceSection(): ReactElement {
         </div>
 
         <div role="group" aria-label={filterLabel} className="mt-8 flex flex-wrap items-center gap-2">
-          <span className="eyebrow mr-1">{filterLabel}</span>
+          <span className="eyebrow me-1">{filterLabel}</span>
           {(["all", "shipped", "planned"] as const).map((f) => {
             const active = filter === f;
             const label = f === "all" ? filterAll : f === "shipped" ? filterShipped : filterPlanned;

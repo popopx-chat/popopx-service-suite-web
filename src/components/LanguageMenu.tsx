@@ -21,16 +21,19 @@ import {
 /**
  * The language picker.
  *
- * It lists exactly `LOCALE_COUNT` (18) languages — the same set the POPOPX iOS
- * client declares in `CFBundleLocalizations` — each labelled in its own script
- * so a visitor never has to read English to find their language. A three-button
- * capsule cannot hold 18 options without overflowing, hence a disclosure menu:
+ * It lists exactly `LOCALE_COUNT` (21) languages: the 18 the POPOPX iOS client
+ * declares in `CFBundleLocalizations`, plus pt-BR, ko and ar shipped by this
+ * portal. Each is labelled in its own script so a visitor never has to read
+ * English to find their language. A three-button capsule cannot hold 21 options
+ * without overflowing, hence a disclosure menu:
  *
  *  - `aria-haspopup="true"` + `aria-expanded` on the trigger;
  *  - Escape and any outside pointer press close it;
  *  - opening moves focus to the *active* language, and closing returns it to the
  *    trigger, so the keyboard path through the navbar stays sane;
  *  - switching is a pure re-render: no reload, no route change, no fetch.
+ *  - the panel anchors with logical `start`/`end` offsets, so the menu stays on
+ *    the same physical side of the trigger when Arabic flips the page to RTL.
  */
 
 const MENU_COPY: Record<"languages" | "current" | "choose", Localized<string>> = {
@@ -53,6 +56,9 @@ const MENU_COPY: Record<"languages" | "current" | "choose", Localized<string>> =
     bg: "Езици",
     tr: "Diller",
     hu: "Nyelvek",
+    "pt-BR": "Idiomas",
+    ko: "언어",
+    ar: "اللغات",
   },
   current: {
     en: "Current language",
@@ -73,6 +79,9 @@ const MENU_COPY: Record<"languages" | "current" | "choose", Localized<string>> =
     bg: "Текущ език",
     tr: "Geçerli dil",
     hu: "Jelenlegi nyelv",
+    "pt-BR": "Idioma atual",
+    ko: "현재 언어",
+    ar: "اللغة الحالية",
   },
   choose: {
     en: "Switch interface language",
@@ -93,6 +102,9 @@ const MENU_COPY: Record<"languages" | "current" | "choose", Localized<string>> =
     bg: "Смяна на езика на интерфейса",
     tr: "Arayüz dilini değiştir",
     hu: "Felhasználói felület nyelvének váltása",
+    "pt-BR": "Mudar o idioma da interface",
+    ko: "인터페이스 언어 전환",
+    ar: "تغيير لغة الواجهة",
   },
 };
 
@@ -207,7 +219,7 @@ export function LanguageMenu({
         }`}
       >
         <GlobeMark />
-        <span className="truncate">{LOCALE_NATIVE[locale]}</span>
+        <span className="truncate"><bdi>{LOCALE_NATIVE[locale]}</bdi></span>
         <span className="rounded-full border border-hair px-1.5 py-0.5 text-[10px] leading-none text-faint">
           {LOCALE_SHORT[locale]} · {LOCALE_COUNT}
         </span>
@@ -231,7 +243,7 @@ export function LanguageMenu({
           role="group"
           aria-label={groupLabel}
           className={`glass animate-rise-in absolute z-50 mt-2 w-[min(92vw,420px)] p-2 ${
-            align === "right" ? "right-0" : "left-0"
+            align === "right" ? "end-0" : "start-0"
           }`}
         >
           <p className="eyebrow px-2 pb-1 pt-1.5">
@@ -251,13 +263,13 @@ export function LanguageMenu({
                   onClick={() => choose(code)}
                   aria-pressed={active}
                   aria-label={`${LOCALE_NATIVE[code]}${active ? ` · ${currentLabel}` : ""}`}
-                  className={`flex items-center gap-1.5 rounded-xl border px-2.5 py-2 text-left text-[12.5px] leading-tight transition-colors duration-150 ${FOCUS} ${
+                  className={`flex items-center gap-1.5 rounded-xl border px-2.5 py-2 text-start text-[12.5px] leading-tight transition-colors duration-150 ${FOCUS} ${
                     active
                       ? "border-brand/60 bg-brand/25 text-white"
                       : "border-transparent bg-white/[0.03] text-mute hover:border-hair-strong hover:text-white"
                   }`}
                 >
-                  <span className="truncate">{LOCALE_NATIVE[code]}</span>
+                  <span className="truncate"><bdi>{LOCALE_NATIVE[code]}</bdi></span>
                   {active ? <CheckMark /> : null}
                 </button>
               );

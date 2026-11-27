@@ -9,7 +9,7 @@ import { CodeBlock, SectionHeading, StatusDot } from "@/components/ui";
  *
  * Envelope bytes, epoch custody, menu and card limits, the phone-side HMAC. Every
  * number is printed as the constant's own name plus its `file:line`, mono values
- * stay byte-identical in all 18 languages and every caption around them is
+ * stay byte-identical in all 21 languages and every caption around them is
  * authored 18 times — a reader who trusts this table writes a client from it.
  * Byte-exact frames belong to `DirectoryAndDocsSection`; we summarise and hand
  * off to `#directory` and `#sandbox`.
@@ -68,7 +68,7 @@ const V_H5_SKEW = "H5_MAX_SKEW_SECONDS = 300";
 const V_H5_QUERY = "popopx_uid · ts · sig";
 const V_H5_VERIFY = "POST /api/v1/verifyH5Auth";
 
-/** One block, 18 languages: the layout is bytes, and bytes do not localise. */
+/** One block, 21 languages: the layout is bytes, and bytes do not localise. */
 const AAD_ASCII = `AAD  (envelope_aad)  authenticated, never encrypted
 
   protocol              21 B   popopx.channel.enc.v1
@@ -109,6 +109,9 @@ const EYEBROW: Localized<string> = {
   bg: "Кратък справочник по протокола",
   tr: "Protokol hızlı başvuru rehberi",
   hu: "Protokoll gyorsreferencia",
+  "pt-BR": "Referência rápida do protocolo",
+  ko: "프로토콜 빠른 참조",
+  ar: "المرجع السريع للبروتوكول",
 };
 
 const TITLE: Localized<string> = {
@@ -130,6 +133,9 @@ const TITLE: Localized<string> = {
   bg: "Обвивка, ключове на епохи, лимити на меню и карти — всяко число си носи изходния ред",
   tr: "Zarf, epoch anahtarları, menü ve kart sınırları — her sayı kaynak satırını taşır",
   hu: "Boríték, epochakulcsok, menü- és kártyakorlátok — minden szám a forrásorával érkezik",
+  "pt-BR": "Envelope, chaves de epoch, limites de menu e de cartão — cada número carrega a sua linha de origem",
+  ko: "봉투, epoch 키, 메뉴 및 카드 한도 — 모든 수치에 출처 행이 함께 표시됩니다",
+  ar: "المغلف ومفاتيح الحقبة وحدود القائمة والبطاقة — كل رقم يحمل سطر مصدره",
 };
 
 const SUBTITLE: Localized<string> = {
@@ -151,6 +157,9 @@ const SUBTITLE: Localized<string> = {
   bg: "Това е обзорна таблица, не втора спецификация. Всяка стойност е прочетена на 2026-11-26 от gateway/app/crypto_service.py, gateway/app/database.py и gateway/app/config.py; file:line е отпечатан под всяка картичка. Единственият въпрос, на който таблица не отговаря — кой пази ключовете — си има собствена картичка.",
   tr: "Bu bir kopya kağıdı, ikinci bir şartname değil. Her değer 2026-11-26 tarihinde gateway/app/crypto_service.py, gateway/app/database.py ve gateway/app/config.py dosyalarından okundu; file:line her kartın altına basıldı. Hiçbir tablonun yanıtlayamadığı tek soru — anahtarları kim tutuyor — kendi kartına sahip.",
   hu: "Ez gyorsfüzet, nem második specifikáció. Minden értéket 2026-11-26-én olvastuk ki a gateway/app/crypto_service.py, gateway/app/database.py és gateway/app/config.py fájlokból, és a file:line minden kártya alatt ki van írva. Az egyetlen kérdésre, amelyet egy táblázat nem tud megválaszolni — ki tartja a kulcsokat — saját kártya tartozik.",
+  "pt-BR": "Uma folha de consulta, não uma segunda especificação. Cada valor foi lido de gateway/app/crypto_service.py, gateway/app/database.py e gateway/app/config.py em 2026-11-26; o file:line é impresso sob cada cartão. A única pergunta que uma tabela não responde — quem detém as chaves — tem o seu próprio cartão.",
+  ko: "두 번째 사양서가 아니라 치트 시트입니다. 각 값은 2026-11-26에 gateway/app/crypto_service.py, gateway/app/database.py, gateway/app/config.py에서 읽어 왔으며, file:line이 모든 카드 아래에 인쇄되어 있습니다. 표가 답할 수 없는 단 하나의 질문, 즉 키를 누가 보유하는지는 별도 카드에서 다룹니다.",
+  ar: "ورقة مرجعية سريعة، لا مواصفة ثانية. قُرئت كل قيمة من gateway/app/crypto_service.py وgateway/app/database.py وgateway/app/config.py في 2026-11-26؛ ويُطبع السطر file:line أسفل كل بطاقة. والسؤال الوحيد الذي لا يجيب عنه جدول — من يحتفظ بالمفاتيح — له بطاقة خاصة به.",
 };
 
 const PILL_CITED: Localized<string> = {
@@ -172,6 +181,9 @@ const PILL_CITED: Localized<string> = {
   bg: "Всяка картичка посочва file:line",
   tr: "Her kartta bir file:line alıntısı eşlik eder",
   hu: "Minden kártya file:line hivatkozással él",
+  "pt-BR": "Cada cartão cita file:line",
+  ko: "모든 카드에 file:line 인용",
+  ar: "كل بطاقة تستشهد بـ file:line",
 };
 
 const PILL_SPINE: Localized<string> = {
@@ -193,6 +205,9 @@ const PILL_SPINE: Localized<string> = {
   bg: "Нулевото знание е свойство на релейния път, а не на твоия сървър",
   tr: "Sıfır bilgi aktarım yolunun bir özelliğidir, sunucunuzun değil",
   hu: "A zero-knowledge az átjátszó útvonal tulajdonsága, nem a saját szerveredé",
+  "pt-BR": "Conhecimento zero é uma propriedade do caminho do relay, não do seu servidor",
+  ko: "영지식은 자체 서버가 아니라 릴레이 경로의 속성입니다",
+  ar: "المعرفة الصفرية سمة في مسار المرحّل، لا في خادمك",
 };
 
 /** Shared row caption, reused wherever a POPX-CP price is printed. */
@@ -215,6 +230,9 @@ const CAP_FEE: Localized<string> = {
   bg: "Такса",
   tr: "Ücret",
   hu: "Díj",
+  "pt-BR": "Taxa",
+  ko: "수수료",
+  ar: "رسوم",
 };
 
 const CAP_VERIFIED: Localized<string> = {
@@ -236,6 +254,9 @@ const CAP_VERIFIED: Localized<string> = {
   bg: "Проверено в",
   tr: "Şurada doğrulandı",
   hu: "Ellenőrizve itt",
+  "pt-BR": "Verificado em",
+  ko: "검증 위치",
+  ar: "تم التحقق بتاريخ",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -261,6 +282,9 @@ const C1_TITLE: Localized<string> = {
   bg: "Обвивка на канала popopx.channel.enc.v1",
   tr: "Kanal zarfı popopx.channel.enc.v1",
   hu: "Csatornaboríték popopx.channel.enc.v1",
+  "pt-BR": "Envelope de canal popopx.channel.enc.v1",
+  ko: "채널 봉투 popopx.channel.enc.v1",
+  ar: "مغلف القناة popopx.channel.enc.v1",
 };
 
 const C1_LEDE: Localized<string> = {
@@ -282,6 +306,9 @@ const C1_LEDE: Localized<string> = {
   bg: "Ротационният товар, който издателят запечатва за един канал: кутия ChaCha20-Poly1305 около новия ключ на епохата, подписана с Ed25519 самоличността на този канал.",
   tr: "Çıkarıcının tek bir kanal için mühürlediği rotasyon yükü: yeni epoch anahtarının etrafında bir ChaCha20-Poly1305 kutusu, kanulun Ed25519 kimliğiyle imzalanmış.",
   hu: "A kibocsátó által egyetlen csatornára lezárt forgatási terhelés: ChaCha20-Poly1305 doboz az új epochakulcs körül, a csatorna Ed25519 azonosságával aláírva.",
+  "pt-BR": "A carga de rotação que o emissor sela para um canal: uma caixa ChaCha20-Poly1305 em torno da nova chave de epoch, assinada pela identidade Ed25519 desse canal.",
+  ko: "발급자가 채널 하나를 위해 봉인하는 교체 페이로드입니다. 새 epoch 키를 감싼 ChaCha20-Poly1305 상자이며, 해당 채널의 Ed25519 신원으로 서명됩니다.",
+  ar: "حمولة التدوير التي يختمها المُصدِر لقناة واحدة: صندوق ChaCha20-Poly1305 حول مفتاح الحقبة الجديد، موقّع بهوية Ed25519 لتلك القناة.",
 };
 
 const C1_R_PROTOCOL: Localized<string> = {
@@ -303,6 +330,9 @@ const C1_R_PROTOCOL: Localized<string> = {
   bg: "Идентификатор на протокола",
   tr: "Protokol kimliği",
   hu: "Protokoll-azonosító",
+  "pt-BR": "Id do protocolo",
+  ko: "프로토콜 ID",
+  ar: "معرّف البروتوكول",
 };
 
 const C1_R_IDENTITY: Localized<string> = {
@@ -324,6 +354,9 @@ const C1_R_IDENTITY: Localized<string> = {
   bg: "Ключ за самоличност",
   tr: "Kimlik anahtarı",
   hu: "Azonosító kulcs",
+  "pt-BR": "Chave de identidade",
+  ko: "신원 키",
+  ar: "مفتاح الهوية",
 };
 
 const C1_R_SEAL: Localized<string> = {
@@ -345,6 +378,9 @@ const C1_R_SEAL: Localized<string> = {
   bg: "Печат",
   tr: "Mühür",
   hu: "Zár",
+  "pt-BR": "Selagem",
+  ko: "봉인",
+  ar: "الختم",
 };
 
 const C1_R_EPOCHKEY: Localized<string> = {
@@ -366,6 +402,9 @@ const C1_R_EPOCHKEY: Localized<string> = {
   bg: "Ключ на епохата",
   tr: "Epoch anahtarı",
   hu: "Epochakulcs",
+  "pt-BR": "Chave de epoch",
+  ko: "epoch 키",
+  ar: "مفتاح الحقبة",
 };
 
 const C1_R_AAD: Localized<string> = {
@@ -387,6 +426,9 @@ const C1_R_AAD: Localized<string> = {
   bg: "Състав на AAD",
   tr: "AAD düzeni",
   hu: "AAD felépítés",
+  "pt-BR": "Estrutura do AAD",
+  ko: "AAD 구성",
+  ar: "بنية AAD",
 };
 
 const C1_R_SEP: Localized<string> = {
@@ -408,6 +450,9 @@ const C1_R_SEP: Localized<string> = {
   bg: "Разделител",
   tr: "Ayırıcı",
   hu: "Elválasztó",
+  "pt-BR": "Separador",
+  ko: "구분자",
+  ar: "الفاصل",
 };
 
 const C1_R_ORDER: Localized<string> = {
@@ -429,6 +474,9 @@ const C1_R_ORDER: Localized<string> = {
   bg: "Ред на разпечатване",
   tr: "Açma sırası",
   hu: "Bontási sorrend",
+  "pt-BR": "Ordem de desembrulho",
+  ko: "해제 순서",
+  ar: "ترتيب فك التغليف",
 };
 
 const C1_ORDER_VAL: Localized<string> = {
@@ -450,6 +498,9 @@ const C1_ORDER_VAL: Localized<string> = {
   bg: "първо проверката на подписа Ed25519, след това отварянето на AEAD етикета",
   tr: "önce Ed25519 imzasını doğrula, sonra AEAD etiketini aç",
   hu: "előbb az Ed25519 aláírást ellenőrizzük, csak ezután nyitjuk meg az AEAD-címkét",
+  "pt-BR": "verifique primeiro a assinatura Ed25519, depois abra a tag AEAD",
+  ko: "먼저 Ed25519 서명을 검증한 뒤 AEAD 태그를 엽니다",
+  ar: "تحقّق من توقيع Ed25519 أولًا، ثم افتح وسم AEAD",
 };
 
 const C1_R_LIMITS: Localized<string> = {
@@ -471,6 +522,9 @@ const C1_R_LIMITS: Localized<string> = {
   bg: "Горни граници",
   tr: "Sınırlar",
   hu: "Felső korlátok",
+  "pt-BR": "Limites",
+  ko: "상한",
+  ar: "الحدود القصوى",
 };
 
 const C1_NOTE: Localized<string> = {
@@ -492,6 +546,9 @@ const C1_NOTE: Localized<string> = {
   bg: "Полетата се свързват от един байт, 0x7C. AAD се удостоверява, но не се криптира: обвивка, записана от един канал и пусната отново в друг, се проваля при проверката на етикета, макар криптираният текст да е бит по бит еднакъв.",
   tr: "Alanlar tek bir bayt ile, 0x7C ile birleştirilir. AAD doğrulanır ama şifrelenmez: bir kanaldan kaydedilen zarf başka bir kanalda yeniden gönderilirse, şifreli metin bayt bayt aynı olsa bile etiket doğrulamasından geçemez.",
   hu: "A mezőket egyetlen bájt, 0x7C fűzi össze. Az AAD hitelesített, de nem titkosított: az egyik csatornáról rögzített boríték egy másikon lejátszva a címkeellenőrzésen elbukik, még ha a titkosított szövege bájtról bájtra azonos is.",
+  "pt-BR": "Os campos são unidos por um único byte, 0x7C. O AAD é autenticado, mas não criptografado: um envelope gravado de um canal e reproduzido em outro falha na verificação da tag, ainda que seu texto cifrado seja idêntico byte a byte.",
+  ko: "필드는 1바이트 0x7C로 이어집니다. AAD는 인증되지만 암호화되지 않으므로, 한 채널에서 기록한 봉투를 다른 채널로 재생하면 암호문이 바이트 단위로 동일하더라도 태그 검사에서 실패합니다.",
+  ar: "تُوصل الحقول ببايت واحد، 0x7C. ويُصادَق على AAD دون تشفيره: فالمغلف الذي يُسجَّل من قناة ثم يُعاد تشغيله على قناة أخرى يفشل في فحص الوسم حتى لو كان نصه المشفّر متطابقًا بايتًا ببايت.",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -517,6 +574,9 @@ const C2_TITLE: Localized<string> = {
   bg: "Ротация на епохите: извикване от издателя, не таймер",
   tr: "Epoch rotasyonu: zamanlayıcı değil, çıkarıcının çağrısı",
   hu: "Epoch-forgatás: a kibocsátó hívása, nem időzítő",
+  "pt-BR": "Rotação de epoch: uma chamada do emissor, não um temporizador",
+  ko: "epoch 교체: 타이머가 아니라 발급자 호출",
+  ar: "تدوير الحقبة: استدعاء من المُصدِر، لا مؤقّت",
 };
 
 const C2_B1: Localized<string> = {
@@ -538,6 +598,9 @@ const C2_B1: Localized<string> = {
   bg: "Новият ключ на епохата са 32 случайни байта от системното CSPRNG, създадени в момента на ротация и не са производни на предишната епоха.",
   tr: "Yeni bir epoch anahtarı, sistem CSPRNG'sinden gelen 32 rastgele bayttır; rotasyon anında üretilir ve önceki epoch'tan türetilmez.",
   hu: "Egy új epochakulcs 32 véletlen bájt a rendszer CSPRNG-jéből; a forgatás pillanatában ütődik, és nem az előző epochból következik.",
+  "pt-BR": "Uma nova chave de epoch consiste em 32 bytes aleatórios do CSPRNG do sistema, gerada no momento da rotação e não derivada do epoch anterior.",
+  ko: "새 epoch 키는 시스템 CSPRNG에서 뽑은 32바이트 난수이며, 교체 시점에 생성되고 이전 epoch에서 파생되지 않습니다.",
+  ar: "مفتاح الحقبة الجديد 32 بايت عشوائيًا من مولّد CSPRNG في النظام، يُنشأ عند لحظة التدوير ولا يُشتق من الحقبة السابقة.",
 };
 
 const C2_B2: Localized<string> = {
@@ -559,6 +622,9 @@ const C2_B2: Localized<string> = {
   bg: "expires_at_ms е по желание и се подава от извикващия, затова гейтуейтът няма фиксирана продължителност на епохата и не извършва автоматична ротация.",
   tr: "expires_at_ms isteğe bağlıdır ve çağıran tarafından verilir; bu yüzden ağ geçidinin sabit bir epoch süresi yoktur ve otomatik rotasyon çalıştırmaz.",
   hu: "az expires_at_ms opcionális, és a hívó adja meg, ezért az átjárónak nincs rögzített epoch-időtartama, és nem futtat automatikus forgatást.",
+  "pt-BR": "expires_at_ms é opcional e fornecido por quem chama, então o gateway não tem duração de epoch fixa e não executa rotação automática.",
+  ko: "expires_at_ms는 선택 사항이며 호출자가 지정하므로, 게이트웨이에는 고정된 epoch 기간이 없고 자동 교체도 실행하지 않습니다.",
+  ar: "الحقل expires_at_ms اختياري ويقدّمه المستدعي، لذا ليس للبوابة مدة حقبة ثابتة ولا تنفّذ أي تدوير تلقائي.",
 };
 
 const C2_B3: Localized<string> = {
@@ -580,6 +646,9 @@ const C2_B3: Localized<string> = {
   bg: "Ротацията е операция на издателя и се отчита като такава; нито един път не подменя ключ безплатно.",
   tr: "Rotasyon bir çıkarıcı işlemidir ve öyle ölçülür; hiçbir uç nokta anahtarı ücretsiz çevirmez.",
   hu: "A forgatás a kibocsátó művelete, és úgy is kerül számlázásra; egyetlen végpont sem ad ingyenes kulcsforgatást.",
+  "pt-BR": "A rotação é uma operação do emissor e é medida como tal; nenhuma rota rotaciona uma chave sem custo.",
+  ko: "교체는 발급자 작업이며 그에 따라 계량됩니다. 어떤 경로도 키를 무료로 교체하지 않습니다.",
+  ar: "التدوير عملية من عمليات المُصدِر ويُقاس على هذا الأساس؛ ولا يوجد مسار يدوّر مفتاحًا مجانًا.",
 };
 
 const C2_FEE_NOTE: Localized<string> = {
@@ -601,6 +670,9 @@ const C2_FEE_NOTE: Localized<string> = {
   bg: "Цената е в същия .env блок като card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query и slack_discord_event; всичките дванадесет брояча се преоценяват там.",
   tr: "Birim fiyat, card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query ve slack_discord_event ile aynı .env bloğunda yer alır; on iki sayacın tamamı orada yeniden fiyatlandırılabilir.",
   hu: "Az ár ugyanabban a .env-blokkban lakik, mint a card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query és slack_discord_event; mind a tizenkét mérőóra ott árazható át.",
+  "pt-BR": "O preço fica no mesmo bloco do .env que card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query e slack_discord_event; cada um dos doze medidores pode ser reprecificado ali.",
+  ko: "가격은 card, menu_push, key_rotation, ai_message, alert, sso_login, poll, web3_event, workflow_event, carddav_query, caldav_query, slack_discord_event와 같은 .env 블록에 있습니다. 열두 미터 모두 이곳에서 가격을 다시 매길 수 있습니다.",
+  ar: "يقع السعر في كتلة .env نفسها التي تضم card وmenu_push وkey_rotation وai_message وalert وsso_login وpoll وweb3_event وworkflow_event وcarddav_query وcaldav_query وslack_discord_event؛ ويمكن إعادة تسعير كل عدّاد من العدّادات الاثني عشر هناك.",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -626,6 +698,9 @@ const C3_TITLE: Localized<string> = {
   bg: "Съхранение на ключовете, преди наречете гейтуейта zero-knowledge",
   tr: "Ağ geçidine zero-knowledge demeden önce: anahtarlar kimde",
   hu: "A kulcsok őrzése, mielőtt zero-knowledge-nak neveznéd az átjárót",
+  "pt-BR": "Custódia de chaves, antes de chamar o gateway de conhecimento zero",
+  ko: "게이트웨이를 영지식이라 부르기 전에 알아야 할 키 보관 구조",
+  ar: "حيازة المفاتيح، قبل أن تصف البوابة بالمعرفة الصفرية",
 };
 
 const C3_LEDE: Localized<string> = {
@@ -647,6 +722,9 @@ const C3_LEDE: Localized<string> = {
   bg: "Гейтуейтът е издателят на канала. Той пази Ed25519 двойката и всеки ключ на епохата като обикновен текст в колоните на своя SQLite файл — коментарът в кода на database.py:183-188 казва точно това.",
   tr: "Ağ geçidi, kanalın çıkarıcısıdır. Ed25519 anahtar çiftini ve her epoch anahtarını SQLite dosyasının düz metin sütunlarında tutar; database.py:183-188 konumundaki kod yorumu aynen bunu söylüyor.",
   hu: "Az átjáró a csatorna kibocsátója. Megtartja az Ed25519 kulcspárt és minden egyes epochakulcsot, méghozzá a saját SQLite-fájlja nyílt szövegű oszlopaiban — a database.py:183-188 kódmegjegyzése pontosan ezt mondja.",
+  "pt-BR": "O gateway é o emissor do canal. Ele detém o par de identidade Ed25519 e todas as chaves de epoch, e os mantém em colunas de texto claro do seu arquivo SQLite — o comentário de código em database.py:183-188 diz exatamente isso.",
+  ko: "게이트웨이는 채널 발급자입니다. Ed25519 신원 키 쌍과 모든 epoch 키를 보유하며, 이를 SQLite 파일의 평문 컬럼에 저장합니다. database.py:183-188의 코드 주석이 바로 그렇게 밝히고 있습니다.",
+  ar: "البوابة هي مُصدِر القناة. فهي تحتفظ بزوج هوية Ed25519 وبكل مفتاح حقبة، وتخزّنها في أعمدة نص واضح داخل ملف SQLite — وتعليق الشيفرة عند database.py:183-188 يقول ذلك بالضبط.",
 };
 
 const C3_COLS: Localized<string> = {
@@ -668,6 +746,9 @@ const C3_COLS: Localized<string> = {
   bg: "Колони с обикновен текст",
   tr: "Düz metin sütunları",
   hu: "Nyílt szövegű oszlopok",
+  "pt-BR": "Colunas em texto claro",
+  ko: "평문 컬럼",
+  ar: "أعمدة نص واضح",
 };
 
 const C3_SPINE: Localized<string> = {
@@ -689,6 +770,9 @@ const C3_SPINE: Localized<string> = {
   bg: "Нулевото знание важи срещу SMP релея, който само съхранява на сляпо base64 кадри и никога не вижда нито ключ на епохата, нито отворен текст. То не важи срещу собствения ви сървър — там живеят ключовете.",
   tr: "Sıfır bilgi SMP aktarıcisına karşı geçerlidir: aktarıcı yalnızca base64 karelerini körlemesine saklar, ne bir epoch anahtarı ne de düz metin görür. Kendi sunucunuza karşı geçerli değildir — anahtarların yaşadığı yer orasıdır.",
   hu: "A zero-knowledge az SMP átjátszóval szemben áll fenn: az átjátszó csak base64 kereteket tárol vakon, és soha nem lát epochakulcsot vagy nyílt szöveget. A saját szervereddel szemben nem áll fenn — a kulcsok ott laknak.",
+  "pt-BR": "O conhecimento zero vale contra o relay SMP, que apenas armazena às cegas quadros base64 e nunca vê uma chave de epoch nem um texto claro. Ele não vale contra o seu próprio servidor — é lá que as chaves vivem.",
+  ko: "영지식은 base64 프레임만 그대로 보관하고 epoch 키나 평문은 결코 보지 않는 SMP 릴레이에 대해서는 성립합니다. 자체 서버에 대해서는 성립하지 않습니다. 키가 있는 곳이 바로 그 서버이기 때문입니다.",
+  ar: "تصحّ المعرفة الصفرية في مواجهة مرحّل SMP، الذي يخزّن إطارات base64 تخزينًا أعمى ولا يرى مفتاح حقبة ولا نصًا واضحًا. ولا تصحّ في مواجهة خادمك أنت — ففيه تقيم المفاتيح.",
 };
 
 const C3_MITIGATION: Localized<string> = {
@@ -710,6 +794,9 @@ const C3_MITIGATION: Localized<string> = {
   bg: "Мерката е оперативна, не криптографска: запазете подразбиращия се loopback bind (127.0.0.1:8080), ограничете правата върху SQLite пътя на ниво операционна система и разглеждайте този хост като доверена зона.",
   tr: "Önlem kriptografik değil, operasyoneldir: varsayılan loopback bağlama düzenini (127.0.0.1:8080) koruyun, SQLite yolu için işletim sistemi düzeyinde dosya izinlerini kısıtlayın ve bu sunucuyu güvenli bir bölge olarak ele alın.",
   hu: "Az enyhítés operatív, nem kriptográfiai: tartsd meg az alapértelmezett loopback bekötést (127.0.0.1:8080), korlátozd az SQLite elérésének OS-szintű jogosultságait, és kezeld ezt a gépet megbízható zónaként.",
+  "pt-BR": "A mitigação é operacional, não criptográfica: mantenha o bind padrão de loopback (127.0.0.1:8080), restrinja as permissões de arquivo no nível do sistema operacional sobre o caminho do SQLite e trate esse host como uma zona confiável.",
+  ko: "완화책은 암호학적이 아니라 운영적입니다. 기본 루프백 바인드(127.0.0.1:8080)를 유지하고, SQLite 경로의 OS 수준 파일 권한을 제한하며, 해당 호스트를 신뢰 영역으로 취급하십시오.",
+  ar: "التخفيف إجرائي لا تشفيري: أبقِ على الربط الافتراضي بالواجهة المحلية (127.0.0.1:8080)، وقيّد أذونات الملفات على مستوى نظام التشغيل لمسار SQLite، واعتبر ذلك المضيف منطقة موثوقة.",
 };
 
 const C3_NOTE: Localized<string> = {
@@ -731,6 +818,9 @@ const C3_NOTE: Localized<string> = {
   bg: "Това не е изтичане на съдържание. Съдържанието на канала се запечатва от издателя под ключа на епохата и релеят никога не получава отворен текст; способността да издадеш следващия ключ е просто това, което един издател трябва да може.",
   tr: "Bu bir içerik sızıntısı değildir. Kanal içeriği, yayıncı tarafından epoch anahtarıyla mühürlenir ve aktarıcı asla düz metin almaz; bir sonraki anahtarı verebilmek, zaten bir çıkarıcının yapması gereken şeydir.",
   hu: "Ez nem tartalmi szivárgás. A csatorna tartalmát a közreadó az epochakulccsal zárja le, és az átjátszó soha nem kap nyílt szöveget; a következő kulcs kiállítása egyszerűen az, amit egy kibocsátónak tudnia kell.",
+  "pt-BR": "Isto não é um vazamento de conteúdo. O conteúdo do canal é selado pelo publicador sob a chave de epoch, e o relay nunca recebe um texto claro; deter a próxima chave é simplesmente algo que um emissor precisa conseguir fazer.",
+  ko: "이것은 콘텐츠 유출이 아닙니다. 채널 콘텐츠는 게시자가 epoch 키로 봉인하며 릴레이는 평문을 받지 않습니다. 다음 키를 보유하는 것은 발급자가 당연히 할 수 있어야 하는 일입니다.",
+  ar: "هذا ليس تسريبًا للمحتوى. فمحتوى القناة يختمه الناشر بمفتاح الحقبة، ولا يتلقى المرحّل أي نص واضح؛ والاحتفاظ بالمفتاح التالي هو ببساطة ما يجب أن يكون المُصدِر قادرًا عليه.",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -756,6 +846,9 @@ const C4_TITLE: Localized<string> = {
   bg: "Меню на сервисния акаунт: две нива, 3 x 5",
   tr: "Servis hesabı menüsü: iki seviye, 3 x 5",
   hu: "A szolgáltatási fiók menüje: két szint, 3 x 5",
+  "pt-BR": "Menu da conta de serviço: dois níveis, 3 x 5",
+  ko: "서비스 계정 메뉴: 2단계, 3 x 5",
+  ar: "قائمة حساب الخدمة: مستويان، 3 x 5",
 };
 
 const C4_LEDE: Localized<string> = {
@@ -777,6 +870,9 @@ const C4_LEDE: Localized<string> = {
   bg: "Гейтуейтът проверява менюто спрямо лимитите на самия клиент, преди да го изпрати, така че счупено меню се отхвърля от API-то, вместо безмълвно да изчезне на телефона.",
   tr: "Ağ geçidi, bir menüyü göndermeden önce istemcinin kendi sınırlarına göre doğrular; bozuk bir menü telefonda sessizce kaybolmak yerine API'de reddedilir.",
   hu: "Az átjáró elküldés előtt az ügyfél saját korlátjai szerint ellenőrzi a menüt, ezért egy hibás menüt az API utasít el, nem pedig csendben eltűnik a telefonon.",
+  "pt-BR": "O gateway valida um menu com base nos limites do próprio cliente antes de enviá-lo, então um menu quebrado é rejeitado na API em vez de ser descartado silenciosamente no celular.",
+  ko: "게이트웨이는 메뉴를 푸시하기 전에 클라이언트 자체의 한도와 대조해 검증하므로, 잘못된 메뉴는 휴대폰에서 조용히 버려지지 않고 API 단계에서 거부됩니다.",
+  ar: "تتحقق البوابة من القائمة وفق حدود العميل نفسها قبل دفعها، فتُرفض القائمة المعطوبة عند API بدل أن تُسقَط بصمت على الهاتف.",
 };
 
 const C4_R_ITEMS: Localized<string> = {
@@ -798,6 +894,9 @@ const C4_R_ITEMS: Localized<string> = {
   bg: "Първо ниво",
   tr: "Üst seviye",
   hu: "Felső szint",
+  "pt-BR": "Nível superior",
+  ko: "최상위 단계",
+  ar: "المستوى الأعلى",
 };
 
 const C4_R_SUBS: Localized<string> = {
@@ -819,6 +918,9 @@ const C4_R_SUBS: Localized<string> = {
   bg: "Второ ниво",
   tr: "İkinci seviye",
   hu: "Második szint",
+  "pt-BR": "Segundo nível",
+  ko: "두 번째 단계",
+  ar: "المستوى الثاني",
 };
 
 const C4_R_TITLE: Localized<string> = {
@@ -840,6 +942,9 @@ const C4_R_TITLE: Localized<string> = {
   bg: "Заглавие на елемента",
   tr: "Öğe başlığı",
   hu: "Bejegyzés címe",
+  "pt-BR": "Título do item",
+  ko: "항목 제목",
+  ar: "عنوان العنصر",
 };
 
 const C4_R_KINDS: Localized<string> = {
@@ -861,6 +966,9 @@ const C4_R_KINDS: Localized<string> = {
   bg: "Вид елемент",
   tr: "Öğe türü",
   hu: "Bejegyzés típusa",
+  "pt-BR": "Tipo do item",
+  ko: "항목 종류",
+  ar: "نوع العنصر",
 };
 
 const C4_R_ACTIONS: Localized<string> = {
@@ -882,6 +990,9 @@ const C4_R_ACTIONS: Localized<string> = {
   bg: "Действие на елемента",
   tr: "Öğe eylemi",
   hu: "Bejegyzés művelete",
+  "pt-BR": "Ação em um item",
+  ko: "항목에 대한 액션",
+  ar: "الإجراء على العنصر",
 };
 
 const C4_R_WIRE: Localized<string> = {
@@ -903,6 +1014,9 @@ const C4_R_WIRE: Localized<string> = {
   bg: "Wire ключ на поделементите",
   tr: "Alt öğelerin wire anahtarı",
   hu: "Az alpontok wire-kulcsa",
+  "pt-BR": "Chave wire dos subitens",
+  ko: "하위 항목의 와이어 키",
+  ar: "مفتاح العناصر الفرعية على الشبكة",
 };
 
 const C4_R_ERR: Localized<string> = {
@@ -924,6 +1038,9 @@ const C4_R_ERR: Localized<string> = {
   bg: "Отговор при нарушение",
   tr: "İhlalde verilen yanıt",
   hu: "Válasz szabálysértéskor",
+  "pt-BR": "Resposta em caso de violação",
+  ko: "위반 시 응답",
+  ar: "استجابة الانتهاك",
 };
 
 const C4_REJECT: Localized<string> = {
@@ -945,6 +1062,9 @@ const C4_REJECT: Localized<string> = {
   bg: "pay_credits и none се отхвърлят върху елемент от менюто. Плащането си е на картичка, където сумата и текстът за потвърждение се виждат.",
   tr: "Menü öğesinde pay_credits ve none reddedilir. Ödeme, tutarın ve onay metninin göründüğü kartta yer alır.",
   hu: "A pay_credits és a none menübejegyzésen elutasításra kerül. A fizetés kártyára tartozik, ahol az összeg és a megerősítő szöveg is látható.",
+  "pt-BR": "pay_credits e none são rejeitados em um item de menu. O pagamento pertence a um cartão, onde o valor e o texto de confirmação ficam visíveis.",
+  ko: "메뉴 항목에서는 pay_credits와 none이 거부됩니다. 결제는 금액과 확인 문구가 보이는 카드에 속합니다.",
+  ar: "يُرفض كل من pay_credits وnone في عنصر القائمة. فالدفع مكانه بطاقة يظهر فيها المبلغ ونص التأكيد.",
 };
 
 const C4_DEPTH: Localized<string> = {
@@ -966,6 +1086,9 @@ const C4_DEPTH: Localized<string> = {
   bg: "Трето ниво не се свежда до подменю: iOS клиентът хвърля цялото меню, затова гейтуейтът отхвърля кадъра предварително.",
   tr: "Üçüncü seviye bir alt menüye dönüşmez: iOS istemcisi tüm menüyü çöpe atar, bu yüzden ağ geçidi kareyi baştan reddeder.",
   hu: "A harmadik szint nem almenüvé romlik: az iOS-ügyfél az egész menüt eldobja, ezért az átjáró előre elutasítja a keretet.",
+  "pt-BR": "Um terceiro nível não degrada para um submenu: o cliente iOS descarta o menu inteiro, então o gateway recusa o quadro em vez disso.",
+  ko: "3단계는 하위 메뉴로 처리되지 않습니다. iOS 클라이언트가 메뉴 전체를 버리므로 게이트웨이가 해당 프레임을 대신 거부합니다.",
+  ar: "لا يتحوّل المستوى الثالث إلى قائمة فرعية: فعميل iOS يتجاهل القائمة بأكملها، لذا ترفض البوابة الحزمة بدلًا من ذلك.",
 };
 
 const C4_QUIRK: Localized<string> = {
@@ -987,6 +1110,9 @@ const C4_QUIRK: Localized<string> = {
   bg: "Поведение на клиента, което сървърът не може да наложи: собственото действие на родител се достига като първи ред в изскачащия прозорец само докато има по-малко от 5 деца; при точно 5 за действието не остава ред.",
   tr: "Sunucunun zorlayamadığı bir istemci davranışı: kendi eylemi olan üst öğe, ancak çocuk sayısı 5'ten azken açılır menünün ilk satırı olarak erişilebilir; tam 5 çocukta eyleme satır kalmaz.",
   hu: "Ügyféljellemző, amelyet a szerver nem tud kikényszeríteni: a saját művelettel rendelkező szülő csak a felugró első soraként érhető el, amíg kevesebb mint 5 gyermeke van; pontosan 5 gyermeknél a műveletnek nem marad sor.",
+  "pt-BR": "Peculiaridade do cliente que o servidor não consegue impor: um pai que carrega a própria ação só é alcançável como a primeira linha do popup enquanto tiver menos de 5 filhos; com exatamente 5, a ação dele fica sem linha.",
+  ko: "서버가 강제할 수 없는 클라이언트 특이 동작: 자체 액션을 가진 부모 항목은 하위 항목이 5개 미만일 때만 팝업의 첫 행으로 도달할 수 있으며, 정확히 5개가 되면 해당 액션이 놓일 행이 남지 않습니다.",
+  ar: "خصوصية في العميل لا يستطيع الخادم فرضها: العنصر الأب الذي يحمل إجراءً خاصًا به لا يكون متاحًا إلا كأول صف في النافذة المنبثقة ما دام لديه أقل من 5 عناصر فرعية؛ وعندما يبلغ 5 بالضبط لا يبقى لإجرائه صف.",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -1012,6 +1138,9 @@ const C5_TITLE: Localized<string> = {
   bg: "Стилове на картичките: standard, receipt, security",
   tr: "Kart stilleri: standard, receipt, security",
   hu: "Kártyastílusok: standard, receipt, security",
+  "pt-BR": "Estilos de cartão: padrão, recibo, segurança",
+  ko: "카드 스타일: standard, receipt, security",
+  ar: "أنماط البطاقة: standard وreceipt وsecurity",
 };
 
 const C5_LEDE: Localized<string> = {
@@ -1033,6 +1162,9 @@ const C5_LEDE: Localized<string> = {
   bg: "Наборът от полета е еднакъв при и трите стила. Стилът е подсказка за изчертаване в клиента, не схема: няма поле, което да е в един стил и да липсва в друг.",
   tr: "Üç stilde de alan seti tamamen aynıdır. Stil, istemcinin boyadığı bir çizim ipucudur, şema değil: bir stilde olan başka bir stilde bulunmayan alan yoktur.",
   hu: "Mindhárom stílusban a mezők készlete azonos. A stílus csak renderelési tipp az ügyfélnek, nem séma: nincs olyan mező, amely az egyik stílusban létezik, a másikban viszont hiányzik.",
+  "pt-BR": "O conjunto de campos é idêntico nos três estilos. O estilo é uma dica de renderização com a qual o cliente pinta; não é um esquema, e nenhum campo existe em um estilo que falte em outro.",
+  ko: "필드 구성은 세 스타일 모두 동일합니다. 스타일은 클라이언트가 그리는 데 쓰는 렌더 힌트일 뿐 스키마가 아니며, 한 스타일에만 있고 다른 스타일에 없는 필드는 없습니다.",
+  ar: "مجموعة الحقول نفسها في الأنماط الثلاثة. فالنمط تلميح عرض يرسم به العميل؛ وهو ليس مخططًا، ولا يوجد حقل في نمط واحد يغيب عن نمط آخر.",
 };
 
 const C5_USE_STANDARD: Localized<string> = {
@@ -1054,6 +1186,9 @@ const C5_USE_STANDARD: Localized<string> = {
   bg: "Всичко, което не е от другите два.",
   tr: "Diğer ikisine girmeyen her şey.",
   hu: "Minden, ami nem tartozik a másik kettőbe.",
+  "pt-BR": "Tudo o que não é um dos outros dois.",
+  ko: "나머지 두 스타일에 해당하지 않는 모든 경우입니다.",
+  ar: "كل ما ليس أحد النمطين الآخرين.",
 };
 
 const C5_USE_RECEIPT: Localized<string> = {
@@ -1075,6 +1210,9 @@ const C5_USE_RECEIPT: Localized<string> = {
   bg: "Разписи за статии и плащания, каквито main.py изгражда.",
   tr: "Makale ve ödeme makbuzları; main.py bunları bu şekilde kurar.",
   hu: "Cikk- és fizetési igazolások, ahogyan a main.py elkészíti.",
+  "pt-BR": "Recibos de artigo e de pagamento, como montados pelo main.py.",
+  ko: "main.py가 구성하는 기사 및 결제 영수증입니다.",
+  ar: "إيصالات المقالات والمدفوعات، كما يبنيها main.py.",
 };
 
 const C5_USE_SECURITY: Localized<string> = {
@@ -1096,6 +1234,9 @@ const C5_USE_SECURITY: Localized<string> = {
   bg: "Аларми и SSO, както ги ползват alert_ops и privacy_sso.",
   tr: "Uyarılar ve SSO; alert_ops ile privacy_sso bunları böyle kullanır.",
   hu: "Riasztások és SSO, ahogyan az alert_ops és a privacy_sso használja.",
+  "pt-BR": "Alertas e SSO, como usados por alert_ops e privacy_sso.",
+  ko: "alert_ops와 privacy_sso가 사용하는 알림 및 SSO입니다.",
+  ar: "التنبيهات وSSO، كما تستخدمها alert_ops وprivacy_sso.",
 };
 
 const C5_R_REQ: Localized<string> = {
@@ -1117,6 +1258,9 @@ const C5_R_REQ: Localized<string> = {
   bg: "Задължителни полета",
   tr: "Zorunlu alanlar",
   hu: "Kötelező mezők",
+  "pt-BR": "Campos obrigatórios",
+  ko: "필수 필드",
+  ar: "الحقول المطلوبة",
 };
 
 const C5_R_OPT: Localized<string> = {
@@ -1138,6 +1282,9 @@ const C5_R_OPT: Localized<string> = {
   bg: "Незадължителни полета",
   tr: "İsteğe bağlı alanlar",
   hu: "Opcionális mezők",
+  "pt-BR": "Campos opcionais",
+  ko: "선택 필드",
+  ar: "الحقول الاختيارية",
 };
 
 const C5_R_ACTKINDS: Localized<string> = {
@@ -1159,6 +1306,9 @@ const C5_R_ACTKINDS: Localized<string> = {
   bg: "Видове действия на картичката",
   tr: "Kart eylem türleri",
   hu: "Kártyaműveletek típusai",
+  "pt-BR": "Tipos de ação do cartão",
+  ko: "카드 액션 종류",
+  ar: "أنواع إجراءات البطاقة",
 };
 
 const C5_R_ACTSTYLES: Localized<string> = {
@@ -1180,6 +1330,9 @@ const C5_R_ACTSTYLES: Localized<string> = {
   bg: "Стилове на бутоните",
   tr: "Düğüm stilleri",
   hu: "Gombstílusok",
+  "pt-BR": "Estilos de botão",
+  ko: "버튼 스타일",
+  ar: "أنماط الأزرار",
 };
 
 const C5_HINT: Localized<string> = {
@@ -1201,6 +1354,9 @@ const C5_HINT: Localized<string> = {
   bg: "Изборът на стил тук не променя нищо по-горе: същите полета, същите лимити, същият кадър.",
   tr: "Burada stil seçmek yukarıda hiçbir şeyi değiştirmez: aynı alanlar, aynı sınırlar, aynı kare.",
   hu: "A stílus kiválasztása fent semmit nem változtat: ugyanazok a mezők, ugyanazok a korlátok, ugyanaz a keret.",
+  "pt-BR": "Selecionar um estilo aqui não muda nada acima: os mesmos campos, os mesmos limites, o mesmo quadro.",
+  ko: "여기서 스타일을 선택해도 위의 내용은 바뀌지 않습니다. 필드도, 상한도, 프레임도 동일합니다.",
+  ar: "اختيار نمط هنا لا يغيّر شيئًا مما سبق: الحقول نفسها، والحدود نفسها، والحزمة نفسها.",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -1226,6 +1382,9 @@ const C6_TITLE: Localized<string> = {
   bg: "Упълномощаване на H5 старт: HMAC от страната на телефона",
   tr: "H5 açma yetkisi: telefon tarafındaki HMAC",
   hu: "H5-indítás engedélyezése: a telefon oldali HMAC",
+  "pt-BR": "Autorização de lançamento H5: o HMAC do lado do celular",
+  ko: "H5 실행 인가: 휴대폰 측 HMAC",
+  ar: "تفويض تشغيل H5: HMAC من جهة الهاتف",
 };
 
 const C6_LEDE: Localized<string> = {
@@ -1247,6 +1406,9 @@ const C6_LEDE: Localized<string> = {
   bg: "Приемането на известия първо проверява статичен токен за всеки източник; когато е зададен POPOPX_ALERT_WEBHOOK_SECRET, то изисква още X-Popopx-Timestamp и X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> в рамките на ±300 s, с локален за процеса кеш за повторения. Достъпът до администрацията е главният токен (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer или ?token=) плюс токени pxa_ с обхвати: SHA-256 при съхранение, обхвати core:/plugin:, изтичане, отнемане и одит. Тук HMAC-SHA256 подписва URL адреса за стартиране на H5, а доставките към Slack/Discord и workflow носят собствени изходящи HMAC.",
   tr: "Uyarı girişi önce kaynak başına statik bir jetonu kontrol eder; POPOPX_ALERT_WEBHOOK_SECRET ayarlıysa ayrıca X-Popopx-Timestamp ve X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> başlıklarını ±300 s penceresinde ister ve süreç yerelinde bir yeniden oynatma önbelleği tutar. Yönetim erişimi, kök jeton (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer veya ?token=) ile kapsamlı pxa_ jetonlarından oluşur: saklarken SHA-256, core:/plugin: kapsamları, süre sonu, iptal ve denetim. Burada HMAC-SHA256, H5 açma URL'sini imzalar; Slack/Discord ve workflow teslimatları ise kendi giden HMAC'larını taşır.",
   hu: "A riasztásbevitel először forrásonkénti statikus tokent ellenőriz; ha a POPOPX_ALERT_WEBHOOK_SECRET be van állítva, emellett X-Popopx-Timestamp és X-Popopx-Signature fejlécet is követel: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> ±300 s ablakon belül, folyamaton belüli visszajátszás-gyorsítótárral. Az admin hozzáférés a gyökér token (X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer vagy ?token=) plusz hatókörözött pxa_ tokenek: SHA-256 a tárolóban, core:/plugin: hatókörök, lejárat, visszavonás és audit. Az HMAC-SHA256 itt az H5-indító URL-t írja alá, a Slack/Discord és workflow kézbesítések pedig saját kimenő HMAC-ot hordoznak.",
+  "pt-BR": "A entrada de alertas verifica primeiro um token estático por origem; quando POPOPX_ALERT_WEBHOOK_SECRET está definido, ela também exige X-Popopx-Timestamp e X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> dentro de ±300 s, com um cache de replay local ao processo. O acesso administrativo é o token raiz — X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer ou ?token= — mais tokens pxa_ com escopo: SHA-256 em repouso, escopos core:/plugin:, expiração, revogação e auditoria. O HMAC-SHA256 assina aqui a URL de lançamento do H5, e as entregas para Slack/Discord e de workflow carregam seus próprios HMACs de saída.",
+  ko: "알림 수신은 먼저 소스별 정적 토큰을 확인합니다. POPOPX_ALERT_WEBHOOK_SECRET이 설정되어 있으면 ±300 s 이내의 X-Popopx-Timestamp와 X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")>도 요구하며, 프로세스 로컬 재전송 캐시를 사용합니다. 관리자 접근은 루트 토큰 — X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer 또는 ?token= — 과 범위 지정 pxa_ 토큰입니다: 저장 시 SHA-256, core:/plugin: 범위, 만료, 폐기, 감사. 여기서 H5 실행 URL에 서명하는 것은 HMAC-SHA256이며, Slack/Discord와 워크플로 전달은 자체 아웃바운드 HMAC을 사용합니다.",
+  ar: "يفحص استقبال التنبيهات رمزًا ثابتًا لكل مصدر أولًا؛ وعند ضبط POPOPX_ALERT_WEBHOOK_SECRET يطالب أيضًا بـ X-Popopx-Timestamp وX-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<raw body>\")> خلال ±300 ثانية، مع ذاكرة مؤقتة لإعادة التشغيل داخل العملية. والوصول الإداري هو الرمز الجذري — X-Popopx-Admin-Token أو X-Admin-Token أو Authorization: Bearer أو ?token= — إضافة إلى رموز pxa_ محدودة النطاق: SHA-256 عند التخزين، ونطاقات core:/plugin:، وانتهاء وإبطال وتدقيق. وHMAC-SHA256 يوقّع هنا URL إطلاق H5، وتسليمات Slack/Discord وسير العمل تحمل HMACs صادرة خاصة بها.",
 };
 
 const C6_R_ALG: Localized<string> = {
@@ -1268,6 +1430,9 @@ const C6_R_ALG: Localized<string> = {
   bg: "Алгоритъм",
   tr: "Algoritma",
   hu: "Algoritmus",
+  "pt-BR": "Algoritmo",
+  ko: "알고리즘",
+  ar: "الخوارزمية",
 };
 
 const C6_R_PRE: Localized<string> = {
@@ -1289,6 +1454,9 @@ const C6_R_PRE: Localized<string> = {
   bg: "Подписван предобраз",
   tr: "İmzalanan öncül görüntü",
   hu: "Aláírt preimage",
+  "pt-BR": "Pré-imagem assinada",
+  ko: "서명 대상 원문",
+  ar: "الصورة الأولية الموقّعة",
 };
 
 const C6_R_KEY: Localized<string> = {
@@ -1310,6 +1478,9 @@ const C6_R_KEY: Localized<string> = {
   bg: "HMAC ключ",
   tr: "HMAC anahtarı",
   hu: "HMAC-kulcs",
+  "pt-BR": "Chave HMAC",
+  ko: "HMAC 키",
+  ar: "مفتاح HMAC",
 };
 
 const C6_KEY_VAL: Localized<string> = {
@@ -1331,6 +1502,9 @@ const C6_KEY_VAL: Localized<string> = {
   bg: "секретът на сесията на конкретния последовател",
   tr: "takipçiye özel oturum sırrı",
   hu: "az adott követő munkamenet-titka",
+  "pt-BR": "o segredo de sessão por seguidor",
+  ko: "팔로워별 세션 시크릿",
+  ar: "سرّ الجلسة الخاص بكل متابع",
 };
 
 const C6_R_SIG: Localized<string> = {
@@ -1352,6 +1526,9 @@ const C6_R_SIG: Localized<string> = {
   bg: "Дължина на подписа",
   tr: "İmza uzunluğu",
   hu: "Alírás hossza",
+  "pt-BR": "Comprimento da assinatura",
+  ko: "서명 길이",
+  ar: "طول التوقيع",
 };
 
 const C6_R_SKEW: Localized<string> = {
@@ -1373,6 +1550,9 @@ const C6_R_SKEW: Localized<string> = {
   bg: "Прозорец за повторение",
   tr: "Yeniden oynatma penceresi",
   hu: "Visszajátszási ablak",
+  "pt-BR": "Janela de replay",
+  ko: "리플레이 윈도",
+  ar: "نافذة إعادة التشغيل",
 };
 
 const C6_R_QUERY: Localized<string> = {
@@ -1394,6 +1574,9 @@ const C6_R_QUERY: Localized<string> = {
   bg: "Параметри на заявката",
   tr: "Sorgu parametreleri",
   hu: "Lekérdezési paraméterek",
+  "pt-BR": "Parâmetros de consulta",
+  ko: "쿼리 매개변수",
+  ar: "معاملات الاستعلام",
 };
 
 const C6_R_VERIFY: Localized<string> = {
@@ -1415,6 +1598,9 @@ const C6_R_VERIFY: Localized<string> = {
   bg: "Проверка от сървърната страна",
   tr: "Sunucu tarafı kontrol",
   hu: "Szerver oldi ellenőrzés",
+  "pt-BR": "Verificação no servidor",
+  ko: "서버 측 검사",
+  ar: "التحقق من جهة الخادم",
 };
 
 const C6_ASYM: Localized<string> = {
@@ -1436,6 +1622,9 @@ const C6_ASYM: Localized<string> = {
   bg: "Капанът е оставен умишлено видим: предобразът казва uid=, а заявката казва popopx_uid=. Сървър, който ги уеднакви, започва да отхвърля всеки телефон.",
   tr: "Tuzak bilerek açıkta: öncül görüntü uid= diyor, sorgu popopx_uid= diyor. Bu iki adı normalize eden bir sunucu her telefonu reddetmeye başlar.",
   hu: "A csapda szándékosan látható: a preimage azt írja, uid=, a lekérdezés azt, popopx_uid=. A két nevet egységesítő szerver elkezdi elutasítani minden telefont.",
+  "pt-BR": "A armadilha está à vista de propósito: a pré-imagem diz uid=, a consulta diz popopx_uid=. Um servidor que normalize os dois passa a rejeitar todos os celulares.",
+  ko: "함정은 의도적으로 드러나 있습니다. 원문에는 uid=가, 쿼리에는 popopx_uid=가 있습니다. 이 둘을 정규화하는 서버는 모든 휴대폰을 거부하기 시작합니다.",
+  ar: "الفخ ظاهر عمدًا: فالصورة الأولية تقول uid=، والاستعلام يقول popopx_uid=. والخادم الذي يوحّد بينهما يبدأ برفض كل هاتف.",
 };
 
 const C6_NOSECRET: Localized<string> = {
@@ -1457,6 +1646,9 @@ const C6_NOSECRET: Localized<string> = {
   bg: "Само гейтуейтът знае секрета на последователя, затова JavaScript на страницата не може сам да изчисли подписа. verifyH5Auth съществува, за да може уеб сървърът на търговеца да провери стартиране без никакви данни за гейтуейта.",
   tr: "Takipçinin sırrını yalnızca ağ geçidi bilir, dolayısıyla sayfanın JavaScript'i imzayı kendi başına hesaplayamaz. verifyH5Auth, tüccarın kendi web sunucusunun herhangi bir ağ geçidi bilgisi gerektirmeden bir açmayı doğrulayabilmesi için var.",
   hu: "Csak az átjáró ismeri a követő titkát, ezért az oldal JavaScript-e maga nem tudja kiszámolni az aláírást. A verifyH5Auth azért létezik, hogy a kereskedő saját webszervere bármilyen átjáró-hitelesítő nélkül ellenőrizzen egy indítást.",
+  "pt-BR": "Só o gateway detém o segredo por seguidor, então o JavaScript da página não consegue calcular uma assinatura por conta própria. verifyH5Auth existe para que o servidor web do próprio comerciante possa verificar um lançamento sem nenhuma credencial do gateway.",
+  ko: "팔로워별 시크릿은 게이트웨이만 보유하므로 페이지 JavaScript가 서명을 직접 계산할 수 없습니다. verifyH5Auth는 판매자의 자체 웹 서버가 게이트웨이 자격 증명을 전혀 보유하지 않고도 실행을 검증할 수 있도록 존재합니다.",
+  ar: "لا تحتفظ بسرّ كل متابع سوى البوابة، لذا لا يستطيع JavaScript في الصفحة حساب توقيع بنفسه. ووُجد verifyH5Auth كي يتمكن خادم الويب الخاص بالتاجر من التحقق من عملية تشغيل دون أي بيانات اعتماد للبوابة.",
 };
 
 const C6_SKEW_NOTE: Localized<string> = {
@@ -1478,6 +1670,9 @@ const C6_SKEW_NOTE: Localized<string> = {
   bg: "Прозорецът се проверява в двете посоки: часовник, подравнен на 20 минути напред, иначе би отпечатал подпис, валид два пъти по-дълго.",
   tr: "Pencere iki yönde de kontrol edilir: 20 dakika ileri ayarlı bir saat, aksi halde iki kat uzun süre geçerli kalan bir imza üretirdi.",
   hu: "Az ablakot mindkét irányban ellenőrizzük: egy 20 perccel előre járó óra olyan aláírást adna, amely kétszer olyan sokáig marad érvényes.",
+  "pt-BR": "A janela é verificada nas duas direções: um relógio 20 minutos adiantado geraria, caso contrário, uma assinatura que continua válida pelo dobro do tempo.",
+  ko: "시간 창은 양방향으로 검사합니다. 그렇지 않으면 20분 앞선 시계가 두 배나 오래 유효한 서명을 만들어 내기 때문입니다.",
+  ar: "تُفحص النافذة في الاتجاهين: فالساعة المتقدمة 20 دقيقة كانت ستولّد توقيعًا يبقى صالحًا ضعف المدة.",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -1503,6 +1698,9 @@ const CAP_RULE: Localized<string> = {
   bg: "Правило",
   tr: "Kural",
   hu: "Szabály",
+  "pt-BR": "Regra",
+  ko: "규칙",
+  ar: "القاعدة",
 };
 
 const CAP_QUIRK: Localized<string> = {
@@ -1524,6 +1722,9 @@ const CAP_QUIRK: Localized<string> = {
   bg: "Поведение на клиента",
   tr: "İstemci davranışı",
   hu: "Ügyfél viselkedése",
+  "pt-BR": "Comportamento do cliente",
+  ko: "클라이언트 동작",
+  ar: "سلوك العميل",
 };
 
 const CAP_TRAP: Localized<string> = {
@@ -1545,6 +1746,9 @@ const CAP_TRAP: Localized<string> = {
   bg: "Капанът",
   tr: "Tuzak",
   hu: "A csapda",
+  "pt-BR": "A armadilha",
+  ko: "함정",
+  ar: "الفخ",
 };
 
 const CAP_DESIGN: Localized<string> = {
@@ -1566,6 +1770,9 @@ const CAP_DESIGN: Localized<string> = {
   bg: "Защо съществува този път",
   tr: "Bu uç nokta neden var",
   hu: "Miért létezik ez a végpont",
+  "pt-BR": "Por que a rota existe",
+  ko: "이 경로가 존재하는 이유",
+  ar: "لماذا يوجد هذا المسار",
 };
 
 const C3_SPINE_CAP: Localized<string> = {
@@ -1587,6 +1794,9 @@ const C3_SPINE_CAP: Localized<string> = {
   bg: "Четете го буквално",
   tr: "Sözünü tam anlamıyla okuyun",
   hu: "Szó szerint olvasandó",
+  "pt-BR": "Leia ao pé da letra",
+  ko: "문자 그대로 읽기",
+  ar: "اقرأه حرفيًا",
 };
 
 const STYLE_GROUP: Localized<string> = {
@@ -1608,6 +1818,9 @@ const STYLE_GROUP: Localized<string> = {
   bg: "Стил на прегледа",
   tr: "Önizleme stili",
   hu: "Előnézeti stílus",
+  "pt-BR": "Estilo da prévia",
+  ko: "미리보기 스타일",
+  ar: "معاينة النمط",
 };
 
 const CLOSE_TITLE: Localized<string> = {
@@ -1629,6 +1842,9 @@ const CLOSE_TITLE: Localized<string> = {
   bg: "Точните байтове са на друго място — умишлено",
   tr: "Birebir baytlar başka yerde, bu bilinçli bir tercih",
   hu: "A pontos bájtok szándékosan máshol találhatók",
+  "pt-BR": "Os bytes exatos estão em outro lugar, de propósito",
+  ko: "정확한 바이트는 의도적으로 다른 곳에 있습니다",
+  ar: "البايتات الدقيقة في موضع آخر، عن قصد",
 };
 
 const CLOSE_DIR: Localized<string> = {
@@ -1650,6 +1866,9 @@ const CLOSE_DIR: Localized<string> = {
   bg: "Байт по байт JSON на обвивката, кадрите ku, sc, mc и sh и двата примера с HMAC",
   tr: "Baytı baytına zarf JSON'u, ku, sc, mc ve sh kareleri ile iki HMAC örneği",
   hu: "A boríték bájt pontosságú JSON-ja, a ku, sc, mc és sh keretek, mindkét HMAC példa",
+  "pt-BR": "O JSON do envelope byte a byte, os quadros wire ku, sc, mc e sh, além das duas amostras de HMAC",
+  ko: "바이트 단위까지 정확한 봉투 JSON, ku, sc, mc, sh 와이어 프레임, 그리고 두 가지 HMAC 샘플",
+  ar: "مغلف JSON مطابق بايتًا ببايت، وإطارات ku وsc وmc وsh على الشبكة، وعيّنتي HMAC كلتيهما",
 };
 
 const CLOSE_SANDBOX: Localized<string> = {
@@ -1671,6 +1890,9 @@ const CLOSE_SANDBOX: Localized<string> = {
   bg: "Същата обвивка, запечатана и разчетена интерактивно срещу гейтуейт, който управлявате сами",
   tr: "Aynı zarf, bizzat kullandığınız bir ağ geçidine karşı etkileşimli olarak mühürlenip çözümleniyor",
   hu: "Ugyanaz a boríték, interaktívan lezárva és dekódolva egy általad kezelt átjáró ellen",
+  "pt-BR": "O mesmo envelope, selado e decodificado de forma interativa contra um gateway que você mesmo opera",
+  ko: "직접 제어하는 게이트웨이를 대상으로 같은 봉투를 대화형으로 봉인하고 복호화해 봅니다",
+  ar: "المغلف نفسه، مختومًا ومفكوكًا تفاعليًا أمام بوابة تديرها بنفسك",
 };
 
 const ASCII_CAPTION: Localized<string> = {
@@ -1692,6 +1914,9 @@ const ASCII_CAPTION: Localized<string> = {
   bg: "AAD и предобраз на подписа, в байтов ред",
   tr: "AAD ve imza öncül görüntüsü, bayt sırasıyla",
   hu: "AAD és az aláírás preimage-je, bájtsorrendben",
+  "pt-BR": "AAD e pré-imagem da assinatura, na ordem dos bytes",
+  ko: "바이트 순서대로 본 AAD와 서명 대상 원문",
+  ar: "AAD والصورة الأولية للتوقيع، بترتيب البايتات",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -1717,6 +1942,9 @@ const CAP_FOR_OPERATOR: Localized<string> = {
   bg: "За оператора",
   tr: "Operatör için",
   hu: "Az üzemeltetőnek",
+  "pt-BR": "Para o operador",
+  ko: "운영자용",
+  ar: "لمشغّل النظام",
 };
 
 type Row = {
@@ -1909,9 +2137,9 @@ function CardHeader({ card }: { card: CardModel }): ReactElement {
   const lede = useCopy(card.lede ?? card.title);
   return (
     <header className="min-w-0">
-      <p className="font-mono text-[11px] tracking-[0.18em] text-faint">
+      <p className="font-mono text-[11px] tracking-[0.18em] text-faint"><bdi dir="ltr">
         {card.number} / {card.code}
-      </p>
+        </bdi></p>
       <h3 className="mt-1.5 text-[16.5px] font-semibold leading-snug text-white">{title}</h3>
       {card.lede ? <p className="mt-2 text-[13px] leading-relaxed text-mute">{lede}</p> : null}
     </header>

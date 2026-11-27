@@ -39,9 +39,10 @@ import { ADMIN_CONSOLE_URL, NODE_WS_URL, SITE_HOST } from "@/lib/site";
 /* ──────────────────────────────────────────────────────────────────────────
  * Copy plumbing
  *
- * `src/lib/i18n.tsx` types `Localized<T>` as a total map over the 18 tags the
- * POPOPX iOS client declares in `CFBundleLocalizations`. Every copy object in
- * this file is therefore written out as a literal with all 18 keys, in the
+ * `src/lib/i18n.tsx` types `Localized<T>` as a total map over the 21 tags this
+ * portal declares: the POPOPX iOS client's 18 `CFBundleLocalizations` tags plus
+ * pt-BR, ko and ar. Every copy object in this file is therefore written out as
+ * a literal with all 21 keys, in the
  * engine's own order, so both `tsc` and `tools/check-i18n.mjs` can see each
  * language a visitor actually gets — no helper fills a slot, nothing is cast,
  * nothing is spread. A slot read inside a `.map()` goes through `pick(map,
@@ -71,7 +72,7 @@ const MENU_REV = 3;
 
 /**
  * Wire enums and digests. These are bytes on a wire, so the same constant is
- * referenced from every one of the 18 slots instead of being translated: a
+ * referenced from every one of the 21 slots instead of being translated: a
  * German reader gets exactly the severity string the gateway wrote.
  */
 const SEVERITY_WARNING = "warning";
@@ -187,6 +188,9 @@ const POLL_OPTIONS: readonly Localized<string>[] = [
     bg: "Вземане от магазина, пратка в събота",
     tr: "Mağazadan teslim al: cumartesi yenileniyor",
     hu: "Átvétel a boltban, áru érkezik szombaton",
+    "pt-BR": "Retirar na loja, reposição neste sábado",
+    ko: "매장 픽업, 이번 주 토요일 재입고",
+    ar: "الاستلام من المتجر، وتوريد جديد هذا السبت",
   },
   {
     en: "Cold chain: the truck leaves tonight",
@@ -207,6 +211,9 @@ const POLL_OPTIONS: readonly Localized<string>[] = [
     bg: "Студена верига: камионът тръгва вечерта",
     tr: "Soğuk zincir: araç bu akşam yola çıkar",
     hu: "Hűtött lánc: ma este indul a autó",
+    "pt-BR": "Cadeia de frio: o caminhão sai hoje à noite",
+    ko: "콜드체인: 오늘 밤 차량 출발",
+    ar: "سلسلة التبريد: الشاحنة تنطلق الليلة",
   },
   {
     en: "A community pickup point",
@@ -227,6 +234,9 @@ const POLL_OPTIONS: readonly Localized<string>[] = [
     bg: "Общ пункт за получаване в квартала",
     tr: "Mahalle teslim noktası",
     hu: "Községi átvételi pont",
+    "pt-BR": "Um ponto de retirada comunitário",
+    ko: "지역 공동 픽업 지점",
+    ar: "نقطة استلام في الحي",
   },
   {
     en: "Skip the group buy this week",
@@ -247,6 +257,9 @@ const POLL_OPTIONS: readonly Localized<string>[] = [
     bg: "Тази седмица без групова поръчка",
     tr: "Bu hafta toplu sipariş yok",
     hu: "Ezen a héten nincs csoportos rendelés",
+    "pt-BR": "Dispensar a compra coletiva desta semana",
+    ko: "이번 주 공동 구매 건너뛰기",
+    ar: "من دون شراء جماعي هذا الأسبوع",
   },
 ];
 
@@ -282,6 +295,9 @@ const MENU_TOP: readonly MenuTop[] = [
       bg: "Сервиз",
       tr: "Servis",
       hu: "Szolgáltatás",
+      "pt-BR": "Central de atendimento",
+      ko: "고객센터",
+      ar: "مكتب الخدمة",
     },
     kind: "click",
     sub: [
@@ -305,6 +321,9 @@ const MENU_TOP: readonly MenuTop[] = [
           bg: "Моите поръчки",
           tr: "Siparişlerim",
           hu: "Rendeléseim",
+          "pt-BR": "Meus pedidos",
+          ko: "내 주문",
+          ar: "طلباتي",
         },
         kind: "click",
         action: "callback",
@@ -330,6 +349,9 @@ const MENU_TOP: readonly MenuTop[] = [
           bg: "Говорете с човек",
           tr: "Bir çalışanla konuş",
           hu: "Beszélj munkatárssal",
+          "pt-BR": "Falar com um atendente",
+          ko: "상담원 연결",
+          ar: "التحدث إلى موظف",
         },
         kind: "click",
         action: "callback",
@@ -355,6 +377,9 @@ const MENU_TOP: readonly MenuTop[] = [
           bg: "Списък на магазините",
           tr: "Mağaza listesi",
           hu: "Üzletjegyzék",
+          "pt-BR": "Lista de lojas",
+          ko: "매장 목록",
+          ar: "قائمة المتاجر",
         },
         kind: "view",
         url: STORE_URL,
@@ -381,6 +406,9 @@ const MENU_TOP: readonly MenuTop[] = [
       bg: "Тазседмичният брой",
       tr: "Bu haftanın sayısı",
       hu: "A hét kiadványa",
+      "pt-BR": "Edição desta semana",
+      ko: "이번 주 소식",
+      ar: "إصدار هذا الأسبوع",
     },
     kind: "view",
     url: "%s/h5/%s".replace("%s", PUBLIC_BASE).replace("%s", ARTICLE_ID),
@@ -405,6 +433,9 @@ const MENU_TOP: readonly MenuTop[] = [
       bg: "Сканирай",
       tr: "Tarayıcı",
       hu: "Beolvasás",
+      "pt-BR": "Escanear",
+      ko: "스캔",
+      ar: "مسح",
     },
     kind: "view",
   },
@@ -435,6 +466,9 @@ const SCANNER_NOTE: Localized<string> = {
   bg: "Сканирането е на телефона: елемент `scancode` няма action, затова ретранслаторът не вижда нито една възходяща рамка.",
   tr: "Tarama telefonda gerçekleşir: bir `scancode` maddesi action taşımaz, dolayısıyla aktarma düğümü yukarı yönlü bir çerçeve görmez.",
   hu: "A beolvasás a telefonon történik: egy `scancode` bejegyzés nem visz actiont, így az átvivő feljövő keretet egyáltalán nem lát.",
+  "pt-BR": "A leitura roda no celular: um item `scancode` não carrega ação, então o relay nunca vê um frame de uplink para ele.",
+  ko: "스캔은 휴대폰에서 실행됩니다: `scancode` 항목은 action을 담지 않으므로 릴레이는 그에 대한 업링크 프레임을 결코 보지 못합니다.",
+  ar: "المسح يجري على الهاتف: عنصر `scancode` لا يحمل أي إجراء، لذا لا يرى المرحّل إطار رفع لأجله قط.",
 };
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -460,6 +494,9 @@ const EYEBROW: Localized<string> = {
   bg: "Интерактивна пясъчница",
   tr: "Etkileşimli kum havuzu",
   hu: "Interaktív homokozó",
+  "pt-BR": "Sandbox interativo",
+  ko: "인터랙티브 샌드박스",
+  ar: "بيئة الاختبار التفاعلية",
 };
 
 const TITLE: Localized<string> = {
@@ -481,6 +518,9 @@ const TITLE: Localized<string> = {
   bg: "Докнете вляво — на телефона гърми истинска карта",
   tr: "Soldan dokunun, telefonda gerçek bir kart belirsin",
   hu: "Kattints balra, a telefonon valódi karta nő ki",
+  "pt-BR": "Toque à esquerda e veja um cartão de verdade crescer no telefone",
+  ko: "왼쪽을 탭하면 휴대폰에 실제 카드가 만들어집니다",
+  ar: "اضغط على اليسار وشاهد بطاقة حقيقية تنمو على الهاتف",
 };
 
 const SUBTITLE: Localized<string> = {
@@ -502,6 +542,9 @@ const SUBTITLE: Localized<string> = {
   bg: "Демо, което живее само в четеца. Лявата колона съдържа действията на конзолата на сервизен акаунт, дясната е iPhone-ът на последовател, а изгледът на ретранслатора долу е третият поглед към същото събитие: ред `::POPOPX_ECO::` плюс компактен JSON. Всяка форма на рамка, име на поле, значение на бутон и мерна единица са взети от gateway/app/ в същото хранилище.",
   tr: "Yalnızca tarayıcıda çalışan bir demo düzeni. Sol sütun Hizmet Hesabı konsolunun tetiklediği eylemleri, sağ sütun bir takipçinin iPhone'unu gösterir; alttaki aktarma düğümü görünümü ise aynı olayın üçüncü okunuşudur: bir satır `::POPOPX_ECO::` ve ardından sıkışık JSON. Buradaki her çerçeve biçimi, alan adı, düğme anlamı ve faturalandırma birimi aynı deponun gateway/app/ klasöründen alınmıştır.",
   hu: "Böngészőben futó demó. A bal oszlop a szolgáltatási fiók konzoljának műveleteit tartalmazza, a jobb a követő iPhone-a, alul pedig az átvivő nézete ugyanannak az eseménynek a harmadik olvasmánya: egy `::POPOPX_ECO::` sor meg tömör JSON. Minden keretforma, mezőnév, gombjelentés és számlázási egység ugyanabból a repóból, a gateway/app/ mappából való.",
+  "pt-BR": "Uma bancada de demonstração que roda apenas no navegador. A coluna da esquerda reúne as ações que um console de conta de serviço dispara, a coluna da direita é o iPhone do seguidor, e a visão do relay abaixo mostra a terceira forma de olhar o mesmo evento: uma linha de `::POPOPX_ECO::` mais JSON compacto. Cada formato de frame, nome de campo, significado de botão e unidade de cobrança aqui foi tirado de gateway/app/ neste mesmo repositório.",
+  ko: "브라우저 전용 데모 장치입니다. 왼쪽 열에는 서비스 계정 콘솔이 발생시키는 동작이 있고, 오른쪽 열은 팔로워의 iPhone이며, 아래의 릴레이 뷰는 같은 이벤트를 바라보는 세 번째 방식을 보여 줍니다: `::POPOPX_ECO::` 한 줄과 압축 JSON입니다. 여기의 모든 프레임 형태, 필드 이름, 버튼 의미, 과금 단위는 같은 저장소의 gateway/app/에서 가져온 것입니다.",
+  ar: "منصة عرض تجريبية في المتصفح وحده. العمود الأيسر يحمل الإجراءات التي تطلقها وحدة تحكم حساب خدمة، والعمود الأيمن هو iPhone المتابع، وعرض المرحّل أدناه يقدم الطريقة الثالثة للنظر إلى الحدث نفسه: سطر من `::POPOPX_ECO::` مع JSON مضغوط. وكل شكل إطار واسم حقل ومعنى زر ووحدة فوترة هنا مأخوذة من gateway/app/ في المستودع نفسه.",
 };
 
 const NO_NETWORK: Localized<string> = {
@@ -523,6 +566,9 @@ const NO_NETWORK: Localized<string> = {
   bg: "Нулиране на демото: всяко състояние се връща към заводската стойност. Оттук нищо не се изпраща — нито fetch, нито WebSocket, нито качване — и всяка рамка се сглобява в четеца в онзи момент.",
   tr: "Demoyu sıfırla: her durum fabrika değerine döner. Buradan hiçbir şey gönderilmez — ne fetch, ne WebSocket, ne yükleme — ve her çerçeve o anda tarayıcıda kurulur.",
   hu: "A demó visszaállítása: minden állapot gyári értékre ugrik vissza. Innen semmi nem megy ki — sincs fetch, sincs WebSocket, sincs feltöltés — és minden keret abban a pillanatban a böngészőben áll össze.",
+  "pt-BR": "Redefinir a demo: cada parte do estado volta ao valor de fábrica. Aqui nada é enviado — nenhum fetch, nenhum WebSocket, nenhum upload — e cada frame é montado no navegador naquele momento.",
+  ko: "데모 초기화: 모든 상태가 공장 초기값으로 돌아갑니다. 이 페이지는 아무것도 전송하지 않습니다 — fetch도, WebSocket도, 업로드도 없습니다 — 그리고 모든 프레임은 그 순간 브라우저에서 조립됩니다.",
+  ar: "إعادة تعيين العرض: تعود كل حالة إلى قيمتها الأصلية من المصنع. لا شيء هنا يرسل شيئًا — لا fetch، ولا WebSocket، ولا رفع ملفات — وكل إطار يُجمَّع في المتصفح في تلك اللحظة نفسها.",
 };
 
 const CONSOLE_HEAD: Localized<string> = {
@@ -544,6 +590,9 @@ const CONSOLE_HEAD: Localized<string> = {
   bg: "Конзола на сервизния акаунт",
   tr: "Hizmet Hesabı konsolu",
   hu: "Szolgáltatási fiók konzolja",
+  "pt-BR": "Console da conta de serviço",
+  ko: "서비스 계정 콘솔",
+  ar: "وحدة تحكم حساب الخدمة",
 };
 const PHONE_HEAD: Localized<string> = {
   en: "The follower's iPhone",
@@ -564,6 +613,9 @@ const PHONE_HEAD: Localized<string> = {
   bg: "iPhone-ът на последовател",
   tr: "Takipçinin iPhone'u",
   hu: "A követő iPhone-a",
+  "pt-BR": "O iPhone do seguidor",
+  ko: "팔로워의 iPhone",
+  ar: "iPhone المتابع",
 };
 const RELAY_HEAD: Localized<string> = {
   en: "Relay server view",
@@ -584,6 +636,9 @@ const RELAY_HEAD: Localized<string> = {
   bg: "Изглед от ретранслатора",
   tr: "Aktarma düğümü görünümü",
   hu: "Átvivő szerver nézete",
+  "pt-BR": "Visão do servidor relay",
+  ko: "릴레이 서버 뷰",
+  ar: "منظور خادم المرحّل",
 };
 const SERVICE_TITLE: Localized<string> = {
   en: "White Peach Lab",
@@ -604,6 +659,9 @@ const SERVICE_TITLE: Localized<string> = {
   bg: "Лаборатория на белите праскови",
   tr: "Beyaz Şeftali Laboratuvarı",
   hu: "Fehér őszibarack labor",
+  "pt-BR": "Laboratório Pêssego Branco",
+  ko: "화이트 피치 랩",
+  ar: "مختبر الخوخ الأبيض",
 };
 
 const TAB_CHANNEL: Localized<string> = {
@@ -625,6 +683,9 @@ const TAB_CHANNEL: Localized<string> = {
   bg: "Канал",
   tr: "Kanal",
   hu: "Csatorna",
+  "pt-BR": "Canal",
+  ko: "채널",
+  ar: "قناة",
 };
 const TAB_SERVICE: Localized<string> = {
   en: "Service",
@@ -645,6 +706,9 @@ const TAB_SERVICE: Localized<string> = {
   bg: "Сервиз",
   tr: "Hizmet",
   hu: "Szolgáltatás",
+  "pt-BR": "Serviço",
+  ko: "서비스",
+  ar: "خدمة",
 };
 
 const ACTION_LABELS: Record<string, Localized<string>> = {
@@ -667,6 +731,9 @@ const ACTION_LABELS: Record<string, Localized<string>> = {
     bg: "Публикувай статията на канала",
     tr: "Kanal makalesini yayınla",
     hu: "Csatorna-cikk közzététele",
+    "pt-BR": "Publicar o artigo do canal",
+    ko: "채널 아티클 발행",
+    ar: "نشر مقال القناة",
   },
   pushMenu: {
     en: "Push menu_config",
@@ -687,6 +754,9 @@ const ACTION_LABELS: Record<string, Localized<string>> = {
     bg: "Изпрати menu_config",
     tr: "menu_config gönder",
     hu: "menu_config küldése",
+    "pt-BR": "Enviar menu_config",
+    ko: "menu_config 푸시",
+    ar: "دفع menu_config",
   },
   standard: {
     en: "Send a standard card",
@@ -707,6 +777,9 @@ const ACTION_LABELS: Record<string, Localized<string>> = {
     bg: "Изпрати standard карта",
     tr: "standard kart gönder",
     hu: "standard kártya küldése",
+    "pt-BR": "Enviar um cartão standard",
+    ko: "표준 카드 전송",
+    ar: "إرسال بطاقة قياسية",
   },
   receipt: {
     en: "Send a receipt card",
@@ -727,6 +800,9 @@ const ACTION_LABELS: Record<string, Localized<string>> = {
     bg: "Изпрати receipt карта",
     tr: "receipt kart gönder",
     hu: "receipt kártya küldése",
+    "pt-BR": "Enviar um cartão receipt",
+    ko: "영수증 카드 전송",
+    ar: "إرسال بطاقة إيصال",
   },
   security: {
     en: "Send a security alert card",
@@ -747,6 +823,9 @@ const ACTION_LABELS: Record<string, Localized<string>> = {
     bg: "Изпрати security карта за предупреждение",
     tr: "security uyarı kartı gönder",
     hu: "security riasztókártya küldése",
+    "pt-BR": "Enviar um cartão de alerta de segurança",
+    ko: "보안 경고 카드 전송",
+    ar: "إرسال بطاقة تنبيه أمني",
   },
   poll: {
     en: "Open an anonymous poll",
@@ -767,6 +846,9 @@ const ACTION_LABELS: Record<string, Localized<string>> = {
     bg: "Стартирай анонимна анкета",
     tr: "Anonim anket aç",
     hu: "Névtelen szavazás indítása",
+    "pt-BR": "Abrir uma enquete anônima",
+    ko: "익명 투표 열기",
+    ar: "فتح استطلاع مجهول",
   },
   rotate: {
     en: "Trigger an epoch key rotation",
@@ -787,6 +869,9 @@ const ACTION_LABELS: Record<string, Localized<string>> = {
     bg: "Стартирай ротация на epoch ключ",
     tr: "Epoch anahtar dönüşümünü tetikle",
     hu: "Epoch-kulcsrotáció indítása",
+    "pt-BR": "Disparar uma rotação da chave de epoch",
+    ko: "epoch 키 교체 트리거",
+    ar: "تشغيل تدوير مفاتيح epoch",
   },
   reset: {
     en: "Reset the demo",
@@ -807,6 +892,9 @@ const ACTION_LABELS: Record<string, Localized<string>> = {
     bg: "Нулирай демото",
     tr: "Demoyu sıfırla",
     hu: "Demó visszaállítása",
+    "pt-BR": "Redefinir a demo",
+    ko: "데모 초기화",
+    ar: "إعادة تعيين العرض",
   },
 };
 
@@ -830,6 +918,9 @@ const HINTS: Record<string, Localized<string>> = {
     bg: "Бутонът под статията Е дълбоката връзка `popopx://service?uri=<address>&ref=<article id>`: само докосването прехвърля телефона в разговора и изпраща `::REF::` нагоре.",
     tr: "Makalenin altındaki düğme zaten `popopx://service?uri=<address>&ref=<article id>` derin bağlantısıdır: telefona konuşmayı yalnızca dokunuş getirir ve `::REF::` yukarı çerçevesini gönderir.",
     hu: "A cikk alján lévő gomb MAGA a mélylink (`popopx://service?uri=<address>&ref=<article id>`): csak rá koppintva lép a telefon a beszélgetésbe, és indul el a `::REF::` feltöltési keret.",
+    "pt-BR": "O botão no rodapé do artigo É o deep link `popopx://service?uri=<address>&ref=<article id>`: tocar nele é o que leva o celular para a conversa e emite o uplink `::REF::`.",
+    ko: "글 하단의 버튼이 곧 딥 링크 `popopx://service?uri=<address>&ref=<article id>`입니다: 이를 탭하는 것이 휴대폰을 대화로 옮기고 `::REF::` 업링크를 발생시키는 동작입니다.",
+    ar: "الزر في أسفل المقال هو نفسه الرابط العميق `popopx://service?uri=<address>&ref=<article id>`: والضغط عليه هو ما ينقل الهاتف إلى المحادثة ويصدر الرفع `::REF::`.",
   },
   pushMenu: {
     en: "The menu arrives as a control frame beside the message, three entries at most. After Push, both the log and the relay panel gain an `mc` frame.",
@@ -850,6 +941,9 @@ const HINTS: Record<string, Localized<string>> = {
     bg: "Менюто идва като контролираща рамка до съобщението, най-много три елемента. След изпращането в дневника и в ретранслаторния панел се появява рамка `mc`.",
     tr: "Menü, mesajın yanında bir kontrol çerçevesi olarak gelir, en fazla üç madde. Gönderimden sonra hem günlükte hem aktarma düğümü panelinde bir `mc` çerçevesi belirir.",
     hu: "A menü a üzenet mellé tartó vezérlő keretként érkezik, legfeljebb három bejegyzéssel. A küldés után mind a naplóban, mind az átvivő panelen megjelén egy `mc` keret.",
+    "pt-BR": "O menu chega como um frame de controle ao lado da mensagem, no máximo três entradas. Depois de Push, tanto o log quanto o painel do relay ganham um frame `mc`.",
+    ko: "메뉴는 메시지 옆에 제어 프레임으로 도착하며, 항목은 최대 세 개입니다. Push 후에는 로그와 릴레이 패널 모두에 `mc` 프레임이 추가됩니다.",
+    ar: "تصل القائمة كإطار تحكم بجانب الرسالة، بثلاثة عناصر على الأكثر. وبعد الضغط على Push، يكتسب كل من السجل ولوحة المرحّل إطار `mc`.",
   },
   cards: {
     en: "The three card styles are a hard-coded enum: standard, receipt, security.",
@@ -870,6 +964,9 @@ const HINTS: Record<string, Localized<string>> = {
     bg: "Трите стила на картите са твърдо записано изброяване: standard, receipt, security.",
     tr: "Üç kart stili sabit bir enumdur: standard, receipt, security.",
     hu: "A három kártyastílus beégetett enum: standard, receipt, security.",
+    "pt-BR": "Os três estilos de cartão são um enum fixo no código: standard, receipt, security.",
+    ko: "세 가지 카드 스타일은 하드코딩된 열거형입니다: standard, receipt, security.",
+    ar: "أنماط البطاقات الثلاثة تعداد ثابت في الشيفرة: standard وreceipt وsecurity.",
   },
   poll: {
     en: "A poll card is keyed by cardId: a vote comes back as an `m:\"u\"` update, so the bar moves inside the same bubble instead of pushing a second message.",
@@ -890,6 +987,9 @@ const HINTS: Record<string, Localized<string>> = {
     bg: "Картата за анкета се разпознава по cardId: гласът се връща като актуализация `m:\"u\"`, затова лентата се мести в същия балон вместо да изпрати второ съобщение.",
     tr: "Anket kartı cardId ile tanınır: oy `m:\"u\"` güncellemesi olarak geri gelir, bu yüzden çubuk ikinci bir mesaj göndermek yerine aynı balonun içinde hareket eder.",
     hu: "A szavazókártyát cardId azonosítja: a szavazat `m:\"u\"` frissítésként tér vissza, így a sáv ugyanabban a buborékban mozog, nem küld második üzenetet.",
+    "pt-BR": "Um cartão de enquete é indexado por cardId: um voto volta como uma atualização `m:\"u\"`, então a barra se move dentro do mesmo balão em vez de enviar uma segunda mensagem.",
+    ko: "투표 카드는 cardId로 키가 지정됩니다: 투표는 `m:\"u\"` 업데이트로 돌아오므로, 두 번째 메시지를 푸시하는 대신 같은 말풍선 안에서 막대가 움직입니다.",
+    ar: "بطاقة التصويت مفتاحها cardId: فالصوت يعود كتحديث `m:\"u\"`، لذا يتحرك الشريط داخل الفقاعة نفسها بدل دفع رسالة ثانية.",
   },
   rotate: {
     en: "A rotation frame carries only the sealed envelope; the new epoch key lives inside the box. This page performs no ChaCha20-Poly1305 or Ed25519 — the nonce, ciphertext and signature below are examples built here, in the browser.",
@@ -910,6 +1010,9 @@ const HINTS: Record<string, Localized<string>> = {
     bg: "Кадърът за ротация носи само запечатания плик; новият epoch ключ е в кутията. Тази страница не изпълнява нито ChaCha20-Poly1305, нито Ed25519 — nonce, криптотекстът и подписът долу са примери, сгънени в четеца.",
     tr: "Dönüşüm çerçevesi yalnızca mühürlü zarfı taşır; yeni epoch anahtarı kutunun içindedir. Bu sayfa ChaCha20-Poly1305 de Ed25519 de çalıştırmaz — aşağıdaki nonce, şifreli metin ve imza tarayıcıda üretilmiş örneklerdir.",
     hu: "A rotációs keret csak a lepecsételt borítékot viszi; az új epoch-kulcs a dobozban lakik. Ez az oldal sem ChaCha20-Poly1305-öt, sem Ed25519-et nem futtat — az alábbi nonce, titkosított szöveg és aláírás a böngészőben összerakott példák.",
+    "pt-BR": "Um frame de rotação carrega apenas o envelope selado; a nova chave de epoch fica dentro da caixa. Esta página não executa ChaCha20-Poly1305 nem Ed25519 — o nonce, o texto cifrado e a assinatura abaixo são exemplos montados aqui, no navegador.",
+    ko: "키 교체 프레임에는 봉인된 봉투만 실립니다. 새 epoch 키는 그 상자 안에 들어 있습니다. 이 페이지는 ChaCha20-Poly1305나 Ed25519를 수행하지 않습니다. 아래의 nonce, ciphertext, signature는 이 브라우저에서 만든 예시입니다.",
+    ar: "لا يحمل إطار التدوير سوى المغلف المختوم؛ أما مفتاح epoch الجديد فيسكن داخل الصندوق. ولا تُجري هذه الصفحة أي عملية ChaCha20-Poly1305 أو Ed25519 — فقيم nonce والنص المشفّر والتوقيع أدناه أمثلة تُبنى هنا داخل المتصفح.",
   },
 };
 
@@ -932,6 +1035,9 @@ const ARTICLE_TITLE: Localized<string> = {
   bg: "Тази седмица: медени праскови от Янгшан, от дървото до вратата за 48 часа",
   tr: "Bu hafta: Yangshan bal şeftalileri, ağaçtan kapınıza 48 saatte",
   hu: "Ezen a héten: yangshani mézbarack, a fáról a küszöböd alá 48 óra alatt",
+  "pt-BR": "Esta semana: pêssegos mel de Yangshan, da árvore à porta em 48 horas",
+  ko: "이번 주: 양산 꿀복숭아, 나무에서 문 앞까지 48시간",
+  ar: "هذا الأسبوع: خوخ يانغشان العسلي، من الشجرة إلى الباب في 48 ساعة",
 };
 
 const ARTICLE_BODY: Localized<string> = {
@@ -953,6 +1059,9 @@ const ARTICLE_BODY: Localized<string> = {
   bg: "Три снимки, пратка направо от градината. Собствената поръчка се проверя и прехвърля към вземане от магазина в сервизния акаунт.",
   tr: "Üç fotoğraf, doğruca bahçeden kargo. Kendi siparişini kontrol etmek veya mağazadan teslim almaya çevirmek için Hizmet Hesabı içini kullan.",
   hu: "Három fotó, egyenesen a gyümölcsösből küldve. A saját rendelésedet ellenőrizheted, vagy átállíthatod bolti átvételre a szolgáltatási fiókban.",
+  "pt-BR": "Três fotos, enviadas direto do pomar. Para conferir seu próprio pedido ou trocá-lo para retirada na loja, resolva tudo dentro da conta de serviço.",
+  ko: "사진 세 장을 과수원에서 곧바로 보냅니다. 본인 주문을 확인하거나 매장 픽업으로 바꾸려면 서비스 계정에서 처리하십시오.",
+  ar: "ثلاث صور تُشحن مباشرة من البستان. وللتحقق من طلبك أو تحويله إلى استلام من المتجر، أنجزه داخل حساب الخدمة.",
 };
 
 const ARTICLE_CTA: Localized<string> = {
@@ -974,6 +1083,9 @@ const ARTICLE_CTA: Localized<string> = {
   bg: "Уредете в сервизния акаунт",
   tr: "Hizmet Hesabı içinde hallet",
   hu: "Intézd el a szolgáltatási fiókban",
+  "pt-BR": "Resolver na conta de serviço",
+  ko: "서비스 계정에서 처리",
+  ar: "أنجزه في حساب الخدمة",
 };
 
 const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<string>; fields: readonly WireField[]; actions: readonly WireAction[] }> = {
@@ -997,6 +1109,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
       bg: "Членската ви привилегия е преведена",
       tr: "Üyelik avantajınız hesabınıza yattı",
       hu: "A tagsági kedvezmény megérkezett a fiókodba",
+      "pt-BR": "Seu benefício de membro chegou",
+      ko: "회원 혜택이 도착했습니다",
+      ar: "وصلت ميزة عضويتك",
     },
     body: {
       en: "This week's fruit voucher is in your account and stays valid until Sunday 24:00.",
@@ -1017,6 +1132,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
       bg: "Ваучерът за плодове за седмицата е в сметката ви и валиден до неделя 24:00.",
       tr: "Bu haftanın meyve kuponu hesabında, pazar 24:00'e kadar geçerli.",
       hu: "A héten járó gyümölcsutalvány a fiókodban van, vasárnap 24:00-ig érvényes.",
+      "pt-BR": "O cupom de frutas desta semana está na sua conta e é válido até domingo, 24:00.",
+      ko: "이번 주 과일 바우처가 계정에 들어왔고 일요일 24:00까지 유효합니다.",
+      ar: "قسيمة فاكهة هذا الأسبوع في حسابك، وهي صالحة حتى الأحد 24:00.",
     },
     fields: [
       {
@@ -1039,6 +1157,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Ниво",
           tr: "Seviye",
           hu: "Szint",
+          "pt-BR": "Nível",
+          ko: "등급",
+          ar: "المستوى",
         },
         v: {
           en: "Black card",
@@ -1059,6 +1180,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Черна карта",
           tr: "Kara kart",
           hu: "Fekete kártya",
+          "pt-BR": "Cartão black",
+          ko: "블랙 카드",
+          ar: "البطاقة السوداء",
         },
       },
       {
@@ -1081,6 +1205,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Ваучер",
           tr: "Kupon",
           hu: "Utalvány",
+          "pt-BR": "Cupom",
+          ko: "바우처",
+          ar: "القسيمة",
         },
         v: {
           en: "VC-2026-1122-0417",
@@ -1101,6 +1228,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "VC-2026-1122-0417",
           tr: "VC-2026-1122-0417",
           hu: "VC-2026-1122-0417",
+          "pt-BR": "VC-2026-1122-0417",
+          ko: "VC-2026-1122-0417",
+          ar: "VC-2026-1122-0417",
         },
         mono: true,
       },
@@ -1124,6 +1254,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Валиден до",
           tr: "Geçerlilik",
           hu: "Érvényes",
+          "pt-BR": "Válido até",
+          ko: "유효 기간",
+          ar: "صالحة حتى",
         },
         v: {
           en: "2026-11-29 24:00 UTC",
@@ -1144,6 +1277,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "2026-11-29 24:00 UTC",
           tr: "2026-11-29 24:00 UTC",
           hu: "2026-11-29 24:00 UTC",
+          "pt-BR": "2026-11-29 24:00 UTC",
+          ko: "2026-11-29 24:00 UTC",
+          ar: "2026-11-29 24:00 UTC",
         },
       },
     ],
@@ -1169,6 +1305,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Отвори страницата с привилегиите",
           tr: "Avantaj sayfasını aç",
           hu: "Előnyoldal megnyitása",
+          "pt-BR": "Abrir a página de benefícios",
+          ko: "혜택 페이지 열기",
+          ar: "افتح صفحة الميزة",
         },
         kind: "open_url",
         style: "primary",
@@ -1199,6 +1338,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Откажи този ваучер",
           tr: "Bu kuponu iptal et",
           hu: "Ennek az utalványnak a törlése",
+          "pt-BR": "Cancelar este cupom",
+          ko: "이 바우처 취소",
+          ar: "إلغاء هذه القسيمة",
         },
         kind: "callback",
         style: "secondary",
@@ -1226,6 +1368,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
       bg: "Пратката в студена верига SF7122068401130 е на път",
       tr: "Soğuk zincir paketi SF7122068401130 yola çıktı",
       hu: "A hűtött csomag SF7122068401130 úton van",
+      "pt-BR": "A encomenda da cadeia de frio SF7122068401130 está a caminho",
+      ko: "콜드체인 택배 SF7122068401130이 배송 중입니다",
+      ar: "الطرد المبرّد SF7122068401130 في الطريق",
     },
     body: {
       en: "Two 1.5 kg gift boxes and four ice packs, arriving inside 36 hours.",
@@ -1246,6 +1391,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
       bg: "Две дарови кутии по 1,5 кг и четири охладителни елемента, доставка до 36 часа.",
       tr: "1,5 kg'lık iki hediyelik kutu ve dört buz aküsü, 36 saat içinde kapıda.",
       hu: "Két 1,5 kg-os ajándékdoboz és négy hűtőelem, 36 órán belül kézhez ér.",
+      "pt-BR": "Duas caixas-presente de 1.5 kg e quatro placas de gelo, chegando em até 36 horas.",
+      ko: "1.5 kg 선물 상자 두 개와 아이스팩 네 개, 36시간 이내에 도착합니다.",
+      ar: "صندوقا هدايا وزن كل منهما 1.5 كغ وأربع وسادات ثلج، وتصل خلال 36 ساعة.",
     },
     fields: [
       {
@@ -1268,6 +1416,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Поръчка",
           tr: "Sipariş",
           hu: "Rendelés",
+          "pt-BR": "Pedido",
+          ko: "주문",
+          ar: "الطلب",
         },
         v: {
           en: "A-2026-1122-8843",
@@ -1288,6 +1439,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "A-2026-1122-8843",
           tr: "A-2026-1122-8843",
           hu: "A-2026-1122-8843",
+          "pt-BR": "A-2026-1122-8843",
+          ko: "A-2026-1122-8843",
+          ar: "A-2026-1122-8843",
         },
         mono: true,
       },
@@ -1311,6 +1465,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Сума",
           tr: "Tutar",
           hu: "Összeg",
+          "pt-BR": "Valor",
+          ko: "금액",
+          ar: "المبلغ",
         },
         v: {
           en: "¥ 216.00",
@@ -1331,6 +1488,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "216,00 ¥",
           tr: "216,00 ¥",
           hu: "216,00 ¥",
+          "pt-BR": "¥ 216.00",
+          ko: "¥ 216.00",
+          ar: "¥ 216.00",
         },
         mono: true,
       },
@@ -1354,6 +1514,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Състояние",
           tr: "Durum",
           hu: "Állapot",
+          "pt-BR": "Situação",
+          ko: "상태",
+          ar: "الحالة",
         },
         v: {
           en: "In transit",
@@ -1374,6 +1537,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "В транспортиране",
           tr: "Taşımada",
           hu: "Szállítás alatt",
+          "pt-BR": "Em trânsito",
+          ko: "배송 중",
+          ar: "قيد النقل",
         },
       },
     ],
@@ -1399,6 +1565,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Проследи пратката",
           tr: "Kargoyu izle",
           hu: "Csomag nyomon követése",
+          "pt-BR": "Rastrear",
+          ko: "배송 조회",
+          ar: "تتبّع الطرد",
         },
         kind: "open_url",
         style: "primary",
@@ -1430,6 +1599,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
       bg: "[warning] делът 5xx на checkout интерфейса надхвърли прага",
       tr: "[warning] ödeme arayüzü 5xx oranı eşiği aştı",
       hu: "[warning] a fizetés API 5xx aránya a küszöb felett",
+      "pt-BR": "[warning] taxa de 5xx do checkout acima do limite",
+      ko: "[warning] 결제 5xx 비율 임계값 초과",
+      ar: "[warning] نسبة 5xx في مسار الدفع تتجاوز الحد",
     },
     body: {
       en: "Delivered by Grafana Alertmanager: 3.7% 5xx over the last 5 minutes against a 2% threshold.",
@@ -1450,6 +1622,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
       bg: "Доставено от Grafana Alertmanager: 3,7% 5xx за последните 5 минути срещу праг от 2%.",
       tr: "Grafana Alertmanager ile iletildi: son 5 dakikada %3,7 5xx, eşik %2.",
       hu: "A Grafana Alertmanager kézbesítette: 3,7% 5xx az elmúlt 5 percben, a küszöb 2%.",
+      "pt-BR": "Entregue pelo Grafana Alertmanager: 3.7% de 5xx nos últimos 5 minutos contra um limite de 2%.",
+      ko: "Grafana Alertmanager 발송: 지난 5분간 5xx 3.7%, 임계값 2%.",
+      ar: "أُرسل عبر Grafana Alertmanager: نسبة 5xx بلغت 3.7% في الدقائق الخمس الأخيرة مقابل حدّ 2%.",
     },
     fields: [
       {
@@ -1472,6 +1647,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Име на алармата",
           tr: "Uyarı adı",
           hu: "Riasztás neve",
+          "pt-BR": "Nome do alerta",
+          ko: "알림 이름",
+          ar: "اسم التنبيه",
         },
         v: {
           en: "checkout 5xx ratio",
@@ -1492,6 +1670,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "дел 5xx на поръчките",
           tr: "sipariş 5xx oranı",
           hu: "5xx arány a fizetésnél",
+          "pt-BR": "taxa de 5xx do checkout",
+          ko: "결제 5xx 비율",
+          ar: "نسبة 5xx في مسار الدفع",
         },
       },
       {
@@ -1514,6 +1695,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Степен на тежест",
           tr: "Önem derecesi",
           hu: "Súlyosság",
+          "pt-BR": "Severidade",
+          ko: "심각도",
+          ar: "الخطورة",
         },
         v: {
           en: SEVERITY_WARNING,
@@ -1534,6 +1718,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: SEVERITY_WARNING,
           tr: SEVERITY_WARNING,
           hu: SEVERITY_WARNING,
+          "pt-BR": SEVERITY_WARNING,
+          ko: SEVERITY_WARNING,
+          ar: SEVERITY_WARNING,
         },
       },
       {
@@ -1556,6 +1743,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Статус",
           tr: "Durum",
           hu: "Állapot",
+          "pt-BR": "Status",
+          ko: "상태",
+          ar: "الحالة",
         },
         v: {
           en: "firing, unacked",
@@ -1576,6 +1766,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "активна, не потвърдена",
           tr: "tetikleniyor, onaysız",
           hu: "aktív, el nem ismerve",
+          "pt-BR": "disparando, sem confirmação",
+          ko: "발생 중, 미확인",
+          ar: "نشِط، غير مؤكَّد",
         },
       },
       {
@@ -1598,6 +1791,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Пръстов отпечатък",
           tr: "Parmak izi",
           hu: "Ujjlenyomat",
+          "pt-BR": "Impressão digital",
+          ko: "지문",
+          ar: "البصمة",
         },
         v: {
           en: ALERT_FINGERPRINT,
@@ -1618,6 +1814,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: ALERT_FINGERPRINT,
           tr: ALERT_FINGERPRINT,
           hu: ALERT_FINGERPRINT,
+          "pt-BR": ALERT_FINGERPRINT,
+          ko: ALERT_FINGERPRINT,
+          ar: ALERT_FINGERPRINT,
         },
         mono: true,
       },
@@ -1641,6 +1840,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Начало",
           tr: "Başlangıç",
           hu: "Kezdés",
+          "pt-BR": "Início",
+          ko: "시작 시각",
+          ar: "البداية",
         },
         v: {
           en: "2026-11-22 01:52 UTC",
@@ -1661,6 +1863,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "2026-11-22 01:52 UTC",
           tr: "2026-11-22 01:52 UTC",
           hu: "2026-11-22 01:52 UTC",
+          "pt-BR": "2026-11-22 01:52 UTC",
+          ko: "2026-11-22 01:52 UTC",
+          ar: "2026-11-22 01:52 UTC",
         },
         mono: true,
       },
@@ -1687,6 +1892,9 @@ const CARD_COPY: Record<CardStyle, { title: Localized<string>; body: Localized<s
           bg: "Потвърди",
           tr: "Onayla",
           hu: "Elismerés",
+          "pt-BR": "Confirmar",
+          ko: "확인",
+          ar: "إقرار",
         },
         kind: "callback",
         style: "primary",
@@ -1715,6 +1923,9 @@ const ACKED: Localized<string> = {
   bg: "Потвърдено",
   tr: "Onaylandı",
   hu: "Elismerve",
+  "pt-BR": "Confirmado",
+  ko: "확인됨",
+  ar: "مؤكَّد",
 };
 const FIRING: Localized<string> = {
   en: "Awaiting ack",
@@ -1735,6 +1946,9 @@ const FIRING: Localized<string> = {
   bg: "Чака потвърждение",
   tr: "Onay bekleniyor",
   hu: "Elismerésre vár",
+  "pt-BR": "Aguardando confirmação",
+  ko: "확인 대기",
+  ar: "بانتظار التأكيد",
 };
 const STATUS_WORD: Localized<string> = {
   en: "Status",
@@ -1755,6 +1969,9 @@ const STATUS_WORD: Localized<string> = {
   bg: "Статус",
   tr: "Durum",
   hu: "Állapot",
+  "pt-BR": "Status",
+  ko: "상태",
+  ar: "الحالة",
 };
 
 /* Console-side labels. */
@@ -1777,6 +1994,9 @@ const L_SOURCE: Localized<string> = {
   bg: "Действия",
   tr: "Eylemler",
   hu: "Műveletek",
+  "pt-BR": "Ações",
+  ko: "동작",
+  ar: "الإجراءات",
 };
 const L_LOG: Localized<string> = {
   en: "Console log",
@@ -1797,6 +2017,9 @@ const L_LOG: Localized<string> = {
   bg: "Дневник на конзолата",
   tr: "Konsol günlüğü",
   hu: "Konzolnapló",
+  "pt-BR": "Registro do console",
+  ko: "콘솔 로그",
+  ar: "سجل وحدة التحكم",
 };
 const L_CP: Localized<string> = {
   en: "Compute credits this demo has booked",
@@ -1817,6 +2040,9 @@ const L_CP: Localized<string> = {
   bg: "Изчислителни кредити, начислени от демото",
   tr: "Bu demonun kullandığı hesaplama kredisi",
   hu: "A demó által lekötött számítási kredit",
+  "pt-BR": "Créditos de computação debitados nesta demo",
+  ko: "이 데모에서 계상된 컴퓨트 크레딧",
+  ar: "نقاط الحوسبة التي حجزها هذا العرض",
 };
 const L_TARGETS: Localized<string> = {
   en: "Targets",
@@ -1837,6 +2063,9 @@ const L_TARGETS: Localized<string> = {
   bg: "Цели",
   tr: "Hedefler",
   hu: "Célállások",
+  "pt-BR": "Destinatários",
+  ko: "대상",
+  ar: "الجهات المستهدفة",
 };
 const L_MENU_NOT: Localized<string> = {
   en: "No menu pushed yet",
@@ -1857,6 +2086,9 @@ const L_MENU_NOT: Localized<string> = {
   bg: "Все още няма изпратено меню",
   tr: "Henüz menü gönderilmedi",
   hu: "Nincs elküldött menü",
+  "pt-BR": "Nenhum menu enviado ainda",
+  ko: "아직 푸시된 메뉴가 없습니다",
+  ar: "لم تُدفع أي قائمة بعد",
 };
 const L_UP: Localized<string> = {
   en: "Uplink",
@@ -1877,6 +2109,9 @@ const L_UP: Localized<string> = {
   bg: "Възходящ",
   tr: "Yukarı yön",
   hu: "Felfelé",
+  "pt-BR": "Subida",
+  ko: "업링크",
+  ar: "صاعد",
 };
 const L_DOWN: Localized<string> = {
   en: "Downlink",
@@ -1897,6 +2132,9 @@ const L_DOWN: Localized<string> = {
   bg: "Низходящ",
   tr: "Aşağı yön",
   hu: "Lefelé",
+  "pt-BR": "Descida",
+  ko: "다운링크",
+  ar: "نازل",
 };
 const L_NOTE: Localized<string> = {
   en: "Note",
@@ -1917,6 +2155,9 @@ const L_NOTE: Localized<string> = {
   bg: "Бележка",
   tr: "Not",
   hu: "Jegyzet",
+  "pt-BR": "Nota",
+  ko: "비고",
+  ar: "ملاحظة",
 };
 
 /* Relay-side labels. */
@@ -1939,6 +2180,9 @@ const L_FRAME: Localized<string> = {
   bg: "Текст на рамката",
   tr: "Çerçeve metni",
   hu: "Keret szövege",
+  "pt-BR": "Texto do frame",
+  ko: "프레임 텍스트",
+  ar: "نص الإطار",
 };
 const L_NONE: Localized<string> = {
   en: "No control frame has gone out yet. Press a button on the left and the real line shows up here.",
@@ -1959,6 +2203,9 @@ const L_NONE: Localized<string> = {
   bg: "Няма изпратена контролираща рамка още. Натиснете бутон вляво и истинският ред се появява тук.",
   tr: "Henüz dışarı çıkmış bir kontrol çerçevesi yok. Solda bir düğmeye basın, gerçek satır burada belirsin.",
   hu: "Még egy vezérlő keret sem ment ki. Nyomj meg egy gombot balra, és az valódi sor itt jelenik meg.",
+  "pt-BR": "Nenhum frame de controle saiu ainda. Pressione um botão à esquerda e a linha real aparece aqui.",
+  ko: "아직 전송된 제어 프레임이 없습니다. 왼쪽에서 버튼을 누르면 실제 라인이 여기에 나타납니다.",
+  ar: "لم يخرج أي إطار تحكّم بعد. اضغط زرًا على اليسار ليظهر السطر الحقيقي هنا.",
 };
 const L_ENV: Localized<string> = {
   en: "Ciphertext and signature digest",
@@ -1979,6 +2226,9 @@ const L_ENV: Localized<string> = {
   bg: "Криптотекст и резюме на подписа",
   tr: "Şifreli metin ve imza özeti",
   hu: "Titkosított szöveg és aláírás-kivonat",
+  "pt-BR": "Texto cifrado e digest da assinatura",
+  ko: "암호문 및 서명 다이제스트",
+  ar: "النص المشفّر وخلاصة التوقيع",
 };
 const L_EXAMPLE: Localized<string> = {
   en: "example values",
@@ -1999,6 +2249,9 @@ const L_EXAMPLE: Localized<string> = {
   bg: "примерни стойности",
   tr: "örnek değerler",
   hu: "példaértékek",
+  "pt-BR": "valores de exemplo",
+  ko: "예시 값",
+  ar: "قيم توضيحية",
 };
 const ENV_CAPTION: Localized<string> = {
   en: `The envelope's field names and byte lengths come from ChannelEnvelope and seal_envelope in gateway/app/crypto_service.py: a 12-byte nonce, the ciphertext with its 16-byte Poly1305 tag appended, a 64-byte Ed25519 signature, all in standard base64. The bytes shown here are built in this page as examples: there is no private key in a browser and no real cipher runs.`,
@@ -2019,6 +2272,9 @@ const ENV_CAPTION: Localized<string> = {
   bg: `Имената на полетата и дължините в байтове на пликчето идват от ChannelEnvelope и seal_envelope в gateway/app/crypto_service.py: 12-байтов nonce, криптотекст с прикачения 16-байтов Poly1305 таг, 64-байтов Ed25519 подпис, всичко в стандартен base64. Показаните байтове са примери, сгънени в тази страница: в четеца няма частен ключ и истинско криптиране не се изпълнява.`,
   tr: `Zarfın alan adları ve bayt uzunlukları gateway/app/crypto_service.py içindeki ChannelEnvelope ve seal_envelope fonksiyonlarından: 12 baytlık nonce, sonuna eklenmiş 16 baytlık Poly1305 etiketiyle şifreli metin, 64 baytlık Ed25519 imzası, hepsi standart base64. Burada görünen baytlar bu sayfada üretilmiş örneklerdir: tarayıcıda özel anahtar yoktur ve gerçek şifreleme çalışmaz.`,
   hu: `A boríték mezőnevei és a bájtok hossza a gateway/app/crypto_service.py ChannelEnvelope és seal_envelope függvényeiből valók: 12 bájtos nonce, a ciphertext a hozzáfűzött 16 bájtos Poly1305 címkével, 64 bájtos Ed25519 aláírás, minden szabvány base64-ban. A itt látható bájtok ezen az oldalon összerakott példák: a böngészőben nincs privát kulcs és valódi titkosítás nem fut.`,
+  "pt-BR": `Os nomes de campo e os tamanhos em bytes do envelope vêm de ChannelEnvelope e seal_envelope em gateway/app/crypto_service.py: um nonce de 12 bytes, o texto cifrado com sua tag Poly1305 de 16 bytes anexada, uma assinatura Ed25519 de 64 bytes, tudo em base64 padrão. Os bytes mostrados aqui são montados nesta página como exemplos: não há chave privada em um navegador e nenhuma cifra real é executada.`,
+  ko: `봉투의 필드 이름과 바이트 길이는 gateway/app/crypto_service.py의 ChannelEnvelope와 seal_envelope에서 가져왔습니다. 12바이트 nonce, 16바이트 Poly1305 태그가 뒤에 붙은 ciphertext, 64바이트 Ed25519 signature이며 모두 표준 base64입니다. 여기 표시된 바이트는 이 페이지에서 만든 예시입니다. 브라우저에는 개인 키가 없고 실제 암호화도 실행되지 않습니다.`,
+  ar: `تأتي أسماء حقول المغلف وأطوال بايتاته من ChannelEnvelope وseal_envelope في gateway/app/crypto_service.py: قيمة nonce بطول 12 بايت، والنص المشفّر مضافًا إليه وسم Poly1305 بطول 16 بايت، وتوقيع Ed25519 بطول 64 بايت، وكلها بترميز base64 القياسي. والبايتات المعروضة هنا مبنية في هذه الصفحة كأمثلة: فلا مفتاح خاص في المتصفح ولا شيفرة تشفير حقيقية تُنفَّذ.`,
 };
 const FRAME_CAPTION: Localized<string> = {
   en: `The encoding rules are from the same source: encode_frame glues ::POPOPX_ECO:: straight in front of json.dumps(separators=(",",":"), ensure_ascii=False), with no key sorting, no \\uXXXX escaping and no line break — a CJK glyph counts as one character.`,
@@ -2039,6 +2295,9 @@ const FRAME_CAPTION: Localized<string> = {
   bg: `Правилата за кодиране идват от същия източник: encode_frame лепи ::POPOPX_ECO:: точно пред json.dumps(separators=(",",":"), ensure_ascii=False), без сортиране на ключовете, без \\uXXXX екраниране и без пренасяне на ред — един CJK знак се брои за един знак.`,
   tr: `Kodlama kuralları da aynı kaynaktan: encode_frame, ::POPOPX_ECO:: ifadesini json.dumps(separators=(",",":"), ensure_ascii=False) satırının tam önüne yapıştırır; anahtar sıralaması yok, \\uXXXX kaçışı yok, satır sonu yok — CJK glifi bir karakter sayılır.`,
   hu: `Az kódolási szabályok is ugyanabból a forrásból valók: az encode_frame a ::POPOPX_ECO:: jelölést közvetlenül a json.dumps(separators=(",",":"), ensure_ascii=False) elé ragasztja — kulcsok rendezése nélkül, \\uXXXX-escape nélkül, sortörés nélkül; egy CJK glif egy karakternek számít.`,
+  "pt-BR": `As regras de codificação vêm da mesma fonte: encode_frame cola ::POPOPX_ECO:: logo à frente de json.dumps(separators=(",",":"), ensure_ascii=False), sem ordenação de chaves, sem escape \\uXXXX e sem quebra de linha — um glifo CJK conta como um caractere.`,
+  ko: `인코딩 규칙도 같은 소스에서 옵니다. encode_frame은 ::POPOPX_ECO::를 json.dumps(separators=(",",":"), ensure_ascii=False) 바로 앞에 붙이며, 키 정렬도, \\uXXXX 이스케이프도, 줄바꿈도 없습니다. CJK 글리프는 한 글자로 계산합니다.`,
+  ar: `وقواعد الترميز من المصدر نفسه: يلصق encode_frame السلسلة ::POPOPX_ECO:: مباشرة أمام json.dumps(separators=(",",":"), ensure_ascii=False)، دون فرز للمفاتيح، ودون هروب بالصيغة \\uXXXX، ودون فاصل أسطر — ويُحسب كل رمز CJK حرفًا واحدًا.`,
 };
 
 /* Phone-side copy. */
@@ -2061,6 +2320,9 @@ const P_ONLINE: Localized<string> = {
   bg: "на линия",
   tr: "çevrimiçi",
   hu: "elérhető",
+  "pt-BR": "conectado",
+  ko: "온라인",
+  ar: "متصل",
 };
 const P_MENU: Localized<string> = {
   en: "Custom menu",
@@ -2081,6 +2343,9 @@ const P_MENU: Localized<string> = {
   bg: "Персонализирано меню",
   tr: "Özel menü",
   hu: "Egyéni menü",
+  "pt-BR": "Menu personalizado",
+  ko: "사용자 지정 메뉴",
+  ar: "قائمة مخصصة",
 };
 const P_LOCKED: Localized<string> = {
   en: "Button locked until the card updates",
@@ -2101,6 +2366,9 @@ const P_LOCKED: Localized<string> = {
   bg: "Бутонът е заключен, докато картата се обнови",
   tr: "Kart güncellenene kadar düğme kilitli",
   hu: "A gomb zárva van a kártya frissüléséig",
+  "pt-BR": "Botão bloqueado até o cartão ser atualizado",
+  ko: "카드가 업데이트될 때까지 버튼이 잠깁니다",
+  ar: "الزر مقفل حتى تُحدَّث البطاقة",
 };
 const P_H5_TITLE: Localized<string> = {
   en: "H5 page",
@@ -2121,6 +2389,9 @@ const P_H5_TITLE: Localized<string> = {
   bg: "H5 страница",
   tr: "H5 sayfası",
   hu: "H5-oldal",
+  "pt-BR": "Página H5",
+  ko: "H5 페이지",
+  ar: "صفحة H5",
 };
 const P_H5_CLOSE: Localized<string> = {
   en: "Close",
@@ -2141,6 +2412,9 @@ const P_H5_CLOSE: Localized<string> = {
   bg: "Затвори",
   tr: "Kapat",
   hu: "Bezárás",
+  "pt-BR": "Fechar",
+  ko: "닫기",
+  ar: "إغلاق",
 };
 const P_H5_NOTE: Localized<string> = {
   en: "On a real phone this does not happen inside the app: the client opens the signed link in an out-of-process SFSafariViewController, and the signature covers only uid=<pairwise_uid>&ts=<unix_seconds>, replay-checked inside a ±300 second window. The sandbox draws the same thing inside the frame so the parameters are visible.",
@@ -2161,6 +2435,9 @@ const P_H5_NOTE: Localized<string> = {
   bg: "На истински телефон тази стъпка не се случва в приложението: клиентът отваря подписания линк чрез SFSafariViewController извън процеса, а подписът покрива само uid=<pairwise_uid>&ts=<unix_seconds> (прозорец срещу повторения H5_MAX_SKEW_SECONDS=300, проверя се и от двете страни). Този пясъчник рисува същото вътре в рамката, за да се виждат параметрите.",
   tr: "Gerçek telefonda bu adım uygulamanın içinde olmaz: istemci imzalı bağlantıyı süreç dışı bir SFSafariViewController ile açar ve imza yalnızca uid=<pairwise_uid>&ts=<unix_seconds> değerlerini kapsar (tekrara karşı pencere H5_MAX_SKEW_SECONDS=300, iki taraftan da kontrol edilir). Bu kum kutusu aynı şeyi çerçevenin içinde çizer, böylece parametreler görünür.",
   hu: "Valódi telefonon ez a lépés nem az alkalmazásban történik: a kliens az aláírt hivatkozást folyamatból kiemelt SFSafariViewController-ban nyitja meg, és az aláírás csak a uid=<pairwise_uid>&ts=<unix_seconds> tartalmat fedi le (visszajátszás-gátló ablak H5_MAX_SKEW_SECONDS=300, mindkét irányban ellenőrizve). Ez a homokozda ugyanazt a kereten belül rajzolja meg, hogy a paraméterek látszódjanak.",
+  "pt-BR": "Em um celular real isso não acontece dentro do app: o cliente abre o link assinado em um SFSafariViewController fora do processo, e a assinatura cobre apenas uid=<pairwise_uid>&ts=<unix_seconds>, com verificação de replay dentro de uma janela de ±300 segundos. O sandbox desenha a mesma coisa dentro do frame para que os parâmetros fiquem visíveis.",
+  ko: "실제 휴대폰에서는 이것이 앱 안에서 일어나지 않습니다: 클라이언트는 서명된 링크를 프로세스 외부의 SFSafariViewController에서 열고, 서명은 uid=<pairwise_uid>&ts=<unix_seconds>만을 대상으로 하며 ±300초 범위 안에서 재전송 검사를 받습니다. 샌드박스는 매개변수가 보이도록 같은 내용을 프레임 안에 그립니다.",
+  ar: "على هاتف حقيقي لا يحدث هذا داخل التطبيق: يفتح العميل الرابط الموقّع في SFSafariViewController خارج العملية، والتوقيع يغطي فقط uid=<pairwise_uid>&ts=<unix_seconds>، ويُفحص ضد إعادة التشغيل داخل نافذة ±300 ثانية. والبيئة التجريبية ترسم الشيء نفسه داخل الإطار لتكون المعاملات مرئية.",
 };
 const P_VOTED: Localized<string> = {
   en: "voted",
@@ -2181,6 +2458,9 @@ const P_VOTED: Localized<string> = {
   bg: "гласувано",
   tr: "oy verildi",
   hu: "szavazva",
+  "pt-BR": "votou",
+  ko: "투표 완료",
+  ar: "صوّتت",
 };
 const P_TOTAL: Localized<string> = {
   en: "Total votes",
@@ -2201,6 +2481,9 @@ const P_TOTAL: Localized<string> = {
   bg: "Общо гласове",
   tr: "Toplam oy",
   hu: "Összes szavazat",
+  "pt-BR": "Total de votos",
+  ko: "총 투표수",
+  ar: "إجمالي الأصوات",
 };
 const P_MULTI: Localized<string> = {
   en: "multiple choice",
@@ -2221,6 +2504,9 @@ const P_MULTI: Localized<string> = {
   bg: "няколко възможности",
   tr: "çoklu seçim",
   hu: "többválasztós",
+  "pt-BR": "múltipla escolha",
+  ko: "복수 선택",
+  ar: "اختيار متعدد",
 };
 const P_YOURS: Localized<string> = {
   en: "Your choice (visible only to you)",
@@ -2241,6 +2527,9 @@ const P_YOURS: Localized<string> = {
   bg: "Вашият избор (виждате го само вие)",
   tr: "Seçimin (yalnızca sen görüyorsun)",
   hu: "A te választásod (csak neked látszik)",
+  "pt-BR": "Sua escolha (visível só para você)",
+  ko: "내 선택 (본인만 볼 수 있음)",
+  ar: "اختيارك (لا يراه غيرك)",
 };
 const P_LEADING: Localized<string> = {
   en: "Leading",
@@ -2261,6 +2550,9 @@ const P_LEADING: Localized<string> = {
   bg: "Води",
   tr: "Önde",
   hu: "Élen",
+  "pt-BR": "Líder:",
+  ko: "선두",
+  ar: "الأول",
 };
 const P_VOTES: Localized<string> = {
   en: "votes",
@@ -2281,6 +2573,9 @@ const P_VOTES: Localized<string> = {
   bg: "гласа",
   tr: "oy",
   hu: "szavazat",
+  "pt-BR": "votos",
+  ko: "표",
+  ar: "صوت",
 };
 const P_DEADLINE: Localized<string> = {
   en: "closes",
@@ -2301,6 +2596,9 @@ const P_DEADLINE: Localized<string> = {
   bg: "приключва",
   tr: "bitiş",
   hu: "határidő",
+  "pt-BR": "encerra em",
+  ko: "마감",
+  ar: "يُغلق",
 };
 const P_NO_VOTES: Localized<string> = {
   en: "no votes yet",
@@ -2321,6 +2619,9 @@ const P_NO_VOTES: Localized<string> = {
   bg: "все още няма гласове",
   tr: "henüz oy yok",
   hu: "még nincs szavazat",
+  "pt-BR": "ainda sem votos",
+  ko: "아직 투표 없음",
+  ar: "لا أصوات بعد",
 };
 const P_POLL_NOTE: Localized<string> = {
   en: "Anonymous poll: only the per-option counts and shares are published, never a voter.",
@@ -2341,6 +2642,9 @@ const P_POLL_NOTE: Localized<string> = {
   bg: "Анонимна анкета: публични са само броят и процентите по опции, а гласувалите не се разкриват.",
   tr: "Anonim anket: yalnızca seçenek bazında sayılar ve oranlar yayımlanır, oy veren kimse asla.",
   hu: "Névtelen szavazás: csak az opciókonkénti számok és arányok jelennek meg, szavazó soha.",
+  "pt-BR": "Enquete anônima: só as contagens e as proporções por opção são publicadas, nunca quem votou.",
+  ko: "익명 투표입니다. 공개되는 것은 선택지별 득표수와 비율뿐이며, 투표자는 절대 공개되지 않습니다.",
+  ar: "استطلاع مجهول: لا يُنشر سوى عدد الأصوات ونسبها لكل خيار، ولا يُكشف عن أي مصوّت أبدًا.",
 };
 const P_ARTICLE: Localized<string> = {
   en: "Article",
@@ -2361,6 +2665,9 @@ const P_ARTICLE: Localized<string> = {
   bg: "Статия",
   tr: "Makale",
   hu: "Cikk",
+  "pt-BR": "Artigo",
+  ko: "아티클",
+  ar: "مقال",
 };
 const P_READ: Localized<string> = {
   en: "Read the full article",
@@ -2381,6 +2688,9 @@ const P_READ: Localized<string> = {
   bg: "Прочети статията",
   tr: "Yazının tamamını oku",
   hu: "Teljes cikk elolvasása",
+  "pt-BR": "Ler o artigo completo",
+  ko: "아티클 전체 읽기",
+  ar: "اقرأ المقال كاملًا",
 };
 
 /* Log copy. */
@@ -2404,6 +2714,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Статията на канала е публикувана; бутонът в края на статията е самият диплинк.",
     tr: "Kanal makalesi yayımlandı; makalenin altındaki düğme doğrudan derin bağlantının kendisidir.",
     hu: "A csatornacikk közzétéve; a cikk alján lévő gomb maga a deep link.",
+    "pt-BR": "Artigo do canal publicado; o botão no rodapé do artigo é o próprio deep link.",
+    ko: "채널 아티클이 발행되었습니다. 아티클 하단의 버튼이 바로 딥링크입니다.",
+    ar: "نُشر مقال القناة؛ والزر في أسفل المقال هو الرابط العميق نفسه.",
   },
   opened: {
     en: "The phone tapped the deep link and the conversation switched from the channel to the service account.",
@@ -2424,6 +2737,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Телефонът натисна диплинкът и разговорът превключи от канала към сервизния акаунт.",
     tr: "Telefon derin bağlantıya dokundu ve sohbet kanaldan Hizmet Hesabına geçti.",
     hu: "A telefon rákattintott a deep linkre, és a beszélgetés a csatornáról a szolgáltatási fiókra váltott.",
+    "pt-BR": "O telefone tocou no deep link e a conversa passou do canal para a conta de serviço.",
+    ko: "휴대폰이 딥링크를 탭했고, 대화가 채널에서 서비스 계정으로 전환되었습니다.",
+    ar: "ضغط الهاتف على الرابط العميق فتحوّلت المحادثة من القناة إلى حساب الخدمة.",
   },
   ref: {
     en: "The phone sent a reference uplink.",
@@ -2444,6 +2760,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Телефонът изпрати восходяща препратка.",
     tr: "Telefon yukarı yönlü bir referans gönderdi.",
     hu: "A telefon felfelé egy hivatkozást küldött.",
+    "pt-BR": "O telefone enviou uma referência de subida.",
+    ko: "휴대폰이 참조 업링크를 보냈습니다.",
+    ar: "أرسل الهاتف إطارًا صاعدًا من نوع مرجع.",
   },
   articleCard: {
     en: "The gateway answered with a receipt card built the way send_article builds one, signed H5 link included.",
@@ -2464,6 +2783,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Гейтвеят отговори с receipt карта, сглобена по начина, по който send_article я прави, включително с подписания H5 линк.",
     tr: "Ağ geçidi, send_article'ın kurduğu biçimde kurulmuş bir receipt kartıyla yanıt verdi; imzalı H5 bağlantısı dahil.",
     hu: "Az átjáró egy receipt kártyával válaszolt, ugyanúgy összeállítva, ahogy a send_article állítja össze; az aláírt H5-hivatkozással együtt.",
+    "pt-BR": "O gateway respondeu com um cartão de recibo montado do jeito que send_article monta, com o link H5 assinado incluído.",
+    ko: "게이트웨이가 send_article이 만드는 방식 그대로 영수증 카드로 응답했으며, 서명된 H5 링크도 포함되어 있습니다.",
+    ar: "أجابت البوابة ببطاقة إيصال مبنية كما يبنيها send_article، مع رابط H5 موقّع.",
   },
   menuPush: {
     en: "menu_config pushed: one menu_push unit per follower.",
@@ -2484,6 +2806,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Изтласкан е menu_config: една menu_push единица за всеки последовател.",
     tr: "menu_config gönderildi: her takipçi için bir menu_push birimi.",
     hu: "A menu_config elküldve: egy-egy menu_push egység követőnként.",
+    "pt-BR": "menu_config enviado: uma unidade menu_push por seguidor.",
+    ko: "menu_config 푸시 완료: 팔로워당 menu_push 1단위.",
+    ar: "دُفع menu_config: وحدة menu_push واحدة لكل متابع.",
   },
   cardSent: {
     en: "Card delivered, charged on the card meter.",
@@ -2504,6 +2829,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Картата е доставена, таксувано по брояча card.",
     tr: "Kart iletildi, card sayacından ücretlendirildi.",
     hu: "A kártya kézbesítve, a card mérőegység szerint terhelve.",
+    "pt-BR": "Cartão entregue, cobrado no medidor card.",
+    ko: "카드가 전달되었고 card 계량기로 과금되었습니다.",
+    ar: "وُصلت البطاقة، وحُسبت على عداد البطاقات.",
   },
   cardVisible: {
     en: "The phone received the card.",
@@ -2524,6 +2852,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Телефонът получи картата.",
     tr: "Telefon kartı aldı.",
     hu: "A telefon fogadta a kártyát.",
+    "pt-BR": "O telefone recebeu o cartão.",
+    ko: "휴대폰이 카드를 받았습니다.",
+    ar: "تلقّى الهاتف البطاقة.",
   },
   pollSent: {
     en: "Poll card delivered, charged POPOPX_CP_PER_CARD=1 for the card itself.",
@@ -2544,6 +2875,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Картата с анкетата е доставена, за самата карта се таксува POPOPX_CP_PER_CARD=1.",
     tr: "Anket kartı iletildi, kartın kendisi için POPOPX_CP_PER_CARD=1 ücretlendirildi.",
     hu: "A szavazókártya kézbesítve, magáért a kártyáért POPOPX_CP_PER_CARD=1 terheléssel.",
+    "pt-BR": "Cartão de enquete entregue, cobrado POPOPX_CP_PER_CARD=1 pelo próprio cartão.",
+    ko: "투표 카드가 전달되었고, 카드 자체에 대해 POPOPX_CP_PER_CARD=1이 과금되었습니다.",
+    ar: "وُصلت بطاقة الاستطلاع، وحُسب POPOPX_CP_PER_CARD=1 للبطاقة نفسها.",
   },
   voteCounted: {
     en: `Vote counted: the card was updated in place by cardId (m:"u"), charged POPOPX_CP_PER_POLL=1.`,
@@ -2564,6 +2898,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: `Гласът е отчетен: картата е обновена на място по cardId (m:"u"), таксувано POPOPX_CP_PER_POLL=1.`,
     tr: `Oy sayıldı: kart cardId ile yerinde güncellendi (m:"u"), POPOPX_CP_PER_POLL=1 ücretlendirildi.`,
     hu: `A szavazat számítva: a kártya a helyén frissült a cardId alapján (m:"u"), POPOPX_CP_PER_POLL=1 terheléssel.`,
+    "pt-BR": `Voto contado: o cartão foi atualizado no local por cardId (m:"u"), cobrado POPOPX_CP_PER_POLL=1.`,
+    ko: `투표가 집계되었습니다. 카드는 cardId로 제자리에서 업데이트되었고(m:"u"), POPOPX_CP_PER_POLL=1이 과금되었습니다.`,
+    ar: `حُسب الصوت: حُدِّثت البطاقة في مكانها بواسطة cardId (m:"u")، وحُسب POPOPX_CP_PER_POLL=1.`,
   },
   voteReplay: {
     en: "decide_vote_write called this a replay: the same option is not counted twice and not charged twice.",
@@ -2584,6 +2921,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "decide_vote_write го определи като повторение: една и съща опция не се брои и не се таксува два пъти.",
     tr: "decide_vote_write bunu tekrar saydı: aynı seçenek iki kez ne sayılır ne ücretlendirilir.",
     hu: "A decide_vote_write ismétlésnek minősítette: ugyanaz az opció sem nem számít kétszer, sem nem terhel kétszer.",
+    "pt-BR": "decide_vote_write tratou isto como repetição: a mesma opção não é contada duas vezes nem cobrada duas vezes.",
+    ko: "decide_vote_write는 이를 리플레이로 판정했습니다. 같은 선택지는 두 번 집계되지 않고 두 번 과금되지도 않습니다.",
+    ar: "اعتبر decide_vote_write هذا تكرارًا: فالخيار نفسه لا يُحسب مرتين ولا تُفرض عليه رسوم مرتين.",
   },
   acked: {
     en: "The alert moved to acknowledged: the same security card pushed its bar to 100% and the ack button became a terminal one.",
@@ -2604,6 +2944,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Сигналът премина в acknowledged: същата security карта довеси лентата до 100%, а бутонът за потвърждение стана краен.",
     tr: "Uyarı acknowledged durumuna geçti: aynı security kartı çubuğu %100'e çıkardı ve onay düğmesi son durum düğmesine dönüştü.",
     hu: "A riasztás acknowledged állapotba ment át: ugyanaz a security kártya 100%-ra tolta a sávot, a nyugtázó gomb pedig záróállapotú gomb lett.",
+    "pt-BR": "O alerta passou para confirmado: o mesmo cartão de segurança levou a barra a 100% e o botão de confirmação se tornou terminal.",
+    ko: "알림이 확인됨 상태로 이동했습니다. 같은 보안 카드의 진행 바가 100%로 올라갔고, 확인 버튼은 최종 상태가 되었습니다.",
+    ar: "انتقل التنبيه إلى «مؤكَّد»: البطاقة الأمنية نفسها دفعت شريطها إلى 100% وأصبح زر التأكيد نهائيًا.",
   },
   callback: {
     en: "Card callback uplink.",
@@ -2624,6 +2967,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Восходяща callback заявка от картата.",
     tr: "Kart geri çağırma uplink'i.",
     hu: "Kártya callback felfelé.",
+    "pt-BR": "Subida de callback do cartão.",
+    ko: "카드 콜백 업링크.",
+    ar: "إطار صاعد لاستدعاء رجوع البطاقة.",
   },
   unmatched: {
     en: "No plugin claimed this payload, so _kind_card_callback answers no_handler_for_payload; the button stays locked under the client's own rule until a card update releases it.",
@@ -2644,6 +2990,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Никакъв плъгин не пое този payload, затова _kind_card_callback отговаря no_handler_for_payload; бутонът си остава заключен по правилото на клиента, докато обновяване на картата го освободи.",
     tr: "Bu payload'ı hiçbir eklenti üstlenmedi, bu yüzden _kind_card_callback no_handler_for_payload yanıtlıyor; düğme istemci kuralına göre kilitli kalır, kart güncellemesi onu bırakana kadar.",
     hu: "Egyik bővítmény sem vállalta ezt a payloadot, ezért a _kind_card_callback válasza no_handler_for_payload; a gomb az ügyfél szabálya szerint zárva marad, amíg egy kártyafrissítés fel nem oldja.",
+    "pt-BR": "Nenhum plug-in reivindicou este payload, então _kind_card_callback responde no_handler_for_payload; o botão continua bloqueado pela regra do próprio cliente até que uma atualização de cartão o libere.",
+    ko: "어떤 플러그인도 이 페이로드를 처리하지 않아 _kind_card_callback은 no_handler_for_payload를 반환합니다. 버튼은 카드 업데이트가 풀어 줄 때까지 클라이언트 자체 규칙에 따라 잠긴 상태로 남습니다.",
+    ar: "لم تتبنَّ أي إضافة هذه الحمولة، لذا يجيب _kind_card_callback بـ no_handler_for_payload؛ ويبقى الزر مقفلًا بحكم قاعدة العميل نفسها حتى يحرّره تحديث للبطاقة.",
   },
   menuLeaf: {
     en: "A menu leaf was tapped: a click item arrives flattened into action and payload, and the gateway runs it through _run_menu_item.",
@@ -2664,6 +3013,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Натиснат е лист от менюто: елементът с тип click пристига сплескан в полетата action и payload, а гейтвеят го изпълнява през _run_menu_item.",
     tr: "Bir menü yaprağına dokunuldu: click türündeki öğe action ve payload olarak düzleştirilip geliyor ve ağ geçidi onu _run_menu_item üzerinden çalıştırıyor.",
     hu: "A menü egyik levelét nyomták meg: a click típusú bejegyzés action és payload mezőkre lapítva érkezik, és az átjáró a _run_menu_item szerint hajtja végre.",
+    "pt-BR": "Uma folha do menu foi tocada: um item click chega achatado em action e payload, e o gateway o executa via _run_menu_item.",
+    ko: "메뉴 리프가 탭되었습니다. 클릭 항목은 action과 payload로 평탄화되어 도착하고, 게이트웨이는 이를 _run_menu_item으로 실행합니다.",
+    ar: "ضُغطت ورقة في القائمة: يصل عنصر click مسطّحًا إلى action وpayload، وتشغّله البوابة عبر _run_menu_item.",
   },
   menuView: {
     en: "A view item carries only a url; build_menu_item deliberately gives it no sub key.",
@@ -2684,6 +3036,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Елементът от тип view носи само url; build_menu_item умишлено не му дава ключ sub.",
     tr: "Bir view öğesi yalnızca bir url taşır; build_menu_item ona kasıtlı olarak sub anahtarı vermez.",
     hu: "A view bejegyzés csak egy url-t visz; a build_menu_item szándékosan nem ad neki sub kulcsot.",
+    "pt-BR": "Um item view carrega apenas uma url; build_menu_item deliberadamente não lhe dá a chave sub.",
+    ko: "보기 항목은 url만 가집니다. build_menu_item은 의도적으로 여기에 sub 키를 주지 않습니다.",
+    ar: "لا يحمل عنصر view سوى url، وقد تعمّد build_menu_item ألا يمنحه مفتاح sub.",
   },
   scanner: SCANNER_NOTE,
   h5: {
@@ -2705,6 +3060,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Натиснато е действие open_url, а подписаният линк отиде в четеца.",
     tr: "Bir open_url eylemine dokunuldu ve imzalı bağlantı tarayıcıya gitti.",
     hu: "Egy open_url műveletet nyomtak meg, az aláírt hivatkozás pedig a böngészőbe került.",
+    "pt-BR": "Uma ação open_url foi tocada e o link assinado foi para o navegador.",
+    ko: "open_url 동작이 탭되었고 서명된 링크가 브라우저로 전달되었습니다.",
+    ar: "ضُغط إجراء open_url وانتقل الرابط الموقّع إلى المتصفح.",
   },
   rotate: {
     en: "The phone sent ::CB::rotate:<channelId> and the gateway answered with a channel_key_update frame, charged POPOPX_CP_PER_KEY_ROTATION=2.",
@@ -2725,6 +3083,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Телефонът изпрати ::CB::rotate:<channelId>, а гейтвеят отговори с кадър channel_key_update, таксувано POPOPX_CP_PER_KEY_ROTATION=2.",
     tr: "Telefon ::CB::rotate:<channelId> gönderdi, ağ geçidi bir channel_key_update çerçevesiyle yanıt verdi ve POPOPX_CP_PER_KEY_ROTATION=2 ücretlendirildi.",
     hu: "A telefon elküldte, hogy ::CB::rotate:<channelId>, az átjáró pedig egy channel_key_update kerettel válaszolt, POPOPX_CP_PER_KEY_ROTATION=2 terheléssel.",
+    "pt-BR": "O celular enviou ::CB::rotate:<channelId> e o gateway respondeu com um frame channel_key_update, cobrando POPOPX_CP_PER_KEY_ROTATION=2.",
+    ko: "휴대폰이 ::CB::rotate:<channelId>를 보냈고 게이트웨이는 channel_key_update 프레임으로 응답하며 POPOPX_CP_PER_KEY_ROTATION=2를 청구했습니다.",
+    ar: "أرسل الهاتف ::CB::rotate:<channelId> وأجابت البوابة بإطار channel_key_update، مع تحصيل POPOPX_CP_PER_KEY_ROTATION=2.",
   },
   rotateReplay: {
     en: "Pressing again turns this into a replay: frame_channel_key_update refuses se == env.epoch, and the client's isSane would drop the frame too.",
@@ -2745,6 +3106,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Натискането отново го превръща в повторение: frame_channel_key_update отказва se == env.epoch, и isSane на клиента също би изхвърлил кадъра.",
     tr: "Tekrar basmak bunu tekrar haline getirir: frame_channel_key_update se == env.epoch değerini reddeder, istemcinin isSane denetimi de bu çerçeveyi atardı.",
     hu: "Újbóli nyomás replay-jé teszi: a frame_channel_key_update elutasítja a se == env.epoch esetet, és az ügyfél isSane ellenőrzése szintén eldobná a keretet.",
+    "pt-BR": "Tocar de novo transforma isto em repetição: frame_channel_key_update recusa se == env.epoch, e o isSane do cliente também descartaria o frame.",
+    ko: "다시 누르면 리플레이가 됩니다. frame_channel_key_update는 se == env.epoch를 거부하고, 클라이언트의 isSane도 해당 프레임을 버립니다.",
+    ar: "الضغط مرة أخرى يحوّل هذا إلى تكرار: يرفض frame_channel_key_update الحالة se == env.epoch، كما أن isSane في العميل سيتجاهل الإطار أيضًا.",
   },
   reset: {
     en: "Demo reset to its factory state.",
@@ -2765,6 +3129,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Демонстрацията е върната в заводското си състояние.",
     tr: "Demo fabrika durumuna sıfırlandı.",
     hu: "A demó visszaállítva gyári állapotába.",
+    "pt-BR": "Demo redefinida ao estado de fábrica.",
+    ko: "데모가 공장 초기 상태로 초기화되었습니다.",
+    ar: "أُعيد العرض إلى حالته الأصلية من المصنع.",
   },
   nothing: {
     en: "Nothing has happened yet: this is the factory screen.",
@@ -2785,6 +3152,9 @@ const LOG_TEXT: Record<string, Localized<string>> = {
     bg: "Все още нищо не се е случило: това е заводският екран.",
     tr: "Henüz hiçbir şey olmadı: bu fabrika ekranı.",
     hu: "Még semmi nem történt: ez a gyári képernyő.",
+    "pt-BR": "Nada aconteceu ainda: esta é a tela de fábrica.",
+    ko: "아직 아무 일도 일어나지 않았습니다. 이것이 공장 초기 화면입니다.",
+    ar: "لم يحدث شيء بعد: هذه هي الشاشة الأصلية.",
   },
 };
 
@@ -3006,6 +3376,9 @@ function pollCard(counts: readonly number[], voted: readonly number[], ut: numbe
       bg: `${count} ${pick(P_VOTES, "bg")} · ${shares[index]}%`,
       tr: `${count} ${pick(P_VOTES, "tr")} · ${shares[index]}%`,
       hu: `${count} ${pick(P_VOTES, "hu")} · ${shares[index]}%`,
+      "pt-BR": `${count} ${pick(P_VOTES, "pt-BR")} · ${shares[index]}%`,
+      ko: `${count} ${pick(P_VOTES, "ko")} · ${shares[index]}%`,
+      ar: `${count} ${pick(P_VOTES, "ar")} · ${shares[index]}%`,
     },
   }));
   fields.push({
@@ -3028,6 +3401,9 @@ function pollCard(counts: readonly number[], voted: readonly number[], ut: numbe
       bg: `${pick(P_TOTAL, "bg")} (${pick(P_MULTI, "bg")})`,
       tr: `${pick(P_TOTAL, "tr")} (${pick(P_MULTI, "tr")})`,
       hu: `${pick(P_TOTAL, "hu")} (${pick(P_MULTI, "hu")})`,
+      "pt-BR": `${pick(P_TOTAL, "pt-BR")} (${pick(P_MULTI, "pt-BR")})`,
+      ko: `${pick(P_TOTAL, "ko")} (${pick(P_MULTI, "ko")})`,
+      ar: `${pick(P_TOTAL, "ar")} (${pick(P_MULTI, "ar")})`,
     },
     v: {
       en: `${total} ${pick(P_VOTES, "en")}`,
@@ -3048,6 +3424,9 @@ function pollCard(counts: readonly number[], voted: readonly number[], ut: numbe
       bg: `${total} ${pick(P_VOTES, "bg")}`,
       tr: `${total} ${pick(P_VOTES, "tr")}`,
       hu: `${total} ${pick(P_VOTES, "hu")}`,
+      "pt-BR": `${total} ${pick(P_VOTES, "pt-BR")}`,
+      ko: `${total} ${pick(P_VOTES, "ko")}`,
+      ar: `${total} ${pick(P_VOTES, "ar")}`,
     },
     mono: true,
   });
@@ -3073,6 +3452,9 @@ function pollCard(counts: readonly number[], voted: readonly number[], ut: numbe
         bg: voted.map((index) => pick(POLL_OPTIONS[index], "bg")).join(", "),
         tr: voted.map((index) => pick(POLL_OPTIONS[index], "tr")).join(", "),
         hu: voted.map((index) => pick(POLL_OPTIONS[index], "hu")).join(", "),
+        "pt-BR": voted.map((index) => pick(POLL_OPTIONS[index], "pt-BR")).join(", "),
+        ko: voted.map((index) => pick(POLL_OPTIONS[index], "ko")).join(", "),
+        ar: voted.map((index) => pick(POLL_OPTIONS[index], "ar")).join("، "),
       },
     });
   }
@@ -3096,6 +3478,9 @@ function pollCard(counts: readonly number[], voted: readonly number[], ut: numbe
     bg: total === 0 ? pick(P_NO_VOTES, "bg") : `${pick(P_LEADING, "bg")} ${pick(POLL_OPTIONS[leader], "bg")} ${leadingShare}%`,
     tr: total === 0 ? pick(P_NO_VOTES, "tr") : `${pick(P_LEADING, "tr")} ${pick(POLL_OPTIONS[leader], "tr")} ${leadingShare}%`,
     hu: total === 0 ? pick(P_NO_VOTES, "hu") : `${pick(P_LEADING, "hu")} ${pick(POLL_OPTIONS[leader], "hu")} ${leadingShare}%`,
+    "pt-BR": total === 0 ? pick(P_NO_VOTES, "pt-BR") : `${pick(P_LEADING, "pt-BR")} ${pick(POLL_OPTIONS[leader], "pt-BR")} ${leadingShare}%`,
+    ko: total === 0 ? pick(P_NO_VOTES, "ko") : `${pick(P_LEADING, "ko")} ${pick(POLL_OPTIONS[leader], "ko")} ${leadingShare}%`,
+    ar: total === 0 ? pick(P_NO_VOTES, "ar") : `${pick(P_LEADING, "ar")} ${pick(POLL_OPTIONS[leader], "ar")} ${leadingShare}%`,
   };
   const progressDetail: Localized<string> = {
     en: `${total} ${pick(P_VOTES, "en")} · ${pick(P_DEADLINE, "en")} ${closing}`,
@@ -3116,6 +3501,9 @@ function pollCard(counts: readonly number[], voted: readonly number[], ut: numbe
     bg: `${total} ${pick(P_VOTES, "bg")} · ${pick(P_DEADLINE, "bg")} ${closing}`,
     tr: `${total} ${pick(P_VOTES, "tr")} · ${pick(P_DEADLINE, "tr")} ${closing}`,
     hu: `${total} ${pick(P_VOTES, "hu")} · ${pick(P_DEADLINE, "hu")} ${closing}`,
+    "pt-BR": `${total} ${pick(P_VOTES, "pt-BR")} · ${pick(P_DEADLINE, "pt-BR")} ${closing}`,
+    ko: `${total} ${pick(P_VOTES, "ko")} · ${pick(P_DEADLINE, "ko")} ${closing}`,
+    ar: `${total} ${pick(P_VOTES, "ar")} · ${pick(P_DEADLINE, "ar")} ${closing}`,
   };
   const actions: WireAction[] = POLL_OPTIONS.map((option, index) => ({
     id: "opt%d".replace("%d", String(index)),
@@ -3147,6 +3535,9 @@ function pollCard(counts: readonly number[], voted: readonly number[], ut: numbe
       bg: "Как да стигне до вас кутията тази седмица?",
       tr: "Bu haftaki kutu sana nasıl ulaşmalı?",
       hu: "Hogyan jusson el hozzád a heti doboz?",
+      "pt-BR": "Como a caixa desta semana deve chegar até você?",
+      ko: "이번 주 상자는 어떻게 받으시겠습니까?",
+      ar: "كيف تريد أن يصل إليك صندوق هذا الأسبوع؟",
     },
     body: {
       en: `${pick(P_POLL_NOTE, "en")} · ${pick(P_MULTI, "en")} · ${pick(P_DEADLINE, "en")} ${closing} · ${POLL_OPTIONS.length} options`,
@@ -3167,6 +3558,9 @@ function pollCard(counts: readonly number[], voted: readonly number[], ut: numbe
       bg: `${pick(P_POLL_NOTE, "bg")} · ${pick(P_MULTI, "bg")} · ${pick(P_DEADLINE, "bg")} ${closing} · ${POLL_OPTIONS.length} опции`,
       tr: `${pick(P_POLL_NOTE, "tr")} · ${pick(P_MULTI, "tr")} · ${pick(P_DEADLINE, "tr")} ${closing} · ${POLL_OPTIONS.length} seçenek`,
       hu: `${pick(P_POLL_NOTE, "hu")} · ${pick(P_MULTI, "hu")} · ${pick(P_DEADLINE, "hu")} ${closing} · ${POLL_OPTIONS.length} opció`,
+      "pt-BR": `${pick(P_POLL_NOTE, "pt-BR")} · ${pick(P_MULTI, "pt-BR")} · ${pick(P_DEADLINE, "pt-BR")} ${closing} · ${POLL_OPTIONS.length} opções`,
+      ko: `${pick(P_POLL_NOTE, "ko")} · ${pick(P_MULTI, "ko")} · ${pick(P_DEADLINE, "ko")} ${closing} · ${POLL_OPTIONS.length} 개 옵션`,
+      ar: `${pick(P_POLL_NOTE, "ar")} · ${pick(P_MULTI, "ar")} · ${pick(P_DEADLINE, "ar")} ${closing} · ${POLL_OPTIONS.length} خيارات`,
     },
     ut,
     fields,
@@ -3476,6 +3870,9 @@ function reducer(state: State, action: Action): State {
             bg: `${pick(ACKED, "bg")} · контакт ${CONTACT_ID} · ${utcMinute(ut)}`,
             tr: `${pick(ACKED, "tr")} · kişi ${CONTACT_ID} · ${utcMinute(ut)}`,
             hu: `${pick(ACKED, "hu")} · kapcsolat ${CONTACT_ID} · ${utcMinute(ut)}`,
+            "pt-BR": `${pick(ACKED, "pt-BR")} · contato ${CONTACT_ID} · ${utcMinute(ut)}`,
+            ko: `${pick(ACKED, "ko")} · 연락처 ${CONTACT_ID} · ${utcMinute(ut)}`,
+            ar: `${pick(ACKED, "ar")} · جهة اتصال ${CONTACT_ID} · ${utcMinute(ut)}`,
           },
         },
         fields: card.fields.map((field) =>
@@ -3574,7 +3971,7 @@ const DIR_WORD: Record<LogEntry["dir"], Localized<string>> = {
 };
 
 const BTN =
-  "w-full rounded-lg px-3 py-2 text-left text-[12.5px] font-medium text-ink-100 transition-colors duration-200 " +
+  "w-full rounded-lg px-3 py-2 text-start text-[12.5px] font-medium text-ink-100 transition-colors duration-200 " +
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/60";
 
 function ActionButton({
@@ -3604,7 +4001,9 @@ function FieldRow({ k, v, mono }: { k: string; v: string; mono?: boolean }): Rea
   return (
     <div className="flex items-baseline justify-between gap-2 text-[11px]">
       <span className="shrink-0 text-faint">{k}</span>
-      <span className={`min-w-0 truncate text-right ${mono ? "font-mono text-[10.5px] text-mesh-soft" : "text-ink-100"}`}>{v}</span>
+      <span className={`min-w-0 truncate text-end ${mono ? "font-mono text-[10.5px] text-mesh-soft" : "text-ink-100"}`}>
+        <bdi dir={mono ? "ltr" : undefined}>{v}</bdi>
+      </span>
     </div>
   );
 }
@@ -3702,7 +4101,7 @@ function CardBubble({
                 } ${mine ? "ring-1 ring-mesh/50" : ""}`}
               >
                 {pick(action.title, locale)}
-                {mine ? <span className="ml-1.5 font-mono text-[9px] text-mesh-soft">{pick(P_VOTED, locale)}</span> : null}
+                {mine ? <span className="ms-1.5 font-mono text-[9px] text-mesh-soft">{pick(P_VOTED, locale)}</span> : null}
               </button>
             );
           })}
@@ -3729,10 +4128,10 @@ function MenuBar({ state, dispatch, locale }: { state: State; dispatch: (action:
               key={index}
               type="button"
               onClick={() => dispatch({ type: "menuLeaf", top: state.openMenu ?? 0, leaf: index })}
-              className="block w-full rounded-lg px-2.5 py-1.5 text-left text-[11px] text-ink-100 transition-colors hover:bg-white/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/60"
+              className="block w-full rounded-lg px-2.5 py-1.5 text-start text-[11px] text-ink-100 transition-colors hover:bg-white/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/60"
             >
               {pick(leaf.title, locale)}
-              {leaf.kind === "view" ? <span className="ml-1.5 font-mono text-[9px] text-faint">view</span> : null}
+              {leaf.kind === "view" ? <span className="ms-1.5 font-mono text-[9px] text-faint">view</span> : null}
             </button>
           ))}
         </div>
@@ -3838,7 +4237,7 @@ export function InteractiveSandbox(): ReactElement {
 
             <div className="mt-5">
               <p className="eyebrow">{pick(L_LOG, locale)}</p>
-              <ul className="mt-2 max-h-64 space-y-2 overflow-y-auto pr-1 no-scrollbar">
+              <ul className="mt-2 max-h-64 space-y-2 overflow-y-auto pe-1 no-scrollbar">
                 {state.log.map((entry) => (
                   <li key={entry.id} className="glass-inset p-2.5">
                     <div className="flex items-center gap-2">
@@ -3891,7 +4290,7 @@ export function InteractiveSandbox(): ReactElement {
                     >
                       {screen === "channel" ? pick(TAB_CHANNEL, locale) : pick(TAB_SERVICE, locale)}
                       {screen === "chat" && state.unread > 0 ? (
-                        <span className="ml-1.5 rounded-full bg-mesh px-1.5 py-0.5 font-mono text-[9px] text-white">{state.unread}</span>
+                        <span className="ms-1.5 rounded-full bg-mesh px-1.5 py-0.5 font-mono text-[9px] text-white">{state.unread}</span>
                       ) : null}
                     </button>
                   ))}
@@ -3924,7 +4323,7 @@ export function InteractiveSandbox(): ReactElement {
                           <div
                             key={msg.id}
                             className={`max-w-[85%] rounded-2xl px-3 py-2 text-[11.5px] leading-relaxed ${
-                              msg.from === "me" ? "ml-auto bg-brand/20 text-white" : "border-hair bg-white/[0.05] text-ink-100"
+                              msg.from === "me" ? "ms-auto bg-brand/20 text-white" : "border-hair bg-white/[0.05] text-ink-100"
                             }`}
                           >
                             {pick(msg.text, locale)}

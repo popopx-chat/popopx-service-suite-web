@@ -20,8 +20,9 @@ import { ADMIN_CONSOLE_URL, NODE_WS_URL } from "@/lib/site";
  *   README.md / README.en.md      the loopback-only, no-linking, no-redistribution line
  *
  * Copy follows the portal's authoring rule: `Localized<T>` in `src/lib/i18n.tsx`
- * is a total map over the 18 tags the iOS client declares, so every slot on this
- * screen is written as a literal object carrying all 18 languages. The compiler
+ * is a total map over the 21 tags this portal declares (the iOS client's 18 plus
+ * pt-BR, ko and ar), so every slot on this screen is written as a literal object
+ * carrying all 21 languages. The compiler
  * is the completeness oracle — a missing language is a type error, not a silent
  * runtime fallback. Protocol tokens, env keys, byte counts and endpoint paths
  * stay locale-free.
@@ -61,6 +62,9 @@ const FEATURES: readonly Feature[] = [
       bg: "Физически разделени контейнери",
       tr: "Fiziksel olarak ayrılmış containerlar",
       hu: "Fizikailag elkülönített konténerek",
+      "pt-BR": "Contêineres fisicamente separados",
+      ko: "물리적으로 분리된 컨테이너",
+      ar: "حاويات منفصلة فيزيائيًا",
     },
     hook: {
       en: "The gateway and the open-source node are two processes joined by one loopback WebSocket.",
@@ -81,6 +85,9 @@ const FEATURES: readonly Feature[] = [
       bg: "Гейтуейтът и възелът с отворен код са два процеса, свързани от един-единствен loopback WebSocket.",
       tr: "Ağ geçidi ile açık kaynaklı düğüm iki ayrı süreçtir ve aralarında yalnızca tek bir loopback WebSocket vardır.",
       hu: "Az átjáró és a nyílt forráskódú csomópont két külön folyamat, közöttük csak egy loopback WebSocket fut.",
+      "pt-BR": "O gateway e o nó de código aberto são dois processos unidos por um único WebSocket de loopback.",
+      ko: "게이트웨이와 오픈소스 노드는 하나의 루프백 WebSocket으로 연결된 두 개의 프로세스입니다.",
+      ar: "البوابة والعقدة مفتوحة المصدر عمليتان تصل بينهما وصلة WebSocket واحدة عبر loopback.",
     },
     facts: [
       {
@@ -102,6 +109,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Гейтуейтът е услуга на FastAPI; портът по подразбиране се задава от POPOPX_GATEWAY_PORT=8080.",
         tr: "Ağ geçidi bir FastAPI servisidir; varsayılan portu POPOPX_GATEWAY_PORT=8080 değeri verir.",
         hu: "Az átjáró egy FastAPI szolgáltatás; az alapértelmezett portot a POPOPX_GATEWAY_PORT=8080 érték adja.",
+        "pt-BR": "O gateway é um serviço FastAPI; POPOPX_GATEWAY_PORT=8080 é a porta padrão dele.",
+        ko: "게이트웨이는 FastAPI 서비스이며, 기본 포트는 POPOPX_GATEWAY_PORT=8080입니다.",
+        ar: "البوابة خدمة FastAPI؛ وPOPOPX_GATEWAY_PORT=8080 هو منفذها الافتراضي.",
       },
       {
         en: "Its one path to the node is the loopback WebSocket ws://127.0.0.1:5225, and the config layer takes only ws or wss URLs.",
@@ -122,6 +132,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Единственият път към възела е loopback WebSocket ws://127.0.0.1:5225, а конфигурационният слой приема само URL адреси със схема ws или wss.",
         tr: "Düğüme giden tek çıkış loopback WebSocket ws://127.0.0.1:5225; yapılandırma katmanı yalnızca ws veya wss biçiminde URL’leri kabul eder.",
         hu: "Az egyetlen út a csomóponthoz a loopback WebSocket (ws://127.0.0.1:5225), és a konfigurációs réteg csak ws vagy wss formátumú URL-eket fogad el.",
+        "pt-BR": "O único caminho dele até o nó é o WebSocket de loopback ws://127.0.0.1:5225, e a camada de configuração aceita apenas URLs ws ou wss.",
+        ko: "노드로 향하는 유일한 경로는 루프백 WebSocket ws://127.0.0.1:5225이며, 구성 계층은 ws 또는 wss URL만 허용합니다.",
+        ar: "مسارها الوحيد إلى العقدة هو WebSocket عبر loopback على ws://127.0.0.1:5225، وطبقة الإعدادات لا تقبل إلا عناوين URL من نوع ws أو wss.",
       },
       {
         en: "The node's WebSocket API binds to 127.0.0.1 and cannot be pointed at a public interface, so follower relationships and content stay on the merchant's own server.",
@@ -142,6 +155,9 @@ const FEATURES: readonly Feature[] = [
         bg: "WebSocket API на възела е обвързано с 127.0.0.1 и не може да сочи към публичен интерфейс, затова връзките с последователи и съдържанието остават на собствения сървър на търговеца.",
         tr: "Düğümün WebSocket API’si yalnızca 127.0.0.1'e bağlanır ve genel bir arayüze yönlendirilemez; böylece takipçi ilişkileri de içerik de işletmenin kendi sunucusunda kalır.",
         hu: "A csomópont WebSocket API-ja csak a 127.0.0.1 címhez kötődik, és nem irányítható nyilvános interfészre, ezért a követői kapcsolatok és a tartalom a kereskedő saját szerverén marad.",
+        "pt-BR": "A API WebSocket do nó se vincula a 127.0.0.1 e não pode ser apontada para uma interface pública, então as relações de seguidores e o conteúdo permanecem no servidor do próprio comerciante.",
+        ko: "노드의 WebSocket API는 127.0.0.1에 바인딩되며 공용 인터페이스를 가리키게 할 수 없습니다. 따라서 팔로워 관계와 콘텐츠는 판매자 자체 서버에 남습니다.",
+        ar: "ترتبط واجهة WebSocket API للعقدة بـ 127.0.0.1 ولا يمكن توجيهها إلى واجهة عامة، لذا تبقى علاقات المتابعين والمحتوى على خادم التاجر نفسه.",
       },
     ],
   },
@@ -168,6 +184,9 @@ const FEATURES: readonly Feature[] = [
       bg: "Долно меню с две нива (3 × 5)",
       tr: "Alt menü, iki düzey (3 × 5)",
       hu: "Alsó menü, két szint (3 × 5)",
+      "pt-BR": "Menu inferior, dois níveis (3 × 5)",
+      ko: "하단 메뉴, 2단계(3 × 5)",
+      ar: "قائمة سفلية بمستويين (3 × 5)",
     },
     hook: {
       en: "Three top-level entries, up to five sub-entries each — the client renders exactly two levels.",
@@ -188,6 +207,9 @@ const FEATURES: readonly Feature[] = [
       bg: "Три елемента от горното ниво, всеки с до пет поделементи — клиентът изобразява точно две нива.",
       tr: "Üst düzeyde üç öğe, her birinde en çok beş alt öğe — istemci tam olarak iki düzey çizer.",
       hu: "Felső szinten három bejegyzés, mindegyikben legfeljebb öt albejegyzés — a kliens pontosan két szintet jelenít meg.",
+      "pt-BR": "Três entradas de nível superior, até cinco subentradas cada — o cliente renderiza exatamente dois níveis.",
+      ko: "최상위 항목 3개, 항목당 하위 항목 최대 5개 — 클라이언트는 정확히 2단계만 렌더링합니다.",
+      ar: "ثلاثة عناصر في المستوى الأعلى، ولكل منها ما يصل إلى خمسة عناصر فرعية — ويعرض العميل مستويين فقط لا غير.",
     },
     facts: [
       {
@@ -209,6 +231,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Таваните идват от EcoLimits: max_menu_items=3 и max_menu_subitems=5, а заглавията в рамките на едно ниво трябва да са уникални.",
         tr: "Sınırlar EcoLimits'ten gelir: max_menu_items=3 ve max_menu_subitems=5; üstelik bir düzey içindeki başlıklar benzersiz olmalı.",
         hu: "A felső korlátok az EcoLimitsből jönnek: max_menu_items=3 és max_menu_subitems=5, és egy szinten belül a címeknek egyedinek kell lenniük.",
+        "pt-BR": "Os tetos vêm de EcoLimits — max_menu_items=3 e max_menu_subitems=5 — e os títulos precisam ser únicos dentro de um nível.",
+        ko: "상한은 EcoLimits에서 오며 max_menu_items=3, max_menu_subitems=5입니다. 제목은 같은 단계 안에서 고유해야 합니다.",
+        ar: "تأتي هذه الحدود القصوى من EcoLimits — max_menu_items=3 وmax_menu_subitems=5 — ويجب أن تكون العناوين فريدة داخل المستوى الواحد.",
       },
       {
         en: "Item kinds are click / view / scancode / location / click_text, and a menu action may only be open_url / send_cmd / open_channel / callback.",
@@ -229,6 +254,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Видовете елементи са click / view / scancode / location / click_text, а действието в менюто може да е само open_url / send_cmd / open_channel / callback.",
         tr: "Öğe türleri click / view / scancode / location / click_text; bir menü eylemi ise yalnızca open_url / send_cmd / open_channel / callback olabilir.",
         hu: "A bejegyzések típusai click / view / scancode / location / click_text, egy menüművelet pedig csak open_url / send_cmd / open_channel / callback lehet.",
+        "pt-BR": "Os tipos de item são click / view / scancode / location / click_text, e uma ação de menu só pode ser open_url / send_cmd / open_channel / callback.",
+        ko: "항목 종류는 click / view / scancode / location / click_text이며, 메뉴 액션은 open_url / send_cmd / open_channel / callback만 가능합니다.",
+        ar: "أنواع العناصر هي click / view / scancode / location / click_text، وإجراء القائمة لا يمكن أن يكون إلا open_url / send_cmd / open_channel / callback.",
       },
       {
         en: "The menu ships whole as an ECO frame with t=mc, sub-items under the sub key. A third level makes the client drop the entire menu, so the gateway refuses it before sending.",
@@ -249,6 +277,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Цялото меню се изпраща като един ECO кадър с t=mc, а поделементите са под ключа sub. Трето ниво кара клиента да изхвърли цялото меню, затова гейтуейтът го отхвърля още преди изпращането.",
         tr: "Menünün tamamı t=mc değerli bir ECO çerçevesi olarak gönderilir, alt öğeler sub anahtarının altında durur. Üçüncü düzey istemciyi menünün tamamını çöpe atmaya zorladığı için ağ geçidi bunu göndermeden önce reddeder.",
         hu: "A menu egészében egy t=mc jelölésű ECO keretként megy ki, az albejegyzések a sub kulcs alatt helyezkednek el. Egy harmadik szint a klienst a teljes menu eldobatására kényszerítené, ezért az átjáró már küldés előtt elutasítja.",
+        "pt-BR": "O menu é enviado inteiro como um frame ECO com t=mc, com os subitens sob a chave sub. Um terceiro nível faz o cliente descartar o menu inteiro, então o gateway o recusa antes de enviar.",
+        ko: "메뉴는 t=mc인 ECO 프레임 하나로 통째로 전송되고 하위 항목은 sub 키 아래에 놓입니다. 3단계가 되면 클라이언트가 메뉴 전체를 버리므로 게이트웨이가 전송 전에 거부합니다.",
+        ar: "تُرسَل القائمة كاملة في إطار ECO بالحقل t=mc، مع العناصر الفرعية تحت المفتاح sub. والمستوى الثالث يجعل العميل يُسقط القائمة بأكملها، لذلك ترفضها البوابة قبل الإرسال.",
       },
     ],
   },
@@ -275,6 +306,9 @@ const FEATURES: readonly Feature[] = [
       bg: "Динамични бизнес карти в три стила",
       tr: "Üç stilli dinamik iş kartları",
       hu: "Dinamikus üzleti kártyák három stílusban",
+      "pt-BR": "Cartões de visita dinâmicos em três estilos",
+      ko: "세 가지 스타일의 동적 비즈니스 카드",
+      ar: "بطاقات أعمال ديناميكية بثلاثة أنماط",
     },
     hook: {
       en: "standard / receipt / security styles, refreshable in place on the very same card.",
@@ -295,6 +329,9 @@ const FEATURES: readonly Feature[] = [
       bg: "Стиловете standard / receipt / security, които се опресняват на място върху самата карта.",
       tr: "standard / receipt / security stilleri; aynı kartın üzerinde, yerinde yenilenebilir.",
       hu: "standard / receipt / security stílusok, amelyek ugyanannak a kártyának a helyén frissíthetők.",
+      "pt-BR": "estilos standard / receipt / security, atualizáveis no local no mesmo cartão.",
+      ko: "standard / receipt / security 스타일을 지원하며, 동일한 카드에서 제자리 갱신이 가능합니다.",
+      ar: "أنماط standard / receipt / security، قابلة للتحديث في مكانها على البطاقة نفسها.",
     },
     facts: [
       {
@@ -316,6 +353,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Стиловете идват от CARD_STYLES. Кадърът на карта е t=sc, където m=c създава, а m=u замества на място по cardId — затова прогрес барът се движи, без да се появява ново съобщение.",
         tr: "Stiller CARD_STYLES'ten gelir. Bir kart çerçevesi t=sc'dir; m=c yeni oluşturur, m=u ise cardId ile yerinde değiştirir — ilerleme çubuğu, yeni bir mesaj belirmeden bu şekilde hareket eder.",
         hu: "A stílusok a CARD_STYLESből jönnek. Egy kártyakeret t=sc, ahol az m=c létrehoz, az m=u pedig cardId alapján helyettesít a helyén — így mozdul el egy haladássáv úgy, hogy nem jelenik meg új üzenet.",
+        "pt-BR": "Os estilos vêm de CARD_STYLES. Um frame de cartão é t=sc, onde m=c cria e m=u substitui no local pelo cardId — é assim que uma barra de progresso se move sem que outra mensagem apareça.",
+        ko: "스타일은 CARD_STYLES에서 정의됩니다. 카드 프레임은 t=sc이며, m=c는 생성을, m=u는 cardId 기준 제자리 대체를 수행합니다. 새 메시지가 나타나지 않아도 진행 표시줄이 움직이는 방식이 바로 이것입니다.",
+        ar: "تأتي الأنماط من CARD_STYLES. وإطار البطاقة هو t=sc، حيث ينشئ m=c ويستبدل m=u في المكان نفسه وفق cardId — وهكذا يتحرك شريط التقدم دون ظهور رسالة أخرى.",
       },
       {
         en: "The progress object has three keys: l (label), p (percent, 0 to 100) and d (detail); a card may carry up to 8 fields and 4 actions.",
@@ -336,6 +376,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Обектът на прогреса има три ключа: l (етикет), p (процент, от 0 до 100) и d (подробност); една карта може да носи до 8 полета и 4 действия.",
         tr: "İlerleme nesnesinin üç anahtarı vardır: l (etiket), p (yüzde, 0 ile 100 arası) ve d (ayrıntı); bir kart en fazla 8 alan ve 4 eylem taşıyabilir.",
         hu: "A haladás objektumnak három kulcsa van: l (címke), p (százalék, 0-tól 100-ig) és d (részletek); egy kártya legfeljebb 8 mezőt és 4 műveletet hordozhat.",
+        "pt-BR": "O objeto progress tem três chaves: l (rótulo), p (percentual, 0 a 100) e d (detalhe); um cartão pode carregar até 8 campos e 4 ações.",
+        ko: "progress 객체에는 세 가지 키가 있습니다. l(레이블), p(백분율, 0~100), d(상세)입니다. 카드에는 필드를 최대 8개, 액션을 최대 4개까지 담을 수 있습니다.",
+        ar: "كائن progress له ثلاثة مفاتيح: l (التسمية) وp (النسبة المئوية، من 0 إلى 100) وd (التفصيل)؛ وقد تحمل البطاقة ما يصل إلى 8 حقول و4 إجراءات.",
       },
       {
         en: "Including the ::POPOPX_ECO:: marker a frame may not exceed 8192 characters (EcoLimits.frame_chars); past that it is a frame the client drops silently.",
@@ -356,6 +399,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Включително маркера ::POPOPX_ECO::, един кадър не може да надхвърля 8192 знака (EcoLimits.frame_chars); отвъд това е кадър, който клиентът мълчаливо изхвърля.",
         tr: "::POPOPX_ECO:: işaretini de sayarsak bir çerçeve 8192 karakteri aşamaz (EcoLimits.frame_chars); aşıyorsa bu, istemcinin sessizce düşürdüğü bir çerçevedir.",
         hu: "A ::POPOPX_ECO:: jelölést is beleszámítva egy keret nem haladhatja meg a 8192 karaktert (EcoLimits.frame_chars); a fölötti keretet a kliens néma csendben eldobja.",
+        "pt-BR": "Incluindo o marcador ::POPOPX_ECO::, um frame não pode exceder 8192 caracteres (EcoLimits.frame_chars); além disso, é um frame que o cliente descarta silenciosamente.",
+        ko: "::POPOPX_ECO:: 마커를 포함해 프레임은 8192자(EcoLimits.frame_chars)를 넘을 수 없으며, 이를 넘으면 클라이언트가 조용히 버리는 프레임이 됩니다.",
+        ar: "مع تضمين العلامة ::POPOPX_ECO::، لا يجوز أن يتجاوز الإطار 8192 حرفًا (EcoLimits.frame_chars)؛ وما يتجاوز ذلك إطار يُسقطه العميل بصمت.",
       },
     ],
   },
@@ -382,6 +428,9 @@ const FEATURES: readonly Feature[] = [
       bg: "Двойкови анонимни H5 подписи",
       tr: "Çift bazlı anonim H5 imzaları",
       hu: "Páronkénti névtelen H5-aláírások",
+      "pt-BR": "Assinaturas H5 anônimas por par",
+      ko: "쌍별 익명 H5 서명",
+      ar: "توقيعات H5 مجهولة ثنائية الاقتران",
     },
     hook: {
       en: "There is no cross-site identifier to join on: the signature only proves that this follower is inside this service account right now.",
@@ -402,6 +451,9 @@ const FEATURES: readonly Feature[] = [
       bg: "Няма идентификатор за свързване между сайтове: подписът доказва единствено, че този последовател в момента е вътре в този акаунт за услуги.",
       tr: "Siteler arası eşleştirmeye olanak tanıyan hiçbir tanımlayıcı yok: imza yalnızca bu takipçinin şu anda bu hizmet hesabının içinde olduğunu kanıtlar.",
       hu: "Nincs oldalközi azonosító, amiből összefüggésvonást lehetne csinálni: az aláírás csak azt igazolja, hogy ez a követő éppen ebben a szolgáltatási fiókban van.",
+      "pt-BR": "Não há identificador entre sites para correlacionar: a assinatura prova apenas que este seguidor está dentro desta conta de serviço neste momento.",
+      ko: "결합에 사용할 교차 사이트 식별자가 없습니다. 서명은 이 팔로워가 지금 이 서비스 계정 안에 있다는 것만 증명합니다.",
+      ar: "لا يوجد معرّف عابر للمواقع يمكن الربط عليه: فالتوقيع يثبت فقط أن هذا المتابع داخل حساب الخدمة هذا في هذه اللحظة.",
     },
     facts: [
       {
@@ -423,6 +475,9 @@ const FEATURES: readonly Feature[] = [
         bg: "При последване се издава кадър t=sh с ключовете uid / sec / svc: uid е двойков идентификатор, който този гейтуейт отсича за този последовател (префикс pw_), а sec е 32 случайни байта.",
         tr: "Takip sırasında uid / sec / svc anahtarlarını içeren bir t=sh çerçevesi verilir: uid, bu ağ geçidinin o takipçi için ürettiği çift bazlı kimliktir (ön ek pw_), sec ise 32 rastgele bayttır.",
         hu: "Követéskor egy uid / sec / svc kulcsokat tartalmazó t=sh keret bocsátó ki: az uid egy páronkénti azonosító, amelyet ez az átjáró ver ki az adott követőnek (pw_ előtaggal), a sec pedig 32 véletlen bájt.",
+        "pt-BR": "Ao seguir, é emitido um frame t=sh com as chaves uid / sec / svc: uid é um ID por par que este gateway cunha para aquele seguidor (prefixo pw_), sec são 32 bytes aleatórios.",
+        ko: "팔로우 시 uid / sec / svc 키를 가진 t=sh 프레임이 발급됩니다. uid는 이 게이트웨이가 해당 팔로워를 위해 발급하는 쌍별 ID(접두사 pw_)이고, sec는 32바이트 난수입니다.",
+        ar: "عند المتابعة يُصدر إطار t=sh بالمفاتيح uid / sec / svc: فـ uid معرّف ثنائي الاقتران تصدره هذه البوابة لذلك المتابع (بادئة pw_)، وsec عبارة عن 32 بايتًا عشوائيًا.",
       },
       {
         en: "The H5 page opens in an out-of-process browser session and calls back to POST /api/v1/verifyH5Auth with the query parameters popopx_uid, ts and sig.",
@@ -443,6 +498,9 @@ const FEATURES: readonly Feature[] = [
         bg: "H5 страницата се отваря в браузърна сесия извън процеса и извиква обратно POST /api/v1/verifyH5Auth с заявковите параметри popopx_uid, ts и sig.",
         tr: "H5 sayfası süreç dışı bir tarayıcı oturumunda açılır ve popopx_uid, ts ve sig sorgu parametreleriyle POST /api/v1/verifyH5Auth adresine geri çağrı yapar.",
         hu: "Az H5 oldal egy folyamaton kívüli böngésző-munkamenetben nyílik meg, és a popopx_uid, ts valamint sig lekérdezési paraméterekkel hívja vissza a POST /api/v1/verifyH5Auth végpontot.",
+        "pt-BR": "A página H5 abre em uma sessão de navegador fora do processo e faz callback para POST /api/v1/verifyH5Auth com os parâmetros de consulta popopx_uid, ts e sig.",
+        ko: "H5 페이지는 프로세스 외부 브라우저 세션에서 열리며, 쿼리 매개변수 popopx_uid, ts, sig를 붙여 POST /api/v1/verifyH5Auth로 콜백합니다.",
+        ar: "تُفتح صفحة H5 في جلسة متصفح خارج عملية التطبيق، وتستدعي POST /api/v1/verifyH5Auth بمعاملات الاستعلام popopx_uid وts وsig.",
       },
       {
         en: "The signature is HMAC-SHA256 over the fixed preimage uid=<pairwise uid>&ts=<unix seconds>, accepted within a ±300-second window and compared in constant time.",
@@ -463,6 +521,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Подписът е HMAC-SHA256 върху фиксиран предобраз uid=<двойков uid>&ts=<юникс-секунди>, приема се в прозорец от ±300 секунди и се сравнява за константно време.",
         tr: "İmza, sabit bir öncül resim üzerinden HMAC-SHA256'dır: uid=<çift bazlı uid>&ts=<unix saniyesi>; ±300 saniyelik pencere içinde kabul edilir ve sabit sürede karşılaştırılır.",
         hu: "Az aláírás HMAC-SHA256 a rögzített előképen: uid=<páronkénti uid>&ts=<unix másodperc>; ±300 másodperces ablakban fogadjuk, és állandó idejű összehasonlítással ellenőrizzük.",
+        "pt-BR": "A assinatura é HMAC-SHA256 sobre a pré-imagem fixa uid=<pairwise uid>&ts=<unix seconds>, aceita dentro de uma janela de ±300 segundos e comparada em tempo constante.",
+        ko: "서명은 고정 프리이미지 uid=<pairwise uid>&ts=<unix seconds>에 대한 HMAC-SHA256이며, ±300초 범위 안에서 허용되고 상수 시간으로 비교됩니다.",
+        ar: "التوقيع هو HMAC-SHA256 فوق القيمة السابقة الثابتة uid=<pairwise uid>&ts=<unix seconds>، ويُقبل ضمن نافذة ±300 ثانية ويُقارَن بزمن ثابت.",
       },
     ],
   },
@@ -489,6 +550,9 @@ const FEATURES: readonly Feature[] = [
       bg: "Канали с нулево разкриване и ротация на Epoch Key",
       tr: "Sıfır bilgi kanalları ve Epoch Key dönüşümü",
       hu: "Nulla-ismeretű csatornák és Epoch Key-csere",
+      "pt-BR": "Canais de conhecimento zero e rotação de Epoch Key",
+      ko: "영지식 채널과 Epoch Key 교체",
+      ar: "قنوات المعرفة الصفرية وتدوير مفاتيح Epoch",
     },
     hook: {
       en: "A relay only ever holds ciphertext — and the message that hands over the next key is sealed under the old one.",
@@ -509,6 +573,9 @@ const FEATURES: readonly Feature[] = [
       bg: "Ретранслаторът винаги държи само шифротекст — и съобщението, което предава следващия ключ, е запечатано със стария.",
       tr: "Bir aktarıcı yalnızca şifreli metni elinde tutar — ve bir sonraki anahtarı devreden mesaj, eski anahtarla mühürlenmiştir.",
       hu: "Egy közvetítő mindig csak titkosított szöveget tart — és az üzenet, amely a következő kulcsot adja át, a régivel van lepecsételve.",
+      "pt-BR": "Um relay só armazena texto cifrado — e a mensagem que entrega a próxima chave é selada sob a chave antiga.",
+      ko: "릴레이는 암호문만 보관하며, 다음 키를 넘겨주는 메시지는 이전 키로 봉인됩니다.",
+      ar: "المرحّل لا يحتفظ إلا بنص مشفّر — والرسالة التي تسلّم المفتاح التالي مختومة بالمفتاح القديم.",
     },
     facts: [
       {
@@ -530,6 +597,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Обвивката е popopx.channel.enc.v1: шифротекст ChaCha20-Poly1305 с добавен 16-байтов маркер, 12-байтов nonce, 64-байтов подпис Ed25519 и 32-байтов ключ на epoch.",
         tr: "Zarf popopx.channel.enc.v1'dir: sonuna 16 baytluk tag eklenmiş ChaCha20-Poly1305 şifreli metni, 12 baytluk nonce, 64 baytluk Ed25519 imzası ve 32 baytluk epoch anahtarı.",
         hu: "A burkoló popopx.channel.enc.v1: ChaCha20-Poly1305 titkosított szöveg a végére fűzött 16 bájtos címkével, 12 bájtos nonce, 64 bájtos Ed25519-aláírás és 32 bájtos epoch-kulcs.",
+        "pt-BR": "O envelope é popopx.channel.enc.v1: texto cifrado ChaCha20-Poly1305 com a tag de 16 bytes anexada, um nonce de 12 bytes, uma assinatura Ed25519 de 64 bytes e uma chave de epoch de 32 bytes.",
+        ko: "봉투는 popopx.channel.enc.v1이며, 16바이트 태그가 뒤에 붙은 ChaCha20-Poly1305 암호문, 12바이트 nonce, 64바이트 Ed25519 서명, 32바이트 epoch 키로 구성됩니다.",
+        ar: "المغلف هو popopx.channel.enc.v1: نص مشفّر بـ ChaCha20-Poly1305 مع وسم من 16 بايتًا مضاف في النهاية، وnonce من 12 بايتًا، وتوقيع Ed25519 من 64 بايتًا، ومفتاح epoch من 32 بايتًا.",
       },
       {
         en: "A rotation frame is t=ku, whose update object has the keys ch / se / rp / env. se must not equal env.epoch — the client enforces that, and the gateway rejects the equal case before sending.",
@@ -550,6 +620,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Кадърът на ротация е t=ku, а обектът update в него носи ключовете ch / se / rp / env. se не трябва да е равен на env.epoch — клиентът налага това, а гейтуейтът отхвърля равния случай преди изпращане.",
         tr: "Bir dönüşüm çerçevesi t=ku'dur ve update nesnesi ch / se / rp / env anahtarlarını taşır. se, env.epoch değerine eşit olmamalıdır; istemci bunu zorunlu kılar ve ağ geçidi eşitlik durumunu göndermeden önce reddeder.",
         hu: "Egy rotációs keret t=ku, amelynek update objektuma a ch / se / rp / env kulcsokat hordozza. Az se nem egyezhet meg az env.epoch értékével — a kliens ezt kikényszeríti, az átjáró pedig az egyezést már küldés előtt elutasítja.",
+        "pt-BR": "Um frame de rotação é t=ku, cujo objeto update tem as chaves ch / se / rp / env. se não pode ser igual a env.epoch — o cliente impõe isso, e o gateway rejeita o caso de igualdade antes de enviar.",
+        ko: "교체 프레임은 t=ku이며, 그 update 객체에는 ch / se / rp / env 키가 있습니다. se는 env.epoch와 같아서는 안 되며, 클라이언트가 이를 강제하고 게이트웨이는 같은 경우를 전송 전에 거부합니다.",
+        ar: "إطار التدوير هو t=ku، وكائن update فيه يحمل المفاتيح ch / se / rp / env. ويجب ألا يساوي se قيمة env.epoch — والعميل يفرض ذلك، وترفض البوابة حالة التساوي قبل الإرسال.",
       },
       {
         en: "Membership of a paid channel is bought with a pay_credits button on a card, which grants that epoch; a menu item is never allowed to carry a payment action.",
@@ -570,6 +643,9 @@ const FEATURES: readonly Feature[] = [
         bg: "Членството в платен канал се купува с бутон pay_credits на карта, който отстъпва съответния epoch; на елемент от менюто никога не се разрешава да носи платежно действие.",
         tr: "Ücretli bir kanala üyelik, kartın üzerindeki pay_credits düğmesiyle satın alınır ve o epoch'u kazandırır; bir menü öğesinin ödeme eylemi taşımasına asla izin verilmez.",
         hu: "Egy fizetős csatorna tagságát egy kártyán lévő pay_credits gombbal vásárolják meg, amely megadja az adott epochot; egy menüpontnak soha nem szabad fizetési műveletet tartalmaznia.",
+        "pt-BR": "A associação a um canal pago é comprada com um botão pay_credits em um cartão, que concede aquela epoch; um item de menu nunca pode carregar uma ação de pagamento.",
+        ko: "유료 채널 멤버십은 카드의 pay_credits 버튼으로 구매하며 이 버튼이 해당 epoch를 부여합니다. 메뉴 항목에는 결제 액션을 담을 수 없습니다.",
+        ar: "تُشترى العضوية في قناة مدفوعة بزر pay_credits على بطاقة، وهو ما يمنح epoch المطلوب؛ ولا يُسمح أبدًا لعنصر في القائمة بأن يحمل إجراء دفع.",
       },
     ],
   },
@@ -595,6 +671,9 @@ const ARCH = {
     bg: "Пет технически характеристики",
     tr: "Beş teknik özellik",
     hu: "Öt technikai jellemző",
+    "pt-BR": "Cinco características técnicas",
+    ko: "다섯 가지 기술적 특성",
+    ar: "خمس خصائص تقنية",
   },
   titleFeatures: {
     en: "The five technical characteristics of a service account",
@@ -615,6 +694,9 @@ const ARCH = {
     bg: "Петте технически характеристики на акаунта за услуги",
     tr: "Bir hizmet hesabının beş teknik özelliği",
     hu: "A szolgáltatási fiók öt technikai jellemzője",
+    "pt-BR": "As cinco características técnicas de uma conta de serviço",
+    ko: "서비스 계정의 다섯 가지 기술적 특성",
+    ar: "الخصائص التقنية الخمس لحساب خدمة",
   },
   subFeatures: {
     en: "Every line is checkable against the upstream repository field by field: the limits, the frame types and the signature parameter names all come out of the source, not out of marketing copy.",
@@ -635,6 +717,9 @@ const ARCH = {
     bg: "Всеки ред може да се сверява поле по поле с upstream хранилището: таваните, видовете кадри и имената на параметрите на подпис идват от изходния код, а не от маркетингов текст.",
     tr: "Her satır üst akış deposunda alan alan doğrulanabilir: sınırlar, çerçeve türleri ve imza parametre adları pazarlama metninden değil, kaynak kodundan gelir.",
     hu: "Minden sor mezőről mezőre ellenőrizhető az upstream kódtárban: a korlátok, a kerettípusok és az aláírás-paraméternevek mind a forráskódből jönnek, nem a marketing-szövegből.",
+    "pt-BR": "Cada linha pode ser conferida no repositório upstream campo por campo: os limites, os tipos de frame e os nomes dos parâmetros de assinatura vêm todos do código-fonte, não de texto de marketing.",
+    ko: "모든 행은 업스트림 저장소와 필드 단위로 대조할 수 있습니다. 한도, 프레임 유형, 서명 매개변수 이름은 모두 소스에서 나온 것이며 마케팅 문구에서 나온 것이 아닙니다.",
+    ar: "يمكن التحقق من كل سطر مقابل المستودع المصدر حقلًا بحقل: فالحدود وأنواع الأُطر وأسماء معاملات التوقيع كلها مستمدة من الشيفرة المصدرية، لا من نصوص تسويقية.",
   },
   eyebrowArchitecture: {
     en: "Dual-core architecture",
@@ -655,6 +740,9 @@ const ARCH = {
     bg: "Двойна ядрена архитектура",
     tr: "Çift çekirdekli mimari",
     hu: "Dual-core architektúra",
+    "pt-BR": "Arquitetura de núcleo duplo",
+    ko: "듀얼 코어 아키텍처",
+    ar: "بنية ثنائية النواة",
   },
   titleArchitecture: {
     en: "Dual-core architecture, compared with the rest of the field",
@@ -675,6 +763,9 @@ const ARCH = {
     bg: "Двойна ядрена архитектура, сравнена с останалите решения",
     tr: "Çift çekirdekli mimari, sahadaki diğer çözümlerle karşılaştırma",
     hu: "Dual-core architektúra összehasonlítva a mező többi szereplőjével",
+    "pt-BR": "Arquitetura de núcleo duplo, comparada com o restante do setor",
+    ko: "다른 제품군과 비교한 듀얼 코어 아키텍처",
+    ar: "البنية ثنائية النواة، مقارنة ببقية الساحة",
   },
   subArchitecture: {
     en: "Client, gateway and node each hold one boundary: messages travel through the node, H5 verification through the gateway.",
@@ -695,6 +786,9 @@ const ARCH = {
     bg: "Клиентът, гейтуейтът и възелът пазят всеки своята граница: съобщенията минават през възела, а H5 проверката — през гейтуейта.",
     tr: "İstemci, ağ geçidi ve düğüm her biri bir sınırı tutar: mesajlar düğüm üzerinden, H5 doğrulaması ağ geçidi üzerinden gider.",
     hu: "A kliens, az átjáró és a csomópont egy-egy határt őriz: az üzenetek a csomóponton, az H5-ellenőrzés az átjárón megy át.",
+    "pt-BR": "Cliente, gateway e nó detêm cada um uma fronteira: as mensagens passam pelo nó, a verificação H5 pelo gateway.",
+    ko: "클라이언트, 게이트웨이, 노드가 각각 하나의 경계를 담당합니다. 메시지는 노드를 통해, H5 검증은 게이트웨이를 통해 이동합니다.",
+    ar: "العميل والبوابة والعقدة لكل منها حدّ واحد: فالرسائل تمر عبر العقدة، والتحقق من H5 عبر البوابة.",
   },
   clientRole: {
     en: "iOS client",
@@ -715,6 +809,9 @@ const ARCH = {
     bg: "iOS клиент",
     tr: "iOS istemcisi",
     hu: "iOS kliens",
+    "pt-BR": "Cliente iOS",
+    ko: "iOS 클라이언트",
+    ar: "عميل iOS",
   },
   clientFacts: {
     en: "The protocol lines up byte for byte with the gateway; card, menu and channel parsing all happen on the device.",
@@ -735,6 +832,9 @@ const ARCH = {
     bg: "Протоколът съвпада байт по байт с гейтуейтът; анализирането на карти, меню и канали се извършва на устройството.",
     tr: "Protokol ağ geçidiyle bayt bayt hizalanır; kart, menü ve kanal ayrıştırması tamamen cihazda yapılır.",
     hu: "A protokoll bájtról bájtrára egyezik az átjáróval; a kártyák, a menü és a csatornák feldolgozása is az eszközön történik.",
+    "pt-BR": "O protocolo se alinha byte a byte com o gateway; a análise de cartões, menus e canais acontece toda no dispositivo.",
+    ko: "프로토콜은 게이트웨이와 바이트 단위로 일치하며, 카드, 메뉴, 채널 파싱은 모두 기기에서 수행됩니다.",
+    ar: "يتوافق البروتوكول بايتًا ببايت مع البوابة؛ وتحليل البطاقات والقوائم والقنوات يجري كله على الجهاز.",
   },
 
   gatewayTitle: {
@@ -756,6 +856,9 @@ const ARCH = {
     bg: "Гейтуейт · FastAPI :8080",
     tr: "Ağ geçidi · FastAPI :8080",
     hu: "Átjáró · FastAPI :8080",
+    "pt-BR": "Gateway · FastAPI :8080",
+    ko: "게이트웨이 · FastAPI :8080",
+    ar: "البوابة · FastAPI :8080",
   },
   gatewayFacts: {
     en: "The nine plugin modules and the single-file SQLite database all sit on the gateway side.",
@@ -776,6 +879,9 @@ const ARCH = {
     bg: "Деветте модула плъгини и базата SQLite с един файл са изцяло от страната на гейтуейта.",
     tr: "Dokuz eklenti modülü ve tek dosyalık SQLite veritabanının tümü ağ geçidi tarafında durur.",
     hu: "A kilenc bővítménymodul és az egyetlen fájlból álló SQLite-adatbázis mind az átjáró oldalán található.",
+    "pt-BR": "Os nove módulos de plug-in e o banco de dados SQLite de arquivo único ficam todos do lado do gateway.",
+    ko: "9개의 플러그인 모듈과 단일 파일 SQLite 데이터베이스는 모두 게이트웨이 쪽에 있습니다.",
+    ar: "وحدات الإضافات التسع وقاعدة بيانات SQLite أحادية الملف كلها في جانب البوابة.",
   },
   gatewayPluginLayer: {
     en: "Plugin layer",
@@ -796,6 +902,9 @@ const ARCH = {
     bg: "Слой с плъгини",
     tr: "Eklenti katmanı",
     hu: "Bővítményréteg",
+    "pt-BR": "Camada de plug-ins",
+    ko: "플러그인 계층",
+    ar: "طبقة الإضافات",
   },
   gatewayPluginList: {
     en: "Four on by default: AI agent · alert ops · privacy SSO · polls; five off: Web3 events · workflow webhooks · CardDAV · CalDAV · Slack/Discord.",
@@ -816,6 +925,9 @@ const ARCH = {
     bg: "Четири включени по подразбиране: AI агент · операции с известия · поверително SSO · допитвания; пет изключени: Web3 събития · workflow уебхукове · CardDAV · CalDAV · Slack/Discord.",
     tr: "Varsayılan olarak dördü açık: yapay zekâ ajanı · uyarı operasyonları · gizlilik dostu SSO · anketler; beşi kapalı: Web3 olayları · workflow webhook’ları · CardDAV · CalDAV · Slack/Discord.",
     hu: "Alapértelmezés szerint négy bekapcsolva: MI-ügynök · riasztásüzemeltetés · magánéletkímélő SSO · szavazások; öt kikapcsolva: Web3-események · workflow-webhookok · CardDAV · CalDAV · Slack/Discord.",
+    "pt-BR": "Quatro ativos por padrão: agente de IA · alertas de operações · SSO de privacidade · enquetes; cinco inativos: eventos Web3 · webhooks de fluxo de trabalho · CardDAV · CalDAV · Slack/Discord.",
+    ko: "기본 활성 4개: AI 에이전트 · 알림 운영 · 개인정보 보호 SSO · 투표. 기본 비활성 5개: Web3 이벤트 · 워크플로 웹훅 · CardDAV · CalDAV · Slack/Discord.",
+    ar: "أربع مفعّلة افتراضيًا: وكيل الذكاء الاصطناعي · تنبيهات العمليات · الدخول الموحّد للخصوصية · الاستطلاعات؛ وخمس معطّلة: أحداث Web3 · ويب هوك سير العمل · CardDAV · CalDAV · Slack/Discord.",
   },
   gatewayStore: {
     en: "SQLite single file",
@@ -836,6 +948,9 @@ const ARCH = {
     bg: "Един файл на SQLite",
     tr: "SQLite tek dosyası",
     hu: "SQLite egyetlen fájl",
+    "pt-BR": "Arquivo único SQLite",
+    ko: "SQLite 단일 파일",
+    ar: "ملف SQLite واحد",
   },
   gatewayStoreList: {
     en: "Ledger and credit balance · pairwise session secrets · channel identity private keys and every epoch key",
@@ -856,6 +971,9 @@ const ARCH = {
     bg: "Главна книга и салдо на кредити · двойкови тайни на сесиите · частните ключове за самоличността на канала и всеки ключ на epoch",
     tr: "Defter ve kredi bakiyesi · çift bazlı oturum sırları · kanalın kimlik özel anahtarları ve her bir epoch anahtarı",
     hu: "Főkönyv és kredit-egyenleg · páronkénti munkamenet-titkok · a csatorna-azonosság privát kulcsai és minden egyes epoch-kulcs",
+    "pt-BR": "Livro-razão e saldo de créditos · segredos de sessão por par · chaves privadas de identidade do canal e todas as chaves de epoch",
+    ko: "원장과 크레딧 잔액 · 쌍별 세션 시크릿 · 채널 신원 개인 키와 모든 epoch 키",
+    ar: "السجل ورصيد الاعتمادات · أسرار الجلسات ثنائية الاقتران · مفاتيح الهوية الخاصة بالقنوات وكل مفتاح epoch",
   },
   nodeTitle: {
     en: "Open-source node",
@@ -876,6 +994,9 @@ const ARCH = {
     bg: "Възел с отворен код",
     tr: "Açık kaynaklı düğüm",
     hu: "Nyílt forráskódú csomópont",
+    "pt-BR": "Nó de código aberto",
+    ko: "오픈소스 노드",
+    ar: "عقدة مفتوحة المصدر",
   },
   nodeRole: {
     en: "WebSocket API · loopback only",
@@ -896,6 +1017,9 @@ const ARCH = {
     bg: "WebSocket API · само loopback",
     tr: "WebSocket API · yalnızca loopback",
     hu: "WebSocket API · csak loopback",
+    "pt-BR": "API WebSocket · somente loopback",
+    ko: "WebSocket API · 루프백 전용",
+    ar: "WebSocket API · loopback فقط",
   },
   nodeFacts: {
     en: "The node's WebSocket API binds to 127.0.0.1; pointing it at a hostname simply will not work.",
@@ -916,6 +1040,9 @@ const ARCH = {
     bg: "WebSocket API на възела се обвързва с 127.0.0.1; насочването му към име на хост изобщо не работи.",
     tr: "Düğümün WebSocket API'si 127.0.0.1'e bağlanır; onu bir ana makine adına yönlendirmek çalışmaz.",
     hu: "A csomópont WebSocket API-ja a 127.0.0.1-hez kötődik; hosztnévre mutatni egyszerűen nem működik.",
+    "pt-BR": "A API WebSocket do nó se vincula a 127.0.0.1; apontá-la para um nome de host simplesmente não funciona.",
+    ko: "노드의 WebSocket API는 127.0.0.1에 바인딩되며, 호스트 이름을 가리키게 하면 동작하지 않습니다.",
+    ar: "ترتبط واجهة WebSocket API للعقدة بـ 127.0.0.1؛ وتوجيهها إلى اسم مضيف لن يعمل ببساطة.",
   },
   linkClientGateway: {
     en: "H5 signature check · HTTPS",
@@ -936,6 +1063,9 @@ const ARCH = {
     bg: "Проверка на H5 подпис · HTTPS",
     tr: "H5 imza doğrulama · HTTPS",
     hu: "H5-aláírás-ellenőrzés · HTTPS",
+    "pt-BR": "Verificação de assinatura H5 · HTTPS",
+    ko: "H5 서명 검사 · HTTPS",
+    ar: "فحص توقيع H5 · HTTPS",
   },
   linkGatewayNode: {
     en: "Loopback WebSocket · sole outbound path",
@@ -956,6 +1086,9 @@ const ARCH = {
     bg: "Loopback WebSocket · единствен изходен път",
     tr: "Loopback WebSocket · tek giden yol",
     hu: "Loopback WebSocket · egyedüli kimenő útvonal",
+    "pt-BR": "WebSocket de loopback · único caminho de saída",
+    ko: "루프백 WebSocket · 유일한 아웃바운드 경로",
+    ar: "WebSocket عبر loopback · المسار الصادر الوحيد",
   },
 
   diagramCaption: {
@@ -977,6 +1110,9 @@ const ARCH = {
     bg: "Горният README го казва буквално: възелът с отворен код се свързва единствено през ws://127.0.0.1:5225, а този комплект не линква, не пачва и не разпространява нито ред от кода му. Документираната опция за внедряване между машини е удостоен TLS фронтенд, завършващ на wss:// — никога възел, който слуша на публичен интерфейс.",
     tr: "Üst README bunu aynen şöyle söylüyor: açık kaynaklı düğüme yalnızca ws://127.0.0.1:5225 üzerinden bağlanılır ve bu takım onun kodundan tek bir satırı ne bağlar ne yamalar ne de yeniden dağıtır. Makineler arası kurulum için belgelenmiş seçenek, wss:// ile biten kimlik doğrulamalı bir TLS ön katmanıdır — düğümün genel bir arayüzde dinlemesi asla değil.",
     hu: "A felirati README ezt szó szerint így mondja: a nyílt forráskódú csomóponthoz kizárólag a ws://127.0.0.1:5225 címén kapcsolódnak, és ez a csomag a kódjából egy sort sem linkel, javít, terjeszt tovább. A dokumentált gépközi telepítési lehetőség egy hitelesített TLS előtag, amely wss:// címen végződik — sosem az, hogy a csomópont nyilvános felületen figyeljen.",
+    "pt-BR": "O README upstream diz isso literalmente: o nó de código aberto só é acessado por ws://127.0.0.1:5225, e esta suíte não se vincula a, não aplica patches e não redistribui nada do código dele. A opção entre máquinas documentada é uma frente TLS autenticada terminando em wss:// — nunca o nó escutando em uma interface pública.",
+    ko: "업스트림 README는 이를 그대로 적고 있습니다. 오픈소스 노드에는 ws://127.0.0.1:5225로만 연결하며, 이 제품군은 노드의 코드를 링크하거나 패치하거나 재배포하지 않습니다. 문서화된 머신 간 옵션은 wss://로 끝나는 인증된 TLS 프런트이며, 노드가 공용 인터페이스에서 수신 대기하는 방식은 결코 아닙니다.",
+    ar: "يضع README للمستودع الأصلي الأمر بنصه: لا يُتصل بالعقدة مفتوحة المصدر إلا عبر ws://127.0.0.1:5225، وهذه الحزمة لا تربط شيفرتها بشيفرة تلك العقدة ولا ترقّعها ولا تعيد توزيع أي جزء منها. والخيار الموثّق للعمل عبر أجهزة مختلفة هو واجهة TLS موثّقة تنتهي بـ wss:// — وليس أبدًا أن تستمع العقدة على واجهة عامة.",
   },
   pathLegend: {
     en: "Three paths",
@@ -997,6 +1133,9 @@ const ARCH = {
     bg: "Три пътеки",
     tr: "Üç yol",
     hu: "Három útvonal",
+    "pt-BR": "Três caminhos",
+    ko: "세 가지 경로",
+    ar: "ثلاثة مسارات",
   },
 
   tableCaption: {
@@ -1018,6 +1157,9 @@ const ARCH = {
     bg: "Двете други колони описват общата архитектура на продуктова категория, а не конкретен назован продукт; всяка POPOPX клетка по-долу е един от петте факта, подкрепени от изходния код по-горе.",
     tr: "Diğer iki sütun bir ürün kategorisinin genel mimarisini anlatır, asla adıyla anılan belirli bir ürünü değil; aşağıdaki her POPOPX hücresi yukarıdaki kaynağı doğrulanmış beş olgudan biridir.",
     hu: "A másik két oszlop egy termékkategória általános architektúráját írja le, sosem egy konkrét megnevezett terméket; minden POPOPX-cella lent a fenti, forrással igazolt öt tény egyike.",
+    "pt-BR": "As outras duas colunas descrevem a arquitetura geral de uma categoria de produto, nunca um produto específico e nomeado; cada célula POPOPX abaixo é um dos cinco fatos comprovados pelo código-fonte acima.",
+    ko: "나머지 두 열은 제품 범주의 일반적인 아키텍처를 설명할 뿐 특정 제품을 지칭하지 않습니다. 아래의 모든 POPOPX 셀은 위의 다섯 가지 소스 기반 사실 중 하나입니다.",
+    ar: "العمودان الآخران يصفان البنية العامة لفئة من المنتجات، وليسا أبدًا منتجًا محددًا بالاسم؛ وكل خلية تخص POPOPX في الجدول أدناه هي واحدة من الحقائق الخمس الموثّقة بالمصدر أعلاه.",
   },
   tableHeading: {
     en: "The comparison: POPOPX service accounts against two centralised designs",
@@ -1038,6 +1180,9 @@ const ARCH = {
     bg: "Сравнението: акаунти за услуги POPOPX срещу две централизирани схеми",
     tr: "Karşılaştırma: POPOPX hizmet hesapları, merkezi iki tasarımın karşısında",
     hu: "Az összehasonlítás: POPOPX szolgáltatási fiókok két centralizált megoldással szemben",
+    "pt-BR": "A comparação: contas de serviço POPOPX contra dois modelos centralizados",
+    ko: "비교: POPOPX 서비스 계정과 두 가지 중앙집중식 설계",
+    ar: "المقارنة: حسابات خدمة POPOPX مقابل تصميمين مركزيين",
   },
   colDimension: {
     en: "Dimension",
@@ -1058,6 +1203,9 @@ const ARCH = {
     bg: "Критерий",
     tr: "Ölçüt",
     hu: "Szempont",
+    "pt-BR": "Dimensão",
+    ko: "항목",
+    ar: "البعد",
   },
   colSelf: {
     en: "POPOPX service account",
@@ -1078,6 +1226,9 @@ const ARCH = {
     bg: "Акаунт за услуги POPOPX",
     tr: "POPOPX hizmet hesabı",
     hu: "POPOPX szolgáltatási fiók",
+    "pt-BR": "Conta de serviço POPOPX",
+    ko: "POPOPX 서비스 계정",
+    ar: "حساب خدمة POPOPX",
   },
   colOfficial: {
     en: "Traditional social-platform official accounts",
@@ -1098,6 +1249,9 @@ const ARCH = {
     bg: "Традиционни официални акаунти в социалните платформи",
     tr: "Geleneksel sosyal platform resmî hesapları",
     hu: "Hagyományos közösségi platformos hivatalos fiókok",
+    "pt-BR": "Contas oficiais tradicionais de plataformas sociais",
+    ko: "전통적인 소셜 플랫폼 공식 계정",
+    ar: "الحسابات الرسمية على منصات التواصل التقليدية",
   },
   colBot: {
     en: "Centralised bot platforms",
@@ -1118,6 +1272,9 @@ const ARCH = {
     bg: "Централизирани bot платформи",
     tr: "Merkezi bot platformları",
     hu: "Centralizált bot-platformok",
+    "pt-BR": "Plataformas de bots centralizadas",
+    ko: "중앙집중식 봇 플랫폼",
+    ar: "منصات الروبوتات المركزية",
   },
 
   sovereigntyHeading: {
@@ -1139,6 +1296,9 @@ const ARCH = {
     bg: "Суверенитет на данните: какво гейтуейтът не притежава",
     tr: "Veri egemenliği: ağ geçidinin tutmadığı şeyler",
     hu: "Adatszuverenitás: amit az átjáró nem birtokol",
+    "pt-BR": "Soberania de dados: o que o gateway não guarda",
+    ko: "데이터 주권: 게이트웨이가 보유하지 않는 것",
+    ar: "سيادة البيانات: ما لا تحتفظ به البوابة",
   },
   sovereigntyKept: {
     en: "Three that hold up",
@@ -1159,6 +1319,9 @@ const ARCH = {
     bg: "Три твърдения, които издържат",
     tr: "Karşılığı olan üç iddia",
     hu: "Három, ami megállja a helyét",
+    "pt-BR": "Três que se sustentam",
+    ko: "성립하는 세 가지",
+    ar: "ثلاثة تصمد",
   },
   sovereigntyHeld: {
     en: "The same source also states plainly what it does hold",
@@ -1179,6 +1342,9 @@ const ARCH = {
     bg: "Същият източник ясно казва и какво реално притежава",
     tr: "Aynı kaynak, gerçekte neyi tuttuğunu da açıkça söylüyor",
     hu: "Ugyanez a forrás azt is nyíltan kimondja, amit tényleg birtokol",
+    "pt-BR": "A mesma fonte também declara com clareza o que ele guarda",
+    ko: "같은 소스는 실제로 보유하는 것도 분명히 밝힙니다.",
+    ar: "المصدر نفسه يذكر بوضوح أيضًا ما تحتفظ به فعلًا",
   },
 } satisfies Record<string, Localized<string>>;
 
@@ -1204,6 +1370,9 @@ const PATHS: readonly Localized<string>[] = [
     bg: "Съобщения: клиент ↔ възел, криптиране от край до край — ретранслаторът вижда само шифротекст и собствените си метаданни за маршрутизация.",
     tr: "Mesajlar: istemci ↔ düğüm, uçtan uca şifreli — bir aktarıcı yalnızca şifreli metni ve kendi yönlendirme üst verisini görür.",
     hu: "Üzenetek: kliens ↔ csomópont, végpontok közötti titkosítással — egy közvetítő csak titkosított szöveget és a saját útválasztási metaadatait látja.",
+    "pt-BR": "Mensagens: cliente ↔ nó, com criptografia de ponta a ponta — um relay vê texto cifrado e seus próprios metadados de roteamento.",
+    ko: "메시지: 클라이언트 ↔ 노드, 종단 간 암호화 — 릴레이는 암호문과 자체 라우팅 메타데이터만 봅니다.",
+    ar: "الرسائل: العميل ↔ العقدة، مشفّرة من طرف إلى طرف — والمرحّل يرى نصًا مشفّرًا وبيانات التوجيه الخاصة به فقط.",
   },
   {
     en: "Commands: gateway → node over that one loopback channel, ws://127.0.0.1:5225.",
@@ -1224,6 +1393,9 @@ const PATHS: readonly Localized<string>[] = [
     bg: "Команди: гейтуейт → възел по онзи единствен loopback канал, ws://127.0.0.1:5225.",
     tr: "Komutlar: ağ geçidi → düğüm, o tek loopback kanalı üzerinden, ws://127.0.0.1:5225.",
     hu: "Parancsok: átjáró → csomópont azon az egy loopback csatornán, ws://127.0.0.1:5225.",
+    "pt-BR": "Comandos: gateway → nó por aquele único canal de loopback, ws://127.0.0.1:5225.",
+    ko: "명령: 게이트웨이 → 노드, 단일 루프백 채널 ws://127.0.0.1:5225를 통해 전달됩니다.",
+    ar: "الأوامر: البوابة → العقدة عبر قناة loopback الواحدة تلك، ws://127.0.0.1:5225.",
   },
   {
     en: "H5: the client's browser → gateway — card callbacks and verifyH5Auth reach the public origin.",
@@ -1244,6 +1416,9 @@ const PATHS: readonly Localized<string>[] = [
     bg: "H5: браузърът на клиента → гейтуейт — обажданията на картите и verifyH5Auth достигат публичния произход.",
     tr: "H5: istemcinin tarayıcısı → ağ geçidi — kart geri çağrıları ve verifyH5Auth genel kaynağa ulaşır.",
     hu: "H5: a kliens böngészője → átjáró — a kártya visszahívások és a verifyH5Auth a nyilvános forráshoz érkezik.",
+    "pt-BR": "H5: o navegador do cliente → gateway — callbacks de cartão e verifyH5Auth chegam à origem pública.",
+    ko: "H5: 클라이언트 브라우저 → 게이트웨이 — 카드 콜백과 verifyH5Auth가 공용 오리진에 도달합니다.",
+    ar: "H5: متصفح العميل → البوابة — فاستدعاءات البطاقات وverifyH5Auth تصل إلى الأصل العام.",
   },
 ];
 
@@ -1273,6 +1448,9 @@ const ROWS: readonly {
       bg: "Какво сървърът може да прочете",
       tr: "Bir sunucunun okuyabildikleri",
       hu: "Mit olvas el egy szerver",
+      "pt-BR": "O que um servidor consegue ler",
+      ko: "서버가 읽을 수 있는 것",
+      ar: "ما يمكن للخادم قراءته",
     },
     self: {
       en: "Channel content is encrypted with the epoch key before it fans out, so a relay sees only ciphertext; cards and menus live in the merchant's own gateway.db.",
@@ -1293,6 +1471,9 @@ const ROWS: readonly {
       bg: "Съдържанието на канала се криптира с ключа на epoch, преди да се раздели, затова ретранслаторът вижда само шифротекст; картите и менютата са в gateway.db на търговеца.",
       tr: "Kanal içeriği, dağıtılmadan önce epoch anahtarıyla şifrelenir, böylece bir aktarıcı yalnızca şifreli metni görür; kartlar ve menü, tüccarın kendi gateway.db dosyasında durur.",
       hu: "A csatorna tartalmát az epoch-kulccsal titkosítják a szétosztás előtt, ezért egy közvetítő csak titkosított szöveget lát; a kártyák és a menük a kereskedő saját gateway.db fájljában vannak.",
+      "pt-BR": "O conteúdo do canal é criptografado com a chave de epoch antes de se distribuir, então um relay vê apenas texto cifrado; cartões e menus ficam no gateway.db do próprio comerciante.",
+      ko: "채널 콘텐츠는 배포 전에 epoch 키로 암호화되므로 릴레이는 암호문만 봅니다. 카드와 메뉴는 판매자 자신의 gateway.db에 저장됩니다.",
+      ar: "يُشفَّر محتوى القناة بمفتاح epoch قبل توزيعه، لذا لا يرى المرحّل سوى نص مشفّر؛ أما البطاقات والقوائم فتعيش في ملف gateway.db الخاص بالتاجر.",
     },
     official: {
       en: "Hosted on the operator's servers and readable in plaintext there.",
@@ -1313,6 +1494,9 @@ const ROWS: readonly {
       bg: "Хостирован на сървърите на оператора и четим там като чист текст.",
       tr: "İşletenin sunucularında barındırılır ve orada düz metin olarak okunabilir.",
       hu: "Az üzemeltető szervereiben van elhelyezve, és ott nyílt szövegként olvasható.",
+      "pt-BR": "Hospedado nos servidores do operador e legível em texto claro lá.",
+      ko: "운영자 서버에 호스팅되며 그곳에서 평문으로 읽을 수 있습니다.",
+      ar: "مستضاف على خوادم المشغّل وقابل للقراءة هناك كنص واضح.",
     },
     bot: {
       en: "Message bodies are relayed by the platform to the developer's server, and readable in plaintext on both sides.",
@@ -1333,6 +1517,9 @@ const ROWS: readonly {
       bg: "Телата на съобщенията се препредават от платформата към сървъра на разработчика и се четат като чист текст от двете страни.",
       tr: "Mesaj gövdeleri platform tarafından geliştiricinin sunucusuna iletilir ve her iki tarafta da düz metin olarak okunabilir.",
       hu: "Az üzenettörzseket a platform továbbítja a fejlesztő szerverére, és mindkét oldalon nyílt szövegként olvashatók.",
+      "pt-BR": "Os corpos das mensagens são retransmitidos pela plataforma ao servidor do desenvolvedor e ficam legíveis em texto claro dos dois lados.",
+      ko: "메시지 본문은 플랫폼이 개발자 서버로 중계하며, 양쪽 모두에서 평문으로 읽을 수 있습니다.",
+      ar: "تُمرَّر أجسام الرسائل عبر المنصة إلى خادم المطوّر، وهي قابلة للقراءة كنص واضح على الجانبين.",
     },
   },
   {
@@ -1355,6 +1542,9 @@ const ROWS: readonly {
       bg: "Разкриване на глобалния идентификатор на акаунта",
       tr: "Genel hesap kimliğinin açığa çıkması",
       hu: "A globális fiók-azonosító kiszivárgása",
+      "pt-BR": "Exposição de ID de conta global",
+      ko: "전역 계정 ID 노출",
+      ar: "انكشاف معرّف الحساب العام",
     },
     self: {
       en: "No global user ID at all. Each follower has one pairwise uid minted by that gateway (prefix pw_), so a different service account sees a different ID.",
@@ -1375,6 +1565,9 @@ const ROWS: readonly {
       bg: "Няма глобален потребителски ID изобщо. Всеки последовател има само един двойков uid, издаден от този гейтуейт (префикс pw_), така че различен акаунт за услуги вижда различен ID.",
       tr: "Genel bir kullanıcı kimliği hiç yok. Her takipçinin, o ağ geçidinin ürettiği tek bir çift bazlı uid'si vardır (ön ek pw_), dolayısıyla farklı bir hizmet hesabı farklı bir kimlik görür.",
       hu: "Egyáltalán nincs globális felhasználói azonosító. Minden követőnek csak egy, az adott átjáró által kiállított, páronkénti uid-je van (pw_ előtag), így egy másik szolgáltatási fiók másik azonosítót lát.",
+      "pt-BR": "Nenhum ID de usuário global. Cada seguidor tem um uid por par cunhado por aquele gateway (prefixo pw_), então uma conta de serviço diferente vê um ID diferente.",
+      ko: "전역 사용자 ID가 전혀 없습니다. 각 팔로워는 해당 게이트웨이가 발급한 쌍별 uid(접두사 pw_) 하나를 가지므로, 다른 서비스 계정은 다른 ID를 봅니다.",
+      ar: "لا يوجد معرّف مستخدم عام على الإطلاق. ولكل متابع معرّف uid ثنائي الاقتران تصدره تلك البوابة (بادئة pw_)، لذا يرى حساب خدمة آخر معرّفًا مختلفًا.",
     },
     official: {
       en: "One account ID runs through every official account and third-party page on the platform and can be joined server-side.",
@@ -1395,6 +1588,9 @@ const ROWS: readonly {
       bg: "Един идентификатор на акаунта преминава през всички официални акаунти и страници на трети страни в платформата и може да се свърже от страната на сървъра.",
       tr: "Tek bir hesap kimliği, platformdaki bütün resmî hesaplardan ve üçüncü taraf sayfalarından geçer ve sunucu tarafında eşleştirilebilir.",
       hu: "Egy fiók-azonosító végigmegy a platform minden hivatalos fiókján és harmadik féltől származó lapján, és szerveroldalon összevonható.",
+      "pt-BR": "Um único ID de conta atravessa todas as contas oficiais e páginas de terceiros na plataforma e pode ser correlacionado no servidor.",
+      ko: "하나의 계정 ID가 플랫폼의 모든 공식 계정과 서드파티 페이지를 관통하며, 서버 측에서 결합할 수 있습니다.",
+      ar: "معرّف حساب واحد يسري عبر كل حساب رسمي وكل صفحة طرف ثالث على المنصة، ويمكن ربطه من جهة الخادم.",
     },
     bot: {
       en: "The platform-issued user identifier is visible to every bot that integrates, so it joins across them by default.",
@@ -1415,6 +1611,9 @@ const ROWS: readonly {
       bg: "Идентификаторът на потребителя, издаден от платформата, се вижда от всеки интегриран bot, затова по подразбиране се свързва между тях.",
       tr: "Platformun verdiği kullanıcı tanımlayıcısı, entegre olan her bota görünür; bu yüzden varsayılan olarak botlar arasında eşleştirilir.",
       hu: "A platform által kiállított felhasználói azonosítót minden bejelentkező bot látja, ezért alapértelmezésben összevonhatók egymással.",
+      "pt-BR": "O identificador de usuário emitido pela plataforma é visível para todo bot que se integra, então ele é correlacionado entre eles por padrão.",
+      ko: "플랫폼이 발급한 사용자 식별자는 통합한 모든 봇에 표시되므로 기본적으로 봇 간에 결합됩니다.",
+      ar: "معرّف المستخدم الذي تصدره المنصة مرئي لكل روبوت يتكامل، لذا يُربط عبر جميعها افتراضيًا.",
     },
   },
   {
@@ -1437,6 +1636,9 @@ const ROWS: readonly {
       bg: "Собствено хостирани данни",
       tr: "Kendi barındırılan veriler",
       hu: "Saját üzemeltetésű adatok",
+      "pt-BR": "Dados auto-hospedados",
+      ko: "자체 호스팅 데이터",
+      ar: "بيانات مستضافة ذاتيًا",
     },
     self: {
       en: "One command onto your own machine (a production script for Ubuntu 22.04, a dev script for macOS); all state sits in a single SQLite file, and backing that file up is the whole procedure.",
@@ -1457,6 +1659,9 @@ const ROWS: readonly {
       bg: "Една команда към собствения ти компютър (производствен скрипт за Ubuntu 22.04, скрипт за разработка за macOS); цялото състояние е в един файл SQLite, и архивирането на този файл е цялата процедура.",
       tr: "Kendi makinene tek komutla kurulum (Ubuntu 22.04 için üretim betiği, macOS için geliştirme betiği); bütün durum tek bir SQLite dosyasında toplanır ve o dosyanın yedeğini almak tüm prosedürdür.",
       hu: "Egy parancs a saját gépre (telepítő szkript Ubuntu 22.04-hez, fejlesztői szkript macOS-hez); minden állapot egyetlen SQLite fájlban van, és ennek a fájlnak a mentése az egész eljárás.",
+      "pt-BR": "Um comando na sua própria máquina (um script de produção para Ubuntu 22.04, um script de desenvolvimento para macOS); todo o estado fica em um único arquivo SQLite, e fazer backup desse arquivo é o procedimento inteiro.",
+      ko: "자체 머신에 명령 하나로 설치합니다(운영용은 Ubuntu 22.04 스크립트, 개발용은 macOS 스크립트). 모든 상태는 SQLite 파일 하나에 있으며, 그 파일을 백업하는 것이 절차의 전부입니다.",
+      ar: "أمر واحد إلى جهازك (سكربت إنتاجي لـ Ubuntu 22.04، وسكربت تطوير لـ macOS)؛ وكل الحالة في ملف SQLite واحد، والنسخ الاحتياطي لذلك الملف هو الإجراء كله.",
     },
     official: {
       en: "No self-hosting option; relationships and content live in the operator's data centre.",
@@ -1477,6 +1682,9 @@ const ROWS: readonly {
       bg: "Няма опция за собствено хостиране; връзките и съдържанието са в data center на оператора.",
       tr: "Kendi sunucunda barındırma seçeneği yok; ilişkiler de içerik de işletenin veri merkezinde durur.",
       hu: "Nincs lehetőség saját szerveren üzemeltetni; a kapcsolatok és a tartalom az üzemeltető adatközpontjában vannak.",
+      "pt-BR": "Nenhuma opção de auto-hospedagem; relações e conteúdo ficam no data center do operador.",
+      ko: "자체 호스팅 옵션이 없으며, 관계와 콘텐츠는 운영자의 데이터 센터에 있습니다.",
+      ar: "لا خيار استضافة ذاتية؛ فالعلاقات والمحتوى يعيشان في مركز بيانات المشغّل.",
     },
     bot: {
       en: "The business backend can be self-hosted, while sessions, identity and message transport still pass through the platform.",
@@ -1497,6 +1705,9 @@ const ROWS: readonly {
       bg: "Бизнес бекендът може да се хостира самостоятелно, но сесиите, самоличността и преносът на съобщения пак минават през платформата.",
       tr: "İşin arka ucu kendi sunucunda barındırılabilir; ancak oturumlar, kimlik ve mesaj taşıma hâlâ platform üzerinden geçer.",
       hu: "Az üzleti backend saját gépen futtatható, de a munkamenetek, a személyazonosság és az üzenetátvitel továbbra is a platformon megy át.",
+      "pt-BR": "O backend de negócios pode ser auto-hospedado, enquanto sessões, identidade e transporte de mensagens continuam passando pela plataforma.",
+      ko: "비즈니스 백엔드는 자체 호스팅할 수 있지만 세션, 신원, 메시지 전송은 여전히 플랫폼을 거칩니다.",
+      ar: "يمكن استضافة الخادم الخلفي للأعمال ذاتيًا، بينما تظل الجلسات والهوية ونقل الرسائل تمر عبر المنصة.",
     },
   },
   {
@@ -1519,6 +1730,9 @@ const ROWS: readonly {
       bg: "Междусайтово проследяване във вградения H5",
       tr: "Gömülü H5 içinde siteler arası izleme",
       hu: "Oldalak közti követés a beágyazott H5-ben",
+      "pt-BR": "Rastreamento entre sites no H5 incorporado",
+      ko: "내장 H5에서의 교차 사이트 추적",
+      ar: "التتبّع عبر المواقع داخل H5 المضمّن",
     },
     self: {
       en: "The H5 page opens in an out-of-process browser session and identity travels only as a pairwise uid plus an HMAC-SHA256 signature valid for ±300 seconds; the signed preimage contains no hostname.",
@@ -1539,6 +1753,9 @@ const ROWS: readonly {
       bg: "H5 страницата се отваря в браузърна сесия извън процеса, а самоличността пътува само като двойков uid плюс подпис HMAC-SHA256 с валидност ±300 секунди; подписаният предобраз не съдържа име на хост.",
       tr: "H5 sayfası süreç dışı bir tarayıcı oturumunda açılır ve kimlik yalnızca çift bazlı bir uid ile ±300 saniye geçerli bir HMAC-SHA256 imzası olarak dolaşır; imzalanan öncül resimde ana makine adı bulunmaz.",
       hu: "Az H5 oldal egy folyamaton kívüli böngésző-munkamenetben nyílik meg, és a személyazonosság csak egy páronkénti uid plusz ±300 másodpercig érvényes HMAC-SHA256-aláírás formájában utazik; az aláírt előképen nincs hosztnév.",
+      "pt-BR": "A página H5 abre em uma sessão de navegador fora do processo, e a identidade viaja apenas como um uid por par mais uma assinatura HMAC-SHA256 válida por ±300 segundos; a pré-imagem assinada não contém nome de host.",
+      ko: "H5 페이지는 프로세스 외부 브라우저 세션에서 열리며, 신원은 쌍별 uid와 ±300초 동안 유효한 HMAC-SHA256 서명으로만 전달됩니다. 서명 대상 원문에는 호스트 이름이 포함되지 않습니다.",
+      ar: "تُفتح صفحة H5 في جلسة متصفح خارج عملية التطبيق، ولا تنتقل الهوية إلا كمعرّف uid ثنائي الاقتران مع توقيع HMAC-SHA256 صالح لمدة ±300 ثانية؛ والصورة الأولية الموقّعة لا تحتوي على اسم مضيف.",
     },
     official: {
       en: "The in-app browser shares cookies and sign-in state with the rest of the platform, which is enough to link the same user.",
@@ -1559,6 +1776,9 @@ const ROWS: readonly {
       bg: "Вграденият браузър споделя бисквитки и състояние на влизане с останалата част от платформата, което е достатъчно да свърже един и същ потребител.",
       tr: "Uygulama içi tarayıcı, çerezleri ve oturum durumunu platformun geri kalanıyla paylaşır; bu, aynı kullanıcıyı eşleştirmek için yeter.",
       hu: "A beépített böngésző süteményeket és bejelentkezési állapotot oszt meg a platform többi részével, ami elég ugyanazon felhasználó összekapcsolásához.",
+      "pt-BR": "O navegador dentro do aplicativo compartilha cookies e o estado de login com o restante da plataforma, o que basta para vincular o mesmo usuário.",
+      ko: "인앱 브라우저는 쿠키와 로그인 상태를 플랫폼의 나머지 부분과 공유하므로 동일한 사용자를 연결하기에 충분합니다.",
+      ar: "المتصفح داخل التطبيق يتشارك ملفات تعريف الارتباط وحالة تسجيل الدخول مع بقية المنصة، وهذا كافٍ لربط المستخدم نفسه.",
     },
     bot: {
       en: "Web authorisation reuses the platform sign-in, and the callback carries the same user identifier.",
@@ -1579,6 +1799,9 @@ const ROWS: readonly {
       bg: "Уеб оторизацията преизползва влизането в платформата, а обратното обаждане носи един и същ идентификатор на потребителя.",
       tr: "Web yetkilendirmesi platformun oturum açmasını yeniden kullanır ve geri çağrı aynı kullanıcı kimliğini taşır.",
       hu: "A webes hitelesítés újrafelhasználja a platform bejelentkezését, és a visszahívás ugyanazt a felhasználói azonosítót hordozza.",
+      "pt-BR": "A autorização web reutiliza o login da plataforma, e o callback carrega o mesmo identificador de usuário.",
+      ko: "웹 인증은 플랫폼 로그인을 재사용하며, 콜백은 동일한 사용자 식별자를 전달합니다.",
+      ar: "تفويض الويب يعيد استخدام تسجيل الدخول الخاص بالمنصة، ويحمل النداء العائد معرّف المستخدم نفسه.",
     },
   },
   {
@@ -1601,6 +1824,9 @@ const ROWS: readonly {
       bg: "Bluetooth mesh без връзка",
       tr: "Çevrimdışı Bluetooth ağı",
       hu: "Bluetooth hálózat kapcsolat nélkül",
+      "pt-BR": "Malha Bluetooth offline",
+      ko: "오프라인 Bluetooth 메시",
+      ar: "شبكة Bluetooth متشابكة دون اتصال",
     },
     self: {
       en: "The client ships its own BLE mesh transport (Noise sessions, flooding and fragmentation all on-device), so nearby peers still form a net with neither cellular nor Wi-Fi.",
@@ -1621,6 +1847,9 @@ const ROWS: readonly {
       bg: "Клиентът носи собствен BLE mesh транспорт (Noise сесии, наводняване и фрагментация се извършват на устройството), така че близки пири образуват мрежа и без клетъчна, и без Wi-Fi.",
       tr: "İstemci kendi BLE ağı taşıma katmanıyla gelir (Noise oturumları, sel verme ve parçalama cihazın içinde yapılır), böylece yakındaki eşler hücresel ya da Wi-Fi olmadan da bir ağ kurar.",
       hu: "A kliens saját BLE mesh-átviteli réteggel érkezik (a Noise-munkamenetek, az áradás és a törédezés mind az eszközön fut), így a közeli csomópontok mobiladat és Wi-Fi nélkül is hálózatot alkotnak.",
+      "pt-BR": "O cliente traz seu próprio transporte de malha BLE (sessões Noise, flooding e fragmentação, tudo no dispositivo), então pares próximos ainda formam uma rede sem celular e sem Wi-Fi.",
+      ko: "클라이언트는 자체 BLE 메시 전송을 제공하며(Noise 세션, 플러딩, 단편화가 모두 기기에서 처리됨), 따라서 주변 피어는 셀룰러도 Wi-Fi도 없이 네트워크를 형성합니다.",
+      ar: "يأتي العميل بنقل BLE شبكي متشابك خاص به (جلسات Noise والانتشار والتقسيم كل ذلك على الجهاز)، فيظل الأقران القريبون يشكّلون شبكة بلا شبكة خلوية ولا Wi-Fi.",
     },
     official: {
       en: "Everything depends on reaching the operator's servers; offline, the feature set is gone.",
@@ -1641,6 +1870,9 @@ const ROWS: readonly {
       bg: "Всичко зависи от достигането на сървърите на оператора; без връзка функционалността изчезва.",
       tr: "Her şey işletenin sunucularına ulaşmaya bağlıdır; çevrimdışıyken yetenek seti buhar olur.",
       hu: "Minden az üzemeltető szervereinek elérésétől függ; kapcsolat nélkül a funkciókészlet eltűnik.",
+      "pt-BR": "Tudo depende de alcançar os servidores do operador; offline, o conjunto de recursos desaparece.",
+      ko: "모든 것이 운영자 서버에 도달하는 데 의존하며, 오프라인이면 기능 집합이 사라집니다.",
+      ar: "كل شيء يعتمد على الوصول إلى خوادم المشغّل؛ ودون اتصال تختفي مجموعة الميزات.",
     },
     bot: {
       en: "A bot sends and receives over network requests, with no on-device fallback path.",
@@ -1661,6 +1893,9 @@ const ROWS: readonly {
       bg: "Ботът изпраща и получава чрез мрежови заявки, без алтернативен път на устройството.",
       tr: "Bir bot ağ istekleri üzerinden gönderir ve alır; cihazda yedek bir yol yoktur.",
       hu: "Egy bot hálózati kérésekkel küld és fogad, eszközoldali tartalék útvonal nélkül.",
+      "pt-BR": "Um bot envia e recebe por requisições de rede, sem nenhum caminho alternativo no dispositivo.",
+      ko: "봇은 네트워크 요청으로 송수신하며, 기기 내 대체 경로가 없습니다.",
+      ar: "يرسل الروبوت ويستقبل عبر طلبات شبكية، دون أي مسار احتياطي على الجهاز.",
     },
   },
 ];
@@ -1685,6 +1920,9 @@ const SOVEREIGNTY: readonly Localized<string>[] = [
     bg: "Няма глобален потребителски ID: таблицата contacts съдържа само локалния contact_id от възела и двойния uid, издаден от този гейтуейт, и нито единият от тях не може да свърже данните между акаунтите за услуги.",
     tr: "Genel kullanıcı kimliği yok: contacts tablosu yalnızca düğümün yerel contact_id değerini ve bu ağ geçidinin ürettiği çift bazlı uid değerini tutar; bunlardan hiçbiri hizmet hesapları arasında eşleştirilemez.",
     hu: "Nincs globális felhasználói azonosító: a contacts tábla csak a csomópont által adott helyi contact_id-t és az átjáró által kiállított, páronkénti uid-t tárolja, és egyik sem vonható össze különböző szolgáltatási fiókok között.",
+    "pt-BR": "Nenhum ID de usuário global: a tabela de contatos guarda apenas o contact_id local do nó e o uid por par que este gateway cunhou, e nenhum dos dois se correlaciona entre contas de serviço.",
+    ko: "전역 사용자 ID가 없습니다. contacts 테이블에는 노드의 로컬 contact_id와 이 게이트웨이가 발급한 쌍별 uid만 있으며, 둘 다 서비스 계정 간에 결합되지 않습니다.",
+    ar: "لا معرّف مستخدم عام: فجدول جهات الاتصال لا يحتفظ إلا بـ contact_id المحلي في العقدة ومعرّف uid ثنائي الاقتران الذي أصدرته هذه البوابة، ولا أي منهما يُربط عبر حسابات الخدمة.",
   },
   {
     en: "A follower's session secret never appears in an API response: GET /api/v1/contacts deliberately omits secret_hex, because its only job is signing H5 callbacks.",
@@ -1705,6 +1943,9 @@ const SOVEREIGNTY: readonly Localized<string>[] = [
     bg: "Тайната на сесията на последовател никога не се появява в API отговор: GET /api/v1/contacts умишлено пропуска secret_hex, защото единствената ѝ работа е да подписва H5 обаждания.",
     tr: "Bir takipçinin oturum sırrı hiçbir API yanıtında görünmez: GET /api/v1/contacts bilerek secret_hex'i dışarıda bırakır, çünkü tek işi H5 geri çağırmalarını imzalamaktır.",
     hu: "Egy követő munkamenet-titka soha nem jelenik meg API-válaszban: a GET /api/v1/contacts szándékosan kihagyja a secret_hex-t, mert az egyetlen feladata a H5-visszahívások aláírása.",
+    "pt-BR": "O segredo de sessão de um seguidor nunca aparece em uma resposta da API: GET /api/v1/contacts omite secret_hex de propósito, porque a única função dele é assinar callbacks H5.",
+    ko: "팔로워의 세션 시크릿은 API 응답에 절대 나타나지 않습니다. GET /api/v1/contacts는 secret_hex를 의도적으로 생략하는데, 그 용도가 H5 콜백 서명뿐이기 때문입니다.",
+    ar: "لا يظهر سر جلسة المتابع في أي استجابة API: فـ GET /api/v1/contacts يحذف secret_hex عمدًا، لأن مهمته الوحيدة هي توقيع استدعاءات H5.",
   },
   {
     en: "A relay never sees channel plaintext: content is encrypted under the epoch key before publication, and a new key only travels inside the sealed box of a rotation frame.",
@@ -1725,6 +1966,9 @@ const SOVEREIGNTY: readonly Localized<string>[] = [
     bg: "Ретранслаторът никога не вижда чист текст на канала: съдържанието се криптира с ключа на epoch преди публикуване, а нов ключ пътува само вътре в запечатаната кутия на кадъра за ротация.",
     tr: "Bir aktarıcı kanalın düz metnini asla görmez: içerik yayımlanmadan önce epoch anahtarıyla şifrelenir ve yeni anahtar yalnızca bir dönüşüm çerçevesinin mühürlü kutusunun içinde dolaşır.",
     hu: "Egy közvetítő soha nem látja a csatorna nyílt szövegét: a tartalmat az epoch-kulccsal titkosítják a közzététel előtt, és egy új kulcs csak a rotációs keret lepecsételt dobozában utazik.",
+    "pt-BR": "Um relay nunca vê o texto claro do canal: o conteúdo é criptografado sob a chave de epoch antes da publicação, e uma nova chave só viaja dentro da caixa selada de um frame de rotação.",
+    ko: "릴레이는 채널 평문을 보지 못합니다. 콘텐츠는 게시 전에 epoch 키로 암호화되며, 새 키는 교체 프레임의 봉인된 상자 안에서만 이동합니다.",
+    ar: "لا يرى المرحّل نص القناة الواضح أبدًا: فالمحتوى يُشفَّر بمفتاح epoch قبل النشر، ولا ينتقل المفتاح الجديد إلا داخل الصندوق المختوم لإطار التدوير.",
   },
 ];
 
@@ -1748,6 +1992,9 @@ const HELD: readonly Localized<string>[] = [
     bg: "Гейтуейтът е издател на канала, затова наистина притежава двойката Ed25519 ключове за самоличност на този канал и всеки ключ на epoch — без тях управителят на ротацията не може да издаде следващия ключ, и коментарът в database.py казва точно това. „Без преглед на съдържанието от сървъра“ важи за ретранслаторите и за чуждите сървъри, а не за погледа на търговеца към собствените му данни.",
     tr: "Ağ geçidi kanalın düzenleyicisidir, dolayısıyla o kanalın Ed25519 kimlik anahtar çiftini ve her epoch anahtarını gerçekten elinde tutar — bunlar olmadan bir dönüşüm yöneticisi bir sonraki anahtarı dağıtamaz, ve database.py içindeki yorum da tam olarak bunu söylüyor. “Sunucu tarafından içerik denetimi yok” ifadesi aktarıcıları ve başkalarının sunucularını bağlar, tüccarın kendi verisine bakışını değil.",
     hu: "Az átjáró a csatorna kibocsátója, ezért valóban birtokában van az adott csatorna Ed25519 személyazonosító kulcspárjának és minden epoch-kulcsnak — ezek nélkül egy rotációkezelő nem adja ki a következő kulcsot, és a database.py kommentje ezt mondja. „A szerver nem vizsgálja a tartalmat“ a közvetítőkre és mások szervereire vonatkozik, nem arra, amit a kereskedő a saját adatairól lát.",
+    "pt-BR": "O gateway é o emissor do canal, então ele de fato guarda o par de chaves de identidade Ed25519 daquele canal e todas as chaves de epoch — um gerenciador de rotação não consegue entregar a próxima chave sem elas, e o comentário em database.py diz exatamente isso. “Nenhuma inspeção de conteúdo pelo servidor” limita relays e servidores de outras pessoas, não a visão que um comerciante tem dos próprios dados.",
+    ko: "게이트웨이는 그 채널의 발급자이므로 해당 채널의 Ed25519 신원 키 쌍과 모든 epoch 키를 실제로 보유합니다. 교체 관리자는 이것 없이 다음 키를 배포할 수 없으며, database.py의 주석이 바로 그렇게 설명합니다. “서버의 콘텐츠 검사 없음”은 릴레이와 다른 사람의 서버를 제한하는 것이지, 판매자가 자기 데이터를 보는 것을 제한하지 않습니다.",
+    ar: "البوابة هي جهة إصدار القناة، لذا فهي تحتفظ بزوج مفاتيح هوية القناة من نوع Ed25519 وبكل مفتاح epoch — فمدير التدوير لا يستطيع تسليم المفتاح التالي بدونها، والتعليق في database.py يقول ذلك بالضبط. وعبارة «لا فحص للمحتوى من قبل الخادم» تحدّ من المرحّلات وخوادم الآخرين، لا من رؤية التاجر لبياناته هو.",
   },
 ];
 
@@ -1917,33 +2164,33 @@ export function ArchitectureComparison(): ReactElement {
               {pick(ARCH.tableHeading, locale)}
             </h3>
             <div className="no-scrollbar mt-4 overflow-x-auto">
-              <table className="w-full min-w-[760px] border-separate border-spacing-0 text-left text-[12px] leading-relaxed">
-                <caption className="pb-4 text-left align-top text-[11.5px] leading-relaxed text-faint">
+              <table className="w-full min-w-[760px] border-separate border-spacing-0 text-start text-[12px] leading-relaxed">
+                <caption className="pb-4 text-start align-top text-[11.5px] leading-relaxed text-faint">
                   {pick(ARCH.tableCaption, locale)}
                 </caption>
                 <thead>
                   <tr>
                     <th
                       scope="col"
-                      className="w-[150px] border-b border-hair pb-2 pr-4 text-left align-bottom text-[11px] font-semibold uppercase tracking-wider text-brand-soft"
+                      className="w-[150px] border-b border-hair pb-2 pe-4 text-start align-bottom text-[11px] font-semibold uppercase tracking-wider text-brand-soft"
                     >
                       {pick(ARCH.colDimension, locale)}
                     </th>
                     <th
                       scope="col"
-                      className="border-b border-brand/45 pb-2 pr-4 text-left align-bottom text-[12.5px] font-semibold text-white"
+                      className="border-b border-brand/45 pb-2 pe-4 text-start align-bottom text-[12.5px] font-semibold text-white"
                     >
                       {pick(ARCH.colSelf, locale)}
                     </th>
                     <th
                       scope="col"
-                      className="border-b border-hair pb-2 pr-4 text-left align-bottom text-[12.5px] font-medium text-mute"
+                      className="border-b border-hair pb-2 pe-4 text-start align-bottom text-[12.5px] font-medium text-mute"
                     >
                       {pick(ARCH.colOfficial, locale)}
                     </th>
                     <th
                       scope="col"
-                      className="border-b border-hair pb-2 text-left align-bottom text-[12.5px] font-medium text-mute"
+                      className="border-b border-hair pb-2 text-start align-bottom text-[12.5px] font-medium text-mute"
                     >
                       {pick(ARCH.colBot, locale)}
                     </th>
@@ -1954,14 +2201,14 @@ export function ArchitectureComparison(): ReactElement {
                     <tr key={`row-${i}`}>
                       <th
                         scope="row"
-                        className="border-b border-hair py-3.5 pr-4 text-left align-top text-[12px] font-semibold text-white"
+                        className="border-b border-hair py-3.5 pe-4 text-start align-top text-[12px] font-semibold text-white"
                       >
                         {pick(row.dimension, locale)}
                       </th>
-                      <td className="border-b border-hair py-3.5 pr-4 align-top text-mesh-soft">
+                      <td className="border-b border-hair py-3.5 pe-4 align-top text-mesh-soft">
                         {pick(row.self, locale)}
                       </td>
-                      <td className="border-b border-hair py-3.5 pr-4 align-top text-mute">
+                      <td className="border-b border-hair py-3.5 pe-4 align-top text-mute">
                         {pick(row.official, locale)}
                       </td>
                       <td className="border-b border-hair py-3.5 align-top text-mute">

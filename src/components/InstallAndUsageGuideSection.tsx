@@ -33,12 +33,13 @@ import { ADMIN_CONSOLE_URL, NODE_WS_URL, REPO_URL } from "@/lib/site";
 /**
  * Copy slots.
  *
- * `src/lib/i18n.tsx` types `Localized<T>` as a **total** map over the 18 tags the
- * iOS client declares, so every literal below carries all eighteen and the
+ * `src/lib/i18n.tsx` types `Localized<T>` as a **total** map over the 21 tags
+ * this portal declares — the iOS client's 18 plus pt-BR, ko and ar — so every
+ * literal below carries all twenty-one and the
  * compiler — plus `tools/check-i18n.mjs`, which reads the same literals — fails
  * the moment one is missing. Shell commands, environment keys, file names, URLs,
  * route paths, `systemd` unit names and console control labels are technical:
- * they stay byte-identical in all 18 slots and only the prose around them is
+ * they stay byte-identical in all 21 slots and only the prose around them is
  * translated. `useCopy` binds a slot to the visitor's language inside a render,
  * `pick` does it at a call site that already holds a locale.
  */
@@ -135,6 +136,9 @@ const T = {
     "bg": "Раздел 05 · Инсталация и ръководство",
     "tr": "Bölüm 05 · Kurulum ve kullanım rehberi",
     "hu": "05. fejezet · Telepítés és használati útmutató",
+    "pt-BR": "Seção 05 · Instalação e guia de uso",
+    ko: "섹션 05 · 설치 및 사용 가이드",
+    ar: "القسم 05 · دليل التثبيت والاستخدام",
   } satisfies L,
   title: {
     en: "Three steps: install it, open the console, see your first card on an iPhone",
@@ -155,6 +159,9 @@ const T = {
     "bg": "Три стъпки: инсталирай, отвори конзолата, виж първата си карта на iPhone",
     "tr": "Üç adım: kurun, konsolu açın ve iPhone'unuzda ilk kartı görün",
     "hu": "Három lépés: telepítés, a konsol megnyitása, az első kártya megtekintése iPhone-on",
+    "pt-BR": "Três passos: instalar, abrir o console, ver seu primeiro cartão em um iPhone",
+    ko: "세 단계: 설치하고, 콘솔을 열고, iPhone에서 첫 카드를 확인합니다",
+    ar: "ثلاث خطوات: التثبيت، ثم فتح وحدة التحكم، ثم رؤية أول بطاقة على iPhone",
   } satisfies L,
   subtitle: {
     en: "Every command, flag, endpoint and key below comes from the repository itself: the README, the three launchers, docker-compose.yml, gen_voucher.py and the console source. If a script does not implement an option, this page does not print it.",
@@ -175,6 +182,9 @@ const T = {
     "bg": "Всяка команда, всеки флаг, всяка крайна точка и всеки ключ по-долу са взети от самото хранилище: README, трите стартиращи скрипта, docker-compose.yml, gen_voucher.py и изходният код на конзолата. Каквото скриптът не поддържа, не го изписваме и тук.",
     "tr": "Aşağıdaki her komut, her bayrak, her uç nokta ve her anahtar deposunun kendisinden alınmıştır: README, üç başlatma betiği, docker-compose.yml, gen_voucher.py ve konsol kaynak kodu. Bir betiğin desteklemediği hiçbir seçeneği burada yayınlamıyoruz.",
     "hu": "Az alábbi minden parancs, kapcsoló, végpont és kulcs a tárolóból származik: README, a három indító szkript, a docker-compose.yml, a gen_voucher.py és a konzol forráskódja. Amely kapcsolót egy szkript nem valósítja meg, azt ez az oldal nem írja le.",
+    "pt-BR": "Cada comando, flag, endpoint e chave abaixo vem do próprio repositório: o README, os três lançadores, docker-compose.yml, gen_voucher.py e o código-fonte do console. Se um script não implementa uma opção, esta página não a exibe.",
+    ko: "아래의 모든 명령, 플래그, 엔드포인트, 키는 저장소 자체에서 가져온 것입니다: README, 세 개의 런처, docker-compose.yml, gen_voucher.py, 콘솔 소스입니다. 스크립트가 구현하지 않은 옵션은 이 페이지에서도 출력하지 않습니다.",
+    ar: "كل أمر وعلامة ونقطة نهاية ومفتاح أدناه يأتي من المستودع نفسه: README، والمشغّلات الثلاثة، وdocker-compose.yml، وgen_voucher.py، وشيفرة وحدة التحكم. وإذا لم ينفّذ نص ما خيارًا ما، فلا تطبعه هذه الصفحة.",
   } satisfies L,
 
   /* Part 1 */
@@ -197,6 +207,9 @@ const T = {
     "bg": "Стъпка 1 · STEP 01",
     "tr": "Adım 1 · STEP 01",
     "hu": "1. lépés · STEP 01",
+    "pt-BR": "Passo 1 · STEP 01",
+    ko: "1단계 · STEP 01",
+    ar: "الخطوة 1 · STEP 01",
   } satisfies L,
   p1Title: {
     en: "Install the environment and launch it in one command",
@@ -217,6 +230,9 @@ const T = {
     "bg": "Инсталирайте средата и стартирайте с една команда",
     "tr": "Ortamı kurun ve tek komutla başlatın",
     "hu": "A környezet telepítése és indítás egyetlen paranccsal",
+    "pt-BR": "Instale o ambiente e o inicie com um único comando",
+    ko: "환경을 설치하고 한 명령으로 실행합니다",
+    ar: "ثبّت البيئة وأطلقها بأمر واحد",
   } satisfies L,
   p1Sub: {
     en: "Production hosts run an installer: sudo ./install_ubuntu22.sh on Ubuntu, or sudo ./install_macos.sh on macOS, where the gateway becomes a native launchd daemon. The ./start_macos.sh launcher is the development path — it runs the gateway in the foreground out of a venv. All three bring the gateway up on 8080 and keep the node's WebSocket on 127.0.0.1:5225.",
@@ -237,6 +253,9 @@ const T = {
     "bg": "Продукционните машини използват инсталатор: sudo ./install_ubuntu22.sh върху Ubuntu или sudo ./install_macos.sh върху macOS, където шлюзът става нативен launchd демон. Скриптът ./start_macos.sh е developmentalният път — той задига шлюза на преден план от venv. И трите вдигат шлюза на порт 8080 и държат WebSocket на възела на 127.0.0.1:5225.",
     "tr": "Üretim sunucuları bir kurulum programı çalıştırır: Ubuntu'da sudo ./install_ubuntu22.sh ya da macOS'ta sudo ./install_macos.sh; ikinci seçenekte ağ geçidi native bir launchd yardımcısı olur. ./start_macos.sh betiği ise geliştirme yoludur — ağ geçidini bir venv içinden ön planda çalıştırır. Üçünün de ağ geçidini 8080 portunda ayağa kaldırır ve düğümün WebSocket'ini 127.0.0.1:5225 adresinde tutar.",
     "hu": "Éles gépeken telepítővel indul: sudo ./install_ubuntu22.sh Ubuntu-n, vagy sudo ./install_macos.sh macOS-en, ahol az átjáró natív launchd démonná válik. A ./start_macos.sh indító a fejlesztői út — az átjárót az előtérben futtatja egy venv-ből. Mind a három az átjárót a 8080-as porton indítja, a csomópont WebSocketjét pedig 127.0.0.1:5225-ön tartja.",
+    "pt-BR": "Hosts de produção executam um instalador: sudo ./install_ubuntu22.sh no Ubuntu, ou sudo ./install_macos.sh no macOS, onde o gateway se torna um daemon launchd nativo. O lançador ./start_macos.sh é o caminho de desenvolvimento — ele executa o gateway em primeiro plano a partir de um venv. Os três colocam o gateway no ar na porta 8080 e mantêm o WebSocket do nó em 127.0.0.1:5225.",
+    ko: "운영 서버는 설치 스크립트로 구성합니다: Ubuntu에서는 sudo ./install_ubuntu22.sh, macOS에서는 sudo ./install_macos.sh를 사용하며, macOS에서는 게이트웨이가 네이티브 launchd 데몬이 됩니다. ./start_macos.sh 런처는 개발 경로로, venv에서 게이트웨이를 포그라운드로 실행합니다. 세 가지 모두 게이트웨이를 8080에서 기동하고 노드의 WebSocket을 127.0.0.1:5225에 유지합니다.",
+    ar: "تشغّل خوادم الإنتاج نصَّ تثبيت: sudo ./install_ubuntu22.sh على Ubuntu، أو sudo ./install_macos.sh على macOS، حيث تصبح البوابة خدمة launchd أصلية. أما المشغّل ./start_macos.sh فهو مسار التطوير — إذ يشغّل البوابة في المقدمة من داخل venv. والثلاثة جميعًا يرفعون البوابة على 8080 ويبقون WebSocket الخاص بالعقدة على 127.0.0.1:5225.",
   } satisfies L,
   tabsLabel: {
     en: "Choose a deployment platform",
@@ -257,6 +276,9 @@ const T = {
     "bg": "Изберете платформа за внедряване",
     "tr": "Dağıtım platformunu seçin",
     "hu": "Válassza ki a telepítési platformot",
+    "pt-BR": "Escolha uma plataforma de implantação",
+    ko: "배포 플랫폼 선택",
+    ar: "اختر منصة النشر",
   } satisfies L,
   tabsLegend: {
     en: "With focus on a tab, the left and right arrow keys switch platform.",
@@ -277,6 +299,9 @@ const T = {
     "bg": "Когато фокусът е върху раздел, стрелките наляво и надясно сменят платформата.",
     "tr": "Bir sekmede odakliyken sol ve sağ ok tuşları platformu değiştirir.",
     "hu": "Ha a fülön van a fókusz, a bal és jobb nyíl billentyűk váltanak platformot.",
+    "pt-BR": "Com o foco em uma aba, as teclas de seta para a esquerda e para a direita alternam a plataforma.",
+    ko: "탭에 포커스가 있을 때 좌우 화살표 키로 플랫폼을 전환합니다.",
+    ar: "عند التركيز على أحد التبويبين، يبدّل مفتاحا السهمين الأيسر والأيمن المنصة.",
   } satisfies L,
   tabUbuntu: {
     en: "Ubuntu 22.04 LTS production",
@@ -297,6 +322,9 @@ const T = {
     "bg": "Ubuntu 22.04 LTS, продукция",
     "tr": "Ubuntu 22.04 LTS üretim",
     "hu": "Ubuntu 22.04 LTS éles környezet",
+    "pt-BR": "Produção em Ubuntu 22.04 LTS",
+    ko: "Ubuntu 22.04 LTS 프로덕션",
+    ar: "Ubuntu 22.04 LTS للإنتاج",
   } satisfies L,
   tabMacos: {
     en: "macOS (Apple Silicon / Intel): production & local dev",
@@ -317,6 +345,9 @@ const T = {
     "bg": "macOS (Apple Silicon / Intel): продукция и локална разработка",
     "tr": "macOS (Apple Silicon / Intel): üretim ve yerel geliştirme",
     "hu": "macOS (Apple Silicon / Intel): üretim és helyi fejlesztés",
+    "pt-BR": "macOS (Apple Silicon / Intel): produção e desenvolvimento local",
+    ko: "macOS (Apple Silicon / Intel): 프로덕션 및 로컬 개발",
+    ar: "macOS (Apple Silicon / Intel): للإنتاج والتطوير المحلي",
   } satisfies L,
 
   ubuntuIntro: {
@@ -338,6 +369,9 @@ const T = {
     "bg": "Инсталаторът печата това изречение в предупреждението при неуспешна сонда, не сред номерираните NEXT STEPS — този блок изобщо не споменава /healthz — а --mode native стартира един и същ шлюз зад един и същи път. Причината дава именно там: /healthz съобщава състоянието на възела, без да го прави праг на готовност, следователно зелено доказва само че шлюзът обслужва — дали последователите наистина се достигат, показва следващото поле.",
     "tr": "Kurulum programı bu cümleyi başarısız yoklama uyarısında yazdırır, numaralı NEXT STEPS listesinde değil — o blok /healthz'den hiç söz etmez —; --mode native aynı ağ geçidini aynı rota arkasında çalıştırır. Gerekçesini de orada verir: /healthz düğüm durumunu bildirir ama hazır olma ölçütü yapmaz — burada yeşil çıkan yanıt yalnızca ağ geçidinin hizmet verdiğini kanıtlar, takipçilere ulaşılıp ulaşılmadığını bir sonraki alan söyler.",
     "hu": "A telepítő ezt a mondatot a sikertelen próba figyelmeztetésében nyomtatja ki, nem a sorszámozott NEXT STEPS között — az a blokk egyáltalán nem említi a /healthz-t —, és a --mode native ugyanazt az átjárót futtatja ugyanazon az útvonalon. A magyarázatot ott adja meg: a /healthz a csomópont állapotát jelenti, nem a készenlét mércéje, tehát a zöld itt csak azt bizonyítja, hogy az átjáró kiszolgál — hogy a követők tényleg elérhetők-e, azt a következő mező mondja meg.",
+    "pt-BR": "O instalador imprime esta frase no aviso de sondagem com falha, e não entre os NEXT STEPS numerados — esse bloco nunca menciona /healthz — e --mode native executa o mesmo gateway por trás da mesma rota. Ali ele apresenta a própria justificativa: /healthz informa o estado do nó em vez de condicionar a prontidão a ele, portanto uma resposta verde prova que o gateway está servindo — o campo seguinte é o que diz se os seguidores podem de fato ser alcançados.",
+    ko: "설치 스크립트는 이 문장을 번호가 붙은 NEXT STEPS가 아니라 프로브 실패 경고에 출력합니다. 그 블록은 /healthz를 언급하지 않으며, --mode native는 동일한 라우트 뒤에서 같은 게이트웨이를 실행합니다. 경고 자체가 그 이유를 밝힙니다: /healthz는 준비 상태를 판정하는 대신 노드 상태를 보고하므로, 초록 응답은 게이트웨이가 서비스 중이라는 것만 증명하며, 팔로워에 실제로 도달할 수 있는지는 다음 필드가 알려 줍니다.",
+    ar: "يطبع نص التثبيت هذه الجملة في تحذير فشل الفحص، لا ضمن NEXT STEPS المرقّمة — فتلك الكتلة لا تذكر /healthz إطلاقًا — كما أن --mode native يشغّل البوابة نفسها خلف المسار نفسه. وهو يورد هناك سببه الخاص: أن /healthz يبلّغ عن حالة العقدة بدل أن يجعل الجاهزية متوقفة عليها، لذا فإن إجابة خضراء تثبت أن البوابة تخدم — والحقل التالي هو ما يبيّن ما إذا كان يمكن الوصول إلى المتابعين فعلًا.",
   } satisfies L,
   macosIntro: {
     en: "This is the very probe the launcher uses: it requests /healthz first and only prints the console address once the gateway answers. On this path the response body is discarded — start_macos.sh logs just gateway healthy (pid N) and never prints node_connected. Dumping the body is what the two production installers do: install_ubuntu22.sh and install_macos.sh each curl /healthz and print it, and that is where a node that stayed down shows up as node_connected. A node that stays down never aborts the run.",
@@ -358,6 +392,9 @@ const T = {
     "bg": "Това е точно сондата, с която работи стартерът: първо проверява /healthz и чак когато шлюзът отговори, печата адреса на конзолата. По този път тялото на отговора се изхвърля — start_macos.sh записва само gateway healthy (pid N) и никога не печата node_connected. Тялото го печатат двата продукционни инсталатора: install_ubuntu22.sh и install_macos.sh всеки прави curl към /healthz и изписва отговора; там именно възел, който не е станал, се вижда като node_connected. Стартирането не се прекъсва заради това.",
     "tr": "Bu, başlatma betiğinin kullandığı yoklamanın ta kendisidir: önce /healthz'i sorgular, ağ geçidi yanıt verince konsol adresini yazdırır. Bu yolda yanıt gövdesi atılır — start_macos.sh yalnızca gateway healthy (pid N) kaydeder ve node_connected'i hiç yazdırmaz. Gövdeyi iki üretim kurulum programı döküyor: install_ubuntu22.sh ve install_macos.sh ikisi de /healthz'i curl'leyip çıktıyı basar; ayağa kalkmayan düğüm ancak orada node_connected olarak görünür. Çalışma bu yüzden yarıda kesilmez.",
     "hu": "Ez pontosan az a próba, amit az indító használ: előbb a /healthz-t kérdezi le, és csak az átjáró válasza után nyomtatja ki a konzol címét. Ezen az úton a válasz törzsét eldobja — a start_macos.sh csak azt jegyzi meg, hogy gateway healthy (pid N), és node_connected-t soha nem nyomtat ki. A törzsét két üretim telepítő írja ki: az install_ubuntu22.sh és az install_macos.sh egyaránt megcurlazza a /healthz-t és kiszedi a választ; ott jelenik meg a fel nem kelő csomópont node_connected formájában. Az indítás ettől nem szakad meg.",
+    "pt-BR": "Esta é exatamente a sondagem que o lançador usa: ele solicita /healthz primeiro e só imprime o endereço do console quando o gateway responde. Nesse caminho, o corpo da resposta é descartado — start_macos.sh registra apenas gateway healthy (pid N) e nunca imprime node_connected. Despejar o corpo é o que fazem os dois instaladores de produção: install_ubuntu22.sh e install_macos.sh executam curl /healthz e o imprimem, e é aí que um nó que permaneceu inativo aparece como node_connected. Um nó que permanece inativo nunca aborta a execução.",
+    ko: "이것이 바로 런처가 사용하는 프로브입니다: 먼저 /healthz를 요청하고 게이트웨이가 응답한 뒤에만 콘솔 주소를 출력합니다. 이 경로에서는 응답 본문이 버려집니다. start_macos.sh는 gateway healthy (pid N)만 기록하고 node_connected는 출력하지 않습니다. 본문을 덤프하는 것은 두 운영 설치 스크립트입니다. install_ubuntu22.sh와 install_macos.sh는 각각 /healthz를 curl하여 출력하며, 올라오지 않은 노드는 바로 그 지점에서 node_connected로 드러납니다. 노드가 올라오지 않아도 실행이 중단되지는 않습니다.",
+    ar: "هذا هو الفحص نفسه الذي يستخدمه المشغّل: يطلب /healthz أولًا، ولا يطبع عنوان وحدة التحكم إلا بعد أن تجيب البوابة. وفي هذا المسار يُهمَل جسم الاستجابة — إذ يسجّل start_macos.sh فقط gateway healthy (pid N) ولا يطبع node_connected أبدًا. أما إظهار الجسم كاملًا فهو ما يفعله نصّا التثبيت الإنتاجيين: فكلٌّ من install_ubuntu22.sh وinstall_macos.sh يستدعي /healthz عبر curl ويطبعه، وهناك يظهر أي عقدة بقيت متوقفة في صورة node_connected. والعقدة التي تبقى متوقفة لا تُجهض التشغيل أبدًا.",
   } satisfies L,
 
   uCloneT: {
@@ -379,6 +416,9 @@ const T = {
     "bg": "Свали изходния код",
     "tr": "Kaynak kodu edinin",
     "hu": "A forráskód beszerzése",
+    "pt-BR": "Obtenha o código-fonte",
+    ko: "소스 가져오기",
+    ar: "احصل على المصدر",
   } satisfies L,
   uCloneC: {
     en: "The installer looks for docker-compose.yml and gateway/app next to itself and aborts if either is missing, so a half-finished checkout never becomes a running service.",
@@ -399,6 +439,9 @@ const T = {
     "bg": "Инсталаторът търси docker-compose.yml и gateway/app до собствената си директория и спира, ако липсва някое от двете — незавършен checkout никога няма да стане работеща услуга.",
     "tr": "Kurulum programı kendi dizininin yanında docker-compose.yml ve gateway/app arar; biri eksikse hemen durur, böylece yarım kalmış bir klon asla çalışan bir hizmet olmaz.",
     "hu": "A telepítő a saját könyvtára mellett keresi a docker-compose.yml és a gateway/app elemeket, és hiány esetén azonnal kilép — a félig pakolt checkout sosem lesz futó szolgáltatás.",
+    "pt-BR": "O instalador procura docker-compose.yml e gateway/app ao lado de si mesmo e aborta se qualquer um dos dois estiver ausente, de modo que um checkout inacabado nunca se torne um serviço em execução.",
+    ko: "설치 스크립트는 자신과 같은 위치에서 docker-compose.yml과 gateway/app을 찾고 둘 중 하나라도 없으면 중단하므로, 절반만 받은 체크아웃이 실행 중인 서비스가 되는 일은 없습니다.",
+    ar: "يبحث نص التثبيت عن docker-compose.yml وgateway/app بجواره، ويتوقف إن غاب أيٌّ منهما، حتى لا تتحول نسخة مستودع نصف منجزة إلى خدمة عاملة.",
   } satisfies L,
   uEnvT: {
     en: "Configure: cp .env.example .env",
@@ -419,6 +462,9 @@ const T = {
     "bg": "Конфигуриране: cp .env.example .env",
     "tr": "Yapılandırma: cp .env.example .env",
     "hu": "Beállítás: cp .env.example .env",
+    "pt-BR": "Configure: cp .env.example .env",
+    ko: "설정: cp .env.example .env",
+    ar: "الإعداد: cp .env.example .env",
   } satisfies L,
   uEnvC: {
     en: ".env.example carries 58 commented keys — the README points at the very grep that counts them. The lookup order is --env <path> → $POPOPX_ENV_FILE → the repository root's .env, and a value already in the process environment overrides the file: the orchestrator wins. An unrecognised POPOPX_* key is ignored rather than an error, while a malformed KEY=value line stops startup on purpose.",
@@ -439,6 +485,9 @@ const T = {
     "bg": ".env.example съдържа 58 ключа, всеки с коментар. Редът на търсене е --env <path> → $POPOPX_ENV_FILE → файлът .env в корена на хранилището, а стойност, вече налична в средата на процеса, надделява над файла. Неразпознатите POPOPX_* ключове се игнорират, не са грешка.",
     "tr": ".env.example içinde her biri açıklamalı 58 anahtar var. Arama sırası --env <path> → $POPOPX_ENV_FILE → depo kökündeki .env şeklindedir; süreç ortamında zaten bulunan bir değer dosyayı ezer. Tanınmayan POPOPX_* anahtarları yok sayılır, hata olarak raporlanmaz.",
     "hu": "A .env.example 58 kommentált kulcsot tartalmaz. A keresési sorrend: --env <path> → $POPOPX_ENV_FILE → a gyökér .env fájlja, és a folyamat környezetében már szereplő érték felülbírálja a fájlt. Az ismeretlen POPOPX_* kulcsokat a rendszer figyelmen kívül hagyja, nem hibajelenség.",
+    "pt-BR": ".env.example traz 58 chaves comentadas — o README aponta exatamente para o grep que as conta. A ordem de busca é --env <path> → $POPOPX_ENV_FILE → o .env da raiz do repositório, e um valor que já esteja no ambiente do processo sobrepõe o arquivo: o orquestrador vence. Uma chave POPOPX_* não reconhecida é ignorada em vez de virar erro, enquanto uma linha KEY=value malformada interrompe a inicialização de propósito.",
+    ko: ".env.example에는 주석 처리된 키가 58개 있습니다 — README는 이를 세는 바로 그 grep을 가리킵니다. 조회 순서는 --env <path> → $POPOPX_ENV_FILE → 저장소 루트의 .env이며, 프로세스 환경에 이미 있는 값은 파일을 덮어씁니다: 오케스트레이터가 우선합니다. 인식되지 않는 POPOPX_* 키는 오류가 아니라 무시되지만, 형식이 잘못된 KEY=value 줄은 의도적으로 시작을 중단시킵니다.",
+    ar: "يحمل .env.example 58 مفتاحًا معلّقًا — وREADME يشير إلى أمر grep نفسه الذي يعدّها. وترتيب البحث هو --env <path> → $POPOPX_ENV_FILE → ملف .env في جذر المستودع، وأي قيمة موجودة أصلًا في بيئة العملية تتغلب على الملف: فالمنسّق هو الفائز. وأي مفتاح POPOPX_* غير معروف يُتجاهل بدل أن يكون خطأً، في حين أن سطر KEY=value مشوّهًا يوقف بدء التشغيل عن قصد.",
   } satisfies L,
   uTokenT: {
     en: "Admin token: do not skip this",
@@ -459,6 +508,9 @@ const T = {
     "bg": "Административен токен: тази стъпка не се прескача",
     "tr": "Yönetici jetonu: bu adım atlanmaz",
     "hu": "Adminisztrátori token: ezt a lépést nem lehet kihagyni",
+    "pt-BR": "Token de administração: não pule esta etapa",
+    ko: "관리자 토큰: 이 단계를 건너뛰지 마십시오",
+    ar: "رمز المسؤول: لا تتخطَّ هذه الخطوة",
   } satisfies L,
   uTokenC: {
     en: "Paste the 64 hex characters it prints into POPOPX_ADMIN_TOKEN= in .env. load_config() refuses to start when that key is missing, shorter than 24 characters, or still an example value — and the refusal message itself hands you this generator. The installer only generates a token when there is no .env at all, and then leaves .env at mode 0600; once you have copied one, it will not touch it.",
@@ -479,6 +531,9 @@ const T = {
     "bg": "Поставете 64-те шестнадесетични символа, които командата отпечатва, в POPOPX_ADMIN_TOKEN= вътре в .env. load_config() отказва стартиране, когато ключът липсва, е по-къс от 24 символа или все още е примерна стойност — и в самото съобщение за отказ се съдържа този генератор. Инсталаторът създава токен само когато няма никакъв .env, и тогава оставя .env в режим 0600; ако сте го копирали сами, файлът няма да бъде докоснат.",
     "tr": "Yazdırdığı 64 onaltılık karakteri .env içindeki POPOPX_ADMIN_TOKEN= satırına yapıştırın. load_config() işlevi bu anahtar eksikse, 24 karakterden kısaysa ya da hâlâ örnek değeri içeriyorsa başlamayı reddeder — ve reddetme mesajının kendisi size bu üretici komutu verir. Kurulum programı yalnızca hiç .env yoksa jeton üretir ve sonra .env dosyasını 0600 modunda bırakır; siz kopyaladıysanız dosyaya dokunmaz.",
     "hu": "Illessze be a parancs által kiírt 64 hexadecimális karaktert a .env fájl POPOPX_ADMIN_TOKEN= kulcsába. A load_config() megtagadja az indulást, ha a kulcs hiányzik, rövidebb mint 24 karakter, vagy még mindig példaérték — és az elutasító üzenet magát ezt a generátort tartalmazza. A telepítő csak akkor állít elő tokent, ha egyetlen .env sincs, és akkor 0600 módban hagyja; ha ön másolta, nem nyúl hozzá.",
+    "pt-BR": "Cole os 64 caracteres hex que ele imprime em POPOPX_ADMIN_TOKEN= no .env. load_config() recusa a inicialização quando essa chave está ausente, tem menos de 24 caracteres ou ainda é um valor de exemplo — e a própria mensagem de recusa entrega a você este gerador. O instalador só gera um token quando não existe nenhum .env, e então deixa o .env com modo 0600; depois que você copiou um, ele não o toca mais.",
+    ko: ".env의 POPOPX_ADMIN_TOKEN= 에 출력된 64자리 hex 문자를 붙여 넣습니다. load_config()는 해당 키가 없거나, 24자 미만이거나, 아직 예시 값이면 시작을 거부하며, 이 거부 메시지 자체가 이 생성기를 알려 줍니다. 설치 스크립트는 .env가 아예 없을 때만 토큰을 생성하고 그때 .env를 모드 0600으로 남깁니다. 한 번 복사한 뒤에는 그 파일을 건드리지 않습니다.",
+    ar: "ألصق الأحرف الست عشرية البالغة 64 حرفًا التي يطبعها في POPOPX_ADMIN_TOKEN= داخل .env. إذ يرفض load_config() بدء التشغيل إذا غاب ذلك المفتاح، أو كان أقصر من 24 حرفًا، أو كان لا يزال قيمة مثال — ورسالة الرفض نفسها تسلّمك هذا المولّد. ولا يولّد نص التثبيت رمزًا إلا حين لا يوجد .env إطلاقًا، وحينها يترك .env على الوضع 0600؛ وبمجرد أن تنسخ رمزًا فلن يمسّه.",
   } satisfies L,
   uReadT: {
     en: "Reading the value back",
@@ -499,6 +554,9 @@ const T = {
     "bg": "Извади стойността обратно",
     "tr": "Değeri geri okumak",
     "hu": "Az érték visszaolvasása",
+    "pt-BR": "Ler o valor de volta",
+    ko: "값 다시 읽기",
+    ar: "قراءة القيمة مجددًا",
   } satisfies L,
   uReadC: {
     en: "The value is never printed to the terminal by default; the installer reports only the key name and prints this grep line for you. The three paths are the three install modes: /opt/popopx-service-suite/src/.env is the Ubuntu installer in container mode, /etc/popopx-service-suite/env is the Ubuntu installer under --mode native, and /usr/local/etc/popopx-service-suite/env is what the macOS production installer, install_macos.sh, writes for its launchd job. If it ever lands in a ticket or a CI log, treat it as compromised and rotate it.",
@@ -519,6 +577,9 @@ const T = {
     "bg": "Стойността по подразбиране не се отпечатва в терминала: инсталаторът съобщава само името на ключа и печата точно тези grep редове. Трите пътеки са трите режима на инсталация: /opt/popopx-service-suite/src/.env се записва от ubuntu скрипта в контейнерен режим, /etc/popopx-service-suite/env се записва от него при --mode native, а /usr/local/etc/popopx-service-suite/env е файлът, който продуктовият инсталатор за macOS, install_macos.sh, записва за launchd задачата си. Ако стойността попадне в билет или CI лог, я считайте за компрометирана и я сменете.",
     "tr": "Değer varsayılan olarak terminale yazdırılmaz: kurulum programı yalnızca anahtar adını bildirir ve bu grep satırlarınız için yazdırır. Üç yol, üç kurulum kipi demektir: /opt/popopx-service-suite/src/.env kapsayıcı kipinde Ubuntu betiğinin yazdığı dosyadır, /etc/popopx-service-suite/env aynı betiğin --mode native altında yazdığı dosyadır, /usr/local/etc/popopx-service-suite/env ise macOS üretim kurulum programının, install_macos.sh'nin, launchd işi için yazdığı dosyadır. Değer bir iş kaydına ya da CI günlüğüne düşerse ele geçirilmiş sayın ve yenisini üretin.",
     "hu": "Az érték alapértelmezésben nem kerül a terminálba: a telepítő csak a kulcs nevét jelenti, és ezeket a grep sorokat nyomtatja ki. A három útvonal a három telepítési módot jelenti: az /opt/popopx-service-suite/src/.env fájlt az Ubuntu szkript konténeres módban írja, az /etc/popopx-service-suite/env fájlt ugyanaz a szkript --mode native alatt, az /usr/local/etc/popopx-service-suite/env fájlt pedig a macOS éles telepítő, az install_macos.sh írja a launchd feladata számára. Ha az érték jegybe vagy CI-naplóba kerül, tekintsé kompromittáltnak, és cserélje le.",
+    "pt-BR": "Por padrão, o valor nunca é impresso no terminal; o instalador informa apenas o nome da chave e imprime esta linha grep para você. Os três caminhos são os três modos de instalação: /opt/popopx-service-suite/src/.env é o instalador do Ubuntu em modo contêiner, /etc/popopx-service-suite/env é o instalador do Ubuntu em --mode native, e /usr/local/etc/popopx-service-suite/env é o que o instalador de produção do macOS, install_macos.sh, grava para a tarefa launchd. Se ele algum dia aparecer em um ticket ou em um log de CI, trate-o como comprometido e faça a rotação.",
+    ko: "기본적으로 값은 터미널에 출력되지 않으며, 설치 스크립트는 키 이름만 알려 주고 이 grep 줄을 대신 출력합니다. 세 경로는 세 가지 설치 모드에 대응합니다: /opt/popopx-service-suite/src/.env는 컨테이너 모드의 Ubuntu 설치 스크립트, /etc/popopx-service-suite/env는 --mode native에서의 Ubuntu 설치 스크립트, /usr/local/etc/popopx-service-suite/env는 macOS 운영 설치 스크립트인 install_macos.sh가 launchd 작업을 위해 기록하는 파일입니다. 이 값이 티켓이나 CI 로그에 남았다면 유출된 것으로 간주하고 교체하십시오.",
+    ar: "لا تُطبع القيمة في الطرفية افتراضيًا أبدًا؛ فنص التثبيت لا يذكر إلا اسم المفتاح ويطبع لك سطر grep هذا. والمسارات الثلاثة هي أوضاع التثبيت الثلاثة: /opt/popopx-service-suite/src/.env هو مثبّت Ubuntu في وضع الحاويات، و/etc/popopx-service-suite/env هو مثبّت Ubuntu تحت --mode native، و/usr/local/etc/popopx-service-suite/env هو ما يكتبه مثبّت الإنتاج على macOS، install_macos.sh، لمهمة launchd الخاصة به. وإذا وصلت القيمة يومًا إلى تذكرة دعم أو سجل CI، فاعتبر القيمة مكشوفة ودوّرها.",
   } satisfies L,
   uInstallT: {
     en: "One-command install",
@@ -539,6 +600,9 @@ const T = {
     "bg": "Инсталация с една команда",
     "tr": "Tek komutla kurulum",
     "hu": "Telepítés egyetlen paranccsal",
+    "pt-BR": "Instalação com um único comando",
+    ko: "한 명령으로 설치",
+    ar: "التثبيت بأمر واحد",
   } satisfies L,
   uInstallC: {
     en: "Root is required. The default mode is containerised: docker.io plus the compose plugin, a build of the gateway image, then compose up. The script is idempotent — an existing .env is backed up with a timestamp and kept, and anything it would overwrite is backed up first. Its own wording is that it never destroys the state directory: the files in it survive a re-run, but the installer does change that directory's owner and mode — chown -R 1001:1001 plus chmod 0750 in container mode, -o popopx -g popopx in native mode.",
@@ -559,6 +623,9 @@ const T = {
     "bg": "Нужен е root. Режимът по подразбиране е контейнерен: docker.io с compose приставка, изграждане на образа на шлюза и после compose up. Скриптът е идемпотентен — съществуващ .env се архивира с времеви печат и се запазва, а всичко, което би било презаписано, първо се архивира. Собствената му формулировка е, че никога не унищожава директорията със състояние: файловете в нея оцеляват при повторно изпълнение, но инсталаторът променя собственика и режима на тази директория — chown -R 1001:1001 плюс chmod 0750 в контейнерен режим, -o popopx -g popopx в native режим.",
     "tr": "root gerekir. Varsayılan kip kapsayıcılıdır: docker.io artı compose eklentisi, ağ geçidi imajının derlenmesi ve ardından compose up. Betik tekrarlanabilir (idempotent) — var olan bir .env zaman damgasıyla yedeklenip korunur ve üzerine yazılacak her şey önce yedeklenir. Betiğin kendi ifadesi durum dizisini asla yok etmediğidir: içindeki dosyalar yeniden çalıştırmadan sağ çıkar, ancak kurulum programı o dizinin sahibini ve modunu değiştirir — kapsayıcı kipinde chown -R 1001:1001 artı chmod 0750, native kipte -o popopx -g popopx.",
     "hu": "root szükséges. Az alapértelmezett mód konténeres: docker.io a compose-bővítménnyel, az átjáró image-ének felépítése, majd compose up. A szkript idempotens — egy meglévő .env fájlt időbélyeggel ment, és megőriz, és mindent, amit felülírna, előre ment. A saját megfogalmazása szerint sosem pusztítja el az állapotkönyvtárat: a benne lévő fájlok túlél egy újrafuttatást, de a telepítő valóban megváltoztatja e könyvtár tulajdonosát és módját — konténeres módban chown -R 1001:1001 és chmod 0750, natív módban -o popopx -g popopx.",
+    "pt-BR": "É necessário root. O modo padrão é em contêineres: docker.io mais o plug-in do compose, uma build da imagem do gateway e, em seguida, compose up. O script é idempotente — um .env existente recebe uma cópia de segurança com carimbo de data e hora e é mantido, e tudo o que ele viesse a sobrescrever recebe uma cópia de segurança antes. Nas suas próprias palavras, ele nunca destrói o diretório de estado: os arquivos nele sobrevivem a uma nova execução, mas o instalador de fato altera o proprietário e o modo desse diretório — chown -R 1001:1001 mais chmod 0750 no modo contêiner, -o popopx -g popopx no modo nativo.",
+    ko: "root 권한이 필요합니다. 기본 모드는 컨테이너 방식입니다: docker.io와 compose 플러그인을 설치하고, 게이트웨이 이미지를 빌드한 뒤 compose up을 실행합니다. 스크립트는 멱등적으로 동작합니다. 기존 .env는 타임스탬프와 함께 백업해 두고 유지하며, 덮어쓸 대상이 있으면 먼저 백업합니다. 스크립트 자체의 설명에 따르면 상태 디렉터리는 절대 파괴하지 않습니다. 재실행 후에도 그 안의 파일은 그대로 남지만, 설치 스크립트는 해당 디렉터리의 소유자와 모드를 변경합니다. 컨테이너 모드에서는 chown -R 1001:1001과 chmod 0750, 네이티브 모드에서는 -o popopx -g popopx입니다.",
+    ar: "صلاحيات root مطلوبة. والوضع الافتراضي هو الحاويات: docker.io مع إضافة compose، ثم بناء صورة البوابة، ثم compose up. ويمكن تكرار تنفيذ النص بأمان: فأي .env موجود يُنسخ احتياطيًا بطابع زمني ويُحتفظ به، وكل ما قد يستبدله يُنسخ احتياطيًا أولًا. وصياغته هو أنه لا يدمّر مجلد الحالة أبدًا: فالملفات فيه تبقى بعد إعادة التنفيذ، لكن نص التثبيت يغيّر مالك ذلك المجلد وأوضاعه — chown -R 1001:1001 مع chmod 0750 في وضع الحاويات، و-o popopx -g popopx في الوضع الأصلي.",
   } satisfies L,
   uModesT: {
     en: "Pick one: mode, node, help",
@@ -579,6 +646,9 @@ const T = {
     "bg": "Три избора: режим, възел, помощ",
     "tr": "Üç seçim: kip, düğüm, yardım",
     "hu": "Három választás: mód, csomópont, súgó",
+    "pt-BR": "Escolha um: modo, nó, ajuda",
+    ko: "하나를 고르십시오: 모드, 노드, 도움말",
+    ar: "اختر واحدًا: mode أو node أو help",
   } satisfies L,
   uModesC: {
     en: "--mode native is the venv + systemd path: deadsnakes for Python 3.11, gateway/requirements.txt into /opt/popopx-service-suite/venv, a pip freeze into requirements.lock, and a popopx-gateway.service whose ExecStart is exactly python -m app.main, so the socket is decided by the EnvironmentFile alone and only one worker runs. --with-node adds the node unit. The options this script knows are --mode, --with-node, --port, --skip-apt and --help; anything else is an unknown argument. On an Ubuntu that is not 22.04 it prints two warnings and continues, noting that the only release-specific step is the deadsnakes PPA.",
@@ -599,6 +669,9 @@ const T = {
     "bg": "--mode native е пътят venv + systemd: deadsnakes за Python 3.11, gateway/requirements.txt в /opt/popopx-service-suite/venv, pip freeze в requirements.lock и popopx-gateway.service, чийто ExecStart е точно python -m app.main — така сокетът се определя единствено от EnvironmentFile и работи един worker. --with-node добавя юнита на възела. Скриптът разбира само --mode, --with-node, --port, --skip-apt и --help; всичко друго е unknown argument. На Ubuntu, различен от 22.04, той отпечатва две предупреждения и продължава, отбелязвайки, че единствената зависеща от изданието стъпка е deadsnakes PPA.",
     "tr": "--mode native, venv + systemd yoludur: Python 3.11 için deadsnakes, gateway/requirements.txt dosyasının /opt/popopx-service-suite/venv içine kurulması, pip freeze ile requirements.lock ve ExecStart'ı tam olarak python -m app.main olan bir popopx-gateway.service; yani soketi yalnızca EnvironmentFile belirler ve tek worker çalışır. --with-node düğüm ünitesini ekler. Bu betiğin tanıdığı seçenekler --mode, --with-node, --port, --skip-apt ve --help; gerisi unknown argument olarak bildirilir. 22.04 olmayan bir Ubuntu'da iki uyarı basar ve devam eder, sürüme özgü tek adımın deadsnakes PPA olduğunu belirterek.",
     "hu": "--mode native a venv + systemd út: deadsnakes a Python 3.11-hez, gateway/requirements.txt a /opt/popopx-service-suite/venv-be, pip freeze a requirements.lockba, és egy popopx-gateway.service, amelynek ExecStartja pontosan python -m app.main — tehát a foglalatot csak az EnvironmentFile határozza meg, és egyetlen worker fut. --with-node a csomópont unitjét adja hozzá. A szkript csak a --mode, --with-node, --port, --skip-apt és --help kapcsolókat ismeri; minden más unknown argument. Nem 22.04 Ubuntu esetén két figyelmeztetést nyomtat és folytatja, megjegyezve, hogy az egyetlen kiadásfüggő lépés a deadsnakes PPA.",
+    "pt-BR": "--mode native é o caminho venv + systemd: deadsnakes para Python 3.11, gateway/requirements.txt em /opt/popopx-service-suite/venv, um pip freeze em requirements.lock e um popopx-gateway.service cujo ExecStart é exatamente python -m app.main, de modo que o socket é decidido apenas pelo EnvironmentFile e somente um worker é executado. --with-node adiciona a unit do nó. As opções que este script conhece são --mode, --with-node, --port, --skip-apt e --help; qualquer outra é um argumento desconhecido. Em um Ubuntu que não seja 22.04, ele imprime dois avisos e continua, observando que a única etapa específica da versão é o PPA deadsnakes.",
+    ko: "--mode native는 venv + systemd 경로입니다: Python 3.11용 deadsnakes, gateway/requirements.txt를 /opt/popopx-service-suite/venv에 설치, pip freeze로 requirements.lock 생성, ExecStart가 정확히 python -m app.main인 popopx-gateway.service 작성입니다. 따라서 소켓은 EnvironmentFile만으로 결정되고 워커는 하나만 실행됩니다. --with-node는 노드 유닛을 추가합니다. 이 스크립트가 아는 옵션은 --mode, --with-node, --port, --skip-apt, --help이며 그 밖의 것은 unknown argument입니다. 22.04가 아닌 Ubuntu에서는 경고 두 개를 출력하고 계속 진행하며, 릴리스에 종속된 단계는 deadsnakes PPA 하나뿐이라고 밝힙니다.",
+    ar: "--mode native هو مسار venv + systemd: deadsnakes من أجل Python 3.11، وgateway/requirements.txt إلى /opt/popopx-service-suite/venv، وpip freeze إلى requirements.lock، وpopopx-gateway.service يكون ExecStart فيه بالضبط python -m app.main، لذا يُحدَّد المقبس من EnvironmentFile وحده ويعمل عامل واحد فقط. ويضيف --with-node وحدة العقدة. والخيارات التي يعرفها هذا النص هي --mode و--with-node و--port و--skip-apt و--help؛ وأي شيء غيرها وسيط مجهول. وعلى Ubuntu غير 22.04 يطبع تحذيرين ويكمل، منبّهًا إلى أن الخطوة الوحيدة الخاصة بالإصدار هي مستودع PPA الخاص بـ deadsnakes.",
   } satisfies L,
   uComposeT: {
     en: "Driving compose directly (Linux)",
@@ -619,6 +692,9 @@ const T = {
     "bg": "Работа с compose директно (Linux)",
     "tr": "compose'u doğrudan kullanmak (Linux)",
     "hu": "A compose közvetlen használata (Linux)",
+    "pt-BR": "Operar o compose diretamente (Linux)",
+    ko: "compose 직접 사용(Linux)",
+    ar: "تشغيل compose مباشرة (Linux)",
   } satisfies L,
   uComposeC: {
     en: "Of these three lines the installer runs the two up commands for you, with the service names spelled out — up -d gateway, or --profile node up -d gateway node — preceded by a compose build gateway and followed by a compose ps. The third line, logs -f gateway, it only prints as a hint; you run it yourself. The node lives in the node profile, so without --profile node only the gateway ever comes up. POPOPX_NODE_IMAGE is read by compose only, never by the gateway — that image is built from the node's own repository, and this suite neither contains nor links its code.",
@@ -639,6 +715,9 @@ const T = {
     "bg": "От тези три реда инсталаторът изпълнява вместо вас двете up команди, с изписани имена на услугите — up -d gateway, или --profile node up -d gateway node — с compose build gateway отпред и compose ps отзад. Третия ред, logs -f gateway, той само отпечатва като подсказка; изпълнявате го вие. Възелът е в профила node, така че без --profile node се повдига само шлюзът. POPOPX_NODE_IMAGE се чете само от compose, никога от шлюза — образът на възела се изгражда от собственото му хранилище, а този комплект не съдържа и не линква кода му.",
     "tr": "Bu üç satırdan ikisini, yani up komutlarını, kurulum programı sizin yerinize çalıştırır — hizmet adları açıkça yazılır: up -d gateway, ya da --profile node up -d gateway node; başında bir compose build gateway, sonunda bir compose ps olur. Üçüncü satır, logs -f gateway, yalnızca bir ipucu olarak yazdırılır; onu siz çalıştırırsınız. Düğüm node profilinde durur, bu yüzden --profile node olmadan yalnızca ağ geçidi ayağa kalkar. POPOPX_NODE_IMAGE'yi yalnızca compose okur, ağ geçidi hiç okumaz — düğüm imajı kendi deposundan derlenir ve bu takım onun kodunu içermez ya da linklemez.",
     "hu": "Ezen három sor közül a telepítő ön helyett a két up parancsot futtatja le, a szolgáltatásnevek kiírásával — up -d gateway, vagy --profile node up -d gateway node — előtte egy compose build gateway, utána egy compose ps. A harmadik sort, logs -f gateway-t, csak tippként nyomtatja ki; azt maga futtatja. A csomópont a node profilban van, ezért --profile node nélkül csak az átjáró indul el. A POPOPX_NODE_IMAGE-t csak a compose olvassa, az átjáró soha — a csomópont image-je a csomópont saját tárolójából épül, és ez a csomag nem tartalmazza és nem linkeli a kódját.",
+    "pt-BR": "Destas três linhas, o instalador executa os dois comandos up para você, com os nomes dos serviços escritos por extenso — up -d gateway, ou --profile node up -d gateway node — precedidos de um compose build gateway e seguidos de um compose ps. A terceira linha, logs -f gateway, ele apenas imprime como dica; você mesmo a executa. O nó fica no perfil node, então sem --profile node apenas o gateway sobe. POPOPX_NODE_IMAGE é lido somente pelo compose, nunca pelo gateway — essa imagem é criada a partir do próprio repositório do nó, e esta suíte não contém nem vincula o código dele.",
+    ko: "이 세 줄 중 설치 스크립트가 대신 실행하는 것은 서비스 이름을 명시한 두 개의 up 명령입니다. up -d gateway, 또는 --profile node up -d gateway node이며, 앞에는 compose build gateway가, 뒤에는 compose ps가 붙습니다. 세 번째 줄인 logs -f gateway는 힌트로만 출력하고 직접 실행해야 합니다. 노드는 node 프로필에 있으므로 --profile node가 없으면 게이트웨이만 기동됩니다. POPOPX_NODE_IMAGE는 compose만 읽고 게이트웨이는 절대 읽지 않습니다. 해당 이미지는 노드 자체 저장소에서 빌드되며, 이 스위트는 그 코드를 포함하지도 링크하지도 않습니다.",
+    ar: "من هذه الأسطر الثلاثة ينفّذ نص التثبيت نيابةً عنك أمري up، مع ذكر أسماء الخدمات صريحة — up -d gateway، أو --profile node up -d gateway node — مسبوقًا بـ compose build gateway ومتبوعًا بـ compose ps. أما السطر الثالث، logs -f gateway، فلا يطبعه إلا كتلميح؛ وأنت من ينفّذه بنفسك. والعقدة تقيم في ملف التعريف node، لذا بدون --profile node لا تظهر إلا البوابة وحدها. وPOPOPX_NODE_IMAGE لا يقرأه إلا compose، ولا تقرأه البوابة أبدًا — فالصورة تُبنى من مستودع العقدة نفسه، وهذه المنظومة لا تحتوي شيفرته ولا تربط إليه.",
   } satisfies L,
   uUfwT: {
     en: "Firewall: the installer prints it, never runs it",
@@ -659,6 +738,9 @@ const T = {
     "bg": "Огнена стена: инсталаторът печата правилото, но не го прилага",
     "tr": "Güvenlik duvarı: betik kuralı yazdırır, asla uygulamaz",
     "hu": "Tűzfal: a telepítő kinyomtatja a szabályt, de sosem alkalmazza",
+    "pt-BR": "Firewall: o instalador imprime a linha, nunca a executa",
+    ko: "방화벽: 설치 스크립트는 출력만 하고 실행하지 않습니다",
+    ar: "جدار الحماية: نص التثبيت يطبعه ولا ينفّذه أبدًا",
   } satisfies L,
   uUfwC: {
     en: "This is exactly the line the installer's fourth NEXT STEP prints — swap in your own POPOPX_GATEWAY_PORT. The compose file says it plainly: under host networking the firewall is set with ufw on the host, and EXPOSE would be meaningless. Open it only once TLS is in place.",
@@ -679,6 +761,9 @@ const T = {
     "bg": "Това е точно редът, който печата четвъртата стъпка от NEXT STEPS на инсталатора — заменете с вашия POPOPX_GATEWAY_PORT. В compose файла пише открыто: при host мрежа огнената стена се настройва с ufw върху хоста, а EXPOSE няма смисъл. Отворете порта едва когато TLS е налице.",
     "tr": "Bu, kurulum betiğinin NEXT STEPS listesindeki dördüncü maddenin yazdırdığı satırın ta kendisidir — kendi POPOPX_GATEWAY_PORT değerinizle değiştirin. compose dosyası açıkça söylüyor: host ağında güvenlik duvarı ana makinede ufw ile kurulur, EXPOSE'in bir anlamı yoktur. Portu ancak TLS hazır olduğunda açın.",
     "hu": "Ez pontosan az a sor, amelyet a telepítő NEXT STEPS listájának negyedik pontja nyomtat — cserélje ki a saját POPOPX_GATEWAY_PORT értékére. A compose fájl egyértelműen mondja: host hálózatnál a tűzfalat a gazdagépen ufw-val állítjuk, az EXPOSE-nek nincs jelentősége. Csak akkor nyissa ki a portot, ha a TLS már a helyén van.",
+    "pt-BR": "Esta é exatamente a linha que o quarto NEXT STEP do instalador imprime — substitua pelo seu próprio POPOPX_GATEWAY_PORT. O arquivo compose diz isso claramente: na rede do host, o firewall é configurado com ufw no host, e EXPOSE não teria sentido. Abra-a apenas quando o TLS estiver no lugar.",
+    ko: "이것은 설치 스크립트의 네 번째 NEXT STEP이 출력하는 바로 그 줄입니다. POPOPX_GATEWAY_PORT 자리에 자신의 값을 넣으십시오. compose 파일은 이를 분명히 밝힙니다. 호스트 네트워킹에서는 방화벽을 호스트에서 ufw로 설정하며 EXPOSE는 의미가 없습니다. TLS가 준비된 뒤에만 포트를 여십시오.",
+    ar: "هذا هو السطر نفسه الذي تطبعه الخطوة الرابعة في NEXT STEPS لدى نص التثبيت — استبدل فيه POPOPX_GATEWAY_PORT بقيمتك. ويقول ملف compose ذلك صراحةً: في شبكة المضيف يُضبط جدار الحماية بـ ufw على المضيف، ويكون EXPOSE بلا معنى. ولا تفتحه إلا بعد أن يصبح TLS جاهزًا.",
   } satisfies L,
   uGatesT: {
     en: "The two pre-release gates, off the boot path",
@@ -699,6 +784,9 @@ const T = {
     "bg": "Двете врати преди релиз, извън пътя на стартиране",
     "tr": "Yayın öncesi iki kapı, açılış yolunun dışında",
     "hu": "A két kiadás előtti kapu, az indulási útvonalon kívül",
+    "pt-BR": "Os dois portões de pré-lançamento, fora do caminho de inicialização",
+    ko: "부팅 경로 밖에 있는 두 개의 사전 릴리스 게이트",
+    ar: "فحصا ما قبل الإصدار، بعيدًا عن مسار الإقلاع",
   } satisfies L,
   uGatesC: {
     en: "create_app() runs only the route gate assert_routes_are_gated() at startup: a single admin route left ungated and the socket never binds. The full suite is the development and release entry point, and all three launchers — start_macos.sh, install_ubuntu22.sh, install_macos.sh — print these two commands as their last step. The self-test really issues requests against the ASGI app, which is how it can tell a mounted route from one that merely exists in source.",
@@ -719,6 +807,9 @@ const T = {
     "bg": "При стартиране create_app() изпълнява само вратата на маршрутите assert_routes_are_gated(): един незащитен админски маршрут и сокетът не се обвързва. Пълните набори са входната точка за разработка и релиз, и и трите стартера — start_macos.sh, install_ubuntu22.sh, install_macos.sh — печатат тези две команди като последна стъпка. --self-test наистина изпраща заявки към ASGI приложението, затова различава монтиран маршрут от такъв, който само съществува в кода.",
     "tr": "Açılışta create_app() yalnızca rota kapısını assert_routes_are_gated() çalıştırır: tek bir korunmasız yönetici rotası varsa soket hiç bağlanmaz. Tam takımlar geliştirme ve yayın giriş kapısıdır, ve üç betiğin hepsi — start_macos.sh, install_ubuntu22.sh, install_macos.sh — bu iki komutu son adım olarak yazdırır. --self-test ASGI uygulamasına gerçekten istek gönderir; bu yüzden kurulmuş bir rotayı, yalnızca kaynakta var olan bir rotadan ayırt edebilir.",
     "hu": "Induláskor a create_app() csak az útvonalőrt futtatja: assert_routes_are_gated() — egyetlen védtelen admin útvonal, és a foglalat nem köt ki. A teljes csomagok a fejlesztés és a kiadás belépési pontjai, és mind a három indító — start_macos.sh, install_ubuntu22.sh, install_macos.sh — utolsó lépésként nyomtatja ki ezt a két parancsot. A --self-test valóban küld kéréseket az ASGI alkalmazásnak, ezért tudja megkülönböztetni a felcsatolt útvonalat attól, amely csak a forrásban létezik.",
+    "pt-BR": "create_app() executa na inicialização apenas o portão de rotas assert_routes_are_gated(): basta uma única rota de administração ficar sem portão para o socket nunca ser vinculado. A suíte completa é o ponto de entrada de desenvolvimento e de lançamento, e os três lançadores — start_macos.sh, install_ubuntu22.sh, install_macos.sh — imprimem estes dois comandos como última etapa. O self-test realmente emite requisições contra o aplicativo ASGI, e é assim que ele distingue uma rota montada de uma que apenas existe no código-fonte.",
+    ko: "create_app()는 시작 시 라우트 게이트인 assert_routes_are_gated()만 실행합니다. 관리자 라우트가 하나라도 게이트 없이 남으면 소켓이 바인딩되지 않습니다. 전체 스위트는 개발 및 릴리스 진입점이며, 세 개의 런처인 start_macos.sh, install_ubuntu22.sh, install_macos.sh는 모두 이 두 명령을 마지막 단계로 출력합니다. 자체 테스트는 실제로 ASGI 앱에 요청을 보내므로, 소스에만 존재하는 라우트와 마운트된 라우트를 구분할 수 있습니다.",
+    ar: "لا يشغّل create_app() عند بدء التشغيل إلا بوابة المسارات assert_routes_are_gated(): فمسار إداري واحد يُترك بلا بوابة، ولا يُربط المقبس أبدًا. أما مجموعة الاختبارات الكاملة فهي نقطة الدخول للتطوير والإصدار، والمشغّلات الثلاثة — start_macos.sh وinstall_ubuntu22.sh وinstall_macos.sh — تطبع هذين الأمرين في خطوتها الأخيرة. والاختبار الذاتي يوجّه طلبات حقيقية إلى تطبيق ASGI، وبذلك يميّز مسارًا مركّبًا من مسار لا يوجد إلا في الشيفرة المصدرية.",
   } satisfies L,
 
   secTitle: {
@@ -740,6 +831,9 @@ const T = {
     "bg": "Четири неща, които трябва да знаете, преди да го извадите в мрежата",
     "tr": "Dışarı açmadan önce bilmeniz gereken dört şey",
     "hu": "Négy dolog, amit tudnia kell, mielőtt kinyitja a hálózat felé",
+    "pt-BR": "Quatro coisas para saber antes de expor o gateway",
+    ko: "노출하기 전에 알아야 할 네 가지",
+    ar: "أربعة أمور يجب معرفتها قبل عرضه على الشبكة",
   } satisfies L,
   secPortL: {
     en: "Port",
@@ -760,6 +854,9 @@ const T = {
     "bg": "Порт",
     "tr": "Port",
     "hu": "Port",
+    "pt-BR": "Porta",
+    ko: "포트",
+    ar: "المنفذ",
   } satisfies L,
   secPort: {
     en: "The console and the API share one socket, sized by POPOPX_GATEWAY_HOST (default 0.0.0.0) and POPOPX_GATEWAY_PORT (default 8080): http://<host>:8080/ is it. The installer opens no firewall port itself — it only prints the ufw line you are supposed to run.",
@@ -780,6 +877,9 @@ const T = {
     "bg": "Конзолата и API споделят един сокет, определен от POPOPX_GATEWAY_HOST (по подразбиране 0.0.0.0) и POPOPX_GATEWAY_PORT (по подразбиране 8080): http://<host>:8080/ е той. Инсталаторът сам не отваря никакъв порт на огнената стена – само печата реда с ufw, който трябва да изпълните.",
     "tr": "Konsol ile API tek bir soketi paylaşır; onu POPOPX_GATEWAY_HOST (varsayılan 0.0.0.0) ve POPOPX_GATEWAY_PORT (varsayılan 8080) belirler: http://<host>:8080/ işte budur. Kurulum programı güvenlik duvarında kendi başına hiçbir port açmaz — yalnızca çalıştırmanız gereken ufw satırını yazdırır.",
     "hu": "A konzol és az API egy foglalatot oszt ki, amelyet a POPOPX_GATEWAY_HOST (alapértelmezett 0.0.0.0) és a POPOPX_GATEWAY_PORT (alapértelmezett 8080) határoz meg: http://<host>:8080/ ez maga. A telepítő maga egy tűzfalportot sem nyit meg — csak azt az ufw sort nyomtatja ki, amelyet futtatnia kell.",
+    "pt-BR": "O console e a API compartilham um único socket, dimensionado por POPOPX_GATEWAY_HOST (padrão 0.0.0.0) e POPOPX_GATEWAY_PORT (padrão 8080): http://<host>:8080/ é ele. O instalador não abre nenhuma porta de firewall por conta própria — ele apenas imprime a linha de ufw que você deve executar.",
+    ko: "콘솔과 API는 하나의 소켓을 공유하며, 그 크기는 POPOPX_GATEWAY_HOST(기본값 0.0.0.0)와 POPOPX_GATEWAY_PORT(기본값 8080)로 정해집니다: 바로 http://<host>:8080/입니다. 설치 프로그램은 방화벽 포트를 직접 열지 않으며, 실행해야 할 ufw 명령 줄을 출력하기만 합니다.",
+    ar: "تتشارك وحدة التحكم وAPI مقبسًا واحدًا، يحدده POPOPX_GATEWAY_HOST (الافتراضي 0.0.0.0) وPOPOPX_GATEWAY_PORT (الافتراضي 8080): وهو http://<host>:8080/. ولا يفتح المثبّت أي منفذ جدار حماية بنفسه — بل يطبع فقط سطر ufw الذي يُفترض أن تشغّله.",
   } satisfies L,
   secNodeL: {
     en: "Node",
@@ -800,6 +900,9 @@ const T = {
     "bg": "Възел",
     "tr": "Düğüm",
     "hu": "Csomópont",
+    "pt-BR": "Nó",
+    ko: "노드",
+    ar: "العقدة",
   } satisfies L,
   secNode: {
     en:
@@ -838,6 +941,9 @@ const T = {
       `Düğümün WebSocket API'si yalnızca loopback'e bağlanır — ${NODE_WS_URL} — ve bu katmanda kimlik doğrulama yoktur. Öyle bırakın: 5225'i asla bir ağa iletmeyin ya da açık etmeyin. nginx ağ geçidinin önünde duruyorsa /api/v1/admin'i koruyun, düğümü rahat bırakın.`,
     "hu":
       `A csomópont WebSocket API-ja csak a loopback-re kötődik — ${NODE_WS_URL} —, és ez a réteg nem hordoz hitelesítést. Hagyja így: soha ne továbbítsa és ne tegye ki 5225-öt egy hálózatra. Ha az nginx az átjáró előtt ül, védje a /api/v1/admin útvonalat, és a csomópontot hagyja békén.`,
+    "pt-BR": `A API WebSocket do nó escuta apenas no loopback — ${NODE_WS_URL} — e essa camada não tem autenticação. Mantenha assim: nunca encaminhe nem exponha a 5225 em uma rede. Se o nginx estiver na frente do gateway, proteja /api/v1/admin e não mexa no nó.`,
+    ko: `노드의 WebSocket API는 루프백에만 바인딩되며 — ${NODE_WS_URL} — 해당 계층에는 인증이 없습니다. 이 상태를 유지하십시오. 5225를 네트워크로 포워딩하거나 노출해서는 안 됩니다. nginx가 게이트웨이 앞에 있다면 /api/v1/admin을 보호하고 노드는 그대로 두십시오.`,
+    ar: `لا يرتبط WebSocket API الخاص بالعقدة إلا بالعنوان المحلي — ${NODE_WS_URL} — وتلك الطبقة لا تحمل أي مصادقة. أبقِ الأمر على ذلك: لا تُمرّر 5225 ولا تعرضه على شبكة أبدًا. وإذا كان nginx أمام البوابة، فاحمِ /api/v1/admin واترك العقدة وشأنها.`,
   } satisfies L,
   secLaunchL: {
     en: "Starting point",
@@ -858,6 +964,9 @@ const T = {
     "bg": "Изходна точка",
     "tr": "Başlangıç noktası",
     "hu": "Kiindulópont",
+    "pt-BR": "Ponto de partida",
+    ko: "시작점",
+    ar: "نقطة البداية",
   } satisfies L,
   secCompose: {
     en: "docker-compose.yml is the starting point for a Linux production box: both services use network_mode: host, which is why the file declares no ports: (they would be silently ignored). The three shell launchers are the venv path. The README states the caveat itself: the author's machine has no docker and the compose file has never been executed — --check-routes proves the URL inside it exists, not that the two containers boot.",
@@ -878,6 +987,9 @@ const T = {
     "bg": "docker-compose.yml е изходната точка за продуктов Linux компютър: и двете услуги ползват network_mode: host, затова във файла няма ports: (при host мрежа те биха били безмълвно игнорирани). Трите shell стартера са пътят на venv. README сам поставя уговорката: на машината на автора няма docker и този compose файл никога не е изпълняван — --check-routes доказва, че URL-ът в него съществува, а не че двата контейнера ще станат.",
     "tr": "docker-compose.yml, bir Linux üretim makinesi için başlangıç noktasıdır: iki hizmet de network_mode: host kullanır, bu yüzden dosyada ports: bildirimi yok (host ağında sessizce yok sayılırlar). Üç kabuk betiği venv yoludur. README çekinceyi bizzat kendisi yazar: yazarın makinesinde docker yok ve bu compose dosyası hiç çalıştırılmadı — --check-routes dosyanın içindeki URL'in var olduğunu kanıtlar, iki konteynerin ayağa kalkacağını değil.",
     "hu": "A docker-compose.yml a Linux éles gép kiindulópontja: mindkét szolgáltatás network_mode: host módot használ, ezért a fájl nem deklarál ports: részt (host hálózatban csendben figyelmen kívül maradnának). A három shell indító a venv út. A README maga fogalmazza meg a fenntartást: a szerző gépén nincs docker, és ezt a compose fájlt soha nem futottatták — a --check-routes azt igazolja, hogy a benne lévő URL létezik, nem azt, hogy a két konténer elindul.",
+    "pt-BR": "docker-compose.yml é o ponto de partida para uma máquina Linux de produção: os dois serviços usam network_mode: host, e por isso o arquivo não declara ports: (eles seriam ignorados silenciosamente). Os três lançadores de shell são o caminho venv. O próprio README declara a ressalva: a máquina do autor não tem docker e o arquivo compose nunca foi executado — --check-routes prova que a URL dentro dele existe, não que os dois contêineres iniciam.",
+    ko: "docker-compose.yml은 Linux 운영 서버의 시작점입니다. 두 서비스 모두 network_mode: host를 사용하므로 이 파일은 ports:를 선언하지 않습니다(선언해도 조용히 무시됩니다). 세 개의 셸 런처는 venv 경로입니다. README 자체가 이 주의사항을 밝힙니다. 작성자의 머신에는 docker가 없고 compose 파일은 한 번도 실행된 적이 없습니다. --check-routes는 그 안의 URL이 존재함을 증명할 뿐, 두 컨테이너가 부팅된다는 것을 증명하지는 않습니다.",
+    ar: "docker-compose.yml هو نقطة البداية لخادم إنتاج Linux: فالخدمتان تستخدمان network_mode: host، ولهذا لا يعلن الملف أي ports: (فستُهمَل بصمت). والمشغّلات الثلاثة من نوع shell هي مسار venv. ويذكر README التحذير بنفسه: فجهاز المؤلف لا يحتوي docker، ولم يُنفَّذ ملف compose قط — و--check-routes يثبت وجود URL بداخله، لا أن الحاويتين تُقلعان.",
   } satisfies L,
   secBackupL: {
     en: "Backup",
@@ -898,6 +1010,9 @@ const T = {
     "bg": "Резервно копие",
     "tr": "Yedek",
     "hu": "Biztonsági mentés",
+    "pt-BR": "Cópia de segurança",
+    ko: "백업",
+    ar: "النسخ الاحتياطي",
   } satisfies L,
   secBackup: {
     en: "One file, gateway.db under /var/lib/popopx-service-suite, holds the ledger, every pairwise session secret and the channel identity private keys; there is deliberately no separate keyring file, because a rotation must commit in the same transaction as the frame it delivers. Lose it and every existing zero-knowledge channel goes silent for good — no rotation can be signed that members will verify. That is the installer's fifth NEXT STEP. The vault is opt-in: with POPOPX_VAULT_KEY set (32 raw bytes, held by the operator) selected secrets are sealed with ChaCha20-Poly1305 and kept as vault1: values in that same database, so back up the key separately — lose it and those rows stay unreadable, while older plaintext rows keep working.",
@@ -918,6 +1033,9 @@ const T = {
     "bg": "Един файл, gateway.db под /var/lib/popopx-service-suite, пази главната книга, всяка двойна сесионна тайна и частните ключове за самоличността на каналите; отделен keyring файл умишлено няма, защото ротацията трябва да се фиксира в същата транзакция като кадръ, който доставя. Ако го загубите, всички съществуващи нулево-информационни канали замлъкват завинаги — никоя ротация не може да се подпише така, че членовете да я проверят. Това е петата NEXT STEP стъпка на инсталатора. Хранилището е по избор: при зададен POPOPX_VAULT_KEY (32 сурови байта, държани от оператора) избраните тайни се запечатват с ChaCha20-Poly1305 и стоят като стойности vault1: в същата база, затова ключът се архивира отделно — загубите ли го, тези редове остават нечетими, докато по-старите редове с открит текст продължават да работят.",
     "tr": "Tek bir dosya, /var/lib/popopx-service-suite altındaki gateway.db, defteri, her eşleşmeli oturum sırrını ve kanal kimliğinin özel anahtarlarını barındırır; bilinçli olarak ayrı bir keyring dosyası yoktur, çünkü bir rotasyon, teslim ettiği kare ile aynı transaction içinde commit edilmelidir. Onu kaybederseniz mevcut tüm sıfır bilgi kanalları kalıcı olarak susar — üyelerin doğrulayacağı hiçbir rotasyon imzalanamaz. Kurulum betiğinin beşinci NEXT STEP maddesi tam olarak bunu söylüyor. Kasa isteğe bağlıdır: POPOPX_VAULT_KEY ayarlıysa (32 ham bayt, operatörde saklanır) seçilen sırlar ChaCha20-Poly1305 ile mühürlenir ve aynı veritabanında vault1: değerleri olarak durur, bu yüzden anahtarı ayrıca yedekleyin — kaybederseniz o satırlar okunamaz kalır, eski düz metin satırları ise çalışmaya devam eder.",
     "hu": "Egyetlen fájl, a /var/lib/popopx-service-suite alatti gateway.db tartalmazza a főkönyvet, minden páros munkamenet-titkot és a csatornák azonosságának privát kulcsait; tudatosan nincs külön keyring fájl, mert egy rotációnak ugyanabban a tranzakcióban kell rögzülnie, mint a keretnek, amit kiszállít. Ha elveszti, minden meglévő nullaismereti csatorna végleg elhallgat — többé nem lehet olyan rotációt aláírni, amelyet a tagok elfogadnak. Ez a telepítő ötödik NEXT STEP pontja. A széf opcionális: ha a POPOPX_VAULT_KEY be van állítva (32 nyers bájt, az üzemeltetőnél), a kiválasztott titkok ChaCha20-Poly1305-tel pecsételődnek és vault1: értékként ugyanabban az adatbázisban maradnak, ezért a kulcsot külön mentse — ha elveszik, azok a sorok olvashatatlanok maradnak, a régebbi nyílt szöveges sorok viszont tovább működnek.",
+    "pt-BR": "Um único arquivo, gateway.db em /var/lib/popopx-service-suite, guarda o livro-razão, todos os segredos de sessão pairwise e as chaves privadas de identidade dos canais; deliberadamente não há um arquivo de chaveiro separado, porque uma rotação precisa ser confirmada na mesma transação do frame que ela entrega. Perca-o e todos os canais de conhecimento zero existentes ficam silenciosos para sempre — nenhuma rotação pode ser assinada de forma que os membros a verifiquem. Esse é o quinto NEXT STEP do instalador. O cofre é opcional: com POPOPX_VAULT_KEY definida (32 bytes brutos, mantidos pelo operador), segredos selecionados são selados com ChaCha20-Poly1305 e guardados como valores vault1: nesse mesmo banco de dados, então faça uma cópia de segurança da chave separadamente — se a perder, essas linhas ficam ilegíveis, enquanto as linhas antigas em texto claro continuam funcionando.",
+    ko: "/var/lib/popopx-service-suite 아래의 gateway.db 파일 하나에 원장, 모든 페어와이즈 세션 시크릿, 채널 아이덴티티 개인 키가 저장됩니다. 별도의 키링 파일이 의도적으로 없는 이유는 키 교체가 전달하는 프레임과 동일한 트랜잭션에서 커밋되어야 하기 때문입니다. 이 파일을 잃으면 기존의 모든 영지식 채널이 영구히 침묵합니다. 멤버가 검증할 수 있는 교체를 서명할 방법이 없기 때문입니다. 이것이 설치 스크립트의 다섯 번째 NEXT STEP입니다. 볼트는 선택 사항입니다. POPOPX_VAULT_KEY(운영자가 보관하는 32바이트 원시 값)를 설정하면 선택된 시크릿이 ChaCha20-Poly1305로 봉인되어 같은 데이터베이스에 vault1: 값으로 보관되므로, 키를 별도로 백업해야 합니다. 키를 잃으면 그 행들은 읽을 수 없게 되지만, 이전의 평문 행들은 계속 동작합니다.",
+    ar: "ملف واحد، gateway.db تحت /var/lib/popopx-service-suite، يحمل دفتر الحسابات وكل سر جلسة ثنائي الأطراف والمفاتيح الخاصة لهوية القنوات؛ ولا يوجد عن قصد ملف مفاتيح منفصل، لأن التدوير يجب أن يُثبَّت في المعاملة نفسها التي يُسلّم فيها الإطار. وإن فقدته صمتت كل قناة معرفة صفرية قائمة إلى الأبد — فلا يمكن توقيع أي تدوير يتحقق منه الأعضاء. وذلك هو سطر NEXT STEPS الخامس لدى نص التثبيت. والخزنة اختيارية: فعند ضبط POPOPX_VAULT_KEY (32 بايتًا خامًّا يحتفظ بها المشغّل) تُغلَّف أسرار مختارة بـ ChaCha20-Poly1305 وتُحفظ قيمًا بصيغة vault1: في قاعدة البيانات نفسها، لذا انسخ المفتاح احتياطيًا على حدة — وإن فقدته بقيت تلك الصفوف غير مقروءة، بينما تظل الصفوف الأقدم من النص الواضح تعمل.",
   } satisfies L,
 
   /* macOS — production: install_macos.sh (launchd) */
@@ -940,6 +1058,9 @@ const T = {
     "bg": "Продукционна инсталация: sudo ./install_macos.sh",
     "tr": "Üretim kurulumu: sudo ./install_macos.sh",
     "hu": "Éles telepítés: sudo ./install_macos.sh",
+    "pt-BR": "Instalação de produção: sudo ./install_macos.sh",
+    ko: "운영 설치: sudo ./install_macos.sh",
+    ar: "تثبيت الإنتاج: sudo ./install_macos.sh",
   } satisfies L,
   mProdInstallT: {
     en: "Install the LaunchDaemon",
@@ -960,6 +1081,9 @@ const T = {
     "bg": "Инсталирай LaunchDaemon",
     "tr": "LaunchDaemon'ı kur",
     "hu": "Telepítsd a LaunchDaemont",
+    "pt-BR": "Instale o LaunchDaemon",
+    ko: "LaunchDaemon 설치",
+    ar: "تثبيت LaunchDaemon",
   } satisfies L,
   mProdInstallC: {
     en: "Root is required. The gateway becomes com.popopx.gateway in /Library/LaunchDaemons, running as the role account _popopx (UID 450, shell /usr/bin/false): code and venv under /usr/local/popopx-service-suite, owned root:wheel and not writable by the service itself, the env file at /usr/local/etc/popopx-service-suite/env, state and logs under /usr/local/var. The entrypoint is python -m app.main, so the socket is read from that env file and nowhere else. Python 3.11 is required and the installer calls no package manager: a missing interpreter exits 3 and prints the brew line for your login user to run, unless you point it at one with --python PATH. The suite targets macOS 13+; the script reads sw_vers and warns rather than refusing.",
@@ -980,6 +1104,9 @@ const T = {
     "bg": "Нужен е root. Шлюзът става услугата com.popopx.gateway в /Library/LaunchDaemons, стартирана със служебния акаунт _popopx (UID 450, shell /usr/bin/false): кодът и venv са под /usr/local/popopx-service-suite, собственик root:wheel и незаписваеми за самата услуга; env файлът е /usr/local/etc/popopx-service-suite/env, а състоянието и логовете са под /usr/local/var. Входът е python -m app.main, затова сокетът се чете единствено от този env файл. Изисква се Python 3.11, а инсталаторът не вика мениджър на пакети: без интерпретатор излиза с код 3 и печата реда brew за вашия потребител — освен ако не го посочите с --python PATH. Комплектът е за macOS 13+; скриптът чете sw_vers и предупреждава, вместо да отказва.",
     "tr": "Root şart. Ağ geçidi /Library/LaunchDaemons içinde com.popopx.gateway hâline gelir ve _popopx hizmet hesabıyla çalışır (UID 450, kabuk /usr/bin/false): kod ve venv /usr/local/popopx-service-suite altında, sahip root:wheel ve hizmetin kendisi buralara yazamaz; env dosyası /usr/local/etc/popopx-service-suite/env, durum ve günlükler /usr/local/var altında. Girdi noktası python -m app.main, dolayısıyla soket yalnızca şu env dosyasından okunur. Python 3.11 gerekir ve kurulum programı hiçbir paket yöneticisi çağırmaz: yorumlayıcı yoksa 3 koduyla çıkar ve oturum kullanıcınız için brew satırını yazdırır — --python PATH ile yolu siz göstermediyseniz. Takım macOS 13+ hedefliyor; betik sw_vers okur ve reddetmek yerine uyarır.",
     "hu": "Root szükséges. Az átjáróból lesz a com.popopx.gateway a /Library/LaunchDaemons alatt, a _popopx szolgáltatásfiókkal futtatva (UID 450, shell /usr/bin/false): a kód és a venv a /usr/local/popopx-service-suite alatt van, root:wheel tulajdonnal, és a szolgáltatás maga nem írhatja; az env fájl a /usr/local/etc/popopx-service-suite/env, az állapot és a naplók a /usr/local/var alatt. A belépési pont python -m app.main, úgyhogy a foglalás csak ebből az env fájlból jön. Python 3.11 kell, és a telepítő nem hív csomagkezelőt: ha nincs értelmező, 3-as kilépéssel kiírja a brew sort a bejelentkezett felhasználónak — hacsak nem a --python PATH jelöli meg. A csomag macOS 13+-ra céloz; a szkript beolvassa a sw_vers-t, és nem tagadja meg, csak figyelmeztet.",
+    "pt-BR": "É necessário root. O gateway se torna com.popopx.gateway em /Library/LaunchDaemons, executando como a conta de sistema _popopx (UID 450, shell /usr/bin/false): código e venv em /usr/local/popopx-service-suite, pertencentes a root:wheel e não graváveis pelo próprio serviço, o arquivo de ambiente em /usr/local/etc/popopx-service-suite/env, estado e logs em /usr/local/var. O entrypoint é python -m app.main, de modo que o socket é lido desse arquivo de ambiente e de nenhum outro lugar. O Python 3.11 é obrigatório e o instalador não chama nenhum gerenciador de pacotes: um interpretador ausente encerra com código 3 e imprime a linha brew para o seu usuário de login executar, a menos que você aponte um com --python PATH. A suíte tem como alvo o macOS 13+; o script lê sw_vers e emite um aviso em vez de recusar.",
+    ko: "root 권한이 필요합니다. 게이트웨이는 /Library/LaunchDaemons의 com.popopx.gateway가 되고, 역할 계정 _popopx(UID 450, 셸 /usr/bin/false)로 실행됩니다. 코드와 venv는 /usr/local/popopx-service-suite 아래에 있고 root:wheel 소유이며 서비스 자체는 쓸 수 없습니다. 환경 파일은 /usr/local/etc/popopx-service-suite/env, 상태와 로그는 /usr/local/var 아래에 있습니다. 진입점은 python -m app.main이므로 소켓은 그 환경 파일에서만 읽습니다. Python 3.11이 필요하며 설치 스크립트는 어떤 패키지 관리자도 호출하지 않습니다. 인터프리터가 없으면 종료 코드 3으로 끝내고 로그인 사용자가 실행할 brew 줄을 출력하며, --python PATH로 인터프리터를 지정하면 그렇지 않습니다. 이 스위트는 macOS 13 이상을 대상으로 하며, 스크립트는 sw_vers를 읽고 거부하는 대신 경고합니다.",
+    ar: "صلاحيات root مطلوبة. وتصبح البوابة com.popopx.gateway في /Library/LaunchDaemons، وتعمل بحساب الدور _popopx (UID 450، والصدفة /usr/bin/false): الشيفرة وvenv تحت /usr/local/popopx-service-suite، مملوكان لـ root:wheel وغير قابلين للكتابة من الخدمة نفسها، وملف البيئة في /usr/local/etc/popopx-service-suite/env، والحالة والسجلات تحت /usr/local/var. ونقطة الدخول هي python -m app.main، لذا يُقرأ المقبس من ملف البيئة ذلك ولا من أي مكان آخر. وPython 3.11 مطلوب، ونص التثبيت لا يستدعي أي مدير حزم: فغياب المفسّر يخرج بالرمز 3 ويطبع سطر brew لينفّذه مستخدم دخولك، إلا إذا وجّهته إلى مفسّر عبر --python PATH. والمنظومة تستهدف macOS 13+؛ ويقرأ النص sw_vers ويحذّر بدل أن يرفض.",
   } satisfies L,
 
   mProdCheckT: {
@@ -1001,6 +1128,9 @@ const T = {
     "bg": "Първо поглед, нищо не се записва",
     "tr": "Önce bak, hiçbir şey yazma",
     "hu": "Előbb nézzük, ne írjunk semmit",
+    "pt-BR": "Olhe primeiro, não grave nada",
+    ko: "먼저 확인만 하고 아무것도 쓰지 않습니다",
+    ar: "انظر أولًا، ولا تكتب شيئًا",
   } satisfies L,
   mProdCheckC: {
     en: "Neither line needs sudo. --check runs every read-only probe and writes nothing: the macOS version, the interpreter, whether the gateway port is free, the Application Firewall state, which node binary --with-node would pick, and whether an existing env file will be kept (it always is, with a timestamped env.bak.<utc> copy); then it prints the same plan as the real install and exits 1 if anything would block it. --dry-run renders the plist and the env file into a temporary directory and lints the plist with plutil; the system is untouched.",
@@ -1021,6 +1151,9 @@ const T = {
     "bg": "Нито един от двата реда не изисква sudo. --check изпълнява всички само-за-четене сонди и не записва нищо: версията на macOS, интерпретаторът, дали портът на шлюза е свободен, състоянието на Application Firewall, кой двоичен файл на възела би избрал --with-node и дали съществуващ env файл ще бъде запазен (винаги се запазва, с копие с времеви маркер env.bak.<utc>); след това печата същия план като истинската инсталация и излиза с 1, ако нещо би я блокирало. --dry-run генерира plist и env файла в временна директория и проверява plist с plutil; системата остава недокосната.",
     "tr": "İki satırın da sudo'ya ihtiyacı yok. --check yalnızca okuma amaçlı tüm yoklamaları çalıştırıp hiçbir şey yazmaz: macOS sürümü, yorumlayıcı, ağ geçidi portu boş mu, Application Firewall durumu, --with-node'un hangi düğüm ikilisini seçeceği ve var olan bir env dosyasının korunup korunmayacağı (her zaman korunur, zaman damgalı bir env.bak.<utc> kopyasıyla); ardından gerçek kurulumla aynı planı yazdırır ve bir şey onu engelleyecekse 1 koduyla çıkar. --dry-run plist ile env dosyasını geçici bir dizine üretir ve plist'i plutil ile denetler; sisteme dokunulmaz.",
     "hu": "Egyik sorhoz sem kell sudo. A --check minden csak olvasható próbát lefuttat és semmit nem ír: macOS-verzió, értelmező, a gateway portja szabad-e, az Application Firewall állása, melyik csomópont-binárist választaná a --with-node, és hogy egy meglévő env fájl megmarad-e (mindig megmarad, egy időbélyeges env.bak.<utc> másolattal); utána ugyanazt a tervet nyomtatja ki, mint a valódi telepítés, és 1-es kilépéssel áll le, ha valami blokkolná. A --dry-run a plistet és az env fájlt egy ideiglenes könyvtárba generálja, és a plutil-lal ellenőrzi a plistet; a rendszert nem éri változás.",
+    "pt-BR": "Nenhuma das duas linhas precisa de sudo. --check executa todas as sondagens somente leitura e não grava nada: a versão do macOS, o interpretador, se a porta do gateway está livre, o estado do Application Firewall, qual binário node --with-node escolheria e se um arquivo env existente será mantido (ele sempre é, com uma cópia datada env.bak.<utc>); em seguida imprime o mesmo plano da instalação real e sai com 1 se algo for bloqueá-la. --dry-run renderiza o plist e o arquivo env em um diretório temporário e faz lint do plist com plutil; o sistema não é tocado.",
+    ko: "두 명령 줄 모두 sudo가 필요하지 않습니다. --check는 모든 읽기 전용 점검을 실행하고 아무것도 쓰지 않습니다: macOS 버전, 인터프리터, 게이트웨이 포트의 사용 가능 여부, Application Firewall 상태, --with-node가 선택할 node 바이너리, 그리고 기존 env 파일이 유지될지 여부(항상 유지되며 타임스탬프가 붙은 env.bak.<utc> 사본이 만들어짐)를 확인합니다. 그런 다음 실제 설치와 동일한 계획을 출력하고, 무언가를 막는 요소가 있으면 1로 종료합니다. --dry-run은 plist와 env 파일을 임시 디렉터리에 렌더링하고 plutil로 plist를 검사합니다. 시스템은 건드리지 않습니다.",
+    ar: "لا يحتاج أي من السطرين إلى sudo. ويشغّل --check كل فحص للقراءة فقط ولا يكتب شيئًا: إصدار macOS، والمفسّر، وما إذا كان منفذ البوابة حرًا، وحالة جدار حماية التطبيقات، وأي ملف node التنفيذي سيختاره --with-node، وما إذا كان ملف env قائم سيُحتفظ به (يُحتفظ به دائمًا، مع نسخة env.bak.<utc> مؤرخة)؛ ثم يطبع الخطة نفسها كالتثبيت الحقيقي ويخرج بالرمز 1 إذا كان أي شيء سيعيقه. و--dry-run يصيّر ملف plist وملف env في دليل مؤقت ويفحص plist بـ plutil؛ والنظام لا يُمَس.",
   } satisfies L,
   mProdFlagsT: {
     en: "The flags, and one trap",
@@ -1041,6 +1174,9 @@ const T = {
     "bg": "Флаговете и един капан",
     "tr": "Bayraklar ve bir tuzak",
     "hu": "A kapcsolók és egy csapda",
+    "pt-BR": "As flags, e uma armadilha",
+    ko: "플래그와 한 가지 함정",
+    ar: "العلامات، وفخّ واحد",
   } satisfies L,
   mProdFlagsC: {
     en: "Every value flag also accepts the --flag=VALUE spelling. --lan switches the bind from the default 127.0.0.1 to 0.0.0.0, and when you use it the installer warns that this gateway trusts X-Forwarded-* from any peer, so whoever can reach the port can impersonate any client. --with-node adds a second LaunchDaemon, com.popopx.node, running as _popopx-node (UID 451); if no popopx-chat binary is found that run exits 4, and --node-bin PATH with --node-port N are the overrides. --public-base-url rewrites POPOPX_PUBLIC_BASE_URL, which has to be the exact https origin the phone loads, because the launcher signs the URL it is about to open. The trap the script states out loud: an existing env file wins, so a re-run with --port does not move a service whose port is already written in that file.",
@@ -1061,6 +1197,9 @@ const T = {
     "bg": "Всеки флаг със стойност приема и формата --flag=VALUE. --lan превключва обвързването от подразбиращото се 127.0.0.1 на 0.0.0.0, и тогава инсталаторът предупреждава, че този шлюз има доверие на X-Forwarded-* от всеки партньор: който достигне порта, може да се представи за когото и да е клиент. --with-node добавя втори LaunchDaemon, com.popopx.node, работещ под _popopx-node (UID 451); ако не намери двоичния файл popopx-chat, изпълнението излиза с код 4, а замяната е --node-bin PATH и --node-port N. --public-base-url презаписва POPOPX_PUBLIC_BASE_URL, който трябва да е точният https произход, който телефонът зарежда — стартерът подписва URL-а, който предстои да отвори. Капанът, който скриптът изрича на глас: съществуващ env файл печели, затова повторно пускане с --port не мести услуга, чийто порт вече е записан в този файл.",
     "tr": "Değer alan her bayrak --flag=VALUE yazımını da kabul eder. --lan bağlamayı varsayılan 127.0.0.1'den 0.0.0.0'a çevirir ve kullanıldığında kurulum programı uyarır: bu ağ geçidi her eşten gelen X-Forwarded-*'e güvenir, yani porta ulaşan herkes herhangi bir istemci gibi görünebilir. --with-node ikinci bir LaunchDaemon ekler, com.popopx.node, _popopx-node (UID 451) olarak çalışır; popopx-chat ikilisi bulunamazsa bu çalıştırma 4 koduyla çıkar ve geçersiz kılmalar --node-bin PATH ile --node-port N'dir. --public-base-url, POPOPX_PUBLIC_BASE_URL değerini yeniden yazar; telefonun yüklediği https köküyle birebir aynı olmalıdır, çünkü başlatıcı açacağı URL'yi imzalar. Betiğin yüksek sesle söylediği tuzak: var olan bir env dosyası kazanır, bu yüzden --port ile tekrar çalıştırmak, portu zaten o dosyada yazılı olan bir hizmeti taşımaz.",
     "hu": "Minden értékű kapcsoló elfogadja a --flag=VALUE alakot is. A --lan az alapértelmezett 127.0.0.1 kötésről 0.0.0.0-ra vált, és ekkor a telepítő figyelmeztet: ez az átjáró megbízik bármelyik féltől érkező X-Forwarded-* fejlécekben, tehát aki eléri a portot, bárkinek kiadhatja magát. A --with-node egy második LaunchDaemont ad hozzá, com.popopx.node, _popopx-node (UID 451) alatt futtatva; ha nem talál popopx-chat binárist, a futás 4-es kóddal lép ki, a felülírások a --node-bin PATH és a --node-port N. A --public-base-url felülírja a POPOPX_PUBLIC_BASE_URL-t, amelynek pontosan annak az https-eredetnek kell lennie, amit a telefon betölt, mert az indító az által megnyitni kívánt URL-t írja alá. A csapda, amit a szkript hangosan ki is mond: egy meglévő env fájl nyer, ezért a --port-tal való újrafuttatás nem mozdítja el azt a szolgáltatást, amelynek portja már benne van a fájlban.",
+    "pt-BR": "Toda flag de valor também aceita a grafia --flag=VALUE. --lan troca o bind do padrão 127.0.0.1 para 0.0.0.0, e quando você a usa o instalador avisa que este gateway confia em X-Forwarded-* de qualquer origem, de modo que quem conseguir alcançar a porta pode se passar por qualquer cliente. --with-node adiciona um segundo LaunchDaemon, com.popopx.node, executando como _popopx-node (UID 451); se nenhum binário popopx-chat for encontrado, essa execução encerra com código 4, e --node-bin PATH com --node-port N são as opções de substituição. --public-base-url reescreve POPOPX_PUBLIC_BASE_URL, que precisa ser exatamente a origem https que o telefone carrega, porque o lançador assina a URL que está prestes a abrir. A armadilha que o script declara em voz alta: um arquivo de ambiente existente vence, então uma nova execução com --port não move um serviço cuja porta já está escrita nesse arquivo.",
+    ko: "모든 값 플래그는 --flag=VALUE 표기도 허용합니다. --lan은 바인딩을 기본값인 127.0.0.1에서 0.0.0.0으로 바꾸며, 이 옵션을 사용하면 설치 스크립트는 이 게이트웨이가 모든 피어의 X-Forwarded-*를 신뢰하므로 포트에 도달할 수 있는 누구나 임의의 클라이언트로 위장할 수 있다고 경고합니다. --with-node는 두 번째 LaunchDaemon인 com.popopx.node를 추가하며 이는 _popopx-node(UID 451)로 실행됩니다. popopx-chat 바이너리를 찾지 못하면 해당 실행은 종료 코드 4로 끝나며, --node-bin PATH와 --node-port N으로 재정의할 수 있습니다. --public-base-url은 POPOPX_PUBLIC_BASE_URL을 다시 쓰는데, 이 값은 휴대폰이 로드하는 정확한 https 오리진이어야 합니다. 런처가 열려고 하는 URL에 서명하기 때문입니다. 스크립트가 분명히 밝히는 함정은 기존 환경 파일이 우선한다는 점입니다. 따라서 --port를 주어 재실행해도 그 파일에 포트가 이미 기록된 서비스는 이동하지 않습니다.",
+    ar: "كل علامة ذات قيمة تقبل أيضًا الصيغة --flag=VALUE. و--lan تنقل الارتباط من 127.0.0.1 الافتراضي إلى 0.0.0.0، وعند استخدامها يحذّر نص التثبيت من أن هذه البوابة تثق بـ X-Forwarded-* من أي قرين، فيستطيع من يصل إلى المنفذ انتحال هوية أي عميل. و--with-node تضيف LaunchDaemon ثانيًا هو com.popopx.node يعمل بـ _popopx-node (UID 451)؛ وإن لم يُعثر على أي ملف تنفيذي popopx-chat خرج ذلك التشغيل بالرمز 4، والتجاوزان هما --node-bin PATH و--node-port N. و--public-base-url تعيد كتابة POPOPX_PUBLIC_BASE_URL، التي يجب أن تكون أصل https نفسه الذي يحمّله الهاتف، لأن المشغّل يوقّع العنوان الذي هو على وشك فتحه. أما الفخ الذي يصرّح به النص: ملف بيئة موجود هو الذي يفوز، لذا فإن إعادة التنفيذ مع --port لا تنقل خدمة منفذها مكتوب أصلًا في ذلك الملف.",
   } satisfies L,
 
   mProdCtlT: {
@@ -1082,6 +1221,9 @@ const T = {
     "bg": "Състояние, рестарт, спиране",
     "tr": "Durum, yeniden başlatma, durdurma",
     "hu": "Állapot, újraindítás, leállítás",
+    "pt-BR": "Status, reiniciar, parar",
+    ko: "상태, 재시작, 중지",
+    ar: "الحالة وإعادة التشغيل والإيقاف",
   } satisfies L,
   mProdCtlC: {
     en: "These are the three lines the installer's own NEXT STEPS section prints. Stopping is launchctl bootout, not launchctl stop, and re-enabling means running install_macos.sh again: the plist is generated, and its header says edits there are overwritten. Crash-restart is KeepAlive with SuccessfulExit false and Crashed true, launchd's spelling of systemd's Restart=on-failure; there is no StartLimitBurst, so launchd retries forever, throttled — which is exactly why the config gate runs before the job is bootstrapped. launchd also has no KillSignal (it only ever sends SIGTERM) and no ProtectSystem, PrivateTmp, NoNewPrivileges or MemoryMax; when you need the exact SIGINT it is one command: sudo launchctl kill SIGINT system/com.popopx.gateway.",
@@ -1102,6 +1244,9 @@ const T = {
     "bg": "Това са точно трите реда, които разделът NEXT STEPS на инсталатора печата сам. Спирането е launchctl bootout, не launchctl stop, а повторното включване означава да пуснеш install_macos.sh отново: plist-ът се генерира и заглавката му казва, че редакциите в него се презаписват. Рестартът след срив е KeepAlive със SuccessfulExit false и Crashed true, launchd формулировката на systemd Restart=on-failure; няма StartLimitBurst, затова launchd опитва безкрайно, с интервал — точно защото вратата за конфигурация минава преди bootstrap на задачата. launchd също няма KillSignal (изпраща само SIGTERM) и няма ProtectSystem, PrivateTmp, NoNewPrivileges или MemoryMax; ако ви трябва точният SIGINT, това е една команда: sudo launchctl kill SIGINT system/com.popopx.gateway.",
     "tr": "Bunlar, kurulum programının kendi NEXT STEPS bölümünün yazdırdığı tam olarak bu üç satır. Durdurma launchctl bootout ile yapılır, launchctl stop ile değil; yeniden etkinleştirmek için install_macos.sh'ı tekrar çalıştırmak gerekir: plist üretilir ve başlığındaki not, burada yapılan düzenlemelerin üzerine yazıldığını söyler. Çökmeden sonra yeniden başlatma, launchd'ın systemd'deki Restart=on-failure karşılığı olan, SuccessfulExit false ve Crashed true içeren KeepAlive'ıdır; StartLimitBurst olmadığı için launchd aralıklarla sonsuza dek denenir — yapılandırma kapısının bootstrap'ten önce çalışmasının nedeni tam olarak bu. launchd'de KillSignal de yoktur (yalnızca SIGTERM gönderir) ve ProtectSystem, PrivateTmp, NoNewPrivileges veya MemoryMax yoktur; tam olarak SIGINT gerekirse tek bir komut: sudo launchctl kill SIGINT system/com.popopx.gateway.",
     "hu": "Ezek pontosan azok a sorok, amelyeket a telepítő saját NEXT STEPS része nyomtat ki. Az leállítás launchctl bootout, nem launchctl stop, és az újbóli engedélyezéshez újra futtatni kell az install_macos.sh-t: a plist generált fájl, és a fejléce kimondja, hogy a benne végzett módosítások felülíródnak. Az összeomlás utáni újraindítás a KeepAlive SuccessfulExit false és Crashed true értékekkel — ez a systemd Restart=on-failure launchd-írásmódja; StartLimitBurst nincs, ezért a launchd az örökkévalóságig próbálkozik ritmussal — éppen ezért fut a konfigurációs kapu a dzsob bootstrapje előtt. A launchdban nincs KillSignal sem (csak SIGTERM-et küld), és ProtectSystem, PrivateTmp, NoNewPrivileges vagy MemoryMax sincs; ha pont az SIGINT kell, az egyetlen parancs: sudo launchctl kill SIGINT system/com.popopx.gateway.",
+    "pt-BR": "Estas são as três linhas que a própria seção NEXT STEPS do instalador imprime. Parar é launchctl bootout, não launchctl stop, e reativar significa executar install_macos.sh novamente: o plist é gerado, e seu cabeçalho diz que edições nele são sobrescritas. A reinicialização após falha é KeepAlive com SuccessfulExit false e Crashed true, a grafia do launchd para o Restart=on-failure do systemd; não há StartLimitBurst, então o launchd tenta para sempre, com limitação de taxa — e é exatamente por isso que o portão de configuração roda antes de a tarefa ser inicializada. O launchd também não tem KillSignal (ele só envia SIGTERM) nem ProtectSystem, PrivateTmp, NoNewPrivileges ou MemoryMax; quando você precisa do SIGINT exato, é um comando: sudo launchctl kill SIGINT system/com.popopx.gateway.",
+    ko: "설치 스크립트의 NEXT STEPS 섹션이 출력하는 세 줄입니다. 중지는 launchctl stop이 아니라 launchctl bootout이며, 다시 활성화하려면 install_macos.sh를 다시 실행해야 합니다. plist는 생성되며 그 헤더에는 이 파일의 편집 내용이 덮어써진다고 적혀 있습니다. 충돌 시 재시작은 KeepAlive에 SuccessfulExit false, Crashed true를 준 것으로, systemd의 Restart=on-failure에 해당하는 launchd의 표현입니다. StartLimitBurst가 없으므로 launchd는 스로틀링을 걸면서 무한히 재시도합니다. 그래서 작업을 부트스트랩하기 전에 구성 게이트를 실행하는 것입니다. 또한 launchd에는 KillSignal이 없어 SIGTERM만 보내며, ProtectSystem, PrivateTmp, NoNewPrivileges, MemoryMax도 없습니다. 정확히 SIGINT가 필요할 때는 명령 하나면 됩니다: sudo launchctl kill SIGINT system/com.popopx.gateway.",
+    ar: "هذه هي الأسطر الثلاثة التي تطبعها كتلة NEXT STEPS الخاصة بنص التثبيت. والإيقاف هو launchctl bootout، لا launchctl stop، وإعادة التمكين تعني تنفيذ install_macos.sh مرة أخرى: فملف plist مولّد، ويقول عنوانه إن التعديلات فيه تُستبدل. وإعادة التشغيل بعد الانهيار هي KeepAlive مع SuccessfulExit false وCrashed true، وهي صياغة launchd لما يقابله Restart=on-failure في systemd؛ ولا وجود لـ StartLimitBurst، لذا يعيد launchd المحاولة إلى ما لا نهاية، مع كبح — وهذا بالضبط سبب تشغيل بوابة الإعداد قبل تمهيد المهمة. كذلك لا يملك launchd أي KillSignal (فهو لا يرسل إلا SIGTERM) ولا ProtectSystem أو PrivateTmp أو NoNewPrivileges أو MemoryMax؛ وحين تحتاج SIGINT تحديدًا فالأمر واحد: sudo launchctl kill SIGINT system/com.popopx.gateway.",
   } satisfies L,
   mProdUninstallT: {
     en: "Uninstall, and the state it will not delete",
@@ -1122,6 +1267,9 @@ const T = {
     "bg": "Деинсталация и състоянието, което не се изтрива",
     "tr": "Kaldırma ve silmeyeceği durum",
     "hu": "Eltávolítás és az állapot, amit nem töröl",
+    "pt-BR": "Desinstalar, e o estado que ele não apaga",
+    ko: "제거, 그리고 삭제되지 않는 상태",
+    ar: "إلغاء التثبيت، والحالة التي لن يحذفها",
   } satisfies L,
   mProdUninstallC: {
     en: "--uninstall boots out both services, removes the plists, the code, the config and the log directory, and deletes the role accounts with -keepHome. The state directory /usr/local/var/popopx-service-suite stays: it holds gateway.db — the ledger, every pairwise session secret and the channel identity private keys — and a re-install reuses it. Only --purge-state deletes it, and that is the one action here with no undo: every zero-knowledge channel this deployment created goes silent for good, because no rotation can be signed that its members will verify. The checkout is never touched.",
@@ -1142,6 +1290,9 @@ const T = {
     "bg": "--uninstall изхвърля и двете услуги, премахва plist-ите, кода, конфигурацията и директорията с логове и изтрива ролите с -keepHome. Директорията на състоянието /usr/local/var/popopx-service-suite остава: в нея е gateway.db — главната книга, всяка двойкова тайна на сесия и частните ключове за самоличност на каналите — и преинсталация я използва отново. Само --purge-state я изтрива и това е единственото действие тук без връщане: всеки zero-knowledge канал, създаден от това разгръщане, замлъква завинаги, защото никоя ротация вече не може да бъде подписана така, че членовете й да я проверят. Работното копие не се докосва.",
     "tr": "--uninstall iki hizmeti de bootout eder, plist'leri, kodu, yapılandırmayı ve günlük dizinini kaldırır, hizmet hesaplarını -keepHome ile siler. Durum dizini /usr/local/var/popopx-service-suite yerinde kalır: içinde gateway.db var — defterin kendisi, her pairwise oturum sırrı ve kanal kimliğinin özel anahtarları — ve yeniden kurulum onu tekrar kullanır. Yalnızca --purge-state onu siler ve bu, burada geri alınışı olmayan tek eylemdir: bu kurulumun yarattığı her sıfır bilgi kanalı kalıcı olarak susar, çünkü üyelerinin doğrulayacağı bir rotasyon bir daha imzalanamaz. Checkou'unuza hiç dokunulmaz.",
     "hu": "--uninstall mindkét szolgáltatást kidobja, törli a plisteket, a kódot, a konfigurációt és a naplókönyvtárat, és a -keepHome kapcsolóval törli a szolgáltatásfiókokat. Az állapotkönyvtár, /usr/local/var/popopx-service-suite, helyben marad: benne a gateway.db — a főkönyv, minden pairwise munkamenet-titok és a csatornák azonosságának privát kulcsai — és egy újratelepítés újra felhasználja. Csak a --purge-state törli, és ez az egyetlen itt végzett művelet, aminek nincs visszafordítása: minden zero-knowledge csatorna, amit ez a telepítés létrehozott, végleg elhallgat, mert nincs olyan rotáció, amit aláírhatnál és a tagjai ellenőriznének. A checkoutodat soha nem érinti.",
+    "pt-BR": "--uninstall remove os dois serviços, apaga os plists, o código, a configuração e o diretório de logs, e exclui as contas de sistema com -keepHome. O diretório de estado /usr/local/var/popopx-service-suite permanece: ele guarda gateway.db — o livro-razão, todos os segredos de sessão pairwise e as chaves privadas de identidade dos canais — e uma reinstalação o reutiliza. Apenas --purge-state o apaga, e essa é a única ação aqui sem desfazer: todos os canais de conhecimento zero criados por esta implantação ficam silenciosos para sempre, porque nenhuma rotação pode ser assinada de forma que seus membros a verifiquem. O checkout nunca é tocado.",
+    ko: "--uninstall은 두 서비스를 부트아웃하고 plist, 코드, 구성, 로그 디렉터리를 제거하며 -keepHome으로 역할 계정을 삭제합니다. 상태 디렉터리 /usr/local/var/popopx-service-suite는 남습니다. 이 디렉터리에는 gateway.db, 즉 원장과 모든 페어와이즈 세션 시크릿과 채널 아이덴티티 개인 키가 있으며 재설치 시 그대로 재사용됩니다. 삭제는 --purge-state로만 가능하며, 이 작업은 여기서 유일하게 되돌릴 수 없습니다. 이 배포가 만든 모든 영지식 채널이 영구히 침묵하게 되는데, 멤버가 검증할 수 있는 교체를 서명할 수 없기 때문입니다. 체크아웃은 절대 건드리지 않습니다.",
+    ar: "--uninstall تُخرج الخدمتين، وتزيل ملفات plist والشيفرة والإعداد ومجلد السجلات، وتحذف حسابات الدور بـ -keepHome. أما مجلد الحالة /usr/local/var/popopx-service-suite فيبقى: فهو يحمل gateway.db — دفتر الحسابات، وكل سر جلسة ثنائي الأطراف، والمفاتيح الخاصة لهوية القنوات — وإعادة التثبيت تعيد استخدامه. ولا يحذفه إلا --purge-state، وهو الإجراء الوحيد هنا الذي لا رجعة فيه: فكل قناة معرفة صفرية أنشأها هذا النشر تصمت إلى الأبد، لأنه لا يمكن توقيع أي تدوير يتحقق منه أعضاؤها. أما نسخة المستودع فلا تُمسّ أبدًا.",
   } satisfies L,
 
   mProdNoteTitle: {
@@ -1163,6 +1314,9 @@ const T = {
     "bg": "Три неща, които install_macos.sh не върши вместо теб",
     "tr": "install_macos.sh'ın sizin yerinize yapmadığı üç şey",
     "hu": "Három dolog, amit az install_macos.sh nem végez el helyetted",
+    "pt-BR": "Três coisas que o install_macos.sh não fará por você",
+    ko: "install_macos.sh가 대신 처리하지 않는 세 가지",
+    ar: "ثلاثة أمور لن ينفّذها install_macos.sh نيابةً عنك",
   } satisfies L,
   mProdBindL: {
     en: "Bind",
@@ -1183,6 +1337,9 @@ const T = {
     "bg": "Обвързване",
     "tr": "Bağlama",
     "hu": "Kötés",
+    "pt-BR": "Escuta",
+    ko: "바인딩",
+    ar: "الارتباط",
   } satisfies L,
   mProdBind: {
     en: "The default is loopback only, 127.0.0.1:8080 — reachable from this Mac alone. That is a deliberate divergence from the Ubuntu installer, which binds every interface by default. This script never opens anything in the Application Firewall: --check only reports its global state, and the NEXT STEPS print the two socketfilterfw lines (--add and --unblockapp on the venv's python) for you to run yourself, once TLS is in place and only if you used --lan.",
@@ -1203,6 +1360,9 @@ const T = {
     "bg": "По подразбиране е само loopback, 127.0.0.1:8080 — достига се единствено от самия този Mac. Това е съзнателно разминаване с Ubuntu инсталатора, който по подразбиране обвързва всички интерфейси. Този скрипт никога не отваря нищо в Application Firewall: --check само съобщава глобалното му състояние, а NEXT STEPS печатат двете реда socketfilterfw (--add и --unblockapp върху python от venv), които стартираш сам, след като TLS е налице и само ако си използвал --lan.",
     "tr": "Varsayılan yalnızca loopback, 127.0.0.1:8080 — sadece bu Mac'in üzerinden erişilebilir. Bu, Ubuntu kurulum programından bilinçli bir ayrışmadır; Ubuntu varsayılan olarak tüm arayüzlere bağlanır. Bu betik Application Firewall'da asla hiçbir şey açmaz: --check yalnızca küresel durumu bildirir, NEXT STEPS ise sizin çalıştıracağınız iki socketfilterfw satırını yazdırır (venv içindeki python üzerinde --add ve --unblockapp) — TLS kurulduysa ve yalnızca --lan kullandıysanız.",
     "hu": "Alapértelmezés szerint csak loopback, 127.0.0.1:8080 — csak erről a Macről érhető el. Ez szándékos eltérés az Ubuntu telepítőtől, amely alapértelmezés szerint minden interfészt leköt. Ez a szkript soha nem nyit semmit az Application Firewallban: a --check csak a globális állapotát jelenti, a NEXT STEPS pedig két socketfilterfw sort nyomtat (--add és --unblockapp a venv pythonjára), amelyeket magad futtatsz, ha már megvan a TLS, és csak ha --lan-t használtál.",
+    "pt-BR": "O padrão é apenas loopback, 127.0.0.1:8080 — acessível somente a partir deste Mac. Trata-se de uma divergência deliberada em relação ao instalador do Ubuntu, que por padrão se vincula a todas as interfaces. Este script nunca abre nada no Firewall de Aplicativos: --check apenas informa seu estado global, e o NEXT STEPS imprime as duas linhas socketfilterfw (--add e --unblockapp sobre o python do venv) para você executar, depois que o TLS estiver no lugar e somente se tiver usado --lan.",
+    ko: "기본값은 루프백 전용인 127.0.0.1:8080이며 이 Mac에서만 접근할 수 있습니다. 이는 기본적으로 모든 인터페이스에 바인딩하는 Ubuntu 설치 스크립트와 의도적으로 다른 동작입니다. 이 스크립트는 애플리케이션 방화벽에서 아무것도 열지 않습니다. --check는 전역 상태만 보고하며, NEXT STEPS는 TLS가 준비되고 --lan을 사용한 경우에만 직접 실행할 두 개의 socketfilterfw 줄(--add와 venv의 python에 대한 --unblockapp)을 출력합니다.",
+    ar: "الافتراضي هو العنوان المحلي وحده، 127.0.0.1:8080 — أي لا يُوصَل إليه إلا من هذا الـ Mac. وهذا خلاف متعمّد مع مثبّت Ubuntu الذي يرتبط بكل الواجهات افتراضيًا. ولا يفتح هذا النص شيئًا في جدار حماية التطبيقات أبدًا: فلا يبلّغ --check إلا عن حالته العامة، وتطبع NEXT STEPS سطري socketfilterfw (--add و--unblockapp على python الخاص بـ venv) لتنفّذهما بنفسك، بعد أن يصبح TLS جاهزًا وفقط إذا كنت قد استخدمت --lan.",
   } satisfies L,
   mProdLogL: {
     en: "Logs",
@@ -1223,6 +1383,9 @@ const T = {
     "bg": "Логове",
     "tr": "Günlükler",
     "hu": "Naplók",
+    "pt-BR": "Registros",
+    ko: "로그",
+    ar: "السجلات",
   } satisfies L,
   mProdLog: {
     en: "launchd writes them into /usr/local/var/log/popopx-service-suite at mode 0600, and there is no rotation — the install plan says so in exactly those words. Everything the gateway says goes to gateway.err.log; gateway.out.log carries only the banner lines. The safe rotation is the one that reopens the file descriptor: move the log, then kickstart -k the job, because a newsyslog entry that renames the file leaves a running daemon writing into an inode nobody opens again.",
@@ -1243,6 +1406,9 @@ const T = {
     "bg": "Логовете се записват от launchd в /usr/local/var/log/popopx-service-suite с режим 0600 и няма ротация — планът за инсталация го казва с точно тези думи. Всичко, което шлюзът казва, отива в gateway.err.log; gateway.out.log носи само редовете на банера. Безопасната ротация е тази, която отново отваря файловия дескриптор: премести лога, после рестартирай задачата с kickstart -k, защото запис на newsyslog, който преименува файла, оставя работещ демон да пише в inode, който никой повече няма да отвори.",
     "tr": "Günlükleri launchd /usr/local/var/log/popopx-service-suite içine 0600 modunda yazar ve rotasyon yoktur — kurulum planı tam bu kelimeleri söyler. Ağ geçidinin söylediği her şey gateway.err.log'a gider; gateway.out.log yalnız banner satırlarını taşır. Güvenli rotasyon, dosya tanımlayıcısını yeniden açan rotasyondur: günlüğü taşıyın, sonra işi kickstart -k ile yeniden başlatın; çünkü dosyayı yeniden adlandıran bir newsyslog kaydı, çalışan bir koruyucu programı kimsenin bir daha açmayacağı bir inode'a yazmaya bırakır.",
     "hu": "A naplókat a launchd írja a /usr/local/var/log/popopx-service-suite alá 0600 móddal, és nincs rotáció — a telepítési terv szó szerint így mondja. Amit az átjáró megszólal, az a gateway.err.log-ba megy; a gateway.out.log csak a banner sorokat viszi. A biztonságos rotáció az, amelyik újra megnyitja a fájlleírót: helyezd át a naplót, majd indítsd újra a dzsobot kickstart -k-val, mert egy newsyslog bejegyzés, amelyik átnevezi a fájlt, egy futó démont hagy írni egy olyan inode-ba, amit senki többé nem nyit meg.",
+    "pt-BR": "O launchd os grava em /usr/local/var/log/popopx-service-suite com modo 0600, e não há rotação — o plano de instalação diz isso exatamente com essas palavras. Tudo o que o gateway emite vai para gateway.err.log; gateway.out.log carrega apenas as linhas do banner. A rotação segura é a que reabre o descritor de arquivo: mova o log e depois execute kickstart -k na tarefa, porque uma entrada newsyslog que renomeia o arquivo deixa um daemon em execução gravando em um inode que ninguém abre de novo.",
+    ko: "launchd는 이를 /usr/local/var/log/popopx-service-suite에 모드 0600으로 기록하며 로테이션은 없습니다. 설치 계획도 바로 그렇게 명시합니다. 게이트웨이가 출력하는 모든 내용은 gateway.err.log로 가고, gateway.out.log에는 배너 줄만 기록됩니다. 안전한 로테이션은 파일 디스크립터를 다시 여는 방식입니다. 로그를 옮긴 뒤 작업에 kickstart -k를 실행하십시오. 파일 이름을 바꾸는 newsyslog 항목은 실행 중인 데몬이 아무도 다시 열지 않는 inode에 계속 쓰도록 남겨 두기 때문입니다.",
+    ar: "يكتبها launchd في /usr/local/var/log/popopx-service-suite على الوضع 0600، ولا يوجد تدوير — وخطة التثبيت تقول ذلك بهذه الكلمات بالضبط. وكل ما تقوله البوابة يذهب إلى gateway.err.log؛ أما gateway.out.log فلا يحمل إلا أسطر اللافتة. والتدوير الآمن هو الذي يعيد فتح واصف الملف: انقل السجل، ثم نفّذ kickstart -k للمهمة، لأن إدخال newsyslog الذي يعيد تسمية الملف يترك خدمة عاملة تكتب في inode لا يفتحه أحد بعد ذلك.",
   } satisfies L,
   mProdExitL: {
     en: "Exit codes",
@@ -1263,6 +1429,9 @@ const T = {
     "bg": "Кодове на излизане",
     "tr": "Çıkış kodları",
     "hu": "Kilépési kódok",
+    "pt-BR": "Códigos de saída",
+    ko: "종료 코드",
+    ar: "رموز الخروج",
   } satisfies L,
   mProdExit: {
     en: "The numbers are part of the contract: 3 is no Python 3.11 found, 4 is --with-node with no popopx-chat binary, 5 is installed but silent on the probe to http://127.0.0.1:<port>/healthz — then the installer tells you to look at launchctl print first, and at gateway.err.log after. 1 stays the fatal-preflight code, and 3 and 4 are deliberately kept from collapsing into it.",
@@ -1283,6 +1452,9 @@ const T = {
     "bg": "Числата са част от договора: 3 означава, че Python 3.11 не е намерен, 4 — че --with-node е без двоичен файл popopx-chat, а 5 — че услугата е инсталирана, но мълчи на сондата http://127.0.0.1:<порт>/healthz; при 5 инсталаторът съветва първо да погледнеш launchctl print, после gateway.err.log. Единицата остава код на фаталния предварителен преглед, а 3 и 4 умишлено не се свиват в нея.",
     "tr": "Sayılar sözleşmenin parçası: 3 Python 3.11 bulunamadığı anlamına gelir, 4 --with-node için popopx-chat ikilisi bulunamadığı, 5 ise hizmetin kurulup http://127.0.0.1:<port>/healthz yoklamasına sessiz kaldığı anlamına gelir — 5'te kurulum programı önce launchctl print'e, sonra gateway.err.log'a bakmanızı söyler. 1 ölümcül ön kontrol kodu olarak kalır ve 3 ile 4'un içine düşürülmesi bilinçli olarak engellenir.",
     "hu": "A számok a megállapodás részei: a 3 azt jelenti, hogy nincs meg a Python 3.11, a 4 azt, hogy --with-node esetén nincs meg a popopx-chat bináris, az 5 pedig azt, hogy a szolgáltatás feltelepült, de hallgat a http://127.0.0.1:<port>/healthz próbára — 5 esetén a telepítő először a launchctl print, majd a gateway.err.log megnyitását tanácsolja. Az 1 marad a végzetes előellenőrzés kódja, és a 3-at meg a 4-et szándékosan nem olthatja bele.",
+    "pt-BR": "Os números fazem parte do contrato: 3 significa que nenhum Python 3.11 foi encontrado, 4 significa --with-node sem um binário popopx-chat, 5 significa instalado mas silencioso na sondagem para http://127.0.0.1:<port>/healthz — e então o instalador manda você olhar primeiro em launchctl print e depois em gateway.err.log. 1 continua sendo o código fatal de pré-verificação, e 3 e 4 são deliberadamente mantidos sem colapsar nele.",
+    ko: "이 숫자들은 계약의 일부입니다: 3은 Python 3.11을 찾지 못함, 4는 popopx-chat 바이너리 없이 --with-node를 사용함, 5는 설치되었지만 http://127.0.0.1:<port>/healthz 점검에 응답하지 않음입니다 — 이때 설치 프로그램은 먼저 launchctl print를, 그다음 gateway.err.log를 확인하라고 안내합니다. 1은 치명적 사전 점검 코드로 남고, 3과 4는 의도적으로 1에 합쳐지지 않습니다.",
+    ar: "الأرقام جزء من العقد: 3 تعني عدم العثور على Python 3.11، و4 تعني --with-node دون وجود ملف popopx-chat التنفيذي، و5 تعني التثبيت مع صمت في فحص http://127.0.0.1:<port>/healthz — وعندها يخبرك المثبّت أن تنظر في launchctl print أولًا، وفي gateway.err.log بعد ذلك. ويبقى 1 رمز الفحص الوقائي القاتل، و3 و4 يُبقيان عن قصد بعيدًا عن الاندماج فيه.",
   } satisfies L,
 
   /* macOS — development: start_macos.sh */
@@ -1305,6 +1477,9 @@ const T = {
     "bg": "Локална разработка: ./start_macos.sh",
     "tr": "Yerel geliştirme: ./start_macos.sh",
     "hu": "Helyi fejlesztés: ./start_macos.sh",
+    "pt-BR": "Desenvolvimento local: ./start_macos.sh",
+    ko: "로컬 개발: ./start_macos.sh",
+    ar: "التطوير المحلي: ./start_macos.sh",
   } satisfies L,
 
   mWhyVenv: {
@@ -1326,6 +1501,9 @@ const T = {
     "bg": "По подразбиране е venv, а не Docker, и има причина: възелът слуша само на 127.0.0.1, а в Docker Desktop „host“-ът на контейнера е loopback на linuxvm, не на този Mac. network_mode: host е възможност на Linux ядрото, затова само пускането и на двете нативно прави този loopback скок истински.",
     "tr": "Varsayılanın Docker değil venv olmasının bir nedeni var: düğüm yalnızca 127.0.0.1'i dinler, üstelik Docker Desktop içinde bir konteynerin “host”'u bu Mac'in değil linuxvm'in loopback'idir. network_mode: host bir Linux çekirdek özelliğidir; bu loopback atlamasını gerçek kılan da ikisini yerel olarak çalıştırmaktır.",
     "hu": "Az alapértelmezés venv, nem Docker, és ennek oka van: a csomópont csak a 127.0.0.1-en figyel, és a Docker Desktopban a konténer „host”ja a linuxvm loopback-je, nem ennek a Macnek a loopback-je. A network_mode: host egy Linux kernel funkció, tehát csak ha mindkettő natívan fut, valós az a loopback ugrás.",
+    "pt-BR": "O padrão é um venv, não Docker, por um motivo: o nó escuta apenas em 127.0.0.1, e dentro do Docker Desktop o “host” de um contêiner é o loopback da linuxvm, não o deste Mac. network_mode: host é um recurso do kernel do Linux, então executar ambos nativamente é o que torna real esse salto pelo loopback.",
+    ko: "기본값이 Docker가 아니라 venv인 데에는 이유가 있습니다. 노드는 127.0.0.1에서만 수신하며, Docker Desktop 내부에서 컨테이너의 “호스트”는 이 Mac이 아니라 linuxvm의 루프백입니다. network_mode: host는 Linux 커널 기능이므로, 둘 다 네이티브로 실행해야 그 루프백 이동이 실제로 성립합니다.",
+    ar: "الافتراضي هو venv لا Docker، وذلك لسبب: فالعقدة لا تستمع إلا على 127.0.0.1، وداخل Docker Desktop يكون «المضيف» في الحاوية هو عنوان loopback في linuxvm، لا عنوان هذا الـ Mac. وnetwork_mode: host ميزة من نواة Linux، لذا فإن تشغيل الاثنين أصليًا هو ما يجعل قفزة loopback تلك حقيقية.",
   } satisfies L,
   mStartT: {
     en: "One command, two processes",
@@ -1346,6 +1524,9 @@ const T = {
     "bg": "Една команда, два процеса",
     "tr": "Tek komut, iki süreç",
     "hu": "Egy parancs, két folyamat",
+    "pt-BR": "Um comando, dois processos",
+    ko: "명령 하나, 프로세스 둘",
+    ar: "أمر واحد، عمليتان",
   } satisfies L,
   mStartC: {
     en: "It copies .env.example to .env when none exists and generates the token inside it (reporting only that it did, never the value, and leaving .env at mode 600); finds Python 3.11, creates .venv and installs gateway/requirements.txt (first run only); starts the node on 127.0.0.1:5225 and the gateway on 0.0.0.0:8080, probes /healthz, then prints the console URL, the phone-side origin and where the token lives. Ctrl-C stops the gateway and any node the script started; a node you were already running is yours and is left alone. Nothing is installed system-wide and .venv is deletable.",
@@ -1366,6 +1547,9 @@ const T = {
     "bg": "Той копира .env.example в .env, когато го няма, и генерира токена вътре (съобщава само че го е направил, никога стойността, и оставя .env в режим 600); намира Python 3.11, създава .venv и инсталира gateway/requirements.txt (само при първо изпълнение); вдига възела на 127.0.0.1:5225 и шлюза на 0.0.0.0:8080, проверява /healthz и после печата адреса на конзолата, произхода от страната на телефона и къде се намира токенът. Ctrl-C спира шлюза и възела, пуснат от скрипта; възел, който вече вашият изпълнява, е ваш и не се пипа. Нищо не се инсталира в системата и .venv може да се изтрие.",
     "tr": "Script .env yoksa .env.example dosyasını kopyalayıp tokeni içinde üretir (yalnızca ürettiğini bildirir, değeri asla yazdırmaz ve .env'i 600 modunda bırakır); Python 3.11'i bulur, .venv oluşturur ve gateway/requirements.txt kurar (ilk çalıştırmada); 127.0.0.1:5225'deki düğüm ile 0.0.0.0:8080'deki ağ geçidini ayağa kaldırır, /healthz'i yoklar, sonra konsol adresini, telefon tarafının origin'ini ve token'ın nerede olduğunu yazar. Ctrl-C, ağ geçidini ve betiğin başlattığı düğümü durdurur; zaten sizin çalıştırdığınız düğmeye dokunmaz. Sisteme hiçbir şey kurulmaz ve .venv silinebilir.",
     "hu": "A szkript, ha nincs .env, átmásolja a .env.example-t .env-be, és legenerálja benne a tokent (csak arról tájékoztat, hogy megtette, az értékről soha, és 600 módban hagyja a fájlt); megtalálja a Python 3.11-et, létrehozza a .venv-környezetet és telepíti a gateway/requirements.txt fájlt (csak az első futáskor); elindítja a csomópontot a 127.0.0.1:5225-ön és az átjárót a 0.0.0.0:8080-címen, leellenőrzi a /healthz végét, majd kinyomtatja a konzol URL-jét, a telefon oldali origin-t és a token helyét. A Ctrl-C leállítja az átjárót és a szkript által indított csomópontot; a már futó, a saját csomópontját nem bolygatja. A rendszerbe semmi nem települ, és a .venv törölhető.",
+    "pt-BR": "Ele copia .env.example para .env quando nenhum existe e gera o token dentro dele (informando apenas que o fez, nunca o valor, e deixando o .env com modo 600); localiza o Python 3.11, cria .venv e instala gateway/requirements.txt (somente na primeira execução); inicia o nó em 127.0.0.1:5225 e o gateway em 0.0.0.0:8080, sonda /healthz e então imprime a URL do console, a origem do lado do telefone e onde o token fica. Ctrl-C interrompe o gateway e qualquer nó que o script tenha iniciado; um nó que você já estava executando é seu e fica intocado. Nada é instalado em todo o sistema e o .venv pode ser apagado.",
+    ko: ".env가 없으면 .env.example을 .env로 복사하고 그 안에 토큰을 생성합니다(생성했다는 사실만 알리고 값은 절대 출력하지 않으며, .env는 모드 600으로 남깁니다). Python 3.11을 찾아 .venv를 만들고 gateway/requirements.txt를 설치합니다(첫 실행에만). 노드를 127.0.0.1:5225에서, 게이트웨이를 0.0.0.0:8080에서 시작하고 /healthz를 프로브한 뒤 콘솔 URL, 휴대폰 쪽 오리진, 토큰이 있는 위치를 출력합니다. Ctrl-C는 게이트웨이와 스크립트가 시작한 노드를 중지합니다. 이미 실행 중이던 노드는 사용자의 것이므로 그대로 둡니다. 시스템 전역에는 아무것도 설치되지 않으며 .venv는 삭제해도 됩니다.",
+    ar: "ينسخ .env.example إلى .env حين لا يوجد ملف .env، ويولّد الرمز بداخله (مبلّغًا فقط بأنه فعل ذلك، ولا يكشف القيمة أبدًا، ويترك .env على الوضع 600)؛ ويعثر على Python 3.11، وينشئ .venv ويثبّت gateway/requirements.txt (في التشغيل الأول فقط)؛ ويشغّل العقدة على 127.0.0.1:5225 والبوابة على 0.0.0.0:8080، ويفحص /healthz، ثم يطبع عنوان URL لوحدة التحكم، والأصل من جهة الهاتف، ومكان وجود الرمز. وCtrl-C يوقف البوابة وأي عقدة بدأها النص؛ أما عقدة كنت تشغّلها أصلًا فهي لك وتُترك وشأنها. ولا شيء يُثبَّت على مستوى النظام، و.venv قابل للحذف.",
   } satisfies L,
   mCheckT: {
     en: "Preflight only",
@@ -1386,6 +1570,9 @@ const T = {
     "bg": "Само предварителна проверка",
     "tr": "Yalnızca ön kontrol",
     "hu": "Csak elő ellenőrzés",
+    "pt-BR": "Somente a verificação prévia",
+    ko: "사전 점검만",
+    ar: "الفحص المسبق فقط",
   } satisfies L,
   mCheckC: {
     en: "--check reports whether Python 3.11 exists, which node binary it found, whether anything is listening on 5225, whether docker is present, whether .env exists, whether the admin token is set and the state of the official voucher key — then prints the LAN address plus the socket and database path a real run would use. It starts nothing and creates nothing.",
@@ -1406,6 +1593,9 @@ const T = {
     "bg": "--check докладва дали има Python 3.11, кой двоичен файл на възела е намерен, дали някой слуша на 5225, дали има docker, дали .env съществува, дали административният токен е зададен и в какъв състояние е официалният ключ на кодовете — после печата LAN адреса плюс сокета и пътя към базата, които реалното изпълнение би използвало. Нищо не стартира и нищо не създава.",
     "tr": "--check, Python 3.11'in var olduğunu, hangi düğüm ikili dosyasını bulduğunu, 5225'i dinleyen biri olup olmadığını, docker'in kurulu olup olmadığını, .env dosyasının varlığını, yönetici jetonunun ayarlanıp ayarlanmadığını ve resmî kupon anahtarının durumunu bildirir — ardından gerçek bir çalıştırmanın kullanacağı LAN adresini, soketi ve veritabanı yolunu yazar. Hiçbir şey başlatmaz, hiçbir şey oluşturmaz.",
     "hu": "A --check jelentést ad arról, létezik-e Python 3.11, melyik csomópont-binárist találta, figyel-e valaki az 5225-ös porton, telepítve van-e a docker, létezik-e a .env, beállították-e az adminisztrátori tokent, és milyen állapotban van a hivatalos utalvány-kulcs — majd kinyomtatja a LAN-címet, azt a foglalatot és adatbázis-útvonalat, amelyeket egy valódi futtatás használna. Semmit nem indít el és semmit nem hoz létre.",
+    "pt-BR": "--check informa se o Python 3.11 existe, qual binário do nó encontrou, se algo está escutando na 5225, se o docker está presente, se o .env existe, se o token de administração está definido e o estado da chave oficial de voucher — e então imprime o endereço da LAN, além do caminho do socket e do banco de dados que uma execução real usaria. Ele não inicia nada nem cria nada.",
+    ko: "--check는 Python 3.11의 존재 여부, 찾은 노드 바이너리, 5225에서 수신 중인 항목이 있는지, docker의 존재 여부, .env의 존재 여부, 관리자 토큰 설정 여부, 공식 바우처 키의 상태를 보고한 뒤, 실제 실행에서 사용할 LAN 주소와 소켓 및 데이터베이스 경로를 출력합니다. 아무것도 시작하지 않고 아무것도 생성하지 않습니다.",
+    ar: "يبلّغ --check عمّا إذا كان Python 3.11 موجودًا، وأي ملف تنفيذي للعقدة وجده، وهل يستمع شيء على 5225، وهل docker موجود، وهل .env موجود، وهل رمز المسؤول مضبوط، وعن حالة مفتاح القسائم الرسمي — ثم يطبع عنوان LAN مع المقبس ومسار قاعدة البيانات اللذين سيستخدمهما تشغيل حقيقي. وهو لا يبدأ شيئًا ولا ينشئ شيئًا.",
   } satisfies L,
   mTokenT: {
     en: "When you want the token printed",
@@ -1426,6 +1616,9 @@ const T = {
     "bg": "Когато искате токенът да се отпечата",
     "tr": "Jetonu yazdırmak istediğinizde",
     "hu": "Amikor ki szeretné nyomtatni a tokent",
+    "pt-BR": "Quando você quiser o token impresso",
+    ko: "토큰을 출력해야 할 때",
+    ar: "حين تريد طباعة الرمز",
   } satisfies L,
   mTokenC: {
     en: "By default only the path that holds the token is printed; --show-token prints the value itself, which you can also read straight out of the development .env at the repository root.",
@@ -1446,6 +1639,9 @@ const T = {
     "bg": "По подразбиране се печата само пътят, където е токенът; --show-token печата самата стойност, която може да прочетете и директно от разработъчния .env в корена на хранилището.",
     "tr": "Varsayılan olarak yalnızca jetonun bulunduğu dosyanın yolu yazdırılır; --show-token değerin kendisini yazdırır — bu değeri ayrıca depo kökündeki geliştirme .env dosyasından doğrudan da okuyabilirsiniz.",
     "hu": "Alapértelmezésben csak az a elérési út jelenik meg, amely a toket tartalmazza; a --show-token magát az értéket nyomtatja ki, amely egyébként közvetlenül is elolvasható a gyökérben lévő fejlesztői .env fájlból.",
+    "pt-BR": "Por padrão, apenas o caminho que guarda o token é impresso; --show-token imprime o próprio valor, que você também pode ler diretamente do .env de desenvolvimento na raiz do repositório.",
+    ko: "기본적으로는 토큰이 들어 있는 경로만 출력됩니다. --show-token은 값 자체를 출력하며, 저장소 루트의 개발용 .env에서 직접 읽을 수도 있습니다.",
+    ar: "لا يُطبع افتراضيًا إلا المسار الذي يحمل الرمز؛ أما --show-token فيطبع القيمة نفسها، ويمكنك أيضًا قراءتها مباشرة من .env الخاص بالتطوير في جذر المستودع.",
   } satisfies L,
   mNodeT: {
     en: "Attach to your own node, or move the port",
@@ -1466,6 +1662,9 @@ const T = {
     "bg": "Прикачете се към ваш собствен възел или преместете порта",
     "tr": "Kendi düğümünüze bağlanın ya da portu taşıyın",
     "hu": "Kapcsolódjon a saját csomópontjához, vagy helyezze át a portot",
+    "pt-BR": "Conecte-se ao seu próprio nó ou mova a porta",
+    ko: "자신의 노드에 연결하거나 포트 옮기기",
+    ar: "الاتصال بعقدتك الخاصة، أو نقل المنفذ",
   } satisfies L,
   mNodeC: {
     en: "--no-node stops the script from starting one and makes it assume a node already answers on 127.0.0.1:5225; --node-bin PATH points at a binary directly and --node-port N moves the port (the gateway's POPOPX_NODE_WS_URL follows). --host changes the bind address (default 0.0.0.0); the two port numbers, --port and --node-port, are validated as 1 to 65535 before anything starts. A node that is not up yet is not fatal — see the verification block below.",
@@ -1486,6 +1685,9 @@ const T = {
     "bg": "--no-node не позволява на скрипта да стартира възел и го кара да предполага, че на 127.0.0.1:5225 вече някой отговаря; --node-bin PATH сочи директно към двоичен файл, а --node-port N мести порта (POPOPX_NODE_WS_URL на шлюза следва промяната). --host променя адреса на bind (по подразбиране 0.0.0.0), и двата портови номера, --port и --node-port, се проверяват като 1 до 65535 преди да стартира каквото и да е. Възел, който не е горе, не е фатален — вижте блока за проверка по-долу.",
     "tr": "--no-node, betiğin düğüm başlatmasını engeller ve 127.0.0.1:5225 adresinde zaten birinin yanıt verdiğini varsayar; --node-bin PATH doğrudan bir ikili dosyayı gösterir, --node-port N ise portu taşır (ağ geçidinin POPOPX_NODE_WS_URL değeri buna uyar). --host bağlama adresini değiştirir (varsayılan 0.0.0.0); --port ve --node-port ikisi de hiçbir şey başlamadan önce 1–65535 aralığında doğrulanır. Düğümün ayağa kalkmamış olması ölümcül değildir — aşağıdaki doğrulama bloğuna bakın.",
     "hu": "--no-node megakadályozza, hogy a szkript csomópontot indítson, és azt feltételezi, hogy a 127.0.0.1:5225 alatt már valaki válaszol; a --node-bin PATH közvetlenül egy binárist jelöl meg, a --node-port N áttelepíti a portot (az átjáró POPOPX_NODE_WS_URL értéke követi). A --host a kötési címet módosítja (alapértelmezés 0.0.0.0), a --port és a --node-port portszámot pedig indulás előtt 1 és 65535 között ellenőrzi. Hogy a csomópont még nem kelt fel, nem végzetes — lásd az alábbi ellenőrzési blokkot.",
+    "pt-BR": "--no-node impede que o script inicie um nó e faz com que ele assuma que um nó já responde em 127.0.0.1:5225; --node-bin PATH aponta diretamente para um binário e --node-port N move a porta (o POPOPX_NODE_WS_URL do gateway acompanha). --host altera o endereço de bind (padrão 0.0.0.0); os dois números de porta, --port e --node-port, são validados como 1 a 65535 antes que qualquer coisa inicie. Um nó que ainda não está no ar não é fatal — veja o bloco de verificação abaixo.",
+    ko: "--no-node는 스크립트가 노드를 시작하지 않게 하고 127.0.0.1:5225에서 이미 노드가 응답한다고 가정하게 합니다. --node-bin PATH는 바이너리를 직접 지정하고 --node-port N은 포트를 옮깁니다(게이트웨이의 POPOPX_NODE_WS_URL도 따라갑니다). --host는 바인드 주소를 변경합니다(기본값 0.0.0.0). 두 포트 번호인 --port와 --node-port는 시작 전에 1부터 65535 사이로 검증됩니다. 아직 올라오지 않은 노드는 치명적이지 않습니다. 아래 검증 블록을 참조하십시오.",
+    ar: "يمنع --no-node النص من بدء عقدة ويجعله يفترض أن عقدة تجيب أصلًا على 127.0.0.1:5225؛ ويشير --node-bin PATH إلى ملف تنفيذي مباشرة، وينقل --node-port N المنفذ (ويتبعه POPOPX_NODE_WS_URL الخاص بالبوابة). ويغيّر --host عنوان الارتباط (والافتراضي 0.0.0.0)؛ ويُتحقق من رقمَي المنفذ، --port و--node-port، أنهما بين 1 و65535 قبل أن يبدأ أي شيء. والعقدة التي لم تقم بعد ليست أمرًا قاتلًا — انظر كتلة التحقق أدناه.",
   } satisfies L,
   pairTitle: {
     en: "Pairing with a real iPhone",
@@ -1506,6 +1708,9 @@ const T = {
     "bg": "Сдвояване с истински iPhone",
     "tr": "Gerçek bir iPhone ile eşleştirme",
     "hu": "Párosítás valódi iPhone-nal",
+    "pt-BR": "Pareamento com um iPhone real",
+    ko: "실제 iPhone과 페어링",
+    ar: "الاقتران بـ iPhone حقيقي",
   } satisfies L,
   pairBody: {
     en: "The script binds the gateway to 0.0.0.0 and sets POPOPX_PUBLIC_BASE_URL for this run only to http://<this Mac's LAN IP>:8080 — nothing is written back to .env, so git diff stays clean. Put the phone on the same Wi-Fi and open that printed http://<LAN-IP>:8080; PopopxH5Launcher accepts http as well as https. Development only: the session secret's HMAC travels in cleartext, and a phone on guest Wi-Fi leaks it to the whole segment. What the phone actually dials for pairing is the relay address, not this LAN IP.",
@@ -1526,6 +1731,9 @@ const T = {
     "bg": "Скриптът обвързва шлюза с 0.0.0.0 и слага POPOPX_PUBLIC_BASE_URL само за това изпълнение на http://<LAN IP на този Mac>:8080 — нищо не се записва обратно в .env, git diff остава чист. Поставете телефона в същата Wi-Fi и отворете отпечатаното http://<LAN-IP>:8080; PopopxH5Launcher приема http така же и https. Само за разработка: HMAC-ът на сесиенната тайна пътува като ясен текст, а телефон в гостова мрежа го изпуска към целия сегмент. За истинско сдвояване телефонът набира адреса на контакта в релейната мрежа, не този LAN IP.",
     "tr": "Betik ağ geçidini 0.0.0.0'e bağlar ve POPOPX_PUBLIC_BASE_URL'i yalnızca bu çalıştırma için http://<bu Mac'in LAN IP>:8080 olarak ayarlar — .env'e hiçbir şey yazılmaz, git diff temiz kalır. Telefonu aynı Wi-Fi'a alın ve yazdırılan http://<LAN-IP>:8080 adresini açın; PopopxH5Launcher http'yi de https gibi kabul eder. Yalnızca geliştirme için: oturum sırrının HMAC'ı düz metin olarak gider, misafir ağındaki bir telefon bunu tüm ağa sızdırır. Gerçek eşleştirmede telefonun aradığı, röle üzerindeki kişi adresidir; bu LAN IP değil.",
     "hu": "A szkript az átjárót a 0.0.0.0-címhez köti, és a POPOPX_PUBLIC_BASE_URL-t csak erre a futásra állítja be http://<a Mac LAN IP-címe>:8080 alakban — a .env-be semmi nem íródik vissza, a git diff tiszta marad. Tegye a telefont ugyanabba a Wi-Fi-be, és nyissa meg a kinyomtatott http://<LAN-IP>:8080 címet; a PopopxH5Launcher az http-t is elfogadja, mint a https-t. Csak fejlesztéshez: a munkamenet-titok HMAC-ja nyílt szövegként utazik, és egy vendéghálózati telefon kiszivárogtatja azt az egész szegmensnek. A valódi párosításkor a telefon a relay-en lévő contact címet hívja, nem ezt a LAN IP-t.",
+    "pt-BR": "O script vincula o gateway a 0.0.0.0 e define POPOPX_PUBLIC_BASE_URL, apenas para esta execução, como http://<this Mac's LAN IP>:8080 — nada é gravado de volta em .env, então o git diff permanece limpo. Coloque o celular na mesma rede Wi-Fi e abra o http://<LAN-IP>:8080 impresso; PopopxH5Launcher aceita http e também https. Apenas para desenvolvimento: o HMAC do segredo de sessão trafega em texto claro, e um celular em Wi-Fi de convidados o vaza para todo o segmento. O que o celular realmente disca para o emparelhamento é o endereço do relay, não este IP de LAN.",
+    ko: "스크립트는 게이트웨이를 0.0.0.0에 바인딩하고 이번 실행에 한해서만 POPOPX_PUBLIC_BASE_URL을 http://<this Mac's LAN IP>:8080으로 설정합니다 — .env에 다시 쓰이는 것은 없으므로 git diff는 깨끗하게 유지됩니다. 휴대폰을 같은 Wi-Fi에 두고 출력된 http://<LAN-IP>:8080을 여십시오. PopopxH5Launcher는 https뿐 아니라 http도 받아들입니다. 개발 전용입니다: 세션 시크릿의 HMAC이 평문으로 이동하며, 게스트 Wi-Fi에 있는 휴대폰은 이를 세그먼트 전체에 노출합니다. 페어링을 위해 휴대폰이 실제로 접속하는 것은 이 LAN IP가 아니라 릴레이 주소입니다.",
+    ar: "يربط السكربت البوابة بـ 0.0.0.0 ويضبط POPOPX_PUBLIC_BASE_URL لهذه التشغيلة فقط على http://<this Mac's LAN IP>:8080 — ولا شيء يُكتب رجوعًا إلى .env، فيبقى git diff نظيفًا. ضع الهاتف على شبكة Wi-Fi نفسها وافتح العنوان المطبوع http://<LAN-IP>:8080؛ وPopopxH5Launcher يقبل http كما يقبل https. للتطوير فقط: فـ HMAC الخاص بسر الجلسة يسافر نصًا واضحًا، وهاتف على Wi-Fi للضيوف يسرّبه إلى المقطع كله. وما يطلبه الهاتف فعليًا للاقتران هو عنوان المرحّل، لا عنوان IP المحلي هذا.",
   } satisfies L,
   pairTrouble: {
     en: "When the iPhone cannot reach that address the script lists three causes in order of likelihood: the macOS application firewall has not allowed python3 (check the global state with the line above); the access point has client isolation on, which guest and corporate Wi-Fi do constantly and no setting on this Mac fixes — use another network or the phone's hotspot; or the contact address was generated for a different host, so re-share it from the console. Switching nodes means resetting the .data/ state, otherwise old pairwise uids get signed with secrets the new node never issued.",
@@ -1546,6 +1754,9 @@ const T = {
     "bg": "Когато iPhone не стига до адреса, скриптът изброява три причини по вероятност: приложният firewall на macOS не е пуснал python3 (проверете глобалното състояние с реда по-горе); достъпната точка има включена изолация на клиенти, което гостови и фирмени Wi-Fi правят постоянно и никаква настройка на този Mac не оправя — сменете мрежата или минете на hotspot на телефона; или адресът на контакта е генериран за друга машина, затова го споделете отново от конзолата. Смяната на възела означава нулиране на състоянието в .data/, иначе старите pairwise uid се подписват с тайни, които новият възел никога не е издавал.",
     "tr": "iPhone o adrese ulaşamıyorsa betik olasılık sırasıyla üç nedeni sayar: macOS uygulama güvenlik duvarı python3'e izin vermemiş (küresel durumu yukarıdaki satırla kontrol edin); erişim noktasında istemci yalıtımı açık — misafir ve kurumsal Wi-Fi ağları bunu sürekli yapar ve bu Mac'teki hiçbir ayar düzeltmez, ağı değiştirin ya da telefonun erişim noktasını kullanın; ya da kişi adresi başka bir makine için üretilmiştir, o hâlde konsoldan yeniden paylaşın. Düğüm değiştirmek .data/ durumunu sıfırlamak demektir; aksi hâlde eski pairwise uid'ler, yeni düğümün hiç vermediği sırlarla imzalanır.",
     "hu": "Ha az iPhone nem éri el a címet, a szkript három okot sorol valószínűség szerint: a macOS alkalmazástűzfal nem engedte át a python3-at (a fenti sorral ellenőrizheti a globális állapotot); a hozzáférési pont bekapcsolta az ügyfél-elválasztást, amit vendég- és vállalati Wi-Fi-k folyamatosan tesznek, és egyetlen Mac-beállítás ezt nem javítja — váltson hálózatot, vagy menjen a telefon hotspot-jára; vagy a contact cím másik gépre generálódott, tehát ossza meg újra a konzolból. A csomópont váltása a .data/ állapotának visszaállítását is jelenti, különben a régi pairwise uid-k olyan titkokkal aláíródnak, amelyeket az új csomópont soha nem adott ki.",
+    "pt-BR": "Quando o iPhone não consegue alcançar esse endereço, o script lista três causas em ordem de probabilidade: o firewall de aplicativos do macOS não permitiu o python3 (verifique o estado global com a linha acima); o ponto de acesso está com isolamento de clientes ativado, o que redes Wi-Fi de convidados e corporativas fazem o tempo todo e nenhuma configuração neste Mac resolve — use outra rede ou o hotspot do telefone; ou o endereço de contato foi gerado para um host diferente, então compartilhe-o novamente a partir do console. Trocar de nó significa redefinir o estado .data/, caso contrário uids pairwise antigos são assinados com segredos que o novo nó nunca emitiu.",
+    ko: "iPhone이 해당 주소에 도달하지 못하면 스크립트는 가능성이 높은 순서대로 세 가지 원인을 나열합니다. macOS 애플리케이션 방화벽이 python3를 허용하지 않은 경우(위의 줄로 전역 상태를 확인하십시오), 액세스 포인트에서 클라이언트 격리가 켜진 경우(게스트 및 사내 Wi-Fi에서 늘 있는 일이며 이 Mac의 어떤 설정으로도 해결되지 않습니다. 다른 네트워크나 휴대폰 핫스팟을 사용하십시오), 또는 다른 호스트용으로 연락처 주소가 생성된 경우(콘솔에서 다시 공유하십시오)입니다. 노드를 전환하려면 .data/ 상태를 초기화해야 합니다. 그렇지 않으면 이전 페어와이즈 uid가 새 노드가 발급한 적 없는 시크릿으로 서명됩니다.",
+    ar: "حين يتعذر على iPhone الوصول إلى ذلك العنوان، يسرد النص ثلاثة أسباب بترتيب الاحتمال: أن جدار حماية التطبيقات في macOS لم يسمح لـ python3 (تحقق من الحالة العامة بالسطر أعلاه)؛ أو أن نقطة الوصول تشغّل عزل العملاء، وهو ما تفعله شبكات Wi-Fi للضيوف والشركات باستمرار ولا يصلحه أي إعداد على هذا الـ Mac — فاستخدم شبكة أخرى أو نقطة اتصال الهاتف؛ أو أن عنوان جهة الاتصال وُلّد لمضيف مختلف، فأعد مشاركته من وحدة التحكم. أما تبديل العقد فيعني إعادة ضبط حالة .data/، وإلا وُقّعت معرّفات pairwise القديمة بأسرار لم تصدرها العقدة الجديدة.",
   } satisfies L,
   mVenvT: {
     en: "Developer path: venv + the full self-test",
@@ -1566,6 +1777,9 @@ const T = {
     "bg": "Път на разработчика: venv + пълна самотест",
     "tr": "Geliştirici yolu: venv + tam öz-sınama",
     "hu": "Fejlesztői út: venv + teljes önellenőrzés",
+    "pt-BR": "Caminho do desenvolvedor: venv + o self-test completo",
+    ko: "개발자 경로: venv + 전체 자체 테스트",
+    ar: "مسار المطوّر: venv + الاختبار الذاتي الكامل",
   } satisfies L,
   mVenvC: {
     en: "The README's own words: 3.11 is the interpreter this suite is built and typed against, named in the first lines of requirements.txt, and both blocks start from the repository root. The README treats the last line the command itself prints as the authoritative count, so this page quotes no check total: a green run on a full install is 22 groups with no SKIPPED, and the exact number of checks is whatever --self-test prints on your own machine. A stdlib-only interpreter names exactly three groups SKIPPED — crypto_self_test, opaque_invite_self_test and http_self_test — and prints those paths are NOT verified here: those three ran zero checks, rather than ran and went uncounted, while the other nineteen still go green. What the README says about interpreters is the opposite of an “only 3.9” caveat: it measured 22 green groups on the 3.9.6 in the repository's own .venv and again on a fresh Homebrew 3.11.18 venv, both exit 0 with 2776 checks, and it took the second reading because requirements.txt pins ranges instead of exact versions, so the newer fastapi/starlette in that venv nested include_router() routes and the first HTTP sweep read 30 plugin routes as never mounted until the check learned to walk nested routers.",
@@ -1586,6 +1800,9 @@ const T = {
     "bg": "Собствените думи на README: 3.11 е целевият интерпретатор на този комплект, посочен в първите редове на requirements.txt, и двата блока тръгват от корена на хранилището. README приема за авторитетен брой последния ред, който самата команда отпечатва, затова тази страница не цитира никаква сума проверки: зелен резултат при пълна инсталация са 22 групи без SKIPPED, а точният брой проверки е каквото --self-test отпечата на собствената ви машина. Интерпретатор само със stdlib получава точно три групи с името SKIPPED — crypto_self_test, opaque_invite_self_test и http_self_test — плюс реда those paths are NOT verified here: онези три не изпълниха нито една проверка, а не са изпълнявани и останали неизброени, а останалите деветнадесет пак светват зелено. Това, което README казва за интерпретаторите, е обратното на уговорката «само на 3.9»: то измери 22 зелени групи както на 3.9.6 в собствения .venv на хранилището, така и в новосъздаден venv с Homebrew 3.11.18, и двата с exit 0 и 2776 проверки, а второто измерване се наложи, защото requirements.txt описва диапазони, не точни версии, та по-новият fastapi/starlette в онзи venv вложи маршрутите на include_router(), и първият HTTP обход прочете 30 плъгинни маршрута като никога не монтирани, докато проверката не се научи да минава през вложени рутери.",
     "tr": "README'nin kendi sözleri: 3.11 bu takımın hedef yorumlayıcısıdır, requirements.txt'in ilk satırlarında adı geçer, ve iki blok de depo kökünden çalıştırılır. README, komutun kendisinin bastığı son satırı yetkili sayı olduğu kabul eder; bu yüzden bu sayfa hiçbir kontrol toplamı alıntılamaz: tam bir kurulumda yeşil çalıştırma 22 grup ve SKIPPED yok demektir, kesin kontrol sayısı ise --self-test'in kendi makinenizde bastığı satırdır. Yalnızca stdlib içeren yorumlayıcıda tam üç grup SKIPPED olarak adlandırılır — crypto_self_test, opaque_invite_self_test ve http_self_test — üstelik those paths are NOT verified here satırıyla: o üçü hiç kontrol çalıştırmadı, çalışıp da sayılmadı demek değil, kalan on dokuz grup yine de yeşile döner. README'nin yorumlayıcılar hakkında söylediği, «yalnızca 3.9» çekincesinin tam tersi: hem deponun kendi .venv'indeki 3.9.6 üzerinde hem de yeni kurulan bir Homebrew 3.11.18 venv üzerinde 22 yeşil grup ölçtü, ikisi de exit 0 ve 2776 kontrol; ikinci ölçüm gerekti, çünkü requirements.txt tam sürümleri değil aralıkları bağlıyor ve o venv'deki daha yeni fastapi/starlette include_router() rotalarını iç içe yerleştirdi, ilk HTTP turu da 30 eklenti rotasını hiç bağlanmamış okudu; ta ki kontrol iç içe yönlendiricilerde yürümeyi öğrenene kadar.",
     "hu": "A README saját szavai: a 3.11 ennek a csomagnak a célinterpretere, amelyet a requirements.txt első sorai nevesítenek, és mindkét blokk a repó gyökeréből indul. A README a parancs által utoljára nyomtatott sort tekinti mérvadó számnak, ezért ez az oldal nem idéz semmilyen ellenőrzés-összesítést: egy teljes telepítés zöld futása 22 csoport SKIPPED nélkül, a pontos ellenőrzésszám pedig az, amit a --self-test a saját gépeden nyomtat ki. Csak stdlib-es interpreterre pontosan három csoport kap SKIPPED nevet — crypto_self_test, opaque_invite_self_test és http_self_test — plusz a those paths are NOT verified here sor: az a három egyetlen ellenőrzést sem futtatott, nem úgy, hogy lefutottak és számolatlanul maradtak, a maradék tizenkilenc csoport viszont zöld lesz. Amit a README az interpreterekről mond, az a „csak 3.9-en mért” fenntartás ellenkezője: 22 zöld csoportot mért mind a repó saját .venv-jének 3.9.6-án, mind egy frissen létrehozott Homebrew 3.11.18 venv-en, mindkettő exit 0 és 2776 ellenőrzés; azért kellett a második mérés, mert a requirements.txt tartományokat ad meg nem rögzített verziókat, így abban a venv-ben az újabb fastapi/starlette beágyazta az include_router() útvonalait, és az első HTTP kör 30 bővítményútvonalat olvasott sosem csatoltként, amíg az ellenőrzés meg nem tanult bejárni a beágyazott routereket.",
+    "pt-BR": "Nas próprias palavras do README: 3.11 é o interpretador com o qual esta suíte é construída e tipada, nomeado nas primeiras linhas de requirements.txt, e ambos os blocos partem da raiz do repositório. O README trata a última linha que o próprio comando imprime como a contagem autoritativa, então esta página não cita nenhum total de verificações: uma execução verde em uma instalação completa são 22 grupos sem SKIPPED, e o número exato de verificações é o que --self-test imprimir na sua própria máquina. Um interpretador apenas com a stdlib nomeia exatamente três grupos SKIPPED — crypto_self_test, opaque_invite_self_test e http_self_test — e imprime que esses caminhos NÃO foram verificados aqui: esses três executaram zero verificações, em vez de terem rodado e não sido contados, enquanto os outros dezenove continuam verdes. O que o README diz sobre interpretadores é o oposto de uma ressalva de “apenas 3.9”: ele mediu 22 grupos verdes no 3.9.6 do .venv do próprio repositório e novamente em um venv novo do Homebrew 3.11.18, ambas as execuções com saída 0 e 2776 verificações, e adotou a segunda leitura porque o requirements.txt fixa faixas em vez de versões exatas, de modo que o fastapi/starlette mais novo naquele venv aninhou rotas de include_router() e a primeira varredura HTTP leu 30 rotas de plug-in como nunca montadas, até que a verificação aprendeu a percorrer roteadores aninhados.",
+    ko: "README의 표현을 그대로 옮기면, 3.11은 이 스위트가 빌드되고 타입 검사되는 인터프리터이며 requirements.txt 첫 줄에 명시되어 있고, 두 블록 모두 저장소 루트에서 시작합니다. README는 명령 자체가 출력하는 마지막 줄을 권위 있는 개수로 취급하므로, 이 페이지는 검사 총계를 인용하지 않습니다. 전체 설치에서 정상 실행은 SKIPPED 없이 22개 그룹이며, 정확한 검사 수는 각자의 머신에서 --self-test가 출력하는 값입니다. 표준 라이브러리만 있는 인터프리터는 정확히 세 그룹을 SKIPPED로 표시합니다. crypto_self_test, opaque_invite_self_test, http_self_test이며, 해당 경로는 여기서 검증되지 않았다고 출력합니다. 이 세 개는 검사를 실행하고 집계에서 빠진 것이 아니라 검사를 0건 실행했으며, 나머지 열아홉 개는 여전히 정상으로 나옵니다. 인터프리터에 관한 README의 설명은 “3.9만 지원” 같은 단서와 정반대입니다. 저장소 자체 .venv의 3.9.6에서 22개 그룹이 정상인 것을 측정했고, 새로 만든 Homebrew 3.11.18 venv에서도 다시 측정했으며, 둘 다 2776개 검사로 종료 코드 0이었습니다. 두 번째 측정을 택한 이유는 requirements.txt가 정확한 버전 대신 범위를 고정하기 때문입니다. 그 venv의 더 새로운 fastapi/starlette가 include_router() 라우트를 중첩시켜, 첫 HTTP 점검이 30개의 플러그인 라우트를 한 번도 마운트되지 않은 것으로 읽었고, 이는 검사가 중첩 라우터를 순회하는 방법을 익힌 뒤에야 바로잡혔습니다.",
+    ar: "كلمات README نفسها: إن 3.11 هو المفسّر الذي تُبنى هذه المنظومة وتُطبع أنواعها وفقه، وهو مذكور في الأسطر الأولى من requirements.txt، وكلتا الكتلتين تبدأان من جذر المستودع. ويعتمد README السطر الأخير الذي يطبعه الأمر نفسه عددًا مرجعيًا، لذا لا تقتبس هذه الصفحة أي إجمالي للفحوص: فالتشغيل الناجح على تثبيت كامل هو 22 مجموعة بلا أي SKIPPED، والعدد الدقيق للفحوص هو ما يطبعه --self-test على جهازك أنت. أما المفسّر الذي لا يضم سوى المكتبة القياسية فيسمّي ثلاث مجموعات بالضبط SKIPPED — crypto_self_test وopaque_invite_self_test وhttp_self_test — ويطبع أن تلك المسارات NOT verified here: أي أن تلك الثلاث نفّذت صفر فحوص، لا أنها نُفّذت ولم تُحصَ، بينما تبقى المجموعات التسع عشرة الأخرى ناجحة. وما يقوله README عن المفسّرات هو عكس تحذير «3.9 فقط»: فقد قاس 22 مجموعة ناجحة على 3.9.6 في .venv الخاص بالمستودع نفسه، ثم مرة أخرى على venv جديد من Homebrew بإصدار 3.11.18، وكلاهما خرج بالرمز 0 مع 2776 فحصًا، وقد أخذ القراءة الثانية لأن requirements.txt يثبّت نطاقات لا إصدارات محددة، وfastapi/starlette الأحدث في ذلك الـ venv ضمّن مسارات include_router()، فقرأت أول جولة HTTP عدد 30 مسار إضافة على أنها غير مركّبة قط حتى تعلّم الفحص المشي في الموجّهات المتداخلة.",
   } satisfies L,
 
   verifyTitle: {
@@ -1607,6 +1824,9 @@ const T = {
     "bg": "Доказателство, че е горе",
     "tr": "Ayağa kalktığına dair kanıt",
     "hu": "Bizonyíték, hogy felkelt",
+    "pt-BR": "Prova de que está no ar",
+    ko: "실행 중임을 확인하는 방법",
+    ar: "إثبات أنه قائم",
   } satisfies L,
   verifyBody: {
     en: "/healthz is a public route: no token, no database write and no call to the node. It answers three fields — ok, node_connected and service_id.",
@@ -1627,6 +1847,9 @@ const T = {
     "bg": "/healthz е публичен маршрут: без токен, без запис в базата и без извикване на възела. Отговаря с три полета — ok, node_connected и service_id.",
     "tr": "/healthz açık bir rotadır: token istemez, veri tabanına yazmaz, düğüme de sormaz. Üç alanla yanıt verir — ok, node_connected ve service_id.",
     "hu": "A /healthz nyilvános útvonal: token nélkül, adatbázis-írás nélkül és a csomópont megszólítása nélkül. Mindössze három mezővel felel — ok, node_connected és service_id.",
+    "pt-BR": "/healthz é uma rota pública: nenhum token, nenhuma gravação no banco de dados e nenhuma chamada ao nó. Ela responde com três campos — ok, node_connected e service_id.",
+    ko: "/healthz는 공개 라우트입니다: 토큰도, 데이터베이스 쓰기도, 노드 호출도 없습니다. ok, node_connected, service_id 세 필드를 응답합니다.",
+    ar: "/healthz مسار عام: لا رمز، ولا كتابة في قاعدة البيانات، ولا استدعاء للعقدة. ويجيب بثلاثة حقول — ok وnode_connected وservice_id.",
   } satisfies L,
   verifyFalse: {
     en: "node_connected: false is not fatal. The gateway keeps serving while the bridge reconnects forever with a capped backoff — it starts from POPOPX_NODE_RECONNECT_SECONDS (3 by default) and doubles up to a 60-second ceiling — and the node attaches itself once it is up. Callers that want fail-fast pass strict=True themselves. The installer puts it this way: /healthz reports node state, it does not gate readiness on it.",
@@ -1647,6 +1870,9 @@ const T = {
     "bg": "node_connected: false не е присъда. Шлюзът продължава да обслужва, докато мостът се прекъсва безкрайно с ограничен backoff — тръгва от POPOPX_NODE_RECONNECT_SECONDS (по подразбиране 3 секунди) и удвоява до таван от 60 секунди — и възелът се закача сам, когато стане. Който иска fail-fast, подава strict=True сам. Инсталаторът го казва така: /healthz съобщава състоянието на възела, не го прави праг на готовност.",
     "tr": "node_connected: false ölümcül değil. Ağ geçidi hizmet vermeye devam ederken köprü, üst sınırı olan bir backoff ile sonsuza dek yeniden bağlanır — POPOPX_NODE_RECONNECT_SECONDS değerinden (varsayılan 3 saniye) başlar ve 60 saniye tavanına kadar katlar — düğüm ayağa kalkınca kendisi bağlanır. Fail-fast isteyen çağıran strict=True'ı kendi geçirir. Kurulum programı bunu şöyle ifade eder: /healthz düğüm durumunu bildirir, hazır olma kapısı yapmaz.",
     "hu": "A node_connected: false nem halálos hiba. Az átjáró tovább kiszolgál, miközben a híd végtelenül újrakapcsol egy fedéllezelátott backoffal — a POPOPX_NODE_RECONNECT_SECONDS értékből indul ki (alapértelmezésben 3 másodperc) és 60 másodperces plafonig duplázik — a csomópont pedig magától csatlakozik, felkelvén. Aki fail-fast-ot akar, az maga adja át a strict=True paramétert. A telepítő így fogalmaz: a /healthz a csomópont állapotát jelenti, nem a készenlét mércéje.",
+    "pt-BR": "node_connected: false não é fatal. O gateway continua servindo enquanto a ponte reconecta indefinidamente com backoff limitado — ele começa em POPOPX_NODE_RECONNECT_SECONDS (3 por padrão) e dobra até um teto de 60 segundos — e o nó se conecta sozinho quando está no ar. Chamadores que querem falha rápida passam strict=True por conta própria. O instalador coloca desta forma: /healthz informa o estado do nó, não condiciona a prontidão a ele.",
+    ko: "node_connected: false는 치명적이지 않습니다. 브리지가 상한이 있는 백오프로 계속 재연결하는 동안 게이트웨이는 계속 서비스합니다. POPOPX_NODE_RECONNECT_SECONDS(기본값 3)에서 시작해 최대 60초까지 두 배씩 늘어나며, 노드는 올라오면 스스로 연결됩니다. 빠른 실패를 원하는 호출자는 직접 strict=True를 전달합니다. 설치 스크립트의 표현대로, /healthz는 노드 상태를 보고하며 그것으로 준비 상태를 판정하지는 않습니다.",
+    ar: "node_connected: false ليس أمرًا قاتلًا. فالبوابة تبقى تخدم بينما يعيد الجسر الاتصال إلى ما لا نهاية بتراجع متصاعد محدود السقف — يبدأ من POPOPX_NODE_RECONNECT_SECONDS (والافتراضي 3) ويتضاعف حتى سقف 60 ثانية — وتتصل العقدة من تلقاء نفسها حين تقوم. أما من يريد الفشل السريع فيمرّر strict=True بنفسه. ويصوغ نص التثبيت ذلك هكذا: /healthz يبلّغ عن حالة العقدة، ولا يجعل الجاهزية متوقفة عليها.",
   } satisfies L,
   verifyNext: {
     en: "The version and the service identity are not in that response — they are in GET /api/v1/status: version, service (service_id, display name, public base URL, contact address), node, billing, outbox, counts and plugins. The two chips in the console's top bar read exactly that.",
@@ -1667,6 +1893,9 @@ const T = {
     "bg": "Версията и идентичността на услугата не живе в отговора — те са в GET /api/v1/status: version, service (service_id, име за показване, публичен базов URL, адрес на контакт), node, billing, outbox, counts и plugins. Точно това четат двете етикети в горната лента на конзолата.",
     "tr": "Sürüm ve hizmet kimliği o yanıtta barınmaz — GET /api/v1/status içindedir: version, service (service_id, görünen ad, genel taban URL'si, kişi adresi), node, billing, outbox, counts ve plugins. Konsolun üst çubuğundaki iki etiket tam olarak onu okur.",
     "hu": "A verzió és a szolgáltatás-azonosság nem abban a válaszban lakik — a GET /api/v1/status tartalmazza: version, service (service_id, megjelenített név, nyilvános alap URL, contact cím), node, billing, outbox, counts és plugins. Pontosabban ezt olvassa a konzol felső sávjának két jelzője.",
+    "pt-BR": "A versão e a identidade do serviço não estão nessa resposta — elas estão em GET /api/v1/status: version, service (service_id, nome de exibição, URL base pública, endereço de contato), node, billing, outbox, contagens e plugins. Os dois chips na barra superior do console leem exatamente isso.",
+    ko: "버전과 서비스 아이덴티티는 그 응답에 없습니다. 그것들은 GET /api/v1/status에 있습니다: version, service(service_id, 표시 이름, 공개 기본 URL, 연락처 주소), node, billing, outbox, counts, plugins입니다. 콘솔 상단 바의 두 칩은 바로 이 값을 읽습니다.",
+    ar: "لا يوجد الإصدار وهوية الخدمة في تلك الاستجابة — بل هما في GET /api/v1/status: الإصدار، والخدمة (service_id، والاسم المعروض، وعنوان URL العام الأساسي، وعنوان جهة الاتصال)، والعقدة، والفوترة، وصندوق الصادر، والأعداد، والإضافات. والشارتان في الشريط الأعلى لوحدة التحكم تقرآن ذلك بالضبط.",
   } satisfies L,
 
   /* Part 2 */
@@ -1689,6 +1918,9 @@ const T = {
     "bg": "Стъпка 2 · STEP 02",
     "tr": "Adım 2 · STEP 02",
     "hu": "2. lépés · STEP 02",
+    "pt-BR": "Passo 2 · STEP 02",
+    ko: "2단계 · STEP 02",
+    ar: "الخطوة 2 · STEP 02",
   } satisfies L,
   p2Title: {
     en: "Initialise the admin console and set the quota",
@@ -1709,6 +1941,9 @@ const T = {
     "bg": "Инициализирай административната конзола и задай квота",
     "tr": "Yönetici konsolunu hazırlayın ve kotayı ayarlayın",
     "hu": "Állítsa be az adminisztrációs konzolt és a kvótát",
+    "pt-BR": "Inicialize o console de administração e defina a cota",
+    ko: "관리 콘솔 초기화 및 할당량 설정",
+    ar: "هيّئ وحدة تحكم الإدارة واضبط الحصة",
   } satisfies L,
   p2Sub: {
     en: `The console is one page served on that same socket: ${ADMIN_CONSOLE_URL}. Past the token gate come nine plugin panels; the quota is decided by twelve meter keys and one admission switch in .env.`,
@@ -1729,6 +1964,9 @@ const T = {
     "bg": `Конзолата е една страница, обслужвана на същия сокет: ${ADMIN_CONSOLE_URL}. След портата с токена идват девет панела на приставките; квотата се определя от дванадесет измервателни ключа и един ключ за допускане в .env.`,
     "tr": `Konsol, aynı soket üzerinde sunulan tek bir sayfa: ${ADMIN_CONSOLE_URL}. Jeton kapısından sonra dokuz eklenti paneli gelir; kota, .env içindeki on iki ölçüm anahtarı ve bir giriş anahtarıyla belirlenir.`,
     "hu": `A konzol egyetlen oldal, ugyanazon a socketen kínálva: ${ADMIN_CONSOLE_URL}. A token-kapun túl kilenc bővítménypanel jönnek; a keretet tizenkét mérési kulcs és egy beléptetős kapcsoló dönti el a .env-ben.`,
+    "pt-BR": `O console é uma única página servida nesse mesmo socket: ${ADMIN_CONSOLE_URL}. Depois do portão de token vêm nove painéis de plug-in; a cota é decidida por doze chaves de medição e um interruptor de admissão no .env.`,
+    ko: `콘솔은 같은 소켓에서 제공되는 한 페이지입니다: ${ADMIN_CONSOLE_URL}. 토큰 게이트를 지나면 아홉 개의 플러그인 패널이 있으며, 할당량은 .env의 열두 개 계량 키와 하나의 승인 스위치로 결정됩니다.`,
+    ar: `وحدة التحكم صفحة واحدة تُقدَّم على المقبس نفسه: ${ADMIN_CONSOLE_URL}. وبعد بوابة الرمز تأتي تسع لوحات إضافات؛ وتُحدَّد الحصة باثني عشر مفتاح عداد ومفتاح قبول واحد في .env.`,
   } satisfies L,
   gateTitle: {
     en: "Getting in: how the token is presented",
@@ -1749,6 +1987,9 @@ const T = {
     "bg": "Как се влиза: как се представя токенът",
     "tr": "Giriş: jeton nasıl sunulur",
     "hu": "Bemenet: így adják meg a tokent",
+    "pt-BR": "Entrando: como o token é apresentado",
+    ko: "접속: 토큰을 제시하는 방법",
+    ar: "الدخول: كيف يُقدَّم الرمز",
   } satisfies L,
   gateBody: {
     en: "The console opens on a gate with a single input. There is one rule: everything under /api/v1/ needs a credential, and a missing or wrong one is always a 401. admin_required accepts four spellings of that credential — X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer and ?token= — and the root POPOPX_ADMIN_TOKEN still works everywhere. Beyond it, scoped pxa_… tokens narrow what a caller may do: a scope is * or core:<resource>:ro|rw or plugin:<id>:ro|rw, GET and HEAD need only ro while everything else needs rw, core:admin can never be granted, expiry runs from 1 to 3650 days, and a token can be revoked. The console keeps a token audit of the last 5000 rows, and the four token routes — list, mint, audit, revoke — stay root-only.",
@@ -1769,6 +2010,9 @@ const T = {
     "bg": "Конзолата се отваря с порта, която има само едно входно поле. Правилото е едно: всичко под /api/v1/ изисква идентификационни данни, а липсващи или грешни са винаги 401. admin_required приема четири изписвания на тези данни — X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer и ?token= — и коренният POPOPX_ADMIN_TOKEN продължава да работи навсякъде. След него токените pxa_… с обхват стесняват какво може да прави извикващият: обхватът е * или core:<resource>:ro|rw, или plugin:<id>:ro|rw, за GET и HEAD е достатъчно ro, всичко останало изисква rw, core:admin никога не може да бъде даден, срокът е от 1 до 3650 дни, а токенът може да бъде оттеглен. Конзолата води одит на токените за последните 5000 реда, а четирите маршрута за токени — списък, издаване, одит и отнемане — остават само за кореновия токен.",
     "tr": "Konsol, tek giriş alanlı bir kapıyla açılır. Tek kural şu: /api/v1/ altındaki her şey bir kimlik bilgisi ister; eksik ya da yanlışsa yanıt hep 401'dir. admin_required bu kimlik bilgisini dört yazımla kabul eder — X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer ve ?token= — ve kök POPOPX_ADMIN_TOKEN her yerde çalışmaya devam eder. Onun ötesinde kapsamlı pxa_… jetonları, çağıranın neler yapabileceğini daraltır: kapsam * ya da core:<resource>:ro|rw ya da plugin:<id>:ro|rw olur, GET ve HEAD yalnızca ro ister, diğer her şey rw gerektirir, core:admin asla verilemez, süre 1 ile 3650 gün arasındadır ve bir jeton iptal edilebilir. Konsol son 5000 satır için jeton denetimi tutar ve dört jeton rotası — liste, üretim, denetim, iptal — yalnızca kök jetonla çalışır.",
     "hu": "A konzol egy kapuval nyílik, amelyen egyetlen beviteli mező van. Egy szabály létezik: minden, a /api/v1/ alatt lévő végpont hitelesítő adatot kér, és a hiányzó vagy hibás mindig 401. Az admin_required négy írásmódot fogad el erre az adatra — X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer és ?token= —, a gyökér POPOPX_ADMIN_TOKEN pedig továbbra is mindenhol működik. Ezen túl a hatókörrel bíró pxa_… tokenek szűkítik, mit tehet a hívó: a hatókör * vagy core:<resource>:ro|rw vagy plugin:<id>:ro|rw, a GET és a HEAD csak ro-t igényel, minden más rw-t kér, a core:admin soha nem adható ki, a lejárat 1 és 3650 nap között van, és egy token visszavonható. A konzol az utolsó 5000 sor tokennaplóját őrzi, és a négy tokenútvonal — lista, kiadás, napló, visszavonás — továbbra is csak a gyökértokené.",
+    "pt-BR": "O console abre em um portão de acesso com um único campo. Há uma única regra: tudo sob /api/v1/ precisa de uma credencial, e uma credencial ausente ou errada é sempre um 401. admin_required aceita quatro grafias dessa credencial — X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer e ?token= — e o POPOPX_ADMIN_TOKEN raiz continua funcionando em todos os lugares. Além dele, tokens pxa_… com escopo restringem o que um chamador pode fazer: um escopo é * ou core:<resource>:ro|rw ou plugin:<id>:ro|rw, GET e HEAD precisam apenas de ro enquanto todo o resto precisa de rw, core:admin nunca pode ser concedido, a validade vai de 1 a 3650 dias, e um token pode ser revogado. O console mantém uma auditoria de tokens das últimas 5000 linhas, e as quatro rotas de token — listar, emitir, auditar e revogar — permanecem restritas ao root.",
+    ko: "콘솔은 입력 필드 하나만 있는 게이트로 열립니다. 규칙은 하나입니다: /api/v1/ 아래의 모든 것에는 자격 증명이 필요하며, 없거나 잘못된 자격 증명은 항상 401입니다. admin_required는 그 자격 증명의 네 가지 표기를 받아들입니다 — X-Popopx-Admin-Token, X-Admin-Token, Authorization: Bearer, ?token= — 그리고 루트 POPOPX_ADMIN_TOKEN은 여전히 어디서나 동작합니다. 그 위에서 범위가 지정된 pxa_… 토큰은 호출자가 할 수 있는 일을 좁힙니다: 범위는 * 또는 core:<resource>:ro|rw 또는 plugin:<id>:ro|rw이고, GET과 HEAD는 ro만 필요하며 나머지는 모두 rw가 필요합니다. core:admin은 부여할 수 없고, 만료는 1일에서 3650일까지이며, 토큰은 폐기할 수 있습니다. 콘솔은 최근 5000개 행의 토큰 감사를 보관하고, 네 개의 토큰 라우트 — 목록, 발급, 감사, 폐기 — 는 루트 전용으로 남습니다.",
+    ar: "تُفتح وحدة التحكم على بوابة بحقل إدخال واحد. وهناك قاعدة واحدة: كل ما هو تحت /api/v1/ يحتاج إلى بيانات اعتماد، والغياب أو الخطأ فيها هو دائمًا 401. ويقبل admin_required أربع صيغ لتلك البيانات — X-Popopx-Admin-Token وX-Admin-Token وAuthorization: Bearer و?token= — ولا يزال رمز الجذر POPOPX_ADMIN_TOKEN يعمل في كل مكان. وما هو أبعد من ذلك، فرموز pxa_… محدودة النطاق تضيّق ما يجوز للمستدعي فعله: النطاق هو * أو core:<resource>:ro|rw أو plugin:<id>:ro|rw، وGET وHEAD يحتاجان ro فقط في حين يحتاج كل ما عداهما rw، ولا يمكن منح core:admin قط، والصلاحية تمتد من 1 إلى 3650 يومًا، ويمكن إبطال الرمز. وتحتفظ وحدة التحكم بتدقيق رموز لآخر 5000 صف، ومسارات الرموز الأربعة — السرد والإصدار والتدقيق والإبطال — تبقى مقصورة على الجذر.",
   } satisfies L,
   gateField: {
     en: "The field is the admin token; the two buttons are Enter console and Check connectivity. The token lives only in browser memory and this session.",
@@ -1789,6 +2033,9 @@ const T = {
     "bg": "Полето е административният токен, а двете бутона се казват Enter console и Check connectivity; токенът съществува само в паметта на браузъра и в тази сесия.",
     "tr": "Alan yönetici jetonudur, iki düğmenin adı Enter console ve Check connectivity'dir; jeton yalnızca tarayıcı belleğinde ve bu oturumda bulunur.",
     "hu": "A mező az adminisztrátori token, a két gomb felirata Enter console és Check connectivity; a token csak a böngésző memóriájában és ebben a munkamenetben létezik.",
+    "pt-BR": "O campo é o token de administração; os dois botões se chamam Enter console e Check connectivity. O token vive apenas na memória do navegador e nesta sessão.",
+    ko: "필드는 관리자 토큰이고, 두 버튼은 Enter console과 Check connectivity입니다. 토큰은 브라우저 메모리와 이 세션에만 존재합니다.",
+    ar: "الحقل هو رمز المسؤول؛ والزران هما Enter console وCheck connectivity. والرمز لا يعيش إلا في ذاكرة المتصفح وفي هذه الجلسة.",
   } satisfies L,
   unauthorized: `401 {"ok": false, "error": "unauthorized"}`,
   unauthorizedCap: {
@@ -1810,6 +2057,9 @@ const T = {
     "bg": "Това е 401 на middleware дословно; онова, което admin_required хвърля вътре в маршрут, добавя detail provide an admin token, а конзолата го преформулира като липсващ или грешен административен токен. И петте изключения са умишлени: /, /healthz и /h5/{article_id} са публични, а POST /api/v1/verifyH5Auth се удостоверява с HMAC подписа от страната на телефона; POST /api/v1/workflows/trigger е публичен за този middleware, но се удостоверява със своя X-PPX-Workflow-Token за всеки абонамент, който може да изтече и да бъде оттеглен; пътеките на приставките /webhook, /verify и /callback не искат административен токен, защото всяка има собствен per-source токен или директен обадящ; и GET /api/v1/plugins/sso/sessions/{session_id} е изключен чрез точно съвпадение на глагол и шаблон на маршрут, понеже сканираща страница трябва да го анкетира преди да съществува какъвто и да е вход.",
     "tr": "Bu, middleware'in 401'idir, aynen; admin_required'ın bir rota içinde fırlattığı 401 ise provide an admin token ayrıntısını ekler ve konsol bunu eksik ya da yanlış yönetici jetonu olarak yeniden yazar. Beş istisnanın hepsi bilinçli: /, /healthz ve /h5/{article_id} açıktır ve POST /api/v1/verifyH5Auth kimliğini telefon tarafındaki HMAC imzasıyla kanıtlar; POST /api/v1/workflows/trigger bu middleware için açıktır ama her abonelik için kendi X-PPX-Workflow-Token'ıyla kimlik doğrular ve bu jeton süresi dolabilir, iptal edilebilir; /webhook, /verify ve /callback ile biten eklenti yolları yönetici jetonu sormaz, çünkü her birinin kendi kaynak-özel jetonu ya da doğrudan çağıranı vardır; ve GET /api/v1/plugins/sso/sessions/{session_id} tam fiil-artı-rota-şablonu eşleşmesiyle muaf tutulur, çünkü bir tarama sayfası herhangi bir oturum açmadan önce onu yoklamak zorundadır.",
     "hu": "Ez a middleware 401-je szó szerint; amelyet az admin_required egy útvonalon belül dob, az hozzáteszi a provide an admin token részletet, amit a konzol hiányzó vagy hibás adminisztrátori tokenként fogalmaz újra. Mind az öt kivétel szándékos: a /, a /healthz és a /h5/{article_id} nyilvános, a POST /api/v1/verifyH5Auth pedig a telefon oldali HMAC-alírásával igazolja magát; a POST /api/v1/workflows/trigger e middleware felé nyilvános, de előfizetésenként saját X-PPX-Workflow-Tokennal hitelesít, amely lejárhat és visszavonható; a /webhook, /verify és /callback végű bővítmény-útvonalak nem kérnek adminisztrátori tokent, mert mindegyiknek megvan a maga forrásfüggő tokenje vagy közvetlen hívója; a GET /api/v1/plugins/sso/sessions/{session_id} pedig pontos ige-plusz-útvonalsablon egyezéssel mentesül, mert egy szkennelő oldalnak minden bejelentkezés előtt le kell kérdeznie.",
+    "pt-BR": "Esse é o 401 do middleware, ao pé da letra; o que admin_required levanta dentro de uma rota acrescenta o detalhe provide an admin token, que o console então reformula como um token de administração ausente ou incorreto. Todas as cinco exceções são deliberadas: /, /healthz e /h5/{article_id} são públicos, e POST /api/v1/verifyH5Auth se autentica com a assinatura HMAC do lado do celular; POST /api/v1/workflows/trigger é público neste middleware, mas se autentica com seu próprio X-PPX-Workflow-Token por assinatura, que pode expirar e ser revogado; caminhos de plug-in terminados em /webhook, /verify ou /callback não pedem token de administração porque cada um tem seu próprio token por origem ou um chamador encadeado; e GET /api/v1/plugins/sso/sessions/{session_id} é isento por uma correspondência exata de verbo mais template de rota, porque uma página de leitura de QR precisa consultá-lo antes de existir qualquer login.",
+    ko: "이것은 미들웨어의 401을 그대로 옮긴 것입니다. 라우트 안에서 admin_required가 발생시키는 401은 \"provide an admin token\"이라는 세부 정보를 더하며, 콘솔은 이를 다시 관리자 토큰 누락 또는 오류로 표현합니다. 다섯 가지 예외는 모두 의도된 것입니다: /, /healthz, /h5/{article_id}는 공개이고, POST /api/v1/verifyH5Auth는 휴대폰 측 HMAC 서명으로 스스로 인증합니다. POST /api/v1/workflows/trigger는 이 미들웨어에서는 공개이지만 구독별 자체 X-PPX-Workflow-Token으로 인증하며, 그 토큰은 만료되고 폐기될 수 있습니다. /webhook, /verify, /callback으로 끝나는 플러그인 경로는 관리자 토큰을 요구하지 않습니다. 각각 소스별 토큰이나 일대일 호출자를 갖기 때문입니다. 그리고 GET /api/v1/plugins/sso/sessions/{session_id}는 동사와 라우트 템플릿의 정확한 일치로 예외 처리됩니다. 스캔 페이지는 로그인이 존재하기 전에 이 라우트를 폴링해야 하기 때문입니다.",
+    ar: "هذا هو نص 401 الخاص بالبرمجية الوسيطة حرفيًا؛ أما الذي يرفعه admin_required داخل مسار فيضيف التفصيل «provide an admin token»، ثم تعيد وحدة التحكم صياغته كـ«a missing or incorrect admin token». والاستثناءات الخمسة كلها مقصودة: فـ / و/healthz و/h5/{article_id} عامة، وPOST /api/v1/verifyH5Auth يصادق نفسه بتوقيع HMAC من جهة الهاتف؛ وPOST /api/v1/workflows/trigger عام عند هذه البرمجية الوسيطة لكنه يصادق بـ X-PPX-Workflow-Token خاص به لكل اشتراك، وهو قابل للانتهاء والإبطال؛ ومسارات الإضافات المنتهية بـ /webhook أو /verify أو /callback لا تطلب رمز مدير لأن لكل منها رمزه الخاص لكل مصدر أو مستدعيًا متتاليًا؛ وGET /api/v1/plugins/sso/sessions/{session_id} معفى بمطابقة تامة للفعل مع قالب المسار، لأن صفحة المسح يجب أن تستقصيه قبل وجود أي تسجيل دخول.",
   } satisfies L,
   apiTitle: {
     en: "The five actions operators run most (verbatim from the README)",
@@ -1830,6 +2080,9 @@ const T = {
     "bg": "Петте действия, които операторите пускат най-често (дума по дума от README)",
     "tr": "Operatörlerin en sık çalıştırdığı beş eylem (README'den olduğu gibi)",
     "hu": "Az öt leggyakrabban futtatott művelet (szó szerint a README-ből)",
+    "pt-BR": "As cinco ações que os operadores mais executam (texto literal do README)",
+    ko: "운영자가 가장 자주 실행하는 다섯 가지 작업(README 원문 그대로)",
+    ar: "الإجراءات الخمسة التي ينفّذها المشغّلون أكثر من غيرها (بنصّها من README)",
   } satisfies L,
   apiSetupCap: {
     en: "Run all three assignments from the repository root: the first reads the token out of .env, the second points $API at the local gateway, and the third sets CHANNEL_ID — ops-demo is only a placeholder, so put a real channel id there, the one GET /api/v1/channels lists, before you run the channel commands. Everything below reuses these three.",
@@ -1850,6 +2103,9 @@ const T = {
     "bg": "И трите присвоявания се изпълняват от корена на хранилището: първото прочита токена от .env, второто насочва $API към локалния шлюз, а третото задава CHANNEL_ID — ops-demo е само заместител; заменете го с реален id на канала, който GET /api/v1/channels изброява, преди заповедите за канала. Всяка команда по-долу ги преизползва.",
     "tr": "Üç atama da depo kökünden çalıştırılır: ilki tokenı .env içinden okur, ikincisi $API'yi yerel ağ geçidine yönlendirir, üçüncüsü ise CHANNEL_ID'yi ayarlar — ops-demo yalnızca bir yer tutucudur; kanal komutlarını çalıştırmadan önce onu GET /api/v1/channels'in sıraladığı gerçek bir kanal id'si ile değiştirin. Aşağıdaki her komut bu üçünü yeniden kullanır.",
     "hu": "Mind a három hozzárendelést a repó gyökeréből futtatjuk: az első kiolvassa a tokent a .env-ből, a második az $API-t a helyi átjáróra irányítja, a harmadik pedig beállítja a CHANNEL_ID-t — az ops-demo csak egy helyőrző, a csatorna-parancsok előtt cserélje le a GET /api/v1/channels által felsorolt valódi csatorna-id-re. Az alábbi minden parancs őket használja újra.",
+    "pt-BR": "Execute as três atribuições a partir da raiz do repositório: a primeira lê o token em .env, a segunda aponta $API para o gateway local, e a terceira define CHANNEL_ID — ops-demo é apenas um espaço reservado, então coloque ali um id de canal real, o que GET /api/v1/channels lista, antes de executar os comandos de canal. Tudo abaixo reutiliza essas três.",
+    ko: "저장소 루트에서 세 가지 할당을 모두 실행하십시오: 첫 번째는 .env에서 토큰을 읽고, 두 번째는 $API를 로컬 게이트웨이로 지정하며, 세 번째는 CHANNEL_ID를 설정합니다 — ops-demo는 자리 표시자일 뿐이므로 채널 명령을 실행하기 전에 GET /api/v1/channels가 나열하는 실제 채널 id를 넣으십시오. 아래의 모든 내용은 이 세 가지를 재사용합니다.",
+    ar: "نفّذ الإسنادات الثلاثة كلها من جذر المستودع: الأول يقرأ الرمز من .env، والثاني يوجّه $API إلى البوابة المحلية، والثالث يضبط CHANNEL_ID — وops-demo مجرد عنصر نائب، فضع هناك معرّف قناة حقيقيًا، ذاك الذي يسرده GET /api/v1/channels، قبل تشغيل أوامر القناة. وكل ما أدناه يعيد استخدام هذه الثلاثة.",
   } satisfies L,
   statusCap: {
     en: "First make sure the console and the command line are looking at the same account and the same node state.",
@@ -1870,6 +2126,9 @@ const T = {
     "bg": "Първо се уверете, че конзолата и командният ред гледат един и същ акаунт и едно и също състояние на възела.",
     "tr": "Önce konsol ile komut satırının aynı hesabı ve aynı düğüm durumunu gördüğünden emin olun.",
     "hu": "Először győződjön meg róla, hogy a konzol és a parancssor ugyanarra a fiókra és ugyanarra a csomópont-állapotra néz.",
+    "pt-BR": "Primeiro, certifique-se de que o console e a linha de comando estão olhando para a mesma conta e o mesmo estado do nó.",
+    ko: "먼저 콘솔과 명령줄이 같은 계정과 같은 노드 상태를 바라보고 있는지 확인하십시오.",
+    ar: "تأكد أولًا من أن وحدة التحكم وسطر الأوامر ينظران إلى الحساب نفسه وحالة العقدة نفسها.",
   } satisfies L,
   tokenQueryCap: {
     en: "Both spellings, so you can check from a browser whether a route really is covered by the token.",
@@ -1890,6 +2149,9 @@ const T = {
     "bg": "И двата начина на запис, за да можете от браузър да проверите дали даден маршрут наистина е покрит от токена.",
     "tr": "Her iki yazım biçimi de var; böylece bir tarayıcıdan bir rotanın gerçekten jetonla korunduğunu denetleyebilirsiniz.",
     "hu": "Mindkét írásmód szerepel, hogy böngészőből ellenőrizni tudja, egy útvonal tényleg a token védte-e.",
+    "pt-BR": "As duas grafias, para que você possa verificar a partir do navegador se uma rota está realmente coberta pelo token.",
+    ko: "두 가지 표기를 모두 제공하므로, 브라우저에서 해당 라우트가 실제로 토큰으로 보호되는지 확인할 수 있습니다.",
+    ar: "كلتا الصيغتين، لتتمكن من التحقق عبر متصفح مما إذا كان المسار مشمولًا فعلًا بالرمز.",
   } satisfies L,
   redeemCap: {
     en: "Redeem a compute code: the handler reads code and redeemed_by (a missing code is 400 code_required) and returns the account alongside the result. The console's voucher panel verifies the signature offline before it even offers the redemption; re-submitting a code that already went through is not an idempotent replay — the gateway refuses it with 409 voucher_used, and the refusal names the voucher's redeemed_at_ms and redeemed_by, so a double paste surfaces as an error instead of passing for success.",
@@ -1910,6 +2172,9 @@ const T = {
     "bg": "Удостоверяване на изчислителен код: handler-ът чете code и redeemed_by (липсващ code е 400 code_required) и връща акаунта заедно с резултата. Панелът с ваучери на конзолата проверява подписа офлайн, преди изобщо да предложи удостоявяване; повторно изпратен код, който вече е използван, не е идемпотентно възпроизвеждане — шлюзът го отказва с 409 voucher_used, а отказът назовава redeemed_at_ms и redeemed_by на ваучера, така че двойното поставяне се вижда като грешка, не минава за успех.",
     "tr": "Hesaplama kodunu kullanma: handler code ile redeemed_by alanlarını okur (eksik code 400 code_required döner) ve hesabı sonuçla birlikte geri verir. Konsolun kupon paneli, kullanmayı teklif etmeden önce imzayı çevrimdışı doğrular; aynı kodu tekrar göndermek idempotent bir tekrar değildir — ağ geçidi bunu 409 voucher_used ile reddeder ve red, kuponun redeemed_at_ms ile redeemed_by alanlarını adlandırır; böylece çift yapıştırma başarı gibi geçmez, hata olarak görünür.",
     "hu": "Számítási kód beváltása: a handler beolvassa a code és redeemed_by mezőket (hiányzó code esetén 400 code_required), és a fiókot a eredménnyel együtt adja vissza. A konzol voucher-panelja először offline ellenőrzi az aláírást, mielőtt egyáltalán felajánlaná a beváltást; ugyanannak a kódnak ismételt beküldése nem idempotens lejátszás — az átjáró 409 voucher_useddel utasítja el, és az elutasítás megnevezi a voucher redeemed_at_ms és redeemed_by mezőit, így a dupla beillesztés hibaként jelenik meg, nem sikerként átmenve.",
+    "pt-BR": "Resgatar um código de computação: o handler lê code e redeemed_by (a ausência de code é 400 code_required) e retorna a conta junto com o resultado. O painel de vouchers do console verifica a assinatura offline antes mesmo de oferecer o resgate; reenviar um código que já passou não é um replay idempotente — o gateway o recusa com 409 voucher_used, e a recusa nomeia redeemed_at_ms e redeemed_by do voucher, de modo que uma colagem dupla aparece como erro em vez de passar por sucesso.",
+    ko: "컴퓨트 코드 교환: 핸들러는 code와 redeemed_by를 읽고(code가 없으면 400 code_required) 결과와 함께 계정을 반환합니다. 콘솔의 바우처 패널은 교환을 제안하기 전에 서명을 오프라인으로 검증합니다. 이미 처리된 코드를 다시 제출하는 것은 멱등한 재생이 아닙니다. 게이트웨이는 409 voucher_used로 거부하며, 거부 응답에는 바우처의 redeemed_at_ms와 redeemed_by가 담깁니다. 따라서 두 번 붙여 넣으면 성공으로 넘어가지 않고 오류로 드러납니다.",
+    ar: "استرداد رمز حوسبة: يقرأ المعالج code وredeemed_by (وغياب code يعطي 400 code_required) ويعيد الحساب مع النتيجة. ولوحة القسائم في وحدة التحكم تتحقق من التوقيع دون اتصال قبل أن تعرض الاسترداد أصلًا؛ وإعادة تقديم رمز مرّ سابقًا ليست إعادة إرسال خاملة الأثر — فالبوابة ترفضه بـ 409 voucher_used، ويسمّي الرفض redeemed_at_ms وredeemed_by الخاصين بالقسيمة، لذا يظهر اللصق المزدوج خطأً بدل أن يمرّ نجاحًا.",
   } satisfies L,
   menuCap: {
     en: "Menu push: an empty body is treated as {}, and with no contact_ids it goes to every follower — the response says recipients: all. Pass contact_ids to target specific followers. Menu frames only reach contacts holding an active session.",
@@ -1930,6 +2195,9 @@ const T = {
     "bg": "Публикуване на менюто: празно тяло се тълкува като {}, и без contact_ids отива до всеки последовател — отговорът казва recipients: all. Подайте contact_ids, за да насочите към конкретни. Кадрите на менюто стигат само до контакти с активна сесия.",
     "tr": "Menü gönderimi: boş gövde {} olarak ele alınır ve contact_ids verilmezse tüm takipçilere gider — yanıt recipients: all der. Belirli takipçileri hedeflemek için contact_ids geçin. Menü kareleri yalnızca etkin oturumu olan kişilere ulaşır.",
     "hu": "Menü-küldés: egy üres body-t {} -ként kezelnek, és contact_ids nélkül minden követőnek megy — a válasz azt mondja, recipients: all. Adja meg a contact_ids-t konkrét követők célzásához. A menü-keretek csak aktív munkamenettel rendelkező kontaktokhoz jutnak el.",
+    "pt-BR": "Envio de menu: um corpo vazio é tratado como {}, e sem contact_ids ele vai para todos os seguidores — a resposta diz recipients: all. Passe contact_ids para atingir seguidores específicos. Frames de menu só chegam a contatos que mantêm uma sessão ativa.",
+    ko: "메뉴 푸시: 빈 본문은 {}로 처리되고, contact_ids가 없으면 모든 팔로워에게 전송됩니다 — 응답에는 recipients: all이라고 표시됩니다. 특정 팔로워를 대상으로 하려면 contact_ids를 전달하십시오. 메뉴 프레임은 활성 세션을 가진 연락처에만 도달합니다.",
+    ar: "دفع القائمة: المتن الفارغ يُعامل كـ {}، وبدون contact_ids يذهب إلى كل متابع — وتقول الاستجابة recipients: all. مرّر contact_ids لاستهداف متابعين بعينهم. وأُطر القائمة لا تصل إلا إلى جهات الاتصال التي تحمل جلسة نشطة.",
   } satisfies L,
   textCap: {
     en: "Send one follower an uncharged plain-text message: the escape hatch for when a plugin is fused but a human still has to be told something. It is deliberately unmetered — none of the twelve meters is named text, and asking for one answers unknown_meter.",
@@ -1950,6 +2218,9 @@ const T = {
     "bg": "Изпрати на един последовател обикновен текст без таксуване: аварийният изход, когато приставката е изгоряла, но на човек пак трябва да се съобщи нещо. Напълно безмерено е — нито един от дванадесетте метра не се казва text, и запитването за такъв отговаря unknown_meter.",
     "tr": "Bir takipçiye ücretlendirilmeyen sade metin mesajı göndermek: bir eklenti patlamış ama bir insanın hâlâ bir şey öğrenmesi gerekiyorsa kullanılan kaçış yolu. Bilinçli olarak ölçüme kapalıdır — on iki sayaçtan hiçbirinin adı text değildir, isteyen de unknown_meter alır.",
     "hu": "Küldeni egyetlen követőnek egy nem terhel szöveges üzenetet: a menekülő út, amikor egy bővítmény kiolvadt, de egy embert még tájékoztatni kell. Tudatosan nem kerül mérésre — a tizenkét meter egyike sem hívódik text-nak, és aki kéri, az unknown_meter választ kapja.",
+    "pt-BR": "Enviar a um seguidor uma mensagem de texto simples sem cobrança: a saída de emergência para quando um plug-in está queimado mas ainda é preciso avisar uma pessoa. Ela é deliberadamente isenta de medição — nenhum dos doze medidores se chama text, e pedir por um responde unknown_meter.",
+    ko: "팔로워 한 명에게 과금 없는 평문 메시지를 보냅니다. 플러그인은 융합되었지만 사람에게 여전히 알려야 할 때 쓰는 우회로입니다. 의도적으로 계량하지 않으며, 열두 미터 중 text라는 이름은 없고 요청하면 unknown_meter로 응답합니다.",
+    ar: "أرسل إلى متابع واحد رسالة نص واضح دون مقابل: وهي المخرج حين تتعطّل إضافة لكن ما زال يلزم إبلاغ إنسان بشيء ما. وهي غير محاسبة عمدًا — فلا شيء من العدادات الاثني عشر يُسمّى text، وطلب عداد بهذا الاسم يجيب unknown_meter.",
   } satisfies L,
   rotateCap: {
     en: "Rotate a paid channel's key: the epoch increments and the envelope is signed with the channel's Ed25519 private key. No body is fine — the three switches are expires_at_ms, revoke_previous (default true) and notify_members (default true). The command interpolates $CHANNEL_ID, which the block above sets to the placeholder ops-demo; put a real channel id there, readable from GET /api/v1/channels or from the console's channel panel.",
@@ -1970,6 +2241,9 @@ const T = {
     "bg": "Ротация на ключа на платен канал: епохата се увеличава, а пликът се подписва с частния Ed25519 ключ на канала. Без тяло също става — трите превключвателя са expires_at_ms, revoke_previous (по подразбиране true) и notify_members (по подразбиране true). Командата замества $CHANNEL_ID, който блокът горе слага като заместител ops-demo; заменете го с реално id, което се вижда в GET /api/v1/channels или в панела на конзолата.",
     "tr": "Ücretli bir kanalın anahtarını döndürme: epoch artar ve zarf, kanalın özel Ed25519 anahtarıyla imzalanır. Gövde göndermeseniz de olur — üç anahtar expires_at_ms, revoke_previous (varsayılan true) ve notify_members (varsayılan true). Komut $CHANNEL_ID değerini araya koyar; yukarıdaki blok onu ops-demo yer tutucusu olarak ayarladığı için, GET /api/v1/channels içinde ya da konsolun kanal panelinde okunan gerçek bir id ile değiştirin.",
     "hu": "Fizetős csatorna kulcsának rotálása: az epoch nő, és a borítékot a csatorna privát Ed25519 kulcsával írják alá. Body nélkül is jó — a három kapcsoló expires_at_ms, revoke_previous (alapértelmezés true) és notify_members (alapértelmezés true). A parancs a $CHANNEL_ID-t helyettesíti be, amit a fenti blokk ops-demo helyőrzőre állít; cserélje valódi id-re, amely a GET /api/v1/channels válaszaiból vagy a konzol csatornapaneljából olvasható.",
+    "pt-BR": "Rotacione a chave de um canal pago: o epoch é incrementado e o envelope é assinado com a chave privada Ed25519 do canal. Não enviar corpo é aceitável — os três interruptores são expires_at_ms, revoke_previous (padrão true) e notify_members (padrão true). O comando interpola $CHANNEL_ID, que o bloco acima define como o espaço reservado ops-demo; coloque ali um id de canal real, legível em GET /api/v1/channels ou no painel de canais do console.",
+    ko: "유료 채널의 키를 교체합니다: epoch가 증가하고 봉투가 채널의 Ed25519 개인 키로 서명됩니다. 본문이 없어도 됩니다 — 세 가지 스위치는 expires_at_ms, revoke_previous(기본값 true), notify_members(기본값 true)입니다. 이 명령은 $CHANNEL_ID를 보간하며, 위 블록은 이를 자리 표시자 ops-demo로 설정합니다. GET /api/v1/channels나 콘솔의 채널 패널에서 읽을 수 있는 실제 채널 id를 넣으십시오.",
+    ar: "تدوير مفتاح قناة مدفوعة: يتزايد epoch ويُوقَّع المغلف بالمفتاح الخاص Ed25519 للقناة. ولا حاجة إلى متن — والمفاتيح الثلاثة هي expires_at_ms وrevoke_previous (الافتراضي true) وnotify_members (الافتراضي true). ويُدخل الأمر قيمة $CHANNEL_ID، التي تضبطها الكتلة أعلاه على العنصر النائب ops-demo؛ فضع هناك معرّف قناة حقيقيًا، مقروءًا من GET /api/v1/channels أو من لوحة القناة في وحدة التحكم.",
   } satisfies L,
   pluginsCap: {
     en: "Plugin status: one list route, plus each plugin answering GET <prefix>/status under its own mount prefix — that single route is what the nine console panels read.",
@@ -1990,6 +2264,9 @@ const T = {
     "bg": "Състояние на приставките: един списъчен маршрут, плюс всяка приставка отговаря GET <prefix>/status под собствения си mount префикс — точно този единствен маршрут четат деветте панела на конзолата.",
     "tr": "Eklenti durumu: bir liste rotası, üstelik her eklenti kendi bağlama ön eki altında GET <prefix>/status ile yanıtlar — konsolun dokuz paneli tam olarak bu tek rotayı okur.",
     "hu": "Bővítmények állapota: egy lista útvonal, plusz minden bővítmény a saját mount előtagja alatt válaszol a GET <prefix>/status-ra — ezt az egyetlen útvonalat olvassa a konzol kilenc panelje.",
+    "pt-BR": "Status dos plug-ins: uma rota de listagem, mais cada plug-in respondendo a GET <prefix>/status sob seu próprio prefixo de montagem — é essa única rota que os nove painéis do console leem.",
+    ko: "플러그인 상태: 목록 라우트 하나에 더해, 각 플러그인이 자체 마운트 프리픽스 아래에서 GET <prefix>/status로 응답합니다 — 콘솔의 아홉 개 패널이 읽는 것이 바로 이 단일 라우트입니다.",
+    ar: "حالة الإضافات: مسار سرد واحد، إضافة إلى أن كل إضافة تجيب على GET <prefix>/status تحت بادئة تركيبها الخاصة — وذلك المسار الواحد هو ما تقرأه لوحات وحدة التحكم التسع.",
   } satisfies L,
 
   quotaTitle: {
@@ -2011,6 +2288,9 @@ const T = {
     "bg": "Квота: превключвателят за допускане",
     "tr": "Kota: katılım anahtarı",
     "hu": "Kvóta: a beléptetés kapcsolója",
+    "pt-BR": "Cota: o interruptor de admissão",
+    ko: "할당량: 승인 스위치",
+    ar: "الحصة: مفتاح القبول",
   } satisfies L,
   quotaOff: {
     en: "At the default 0 a new account is created ONLINE and four of the nine plugins work out of the box — ai_agent, alert_ops, privacy_sso and polls — so nobody has to redeem an activation code. The other five are off by default and each has its own switch: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1 and POPOPX_PLUGIN_SLACK_DISCORD=1. Metering is still recorded, the ledger still balances and the console still shows it, so the quota data is real.",
@@ -2031,6 +2311,9 @@ const T = {
     "bg": "При нулата по подразбиране нов акаунт се създава като ONLINE и четири от деветте приставки работят веднага — ai_agent, alert_ops, privacy_sso и polls — никой не трябва да удостоявява активационен код. Останалите пет са изключени по подразбиране и всяка има собствен превключвател: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1 и POPOPX_PLUGIN_SLACK_DISCORD=1. Меренето се записва, книгата се изравнява и конзолата го показва, затова данните за квотата са истински.",
     "tr": "Varsayılan 0 değerinde yeni bir hesap ONLINE olarak oluşturulur ve dokuz eklentinin dördü kutudan çıkar gibi çalışır — ai_agent, alert_ops, privacy_sso ve polls — kimsenin bir etkinleştirme kodu kullanması gerekmez. Diğer beşi varsayılan olarak kapalıdır ve her birinin kendi anahtarı vardır: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1 ve POPOPX_PLUGIN_SLACK_DISCORD=1. Ölçüm kaydedilmeye devam eder, defter denk düşer ve konsol bunu gösterir; yani kota verileri gerçektir.",
     "hu": "Az alapértelmezett 0 esetén új fiók ONLINE állapott jön létre, és a kilenc bővítmény közül négy azonnal működik — ai_agent, alert_ops, privacy_sso és polls — senkinek nem kell aktiváló kódot beváltania. A másik öt alapértelmezés szerint ki van kapcsolva, és mindegyiknek saját kapcsolója van: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1 és POPOPX_PLUGIN_SLACK_DISCORD=1. A mérés tovább rögzül, a főkönyv egyezik, a konzol pedig mutatja, tehát a kvótaadatai valósak.",
+    "pt-BR": "Com o valor padrão 0, uma nova conta é criada como ONLINE e quatro dos nove plug-ins funcionam imediatamente — ai_agent, alert_ops, privacy_sso e polls — para que ninguém precise resgatar um código de ativação. Os outros cinco ficam desligados por padrão e cada um tem seu próprio interruptor: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1 e POPOPX_PLUGIN_SLACK_DISCORD=1. A medição continua sendo registrada, o livro-razão continua equilibrado e o console continua mostrando isso, então os dados de cota são reais.",
+    ko: "기본값 0에서는 새 계정이 ONLINE으로 생성되고 아홉 개 플러그인 중 네 개가 바로 동작합니다. ai_agent, alert_ops, privacy_sso, polls이며, 활성화 코드를 교환할 필요가 없습니다. 나머지 다섯 개는 기본적으로 꺼져 있고 각자 스위치가 있습니다: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1, POPOPX_PLUGIN_SLACK_DISCORD=1입니다. 계량은 여전히 기록되고 원장은 여전히 균형을 이루며 콘솔도 이를 표시하므로, 할당량 데이터는 실제입니다.",
+    ar: "عند القيمة الافتراضية 0 يُنشأ حساب جديد ONLINE وتعمل أربع من الإضافات التسع مباشرة — ai_agent وalert_ops وprivacy_sso وpolls — فلا يحتاج أحد إلى استرداد رمز تنشيط. أما الخمس الأخرى فمعطّلة افتراضيًا ولكل منها مفتاحها: POPOPX_PLUGIN_WEB3_BRIDGE=1 وPOPOPX_PLUGIN_WORKFLOW_WEBHOOK=1 وPOPOPX_PLUGIN_CARDDAV_CONNECTOR=1 وPOPOPX_PLUGIN_CALDAV_CONNECTOR=1 وPOPOPX_PLUGIN_SLACK_DISCORD=1. ويظل القياس مسجَّلًا، ويظل دفتر الحسابات متوازنًا، وتظل وحدة التحكم تعرضه، فبيانات الحصة حقيقية.",
   } satisfies L,
   quotaOn: {
     en: "Set it to 1 and you are back in admission mode: the account starts DRAFT and every metered action is refused with 409 account_draft until a signed code is redeemed. POPOPX_OFFICIAL_ED25519_PUBLIC_KEY then becomes a startup requirement — a value that does not decode to 32 bytes refuses to boot, and both the 44-character base64 and the 64-character hex spelling are accepted. The private half stays on the minting box and the gateway verifies offline with the public half only, so a gateway cannot mint a code.",
@@ -2051,6 +2334,9 @@ const T = {
     "bg": "Зададено на 1 се връщате в режим на допускане: акаунтът стартира като DRAFT и всяко мерено действие се отказва с 409 account_draft, докато не се удостовери подписан код. POPOPX_OFFICIAL_ED25519_PUBLIC_KEY става изискване за стартиране — стойност, която не се разкодира до 32 байта, отказва бутирането, и се приемат и двата записа: base64 с 44 символа и hex со 64. Частната половина остава на минтовата машина, а шлюзът проверява офлайн само с публичната половина, следователно шлюз не може да сече код.",
     "tr": "1 yapınca katılım moduna geri dönersiniz: hesap DRAFT olarak başlar ve imzalı bir kod kullanılmadıkça ölçülen her eylem 409 account_draft ile reddedilir. POPOPX_OFFICIAL_ED25519_PUBLIC_KEY o zaman açılış zorunluluğu olur — 32 bayrağa çözülmeyen değer açılmayı reddeder; hem 44 karakterlik base64 hem 64 karakterlik hex yazımı kabul edilir. Özel yarı yalnızca darphane makinesinde kalır, ağ geçidi çevrimdışı doğrulamayı sadece genel yarıyla yapar; dolayısıyla bir ağ geçidi kod üretemez.",
     "hu": "1-re állítva vissza lép a beléptetési módba: a fiók DRAFT állapott indul, és minden mérhető műveletet 409 account_draft hibával elutasítanak, amíg egy aláírt kódu be nem váltanak. Ezután a POPOPX_OFFICIAL_ED25519_PUBLIC_KEY indítási követelménnyé válik — egy olyan érték, amely nem dekódol 32 bájtra, megtagadja az indulást, és mind a 44 karakteres base64, mind a 64 karakteres hex írásmódot elfogadják. A privát fél a pénverdén marad, és az átjáró offline csak a publikus féllel ellenőriz, ezért egy átjáró nem tud veretni.",
+    "pt-BR": "Defina-o como 1 e você volta ao modo de admissão: a conta começa como DRAFT e toda ação medida é recusada com 409 account_draft até que um código assinado seja resgatado. POPOPX_OFFICIAL_ED25519_PUBLIC_KEY passa então a ser um requisito de inicialização — um valor que não decodifica para 32 bytes recusa iniciar, e tanto a grafia base64 de 44 caracteres quanto a hex de 64 caracteres são aceitas. A metade privada permanece na máquina de cunhagem e o gateway verifica offline apenas com a metade pública, de modo que um gateway não pode cunhar um código.",
+    ko: "1로 설정하면 다시 승인 모드로 돌아갑니다. 계정은 DRAFT로 시작하고, 서명된 코드를 교환할 때까지 모든 계량 작업이 409 account_draft로 거부됩니다. 그러면 POPOPX_OFFICIAL_ED25519_PUBLIC_KEY가 시작 요구 사항이 됩니다. 32바이트로 디코딩되지 않는 값은 부팅을 거부하며, 44자리 base64와 64자리 hex 표기를 모두 허용합니다. 개인 키 절반은 발급 머신에 남고 게이트웨이는 공개 키 절반만으로 오프라인 검증하므로, 게이트웨이는 코드를 발급할 수 없습니다.",
+    ar: "اضبطه على 1 لتعود إلى وضع القبول: فيبدأ الحساب DRAFT ويُرفض كل إجراء محاسَب بـ 409 account_draft حتى يُسترد رمز موقّع. وعندها يصبح POPOPX_OFFICIAL_ED25519_PUBLIC_KEY شرطًا لبدء التشغيل — فالقيمة التي لا تُفكّ إلى 32 بايتًا ترفض الإقلاع، وتُقبل الصيغتان: base64 بطول 44 حرفًا وhex بطول 64 حرفًا. ويبقى النصف الخاص على جهاز السكّ، وتتحقق البوابة دون اتصال بالنصف العام وحده، لذا لا تستطيع أي بوابة أن تسكّ رمزًا.",
   } satisfies L,
   mintTitle: {
     en: "Minting your own code, on an offline box",
@@ -2071,6 +2357,9 @@ const T = {
     "bg": "Отсечете собствен код, на офлайн машина",
     "tr": "Kendi kodunuzu basmak, çevrimdışı bir makinede",
     "hu": "Saját kód verése offline gépen",
+    "pt-BR": "Cunhar seu próprio código, em uma máquina offline",
+    ko: "오프라인 머신에서 직접 코드 발급하기",
+    ar: "سكّ رمزك الخاص، على جهاز دون اتصال",
   } satisfies L,
   mintCap: {
     en: "These lines are picked from the five-line usage block at the top of gen_voucher.py, which also lists --verify, and every flag named here exists in its argparse: --gen-keyring builds a keyring and refuses to overwrite one, --show-pubkey prints the public key in every spelling the gateway accepts, --mint issues codes and --self-test asserts the frozen test vector. Three packages ship — startup 500, commercial 2500, flagship 10000 — and --credits overrides them; --ttl-days, --note, --out and --voucher-id also exist. A code is POPX-CP-1.<base64url(payload)>.<base64url(signature)>, pure Ed25519 (RFC 8032, not Ed25519ph), the same curve the iOS side's CryptoKit and the gateway's cryptography use. Run --verify on the codes --mint just printed.",
@@ -2091,6 +2380,9 @@ const T = {
     "bg": "Тези редове са подбрани от usage блока в началото на gen_voucher.py, който има пет реда, включително --verify, и всеки споменат тук флаг съществува в argparse: --gen-keyring изгражда keyring и отказва да презапише съществуващ, --show-pubkey печата публичния ключ във всеки запис, който шлюзът приема, --mint издава кодове, а --self-test проверява замръзналия тестов вектор. Идват с три пакета — startup 500, commercial 2500, flagship 10000 — и --credits ги замества; съществуват и --ttl-days, --note, --out и --voucher-id. Кодът е POPX-CP-1.<base64url(payload)>.<base64url(signature)>, чист Ed25519 (RFC 8032, не Ed25519ph), същата крива като CryptoKit от страната на iOS и cryptography от страната на шлюза. Пуснете --verify върху кодовете, които --mint току-що отпечата.",
     "tr": "Bu satırlar gen_voucher.py dosyasının başındaki kullanım bloğundan alınmıştır; o blok --verify dahil beş satırdır ve burada anılan her bayrak kendi argparse içinde mevcuttur: --gen-keyring bir keyring kurar ve var olanı üzerine yazmayı reddeder, --show-pubkey ağ geçidinin kabul ettiği her yazımda genel anahtarı yazdırır, --mint kod üretir, --self-test ise dondurulmuş test vektörünü doğrular. Üç paket gelir — startup 500, commercial 2500, flagship 10000 — ve --credits bunları geçersiz kılar; --ttl-days, --note, --out ve --voucher-id de mevcuttur. Bir kod POPX-CP-1.<base64url(payload)>.<base64url(signature)> biçimindedir, salt Ed25519 (RFC 8032, Ed25519ph değil); iOS tarafındaki CryptoKit ile ağ geçidindeki cryptography'nin kullandığı aynı eğri. --verify'yi, --mint'in az önce yazdırdığı kodlar üzerinde çalıştırın.",
     "hu": "Ezek a sorok a gen_voucher.py tetején lévő használati blokkból valók, amely összesen öt sort sorol fel a --verify-jel együtt, és minden itt említett kapcsoló létezik a saját argparse-ében: a --gen-keyring keyring-et épít és megtagadja egy meglévő felülírását, a --show-pubkey az átjáró által elfogadott minden írásmódban kinyomtatja a publikus kulcsot, a --mint kódokat állít elő, a --self-test pedig a befagyasztott tesztvektort ellenőrzi. Három csomag tartozik hozzá — startup 500, commercial 2500, flagship 10000 — és a --credits felülírja őket; létezik még --ttl-days, --note, --out és --voucher-id is. Egy kód alakja POPX-CP-1.<base64url(payload)>.<base64url(signature)>, tiszta Ed25519 (RFC 8032, nem Ed25519ph), ugyanaz a görbe, mint az iOS oldali CryptoKit és az átjáró cryptography-je. Futtassa a --verify-t a --mint által épp most kiirtott kódokon.",
+    "pt-BR": "Estas linhas foram extraídas do bloco de uso de cinco linhas no topo de gen_voucher.py, que também lista --verify, e cada flag nomeada aqui existe em seu argparse: --gen-keyring cria um keyring e se recusa a sobrescrever um, --show-pubkey imprime a chave pública em todas as grafias que o gateway aceita, --mint emite códigos e --self-test verifica o vetor de teste congelado. Três pacotes são distribuídos — startup 500, commercial 2500, flagship 10000 — e --credits os substitui; --ttl-days, --note, --out e --voucher-id também existem. Um código é POPX-CP-1.<base64url(payload)>.<base64url(signature)>, Ed25519 puro (RFC 8032, não Ed25519ph), a mesma curva que o CryptoKit do lado iOS e a biblioteca cryptography do gateway usam. Execute --verify nos códigos que --mint acabou de imprimir.",
+    ko: "이 줄들은 gen_voucher.py 상단의 다섯 줄 사용 안내 블록에서 발췌한 것이며, 그 블록에는 --verify도 나열되어 있고 여기 언급된 모든 플래그는 해당 argparse에 존재합니다: --gen-keyring은 키링을 만들고 기존 키링의 덮어쓰기를 거부하며, --show-pubkey는 게이트웨이가 허용하는 모든 표기로 공개 키를 출력하고, --mint는 코드를 발급하며, --self-test는 고정된 테스트 벡터를 검증합니다. 세 가지 패키지가 제공됩니다 — startup 500, commercial 2500, flagship 10000 — 그리고 --credits가 이를 재정의합니다. --ttl-days, --note, --out, --voucher-id도 존재합니다. 코드는 POPX-CP-1.<base64url(payload)>.<base64url(signature)> 형식이며, 순수 Ed25519(RFC 8032, Ed25519ph 아님)로, iOS 측의 CryptoKit과 게이트웨이의 cryptography가 사용하는 것과 같은 곡선입니다. --mint가 방금 출력한 코드에 --verify를 실행하십시오.",
+    ar: "هذه الأسطر مأخوذة من كتلة الاستخدام ذات الأسطر الخمسة في أعلى gen_voucher.py، وهي تسرد أيضًا --verify، وكل راية مذكورة هنا موجودة في argparse الخاص به: --gen-keyring يبني حلقة مفاتيح ويرفض الكتابة فوق واحدة، و--show-pubkey يطبع المفتاح العام بكل صيغة تقبلها البوابة، و--mint يصدر الأكواد، و--self-test يؤكد متجه الاختبار المجمّد. وتُشحن ثلاث حزم — startup 500 وcommercial 2500 وflagship 10000 — و--credits يتجاوزها؛ وتوجد أيضًا --ttl-days و--note و--out و--voucher-id. والكود هو POPX-CP-1.<base64url(payload)>.<base64url(signature)>، من نوع Ed25519 الخالص (RFC 8032، لا Ed25519ph)، وهو المنحنى نفسه الذي تستخدمه CryptoKit في جهة iOS ومكتبة cryptography في البوابة. شغّل --verify على الأكواد التي طبعها --mint للتو.",
   } satisfies L,
   mintHelpCap: {
     en: "This is the exact line the README's voucher section prints, run from the gateway directory.",
@@ -2111,6 +2403,9 @@ const T = {
     "bg": "Това е точно редът, който печата разделът за ваучери в README, изпълнен от директория gateway.",
     "tr": "Bu, README'nin kupon bölümünün yazdırdığı satırın ta kendisi; gateway dizininden çalıştırılır.",
     "hu": "Ez pontosan az a sor, amelyet a README voucher-szakasza nyomtat, a gateway könyvtárból futtatva.",
+    "pt-BR": "Esta é exatamente a linha que a seção de vouchers do README imprime, executada a partir do diretório do gateway.",
+    ko: "README의 바우처 섹션이 출력하는 바로 그 줄이며, gateway 디렉터리에서 실행합니다.",
+    ar: "هذا هو السطر نفسه الذي يطبعه قسم القسائم في README، ويُنفَّذ من مجلد البوابة.",
   } satisfies L,
   meterTitle: {
     en: "What each action costs (the twelve numbers in .env.example)",
@@ -2131,6 +2426,9 @@ const T = {
     "bg": "Колко струва всяко действие (дванадесетте числа в .env.example)",
     "tr": "Her eylemin bedeli (.env.example içindeki on iki sayı)",
     "hu": "Mibe kerül egy-egy művelet (a tizenkét szám a .env.example-ben)",
+    "pt-BR": "Quanto custa cada ação (os doze números em .env.example)",
+    ko: "각 작업의 비용(.env.example의 열두 숫자)",
+    ar: "تكلفة كل إجراء (الأرقام الاثنا عشر في .env.example)",
   } satisfies L,
   meterHeadKey: {
     en: "Environment key",
@@ -2151,6 +2449,9 @@ const T = {
     "bg": "Променлива на обкръжаването",
     "tr": "Ortam anahtarı",
     "hu": "Környezeti kulcs",
+    "pt-BR": "Chave de ambiente",
+    ko: "환경 키",
+    ar: "مفتاح البيئة",
   } satisfies L,
   meterHeadUnit: {
     en: "POPX-CP",
@@ -2171,6 +2472,9 @@ const T = {
     "bg": "POPX-CP",
     "tr": "POPX-CP",
     "hu": "POPX-CP",
+    "pt-BR": "POPX-CP",
+    ko: "POPX-CP",
+    ar: "POPX-CP",
   } satisfies L,
   meterHeadWhat: {
     en: "What it meters",
@@ -2191,6 +2495,9 @@ const T = {
     "bg": "Какво се брои",
     "tr": "Neyin ölçüldüğü",
     "hu": "Mit számol",
+    "pt-BR": "O que ela mede",
+    ko: "계량 대상",
+    ar: "ما يقيسه",
   } satisfies L,
   meterFoot: {
     en: "All twelve metered actions come from one table in billing_service.py (METER_ACTIONS), and each environment name is derived as POPOPX_CP_ plus the upper-cased attribute, so this table cannot drift from the code. A meter set to 0 is free, and the console renders it as free.",
@@ -2211,6 +2518,9 @@ const T = {
     "bg": "И дванадесетте мерени действия идват от една таблица в billing_service.py (METER_ACTIONS), а всяко име на променлива се извежда като POPOPX_CP_ плюс атрибутът с главни букви, така че таблицата не може да се размини с кода. Метър на нула е безплатен и конзолата го изобразява като безплатен.",
     "tr": "Ölçülen on iki eylemin tamamı billing_service.py içindeki tek bir tablodan gelir (METER_ACTIONS) ve her ortam adı POPOPX_CP_ üstüne büyük harfli nitelik olarak türetilir; bu yüzden tablo koddan sapamaz. Sıfıra ayarlı sayaç ücretsizdir ve konsol da onu ücretsiz olarak gösterir.",
     "hu": "Mind a tizenkét mért művelet a billing_service.py egy táblájából jön (METER_ACTIONS), és minden környezeti név POPOPX_CP_ plus a attribútum nagybetűs alakjaként képződik, így a tábla nem térhet el a kódtól. A 0-ra állított számláló ingyenes, és a konzol is ingyenesként rajzolja.",
+    "pt-BR": "Todas as doze ações medidas vêm de uma única tabela em billing_service.py (METER_ACTIONS), e cada nome de ambiente é derivado como POPOPX_CP_ mais o atributo em maiúsculas, de modo que esta tabela não pode divergir do código. Um medidor definido como 0 é gratuito, e o console o renderiza como gratuito.",
+    ko: "열두 개의 계량 작업은 모두 billing_service.py의 한 테이블(METER_ACTIONS)에서 오며, 각 환경 변수 이름은 POPOPX_CP_에 대문자로 바꾼 속성을 붙여 만들어지므로 이 테이블이 코드와 어긋날 수 없습니다. 0으로 설정한 미터는 무료이며 콘솔도 무료로 표시합니다.",
+    ar: "تأتي الإجراءات المحاسبة الاثنا عشر كلها من جدول واحد في billing_service.py (METER_ACTIONS)، ويُشتق اسم كل متغير بيئة من POPOPX_CP_ مضافًا إليه اسم السمة بأحرف كبيرة، لذا لا يمكن لهذا الجدول أن ينحرف عن الشيفرة. والعداد المضبوط على 0 مجاني، وتعرضه وحدة التحكم مجانيًا.",
   } satisfies L,
   fuseTitle: {
     en: "The balance-exhaustion circuit breaker",
@@ -2231,6 +2541,9 @@ const T = {
     "bg": "Предпазител при изчерпан баланс",
     "tr": "Bakiye tükendiğinde devreye giren sigorta",
     "hu": "Biztosíték a kreditek elfogyásakor",
+    "pt-BR": "O disjuntor de esgotamento de saldo",
+    ko: "잔액 소진 서킷 브레이커",
+    ar: "قاطع دائرة نفاد الرصيد",
   } satisfies L,
   fuseBody: {
     en: "There is exactly one implementation of the decision. When the balance falls to or below POPOPX_BILLING_SUSPEND_THRESHOLD (default 0) the account becomes SUSPENDED with reason credits and every metered plugin is fused at the same moment — the comparison is balance <= threshold, so the default fuses at exactly zero, not one credit later. Metered actions then answer 402 insufficient_credits or account_suspended, and the gateway-decision chip on the console's plugin panel reads the very same verdict. The AI plugin adds one more knob, exhausted_message, the fixed reply followers get while the balance is gone; the README states that this decision and the one the console shows come from the same code.",
@@ -2251,6 +2564,9 @@ const T = {
     "bg": "Решението има точно една имплементация. Когато балансът падне до POPOPX_BILLING_SUSPEND_THRESHOLD (по подразбиране 0) или под него, акаунтът става SUSPENDED с причина credits и всяка мерена приставка се изгаря в същия миг — сравнението е balance <= threshold, затова по подразбиране се изгаря точно на нула, не един кредит по-късно. Мерените действия след това отговарят 402 insufficient_credits или account_suspended, и чипът gateway-decision в панела на приставките в конзолата чете точно същата присъда. AI приставката добавя още едно гевре, exhausted_message, фиксираният отговор, който последователите получават докато балансът е изчерпан; README твърди, че това решение и показаното в конзолата идват от един и същи код.",
     "tr": "Kararın tam olarak bir implementation'ı var. Bakiye POPOPX_BILLING_SUSPEND_THRESHOLD değerine (varsayılan 0) veya altına düşünce hesap reason=credits ile SUSPENDED olur ve ölçülen her eklenti aynı anda yakılır — karşılaştırma balance <= threshold olduğundan varsayılan tam sıfırda, bir kredi geç değil yakar. Ölçülen eylemler bundan sonra 402 insufficient_credits ya da account_suspended döner; konsolun eklenti panelindeki gateway-decision çipi de birebir aynı kararı okur. AI eklentisi bir düğme daha ekler, exhausted_message; bakiye tükenmişken takipçilerin aldığı sabit yanıt. README, bu karar ile konsolun gösterdiği kararın aynı koddan geldiğini açıkça yazar.",
     "hu": "A döntésnek pontosan egy megvalósítása van. Amikor az egyenleg POPOPX_BILLING_SUSPEND_THRESHOLD alá (alapértelmezés 0) esik, a fiók SUSPENDED lesz credits okkal, és minden mért bővítmény ugyanabban a pillanatban kiég — az összevetés balance <= threshold, ezért alapértelmezésben pontosan nullánál ég ki, nem egy kredittel később. A mért műveletek ezután 402 insufficient_credits vagy account_suspended választ adnak, és a konzol bővítménypaneljének gateway-decision jelölője ugyanazt az ítéletet olvassa. Az AI bővítmény még egy gombot teker fel, exhausted_message, az a rögzített válasz, amit a követők kapnak amíg az egyenleg elmúlt; a README szerint ez a döntés és a konzol által mutatott is ugyanabból a kódból jön.",
+    "pt-BR": "Existe exatamente uma implementação da decisão. Quando o saldo cai para o valor de POPOPX_BILLING_SUSPEND_THRESHOLD (padrão 0) ou fica abaixo dele, a conta passa a SUSPENDED com motivo credits e todo plug-in medido é cortado no mesmo momento — a comparação é balance <= threshold, então o padrão corta exatamente em zero, não um crédito depois. Ações medidas então respondem 402 insufficient_credits ou account_suspended, e o chip de decisão do gateway no painel de plug-ins do console lê exatamente o mesmo veredito. O plug-in de IA acrescenta mais um ajuste, exhausted_message, a resposta fixa que os seguidores recebem enquanto o saldo está esgotado; o README declara que esta decisão e a que o console mostra vêm do mesmo código.",
+    ko: "이 결정의 구현은 정확히 하나뿐입니다. 잔액이 POPOPX_BILLING_SUSPEND_THRESHOLD(기본값 0) 이하로 떨어지면 계정은 reason credits와 함께 SUSPENDED가 되고 모든 계량 플러그인이 같은 순간에 차단됩니다 — 비교는 balance <= threshold이므로 기본값에서는 정확히 0에서 차단되며 1 크레딧 뒤가 아닙니다. 이후 계량 동작은 402 insufficient_credits 또는 account_suspended로 응답하고, 콘솔 플러그인 패널의 gateway-decision 칩은 바로 같은 판정을 읽습니다. AI 플러그인은 잔액이 없는 동안 팔로워가 받는 고정 응답인 exhausted_message 손잡이를 하나 더 추가합니다. README는 이 결정과 콘솔이 보여 주는 결정이 같은 코드에서 나온다고 명시합니다.",
+    ar: "هناك تطبيق واحد فقط للقرار. وعندما يهبط الرصيد إلى POPOPX_BILLING_SUSPEND_THRESHOLD أو دونه (الافتراضي 0) يصبح الحساب SUSPENDED بسبب credits، وتُعطَّل كل إضافة خاضعة للقياس في اللحظة نفسها — فالمقارنة هي balance <= threshold، لذا يعطّل الافتراضي عند الصفر بالضبط، لا عند رصيد أقل بواحد. وبعدها تجيب الإجراءات الخاضعة للقياس بـ 402 insufficient_credits أو account_suspended، وتقرأ شريحة قرار البوابة في لوحة الإضافات بوحدة التحكم الحكم نفسه تمامًا. وتضيف إضافة الذكاء الاصطناعي مفتاحًا آخر هو exhausted_message، الرد الثابت الذي يحصل عليه المتابعون ما دام الرصيد غائبًا؛ ويذكر README أن هذا القرار والذي تعرضه وحدة التحكم يأتيان من الشيفرة نفسها.",
   } satisfies L,
 
   /* Part 3 */
@@ -2273,6 +2589,9 @@ const T = {
     "bg": "Стъпка 3 · STEP 03",
     "tr": "Adım 3 · STEP 03",
     "hu": "3. lépés · STEP 03",
+    "pt-BR": "Passo 3 · STEP 03",
+    ko: "3단계 · STEP 03",
+    ar: "الخطوة 3 · STEP 03",
   } satisfies L,
   p3Title: {
     en: "Scan, follow and interact on the iPhone, end to end",
@@ -2293,6 +2612,9 @@ const T = {
     "bg": "Сканирай, последвай и взаимодействай на iPhone, от край до край",
     "tr": "iPhone'da tara, takibe al ve etkileşime geç, baştan sona",
     "hu": "Beolvasás, követés és interakció iPhonon, a kezdettől a végéig",
+    "pt-BR": "Escanear, seguir e interagir no iPhone, de ponta a ponta",
+    ko: "iPhone에서 스캔하고 팔로우하고 상호작용하기까지 전 과정",
+    ar: "امسح وتابِع وتفاعل على iPhone، من البداية إلى النهاية",
   } satisfies L,
   p3Sub: {
     en: "The panel names are the ones that actually exist: Overview, Service account & node, Contacts, Menu orchestration, Card delivery, Articles & H5, Channels & key rotation, Account & ledger, Vouchers, then the nine plugin panels AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar and Slack / Discord outbound, and the operations group API tokens, Outbox, Callbacks, Settings, Diagnostics.",
@@ -2313,6 +2635,9 @@ const T = {
     "bg": "Имената на панелите са тези, които наистина съществуват: Overview, Service account & node, Contacts, Menu orchestration, Card delivery, Articles & H5, Channels & key rotation, Account & ledger, Vouchers, после деветте панела на приставки AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar и Slack / Discord outbound и групата операции API tokens, Outbox, Callbacks, Settings, Diagnostics.",
     "tr": "Panel adları gerçekte var olanlardır: Overview, Service account & node, Contacts, Menu orchestration, Card delivery, Articles & H5, Channels & key rotation, Account & ledger, Vouchers, ardından dokuz eklenti paneli AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar ve Slack / Discord outbound ile operasyon grubu API tokens, Outbox, Callbacks, Settings, Diagnostics.",
     "hu": "A panelnevek pontosan a létezők: Overview, Service account & node, Contacts, Menu orchestration, Card delivery, Articles & H5, Channels & key rotation, Account & ledger, Vouchers, aztán a kilenc bővítménypanel AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar és Slack / Discord outbound, végül az operations csoport API tokens, Outbox, Callbacks, Settings, Diagnostics.",
+    "pt-BR": "Os nomes dos painéis são os que realmente existem: Overview, Service account & node, Contacts, Menu orchestration, Card delivery, Articles & H5, Channels & key rotation, Account & ledger, Vouchers, depois os nove painéis de plug-in AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar e Slack / Discord outbound, e o grupo de operações API tokens, Outbox, Callbacks, Settings, Diagnostics.",
+    ko: "패널 이름은 실제로 존재하는 것입니다: Overview, Service account & node, Contacts, Menu orchestration, Card delivery, Articles & H5, Channels & key rotation, Account & ledger, Vouchers, 이어서 아홉 개의 플러그인 패널인 AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar, Slack / Discord outbound, 그리고 운영 그룹인 API tokens, Outbox, Callbacks, Settings, Diagnostics입니다.",
+    ar: "أسماء اللوحات هي الأسماء الموجودة فعلًا: Overview وService account & node وContacts وMenu orchestration وCard delivery وArticles & H5 وChannels & key rotation وAccount & ledger وVouchers، ثم لوحات الإضافات التسع AI agent وAlert ops وPasswordless SSO وPolls وWeb3 bridge وWorkflow bridge وCardDAV contacts وCalDAV calendar وSlack / Discord outbound، ومجموعة العمليات API tokens وOutbox وCallbacks وSettings وDiagnostics.",
   } satisfies L,
   consoleLabel: {
     en: "Where you click",
@@ -2333,6 +2658,9 @@ const T = {
     "bg": "Къде се кликва",
     "tr": "Nereye tıklıyorsunuz",
     "hu": "Hová kattintson",
+    "pt-BR": "Onde você clica",
+    ko: "클릭할 위치",
+    ar: "أين تنقر",
   } satisfies L,
   phoneLabel: {
     en: "On the phone",
@@ -2353,6 +2681,9 @@ const T = {
     "bg": "На телефона",
     "tr": "Telefonda",
     "hu": "A telefonon",
+    "pt-BR": "No telefone",
+    ko: "휴대폰에서",
+    ar: "على الهاتف",
   } satisfies L,
   framesCaption: {
     en: "This block is an abbreviated schematic, not a pasteable payload: it names the frame types and the fields the wire always carries, while the card object and the leaf values are left out. sc always travels with card next to m; mc carries rev only when a menu revision was passed. The gateway appends the frame after the visible text when it sends; the client's parser drops anything whose prefix it does not recognise, silently, which is why these bytes are validated before sending rather than discussed afterwards.",
@@ -2373,6 +2704,9 @@ const T = {
     "bg": "Този блок е съкратена схема, не payload за поставяне: той именува типовете кадри и полетата, които линията винаги носи, а обектът card и крайните стойности са пропуснати. sc винаги върви с card до m; mc носи rev, когато е подадена ревизия на менюто. Шлюзът добавя кадъра след видимия текст при изпращане; parser-ът на клиента мълчаливо изхвърля всичко с неразпознат префикс — затова тези байтове се валидират преди изпращане, а не се обсъждат след това.",
     "tr": "Bu blok kısaltılmış bir şemadır, yapıştırılabilir bir yük değil: çerçeve türlerini ve hattın her zaman taşıdığı alanları adlandırır, card nesnesi ile uç değerler düşürülmüştür. sc her zaman m'nin yanında card ile gider; mc yalnızca bir menü revizyonu geçirildiğinde rev taşır. Ağ geçidi gönderirken kareyi görünür metnin sonuna ekler; istemcinin ayracı tanımadığı ön ekli her şeyi sessizce düşürür — bu yüzden bu baytlar göndermeden önce doğrulanır, sonra tartışılmaz.",
     "hu": "Ez a blokk rövidített vázlat, nem beilleszthető payload: a kerettípusokat és azokat a mezőket sorolja fel, amelyeket a vonal mindig visz; a card objektum és a levélértékek ki vannak hagyva. Az sc mindig az m mellé tett card-dal együtt indul; az mc akkor visz rev-t, ha a menü revízióját átadták. Az átjáró elküadáskor a látható szöveg mögé fűzi a keretet; az ügyfél elemzője hallgatóan dob el mindent, amelynek előtagját nem ismeri fel — ezért ezeket a bájtokat elküldés előtt ellenőrizzük, nem utólag vitatjuk.",
+    "pt-BR": "Este bloco é um esquema abreviado, não um payload colável: ele nomeia os tipos de frame e os campos que o protocolo sempre carrega, enquanto o objeto card e os valores folha ficam de fora. sc sempre viaja com card ao lado de m; mc carrega rev apenas quando uma revisão de menu foi passada. O gateway anexa o frame depois do texto visível quando envia; o parser do cliente descarta silenciosamente qualquer coisa cujo prefixo ele não reconheça, e é por isso que esses bytes são validados antes do envio em vez de discutidos depois.",
+    ko: "이 블록은 요약된 도해이며 붙여 넣을 수 있는 페이로드가 아닙니다. 프레임 유형과 전송 시 항상 실리는 필드를 나열할 뿐, 카드 객체와 말단 값은 생략했습니다. sc는 항상 m 옆에서 card와 함께 전달되며, mc는 메뉴 개정이 전달된 경우에만 rev를 담습니다. 게이트웨이는 전송할 때 보이는 텍스트 뒤에 프레임을 덧붙이고, 클라이언트 파서는 접두사를 인식하지 못하는 항목을 조용히 버립니다. 그래서 이 바이트들은 사후에 논의하는 대신 전송 전에 검증합니다.",
+    ar: "هذه الكتلة مخطط مختصر، لا حمولة قابلة للّصق: فهي تسمّي أنواع الإطارات والحقول التي يحملها البروتوكول دائمًا، بينما يُترك كائن card والقيم الطرفية خارجها. وsc يرافق card دائمًا بجوار m؛ وmc لا يحمل rev إلا عندما يُمرَّر إصدار قائمة. والبوابة تُلحق الإطار بعد النص المرئي حين ترسله؛ ومحلّل العميل يُسقط بصمت كل ما لا يعرف بادئته، ولهذا تُتحقَّق هذه البايتات قبل الإرسال بدل أن تُناقش بعده.",
   } satisfies L,
 
   checkTitle: {
@@ -2394,6 +2728,9 @@ const T = {
     "bg": "Старт за пет минути: чек-листът",
     "tr": "Beş dakikada kurulum: kontrol listesi",
     "hu": "Öt perces indítás: a lista",
+    "pt-BR": "Início em cinco minutos: a lista de verificação",
+    ko: "5분 안에 시작하기: 체크리스트",
+    ar: "بدء في خمس دقائق: قائمة التحقق",
   } satisfies L,
   checkHint: {
     en: "Tap to tick; the state lives only in this page's memory and a language switch leaves it alone.",
@@ -2414,6 +2751,9 @@ const T = {
     "bg": "Докването слага отметка; състоянието живее само в паметта на тази страница, а смяната на език не го докосва.",
     "tr": "Dokunmak işareti koyar; durum yalnızca bu sayfanın belleğinde yaşar, dil değiştirmek ona dokunmaz.",
     "hu": "Koppintással pipa kerül be; az állapot csak az oldal memóriájában él, és a nyelvváltás sem bántja.",
+    "pt-BR": "Toque para marcar; o estado vive apenas na memória desta página e a troca de idioma não o afeta.",
+    ko: "탭하여 체크하십시오. 상태는 이 페이지의 메모리에만 존재하며 언어를 전환해도 그대로 유지됩니다.",
+    ar: "انقر للتأشير؛ والحالة لا تعيش إلا في ذاكرة هذه الصفحة، وتبديل اللغة لا يمسّها.",
   } satisfies L,
   checkProgress: {
     en: "Done",
@@ -2434,6 +2774,9 @@ const T = {
     "bg": "Готово",
     "tr": "Tamam",
     "hu": "Kész",
+    "pt-BR": "Concluído",
+    ko: "완료",
+    ar: "تم",
   } satisfies L,
   checkAll: {
     en: "Tick all",
@@ -2454,6 +2797,9 @@ const T = {
     "bg": "Отбележи всичко",
     "tr": "Hepsini işaretle",
     "hu": "Mindet bepipálja",
+    "pt-BR": "Marcar tudo",
+    ko: "모두 체크",
+    ar: "أشّر الكل",
   } satisfies L,
   checkReset: {
     en: "Clear ticks",
@@ -2474,6 +2820,9 @@ const T = {
     "bg": "Изчисти отметките",
     "tr": "İşaretleri temizle",
     "hu": "Pipeák törlése",
+    "pt-BR": "Limpar marcações",
+    ko: "체크 해제",
+    ar: "مسح التأشيرات",
   } satisfies L,
   checkDone: {
     en: "All checked",
@@ -2494,6 +2843,9 @@ const T = {
     "bg": "Всичко е отметнато",
     "tr": "Hepsi işaretli",
     "hu": "Minden bepipálva",
+    "pt-BR": "Tudo marcado",
+    ko: "모두 확인됨",
+    ar: "تم تأشير الكل",
   } satisfies L,
   outroSandbox: {
     en: "Not ready to install? #sandbox walks the plugin calls and their receipts right here in the page.",
@@ -2514,6 +2866,9 @@ const T = {
     "bg": "Все още не сте готови за инсталация? #sandbox преминава през извикванията на приставките и техните разписки точно тук, в страницата.",
     "tr": "Henüz kurmaya hazır değilseniz? #sandbox, eklenti çağrılarını ve makbuzlarını tam burada, sayfada gezdirir.",
     "hu": "Még nem áll készen a telepítésre? A #sandbox itt, az oldalon vezeti végig a bővítményhívásokat és a bizonylataikat.",
+    "pt-BR": "Ainda não está pronto para instalar? #sandbox percorre as chamadas dos plug-ins e seus recibos aqui mesmo, na página.",
+    ko: "아직 설치할 준비가 되지 않았습니까? #sandbox에서는 플러그인 호출과 그 영수증을 이 페이지 안에서 바로 살펴봅니다.",
+    ar: "لست جاهزًا للتثبيت؟ يمرّ #sandbox على نداءات الإضافات وإيصالاتها هنا في الصفحة نفسها.",
   } satisfies L,
   outroDirectory: {
     en: "For byte-exact frame samples, the frame table and the route census, the #directory section keeps them.",
@@ -2534,6 +2889,9 @@ const T = {
     "bg": "За образец на кадрове байт по байт, таблицата с кадри и преброяването на маршрутите — раздел #directory ги пази.",
     "tr": "Birebir bayt eşleşen kare örnekleri, kare tablosu ve rota sayımı için #directory bölümüne bakın.",
     "hu": "Bajt-pontos keretmintákhoz, a kerettáblához és az útvonalnévsorhoz a #directory szakasz szolgál.",
+    "pt-BR": "Para amostras de frame exatas byte a byte, a tabela de frames e o censo de rotas, a seção #directory as mantém.",
+    ko: "바이트 단위로 정확한 프레임 샘플, 프레임 표, 라우트 전수 목록은 #directory 섹션이 그대로 보관하고 있습니다.",
+    ar: "أما نماذج الإطارات المطابقة بايتًا ببايت، وجدول الإطارات، وإحصاء المسارات، فيحفظها قسم #directory.",
   } satisfies L,
 } as const;
 
@@ -2564,6 +2922,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Доставяне на една карта",
       "tr": "Bir kart teslimi",
       "hu": "Egy kártya kiszállítása",
+      "pt-BR": "entrega de um cartão",
+      ko: "카드 한 건 전달",
+      ar: "تسليم بطاقة واحدة",
     },
   },
   {
@@ -2588,6 +2949,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Едно публикуване на долното меню",
       "tr": "Alt menüyü bir kez yayımlama",
       "hu": "Az alsó menu egyszeri feltöltése",
+      "pt-BR": "envio do menu inferior uma vez",
+      ko: "하단 메뉴 1회 푸시",
+      ar: "دفع القائمة السفلية مرة واحدة",
     },
   },
   {
@@ -2612,6 +2976,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Ротация на ключа на канала, таксуване на участник",
       "tr": "Kanal anahtarı döndürme, üye başına ücret",
       "hu": "Csatornakulcs-rotáció, tagságonként számolva",
+      "pt-BR": "rotação de chaves do canal, cobrada por membro",
+      ko: "채널 키 교체, 멤버당 과금",
+      ar: "تدوير مفتاح القناة، محاسَب لكل عضو",
     },
   },
   {
@@ -2636,6 +3003,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Един отговор на AI агента",
       "tr": "Bir AI ajanı yanıtı",
       "hu": "Egy AI-ügynök válasza",
+      "pt-BR": "uma resposta do agente de IA",
+      ko: "AI 에이전트 응답 1건",
+      ar: "ردّ واحد من وكيل AI",
     },
   },
   {
@@ -2660,6 +3030,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Едно alert действие (ack и resolve се таксуват поотделно)",
       "tr": "Bir uyarı eylemi (ack ve resolve ayrı ücretlendirilir)",
       "hu": "Egy riasztási művelet (az ack és a resolve külön számít)",
+      "pt-BR": "uma ação de alerta (ack e resolve são cobrados separadamente)",
+      ko: "알림 작업 1건(ack와 resolve는 별도로 과금)",
+      ar: "إجراء تنبيه واحد (يُحاسَب ack وresolve كلٌّ على حدة)",
     },
   },
   {
@@ -2684,6 +3057,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Един вход без парола",
       "tr": "Bir parolasız giriş",
       "hu": "Egy belépés jelszó nélkül",
+      "pt-BR": "um login SSO sem senha",
+      ko: "패스워드리스 SSO 로그인 1건",
+      ar: "تسجيل دخول واحد بـ SSO دون كلمة مرور",
     },
   },
   {
@@ -2708,6 +3084,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Една анкета",
       "tr": "Bir anket",
       "hu": "Egy szavazás",
+      "pt-BR": "uma enquete",
+      ko: "투표 1건",
+      ar: "تصويت واحد",
     },
   },
   {
@@ -2732,6 +3111,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Едно on-chain събитие (тази приставка е изключена по подразбиране)",
       "tr": "Bir zincir üstü olay (bu eklenti varsayılan olarak kapalı)",
       "hu": "Egy on-chain esemény (ez a bővítmény alapból ki van kapcsolva)",
+      "pt-BR": "um evento on-chain (este plug-in vem desligado por padrão)",
+      ko: "온체인 이벤트 1건(이 플러그인은 기본적으로 꺼져 있음)",
+      ar: "حدث واحد على السلسلة (هذه الإضافة معطّلة افتراضيًا)",
     },
   },
   {
@@ -2756,6 +3138,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Едно доставяне на workflow trigger (тази приставка е изключена по подразбиране)",
       "tr": "Bir workflow tetikleyici teslimi (bu eklenti varsayılan olarak kapalı)",
       "hu": "Egy workflow-trigger kiszállítása (ez a bővítmény alapból ki van kapcsolva)",
+      "pt-BR": "uma entrega de gatilho de fluxo de trabalho (este plug-in vem desligado por padrão)",
+      ko: "워크플로 트리거 전달 1건(이 플러그인은 기본적으로 꺼져 있음)",
+      ar: "تسليم مُشغِّل سير عمل واحد (هذه الإضافة معطّلة افتراضيًا)",
     },
   },
   {
@@ -2780,6 +3165,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Едно търсене на контакти в CardDAV (тази приставка е изключена по подразбиране)",
       "tr": "Bir CardDAV kişi araması (bu eklenti varsayılan olarak kapalı)",
       "hu": "Egy CardDAV-névjegykeresés (ez a bővítmény alapból ki van kapcsolva)",
+      "pt-BR": "uma busca de contatos CardDAV (este plug-in vem desligado por padrão)",
+      ko: "CardDAV 연락처 검색 1건(이 플러그인은 기본적으로 꺼져 있음)",
+      ar: "بحث واحد في جهات اتصال CardDAV (هذه الإضافة معطّلة افتراضيًا)",
     },
   },
   {
@@ -2804,6 +3192,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Една CalDAV заявка за свободно/заето (тази приставка е изключена по подразбиране)",
       "tr": "Bir CalDAV boş/dolu sorgusu (bu eklenti varsayılan olarak kapalı)",
       "hu": "Egy CalDAV szabad/foglalt lekérdezés (ez a bővítmény alapból ki van kapcsolva)",
+      "pt-BR": "uma consulta de disponibilidade CalDAV (este plug-in vem desligado por padrão)",
+      ko: "CalDAV 한가/바쁨 조회 1건(이 플러그인은 기본적으로 꺼져 있음)",
+      ar: "استعلام free/busy واحد في CalDAV (هذه الإضافة معطّلة افتراضيًا)",
     },
   },
   {
@@ -2828,6 +3219,9 @@ const CP_ROWS: { key: string; value: string; what: L }[] = [
       "bg": "Едно изходящо доставяне към Slack или Discord (тази приставка е изключена по подразбиране)",
       "tr": "Bir giden Slack veya Discord teslimi (bu eklenti varsayılan olarak kapalı)",
       "hu": "Egy kimenő Slack- vagy Discord-kiszállítás (ez a bővítmény alapból ki van kapcsolva)",
+      "pt-BR": "uma entrega de saída para Slack ou Discord (este plug-in vem desligado por padrão)",
+      ko: "Slack 또는 Discord 외부 전달 1건(이 플러그인은 기본적으로 꺼져 있음)",
+      ar: "تسليم صادر واحد إلى Slack أو Discord (هذه الإضافة معطّلة افتراضيًا)",
     },
   },
 ];
@@ -2864,6 +3258,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Отсечете адрес, сканирайте, последвайте",
       "tr": "Adresi üret, tara, takibe al",
       "hu": "Kibocsátja a címet, beolvassa, követi",
+      "pt-BR": "Cunhe o endereço, escaneie-o, siga",
+      ko: "주소를 발급하고 스캔한 뒤 팔로우",
+      ar: "اسكّ العنوان، وامسحه، وتابِع",
     },
     body: {
       en: "The identity block of the Service account & node panel mints an opaque invite link: POST /api/v1/invite-links returns https://popopx.chat/i/v1/<code> plus a qr_svg, and the console shows the link with a copy button and a 生成二维码 button that renders the QR image in place. The raw protocol address — the popopx:/… URI that carries the relay domain — is not on the card; it sits under 高级诊断 for operator debugging, and the console says so. On iOS the add-contact screen routes the scanner, the clipboard and the paste field through one address classifier, so the link can be scanned or pasted.",
@@ -2884,6 +3281,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Идентификационният блок в панела Service account & node издава непрозрачна връзка за покана: POST /api/v1/invite-links връща https://popopx.chat/i/v1/<code> плюс qr_svg, а конзолата показва връзката с бутон за копиране и бутон 生成二维码, който рисува QR изображението направо там. Суровият протоколен адрес — URI popopx:/…, който носи домейна на релея — не е на картата; той стои под 高级诊断 за диагностика от оператора, и конзолата го казва. При iOS екранът за добавяне на контакт минава скенера, клипборда и полето за поставяне през един класификатор на адреси, така че връзката може да се сканира или постави.",
       "tr": "Service account & node panelinin kimlik bloğu opak bir davet bağlantısı üretir: POST /api/v1/invite-links, https://popopx.chat/i/v1/<code> ve bir qr_svg döndürür; konsol bağlantıyı kopyalama düğmesi ve QR görüntüsünü yerinde çizen 生成二维码 düğmesiyle gösterir. Ham protokol adresi — relay alan adını taşıyan popopx:/… URI'si — kartta değildir; operatör teşhisi için 高级诊断 altında durur ve konsol bunu açıkça söyler. iOS'ta kişi ekleme ekranı tarayıcıyı, panoyu ve yapıştırma alanını aynı adres sınıflandırıcısından geçirir; bu yüzden bağlantı taranabilir ya da yapıştırılabilir.",
       "hu": "A Service account & node panel azonosítási blokkja átlátszatlan meghívólinket bocsát ki: a POST /api/v1/invite-links https://popopx.chat/i/v1/<code> és egy qr_svg választ ad, a konzol pedig a linket másolás gombbal és a QR képet helyben kirajzoló 生成二维码 gombbal mutatja. A nyers protokollcím — a relay domaint hordozó popopx:/… URI — nincs a kártyán; a 高级诊断 alatt van az üzemeltetői hibakereséshez, és a konzol ezt ki is mondja. iOS-en a névjegy-hozzáadás képernyője a beolvasót, a vágólapot és a beillesztés mezőt ugyanazon a címosztályozón vezeti át, ezért a link beolvasható vagy bemásolható.",
+      "pt-BR": "O bloco de identidade do painel Service account & node gera um link de convite opaco: POST /api/v1/invite-links retorna https://popopx.chat/i/v1/<code> mais um qr_svg, e o console mostra o link com um botão de copiar e um botão 生成二维码 que renderiza a imagem do QR no próprio lugar. O endereço bruto do protocolo — o URI popopx:/… que carrega o domínio do relay — não está no cartão; ele fica sob 高级诊断 para depuração do operador, e o console diz isso. No iOS, a tela de adicionar contato passa o scanner, a área de transferência e o campo de colar por um único classificador de endereços, então o link pode ser escaneado ou colado.",
+      ko: "서비스 계정 및 노드 패널의 신원 블록은 불투명한 초대 링크를 발급합니다: POST /api/v1/invite-links는 https://popopx.chat/i/v1/<code>와 qr_svg를 반환하고, 콘솔은 복사 버튼과 함께 링크를, 그리고 QR 이미지를 제자리에서 렌더링하는 生成二维码 버튼을 보여 줍니다. 릴레이 도메인을 담은 원본 프로토콜 주소인 popopx:/… URI는 카드에 없습니다. 이는 운영자 디버깅을 위해 高级诊断 아래에 있으며, 콘솔도 그렇게 안내합니다. iOS에서는 연락처 추가 화면이 스캐너, 클립보드, 붙여넣기 필드를 하나의 주소 분류기로 처리하므로 링크를 스캔하거나 붙여넣을 수 있습니다.",
+      ar: "كتلة الهوية في لوحة «حساب الخدمة والعقدة» تصدر رابط دعوة مبهمًا: POST /api/v1/invite-links يعيد https://popopx.chat/i/v1/<code> مع qr_svg، وتعرض وحدة التحكم الرابط مع زر نسخ وزر «生成二维码» يرسم صورة QR في مكانها. والعنوان الخام للبروتوكول — أي URI من نوع popopx:/… يحمل نطاق المرحّل — ليس على البطاقة؛ بل يقع تحت «高级诊断» لتصحيح أخطاء المشغّل، ووحدة التحكم تقول ذلك. وعلى iOS يوجّه شاشة إضافة جهة الاتصال الماسح والحافظة وحقل اللصق عبر مصنّف عناوين واحد، فيمكن مسح الرابط أو لصقه.",
     },
     console: {
       en: "Service account & node → Service identity → Request/reuse address. The same block rotates it: existing contacts are kept, new users can no longer add the old address.",
@@ -2904,6 +3304,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Service account & node → Service identity → Request/reuse address. Същият блок го ротира: съществуващите контакти се запазват, а нови потребители вече не могат да добавят стария адрес.",
       "tr": "Service account & node → Service identity → Request/reuse address. Aynı blok onu döndürür: var olan kişiler kalır, yeni kullanıcılar eski adresi artık ekleyemez.",
       "hu": "Service account & node → Service identity → Request/reuse address. Ugyanaz a blokk rotálja: a meglévő néjegyek megmaradnak, új felhasználók a régi címet már nem adhatják hozzá.",
+      "pt-BR": "Service account & node → Service identity → Request/reuse address. O mesmo bloco o rotaciona: os contatos existentes são mantidos, e novos usuários não conseguem mais adicionar o endereço antigo.",
+      ko: "Service account & node → Service identity → Request/reuse address. 같은 블록에서 주소를 교체할 수 있습니다. 기존 연락처는 유지되며 새 사용자는 더 이상 이전 주소를 추가할 수 없습니다.",
+      ar: "Service account & node → Service identity → Request/reuse address. والكتلة نفسها تدوّره: فتبقى جهات الاتصال القائمة، ولا يعود بإمكان المستخدمين الجدد إضافة العنوان القديم.",
     },
     phone: {
       en: "Scan it, or paste the invite link into add-contact; the string is an opaque https://popopx.chat/i/v1/<code> link that unwraps to the contact address on the phone — which is why it is copied rather than typed.",
@@ -2924,6 +3327,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Сканирайте го или поставете връзката за покана в добавяне на контакт; низът е непрозрачна връзка https://popopx.chat/i/v1/<code>, която на телефона се разгъва до адреса на контакта — затова се копира, а не се надписва.",
       "tr": "Tarayın ya da davet bağlantısını kişi eklemeye yapıştırın; dizi, telefonda kontakt adresine açılan opak bir https://popopx.chat/i/v1/<code> bağlantısıdır — bu yüzden elle yazmak yerine kopyalanır.",
       "hu": "Olvassa be, vagy illessze be a meghívólinket a névjegy-hozzáadás képernyőn; a karakterlánc egy átlátszatlan https://popopx.chat/i/v1/<code> link, amely a telefonon a névjegy címévé bomlik ki — ezért másolják, nem írják le.",
+      "pt-BR": "Escaneie-o, ou cole o link de convite em adicionar contato; a string é um link opaco https://popopx.chat/i/v1/<code> que se desdobra no endereço de contato no celular — e é por isso que ele é copiado em vez de digitado.",
+      ko: "스캔하거나 초대 링크를 연락처 추가 화면에 붙여넣으십시오. 이 문자열은 불투명한 https://popopx.chat/i/v1/<code> 링크이며, 휴대폰에서 연락처 주소로 풀립니다 — 그래서 입력하지 않고 복사하는 것입니다.",
+      ar: "امسحه، أو ألصق رابط الدعوة في «إضافة جهة اتصال»؛ فالسلسلة رابط مبهم https://popopx.chat/i/v1/<code> يُفكّ على الهاتف إلى عنوان جهة الاتصال — ولهذا يُنسخ ولا يُكتب.",
     },
     snippet: {
       code: CMD.frames,
@@ -2946,6 +3352,9 @@ const TIMELINE: TimelineStep[] = [
         "bg": "В мига, в който заявката се приеме, шлюзът издава сесията на този последовател и изпраща session_handshake: pairwise uid, 64-символен hex сесиен секрет и service id, и трите полета в кадъра. Handshake-ът не се мери — нито един метър не го покрива — и редът се налага от протокола: кадърът е съобщение към контакт, а преди приемането на заявката контакт още няма.",
         "tr": "İstek kabul edildiği anda ağ geçidi bu takipçinin oturumunu üretir ve session_handshake gönderir: pairwise uid, 64 karakterlik hex oturum sırrı ve service id — üçü de karenin içindedir. Handshake ücretlendirilmez; hiçbir sayaç onu kapsamaz. Sıra da protokol tarafından dayatılır: kare bir kişiye mesajdır ve istek kabul edilene kadar ortada kişi yoktur.",
         "hu": "Abban a pillanatban, ahogy a kérelmet elfogadják, az átjáró kiadja ennek a követőnek a munkamenetét, és elküldi a session_handshake-et: pairwise uid, egy 64 karakteres hex munkamenet-titok és a service id, mind a három a keretben. Maga a handshake nem meterelt — egyetlen meter sem fedi le —, a sorrendet pedig a protokoll kényszeríti ki: a keret üzenet egy névjegynek, és az elfogadás előtt még nincs is névjegy.",
+        "pt-BR": "No momento em que a solicitação é aceita, o gateway cunha a sessão deste seguidor e envia session_handshake: o uid pairwise, um segredo de sessão de 64 caracteres hex e o id do serviço, os três dentro do frame. O handshake não é medido — nenhum medidor o cobre — e a ordem é imposta pelo protocolo: o frame é uma mensagem para um contato, e até que a solicitação seja aceita não existe contato.",
+        ko: "요청이 수락되는 순간 게이트웨이는 이 팔로워의 세션을 발급하고 session_handshake를 푸시합니다. 페어와이즈 uid, 64자리 hex 세션 시크릿, 서비스 id가 모두 프레임 안에 담깁니다. 핸드셰이크는 계량되지 않습니다. 이를 다루는 미터가 없습니다. 순서는 프로토콜이 강제합니다. 프레임은 연락처에게 보내는 메시지이며, 요청이 수락되기 전에는 연락처가 존재하지 않습니다.",
+        ar: "في اللحظة التي يُقبل فيها الطلب تُصدر البوابة جلسة هذا المتابع وتدفع session_handshake: معرّف pairwise uid، وسرّ جلسة من 64 حرفًا ست عشريًا، ومعرّف service id، والثلاثة جميعًا داخل الإطار. والمصافحة غير محاسبة — فلا عداد يغطيها — والترتيب يفرضه البروتوكول: فالإطار رسالة إلى جهة اتصال، وحتى يُقبل الطلب لا وجود لجهة الاتصال.",
       },
     },
     warn: {
@@ -2967,6 +3376,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Като gateway.auto_accept е изключен в Settings, всяка нова заявка чака да бъде одобрена по една в панела Service account & node, чийто блок е озаглавен точно така: сервисен акаунт не одобрява автоматично. Докато нищо не е одобрено, телефонът не получава нищо.",
       "tr": "Ayarlar içinde gateway.auto_accept kapalıysa her yeni istek, Service account & node panelinde tek tek onay bekler; o blokta zaten yazar: hizmet hesabı otomatik onaylamaz. Onay gelene kadar telefona hiçbir şey ulaşmaz.",
       "hu": "Ha a Settingsben a gateway.auto_accept ki van kapcsolva, minden új kérelem egyenként jóváhagyásra vár a Service account & node panelen, amelynek blokkja úgy van feliratozva, hogy mondja: a szolgáltatási fiók nem hagyja jóvá magától. Amíg nincs jóváhagyva, a telefon semmit nem kap.",
+      "pt-BR": "Desligue gateway.auto_accept em Settings e cada nova solicitação espera no bloco Accept contact requests de Service account & node, cujo próprio subtítulo diz que uma conta de serviço não aprova automaticamente, enquanto o bloco de configurações acrescenta que as solicitações então precisam ser aceitas uma a uma ali. Nada chega ao telefone até que uma seja aprovada.",
+      ko: "Settings에서 gateway.auto_accept를 끄면 각각의 새 요청이 Service account & node의 Accept contact requests 블록에서 대기합니다. 이 블록의 부제는 서비스 계정이 자동 승인하지 않는다고 적고 있으며, 설정 블록은 그 경우 요청을 거기서 하나씩 수락해야 한다고 덧붙입니다. 하나가 승인되기 전까지는 아무것도 휴대폰에 도달하지 않습니다.",
+      ar: "أوقف gateway.auto_accept في Settings، فينتظر كل طلب جديد في كتلة Accept contact requests ضمن Service account & node، التي يقول عنوانها الفرعي إن حساب الخدمة لا يوافق تلقائيًا، بينما تضيف كتلة الإعدادات أنه يجب حينها قبول الطلبات واحدًا واحدًا هناك. ولا شيء يصل إلى الهاتف حتى يُقبل أحدها.",
     },
   },
   {
@@ -2990,6 +3402,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Сглобете долното меню и достави карта",
       "tr": "Alt menüyü kurun ve bir kart teslim edin",
       "hu": "Építse fel az alsó menüt, és küldjön egy kártyát",
+      "pt-BR": "Monte o menu inferior, entregue um cartão",
+      ko: "하단 메뉴를 만들고 카드 전달",
+      ar: "أنشئ القائمة السفلية، وسلّم بطاقة",
     },
     body: {
       en: "The Menu orchestration editor holds up to 3 top-level items with 5 sub-items each; edits stay in the page until you save, and saving writes to the gateway as a new revision. The panel's client-rule check is built from the same rules as the server's build_menu, so a frame that would be rejected never leaves. In Card delivery pick the style first — standard, receipt for bills, security for alerts — with up to 8 fields and 4 buttons, preview the request body, then send.",
@@ -3010,6 +3425,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Редакторът на Menu orchestration държи до 3 елемента от горно ниво по 5 поделемента; промените живеят в страницата, докато не запазите, а записването пише в шлюза като нова ревизия. Проверката на клиентските правила в този панел е съградена от същите правила като сървърния build_menu, следователно кадър, който би бил отхвърлен, никога не тръгва. В Card delivery първо изберете стил — standard, receipt за сметки, security за тревоги — с до 8 полета и 4 бутона, прегледайте тялото на заявката и после изпратете.",
       "tr": "Menu orchestration editörü en fazla 3 üst düzey madde ve her birinde 5 alt madde tutar; düzenlemeler siz kaydedene kadar sayfada kalır, kayıt ise ağ geçidine yeni bir revizyon olarak yazılır. Bu panelin istemci kural denetimi, sunucudaki build_menu ile aynı kurallardan kuruludur; dolayısıyla reddedilecek bir kare hiç yola çıkmaz. Card delivery içinde önce stili seçin — standard, faturalar için receipt, uyarılar için security — en fazla 8 alan ve 4 düğme; istek gövdesini önizleyip sonra gönderin.",
       "hu": "A Menu orchestration szerkesztője akár 3 felső szintű elemet tart, elemenként 5 aleggyel; a módosítások az oldalon élnek, amíg nem ment, a mentés pedig új revízióként ír az átjáróba. A panel kliensszabály-ellenőrzése ugyanazokból a szabályokból épül, mint a szerver oldali build_menu, ezért egy keret, amelyet elutasítanának, sosem indul el. A Card deliveryben előbb válassza ki a stílt — standard, receipt számlákhoz, security riasztásokhoz — legfeljebb 8 mezővel és 4 gombbal, nézze meg a kérés body-ját, aztán küldje el.",
+      "pt-BR": "O editor de Menu orchestration comporta até 3 itens de nível superior com 5 subitens cada; as edições ficam na página até você salvar, e salvar grava no gateway como uma nova revisão. A verificação de regras do cliente do painel é construída a partir das mesmas regras do build_menu do servidor, então um frame que seria rejeitado nunca sai. Em Card delivery, escolha o estilo primeiro — standard, receipt para cobranças, security para alertas — com até 8 campos e 4 botões, visualize o corpo da requisição e então envie.",
+      ko: "Menu orchestration 편집기는 최상위 항목을 최대 3개까지, 각 항목에 하위 항목 5개까지 담을 수 있습니다. 편집 내용은 저장할 때까지 페이지에 남고, 저장하면 새로운 개정으로 게이트웨이에 기록됩니다. 이 패널의 클라이언트 규칙 검사는 서버의 build_menu와 같은 규칙으로 만들어지므로, 거부될 프레임은 결코 전송되지 않습니다. Card delivery에서는 먼저 스타일을 고르고(표준, 청구서용 영수증, 알림용 보안) 최대 8개 필드와 4개 버튼을 설정하고 요청 본문을 미리 본 뒤 전송합니다.",
+      ar: "يحمل محرّر Menu orchestration ما يصل إلى 3 عناصر عليا لكل منها 5 عناصر فرعية؛ وتبقى التعديلات في الصفحة حتى تحفظ، والحفظ يكتب إلى البوابة بوصفه إصدارًا جديدًا. وفحص قواعد العميل في اللوحة مبني على القواعد نفسها التي يستخدمها build_menu في الخادم، لذا لا يخرج إطار كان سيُرفض أبدًا. وفي Card delivery اختر النمط أولًا — standard، أو receipt للفواتير، أو security للتنبيهات — مع ما يصل إلى 8 حقول و4 أزرار، ثم عاين جسم الطلب، ثم أرسل.",
     },
     console: {
       en: "Menu orchestration → Add top-level item / + sub-item → Save and push (or Push saved menu only); Card delivery → style → Preview request body → Send card.",
@@ -3030,6 +3448,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Menu orchestration → Add top-level item / + sub-item → Save and push (или Push saved menu only); Card delivery → стил → Preview request body → Send card.",
       "tr": "Menu orchestration → Add top-level item / + sub-item → Save and push (ya da Push saved menu only); Card delivery → stil → Preview request body → Send card.",
       "hu": "Menu orchestration → Add top-level item / + sub-item → Save and push (vagy Push saved menu only); Card delivery → stílus → Preview request body → Send card.",
+      "pt-BR": "Menu orchestration → Add top-level item / + sub-item → Save and push (ou Push saved menu only); Card delivery → estilo → Preview request body → Send card.",
+      ko: "Menu orchestration → Add top-level item / + sub-item → Save and push(또는 Push saved menu only). Card delivery → 스타일 → Preview request body → Send card.",
+      ar: "Menu orchestration → Add top-level item / + sub-item → Save and push (أو Push saved menu only)؛ Card delivery → النمط → Preview request body → Send card.",
     },
     phone: {
       en: "The bottom bar becomes the three items you configured and opens as a card; later updates refresh in place instead of arriving as another message.",
@@ -3050,6 +3471,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Долната лента става онези три елемента, които конфигурирахте, и се отваря като карта; последващите обновявания се презареждат на място, вместо да идват като още едно съобщение.",
       "tr": "Alt çubuk, sizin yapılandırdığınız üç maddeye dönüşür ve kart olarak açılır; sonraki güncellemeler yeni bir mesaj olarak gelmek yerine yerinde yenilenir.",
       "hu": "Az alsó sáv aza három elem lesz, amelyet beállított, és kártyaként nyílik meg; a későbbi frissítések a helyükön frissülnek, ahelyett, hogy új üzenetként érkeznének.",
+      "pt-BR": "A barra inferior se torna os três itens que você configurou e abre como um cartão; atualizações posteriores são aplicadas no local em vez de chegar como outra mensagem.",
+      ko: "하단 바는 구성한 세 항목이 되어 카드로 열리며, 이후 업데이트는 또 다른 메시지로 도착하지 않고 그 자리에서 갱신됩니다.",
+      ar: "يتحول الشريط السفلي إلى العناصر الثلاثة التي أعددتها، ويُفتح بطاقةً؛ والتحديثات اللاحقة تنعشه في مكانه بدل أن تصل رسالة أخرى.",
     },
     warn: {
       en: "In-place updates are keyed by cardId: re-sending the same card with m=u mutates it on the phone, so a progress bar moves without another message appearing. That is why card_id has to be stable — left blank it is generated, and a broadcast derives a suffix per recipient. The menu cannot carry pay_credits at all; a payment has to ride a readable card.",
@@ -3070,6 +3494,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Освежаването на място е обвързано с cardId: изпращането отново на същата карта с m=u я мутира по телефона, затова един progress bar се движи без ново съобщение. Ето защо card_id трябва да е стабилен — оставен празно се генерира, а при broadcast се извежда наставка за всеки получач. Менюто изобщо не може да носи pay_credits; плащането трябва да възложи четима карта.",
       "tr": "Yerinde güncellemeler cardId üzerinden bağlanır: aynı kartı m=u ile yeniden göndermek onu telefonda değiştirir, böylece yeni bir mesaj gelmeden ilerleme çubuğu hareket eder. Bu yüzden card_id sabit olmalıdır — boş bırakılırsa üretilir ve toplu gönderimde alıcı başına bir son ek türetilir. Menü pay_credits taşıyamaz; ödeme okunabilir bir kartın üzerinde gitmek zorundadır.",
       "hu": "A helyben frissítések cardId-höz vanak kötve: ugyanazon kártya m=u-val történő újraküldése megváltoztatja a telefonon, ezért egy progress bar új üzenet nélkül mozog. Ezért a card_id-nak stabilnak kell lennie — üresen hagyva generálódik, és egy broadcast esetén minden címzetthez külön utótag tartozik. A menu egyáltalán nem hordozhat pay_credits-t; egy fizetésnek egy olvasható kártyán kell utaznia.",
+      "pt-BR": "As atualizações no local são indexadas por cardId: reenviar o mesmo cartão com m=u o altera no telefone, de modo que uma barra de progresso avança sem que outra mensagem apareça. É por isso que card_id precisa ser estável — se ficar em branco, ele é gerado, e um envio em massa deriva um sufixo por destinatário. O menu não pode carregar pay_credits de forma alguma; um pagamento precisa viajar em um cartão legível.",
+      ko: "제자리 업데이트는 cardId로 식별됩니다. 같은 카드를 m=u로 다시 보내면 휴대폰에서 해당 카드가 변경되므로, 또 다른 메시지가 나타나지 않아도 진행 표시줄이 움직입니다. 그래서 card_id는 안정적이어야 합니다. 비워 두면 생성되며, 브로드캐스트는 수신자별로 접미사를 파생합니다. 메뉴에는 pay_credits를 담을 수 없으며, 결제는 읽을 수 있는 카드에 실어야 합니다.",
+      ar: "ترتبط التحديثات في المكان بـ cardId: فإعادة إرسال البطاقة نفسها مع m=u تعدّلها على الهاتف، فيتحرك شريط التقدم دون أن تظهر رسالة أخرى. ولهذا يجب أن يبقى card_id مستقرًا — فإذا تُرك فارغًا يُولَّد، والإرسال الجماعي يشتق لاحقة لكل مستلم. ولا تستطيع القائمة حمل pay_credits إطلاقًا؛ فالمبلغ يجب أن يُحمَل على بطاقة قابلة للقراءة.",
     },
   },
   {
@@ -3093,6 +3520,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Включи петте опционални приставки",
       "tr": "Beş isteğe bağlı eklentiyi aç",
       "hu": "Kapcsold be az öt opcionális bővítményt",
+      "pt-BR": "Ligue os cinco plug-ins opcionais",
+      ko: "선택형 플러그인 다섯 개 켜기",
+      ar: "فعّل الإضافات الخمس الاختيارية",
     },
     body: {
       en: "The plugin console is nine panels: AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar and Slack / Discord outbound. Four are on by default; the other five wait for their own POPOPX_PLUGIN_* switch. Each header carries two chips — module mounted, and gateway verdict — both read from that <prefix>/status. The AI panel hot-edits exactly six keys: system_prompt, model, history_size, temperature, max_tokens and exhausted_message. The API key and endpoint are environment values, and the status row says so verbatim: missing means set POPOPX_AI_API_KEY in .env, then restart.",
@@ -3113,6 +3543,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Конзолата на приставките са девет панела: AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar и Slack / Discord outbound. Четири са включени по подразбиране; останалите пет чакат собствения си превключвател POPOPX_PLUGIN_*. Всяка заглавка носи два чипа — module mounted и присъдата на шлюза, и двата се четат от онзи <prefix>/status. AI панелът горещо редактира точно шест ключа: system_prompt, model, history_size, temperature, max_tokens и exhausted_message. API ключът и endpoint са стойности на обкръжаването, и редът за състояние го казва буквално: липсва – сложете POPOPX_AI_API_KEY в .env и рестартирайте.",
       "tr": "Eklenti konsolu dokuz panelden oluşur: AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar ve Slack / Discord outbound. Dördü varsayılan olarak açıktır; diğer beşi kendi POPOPX_PLUGIN_* anahtarını bekler. Her başlıkta iki çip var — module mounted ve ağ geçidi kararı — ve ikisi de o <prefix>/status rotasından okunur. AI paneli hot olarak tam altı anahtarı düzenler: system_prompt, model, history_size, temperature, max_tokens ve exhausted_message. API anahtarı ve uç nokta ortam değerleridir; durum satırı bunu aynen yazar: eksikse .env içinde POPOPX_AI_API_KEY değerini verin, sonra yeniden başlatın.",
       "hu": "A bővítmény-konzol kilenc panel: AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar és Slack / Discord outbound. Négy alapból be van kapcsolva; a másik öt a saját POPOPX_PLUGIN_* kapcsolójára vár. Minden fejléken két chip ül — module mounted és az átjáró ítélete —, s mindkettő éppen abból a <prefix>/status-ból olvastatik. Az AI panel melegen pontosan hat kulcsot szerkeszt: system_prompt, model, history_size, temperature, max_tokens és exhausted_message. Az API-kulcs és az endpoint környezeti érték, és a status-sor ezt szó szerint ki is mondja: ha hiányzik, állítsa be POPOPX_AI_API_KEY-t a .env-ben, majd indítsa újra.",
+      "pt-BR": "O console de plug-ins tem nove painéis: AI agent, Alert ops, Passwordless SSO, Polls, Web3 bridge, Workflow bridge, CardDAV contacts, CalDAV calendar e Slack / Discord outbound. Quatro vêm ativados por padrão; os outros cinco aguardam seu próprio interruptor POPOPX_PLUGIN_*. Cada cabeçalho leva dois chips — module mounted e o veredito do gateway — ambos lidos daquele <prefix>/status. O painel de IA edita a quente exatamente seis chaves: system_prompt, model, history_size, temperature, max_tokens e exhausted_message. A chave de API e o endpoint são valores de ambiente, e a linha de status diz isso literalmente: missing significa definir POPOPX_AI_API_KEY em .env e reiniciar em seguida.",
+      ko: "플러그인 콘솔은 아홉 개 패널로 구성됩니다: AI 에이전트, 알림 운영, 비밀번호 없는 SSO, 투표, Web3 브리지, 워크플로 브리지, CardDAV 연락처, CalDAV 캘린더, Slack / Discord 아웃바운드. 네 개는 기본으로 켜져 있고 나머지 다섯 개는 각자의 POPOPX_PLUGIN_* 스위치를 기다립니다. 각 헤더에는 두 개의 칩 — 모듈 마운트됨, 게이트웨이 판정 — 이 있으며, 둘 다 해당 <prefix>/status에서 읽습니다. AI 패널은 정확히 여섯 개 키를 즉석 편집합니다: system_prompt, model, history_size, temperature, max_tokens, exhausted_message. API 키와 엔드포인트는 환경 값이며, 상태 행은 이를 그대로 알려 줍니다: missing은 .env에 POPOPX_AI_API_KEY를 설정한 뒤 재시작하라는 뜻입니다.",
+      ar: "وحدة تحكم الإضافات تسع لوحات: وكيل الذكاء الاصطناعي، وعمليات التنبيه، وSSO بلا كلمة مرور، والتصويتات، وجسر Web3، وجسر سير العمل، وجهات اتصال CardDAV، وتقويم CalDAV، والصادر إلى Slack / Discord. وأربع منها مفعّلة افتراضيًا؛ والخمس الأخرى تنتظر مفتاح POPOPX_PLUGIN_* الخاص بها. ويحمل كل رأس شريحتين — الوحدة مركّبة، وحكم البوابة — وكلتاهما مقروءة من <prefix>/status ذاك. ولوحة الذكاء الاصطناعي تعدّل آنيًا ستة مفاتيح بالضبط: system_prompt وmodel وhistory_size وtemperature وmax_tokens وexhausted_message. ومفتاح API ونقطة النهاية قيمتا بيئة، ويقول صف الحالة ذلك حرفيًا: missing يعني اضبط POPOPX_AI_API_KEY في .env ثم أعد التشغيل.",
     },
     console: {
       en: "Alert ops builds the curl for you: point Alertmanager or Grafana at /api/v1/plugins/alerts/webhook with X-Popopx-Alert-Token set to POPOPX_ALERT_WEBHOOK_TOKEN — an Authorization: Bearer is accepted there too. If you also set POPOPX_ALERT_WEBHOOK_SECRET, every request must add X-Popopx-Timestamp (integer seconds, ±300 s of gateway time) and X-Popopx-Signature: v1=<hex> with an HMAC-SHA256 over <timestamp>.<raw body>, and each signature is accepted once; leave the secret unset and the token alone is enough. The severity comparison is >=, so POPOPX_ALERT_MIN_SEVERITY=warning means warning and above, and only an alert that clears the line becomes a card in the security style. In Polls set mode to anonymous, the other value being signed, give it 2 to 4 options, and list the recipients explicitly.",
@@ -3133,6 +3566,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Alert ops сглобява curl вместо вас: насочете Alertmanager или Grafana към /api/v1/plugins/alerts/webhook с X-Popopx-Alert-Token равен на POPOPX_ALERT_WEBHOOK_TOKEN — Authorization: Bearer също се приема там. Ако допълнително зададете POPOPX_ALERT_WEBHOOK_SECRET, всяка заявка трябва да добави X-Popopx-Timestamp (цели секунди, ±300 s от времето на шлюза) и X-Popopx-Signature: v1=<hex> с HMAC-SHA256 върху <timestamp>.<raw body>, и всеки подпис се приема само веднъж; без secret стига токенът. Сравнението на severity е >=, така че POPOPX_ALERT_MIN_SEVERITY=warning значи warning и нагоре, и само тревога над прага дава червената security карта. В Polls поставете mode на anonymous, дайте от 2 до 4 опции и избройте получателите изрично.",
       "tr": "Alert ops curl'ü sizin için kurar: Alertmanager ya da Grafana'yı X-Popopx-Alert-Token = POPOPX_ALERT_WEBHOOK_TOKEN ile /api/v1/plugins/alerts/webhook adresine yöneltin — Authorization: Bearer da orada kabul edilir. Ayrıca POPOPX_ALERT_WEBHOOK_SECRET ayarlarsanız her istek X-Popopx-Timestamp (tam saniye, ağ geçidi saatinden ±300 s) ve X-Popopx-Signature: v1=<hex> eklemelidir; imza <timestamp>.<raw body> üzerinde HMAC-SHA256'dır ve her imza yalnızca bir kez kabul edilir; secret yoksa token yeterlidir. Severity karşılaştırması >= olduğundan POPOPX_ALERT_MIN_SEVERITY=warning, warning ve üzeri demektir ve yalnızca çizgiyi geçen alarm kırmızı security kartını üretir. Polls içinde mode'u anonymous yapın, 2 ile 4 seçenek verin ve alıcıları açıkça sayın.",
       "hu": "Az Alert ops megépíti önért a curlt: irányítsa az Alertmanager-t vagy a Grafanát a /api/v1/plugins/alerts/webhook címre, ahol X-Popopx-Alert-Token = POPOPX_ALERT_WEBHOOK_TOKEN — az Authorization: Bearer is elfogadott ott. Ha emellett POPOPX_ALERT_WEBHOOK_SECRET is be van állítva, minden kérésnek mellékelnie kell X-Popopx-Timestamp (egész másodperc, ±300 s a gateway idejéhez képest) és X-Popopx-Signature: v1=<hex> fejlécet, amely HMAC-SHA256 a <timestamp>.<raw body> felett, és minden aláírás csak egyszer fogadható el; secret nélkül elég a token. A severity-összehasonlítás >=, tehát a POPOPX_ALERT_MIN_SEVERITY=warning a warningot és az afelettieket jelenti, és csak a küszöböt átlépő riasztásból lesz piros security-kártya. A Pollsban állítsa a mode-ot anonymous-re, adjon meg 2–4 opciót, és sorolja fel a címzetteket kifejezetten.",
+      "pt-BR": "O Alert ops monta o curl para você: aponte o Alertmanager ou o Grafana para /api/v1/plugins/alerts/webhook com X-Popopx-Alert-Token definido como POPOPX_ALERT_WEBHOOK_TOKEN — um Authorization: Bearer também é aceito ali. Se você também definir POPOPX_ALERT_WEBHOOK_SECRET, toda requisição precisa acrescentar X-Popopx-Timestamp (segundos inteiros, ±300 s do horário do gateway) e X-Popopx-Signature: v1=<hex> com um HMAC-SHA256 sobre <timestamp>.<raw body>, e cada assinatura é aceita uma única vez; deixe o segredo sem definir e o token sozinho basta. A comparação de severidade é >=, então POPOPX_ALERT_MIN_SEVERITY=warning significa warning e acima, e apenas um alerta que passa da linha vira um cartão no estilo security. Em Polls, defina mode como anonymous (o outro valor aceito é signed), ofereça de 2 a 4 opções e liste os destinatários explicitamente.",
+      ko: "알림 운영은 curl을 대신 만들어 줍니다: Alertmanager나 Grafana를 /api/v1/plugins/alerts/webhook으로 향하게 하고 X-Popopx-Alert-Token에 POPOPX_ALERT_WEBHOOK_TOKEN을 설정하십시오 — Authorization: Bearer도 여기서 허용됩니다. POPOPX_ALERT_WEBHOOK_SECRET도 설정했다면 모든 요청에 X-Popopx-Timestamp(정수 초, 게이트웨이 시간 기준 ±300 s)와, <timestamp>.<raw body>에 대한 HMAC-SHA256을 담은 X-Popopx-Signature: v1=<hex>를 추가해야 하며, 각 서명은 한 번만 허용됩니다. 시크릿을 설정하지 않으면 토큰만으로 충분합니다. 심각도 비교는 >=이므로 POPOPX_ALERT_MIN_SEVERITY=warning은 warning 이상을 뜻하며, 기준선을 넘는 경고만 security 스타일의 카드가 됩니다. Polls에서는 mode를 anonymous로 설정하고(다른 값은 signed), 옵션을 2~4개 주며 수신자를 명시적으로 나열하십시오.",
+      ar: "عمليات التنبيه تبني أمر curl عنك: وجّه Alertmanager أو Grafana إلى /api/v1/plugins/alerts/webhook مع ضبط X-Popopx-Alert-Token على POPOPX_ALERT_WEBHOOK_TOKEN — ويُقبل هناك أيضًا Authorization: Bearer. وإذا ضبطت POPOPX_ALERT_WEBHOOK_SECRET أيضًا، فيجب أن يضيف كل طلب X-Popopx-Timestamp (ثوانٍ صحيحة، ±300 ثانية من وقت البوابة) وX-Popopx-Signature: v1=<hex> مع HMAC-SHA256 على <timestamp>.<raw body>، وكل توقيع يُقبل مرة واحدة؛ واترك السر غير مضبوط فيكفي الرمز وحده. ومقارنة الشدة هي >=، لذا فـ POPOPX_ALERT_MIN_SEVERITY=warning تعني warning وما فوقها، ولا يصبح بطاقة بالنمط security إلا التنبيه الذي يتجاوز الحد. وفي التصويتات اضبط mode على anonymous، والقيمة الأخرى هي signed، وامنحه من 2 إلى 4 خيارات، واسرد المستلمين صراحة.",
     },
     phone: {
       en: "A follower asks and the agent answers, charged as ai_message; an alert arrives as a red card, with ack and resolve each charged as alert; a poll renders one button per option, and an anonymous result contains no contact identifier at all.",
@@ -3153,6 +3589,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Последовател пита и агентът отговаря, таксува се като ai_message; тревога идва като червена карта, като ack и resolve се таксуват поотделно като alert; анкетата начертава един бутон на опция, а анонимният результат изобщо не съдържа контакт идентификатор.",
       "tr": "Takipçi sorar, ajan yanıtlar; bu ai_message olarak ücretlendirilir. Uyarı kırmızı kart olarak gelir ve ack ile resolve ayrı ayrı alert olarak ücretlendirilir. Anket her seçenek için bir düğme çizer; anonim sonuçta kontakt tanımlayıcısı hiç bulunmaz.",
       "hu": "A követő kérdez, az ügynök felel — ez ai_message-ként számítódik; a riasztás piros kártyaként érkezik, miközben az ack és a resolve külön-külön riasztásként számítódik; egy szavazás opçõesanként egy gombot rajzol, és egy névtelen eredmény egyáltalán nem tartalmaz kontakt-azonosítót.",
+      "pt-BR": "Um seguidor pergunta e o agente responde, cobrado como ai_message; um alerta chega como um cartão vermelho, com ack e resolve cobrados cada um como alert; uma enquete renderiza um botão por opção, e um resultado anônimo não contém nenhum identificador de contato.",
+      ko: "팔로워가 질문하면 에이전트가 답하며 ai_message로 과금됩니다. 알림은 빨간 카드로 도착하고 ack와 resolve는 각각 alert로 과금됩니다. 투표는 선택지마다 버튼 하나를 표시하며, 익명 결과에는 연락처 식별자가 전혀 포함되지 않습니다.",
+      ar: "يسأل متابع فيجيب الوكيل، ويُحاسَب ذلك باسم ai_message؛ ويصل التنبيه في صورة بطاقة حمراء، ويُحاسَب ack وresolve كلٌّ منهما باسم alert؛ ويعرض التصويت زرًا لكل خيار، والنتيجة المجهولة لا تحتوي أي معرّف لجهة اتصال إطلاقًا.",
     },
     warn: {
       en: "Four plugins are on by default — ai_agent, alert_ops, privacy_sso and polls. The other five are opt-in and each has its own switch: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1 and POPOPX_PLUGIN_SLACK_DISCORD=1; the connectors also need their CalDAV/CardDAV settings before a query stops answering 409 not_configured. A disabled or unmounted plugin answers 404 and the panel spells that reason out underneath. A poll created with an empty target list is created but delivered to nobody. Slack and Discord delivery is offline-tested only, not live-verified.",
@@ -3173,6 +3612,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Четири приставки са включени по подразбиране — ai_agent, alert_ops, privacy_sso и polls. Останалите пет са опционални и всяка има свой превключвател: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1 и POPOPX_PLUGIN_SLACK_DISCORD=1; конекторите освен това се нуждаят от своите CardDAV/CalDAV настройки, иначе заявката отговаря 409 not_configured. Изключена или немонтирана приставка отговаря 404, и панелът изписва причината под нея. Анкета, създадена с празен списък на получателите, се създава, но не се доставя на никого. Доставката към Slack и Discord е тествана само офлайн, не е проверена на живо.",
       "tr": "Dört eklenti varsayılan olarak açıktır — ai_agent, alert_ops, privacy_sso ve polls. Diğer beşi isteğe bağlıdır ve her birinin kendi anahtarı vardır: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1 ve POPOPX_PLUGIN_SLACK_DISCORD=1; bağlayıcılar ayrıca kendi CardDAV/CalDAV ayarlarına ihtiyaç duyar, yoksa sorgu 409 not_configured döner. Kapalı ya da bağlanmamış bir eklenti 404 döner ve panel bu nedeni alta yazar. Alıcı listesi boşken oluşturulan anket oluşturulur ama kimseye teslim edilmez. Slack ve Discord'a teslimat yalnızca çevrimdışı test edilmiştir, canlı doğrulanmamıştır.",
       "hu": "Négy bővítmény alapból be van kapcsolva — ai_agent, alert_ops, privacy_sso és polls. A másik öt opcionális, és mindegyiknek saját kapcsolója van: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1 és POPOPX_PLUGIN_SLACK_DISCORD=1; a konnektoroknak emellett saját CardDAV/CalDAV beállításuk is kell, különben a lekérdezés 409 not_configured választ ad. Egy kikapcsolt vagy fel nem szerelt bővítmény 404-gel válaszol, és a panel alája írja az okot. Egy üres címzettlistával készült szavazás létrejön, de senkihez sem érkezik meg. A Slack és Discord felé történő kézbesítés csak offline tesztelt, élesben nem ellenőrzött.",
+      "pt-BR": "Quatro plug-ins vêm ligados por padrão — ai_agent, alert_ops, privacy_sso e polls. Os outros cinco são opcionais e cada um tem seu próprio interruptor: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1 e POPOPX_PLUGIN_SLACK_DISCORD=1; os conectores também precisam das configurações de CalDAV/CardDAV antes que uma consulta deixe de responder 409 not_configured. Um plug-in desativado ou não montado responde 404 e o painel explicita esse motivo logo abaixo. Uma enquete criada com uma lista de destinatários vazia é criada, mas não é entregue a ninguém. A entrega para Slack e Discord é testada apenas offline, não verificada ao vivo.",
+      ko: "네 개의 플러그인은 기본으로 켜져 있습니다: ai_agent, alert_ops, privacy_sso, polls. 나머지 다섯 개는 선택형이며 각자 스위치가 있습니다: POPOPX_PLUGIN_WEB3_BRIDGE=1, POPOPX_PLUGIN_WORKFLOW_WEBHOOK=1, POPOPX_PLUGIN_CARDDAV_CONNECTOR=1, POPOPX_PLUGIN_CALDAV_CONNECTOR=1, POPOPX_PLUGIN_SLACK_DISCORD=1입니다. 커넥터는 CalDAV/CardDAV 설정이 있어야 조회가 409 not_configured 응답을 멈춥니다. 비활성화되었거나 마운트되지 않은 플러그인은 404를 응답하며 패널은 그 이유를 아래에 명시합니다. 대상 목록이 빈 상태로 만든 투표는 생성되지만 아무에게도 전달되지 않습니다. Slack 및 Discord 전달은 오프라인 테스트만 거쳤으며 실제 검증은 되지 않았습니다.",
+      ar: "أربع إضافات مفعّلة افتراضيًا — ai_agent وalert_ops وprivacy_sso وpolls. والخمس الأخرى اختيارية ولكل منها مفتاحها: POPOPX_PLUGIN_WEB3_BRIDGE=1 وPOPOPX_PLUGIN_WORKFLOW_WEBHOOK=1 وPOPOPX_PLUGIN_CARDDAV_CONNECTOR=1 وPOPOPX_PLUGIN_CALDAV_CONNECTOR=1 وPOPOPX_PLUGIN_SLACK_DISCORD=1؛ كما تحتاج الإضافات الموصّلة إلى إعدادات CalDAV/CardDAV الخاصة بها قبل أن يكفّ الاستعلام عن الإجابة بـ 409 not_configured. والإضافة المعطّلة أو غير المركّبة تجيب 404، وتوضّح اللوحة ذلك السبب تحتها. والتصويت المنشأ بقائمة أهداف فارغة يُنشأ لكنه لا يُسلَّم لأحد. وتسليم Slack وDiscord مختبَر دون اتصال فقط، لا مُتحقَّق منه حيًّا.",
     },
   },
   {
@@ -3196,6 +3638,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Канали с нулево разкриване и ротация на ключове",
       "tr": "Sıfır bilgi kanalları ve anahtar döndürme",
       "hu": "Nulla tudású csatornák és kulcsrotáció",
+      "pt-BR": "Canais de conhecimento zero e rotação de chaves",
+      ko: "영지식 채널과 키 교체",
+      ar: "قنوات المعرفة الصفرية وتدوير المفاتيح",
     },
     body: {
       en: "Creating a channel in Channels & key rotation takes a title and a relay hostname — the server hosting the node group. The channel identity private key never leaves the gateway; the only outward value is public_uri, which is a new member's single way in: importing it creates epoch 1, and every later epoch arrives by a key frame. The members block grants and revokes.",
@@ -3216,6 +3661,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Създаването на канал в Channels & key rotation изисква заглавие и hostname на релето — сървърът, който хоства възел групата. Частният ключ на идентичността на канала никога не напуска шлюза; навън излиза само public_uri, и за нов член това е единственият път навътре: импортирането създава epoch 1, а всяка следваща епоха идва чрез key-кадър. Блокът members отстъпва и отнема.",
       "tr": "Channels & key rotation içinde kanal oluşturmak bir başlık ve bir relay hostname'i ister — düğüm kümesini barındıran sunucunun adını. Kanal kimliğinin özel anahtarı ağ geçidini asla terk etmez; dışarıya yalnızca public_uri çıkar ve yeni bir üye için tek giriş kapısı odur: içe almak epoch 1'i yaratır, sonraki her epoch bir key karesiyle gelir. members bloğu yetki verir ve geri alır.",
       "hu": "Csatorna létrehozása a Channels & key rotation panelen egy címet és egy relay hostname-t kér — annak a szervernek a nevét, amely a csomópont-csoportot látja el. A csatorna-azonosság privát kulcsa sosem hagyja el az átjárót; kifelé csak a public_uri megy, és egy új tag számára ez az egyetlen belépési út: a behívás epoch 1-et hoz létre, és minden későbbi epoch egy key-kerettel érkezik. A members blokk ad és von meg jogot.",
+      "pt-BR": "Criar um canal em Channels & key rotation exige um título e um hostname de relay — o servidor que hospeda o grupo de nós. A chave privada de identidade do canal nunca sai do gateway; o único valor exposto é public_uri, que é a única forma de entrada de um novo membro: importá-lo cria o epoch 1, e todo epoch posterior chega por um frame de chave. O bloco members concede e revoga.",
+      ko: "Channels & key rotation에서 채널을 만들려면 제목과 릴레이 호스트 이름이 필요합니다. 릴레이 호스트 이름은 노드 그룹을 호스팅하는 서버입니다. 채널 아이덴티티 개인 키는 게이트웨이를 떠나지 않습니다. 외부로 나가는 값은 public_uri뿐이며, 이것이 새 멤버가 들어오는 유일한 방법입니다. 이를 가져오면 epoch 1이 생성되고, 이후의 모든 epoch는 키 프레임으로 도착합니다. 멤버 블록에서는 권한을 부여하고 회수합니다.",
+      ar: "يتطلب إنشاء قناة في Channels & key rotation عنوانًا واسم مضيف للمرحّل — أي الخادم الذي يستضيف مجموعة العقد. ولا يغادر المفتاح الخاص لهوية القناة البوابة أبدًا؛ والقيمة الوحيدة الظاهرة للخارج هي public_uri، وهي السبيل الوحيد لدخول عضو جديد: فاستيرادها ينشئ epoch 1، وكل epoch لاحق يصل في إطار مفتاح. وكتلة الأعضاء تمنح وتسحب.",
     },
     console: {
       en: "To put a price on the door, add a pay_credits button to a card with an amount in POPX-CP (1 to 100000) — the phone asks for a second confirmation before it charges, and no such button can live in the menu. A menu entry that opens the channel uses open_channel, and its payload is the public_uri you copied from this panel.",
@@ -3236,6 +3684,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "За да сложите цена на вратата, добавете в картата бутон pay_credits със сума в POPX-CP (от 1 до 100000) — телефонът иска второ потвърждение преди таксуването, и такъв бутон не може да живее в менюто. Елемент от менюто, който отваря канала, използва open_channel, а payload-ът му е public_uri, копиран от този панел.",
       "tr": "Kapıya fiyat koymak için bir karta, POPX-CP cinsinden bir tutarla (1-100000) pay_credits düğmesi ekleyin — telefon ücret almadan önce ikinci bir onay ister; böyle bir düğme menüde bulunamaz. Kanalı açan menü maddesi open_channel kullanır ve payload'ı bu panelden kopyaladığınız public_uri'dir.",
       "hu": "Hogy árat tegyen az ajtóra, tegyen egy kártyára pay_credits gombot, POPX-CP-ben megadott összeggel (1 és 100000 közt) — a telefon a terhelés előtt második megerősítést kér, és egy ilyen gomb a menüben egyáltalán nem kaphat helyet. Egy csatornát megnyitó menüpont open_channel-t használ, és a payload-a erről a panelről kimásolt public_uri.",
+      "pt-BR": "Para colocar um preço na porta, adicione um botão pay_credits a um cartão com um valor em POPX-CP (1 a 100000) — o telefone pede uma segunda confirmação antes de cobrar, e nenhum botão desse tipo pode ficar no menu. Uma entrada de menu que abre o canal usa open_channel, e seu payload é o public_uri que você copiou deste painel.",
+      ko: "입장료를 매기려면 카드에 POPX-CP 단위 금액(1~100000)을 가진 pay_credits 버튼을 추가하십시오. 휴대폰은 과금 전에 한 번 더 확인을 요청하며, 이런 버튼은 메뉴에 둘 수 없습니다. 채널을 여는 메뉴 항목은 open_channel을 사용하며, 그 페이로드는 이 패널에서 복사한 public_uri입니다.",
+      ar: "لوضع ثمن على الباب، أضف إلى بطاقة زر pay_credits بمبلغ بعملة POPX-CP (من 1 إلى 100000) — فيطلب الهاتف تأكيدًا ثانيًا قبل أن يحاسب، ولا يمكن لزر كهذا أن يقيم في القائمة. ومدخل القائمة الذي يفتح القناة يستخدم open_channel، وحمولته هي public_uri التي نسختها من هذه اللوحة.",
     },
     phone: {
       en: "The phone decrypts channel content with the epoch published after the rotation, having first verified the envelope signature and the epoch's self-consistency — a frame that fails is dropped whole. Revoking a member only stops future epochs; a key already on that phone stays on that phone.",
@@ -3256,6 +3707,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Телефонът разшифрова съдържанието на канала с епохата, публикувана след ротацията, като първо е проверил подписа на плика и вътрешната съгласуваност на епохата — кадър, който се провали, се изхвърля цял. Отмяната на член спира само бъдещите епохи; ключ, който вече е на телефона, си остава на телефона.",
       "tr": "Telefon, kanal içeriğini döndürmeden sonra yayınlanan epoch anahtarıyla çözer; önce zarf imzasını ve epoch'un kendi içinde tutarlılığını doğrular — başarısız bir kare bütün olarak düşürülür. Bir üyeyi geri almak yalnızca gelecek epoch'ları durdurur; telefona zaten inmiş bir anahtar telefonda kalır.",
       "hu": "A telefon a csatorna tartalmát a rotáció után közzétett epoch kulcsával fejti vissza, méghozzá azelőtt, hogy ellenőrizte a boríték aláírását és az epoch összeférhetőségét — egy bukjó keretet egészen eldob. Egy tag visszavonása csak a jövőbeli epochokat állítja meg; a telefonon már ott lévő kulcs a telefonon marad.",
+      "pt-BR": "O telefone descriptografa o conteúdo do canal com o epoch publicado após a rotação, tendo primeiro verificado a assinatura do envelope e a autoconsistência do epoch — um frame que falha é descartado por inteiro. Revogar um membro apenas interrompe epochs futuros; uma chave que já está naquele telefone permanece naquele telefone.",
+      ko: "휴대폰은 봉투 서명과 epoch의 자기 일관성을 먼저 검증한 뒤, 교체 후에 게시된 epoch로 채널 내용을 복호화합니다. 검증에 실패한 프레임은 통째로 버려집니다. 멤버를 회수하면 향후 epoch만 중단되며, 이미 그 휴대폰에 있는 키는 그 휴대폰에 그대로 남습니다.",
+      ar: "يفكّ الهاتف تشفير محتوى القناة بـ epoch المنشور بعد التدوير، بعد أن يتحقق أولًا من توقيع المغلف واتساق epoch الذاتي — والإطار الذي يفشل يُسقَط بكامله. وسحب عضوية عضو لا يوقف إلا الـ epochs الآتية؛ أما مفتاح موجود أصلًا على ذلك الهاتف فيبقى عليه.",
     },
     warn: {
       en: "Rotation is metered per member as key_rotation, 2 POPX-CP each by default. The console puts that price in front of you before you click — the estimate is active members times the unit price — and the README's own advice is to rehearse on a small group rather than try it on a channel of 4000. Leave notify_members off and only this channel's epoch record advances, so members never get the new key; the number of members a delivery failed for comes back in errors.",
@@ -3276,6 +3730,9 @@ const TIMELINE: TimelineStep[] = [
       "bg": "Ротацията се мери чрез key_rotation на участник, по подразбиране 2 POPX-CP за човек. Конзолата ви показва тази цена преди клика — оценката е активни членове по единична цена — и README сам съветва да репетирате на малка група, вместо да пробвате на канал с 4000. Оставете notify_members изключен и само записът на епохата на този канал мърда, членовете никога не получават новия ключ; броят на членовете, за които доставката се провали, се връща в errors.",
       "tr": "Döndürme key_rotation ile üye başına ölçülür; varsayılan üye başına 2 POPX-CP. Konsol tıklamadan önce bu fiyatı önünüze koyar — tahmin, etkin üye sayısı çarpı birim fiyattır — ve README'nin kendi tavsiyesi, 4000 kişilik kanalda denemek yerine önce küçük bir grup üzerinde provayı yapmaktır. notify_members kapalı bırakılırsa yalnızca bu kanalın epoch kaydı ilerler, üyeler yeni anahtarı asla almaz; teslimin başarısız olduğu üye sayısı errors içinde geri döner.",
       "hu": "A rotációt a key_rotation számolja tagságonként, alapértelmezés szerint darabonként 2 POPX-CP. A konzol az árat a kattintás előtt eléd tárja — a becslés az aktív tagok szorozva az egységár —, és a README maga tanácsolja, hogy előbb egy kis csoporton gyakorolj, ne egy 4000 fős csatornán próbáld ki. Ha a notify_members-t kikapcsolva hagyod, csak ennek a csatornának az epoch-bejegyzése lépi előre, és a tagok sosem kapják meg az új kulcsot; a sikertelen kiszállítások száma az errors mezőben jön vissza.",
+      "pt-BR": "A rotação é medida por membro como key_rotation, 2 POPX-CP cada por padrão. O console coloca esse preço diante de você antes de clicar — a estimativa é membros ativos vezes o preço unitário — e o conselho do próprio README é ensaiar em um grupo pequeno em vez de tentar em um canal de 4000. Deixe notify_members desligado e apenas o registro de epoch deste canal avança, de modo que os membros nunca recebem a nova chave; o número de membros para os quais uma entrega falhou volta em errors.",
+      ko: "교체는 멤버당 key_rotation으로 계량되며 기본 단가는 2 POPX-CP입니다. 콘솔은 클릭하기 전에 그 가격을 보여 줍니다. 예상치는 활성 멤버 수에 단가를 곱한 값입니다. README 자체의 권고는 4000명 규모의 채널에서 시도하기보다 소규모 그룹에서 리허설하라는 것입니다. notify_members를 끄면 이 채널의 epoch 기록만 갱신되므로 멤버는 새 키를 받지 못하고, 전달에 실패한 멤버 수가 errors로 반환됩니다.",
+      ar: "يُقاس التدوير لكل عضو باسم key_rotation، وبواقع 2 POPX-CP للعضو الواحد افتراضيًا. وتعرض وحدة التحكم ذلك الثمن أمامك قبل أن تنقر — والتقدير هو الأعضاء النشطون مضروبين في سعر الوحدة — ونصيحة README نفسها هي التمرّن على مجموعة صغيرة بدل تجربته على قناة تضم 4000 عضو. وإذا أبقيت notify_members معطّلًا فلا يتقدم إلا سجل epoch لهذه القناة، فلا يحصل الأعضاء على المفتاح الجديد؛ ويعود عدد الأعضاء الذين فشل التسليم لهم في errors.",
     },
   },
 ];
@@ -3300,6 +3757,9 @@ const CHECKLIST: L[] = [
     "bg": "POPOPX_ADMIN_TOKEN в .env е генерираният от вас, не примерната стойност: липсващ, по-къс от 24 символа или все още пример — всичко това отказва старта.",
     "tr": ".env içindeki POPOPX_ADMIN_TOKEN sizin ürettiğiniz olmalı, örnek değer değil: eksikse, 24 karakterden kısaysa ya da hâlâ örnek değerse açılış reddedilir.",
     "hu": "A .env-ben lévő POPOPX_ADMIN_TOKEN az Ön által generált, nem a példaérték: hiányzó, 24 karakternél rövidebb vagy még mindig példaérték — mindegyik megtagadja az indulást.",
+    "pt-BR": "POPOPX_ADMIN_TOKEN em .env é um que você gerou, não o valor de exemplo: ausente, com menos de 24 caracteres ou ainda um exemplo, todos se recusam a iniciar.",
+    ko: ".env의 POPOPX_ADMIN_TOKEN은 예시 값이 아니라 직접 생성한 값이어야 합니다: 없거나 24자 미만이거나 여전히 예시 값이면 모두 부팅을 거부합니다.",
+    ar: "رمز POPOPX_ADMIN_TOKEN في .env هو رمز ولّدته أنت، لا القيمة المثال: فالغائب، أو الأقصر من 24 حرفًا، أو الذي ما زال مثالًا، كلها ترفض الإقلاع.",
   },
   {
     en: "One command brings it up: ./start_macos.sh for development, sudo ./install_ubuntu22.sh or sudo ./install_macos.sh for production.",
@@ -3320,6 +3780,9 @@ const CHECKLIST: L[] = [
     "bg": "Една команда вдига всичко: ./start_macos.sh за разработка, sudo ./install_ubuntu22.sh или sudo ./install_macos.sh за продукция.",
     "tr": "Tek komut her şeyi ayağa kaldırır: geliştirme için ./start_macos.sh, üretim için sudo ./install_ubuntu22.sh ya da sudo ./install_macos.sh.",
     "hu": "Egy parancs felhúzza az egészet: fejlesztéshez ./start_macos.sh, éles környezethez sudo ./install_ubuntu22.sh vagy sudo ./install_macos.sh.",
+    "pt-BR": "Um comando o coloca no ar: ./start_macos.sh para desenvolvimento, sudo ./install_ubuntu22.sh ou sudo ./install_macos.sh para produção.",
+    ko: "명령 하나로 기동합니다. 개발에는 ./start_macos.sh, 운영에는 sudo ./install_ubuntu22.sh 또는 sudo ./install_macos.sh를 사용합니다.",
+    ar: "أمر واحد يرفعه: ./start_macos.sh للتطوير، أو sudo ./install_ubuntu22.sh أو sudo ./install_macos.sh للإنتاج.",
   },
   {
     en: "curl -s http://127.0.0.1:8080/healthz answers — and node_connected: false is not a panic, the gateway is serving.",
@@ -3340,6 +3803,9 @@ const CHECKLIST: L[] = [
     "bg": "curl -s http://127.0.0.1:8080/healthz отговаря — и node_connected: false не е паника, шлюзът обслужва.",
     "tr": "curl -s http://127.0.0.1:8080/healthz yanıt veriyor — node_connected: false panik değil, ağ geçidi hizmet veriyor.",
     "hu": "A curl -s http://127.0.0.1:8080/healthz válaszol — és a node_connected: false nem pánik, az átjáró szolgáltat.",
+    "pt-BR": "curl -s http://127.0.0.1:8080/healthz responde — e node_connected: false não é motivo para pânico, o gateway está servindo.",
+    ko: "curl -s http://127.0.0.1:8080/healthz가 응답합니다. node_connected: false는 당황할 일이 아니며 게이트웨이는 서비스 중입니다.",
+    ar: "الأمر curl -s http://127.0.0.1:8080/healthz يجيب — وnode_connected: false ليس مدعاةً للهلع، فالبوابة تخدم.",
   },
   {
     en: "Open http://127.0.0.1:8080, paste the token, and read the billing and node chips in the top bar.",
@@ -3360,6 +3826,9 @@ const CHECKLIST: L[] = [
     "bg": "Отворете http://127.0.0.1:8080, поставете токена и прочетете в горната лента чиповете billing и node.",
     "tr": "http://127.0.0.1:8080 adresini açın, jetonu yapıştırın ve üst çubukta billing ile node çiplerini okuyun.",
     "hu": "Nyissa meg a http://127.0.0.1:8080 címet, illessze be a tokent, és olvassa el a felső sávon a billing és node chipeket.",
+    "pt-BR": "Abra http://127.0.0.1:8080, cole o token e leia os chips de cobrança e de nó na barra superior.",
+    ko: "http://127.0.0.1:8080을 열고 토큰을 붙여 넣은 뒤 상단 바의 과금 및 노드 칩을 확인합니다.",
+    ar: "افتح http://127.0.0.1:8080، وألصق الرمز، واقرأ شارتَي الفوترة والعقدة في الشريط الأعلى.",
   },
   {
     en: "Request/reuse the address in Service account & node, hand that string to the iPhone to scan or paste, then confirm the follower has a pairwise uid in Contacts.",
@@ -3380,6 +3849,9 @@ const CHECKLIST: L[] = [
     "bg": "Заявете или преизползвайте адреса в Service account & node, предайте този низ на iPhone за сканиране или поставяне, и се убедете, че последователят има pairwise uid в Contacts.",
     "tr": "Service account & node içinde adresi isteyin ya da yeniden kullanın, bu diziyi iPhone'a taranmak veya yapıştırılmak üzere verin, sonra takipçinin Contacts içinde bir pairwise uid'si olduğundan emin olun.",
     "hu": "Kérjen ki vagy használjon újra egy címet a Service account & node panelen, adja át a karakterláncot az iPhone-nak beolvasásra vagy bemásolásra, majd győződjön meg róla, hogy a követőnek van pairwise uid-ja a Contacts ban.",
+    "pt-BR": "Solicite ou reutilize o endereço em Service account & node, entregue essa string ao iPhone para escanear ou colar e então confirme que o seguidor tem um uid pairwise em Contacts.",
+    ko: "Service account & node에서 주소를 요청하거나 재사용하고, 그 문자열을 iPhone에서 스캔하거나 붙여 넣도록 넘긴 뒤, Contacts에서 팔로워에 페어와이즈 uid가 있는지 확인합니다.",
+    ar: "اطلب العنوان أو أعد استخدامه عبر Request/reuse address في Service account & node، وسلّم ذلك النص إلى iPhone ليمسحه أو يلصقه، ثم تأكد من أن المتابع لديه pairwise uid في Contacts.",
   },
   {
     en: "Save and push the three top-level items in Menu orchestration; send one card with a chosen style in Card delivery, passing contact_ids when it should be targeted.",
@@ -3400,6 +3872,9 @@ const CHECKLIST: L[] = [
     "bg": "Запазете и изпратете трите елемента от горно ниво в Menu orchestration; изпратете една карта в избран стил от Card delivery, подавайки contact_ids когато трябва да е насочено.",
     "tr": "Menu orchestration içindeki üç üst düzey maddeyi kaydedin ve gönderin; Card delivery içinden seçtiğiniz tarzda bir kart gönderin ve hedefli gönderim gerekiyorsa contact_ids verin.",
     "hu": "Mentse el és tolja fel a három felső szintű elemet a Menu orchestrationben; a Card deliveryben küldjön egy kártyát a választott stílusban, és adja meg a contact_ids-t, ha célzottan kell kiszállítani.",
+    "pt-BR": "Salve e envie os três itens de nível superior em Menu orchestration; envie um cartão com um estilo escolhido em Card delivery, passando contact_ids quando ele deve ser direcionado.",
+    ko: "Menu orchestration에서 최상위 항목 세 개를 저장하고 푸시하며, Card delivery에서 선택한 스타일로 카드 한 장을 보내고 대상 지정이 필요하면 contact_ids를 전달합니다.",
+    ar: "احفظ العناصر الثلاثة العليا وادفعها في Menu orchestration؛ وأرسل بطاقة واحدة بنمط مختار في Card delivery، ومرّر contact_ids عندما يجب أن يكون الإرسال موجّهًا.",
   },
   {
     en: "Read each of the nine plugin panels once; only a switch to admission mode needs POPOPX_BILLING_REQUIRE_VOUCHER=1, the official public key and a minted code.",
@@ -3420,6 +3895,9 @@ const CHECKLIST: L[] = [
     "bg": "Прочетете всеки от деветте панела на приставките поне веднъж; само превключването в режим на допускане изисква POPOPX_BILLING_REQUIRE_VOUCHER=1, официалния публичен ключ и отсечен код.",
     "tr": "Dokuz eklenti panelinin her birini en az bir kez okuyun; yalnızca katılım moduna geçiş POPOPX_BILLING_REQUIRE_VOUCHER=1, resmi genel anahtar ve basılmış bir kod ister.",
     "hu": "Olvassa el mind a kilenc bővítménypanelt legalább egyszer; csak a beléptetési módra váltás igényli a POPOPX_BILLING_REQUIRE_VOUCHER=1-et, a hivatalos publikus kulcsot és egy levert kódot.",
+    "pt-BR": "Leia cada um dos nove painéis de plug-in uma vez; apenas a mudança para o modo de admissão exige POPOPX_BILLING_REQUIRE_VOUCHER=1, a chave pública oficial e um código cunhado.",
+    ko: "아홉 개 플러그인 패널을 하나씩 한 번 읽어 보십시오. 승인 모드로 전환할 때만 POPOPX_BILLING_REQUIRE_VOUCHER=1, 공식 공개 키, 발급된 코드가 필요합니다.",
+    ar: "اقرأ كل لوحة من لوحات الإضافات التسع مرة واحدة؛ ولا يحتاج الانتقال إلى وضع القبول إلا POPOPX_BILLING_REQUIRE_VOUCHER=1 والمفتاح العام الرسمي ورمزًا مسكوكًا.",
   },
 ];
 
@@ -3475,7 +3953,7 @@ function Prose({ label, text }: { label: L; text: L }): ReactElement {
   const s = useCopy(text);
   return (
     <p className="text-[12.5px] leading-relaxed">
-      <span className="mr-1.5 font-semibold text-brand-soft">{l}</span>
+      <span className="me-1.5 font-semibold text-brand-soft">{l}</span>
       <span className="text-mute">{s}</span>
     </p>
   );
@@ -3493,7 +3971,7 @@ function VerificationBlock({ intro }: { intro: L }): ReactElement {
         <p className="text-[12.5px] leading-relaxed text-mute">{useCopy(intro)}</p>
         <p className="text-[12.5px] leading-relaxed text-mute">{useCopy(T.verifyBody)}</p>
         <p className="text-[12.5px] leading-relaxed text-mute">
-          <span className="mr-1.5 inline-flex items-center gap-1.5 font-semibold text-warn">
+          <span className="me-1.5 inline-flex items-center gap-1.5 font-semibold text-warn">
             <StatusDot tone="warn" />
             node_connected: false
           </span>
@@ -3566,7 +4044,7 @@ export function InstallAndUsageGuideSection(): ReactElement {
                       moveTo(event, "macos");
                     }
                   }}
-                  className={`glass glass-hover flex flex-col items-start gap-1 px-4 py-3 text-left ${
+                  className={`glass glass-hover flex flex-col items-start gap-1 px-4 py-3 text-start ${
                     selected ? "!border-brand/70 !bg-brand/15" : ""
                   }`}
                 >
@@ -3718,14 +4196,14 @@ export function InstallAndUsageGuideSection(): ReactElement {
               <div className="glass-inset p-3.5 [overflow-wrap:anywhere]">
                 <p className="flex items-center gap-2 font-mono text-[11.5px] text-mesh-soft">
                   <StatusDot tone="mesh" />
-                  POPOPX_BILLING_REQUIRE_VOUCHER=0
+                  <bdi dir="ltr">POPOPX_BILLING_REQUIRE_VOUCHER=0</bdi>
                 </p>
                 <p className="mt-2 text-[12.5px] leading-relaxed text-mute">{useCopy(T.quotaOff)}</p>
               </div>
               <div className="glass-inset p-3.5 [overflow-wrap:anywhere]">
                 <p className="flex items-center gap-2 font-mono text-[11.5px] text-warn">
                   <StatusDot tone="warn" />
-                  POPOPX_BILLING_REQUIRE_VOUCHER=1
+                  <bdi dir="ltr">POPOPX_BILLING_REQUIRE_VOUCHER=1</bdi>
                 </p>
                 <p className="mt-2 text-[12.5px] leading-relaxed text-mute">{useCopy(T.quotaOn)}</p>
               </div>
@@ -3744,13 +4222,13 @@ export function InstallAndUsageGuideSection(): ReactElement {
         <div className="glass mt-4 p-4 sm:p-6">
           <h4 className="text-[13px] font-semibold tracking-wide text-white">{useCopy(T.meterTitle)}</h4>
           <div className="mt-4 overflow-x-auto">
-            <table className="w-full min-w-[560px] border-collapse text-left">
+            <table className="w-full min-w-[560px] border-collapse text-start">
               <thead>
                 <tr className="border-b border-hair text-[11px] uppercase tracking-[0.14em] text-faint">
-                  <th scope="col" className="py-2 pr-4 font-medium">
+                  <th scope="col" className="py-2 pe-4 font-medium">
                     {useCopy(T.meterHeadKey)}
                   </th>
-                  <th scope="col" className="py-2 pr-4 text-right font-medium">
+                  <th scope="col" className="py-2 pe-4 text-end font-medium">
                     {useCopy(T.meterHeadUnit)}
                   </th>
                   <th scope="col" className="py-2 font-medium">
@@ -3761,8 +4239,8 @@ export function InstallAndUsageGuideSection(): ReactElement {
               <tbody>
                 {CP_ROWS.map((row) => (
                   <tr key={row.key} className="border-b border-hair/60 last:border-0">
-                    <td className="py-2.5 pr-4 font-mono text-[12px] text-brand-soft">{row.key}</td>
-                    <td className="py-2.5 pr-4 text-right font-mono text-[12.5px] text-white">{row.value}</td>
+                    <td className="py-2.5 pe-4 font-mono text-[12px] text-brand-soft"><bdi dir="ltr">{row.key}</bdi></td>
+                    <td className="py-2.5 pe-4 text-end font-mono text-[12.5px] text-white"><bdi dir="ltr">{row.value}</bdi></td>
                     <td className="py-2.5 text-[12.5px] text-mute">{pick(row.what, locale)}</td>
                   </tr>
                 ))}
@@ -3784,7 +4262,7 @@ export function InstallAndUsageGuideSection(): ReactElement {
         <ol className="mt-8">
           {TIMELINE.map((step, i) => (
             <li key={step.no} className="relative grid gap-4 pb-9 sm:grid-cols-[2.5rem_minmax(0,1fr)]">
-              {i < TIMELINE.length - 1 ? <span aria-hidden className="absolute bottom-0 left-[15px] top-9 w-px bg-hair-strong" /> : null}
+              {i < TIMELINE.length - 1 ? <span aria-hidden className="absolute bottom-0 start-[15px] top-9 w-px bg-hair-strong" /> : null}
               <span
                 aria-hidden
                 className="relative inline-flex h-8 w-8 items-center justify-center rounded-full border border-brand/55 bg-brand/20 font-mono text-[13px] font-semibold text-white"
@@ -3808,7 +4286,7 @@ export function InstallAndUsageGuideSection(): ReactElement {
                     />
                   </div>
                 ) : null}
-                <p className="mt-3 border-l-2 border-warn/60 pl-3 text-[12.5px] leading-relaxed text-warn/90">{pick(step.warn, locale)}</p>
+                <p className="mt-3 border-s-2 border-warn/60 ps-3 text-[12.5px] leading-relaxed text-warn/90">{pick(step.warn, locale)}</p>
               </div>
             </li>
           ))}
@@ -3821,7 +4299,7 @@ export function InstallAndUsageGuideSection(): ReactElement {
             <span className="pill">
               {useCopy(T.checkProgress)}
               <span className="font-mono text-mesh-soft">
-                {doneCount}/{CHECKLIST.length}
+                <bdi dir="ltr">{doneCount}/{CHECKLIST.length}</bdi>
               </span>
             </span>
             <span className="grow" />
@@ -3849,7 +4327,7 @@ export function InstallAndUsageGuideSection(): ReactElement {
                         return copy;
                       })
                     }
-                    className={`glass-hover flex w-full items-start gap-3 rounded-xl border px-3.5 py-3 text-left ${
+                    className={`glass-hover flex w-full items-start gap-3 rounded-xl border px-3.5 py-3 text-start ${
                       on ? "!border-mesh/55 !bg-mesh/10" : "border-hair bg-white/[0.03]"
                     }`}
                   >

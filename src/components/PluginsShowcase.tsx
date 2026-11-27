@@ -65,6 +65,9 @@ const EYEBROW: Localized<string> = {
   bg: "Каталог на услугите и конекторите",
   tr: "Hizmetler ve bağlayıcılar kataloğu",
   hu: "Szolgáltatások és csatlakoztatók katalógusa",
+  "pt-BR": "Catálogo de serviços e conectores",
+  ko: "서비스 및 커넥터 카탈로그",
+  ar: "دليل الخدمات والموصّلات",
 };
 
 const TITLE: Localized<string> = {
@@ -86,6 +89,9 @@ const TITLE: Localized<string> = {
   bg: "Състоянието на каталога: доставят се девет модула на плъгини, четири са включени и пет изключени по подразбиране, всичките девет са реализирани, а останалите интеграции или не съществуват, или са отказани",
   tr: "Katalog durumu: dokuz eklenti modülü sevk edilir, dördü varsayılan olarak açık ve beşi kapalı, dokuzu da yazıldı; geri kalan entegrasyonlar ya yok ya da açıkça reddedildi",
   hu: "A katalógus állapota: kilenc bővítménymodul érkezik, négy alapértelmezés szerint bekapcsolva és öt kikapcsolva, mind a kilenc megvalósult, a többi integráció pedig vagy nem létezik, vagy elutasítottuk",
+  "pt-BR": "Estado do catálogo: nove módulos de plug-in são entregues, quatro vêm ativos e cinco vêm inativos por padrão de fábrica, todos os nove estão implementados, e as integrações restantes ou não foram construídas ou foram recusadas",
+  ko: "카탈로그 상태: 플러그인 모듈 9개가 제공되며 출고 기본값 기준 4개는 켜져 있고 5개는 꺼져 있습니다. 9개 모두 구현되어 있으며, 나머지 통합은 구축되지 않았거나 제외되었습니다.",
+  ar: "حالة الدليل: تُشحَن تسع وحدات إضافات، أربع منها مفعّلة وخمس معطّلة وفق إعدادات المصنع الافتراضية، والتسع كلها منفّذة، والتكاملات المتبقية إما غير مبنية أو مرفوضة",
 };
 
 const SUBTITLE: Localized<string> = {
@@ -109,6 +115,9 @@ const SUBTITLE: Localized<string> = {
   bg: "Всяка запись казва какво прави модулът, какъв ключ наистина изисква извикването, кои данни напускат сървъра ви и как отново да го изключите. Всичко е изчетено от gateway/app/plugins/, gateway/app/config.py и .env.example; блокът накрая изброява трите интеграции, зависими от чужди ключове, които още ги няма, и двете семейства, отказани умишлено, и не обещава дати.",
   tr: "Her girdi modülün ne yaptığını, çağrının gerçekten hangi anahtara ihtiyaç duyduğunu, sunucunuzdan çıkan veriyi ve nasıl tekrar kapatılacağını anlatır. Tamamı gateway/app/plugins/, gateway/app/config.py ve .env.example dosyalarından okundu; sondaki blok, henüz var olmayan ve dış kimlik bilgilerine bağlı üç entegrasyonu ve bilerek reddedilen iki aileyi sıralar, tarih vaat etmez.",
   hu: "Minden bejegyzés megmondja, mit csinál a modul, milyen kulcsot igényel tényleg a hívás, milyen adat hagyja el a szerveredet, és hogyan kapcsolhatod ki újra. Az egész a gateway/app/plugins/, a gateway/app/config.py és a .env.example fájlokból van kiolvasva; a végén lévő blokk a még nem létező, külső hitelesítőktől függő három integrációt és a szándékosan elutasított két családot sorolja fel, dátumot nem ígér.",
+  "pt-BR": "Cada entrada declara o que o módulo faz, qual credencial a chamada realmente precisa, o que sai do seu servidor e como desativá-lo de novo. Tudo isso é lido de gateway/app/plugins/, gateway/app/config.py e .env.example; o bloco de planejamento no final nomeia as três integrações dependentes de credenciais que ainda não existem e as duas famílias recusadas de propósito, e não promete data nenhuma.",
+  ko: "각 항목은 모듈이 하는 일, 호출에 실제로 필요한 자격 증명, 서버를 떠나는 데이터, 다시 끄는 방법을 설명합니다. 모든 내용은 gateway/app/plugins/, gateway/app/config.py, .env.example에서 읽어 왔습니다. 끝의 계획 블록은 아직 존재하지 않는 자격 증명 의존 통합 3개와 의도적으로 제외한 2개 계열을 명시하며, 일정은 약속하지 않습니다.",
+  ar: "يبيّن كل إدخال ما تفعله الوحدة، وأي بيانات اعتماد يحتاجها الاستدعاء فعليًا، وما يغادر خادمك، وكيف تُعطّلها مرة أخرى. وكل ذلك مقروء من gateway/app/plugins/ وgateway/app/config.py و.env.example؛ والكتلة المخططة في النهاية تسمّي ثلاثة تكاملات تعتمد على بيانات اعتماد ولا وجود لها بعد، وعائلتين مرفوضتين عن قصد، ولا تعد بأي موعد.",
 };
 
 const LEGEND_SOURCE: Localized<string> = {
@@ -130,6 +139,9 @@ const LEGEND_SOURCE: Localized<string> = {
   bg: "Същото хранилище: gateway/app/plugins/",
   tr: "Aynı depoda: gateway/app/plugins/",
   hu: "Ugyanabban a repóban: gateway/app/plugins/",
+  "pt-BR": "Mesmo repositório: gateway/app/plugins/",
+  ko: "동일 저장소: gateway/app/plugins/",
+  ar: "المستودع نفسه: gateway/app/plugins/",
 };
 
 const LEGEND_METER: Localized<string> = {
@@ -151,6 +163,9 @@ const LEGEND_METER: Localized<string> = {
   bg: "Мерна единица: изчислителни кредити POPX-CP",
   tr: "Ölçü birimi: POPX-CP hesaplama kredisi",
   hu: "Mértékegység: POPX-CP számítási kredit",
+  "pt-BR": "Unidade de medição: créditos de computação POPX-CP",
+  ko: "계량 단위: POPX-CP 컴퓨트 크레딧",
+  ar: "وحدة القياس: اعتمادات الحوسبة POPX-CP",
 };
 
 const LEGEND_DISABLED: Localized<string> = {
@@ -172,6 +187,9 @@ const LEGEND_DISABLED: Localized<string> = {
   bg: "Четири са включени и пет изключени по подразбиране; всеки изключен модул има свой превключвател POPOPX_PLUGIN_*",
   tr: "Dördü varsayılan olarak açık, beşi kapalı; kapalı her modülün kendi POPOPX_PLUGIN_* anahtarı var",
   hu: "Négy alapértelmezés szerint bekapcsolva és öt kikapcsolva; minden kikapcsolt modulnak saját POPOPX_PLUGIN_* kapcsolója van",
+  "pt-BR": "Quatro ativos e cinco inativos por padrão; cada módulo inativo tem o próprio interruptor POPOPX_PLUGIN_*",
+  ko: "기본적으로 4개는 켜져 있고 5개는 꺼져 있으며, 꺼진 모듈마다 자체 POPOPX_PLUGIN_* 스위치가 있습니다.",
+  ar: "أربع مفعّلة وخمس معطّلة افتراضيًا؛ ولكل وحدة معطّلة مفتاح POPOPX_PLUGIN_* خاص بها",
 };
 
 const STATE_LABEL: Localized<string> = {
@@ -193,6 +211,9 @@ const STATE_LABEL: Localized<string> = {
   bg: "При доставка",
   tr: "Sevkiyatta",
   hu: "Szállításkor",
+  "pt-BR": "Estado de fábrica",
+  ko: "출고 상태",
+  ar: "يُشحَن كـ",
 };
 
 const ON_LABEL: Localized<string> = {
@@ -214,6 +235,9 @@ const ON_LABEL: Localized<string> = {
   bg: "включено по подразбиране",
   tr: "varsayılan olarak etkin",
   hu: "alapértelmezés szerint engedélyezve",
+  "pt-BR": "ativo por padrão",
+  ko: "기본 활성화",
+  ar: "مفعّلة افتراضيًا",
 };
 
 const OFF_LABEL: Localized<string> = {
@@ -235,6 +259,9 @@ const OFF_LABEL: Localized<string> = {
   bg: "изключено по подразбиране",
   tr: "varsayılan olarak devre dışı",
   hu: "alapértelmezés szerint letiltva",
+  "pt-BR": "inativo por padrão",
+  ko: "기본 비활성화",
+  ar: "معطّلة افتراضيًا",
 };
 
 /** The one word a card's state pill prints, keyed off `status` rather than off a
@@ -258,6 +285,9 @@ const NOT_BUILT_LABEL: Localized<string> = {
   bg: "не е изградено",
   tr: "yazılmadı",
   hu: "nincs megépítve",
+  "pt-BR": "não construído",
+  ko: "미구축",
+  ar: "غير مبنية",
 };
 
 const SHIP_WORD: Record<ShipState, Localized<string>> = {
@@ -285,6 +315,9 @@ const KEYS_LABEL: Localized<string> = {
   bg: "Средата",
   tr: "Ortam",
   hu: "Környezet",
+  "pt-BR": "Ambiente",
+  ko: "환경 변수",
+  ar: "البيئة",
 };
 
 const ROUTE_LABEL: Localized<string> = {
@@ -306,6 +339,9 @@ const ROUTE_LABEL: Localized<string> = {
   bg: "Крайна точка",
   tr: "Uç nokta",
   hu: "Végpont",
+  "pt-BR": "Ponto de extremidade",
+  ko: "엔드포인트",
+  ar: "النقطة الطرفية",
 };
 
 const FILE_LABEL: Localized<string> = {
@@ -327,6 +363,9 @@ const FILE_LABEL: Localized<string> = {
   bg: "Модул",
   tr: "Modül",
   hu: "Modul",
+  "pt-BR": "Módulo",
+  ko: "모듈",
+  ar: "الوحدة",
 };
 
 /* ── 规划中 ───────────────────────────────────────────────────────────────
@@ -359,6 +398,9 @@ const ROADMAP_TITLE: Localized<string> = {
   bg: "Девет модула се доставят и четири семейства конектори са вече в решетката; трите реда по-долу са планирани, последните два — отказани",
   tr: "Dokuz modül sevk ediliyor ve dört bağlayıcı ailesi ızgarada; aşağıdaki üç satır planlanıyor, son iki satır reddedildi",
   hu: "Kilenc modul érkezik, és négy csatlakoztató-család már a rácsban van; az alábbi három sor tervezett, az utolsó kettő elutasított",
+  "pt-BR": "Nove módulos são entregues e quatro famílias de conectores já estão na grade; as três linhas abaixo são planejadas, as duas últimas são recusadas",
+  ko: "모듈 9개가 제공되고 커넥터 계열 4개가 이미 그리드에 있으며, 아래 세 행은 계획된 항목이고 마지막 두 행은 제외된 항목입니다.",
+  ar: "تُشحَن تسع وحدات، وأربع عائلات موصّلات موجودة بالفعل في شبكة البطاقات؛ والصفوف الثلاثة أدناه مخطط لها، والصفّان الأخيران مرفوضان",
 };
 
 const ROADMAP_SUB: Localized<string> = {
@@ -380,6 +422,9 @@ const ROADMAP_SUB: Localized<string> = {
   bg: "Шлюзът обявява девет модула на плъгини в gateway/app/plugins/__init__.py, а четири семейства конектори — workflow_webhook, carddav_connector, caldav_connector и slack_discord — вече са описани като карти отгоре. Трите планирани реда зависят от ключове на доставчици, които никой още не е свързал; последните два са отказани, защото биха внесли телефонните номера или истинските имена, които шлюзът отказва да пази. Нищо от това не е интеграция с OAuth или SAML.",
   tr: "Ağ geçidi gateway/app/plugins/__init__.py içinde dokuz eklenti modülü bildirir ve dört bağlayıcı ailesi — workflow_webhook, carddav_connector, caldav_connector ve slack_discord — yukarıda kart olarak belgelenmiştir. Planlanan üç satır, kimsenin henüz bağlamadığı sağlayıcı kimlik bilgilerine bağlıdır; son iki satır reddedilmiştir çünkü ağ geçidinin tutmayı reddettiği telefon numaralarını ya da gerçek adları içeri aktarırlardı. Bunların hiçbiri OAuth ya da SAML entegrasyonu değildir.",
   hu: "Az átjáró kilenc bővítménymodult deklarál a gateway/app/plugins/__init__.py fájlban, és négy csatlakoztató-család — workflow_webhook, carddav_connector, caldav_connector és slack_discord — már kártyaként szerepel fent. A három tervezett sor olyan szolgáltatói hitelesítőktől függ, amelyeket még senki nem kötött be; az utolsó kettőt elutasítottuk, mert olyan telefonszámokat vagy valódi neveket hozna be, amelyeket ez az átjáró nem vállal tárolni. Ezek egyike sem OAuth- vagy SAML-integráció.",
+  "pt-BR": "O gateway declara nove módulos de plug-in em gateway/app/plugins/__init__.py, e quatro famílias de conectores — workflow_webhook, carddav_connector, caldav_connector e slack_discord — estão documentadas como cartões acima. As três linhas planejadas dependem de credenciais de provedores que ninguém conectou ainda; as duas últimas são recusadas porque importariam os números de telefone ou nomes reais que o gateway se recusa a guardar. Nada disso é uma integração OAuth ou SAML.",
+  ko: "게이트웨이는 gateway/app/plugins/__init__.py에서 플러그인 모듈 9개를 선언하며, 커넥터 계열 4개(workflow_webhook, carddav_connector, caldav_connector, slack_discord)는 위에 카드로 문서화되어 있습니다. 계획된 세 행은 아직 아무도 연결하지 않은 공급자 자격 증명에 의존하며, 마지막 두 행은 게이트웨이가 보유하지 않기로 한 전화번호나 실명을 가져오게 되므로 제외했습니다. 이 중 어느 것도 OAuth나 SAML 통합이 아닙니다.",
+  ar: "تُعلن البوابة تسع وحدات إضافات في gateway/app/plugins/__init__.py، وأربع عائلات موصّلات — workflow_webhook وcarddav_connector وcaldav_connector وslack_discord — موثّقة كبطاقات أعلاه. والصفوف الثلاثة المخطط لها تعتمد على بيانات اعتماد لدى المزوّد لم يوصّلها أحد بعد؛ والصفّان الأخيران مرفوضان لأنهما سيستوردان أرقام الهواتف أو الأسماء الحقيقية التي ترفض البوابة الاحتفاظ بها. ولا شيء من هذا تكامل OAuth أو SAML.",
 };
 
 const ROADMAP_NEEDS: Localized<string> = {
@@ -401,6 +446,9 @@ const ROADMAP_NEEDS: Localized<string> = {
   bg: "Какво би било нужно",
   tr: "Ne gerektirirdi",
   hu: "Kellene hozzá",
+  "pt-BR": "O que seria necessário",
+  ko: "필요 조건",
+  ar: "ما الذي سيتطلبه",
 };
 
 const ROADMAP_NO_DATE: Localized<string> = {
@@ -422,6 +470,9 @@ const ROADMAP_NO_DATE: Localized<string> = {
   bg: "За планираните редове не се обещава дата на доставка, а отказаните редове няма да бъдат правени, освен ако самият модел на поверителност не се промени. Нищо в този блок днес не работи.",
   tr: "Planlanan satırlar için teslim tarihi vaat edilmiyor; reddedilen satırlar ise gizlilik modelinin kendisi değişmedikçe yazılmayacak. Bu blokta bugün çalışan hiçbir şey yok.",
   hu: "A tervezett sorokhoz nem ígérünk szállítási dátumot, az elutasított sorok pedig nem épülnek meg, hacsak maga az adatvédelmi modell nem változik. Ebben a blokkban ma semmi sem működik.",
+  "pt-BR": "Nenhuma data de entrega é prometida para as linhas planejadas, e as linhas recusadas não serão construídas a menos que o próprio modelo de privacidade mude. Nada neste bloco funciona hoje.",
+  ko: "계획된 행에는 제공 일정을 약속하지 않으며, 제외된 행은 개인정보 보호 모델 자체가 바뀌지 않는 한 구축되지 않습니다. 이 블록의 어떤 것도 현재 동작하지 않습니다.",
+  ar: "لا يُوعَد بأي موعد تسليم للصفوف المخطط لها، ولن تُبنى الصفوف المرفوضة ما لم يتغيّر نموذج الخصوصية نفسه. ولا شيء في هذه الكتلة يعمل اليوم.",
 };
 
 type RoadmapItem = {
@@ -456,6 +507,9 @@ const ROADMAP: readonly RoadmapItem[] = [
       bg: "Платежен шлюз",
       tr: "Ödeme geçidi",
       hu: "Fizetési átjáró",
+      "pt-BR": "Gateway de pagamento",
+      ko: "결제 게이트웨이",
+      ar: "بوابة الدفع",
     },
     caption: {
       en: "No payment provider is wired in anywhere — billing is the internal POPX-CP credit meter with its twelve POPOPX_CP_* knobs. A real row would need a merchant secret held on your server, an inbound signed callback, and a refund path; none of the three is written.",
@@ -478,6 +532,9 @@ const ROADMAP: readonly RoadmapItem[] = [
       bg: "Няма свързан платежен доставчик никъде — отчитът минава през вътрешния измерител POPX-CP с дванадесет POPOPX_CP_* регулатора. Истински ред би изисквал търговски ключ на вашия сървър, входящо подписано обратното извикване и път за връщане на средства; нито едно от трите е написано.",
       tr: "Hiçbir yerde bir ödeme sağlayıcısı bağlanmamış — faturalandırma, on iki POPOPX_CP_* düğmeli dahili POPX-CP sayacı ile yapılıyor. Gerçek bir satır sizin sunucunuzda bir tüccar anahtarı, imzalı bir gelen geri çağırma ve bir iade yolu gerektirirdi; üçünün de kodu yazılmadı.",
       hu: "Fizetési szolgáltató nincs bekötve sehol — az elszámolás a belső POPX-CP mérővel történik, a tizenkét POPOPX_CP_* kapcsolóval. Egy valós sorhoz a szervereden tárolt kereskedői kulcs, egy aláírt bejövő visszahívás és egy visszatérítési útvonal kellene; a három egyike sincs megírva.",
+      "pt-BR": "Nenhum provedor de pagamento está conectado em lugar nenhum — a cobrança é o medidor de créditos interno POPX-CP com seus doze ajustes POPOPX_CP_*. Uma linha de verdade precisaria de um segredo de comerciante guardado no seu servidor, um callback de entrada assinado e um caminho de reembolso; nenhum dos três está escrito.",
+      ko: "어디에도 결제 공급자가 연결되어 있지 않습니다. 과금은 열두 개의 POPOPX_CP_* 설정을 가진 내부 POPX-CP 크레딧 계량기입니다. 실제 행이 되려면 서버에 보관하는 판매자 시크릿, 인바운드 서명 콜백, 환불 경로가 필요하며, 세 가지 모두 작성되어 있지 않습니다.",
+      ar: "لا يوجد أي مزوّد دفع موصول في أي مكان — فالفوترة هي عدّاد اعتمادات POPX-CP الداخلي بمقابضه الاثني عشر POPOPX_CP_*. وسيحتاج صف حقيقي إلى سر تاجر محفوظ على خادمك، ونداء عائد وارد موقّع، ومسار استرداد؛ ولا شيء من الثلاثة مكتوب.",
     },
   },
   {
@@ -502,6 +559,9 @@ const ROADMAP: readonly RoadmapItem[] = [
       bg: "Търговия",
       tr: "Ticaret",
       hu: "Kereskedelem",
+      "pt-BR": "Comércio",
+      ko: "커머스",
+      ar: "التجارة",
     },
     caption: {
       en: "The suite has no product, cart or order model; cards carry text and buttons, not SKUs. An order feed would arrive over HTTPS into storage this gateway does not have, and it would have to be reconciled against POPX-CP, which is a credit meter rather than money.",
@@ -524,6 +584,9 @@ const ROADMAP: readonly RoadmapItem[] = [
       bg: "Комплектът няма модел на продукт, количка или поръчка; картите носят текст и бутони, не артикули. Поток от поръчки би дошъл през HTTPS в хранилище, което този шлюз няма, и би трябвало да се сверява с POPX-CP, което е мерител на кредити, а не пари.",
       tr: "Bu takımda ürün, sepet ya da sipariş modeli yok; kartlar metin ve düğme taşır, SKU değil. Sipariş akışı HTTPS ile bu ağ geçidinin sahip olmadığı bir depoya gelirdi, üstelik POPX-CP ile mutabık olması gerekirdi; o ise bir kredi sayacı, para değil.",
       hu: "A csomagban nincs termék-, kosár- vagy rendelési modell; a kártyák szöveget és gombokat visznek,cikket nem. A rendelési adatfolyom HTTPS-en érkezne egy olyan tárolóba, amellyel ez az átjáró nem rendelkezik, és az POPX-CP-vel szembe egyeztetendő, amely kreditmérő, nem pénz.",
+      "pt-BR": "A suíte não tem modelo de produto, carrinho ou pedido; cartões carregam texto e botões, não SKUs. Um feed de pedidos chegaria por HTTPS para um armazenamento que este gateway não tem, e teria de ser reconciliado com o POPX-CP, que é um medidor de créditos e não dinheiro.",
+      ko: "이 제품군에는 상품, 장바구니, 주문 모델이 없습니다. 카드는 SKU가 아니라 텍스트와 버튼을 담습니다. 주문 피드는 HTTPS로 이 게이트웨이에 없는 저장소에 도착해야 하며, 돈이 아닌 크레딧 계량기인 POPX-CP와 대사해야 합니다.",
+      ar: "لا تملك الحزمة نموذج منتج أو سلة أو طلب؛ فالبطاقات تحمل نصًا وأزرارًا لا رموز SKU. وسيصل تدفق الطلبات عبر HTTPS إلى تخزين لا تملكه هذه البوابة، وسيتعيّن مطابقته مع POPX-CP، وهو عدّاد اعتمادات لا نقود.",
     },
   },
   {
@@ -548,6 +611,9 @@ const ROADMAP: readonly RoadmapItem[] = [
       bg: "Електронни таблици и документи",
       tr: "Tablolar ve belgeler",
       hu: "Táblázatok és dokumentumok",
+      "pt-BR": "Planilhas e documentos",
+      ko: "스프레드시트와 문서",
+      ar: "الجداول الممتدة والمستندات",
     },
     caption: {
       en: "Everything the gateway knows sits in one SQLite file. Export exists only as GET /api/v1/plugins/ai/transcript/<contact_id>/export and the polls result endpoints; there is no writer to any external document store, and no OAuth refresh token machinery to authorize one.",
@@ -570,6 +636,9 @@ const ROADMAP: readonly RoadmapItem[] = [
       bg: "Всичко, което шлюзът знае, е в един SQLite файл. Експортът съществува само като GET /api/v1/plugins/ai/transcript/<contact_id>/export и крайните точки за резултати от анкети; няма писател към външно хранилище за документи, нито машина за обновяващи токени на OAuth, която да го оторизира.",
       tr: "Ağ geçidinin bildiği her şey tek bir SQLite dosyasında duruyor. Dışa aktarım yalnızca GET /api/v1/plugins/ai/transcript/<contact_id>/export ve anket sonuç uç noktaları olarak var; harici bir belge deposuna yazan bir kod da yok, onu yetkilendirecek OAuth yenileme jetonu düzeneği de.",
       hu: "Bmit is tud az átjáró, egyetlen SQLite fájlban van. Exportálás csak a GET /api/v1/plugins/ai/transcript/<contact_id>/export és a szavazások eredményvégpontjai formájában létezik; nincs író külső dokumentumtárba, és nincs hozzá felhatalmazó OAuth-frissítőtoken-gépészet sem.",
+      "pt-BR": "Tudo o que o gateway sabe fica em um único arquivo SQLite. A exportação existe apenas como GET /api/v1/plugins/ai/transcript/<contact_id>/export e os endpoints de resultados das enquetes; não há nenhum gravador para qualquer armazenamento de documentos externo, nem maquinaria de refresh token OAuth para autorizar um.",
+      ko: "게이트웨이가 아는 모든 것은 하나의 SQLite 파일에 있습니다. 내보내기는 GET /api/v1/plugins/ai/transcript/<contact_id>/export와 투표 결과 엔드포인트로만 존재합니다. 외부 문서 저장소로 기록하는 주체는 없고, 그러한 주체를 승인할 OAuth 리프레시 토큰 체계도 없습니다.",
+      ar: "كل ما تعرفه البوابة يقع في ملف SQLite واحد. والتصدير لا وجود له إلا كـ GET /api/v1/plugins/ai/transcript/<contact_id>/export ونقاط نهاية نتائج التصويتات؛ فلا كاتب إلى أي مخزن مستندات خارجي، ولا آلية رموز تحديث OAuth لتخويل واحد.",
     },
   },
   {
@@ -594,6 +663,9 @@ const ROADMAP: readonly RoadmapItem[] = [
       bg: "CRM и ERP",
       tr: "CRM ve ERP",
       hu: "CRM és ERP",
+      "pt-BR": "CRM e ERP",
+      ko: "CRM과 ERP",
+      ar: "أنظمة CRM وERP",
     },
     caption: {
       en: "Deliberately so: the follower table keys on pairwise_uid and stores no phone number, no email and no real-name profile, which is the privacy promise rather than an omission. Syncing a CRM in would import exactly the identifiers this gateway refuses to hold.",
@@ -616,6 +688,9 @@ const ROADMAP: readonly RoadmapItem[] = [
       bg: "И това е умишлено: таблицата с последователи се индексира от pairwise_uid и не пази телефонен номер, имейл или профил с истинско име, което е обещанието за поверителност, а не пропуск. Синхронизирането на CRM би внесло точно идентификаторите, които този шлюз отказва да съхранява.",
       "tr": "Bu bilinçli bir tercih: takipçi tablosu pairwise_uid üzerine anahtarlanır ve telefon numarası, e-posta ya da gerçek adlı profil saklamaz; bu bir gizlilik sözüdür, eksiklik değil. Bir CRM’i eşitlemek tam da bu ağ geçidinin tutmayı reddettiği tanımlayıcıları içeri aktarırdı.",
       hu: "Ez szándékos: a követőtábla pairwise_uid szerint kulcsol, és nem tárol telefonszámot, e-mailt ولا valódi nevű profilt — ez a magánszféra ígérete, nem kimaradás. Egy CRM szinkronizálása éppen azokat az azonosítókat hozná be, amelyeket ez az átjáró nem vállal tárolni.",
+      "pt-BR": "De propósito: a tabela de seguidores usa pairwise_uid como chave e não armazena número de telefone, e-mail nem perfil com nome real, o que é a promessa de privacidade e não uma omissão. Sincronizar um CRM importaria exatamente os identificadores que este gateway se recusa a guardar.",
+      ko: "의도된 결과입니다. 팔로워 테이블은 pairwise_uid를 키로 사용하며 전화번호, 이메일, 실명 프로필을 저장하지 않는데, 이는 누락이 아니라 개인정보 보호 약속입니다. CRM을 동기화하면 이 게이트웨이가 보유하지 않기로 한 식별자를 그대로 가져오게 됩니다.",
+      ar: "عن قصد: فجدول المتابعين يعتمد على pairwise_uid ولا يخزّن رقم هاتف ولا بريدًا إلكترونيًا ولا ملفًا بالاسم الحقيقي، وهذا هو وعد الخصوصية لا سهوًا. ومزامنة نظام CRM ستستورد بالضبط المعرّفات التي ترفض هذه البوابة الاحتفاظ بها.",
     },
   },
   {
@@ -640,6 +715,9 @@ const ROADMAP: readonly RoadmapItem[] = [
       bg: "Други мостове за чат",
       tr: "Diğer sohbet köprüleri",
       hu: "További chat-hidak",
+      "pt-BR": "Outras pontes de chat",
+      ko: "기타 채팅 브리지",
+      ar: "جسور دردشة أخرى",
     },
     caption: {
       en: "The gateway speaks to one transport only: the open-source node on ws://127.0.0.1:5225. A second network would mean a second identity model, and those platforms bind accounts to phone numbers, which is the one thing this suite promises not to carry.",
@@ -662,6 +740,9 @@ const ROADMAP: readonly RoadmapItem[] = [
       "bg": "Шлюзът говори само с един транспорт: възел с отворен код на ws://127.0.0.1:5225. Втората мрежа би значела втори модел на самоличността, а тези платформи обвързват сметките с телефонен номер — единственото нещо, което този комплект обещава да не пренася.",
       "tr": "Ağ geçidi yalnızca tek bir taşımayla konuşur: ws://127.0.0.1:5225 üzerindeki açık kaynak düğüm. İkinci bir ağ, ikinci bir kimlik modeli demek olurdu; üstelik bu platformlar hesapları telefon numarasına bağlar — bu takımın taşımama sözü verdiği tek şey de telefon numarasıdır.",
       hu: "Az átjáró csak egy szállítófelülettel beszél: a ws://127.0.0.1:5225 címen futó nyílt forráskódú csomóponttal. Egy második hálózat második személyazonosság-modellt jelentene, ezek a platformok pedig a fiókokat telefonszámhoz kötik — ez az egyetlen dolog, amelyet ez a csomag nem vállal szállítani.",
+      "pt-BR": "O gateway fala com um único transporte: o nó de código aberto em ws://127.0.0.1:5225. Uma segunda rede significaria um segundo modelo de identidade, e essas plataformas vinculam contas a números de telefone, que é justamente a única coisa que esta suíte promete não carregar.",
+      ko: "게이트웨이는 하나의 전송만 사용합니다. ws://127.0.0.1:5225의 오픈소스 노드입니다. 두 번째 네트워크는 두 번째 신원 모델을 의미하며, 그런 플랫폼은 계정을 전화번호에 묶는데, 이 제품군이 보유하지 않겠다고 약속한 것이 바로 그것입니다.",
+      ar: "تتحدث البوابة مع نقل واحد فقط: العقدة مفتوحة المصدر على ws://127.0.0.1:5225. وشبكة ثانية تعني نموذج هوية ثانيًا، وتلك المنصات تربط الحسابات بأرقام هواتف، وهو الشيء الوحيد الذي تعد هذه الحزمة بعدم حمله.",
     },
   },
 ];
@@ -692,6 +773,9 @@ const Q_CAPABILITY: Localized<string> = {
   bg: "Възможност",
   tr: "Yetenek",
   hu: "Teljesítmény",
+  "pt-BR": "Capacidade",
+  ko: "기능",
+  ar: "القدرة",
 };
 
 const Q_CREDENTIAL: Localized<string> = {
@@ -713,6 +797,9 @@ const Q_CREDENTIAL: Localized<string> = {
   bg: "Ключ",
   tr: "Anahtar",
   hu: "Kulcs",
+  "pt-BR": "Credencial",
+  ko: "자격 증명",
+  ar: "بيانات الاعتماد",
 };
 
 const Q_DATAFLOW: Localized<string> = {
@@ -734,6 +821,9 @@ const Q_DATAFLOW: Localized<string> = {
   bg: "Поток от данни",
   tr: "Veri akışı",
   hu: "Adatfolyam",
+  "pt-BR": "Fluxo de dados",
+  ko: "데이터 흐름",
+  ar: "تدفق البيانات",
 };
 
 const Q_LIMIT: Localized<string> = {
@@ -755,6 +845,9 @@ const Q_LIMIT: Localized<string> = {
   bg: "Граница",
   tr: "Sınır",
   hu: "Korlát",
+  "pt-BR": "Limite",
+  ko: "한도",
+  ar: "الحد",
 };
 
 const Q_REVOKE: Localized<string> = {
@@ -776,6 +869,9 @@ const Q_REVOKE: Localized<string> = {
   bg: "Отмяна",
   tr: "Geri alma",
   hu: "Visszavonás",
+  "pt-BR": "Revogação",
+  ko: "철회",
+  ar: "الإبطال",
 };
 
 const FILTER_LABEL: Localized<string> = {
@@ -797,6 +893,9 @@ const FILTER_LABEL: Localized<string> = {
   bg: "Филтър",
   tr: "Filtre",
   hu: "Szűrő",
+  "pt-BR": "Filtro",
+  ko: "필터",
+  ar: "تصفية",
 };
 
 const CAT_ALL: Localized<string> = {
@@ -818,6 +917,9 @@ const CAT_ALL: Localized<string> = {
   bg: "Всички девет",
   tr: "Dokuzu da",
   hu: "Mind a kilenc",
+  "pt-BR": "Todos os nove",
+  ko: "9개 전체",
+  ar: "التسع كلها",
 };
 
 const CAT_AGENT: Localized<string> = {
@@ -839,6 +941,9 @@ const CAT_AGENT: Localized<string> = {
   bg: "Асистент за поддръжка",
   tr: "Destek ajanı",
   hu: "Ügyféltámogatás",
+  "pt-BR": "Agente de suporte",
+  ko: "지원 에이전트",
+  ar: "وكيل الدعم",
 };
 
 const CAT_OPS: Localized<string> = {
@@ -860,6 +965,9 @@ const CAT_OPS: Localized<string> = {
   bg: "Експлоатационни предупредявания",
   tr: "Operasyon uyarıları",
   hu: "Üzemriasztások",
+  "pt-BR": "Alertas de operações",
+  ko: "운영 알림",
+  ar: "تنبيهات العمليات",
 };
 
 const CAT_IDENTITY: Localized<string> = {
@@ -881,6 +989,9 @@ const CAT_IDENTITY: Localized<string> = {
   bg: "Идентичност",
   tr: "Kimlik",
   hu: "Személyazonosság",
+  "pt-BR": "Identidade",
+  ko: "신원",
+  ar: "الهوية",
 };
 
 const CAT_ENGAGEMENT: Localized<string> = {
@@ -902,6 +1013,9 @@ const CAT_ENGAGEMENT: Localized<string> = {
   bg: "Ангажираност",
   tr: "Etkileşim",
   hu: "Közösségi bevonás",
+  "pt-BR": "Engajamento",
+  ko: "참여 유도",
+  ar: "التفاعل",
 };
 
 const CAT_CHAIN: Localized<string> = {
@@ -923,6 +1037,9 @@ const CAT_CHAIN: Localized<string> = {
   bg: "Верижно",
   tr: "Zincir üstü",
   hu: "Láncra írva",
+  "pt-BR": "On-chain",
+  ko: "온체인",
+  ar: "على السلسلة",
 };
 
 const CAT_CONNECTORS: Localized<string> = {
@@ -944,6 +1061,9 @@ const CAT_CONNECTORS: Localized<string> = {
   bg: "Конектори",
   tr: "Bağlayıcılar",
   hu: "Csatlakoztatók",
+  "pt-BR": "Conectores",
+  ko: "커넥터",
+  ar: "الموصّلات",
 };
 
 const CATEGORY_COPY: Record<Category, Localized<string>> = {
@@ -984,6 +1104,9 @@ const FILTER_ARIA: Localized<string> = {
   bg: "Филтрирай каталога на услугите по категория",
   tr: "Hizmet kataloğunu kategoriye göre süzüp daralt",
   hu: "Szolgáltatáskatalógus szűrése kategória szerint",
+  "pt-BR": "Filtrar o catálogo de serviços por categoria",
+  ko: "카테고리별로 서비스 카탈로그 필터링",
+  ar: "تصفية دليل الخدمات حسب الفئة",
 };
 
 const ROADMAP_DECLINED_LABEL: Localized<string> = {
@@ -1005,6 +1128,9 @@ const ROADMAP_DECLINED_LABEL: Localized<string> = {
   bg: "отказано",
   tr: "reddedildi",
   hu: "elutasítva",
+  "pt-BR": "recusado",
+  ko: "제외됨",
+  ar: "مرفوض",
 };
 
 const ROADMAP_DECLINED_NOTE: Localized<string> = {
@@ -1026,6 +1152,9 @@ const ROADMAP_DECLINED_NOTE: Localized<string> = {
   bg: "Отказано, не е планирано: това семейство би изисквало идентификатори, които този шлюз отказва да пази, затова няма да бъде правено. Редът остава тук, за да е отразен отказът.",
   tr: "Reddedildi, planlanmadı: bu aile, ağ geçidinin tutmayı reddettiği tanımlayıcıları gerektirir, bu yüzden yazılmayacak. Satır, ret kayıtta kalsın diye burada duruyor.",
   hu: "Elutasítva, nem tervezett: ez a család olyan azonosítókat igényelne, amelyeket ez az átjáró nem vállal tárolni, ezért nem épül meg. A sor azért marad itt, hogy az elutasítás nyoma meglegyen.",
+  "pt-BR": "Recusado, não agendado: esta família exigiria identificadores que este gateway se recusa a guardar, então não será construída. A linha fica aqui para que a recusa fique registrada.",
+  ko: "제외되었으며 일정이 없습니다. 이 계열은 이 게이트웨이가 보유하지 않기로 한 식별자를 요구하므로 구축되지 않습니다. 거부 사실을 기록으로 남기기 위해 이 행은 여기에 둡니다.",
+  ar: "مرفوض وغير مجدول: ستتطلب هذه العائلة معرّفات ترفض هذه البوابة الاحتفاظ بها، لذا لن تُبنى. ويبقى الصف هنا كي يكون الرفض مسجّلًا.",
 };
 
 const ROADMAP_LABEL: Localized<string> = {
@@ -1047,6 +1176,9 @@ const ROADMAP_LABEL: Localized<string> = {
   bg: "не е реализирано",
   tr: "yazılmadı",
   hu: "nincs megvalósítva",
+  "pt-BR": "não implementado",
+  ko: "미구현",
+  ar: "غير منفّذ",
 };
 
 /* --- four-step integration path ---------------------------------------------- */
@@ -1070,6 +1202,9 @@ const STEPS_TITLE: Localized<string> = {
   bg: "Четири стъпки от записа в каталога до реално извикване",
   tr: "Katalog kaydından çalışan çağrıya dört adım",
   hu: "Négy lépés a katalógusbejegyzéstől az élő hívásig",
+  "pt-BR": "Quatro passos da entrada no catálogo até uma chamada ativa",
+  ko: "카탈로그 항목에서 실제 호출까지 네 단계",
+  ar: "أربع خطوات من إدخال الدليل إلى استدعاء حي",
 };
 
 const STEP_1_TITLE: Localized<string> = {
@@ -1091,6 +1226,9 @@ const STEP_1_TITLE: Localized<string> = {
   bg: "Избери услугата",
   tr: "Hizmeti seç",
   hu: "Válaszd ki a szolgáltatást",
+  "pt-BR": "Escolha o serviço",
+  ko: "서비스 선택",
+  ar: "اختر الخدمة",
 };
 
 const STEP_1_COPY: Localized<string> = {
@@ -1111,7 +1249,10 @@ const STEP_1_COPY: Localized<string> = {
   uk: "Відфільтруйте каталог і спершу подивіться на чип стану: девʼять карток існують як код, чотири постачаються увімкненими, пʼять — вимкненими. Картка з позначкою «не реалізовано» лежить у блоці планів нижче, а не в цій сітці.",
   bg: "Филтрирай каталога и първо прочети етикета на състоянието: девет карти съществуват като код, четири се доставят включени, а пет изключени. Карта с означение „не е изградено“ стои в блока с планове по-долу, никога в тази решетка.",
   tr: "Kataloğu süz ve önce durum etiketine bak: dokuz kart kod olarak var, dördü açık, beşi kapalı geliyor. «Yazılmadı» işaretli kart aşağıdaki plan bloğunda durur, asla bu ızgarada değil.",
-  hu: "Szűrd a katalógust, és először az állapotjelzőt olvasd el: kilenc kártya létezik kódként, négy bekapcsolva, öt kikapcsolva érkezik. A nincs megépítve jelzéssel ellátott kártya a lenti tervblokkban van, soha nem ebben a rácsban."
+  hu: "Szűrd a katalógust, és először az állapotjelzőt olvasd el: kilenc kártya létezik kódként, négy bekapcsolva, öt kikapcsolva érkezik. A nincs megépítve jelzéssel ellátott kártya a lenti tervblokkban van, soha nem ebben a rácsban.",
+  "pt-BR": "Filtre o catálogo e leia primeiro o selo de estado: existem nove cartões como código, quatro são entregues ligados e cinco desligados. Um cartão marcado como não construído fica no bloco de roteiro abaixo, nunca nesta grade.",
+  ko: "카탈로그를 필터링하고 상태 칩을 먼저 확인하십시오. 카드 9개가 코드로 존재하며 4개는 켜진 상태로, 5개는 꺼진 상태로 제공됩니다. 미구축으로 표시된 카드는 이 그리드가 아니라 아래 로드맵 블록에 있습니다.",
+  ar: "صفِّ الدليل واقرأ شارة الحالة أولًا: تسع بطاقات موجودة كشيفرة، أربع تُشحَن مفعّلة وخمس تُشحَن معطّلة. والبطاقة المعلّمة بأنها غير مبنية تقع في كتلة خريطة الطريق أدناه، وليس في شبكة البطاقات هذه أبدًا.",
 };
 
 const STEP_2_TITLE: Localized<string> = {
@@ -1133,6 +1274,9 @@ const STEP_2_TITLE: Localized<string> = {
   bg: "Задай връзката и ключовете",
   tr: "Bağlantıyı ve kimlik bilgilerini ayarla",
   hu: "Állítsd be a kapcsolatot és a hitelesítő adatokat",
+  "pt-BR": "Defina a conexão e as credenciais",
+  ko: "연결과 자격 증명 설정",
+  ar: "اضبط الاتصال وبيانات الاعتماد",
 };
 
 const STEP_2_COPY: Localized<string> = {
@@ -1154,6 +1298,9 @@ const STEP_2_COPY: Localized<string> = {
   bg: "Запиши превключвателя POPOPX_PLUGIN_* и ключовете на модула в .env, запази файла в режим 0600, дай на POPOPX_ADMIN_TOKEN поне 24 знака, които не са шаблонна стойност, и рестартирай; редът Средата в картата е целият списък.",
   tr: "POPOPX_PLUGIN_* anahtarını ve modülün kendi anahtarlarını .env içine yaz, dosyayı 0600 olarak bırak, POPOPX_ADMIN_TOKEN için şablon olmayan en az 24 karakter ver ve yeniden başlat; karttaki Ortam satırı tüm listedir.",
   hu: "Írd a .env-be a POPOPX_PLUGIN_* kapcsolót és a modul kulcsait, tartsd a fájlt 0600 módban, adj a POPOPX_ADMIN_TOKEN-nak legalább 24, nem sablon karaktert, majd indítsd újra; a kártya Környezet sora a teljes lista.",
+  "pt-BR": "Grave o interruptor POPOPX_PLUGIN_* e as chaves próprias do plug-in no .env, mantenha esse arquivo com 0600, dê ao POPOPX_ADMIN_TOKEN pelo menos 24 caracteres que não sejam um valor de modelo e reinicie; a linha Ambiente do cartão é a lista inteira.",
+  ko: ".env에 POPOPX_PLUGIN_* 스위치와 플러그인 자체 키를 기록하고, 해당 파일 권한을 0600으로 유지하며, POPOPX_ADMIN_TOKEN에 템플릿 값이 아닌 최소 24자를 지정한 뒤 재시작하십시오. 전체 목록은 카드의 환경 변수 행에 있습니다.",
+  ar: "اكتب مفتاح POPOPX_PLUGIN_* ومفاتيح الإضافة الخاصة بها في .env، وأبقِ ذلك الملف بصلاحية 0600، وأعطِ POPOPX_ADMIN_TOKEN 24 حرفًا على الأقل لا تكون قيمة قالب، ثم أعد التشغيل؛ وصف البيئة في البطاقة هو القائمة كاملة.",
 };
 
 const STEP_3_TITLE: Localized<string> = {
@@ -1175,6 +1322,9 @@ const STEP_3_TITLE: Localized<string> = {
   bg: "Свиси изложената повърхност",
   tr: "Saldırı yüzeyini daralt",
   hu: "Szűkítsd a kitettséget",
+  "pt-BR": "Reduza a exposição",
+  ko: "노출 범위 축소",
+  ar: "قلّل نطاق التعرّض",
 };
 
 const STEP_3_COPY: Localized<string> = {
@@ -1195,7 +1345,10 @@ const STEP_3_COPY: Localized<string> = {
   uk: "Важелів, які справді існують, пʼять: перемикач кожного модуля, привʼязка шлюза до 127.0.0.1:8080 замість 0.0.0.0, ключі лише для читання там, де сервіс їх підтримує, ліміти за модулями й скоуповані токени pxa_, що видаються в POST /api/v1/admin/tokens з областями core:…:ro|rw або plugin:<id>:…, зберігаються на диску як хеш і показуються один раз.",
   bg: "Лостовете, които наистина съществуват, са пет: превключвателят по модул, обвързването на гейтуейта с 127.0.0.1:8080 вместо 0.0.0.0, ключовете само за четене, където услугата ги предлага, лимитите по модул и токените pxa_ с обхват, издавани в POST /api/v1/admin/tokens с обхвати core:…:ro|rw или plugin:<id>:…, съхранявани на диска като хеш и показвани веднъж.",
   tr: "Gerçekte var olan beş kaldıraç var: eklenti başına anahtar, ağ geçidini 0.0.0.0 yerine 127.0.0.1:8080ʼe bağlamak, hizmet sunduğunda salt okunur kimlik bilgisi kullanmak, eklenti başına tavanlar ve POST /api/v1/admin/tokens üzerinden core:…:ro|rw ya da plugin:<id>:… kapsamlarıyla üretilen, diskte yalnızca hash olarak tutulan ve bir kez gösterilen kapsamlı pxa_ tokenları.",
-  hu: "Öt valódi kar létezik: modulonkénti kapcsoló, az átjáró 127.0.0.1:8080-hoz kötése a 0.0.0.0 helyett, csak olvasható hitelesítők, ahol a szolgáltatás ilyet kínál, a modulonkénti korlátok, és a POST /api/v1/admin/tokens végponton kiadott, core:…:ro|rw vagy plugin:<id>:… hatókörű pxa_ tokenek, amelyek a lemezen csak hash-ként élnek, és egyszer láthatók."
+  hu: "Öt valódi kar létezik: modulonkénti kapcsoló, az átjáró 127.0.0.1:8080-hoz kötése a 0.0.0.0 helyett, csak olvasható hitelesítők, ahol a szolgáltatás ilyet kínál, a modulonkénti korlátok, és a POST /api/v1/admin/tokens végponton kiadott, core:…:ro|rw vagy plugin:<id>:… hatókörű pxa_ tokenek, amelyek a lemezen csak hash-ként élnek, és egyszer láthatók.",
+  "pt-BR": "As alavancas que realmente existem são cinco: o interruptor por plug-in, vincular o gateway a 127.0.0.1:8080 em vez de 0.0.0.0, credenciais somente leitura onde o serviço as oferece, os limites por plug-in, e tokens pxa_ com escopo emitidos em POST /api/v1/admin/tokens com escopos core:…:ro|rw ou plugin:<id>:…, com hash em disco e mostrados uma única vez.",
+  ko: "실제로 존재하는 수단은 다섯 가지입니다: 플러그인별 스위치, 게이트웨이를 0.0.0.0 대신 127.0.0.1:8080에 바인딩하기, 서비스가 제공하는 경우의 읽기 전용 자격 증명, 플러그인별 상한, 그리고 POST /api/v1/admin/tokens에서 core:…:ro|rw 또는 plugin:<id>:… 범위로 발급되어 디스크에 해시로 저장되고 한 번만 표시되는 범위 지정 pxa_ 토큰입니다.",
+  ar: "الروافع الموجودة فعلًا خمس: مفتاح كل إضافة، وربط البوابة بـ 127.0.0.1:8080 بدل 0.0.0.0، وبيانات اعتماد للقراءة فقط حيث تقدمها الخدمة، والحدود القصوى لكل إضافة، ورموز pxa_ محدودة النطاق المُصدرة عند POST /api/v1/admin/tokens بنطاقات core:…:ro|rw أو plugin:<id>:…، مجزّأة على القرص وتُعرض مرة واحدة.",
 };
 
 const STEP_4_TITLE: Localized<string> = {
@@ -1217,6 +1370,9 @@ const STEP_4_TITLE: Localized<string> = {
   bg: "Прехвърли го на акаунта на услугата или на Agent",
   tr: "Hizmet hesabına ya da Agentʼa devret",
   hu: "Add tovább a szolgáltatási fióknak vagy az Agentnek",
+  "pt-BR": "Entregue-o a uma conta de serviço ou a um Agent",
+  ko: "서비스 계정 또는 Agent에 연결",
+  ar: "سلّمها إلى حساب خدمة أو إلى Agent",
 };
 
 const STEP_4_COPY: Localized<string> = {
@@ -1237,7 +1393,10 @@ const STEP_4_COPY: Localized<string> = {
   uk: "Споживачів двоє. Сервіс-акаунт POPOPX Chat отримує картки й до трьох пунктів меню та керує модулем через callback. Agent викликає ті самі ендпоінти /api/v1 по HTTP з кореневим bearer POPOPX_ADMIN_TOKEN або скоупованим токеном pxa_, що несе лише потрібну область plugin:<id>:ro|rw чи core.",
   bg: "Потребителите са двама. Акаунтът на услугата POPOPX Chat получава карти и до три меню елемента и работи през callback. Един Agent извиква същите /api/v1 крайни точки през HTTP с основния bearer POPOPX_ADMIN_TOKEN или с токен pxa_ с обхват, носещ само нужния обхват plugin:<id>:ro|rw или core.",
   tr: "İki tüketici var. Bir POPOPX Chat hizmet hesabı kartları ve en fazla üç menü öğesini alır, eklentiyi callback üzerinden sürer. Bir Agent aynı /api/v1 uç noktalarını HTTP üzerinden ya kök bearer POPOPX_ADMIN_TOKEN ya da yalnızca gereken plugin:<id>:ro|rw veya core kapsamını taşıyan kapsamlı bir pxa_ tokenı ile çağırır.",
-  hu: "Két fogyasztó van. Egy POPOPX Chat szolgáltatási fiók kártyákat és legfeljebb három menüpontot kap, s callbackekkel hajtja a modult. Egy Agent ugyanazokat a /api/v1 végpontokat hívja HTTP-n a gyökér POPOPX_ADMIN_TOKEN bearerrel vagy egy olyan hatókörű pxa_ tokennel, amely csak a szükséges plugin:<id>:ro|rw vagy core hatókört hordozza."
+  hu: "Két fogyasztó van. Egy POPOPX Chat szolgáltatási fiók kártyákat és legfeljebb három menüpontot kap, s callbackekkel hajtja a modult. Egy Agent ugyanazokat a /api/v1 végpontokat hívja HTTP-n a gyökér POPOPX_ADMIN_TOKEN bearerrel vagy egy olyan hatókörű pxa_ tokennel, amely csak a szükséges plugin:<id>:ro|rw vagy core hatókört hordozza.",
+  "pt-BR": "Existem dois consumidores. Uma conta de serviço do POPOPX Chat recebe cartões e até três itens de menu, e conduz o plug-in por meio de callbacks. Um Agent chama os mesmos endpoints /api/v1 por HTTP com o bearer POPOPX_ADMIN_TOKEN raiz ou com um token pxa_ com escopo que carrega apenas o escopo plugin:<id>:ro|rw ou core de que precisa.",
+  ko: "소비자는 두 가지입니다. POPOPX Chat 服务号는 카드와 최대 세 개의 메뉴 항목을 받고 콜백으로 플러그인을 구동합니다. Agent는 HTTP를 통해 동일한 /api/v1 엔드포인트를 호출하며, 루트 POPOPX_ADMIN_TOKEN bearer 또는 필요한 plugin:<id>:ro|rw나 core 범위만 담은 범위 지정 pxa_ 토큰을 사용합니다.",
+  ar: "هناك مستهلكان. حساب POPOPX Chat 服务号 يحصل على بطاقات وعلى ثلاثة عناصر قائمة كحد أقصى، ويقود الإضافة عبر عمليات الاستدعاء الراجعة. ويستدعي Agent نقاط نهاية /api/v1 نفسها عبر HTTP إما بحامل POPOPX_ADMIN_TOKEN الجذري وإما برمز pxa_ محدود النطاق لا يحمل إلا plugin:<id>:ro|rw أو نطاق core الذي يحتاجه.",
 };
 
 /* --- roadmap block -------------------------------------------------------------- */
@@ -1260,7 +1419,10 @@ const ROADMAP_SHIPPED_NOTE: Localized<string> = {
   uk: "Чотири родини конекторів уже в сітці вище — workflow_webhook, carddav_connector, caldav_connector і slack_discord — і разом із девʼятьма реалізованими модулями каталог повний як код. Жодну з них тут не перевірено проти живого стороннього провайдера; картки описують, що робить код, а не виробничу сертифікацію.",
   bg: "Четири семейства конектори вече са в решетката отгоре — workflow_webhook, carddav_connector, caldav_connector и slack_discord — и с девет реализирани модула каталогът е пълен като код. Никое от тях не е проверено тук срещу реален външен доставчик; картите описват какво прави кодът, не производствен сертификат.",
   tr: "Dört bağlayıcı ailesi yukarıdaki ızgarada zaten var — workflow_webhook, carddav_connector, caldav_connector ve slack_discord — ve dokuz yazılmış modülle katalog kod olarak eksiksiz. Hiçbiri burada gerçek bir üçüncü taraf sağlayıcıya karşı doğrulanmadı; kartlar kodun ne yaptığını anlatır, üretim sertifikası değil.",
-  hu: "Négy csatlakoztató-család már a fenti rácsban van — workflow_webhook, carddav_connector, caldav_connector és slack_discord —, és a kilenc megvalósított modullal a katalógus kódként teljes. Egyiket sem ellenőrizték itt valódi külső szolgáltatón; a kártyák azt írják le, mit tesz a kód, nem termelési tanúsítványt."
+  hu: "Négy csatlakoztató-család már a fenti rácsban van — workflow_webhook, carddav_connector, caldav_connector és slack_discord —, és a kilenc megvalósított modullal a katalógus kódként teljes. Egyiket sem ellenőrizték itt valódi külső szolgáltatón; a kártyák azt írják le, mit tesz a kód, nem termelési tanúsítványt.",
+  "pt-BR": "Quatro famílias de conectores já estão na grade acima — workflow_webhook, carddav_connector, caldav_connector e slack_discord — e, com nove módulos implementados, isso torna o catálogo completo como código. Nenhuma delas foi verificada contra um provedor terceiro real aqui; os cartões descrevem o que o código faz, não uma certificação de produção.",
+  ko: "커넥터 계열 4개(workflow_webhook, carddav_connector, caldav_connector, slack_discord)는 이미 위 그리드에 있으며, 구현된 모듈 9개와 함께 코드 기준으로 카탈로그가 완성됩니다. 이 중 어느 것도 여기서 실제 서드파티 공급자와 검증되지 않았으며, 카드는 코드가 하는 일을 설명할 뿐 운영 인증이 아닙니다.",
+  ar: "أربع عائلات موصّلات موجودة بالفعل في شبكة البطاقات أعلاه — workflow_webhook وcarddav_connector وcaldav_connector وslack_discord — ومع تسع وحدات منفّذة يكتمل الدليل كشيفرة. ولم يُتحقَّق من أي منها مقابل مزوّد طرف ثالث حي هنا؛ فالبطاقات تصف ما تفعله الشيفرة، لا شهادة إنتاجية.",
 };
 
 /* --- footer: route census ------------------------------------------------------- */
@@ -1283,7 +1445,10 @@ const CENSUS_TEXT: Localized<string> = {
   uk: "Перепис маршрутів, перевірено 2026-11-26: 129 реєстрацій — 59 core у main.py плюс 70 маршрутів плагінів із розподілом 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; за типових налаштувань обслуговується 89 (59 core + 30 плагінів), документованих core-маршрутів — 57. Рецепт grep під прикладом — увесь метод.",
   bg: "Преброяване на маршрути, проверено на 2026-11-26: 129 регистрации — 59 основни в main.py плюс 70 маршрута на плъгини с разпределение 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7; с фабричните настройки се обслужват 89 (59 основни + 30 плъгинни) и 57 основни маршрута са документирани. Grep рецептата под примера е целият метод.",
   tr: "Rota sayımı, 2026-11-26ʼde yeniden doğrulandı: 129 kayıt — main.py içinde 59 çekirdek rota artı 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 dağılımıyla 70 eklenti rotası; fabrika varsayılanlarıyla 89 rota (59 çekirdek + 30 eklenti) sunuluyor ve 57 çekirdek rota belgelenmiş. Örneğin altındaki grep tarifi metodun tamamı.",
-  hu: "Útvonalnévsor, 2026-11-26-én újraellenőrizve: 129 regisztráció — 59 törzsútvonal a main.py-ban, plusz 70 bővítményútvonal 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 bontásban; gyári alapértelmezésekkel 89 útvonalat szolgál ki (59 törzs + 30 bővítmény), és 57 törzsútvonal dokumentált. A példa alatti grep recept a teljes módszer."
+  hu: "Útvonalnévsor, 2026-11-26-én újraellenőrizve: 129 regisztráció — 59 törzsútvonal a main.py-ban, plusz 70 bővítményútvonal 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 bontásban; gyári alapértelmezésekkel 89 útvonalat szolgál ki (59 törzs + 30 bővítmény), és 57 törzsútvonal dokumentált. A példa alatti grep recept a teljes módszer.",
+  "pt-BR": "Censo de rotas, reverificado em 2026-11-26: 129 registros de rota — 59 no núcleo, em main.py, mais 70 rotas de plug-in divididas em 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 — com 89 servidas sob os padrões de fábrica (59 do núcleo + 30 de plug-in) e 57 rotas do núcleo documentadas. A receita de grep sob a amostra é o método inteiro.",
+  ko: "라우트 집계(2026-11-26 재확인): 라우트 등록은 129개이며, main.py의 코어 59개에 플러그인 라우트 70개(6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7로 분할)가 더해집니다. 출고 기본값에서는 89개(코어 59 + 플러그인 30)가 제공되고 문서화된 코어 라우트는 57개입니다. 샘플 아래의 grep 절차가 방법의 전부입니다.",
+  ar: "إحصاء المسارات، أُعيد فحصه في 2026-11-26: 129 تسجيل مسار — 59 أساسيًا في main.py زائد 70 مسار إضافة موزعة 6 + 10 + 6 + 8 + 9 + 12 + 6 + 6 + 7 — مع 89 تُخدَم وفق إعدادات المصنع الافتراضية (59 أساسيًا + 30 إضافة) و57 مسارًا أساسيًا موثّقًا. ووصفة grep الواردة تحت النموذج هي الطريقة كلها.",
 };
 
 const FOOTER_TITLE: Localized<string> = {
@@ -1305,6 +1470,9 @@ const FOOTER_TITLE: Localized<string> = {
   bg: "Как конзолата знае, че плъгинът е жив",
   tr: "Konsol bir eklentinin hayatta olduğunu nasıl anlıyor",
   hu: "Honnan tudja a konzol, hogy a bővítmény él",
+  "pt-BR": "Como o console sabe que um plug-in está funcionando",
+  ko: "콘솔이 플러그인의 정상 동작을 확인하는 방법",
+  ar: "كيف تعرف وحدة التحكم أن الإضافة حيّة",
 };
 
 const FOOTER_BODY: Localized<string> = {
@@ -1325,7 +1493,10 @@ const FOOTER_BODY: Localized<string> = {
   uk: "Консоль викликає GET /api/v1/plugins із POPOPX_ADMIN_TOKEN і за один виклик отримує всі девʼять рішень воріт; кожен плагін також відповідає на GET <власний префікс>/status. Три види «не може працювати» розрізнюються: вимкнений плагін відповідає 404 і називає в тілі саме той ключ, який треба перевернути, за відсутності коштів приходить 402 разом із залишком, а відвалений вузол відповідає 503, і запит можна повторити. Справедлива примітка: пʼять модулів постачаються з 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector і slack_discord — і продавець має увімкнути кожен сам.",
   bg: "Конзолата извиква GET /api/v1/plugins с POPOPX_ADMIN_TOKEN и наведнъж получава всичките девет решения на контролите; всеки плъгин отговаря и на GET <собствен префикс>/status. Трите вида „не може да работи“ си остават различими: изключен плъгин отговаря с 404 и сочи в тялото точния ключ, изчерпаният баланс отговаря с 402 заедно с остатъка, а паднал възел отговаря с 503 и заявката може да се повтори. Честна бележка: пет модула се доставят с 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector и slack_discord — и търговецът трябва да включи всеки сам.",
   tr: "Konsol, POPOPX_ADMIN_TOKEN ile GET /api/v1/plugins çağrısını yapar ve dokuz kontrolün kararını tek seferde alır; her eklenti ayrıca GET <kendi ön eki>/status sorusuna da yanıt verir. “Çalışmıyor” durumlarının üç türü birbirinden ayırt edilebilir kalır: kapatılmış bir eklenti 404 döner ve gövdede çevrilecek tam anahtarı söyler, bakiyesi biten 402 ile birlikte kalan bakiyeyi döner, düşmüş bir düğüm 503 döner ve yeniden denenebilir. Dürüst bir not: beş modül fabrikadan 0 olarak çıkar — web3_bridge, workflow_webhook, carddav_connector, caldav_connector ve slack_discord — ve tüccarın her birini kendisi açması gerekir.",
-  hu: "A konzol POPOPX_ADMIN_TOKEN-nal hívja a GET /api/v1/plugins végpontot, és egyetlen hívással megkapja mind a kilenc kapu döntését; minden bővítmény a saját GET <saját előtag>/status kérésre is válaszol. A „nem fut el” három fajtája megkülönböztethető marad: a kikapcsolt bővítmény 404-gyel válaszol és a törzsben megnevezi a pontos kulcsot, a credit nélkül lévő 402-vel és az egyenleggel válaszol, a lezuhant csomópont 503-mal, az újrapróbálás pedig adott. Őszinte megjegyzés: öt modul 0 értékkel érkezik — web3_bridge, workflow_webhook, carddav_connector, caldav_connector és slack_discord —, és a kereskedőnek mindegyiket magának kell bekapcsolnia."
+  hu: "A konzol POPOPX_ADMIN_TOKEN-nal hívja a GET /api/v1/plugins végpontot, és egyetlen hívással megkapja mind a kilenc kapu döntését; minden bővítmény a saját GET <saját előtag>/status kérésre is válaszol. A „nem fut el” három fajtája megkülönböztethető marad: a kikapcsolt bővítmény 404-gyel válaszol és a törzsben megnevezi a pontos kulcsot, a credit nélkül lévő 402-vel és az egyenleggel válaszol, a lezuhant csomópont 503-mal, az újrapróbálás pedig adott. Őszinte megjegyzés: öt modul 0 értékkel érkezik — web3_bridge, workflow_webhook, carddav_connector, caldav_connector és slack_discord —, és a kereskedőnek mindegyiket magának kell bekapcsolnia.",
+  "pt-BR": "O console chama GET /api/v1/plugins com POPOPX_ADMIN_TOKEN e recebe todas as nove decisões de portão de uma vez; cada plug-in também responde a GET <its own prefix>/status. Os três tipos de \"não pode rodar\" permanecem distinguíveis: um plug-in desligado responde 404 e nomeia no corpo a chave exata que deve ser alternada, um sem saldo responde 402 com o saldo, um nó fora do ar responde 503 e pode ser repetido. Uma observação honesta: cinco módulos são distribuídos como 0 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector e slack_discord — e o comerciante precisa ligar cada um.",
+  ko: "콘솔은 POPOPX_ADMIN_TOKEN과 함께 GET /api/v1/plugins를 호출해 아홉 가지 게이트 결정을 한 번에 받습니다. 각 플러그인은 또한 GET <its own prefix>/status로 응답합니다. '실행할 수 없음'의 세 가지 유형은 구분 가능하게 유지됩니다: 꺼진 플러그인은 404로 응답하고 본문에 전환해야 할 정확한 키를 밝히며, 자금이 없는 플러그인은 잔액과 함께 402로 응답하고, 노드가 내려가 있으면 503으로 응답하며 재시도할 수 있습니다. 한 가지 분명히 밝혀 둘 점: 다섯 개 모듈 — web3_bridge, workflow_webhook, carddav_connector, caldav_connector, slack_discord — 은 0으로 출시되므로 판매자가 각각을 직접 켜야 합니다.",
+  ar: "تستدعي وحدة التحكم GET /api/v1/plugins مع POPOPX_ADMIN_TOKEN فتحصل على قرارات البوابات التسع كلها دفعة واحدة؛ وكل إضافة تجيب أيضًا على GET <its own prefix>/status. وتبقى أنواع «تعذّر التشغيل» الثلاثة متمايزة: فالإضافة المطفأة تجيب بـ 404 وتسمّي في المتن المفتاح الدقيق الذي يجب قلبه، وغير الممولة تجيب بـ 402 مع الرصيد، والعقدة المتوقفة تجيب بـ 503 والطلب قابل لإعادة المحاولة. وملاحظة صادقة واحدة: خمس وحدات تُشحن بقيمة 0 — web3_bridge وworkflow_webhook وcarddav_connector وcaldav_connector وslack_discord — وعلى التاجر تشغيل كل واحدة منها.",
 };
 
 const FOOTER_SAMPLE_CAPTION: Localized<string> = {
@@ -1347,6 +1518,9 @@ const FOOTER_SAMPLE_CAPTION: Localized<string> = {
   bg: "Истинските имена на полите на записа web3_bridge в тялото на GET /api/v1/plugins (примерни стойности).",
   tr: "Bir GET /api/v1/plugins gövdesindeki web3_bridge kaydının gerçek alan adları (örnek değerler).",
   hu: "A web3_bridge bejegyzés valódi mezőnevei egy GET /api/v1/plugins törzsben (példaértékek).",
+  "pt-BR": "Os nomes reais dos campos da entrada web3_bridge em um corpo de GET /api/v1/plugins (valores de exemplo).",
+  ko: "GET /api/v1/plugins 응답 본문에서 web3_bridge 항목의 실제 필드 이름입니다(값은 예시).",
+  ar: "أسماء الحقول الحقيقية لإدخال web3_bridge في جسم استجابة GET /api/v1/plugins (قيم مثال).",
 };
 
 /** Field names and the `detail` sentence come from `PluginGate.status` and
@@ -1380,6 +1554,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "AI асистент за поддръжка с приоритет на поверителността",
       tr: "Gizlilik odaklı yapay zekâ destek asistanı",
       hu: "Adatvédelmet előtérbe helyező MI ügyfélszolgálati asszisztens",
+      "pt-BR": "Agente de suporte de IA com privacidade em primeiro lugar",
+      ko: "개인정보 보호 우선 AI 지원 에이전트",
+      ar: "وكيل دعم بالذكاء الاصطناعي يضع الخصوصية أولًا",
     },
     hook: {
       en: "The model key never leaves your own server, and the default system prompt already says not to ask for any personal information.",
@@ -1400,6 +1577,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Ключът на модела никога не напуска собствения сървър на търговеца, а подразбиращият се системен подканващ текст вече гласи да не се изискват лични данни.",
       tr: "Model anahtarı asla satıcının kendi sunucusundan dışarı çıkmaz; varsayılan sistem istemi zaten hiçbir kişisel bilgi istenmemesini söylüyor.",
       hu: "A modell kulcsa soha nem hagyja el a kereskedő saját szerverét, és az alapértelmezett rendszerprompt már kimondja, hogy személyes adatot tilos kérni.",
+      "pt-BR": "A chave do modelo nunca sai do seu próprio servidor, e o prompt de sistema padrão já diz para não pedir nenhuma informação pessoal.",
+      ko: "모델 키는 자체 서버를 벗어나지 않으며, 기본 시스템 프롬프트에는 개인정보를 요청하지 말라는 지침이 이미 포함되어 있습니다.",
+      ar: "مفتاح النموذج لا يغادر خادمك أبدًا، والتعليمة النظامية الافتراضية تنص أصلًا على عدم طلب أي معلومات شخصية.",
     },
     facts: [
       {
@@ -1422,6 +1602,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Самоличност",
           tr: "Kimlik",
           hu: "Személyazonosság",
+          "pt-BR": "Identidade",
+          ko: "신원",
+          ar: "الهوية",
         },
         v: {
           en: "Exchanges are rows in ai_messages keyed by the pairwise uid: no phone number, no email, no real-name profile.",
@@ -1442,6 +1625,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Разговорите са редове в таблицата ai_messages с ключ на двойката uid: без телефонен номер, без имейл, без профил с истинско име.",
           tr: "Yazışmalar ai_messages tablosunda pairwise uid ile anahtarlanmış satırlardır: telefon numarası yok, e-posta yok, gerçek adlı profil de yok.",
           hu: "A beszélgetések az ai_messages tábla sorai, pairwise uid kulccsal: telefonszám nélkül, e-mail cím nélkül, valós nevű profil nélkül.",
+          "pt-BR": "As trocas são linhas em ai_messages com chave pelo uid por par: sem número de telefone, sem e-mail, sem perfil com nome real.",
+          ko: "대화 기록은 쌍별 uid를 키로 하는 ai_messages 행이며, 전화번호도 이메일도 실명 프로필도 없습니다.",
+          ar: "التبادلات صفوف في ai_messages مفتاحها uid ثنائي الاقتران: لا رقم هاتف ولا بريد إلكتروني ولا ملف بالاسم الحقيقي.",
         },
       },
       {
@@ -1464,6 +1650,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Свързване",
           tr: "Bağlantı",
           hu: "Csatlakozás",
+          "pt-BR": "Ponto de extremidade",
+          ko: "엔드포인트",
+          ar: "النقطة الطرفية",
         },
         v: {
           en: "POPOPX_AI_BASE_URL defaults to https://api.openai.com/v1 and POPOPX_AI_MODEL to gpt-4o-mini; a local Ollama at http://127.0.0.1:11434/v1 works too.",
@@ -1484,6 +1673,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "POPOPX_AI_BASE_URL е по подразбиране https://api.openai.com/v1, а POPOPX_AI_MODEL е gpt-4o-mini; работи и локално Ollama (http://127.0.0.1:11434/v1).",
           tr: "POPOPX_AI_BASE_URL varsayılan olarak https://api.openai.com/v1, POPOPX_AI_MODEL varsayılan olarak gpt-4o-mini; makinedeki bir Ollama (http://127.0.0.1:11434/v1) da olur.",
           hu: "A POPOPX_AI_BASE_URL alapértelmezése https://api.openai.com/v1, a POPOPX_AI_MODEL-é pedig gpt-4o-mini; helyi Ollama (http://127.0.0.1:11434/v1) is megfelel.",
+          "pt-BR": "POPOPX_AI_BASE_URL assume https://api.openai.com/v1 por padrão e POPOPX_AI_MODEL assume gpt-4o-mini; um Ollama local em http://127.0.0.1:11434/v1 também funciona.",
+          ko: "POPOPX_AI_BASE_URL의 기본값은 https://api.openai.com/v1이고 POPOPX_AI_MODEL의 기본값은 gpt-4o-mini입니다. http://127.0.0.1:11434/v1의 로컬 Ollama도 동작합니다.",
+          ar: "القيمة الافتراضية لـ POPOPX_AI_BASE_URL هي https://api.openai.com/v1 ولـ POPOPX_AI_MODEL هي gpt-4o-mini؛ ويعمل أيضًا Ollama محلي على http://127.0.0.1:11434/v1.",
         },
       },
       {
@@ -1506,6 +1698,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Лимити и цена",
           tr: "Sınırlar ve fiyat",
           hu: "Korlátok és ár",
+          "pt-BR": "Limites e preço",
+          ko: "한도와 가격",
+          ar: "الحدود والسعر",
         },
         v: {
           en: "POPOPX_AI_RATE_LIMIT_MESSAGES=20 per follower inside POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300, priced at POPOPX_CP_PER_AI_MESSAGE=5, and a turn that produced no answer is refunded in full.",
@@ -1526,6 +1721,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "За един последовател най-много POPOPX_AI_RATE_LIMIT_MESSAGES=20 съобщения в прозореца POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 секунди; всяко съобщение се отчита с POPOPX_CP_PER_AI_MESSAGE=5, а ход без отговор се възстановява напълно.",
           tr: "Bir takipçi başına POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 saniyelik pencerede en fazla POPOPX_AI_RATE_LIMIT_MESSAGES=20 mesaj; her mesaj POPOPX_CP_PER_AI_MESSAGE=5 olarak ölçülür ve yanıt çıkmayan tur tamamen geri iade edilir.",
           hu: "Követőnként legfeljebb POPOPX_AI_RATE_LIMIT_MESSAGES=20 üzenet a POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 másodperces ablakban; üzenetenként POPOPX_CP_PER_AI_MESSAGE=5 a díj, és a válasz nélkül maradt kör teljes egészében visszajár.",
+          "pt-BR": "POPOPX_AI_RATE_LIMIT_MESSAGES=20 por seguidor dentro de POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300, com preço definido por POPOPX_CP_PER_AI_MESSAGE=5, e um turno que não produziu resposta é reembolsado integralmente.",
+          ko: "POPOPX_AI_RATE_LIMIT_MESSAGES=20은 POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300 안에서 팔로워당 적용되며, 가격은 POPOPX_CP_PER_AI_MESSAGE=5이고, 답변을 생성하지 못한 턴은 전액 환불됩니다.",
+          ar: "POPOPX_AI_RATE_LIMIT_MESSAGES=20 لكل متابع داخل POPOPX_AI_RATE_LIMIT_WINDOW_SECONDS=300، بسعر POPOPX_CP_PER_AI_MESSAGE=5، وأي دور لم ينتج إجابة يُرد كاملًا.",
         },
       },
     ],
@@ -1564,6 +1762,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "DevOps известия и ончейн сигнализации за сигурност",
       tr: "DevOps ve zincir üstü güvenlik uyarıları",
       hu: "DevOps és on-chain biztonsági riasztások",
+      "pt-BR": "Alertas de DevOps e de segurança on-chain",
+      ko: "DevOps와 온체인 보안 알림",
+      ar: "تنبيهات أمنية لعمليات DevOps وعلى السلسلة",
     },
     hook: {
       en: "One webhook in from Grafana or Alertmanager, one security card on the phone.",
@@ -1584,6 +1785,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Един webhook от Grafana или Alertmanager и една security картичка на телефона.",
       tr: "Grafana veya Alertmanager’dan gelen tek bir webhook, telefonda tek bir security kartı.",
       hu: "Egy bejövő webhook Grafanából vagy Alertmanagerből, egy security kártya a telefonon.",
+      "pt-BR": "Um webhook de entrada do Grafana ou do Alertmanager, um cartão de segurança no telefone.",
+      ko: "Grafana 또는 Alertmanager에서 들어오는 웹훅 하나, 휴대폰에 도착하는 보안 카드 하나입니다.",
+      ar: "ويب هوك واحد وارد من Grafana أو Alertmanager، وبطاقة أمنية واحدة على الهاتف.",
     },
     facts: [
       {
@@ -1606,6 +1810,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Вход",
           tr: "Giriş",
           hu: "Bemenet",
+          "pt-BR": "Entrada",
+          ko: "인그레스",
+          ar: "الدخول",
         },
         v: {
           en: "POST /api/v1/plugins/alerts/webhook checks the inbound token first: an empty or wrong POPOPX_ALERT_WEBHOOK_TOKEN is refused with 401 before any signature work. When POPOPX_ALERT_WEBHOOK_SECRET is set, a timestamped HMAC becomes mandatory — X-Popopx-Timestamp plus X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> over a ±300 s window, with replayed timestamps rejected. With no secret set, the token alone admits the call. POPOPX_ALERT_MIN_SEVERITY defaults to warning and anything below it is stored rather than pushed.",
@@ -1626,6 +1833,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "POST /api/v1/plugins/alerts/webhook първо проверява входящия токен: празен или грешен POPOPX_ALERT_WEBHOOK_TOKEN се отказва с 401 още преди каквато и да е работа с подписа. Когато е зададен POPOPX_ALERT_WEBHOOK_SECRET, HMAC с времеви печат става задължителен — X-Popopx-Timestamp и X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> в прозорец ±300 s, а повторените печати се отхвърлят. Без secret е достатъчен токенът. POPOPX_ALERT_MIN_SEVERITY е по подразбиране warning и всичко под прага се съхранява, вместо да се изпраща.",
           tr: "POST /api/v1/plugins/alerts/webhook önce gelen tokenı denetler: boş ya da yanlış POPOPX_ALERT_WEBHOOK_TOKEN, herhangi bir imza işi başlamadan 401 ile reddedilir. POPOPX_ALERT_WEBHOOK_SECRET ayarlıysa zaman damgalı HMAC zorunlu hale gelir — ±300 saniyelik pencerede X-Popopx-Timestamp ve X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, tekrarlanan damgalar reddedilir. Secret yoksa token tek başına yeter. POPOPX_ALERT_MIN_SEVERITY varsayılan olarak warning’dır ve eşiğin altındaki olaylar yalnızca saklanır, kart gönderilmez.",
           hu: "A POST /api/v1/plugins/alerts/webhook először a bejövő tokent ellenőrzi: az üres vagy hibás POPOPX_ALERT_WEBHOOK_TOKEN már 401-gyel elutasításra kerül, mielőtt bármi aláírásmunka elkezdődne. Ha a POPOPX_ALERT_WEBHOOK_SECRET be van állítva, az időbélyeges HMAC kötelezővé válik — X-Popopx-Timestamp és X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> ±300 másodperces ablakban, az ismételt időbélyegek pedig elutasításra kerülnek. Secret nélkül a token önmagában elég. Az POPOPX_ALERT_MIN_SEVERITY alapértelmezése warning, és a küszöb alatti események csak tárolódnak, nem kerülnek kiküldésre.",
+          "pt-BR": "POST /api/v1/plugins/alerts/webhook verifica primeiro o token de entrada: um POPOPX_ALERT_WEBHOOK_TOKEN vazio ou errado é recusado com 401 antes de qualquer trabalho de assinatura. Quando POPOPX_ALERT_WEBHOOK_SECRET está definido, um HMAC com timestamp passa a ser obrigatório — X-Popopx-Timestamp mais X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> em uma janela de ±300 s, e timestamps repetidos são rejeitados. Sem segredo definido, o token sozinho admite a chamada. POPOPX_ALERT_MIN_SEVERITY usa warning por padrão e qualquer coisa abaixo dele é armazenada em vez de enviada.",
+          ko: "POST /api/v1/plugins/alerts/webhook은 수신 토큰을 먼저 확인합니다: 비어 있거나 잘못된 POPOPX_ALERT_WEBHOOK_TOKEN은 어떤 서명 작업보다도 앞서 401로 거부됩니다. POPOPX_ALERT_WEBHOOK_SECRET이 설정되어 있으면 타임스탬프가 포함된 HMAC이 필수가 됩니다 — X-Popopx-Timestamp와 X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>를 ±300 s 범위에서 검사하며, 재전송된 타임스탬프는 거부됩니다. 시크릿이 설정되지 않으면 토큰만으로 호출이 허용됩니다. POPOPX_ALERT_MIN_SEVERITY의 기본값은 warning이며 그보다 낮은 항목은 푸시되지 않고 저장됩니다.",
+          ar: "يفحص POST /api/v1/plugins/alerts/webhook الرمز الوارد أولًا: فالرمز الفارغ أو الخاطئ في POPOPX_ALERT_WEBHOOK_TOKEN يُرفض بـ 401 قبل أي عمل على التوقيع. وعند ضبط POPOPX_ALERT_WEBHOOK_SECRET يصبح HMAC المؤرخ إلزاميًا — X-Popopx-Timestamp مع X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> خلال نافذة ±300 ثانية، مع رفض الطوابع الزمنية المعاد إرسالها. وبدون ضبط سر، يكفي الرمز وحده لقبول الاستدعاء. والقيمة الافتراضية لـ POPOPX_ALERT_MIN_SEVERITY هي warning، وكل ما دونها يُخزَّن بدل دفعه.",
         },
       },
       {
@@ -1648,6 +1858,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "На телефона",
           tr: "Telefonda",
           hu: "A telefonon",
+          "pt-BR": "No telefone",
+          ko: "휴대폰에서",
+          ar: "على الهاتف",
         },
         v: {
           en: "Tapping 确认 sends ::CB::alert:ack:<id> and that same card moves its progress bar from 0% to 100% in place; resolution itself comes from the webhook, the console, or a whole-string keyword (defaults 确认,已处理,ack,resolve).",
@@ -1668,6 +1881,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Докосването на 确认 изпраща ::CB::alert:ack:<id> и същата картичка премества прогрес бара си на място от 0% на 100%; самото разрешаване идва от webhook, от конзолата или по съвпадение на целия низ (по подразбиране 确认,已处理,ack,resolve).",
           tr: "确认 öğesine dokunmak ::CB::alert:ack:<id> gönderir ve aynı kart ilerleme çubuğunu yerinde %0’dan %100’e iter; çözümün kendisi webhook’tan, konsoldan veya tüm dize eşleşmesiyle gelir (varsayılan 确认,已处理,ack,resolve).",
           hu: "A 确认 érintése ::CB::alert:ack:<id> parancsot küld, és ugyanaz a kártya a helyén tolja a haladássávját 0%-ról 100%-ra; a megoldás maga a webhookból, a konzolból vagy egy teljes karakterláncos kulcsszóból érkezik (alapértelmezés: 确认,已处理,ack,resolve).",
+          "pt-BR": "Tocar em 确认 envia ::CB::alert:ack:<id> e esse mesmo cartão move sua barra de progresso de 0% para 100% no lugar; a resolução em si vem do webhook, do console ou de uma palavra-chave de string inteira (padrões 确认,已处理,ack,resolve).",
+          ko: "确认을 탭하면 ::CB::alert:ack:<id>가 전송되고 같은 카드가 진행 표시줄을 0%에서 100%로 제자리에서 이동시킵니다. 해결 자체는 웹훅, 콘솔 또는 전체 문자열 키워드(기본값 确认,已处理,ack,resolve)에서 옵니다.",
+          ar: "الضغط على «确认» يرسل ::CB::alert:ack:<id> والبطاقة نفسها تحرك شريط تقدمها من 0% إلى 100% في مكانها؛ والحل نفسه يأتي من الويب هوك أو وحدة التحكم أو كلمة مفتاحية مطابقة للسلسلة كاملة (الافتراضيات 确认,已处理,ack,resolve).",
         },
       },
       {
@@ -1690,6 +1906,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Таксуване",
           tr: "Faturalandırma",
           hu: "Számlázás",
+          "pt-BR": "Cobrança",
+          ko: "과금",
+          ar: "الفوترة",
         },
         v: {
           en: "One incident fingerprint is charged once at POPOPX_CP_PER_ALERT=2: re-fires, resampled notifications and repeated acks all land on the same idempotency key.",
@@ -1710,6 +1929,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "За един отпечатък на инцидент таксата POPOPX_CP_PER_ALERT=2 се начислява веднъж: повторни задействания, препробирани известия и повторно потвърждения попадат на един и същ идемпотентен ключ.",
           tr: "Bir olay parmak izi için POPOPX_CP_PER_ALERT=2 tek seferlik ücretlendirilir: yeniden tetiklemeler, yeniden örneklenen bildirimler ve yinelenen onaylar hep aynı idempotency anahtarına düşer.",
           hu: "Egy esemény-ujjlenyomat után a POPOPX_CP_PER_ALERT=2 díjat csak egyszer számoljuk fel: az újratüzelések, az újravett minták és az ismételt elismerések mind ugyanarra az idempotens kulcsra futnak ki.",
+          "pt-BR": "Uma impressão digital de incidente é cobrada uma vez a POPOPX_CP_PER_ALERT=2: reenvios, notificações reamostradas e confirmações repetidas caem todos na mesma chave de idempotência.",
+          ko: "하나의 인시던트 지문에는 POPOPX_CP_PER_ALERT=2로 한 번만 과금됩니다. 재발화, 재샘플링된 알림, 반복 확인은 모두 같은 멱등성 키로 처리됩니다.",
+          ar: "بصمة الحادثة الواحدة تُحتسب مرة واحدة عند POPOPX_CP_PER_ALERT=2: فإعادة الإطلاق والإشعارات المعاد أخذ عيناتها والإقرارات المتكررة تصل كلها إلى مفتاح idempotency نفسه.",
         },
       },
     ],
@@ -1748,6 +1970,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Вход с сканиране без проследяване",
       tr: "İzleme yapmadan QR ile giriş",
       hu: "Trackingmentes QR-bejelentkezés",
+      "pt-BR": "Login por leitura de QR sem rastreamento",
+      ko: "추적 없는 스캔 로그인",
+      ar: "تسجيل دخول بالمسح بلا تتبّع",
     },
     hook: {
       en: "No phone number and no email: the iOS scanner completes the third-party site login.",
@@ -1768,6 +1993,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Нито телефонен номер, нито имейл: скенерът на iOS завършва влизането в сайт на трета страна.",
       tr: "Telefon numarası yok, e-posta yok: iOS tarayıcısı üçüncü taraf site girişini tamamlıyor.",
       hu: "Telefonszám nélkül és e-mail cím nélkül: az iOS beolvasója fejezi be a harmadik fél oldalán való bejelentkezést.",
+      "pt-BR": "Sem número de telefone e sem e-mail: o leitor do iOS conclui o login no site de terceiros.",
+      ko: "전화번호도 이메일도 필요 없습니다. iOS 스캐너가 서드파티 사이트 로그인을 완료합니다.",
+      ar: "لا رقم هاتف ولا بريد إلكتروني: ماسح iOS يكمل تسجيل الدخول إلى موقع الطرف الثالث.",
     },
     facts: [
       {
@@ -1790,6 +2018,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "QR код",
           tr: "QR kodu",
           hu: "QR-kód",
+          "pt-BR": "O QR",
+          ko: "QR 코드",
+          ar: "رمز QR",
         },
         v: {
           en: "The payload is popopx://sso?uri=<service address>&session=<id>, where the id is 24 URL-safe characters off 18 random bytes, so guessing one is not a thing.",
@@ -1810,6 +2041,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Натоварването е popopx://sso?uri=<адрес на сервисния акаунт>&session=<id>, където id са 24 URL-safe знака от 18 случайни байта, та че да го познаеш не е вариант.",
           tr: "Yük, popopx://sso?uri=<hizmet hesabı adresi>&session=<id> biçimindedir; buradaki id 18 rastgele bayttan üretilmiş 24 URL-güvenli karakterdir, yani tahmin etmek söz konusu değil.",
           hu: "A hasznos teher popopx://sso?uri=<szolgáltatásfiók-cím>&session=<id>, ahol az id 24 URL-biztos karakter 18 véletlen bájtból, így a találgatás szóba sem jön.",
+          "pt-BR": "O payload é popopx://sso?uri=<service address>&session=<id>, onde o id são 24 caracteres seguros para URL derivados de 18 bytes aleatórios, então adivinhar um não é algo possível.",
+          ko: "페이로드는 popopx://sso?uri=<service address>&session=<id>이며, 여기서 id는 18개의 난수 바이트에서 나온 24개의 URL-safe 문자이므로 하나를 추측하는 일은 불가능합니다.",
+          ar: "الحمولة هي popopx://sso?uri=<service address>&session=<id>، حيث المعرّف 24 حرفًا آمنًا في URL من 18 بايتًا عشوائيًا، فتخمين واحد ليس أمرًا واردًا.",
         },
       },
       {
@@ -1832,6 +2066,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Запитване",
           tr: "Sorgulama",
           hu: "Lekérdezés",
+          "pt-BR": "Consulta periódica",
+          ko: "폴링",
+          ar: "الاستقصاء الدوري",
         },
         v: {
           en: "The scan page polls GET /api/v1/plugins/sso/sessions/{id} with no token at all and gets state, never an identity; the credential is released only by the bearer-authenticated POST /api/v1/plugins/sso/verify and is burned on redemption.",
@@ -1852,6 +2089,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Страницата за сканиране се допитва до GET /api/v1/plugins/sso/sessions/{id} изобщо без токен и получава само състояние, никога самоличност; удостоверението се освобождава единствено от POST /api/v1/plugins/sso/verify, удостоверяван с bearer токен, и изгаря при поднасянето.",
           tr: "Tarama sayfası GET /api/v1/plugins/sso/sessions/{id} adresini hiçbir token olmadan yoklar ve yalnızca durumu alır, kimliği asla; kimlik bilgisi ancak bearer ile doğrulanmış POST /api/v1/plugins/sso/verify tarafından verilir ve kullanıldığı anda geçersiz hale gelir.",
           hu: "A beolváltó oldal token nélkül kérdezi le a GET /api/v1/plugins/sso/sessions/{id} végpontot, és csak állapotot kap, identitást soha; a hitelesítő adatot kizárólag a bearer-rel hitelesített POST /api/v1/plugins/sso/verify adja ki, és az átvétel pillanatában megsemmisül.",
+          "pt-BR": "A página de leitura do QR consulta GET /api/v1/plugins/sso/sessions/{id} sem nenhum token e recebe o estado, nunca uma identidade; a credencial só é liberada pelo POST /api/v1/plugins/sso/verify autenticado por bearer e é consumida no resgate.",
+          ko: "스캔 페이지는 토큰 없이 GET /api/v1/plugins/sso/sessions/{id}를 폴링해 상태만 받고 신원은 결코 받지 않습니다. 자격 증명은 bearer 인증을 거치는 POST /api/v1/plugins/sso/verify에 의해서만 공개되고 사용 시 소멸합니다.",
+          ar: "صفحة المسح تستقصي GET /api/v1/plugins/sso/sessions/{id} بلا أي رمز وتحصل على الحالة، لا على هوية قط؛ وبيانات الاعتماد لا تُسلَّم إلا عبر POST /api/v1/plugins/sso/verify الموثّق بـ bearer، وتُحرق عند الاسترداد.",
         },
       },
       {
@@ -1874,6 +2114,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Срок и цена",
           tr: "Süre ve fiyat",
           hu: "Élettartam és ár",
+          "pt-BR": "Validade e preço",
+          ko: "유효 기간과 가격",
+          ar: "مدة الصلاحية والسعر",
         },
         v: {
           en: "POPOPX_SSO_TTL_SECONDS=180 and POPOPX_SSO_POLL_INTERVAL_MS=2000; minting a QR is free, the POPOPX_CP_PER_SSO_LOGIN=1 charge happens on the user's approval.",
@@ -1894,6 +2137,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "POPOPX_SSO_TTL_SECONDS=180 и POPOPX_SSO_POLL_INTERVAL_MS=2000; издаването на QR е безплатно, таксата POPOPX_CP_PER_SSO_LOGIN=1 се начислява в момента на одобрение от потребителя.",
           tr: "POPOPX_SSO_TTL_SECONDS=180 ve POPOPX_SSO_POLL_INTERVAL_MS=2000; QR üretimi ücretsizdir, POPOPX_CP_PER_SSO_LOGIN=1 ücretlendirmesi kullanıcının onay anında yapılır.",
           hu: "POPOPX_SSO_TTL_SECONDS=180 és POPOPX_SSO_POLL_INTERVAL_MS=2000; a QR kibocsátása ingyenes, a POPOPX_CP_PER_SSO_LOGIN=1 terhelés a felhasználó jóváhagyásakor lép fel.",
+          "pt-BR": "POPOPX_SSO_TTL_SECONDS=180 e POPOPX_SSO_POLL_INTERVAL_MS=2000; emitir um QR é gratuito, a cobrança de POPOPX_CP_PER_SSO_LOGIN=1 acontece na aprovação do usuário.",
+          ko: "POPOPX_SSO_TTL_SECONDS=180, POPOPX_SSO_POLL_INTERVAL_MS=2000입니다. QR 발급은 무료이며, POPOPX_CP_PER_SSO_LOGIN=1 과금은 사용자의 승인 시점에 발생합니다.",
+          ar: "POPOPX_SSO_TTL_SECONDS=180 وPOPOPX_SSO_POLL_INTERVAL_MS=2000؛ إصدار QR مجاني، وتحصيل POPOPX_CP_PER_SSO_LOGIN=1 يحدث عند موافقة المستخدم.",
         },
       },
     ],
@@ -1930,6 +2176,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Криптирани проучвания без бекенд и анонимни гласувания",
       tr: "Backend’siz şifreli anketler ve anonim oylamalar",
       hu: "Backend nélküli titkosított felmérések és anonim szavazások",
+      "pt-BR": "Enquetes e votações criptografadas sem backend",
+      ko: "백엔드 없는 암호화 설문과 투표",
+      ar: "استبيانات واستطلاعات مشفّرة بلا خادم خلفي",
     },
     hook: {
       en: "Create the poll in the console, fans tap to vote, and the bar moves inside the same bubble.",
@@ -1950,6 +2199,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Създавате анкетата в конзолата, последователите докосват, за да гласуват, и барът се мести в същия балон.",
       tr: "Anketi konsolda oluşturun, takipçiler dokunarak oy verir ve çubuk aynı baloncuğun içinde hareket eder.",
       hu: "A konzolban hozod létre a szavazást, a követők egy érintéssel szavaznak, és a sáv ugyanabban a buborékban mozog.",
+      "pt-BR": "Crie a enquete no console, os fãs tocam para votar, e a barra se move dentro da mesma bolha.",
+      ko: "콘솔에서 투표를 만들면 팬이 탭으로 투표하고, 막대가 같은 말풍선 안에서 움직입니다.",
+      ar: "أنشئ الاستطلاع في وحدة التحكم، فيضغط المتابعون للتصويت، ويتحرك الشريط داخل الفقاعة نفسها.",
     },
     facts: [
       {
@@ -1972,6 +2224,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Създаване",
           tr: "Oluşturma",
           hu: "Létrehozás",
+          "pt-BR": "Criação",
+          ko: "생성",
+          ar: "الإنشاء",
         },
         v: {
           en: "POST /api/v1/plugins/polls takes question, options, mode, multi and targets; at most four options (the client's action ceiling), and empty targets means nobody, so a poll is never a broadcast by default.",
@@ -1992,6 +2247,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "POST /api/v1/plugins/polls приема question, options, mode, multi и targets; най-много четири опции (таванът на бутоните в клиента), а празен targets означава никой, така че анкетата по подразбиране никога не е излъчване към всички.",
           tr: "POST /api/v1/plugins/polls, question, options, mode, multi ve targets alır; en fazla dört seçenek (istemcinin buton sınırı) ve boş targets hiç kimse demektir, dolayısıyla anket varsayılan olarak asla bir toplu gönderim olmaz.",
           hu: "A POST /api/v1/plugins/polls a question, options, mode, multi és targets mezőket fogadja; legfeljebb négy opció (a kliens gombplafonja), és az üres targets azt jelenti, hogy senkinek, így a szavazás alapértelmezés szerint sosem tömegküldés.",
+          "pt-BR": "POST /api/v1/plugins/polls recebe question, options, mode, multi e targets; no máximo quatro opções (o teto de ações do cliente), e targets vazio significa ninguém, então uma enquete nunca é um disparo em massa por padrão.",
+          ko: "POST /api/v1/plugins/polls는 question, options, mode, multi, targets를 받습니다. 선택지는 최대 4개(클라이언트의 액션 상한)이며, targets가 비어 있으면 아무도 대상이 아니므로 투표는 기본적으로 절대 브로드캐스트가 아닙니다.",
+          ar: "يستقبل POST /api/v1/plugins/polls الحقول question وoptions وmode وmulti وtargets؛ وبحد أقصى أربعة خيارات (سقف الإجراءات في العميل)، وtargets الفارغة تعني لا أحد، لذا لا يكون الاستطلاع بثًا عامًا افتراضيًا أبدًا.",
         },
       },
       {
@@ -2014,6 +2272,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Дедуплициране",
           tr: "Mükerrer engelleme",
           hu: "Duplikációszűrés",
+          "pt-BR": "Deduplicação",
+          ko: "중복 제거",
+          ar: "إزالة التكرار",
         },
         v: {
           en: "poll_votes carries UNIQUE (poll_id, contact_id) and the check-plus-write runs in one transaction; a follower's second tap is answered as a replay, no count, no charge, no rewrite of a published result.",
@@ -2034,6 +2295,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "poll_votes носи UNIQUE (poll_id, contact_id), а проверката заедно със записа се извършва в една транзакция; второто докосване на последовател се третира като повторение: без броене, без такса, без презаписване на публикуван резултат.",
           tr: "poll_votes tablosunda UNIQUE (poll_id, contact_id) bulunur ve kontrol ile yazma tek transaction içinde çalışır; takipçinin ikinci dokunuşu yeniden gönderim olarak yanıtlanır: sayım yok, ücret yok, yayımlanmış sonucun yeniden yazılması yok.",
           hu: "A poll_votes tábla UNIQUE (poll_id, contact_id) kulccsal rendelkezik, és az ellenőrzés meg a beírás egyetlen tranzakcióban fut; a követő második érintését replay-ként kezeljük: nem számítjuk, nem számlázzuk, és egy közzétett eredményt sem írunk át.",
+          "pt-BR": "poll_votes tem UNIQUE (poll_id, contact_id) e a verificação e a gravação rodam em uma única transação; o segundo toque de um seguidor é respondido como repetição, sem contagem, sem cobrança e sem reescrever um resultado já publicado.",
+          ko: "poll_votes는 UNIQUE (poll_id, contact_id)를 가지며 검사와 쓰기가 하나의 트랜잭션에서 실행됩니다. 팔로워의 두 번째 탭은 재전송으로 처리되어 집계도, 과금도, 게시된 결과의 재작성도 없습니다.",
+          ar: "يحمل poll_votes القيد UNIQUE (poll_id, contact_id) ويجري الفحص والكتابة في معاملة واحدة؛ ويُرد على ضغطة المتابع الثانية كإعادة تشغيل، بلا احتساب ولا خصم ولا إعادة كتابة لنتيجة منشورة.",
         },
       },
       {
@@ -2056,6 +2320,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Таксуване",
           tr: "Faturalandırma",
           hu: "Számlázás",
+          "pt-BR": "Cobrança",
+          ko: "과금",
+          ar: "الفوترة",
         },
         v: {
           en: "Polls default to anonymous, publishing counts and shares but never a voter; each counted vote is POPOPX_CP_PER_POLL=1 and the card itself is POPOPX_CP_PER_CARD=1.",
@@ -2076,6 +2343,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Анкетите са анонимни по подразбиране: публикуват се бройки и дялове, но никога гласувалият; всеки броен глас е POPOPX_CP_PER_POLL=1, а самата картичка е POPOPX_CP_PER_CARD=1.",
           tr: "Oylama kartları varsayılan olarak anonimdir: yalnızca seçenek sayıları ve oranları yayımlanır, oy veren kişinin kimliği sonuca girmez; sayılan her oy POPOPX_CP_PER_POLL=1, kartın kendisi POPOPX_CP_PER_CARD=1.",
           hu: "A szavazások alapértelmezés szerint névtelenek: darabszámok és arányok kerülnek közzétételre, szavazó soha; minden beszámított szavazat POPOPX_CP_PER_POLL=1, maga a kártya POPOPX_CP_PER_CARD=1.",
+          "pt-BR": "As enquetes são anônimas por padrão, publicando contagens e proporções mas nunca um votante; cada voto contado custa POPOPX_CP_PER_POLL=1 e o cartão em si custa POPOPX_CP_PER_CARD=1.",
+          ko: "투표는 기본적으로 익명이며 집계와 비율은 공개하지만 투표자는 절대 공개하지 않습니다. 집계된 투표 하나는 POPOPX_CP_PER_POLL=1이고 카드 자체는 POPOPX_CP_PER_CARD=1입니다.",
+          ar: "الاستطلاعات مجهولة افتراضيًا، وتنشر الأعداد والنسب لكن لا تكشف أي مصوّت أبدًا؛ وكل صوت محتسب POPOPX_CP_PER_POLL=1 والبطاقة نفسها POPOPX_CP_PER_CARD=1.",
         },
       },
     ],
@@ -2111,6 +2381,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Наблюдение on-chain и изпращане по бял списък",
       tr: "Zincir üstü izleme ve beyaz listeye gönderim",
       hu: "On-chain figyelés és fehérlistás kiküldés",
+      "pt-BR": "Monitoramento on-chain e entrega por lista de permissões",
+      ko: "온체인 감시와 화이트리스트 전달",
+      ar: "المراقبة على السلسلة وتسليم القائمة البيضاء",
     },
     hook: {
       en: "Read-only watching of EVM and Solana addresses: a transfer becomes a receipt card, and a private key never enters the server.",
@@ -2131,6 +2404,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Наблюдение само за четене на адреси от EVM и Solana: преводът се превръща в картичка receipt, а личният ключ никога не влиза в сървъра.",
       tr: "EVM ve Solana adreslerinin yalnızca okuma şeklinde izlenmesi: gelen transfer bir receipt kartına dönüşür ve özel anahtar sunucuya asla girmez.",
       hu: "Csak olvasható módban történő figyelés EVM és Solana címeken: az érkezett átutalás receipt kártyává válik, és a privát kulcs soha nem kerül fel a szerverre.",
+      "pt-BR": "Monitoramento somente leitura de endereços EVM e Solana: uma transferência se torna um cartão de recibo, e uma chave privada nunca entra no servidor.",
+      ko: "EVM 및 Solana 주소를 읽기 전용으로 감시합니다. 전송이 발생하면 영수증 카드가 되며, 개인 키는 서버에 들어오지 않습니다.",
+      ar: "مراقبة للقراءة فقط لعناوين EVM وSolana: يتحول التحويل إلى بطاقة إيصال، ولا يدخل مفتاح خاص إلى الخادم أبدًا.",
     },
     facts: [
       {
@@ -2153,6 +2429,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Превключвател",
           tr: "Anahtar",
           hu: "Kapcsoló",
+          "pt-BR": "Interruptor",
+          ko: "스위치",
+          ar: "مفتاح التشغيل",
         },
         v: {
           en: "Default 0: the routes are not mounted, the console row reports available false with error disabled, and only POPOPX_PLUGIN_WEB3_BRIDGE=1 brings it up.",
@@ -2173,6 +2452,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Стойност по подразбиране 0: маршрутите не се качват, редът в конзолата сочи available false с error disabled и единствено POPOPX_PLUGIN_WEB3_BRIDGE=1 го стартира.",
           tr: "Varsayılan 0: rotalar monte edilmez, konsol satırı available false ve error disabled olarak raporlar; ancak POPOPX_PLUGIN_WEB3_BRIDGE=1 ile ayağa kalkar.",
           hu: "Alapértelmezés 0: az útvonalak nem kerülnek felcsatolásra, a konzol sora available false és error disabled értéket mutat, és csak a POPOPX_PLUGIN_WEB3_BRIDGE=1 indítja be.",
+          "pt-BR": "Padrão 0: as rotas não são montadas, a linha do console informa available false com error disabled, e só POPOPX_PLUGIN_WEB3_BRIDGE=1 a ativa.",
+          ko: "기본값은 0입니다. 라우트가 마운트되지 않고, 콘솔 행은 available 값이 false이고 error가 disabled인 상태를 보고하며, POPOPX_PLUGIN_WEB3_BRIDGE=1만이 이를 활성화합니다.",
+          ar: "القيمة الافتراضية 0: لا تُركَّب المسارات، ويبلّغ صف وحدة التحكم عن available false مع error disabled، ولا شيء يرفعها سوى POPOPX_PLUGIN_WEB3_BRIDGE=1.",
         },
       },
       {
@@ -2195,6 +2477,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Наблюдение",
           tr: "İzleme",
           hu: "Figyelés",
+          "pt-BR": "Monitoramento",
+          ko: "감시",
+          ar: "المراقبة",
         },
         v: {
           en: "Public JSON-RPC is read every POPOPX_WEB3_POLL_INTERVAL_SECONDS=30 (POPOPX_WEB3_EVM_RPC_URL defaults to https://eth.llamarpc.com, POPOPX_WEB3_SOLANA_RPC_URL to https://api.mainnet-beta.solana.com), and any parameter whose name smells like key material is refused outright.",
@@ -2215,6 +2500,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Публичният JSON-RPC се чете на всеки POPOPX_WEB3_POLL_INTERVAL_SECONDS=30 секунди (POPOPX_WEB3_EVM_RPC_URL е по подразбиране https://eth.llamarpc.com, а POPOPX_WEB3_SOLANA_RPC_URL е https://api.mainnet-beta.solana.com), и всеки параметър, чието име напомня за ключов материал, се отхвърля без колебание.",
           tr: "Genel JSON-RPC her POPOPX_WEB3_POLL_INTERVAL_SECONDS=30 saniyede bir okunur (POPOPX_WEB3_EVM_RPC_URL varsayılan olarak https://eth.llamarpc.com, POPOPX_WEB3_SOLANA_RPC_URL ise https://api.mainnet-beta.solana.com) ve adı anahtar malzemesini andıran herhangi bir parametre kesinlikle reddedilir.",
           hu: "A nyilvános JSON-RPC-t minden POPOPX_WEB3_POLL_INTERVAL_SECONDS=30 másodpercbel elolvassuk (a POPOPX_WEB3_EVM_RPC_URL alapértelmezése https://eth.llamarpc.com, a POPOPX_WEB3_SOLANA_RPC_URL-é https://api.mainnet-beta.solana.com), és minden paramétert, amelynek neve kulcsanyagra utal, határozottan elutasítunk.",
+          "pt-BR": "O JSON-RPC público é lido a cada POPOPX_WEB3_POLL_INTERVAL_SECONDS=30 (POPOPX_WEB3_EVM_RPC_URL usa https://eth.llamarpc.com por padrão, e POPOPX_WEB3_SOLANA_RPC_URL usa https://api.mainnet-beta.solana.com), e qualquer parâmetro cujo nome cheire a material de chave é recusado de imediato.",
+          ko: "공용 JSON-RPC는 POPOPX_WEB3_POLL_INTERVAL_SECONDS=30마다 읽습니다(POPOPX_WEB3_EVM_RPC_URL의 기본값은 https://eth.llamarpc.com, POPOPX_WEB3_SOLANA_RPC_URL의 기본값은 https://api.mainnet-beta.solana.com). 이름이 키 자료를 연상시키는 매개변수는 즉시 거부됩니다.",
+          ar: "يُقرأ JSON-RPC العام كل POPOPX_WEB3_POLL_INTERVAL_SECONDS=30 (القيمة الافتراضية لـ POPOPX_WEB3_EVM_RPC_URL هي https://eth.llamarpc.com، ولـ POPOPX_WEB3_SOLANA_RPC_URL هي https://api.mainnet-beta.solana.com)، وأي معامل يوحي اسمه بأنه مادة مفتاحية يُرفض رفضًا قاطعًا.",
         },
       },
       {
@@ -2237,6 +2525,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Бял списък",
           tr: "Beyaz liste",
           hu: "Fehérlista",
+          "pt-BR": "Lista de permissões",
+          ko: "화이트리스트",
+          ar: "القائمة البيضاء",
         },
         v: {
           en: "POST /api/v1/plugins/web3/whitelist claims an address as a member of a channel, and the poll loop honours that promise by handing the epoch key over in a channel_key_update; chain events cost POPOPX_CP_PER_WEB3_EVENT=1 and a replayed receipt charges nothing at all.",
@@ -2257,6 +2548,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "POST /api/v1/plugins/web3/whitelist обявява адрес за член на канал и цикълът на допитване изпълнява това обещание, като предава ключа на епохата в channel_key_update; събитията от веригата струват POPOPX_CP_PER_WEB3_EVENT=1, а повторен receipt не струва нищо.",
           tr: "POST /api/v1/plugins/web3/whitelist bir adresi kanal üyesi olarak taahhüt eder ve yoklama döngüsü bu sözü, epoch anahtarını bir channel_key_update içinde teslim ederek tutar; zincir olayları POPOPX_CP_PER_WEB3_EVENT=1 tutar ve yeniden gönderilen makbuz hiç ücretlendirilmez.",
           hu: "A POST /api/v1/plugins/web3/whitelist azt ígéri, hogy a cím egy csatorna tagja, és a lekérdező ciklus be is tartja ezt az ígéretet: az epochakulcsot egy channel_key_update keretében adja át; a láncesemények POPOPX_CP_PER_WEB3_EVENT=1-be kerülnek, egy replayelt receipt pedig egyáltalán nem számít fel díjat.",
+          "pt-BR": "POST /api/v1/plugins/web3/whitelist reivindica um endereço como membro de um canal, e o laço de consulta honra essa promessa entregando a chave de epoch em um channel_key_update; eventos de cadeia custam POPOPX_CP_PER_WEB3_EVENT=1 e um recibo repetido não cobra nada.",
+          ko: "POST /api/v1/plugins/web3/whitelist는 주소를 채널 구성원으로 등록하며, 폴링 루프가 그 약속을 지켜 channel_key_update로 epoch 키를 전달합니다. 체인 이벤트는 POPOPX_CP_PER_WEB3_EVENT=1이고, 재전송된 영수증은 전혀 과금되지 않습니다.",
+          ar: "يطالب POST /api/v1/plugins/web3/whitelist بعنوان كعضو في قناة، وتفي حلقة الاستقصاء بذلك الوعد بتسليم مفتاح epoch في channel_key_update؛ وأحداث السلسلة تكلّف POPOPX_CP_PER_WEB3_EVENT=1، والإيصال المعاد تشغيله لا يحتسب شيئًا على الإطلاق.",
         },
       },
     ],
@@ -2294,6 +2588,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Мост за workflow webhook",
       tr: "İş akışı webhook köprüsü",
       hu: "Munkafolyamat-webhook híd",
+      "pt-BR": "Ponte de webhook de fluxo de trabalho",
+      ko: "워크플로 웹훅 브리지",
+      ar: "جسر ويب هوك سير العمل",
     },
     hook: {
       en: "Inbound triggers queue while the node is offline, and every outbound action lands as a card a human must approve.",
@@ -2314,6 +2611,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Входящите тригери чакат в опашка, докато възелът е офлайн, а всяко изходящо действие пристига като карта, която човек трябва да одобри.",
       tr: "Düğüm çevrimdışıyken gelen tetikleyiciler kuyrukta bekler ve her giden işlem, bir insanın onaylaması gereken kart olarak düşer.",
       hu: "A bejövő eseményindítók a csomópont offline állapotában sorban várnak, minden kimenő művelet pedig olyan kártyaként érkezik, amelyet embernek kell jóváhagynia.",
+      "pt-BR": "Os gatilhos de entrada ficam na fila enquanto o nó está offline, e toda ação de saída chega como um cartão que uma pessoa precisa aprovar.",
+      ko: "노드가 오프라인인 동안 인바운드 트리거는 대기열에 쌓이며, 모든 아웃바운드 액션은 사람이 승인해야 하는 카드로 도착합니다.",
+      ar: "تصطف المحفّزات الواردة في الطابور بينما العقدة غير متصلة، وكل إجراء صادر يصل كبطاقة يجب أن يوافق عليها إنسان.",
     },
     facts: [
       {
@@ -2337,6 +2637,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Входящите повиквания носят X-PPX-Workflow-Token, издаден на POST /api/v1/plugins/workflow/tokens с message.send или approval.request; на диска се пази само SHA-256 хеш, а откритият текст се показва веднъж. Всяко абонаментно ниво има свой изходящ подписен секрет, запечатан с POPOPX_VAULT_KEY и подлежащ на ротация. Админ повикванията използват корен bearer или scoped токен pxa_.",
           tr: "Gelen çağrılar, POST /api/v1/plugins/workflow/tokens üzerinde message.send veya approval.request ile üretilen X-PPX-Workflow-Token taşır; diskte yalnızca SHA-256 karması tutulur ve düz metin bir kez gösterilir. Her aboneliğin kendi giden imza sırrı vardır; POPOPX_VAULT_KEY ile mühürlenir ve döndürülebilir. Yönetici çağrıları kök bearer’ı veya kapsamlı pxa_ tokenını kullanır.",
           hu: "A bejövő hívások X-PPX-Workflow-Token fejlécet hoznak, amelyet a POST /api/v1/plugins/workflow/tokens végpont ad ki message.send vagy approval.request hatókörrel; csak SHA-256 hash tárolódik, a nyílt szöveg egyszer jelenik meg. Minden előfizetésnek saját kimenő aláírási titka van, amelyet a POPOPX_VAULT_KEY pecsétel le, és forgatható. Az admin hívások a gyökér bearer tokent vagy egy hatókörrel ellátott pxa_ tokent használnak.",
+          "pt-BR": "As chamadas de entrada carregam X-PPX-Workflow-Token, emitido em POST /api/v1/plugins/workflow/tokens com message.send ou approval.request; apenas um hash SHA-256 é armazenado e o texto claro aparece uma única vez. Cada subscrição recebe o próprio segredo de assinatura de saída, selado por POPOPX_VAULT_KEY e rotacionável. Chamadas administrativas usam o bearer raiz ou um token pxa_ com escopo.",
+          ko: "인바운드 호출은 POST /api/v1/plugins/workflow/tokens에서 message.send 또는 approval.request로 발급된 X-PPX-Workflow-Token을 전달합니다. SHA-256 해시만 저장되며 평문은 한 번만 표시됩니다. 각 구독은 POPOPX_VAULT_KEY로 봉인되고 교체 가능한 자체 아웃바운드 서명 시크릿을 가집니다. 관리자 호출은 루트 bearer 또는 범위가 지정된 pxa_ 토큰을 사용합니다.",
+          ar: "تحمل الاستدعاءات الواردة X-PPX-Workflow-Token، المُصدر عند POST /api/v1/plugins/workflow/tokens بصلاحية message.send أو approval.request؛ ولا يُخزَّن إلا تجزئة SHA-256 ويظهر النص الواضح مرة واحدة. وكل اشتراك يحصل على سر توقيع صادر خاص به، مختوم بـ POPOPX_VAULT_KEY وقابل للتدوير. والاستدعاءات الإدارية تستخدم رمز bearer الجذري أو رمز pxa_ محدود النطاق.",
         },
       },
       {
@@ -2360,6 +2663,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Действието винаги става карта за одобрение с 批准执行 / 拒绝 и шлюзът никога не го изпълнява сам. Ако възелът е офлайн, тригерът се поставя в опашка като 202 queued_local или pending_approval плюс standalone_gateway; изходящите заявки носят X-PPX-Timestamp и X-PPX-Signature: sha256=<hex>, а одитът не пази текст, URL, токен или секрет.",
           tr: "Bir işlem her zaman 批准执行 / 拒绝 içeren bir onay kartına dönüşür ve ağ geçidi tarafından asla kendiliğinden çalıştırılmaz. Düğüm çevrimdışıysa tetikleyici 202 queued_local veya pending_approval ve standalone_gateway olarak kuyruğa alınır; giden istekler X-PPX-Timestamp ve X-PPX-Signature: sha256=<hex> taşır, denetim kaydında metin, URL, token veya sır tutulmaz.",
           hu: "A művelet mindig jóváhagyó kártyává válik 批准执行 / 拒绝 gombokkal, és az átjáró soha nem hajtja végre maga. Ha a csomópont offline, az eseményindító 202 queued_local vagy pending_approval állapotban, standalone_gateway kíséretében sorba kerül; a kimenő kérések X-PPX-Timestamp és X-PPX-Signature: sha256=<hex> fejlécet hordoznak, az audit pedig nem tárol szöveget, URL-t, tokent vagy titkot.",
+          "pt-BR": "Uma ação sempre vira um cartão de aprovação com 批准执行 / 拒绝 e nunca é executada pelo gateway. Se o nó estiver offline, o gatilho é enfileirado como 202 queued_local ou pending_approval mais standalone_gateway; posts de saída carregam X-PPX-Timestamp e X-PPX-Signature: sha256=<hex>, e a trilha de auditoria não guarda texto, URL, token nem segredo.",
+          ko: "동작은 항상 批准执行 / 拒绝이 있는 승인 카드가 되며 게이트웨이가 실행하는 일은 없습니다. 노드가 오프라인이면 트리거는 202 queued_local 또는 pending_approval과 standalone_gateway로 대기열에 들어갑니다. 아웃바운드 게시물은 X-PPX-Timestamp와 X-PPX-Signature: sha256=<hex>를 함께 보내며, 감사 추적에는 텍스트, URL, 토큰, 시크릿이 남지 않습니다.",
+          ar: "كل إجراء يصبح دائمًا بطاقة موافقة تحمل «批准执行 / 拒绝» ولا تنفّذه البوابة أبدًا. وإذا كانت العقدة غير متصلة، يُصفّ المشغّل كـ 202 queued_local أو pending_approval مع standalone_gateway؛ والمنشورات الصادرة تحمل X-PPX-Timestamp وX-PPX-Signature: sha256=<hex>، وسجل التدقيق لا يحتفظ بأي نص أو URL أو رمز أو سر.",
         },
       },
       {
@@ -2383,6 +2689,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "20 абонамента и 50 живи токена, 4 000 знака на текст; 8 последователни грешки отварят 15-минутен предпазител; доставките се пазят 30 дни; повикване, което не е нито изпратено, нито в опашка, връща 502 и се възстановява.",
           tr: "20 abonelik ve 50 canlı token, metin başına 4.000 karakter; üst üste 8 hata 15 dakikalık devre kesiciyi açar; teslimatlar 30 gün saklanır; ne gönderilen ne kuyruğa alınan çağrı 502 döner ve iade edilir.",
           hu: "20 előfizetés és 50 élő token, szövegenként 4 000 karakter; 8 egymást követő hiba 15 perces áramkör-megszakítót nyit; a kézbesítések 30 napig megmaradnak; a sem elküldött, sem sorba állított hívás 502-t ad és visszatérítésre kerül.",
+          "pt-BR": "20 subscrições e 50 tokens vivos, 4.000 caracteres por texto; 8 falhas consecutivas abrem um circuito de 15 minutos; as entregas são retidas por 30 dias; uma chamada que não foi enviada nem enfileirada retorna 502 e é reembolsada.",
+          ko: "구독 20개, 활성 토큰 50개, 텍스트당 4,000자입니다. 8회 연속 실패 시 15분간 회로가 열립니다. 전달 기록은 30일간 보존됩니다. 전송도 대기열 등록도 되지 않은 호출은 502를 반환하고 환불됩니다.",
+          ar: "20 اشتراكًا و50 رمزًا حيًا، و4,000 حرف لكل نص؛ و8 إخفاقات متتالية تفتح قاطعًا لمدة 15 دقيقة؛ ويُحتفظ بالتسليمات 30 يومًا؛ والاستدعاء الذي لم يُرسَل ولم يُوضع في الطابور يعيد 502 ويُسترد مبلغه.",
         },
       },
     ],
@@ -2418,6 +2727,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Заявка за контакти CardDAV",
       tr: "CardDAV kişi sorgusu",
       hu: "CardDAV-névjegylekérdezés",
+      "pt-BR": "Consulta de contatos CardDAV",
+      ko: "CardDAV 연락처 조회",
+      ar: "استعلام جهات اتصال CardDAV",
     },
     hook: {
       en: "Your address book answers five contacts at a time, and only the fields you allowlist ever leave it.",
@@ -2438,6 +2750,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Адресникът отговаря с пет контакта наведнъж и от него излизат само полетата от вашия бял списък.",
       tr: "Adres defteri her seferinde beş kişi yanıtlar ve yalnızca izin listenizdeki alanlar dışarı çıkar.",
       hu: "A címjegyzék alkalmanként öt névjegyet ad, és csak a fehérlistára tett mezők hagyják el.",
+      "pt-BR": "Seu catálogo de endereços responde cinco contatos por vez, e apenas os campos que você incluir na lista de permissões saem dele.",
+      ko: "주소록은 한 번에 연락처 5개까지 응답하며, 허용 목록에 넣은 필드만 주소록을 떠납니다.",
+      ar: "يجيب دفتر عناوينك بخمس جهات اتصال في المرة، ولا يغادره إلا الحقول التي تدرجها في القائمة المسموحة.",
     },
     facts: [
       {
@@ -2461,6 +2776,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "PUT /api/v1/plugins/carddav/config пази паролата за CardDAV, запечатана с POPOPX_VAULT_KEY; админ повикванията използват корен bearer POPOPX_ADMIN_TOKEN или scoped токен pxa_.",
           tr: "PUT /api/v1/plugins/carddav/config, CardDAV parolasını POPOPX_VAULT_KEY ile mühürleyerek saklar; yönetici çağrıları kök POPOPX_ADMIN_TOKEN bearer’ını veya kapsamlı pxa_ tokenını kullanır.",
           hu: "A PUT /api/v1/plugins/carddav/config a CardDAV-jelszót a POPOPX_VAULT_KEY kulccsal lepecsételve tárolja; az admin hívások a gyökér POPOPX_ADMIN_TOKEN bearert vagy egy hatókörrel ellátott pxa_ tokent használnak.",
+          "pt-BR": "PUT /api/v1/plugins/carddav/config armazena a senha do CardDAV selada por POPOPX_VAULT_KEY; chamadas administrativas usam o bearer POPOPX_ADMIN_TOKEN raiz ou um token pxa_ com escopo.",
+          ko: "PUT /api/v1/plugins/carddav/config는 POPOPX_VAULT_KEY로 봉인된 CardDAV 비밀번호를 저장합니다. 관리자 호출은 루트 POPOPX_ADMIN_TOKEN bearer 또는 범위가 지정된 pxa_ 토큰을 사용합니다.",
+          ar: "يخزّن PUT /api/v1/plugins/carddav/config كلمة مرور CardDAV مختومة بـ POPOPX_VAULT_KEY؛ وتستخدم الاستدعاءات الإدارية رمز bearer الجذري POPOPX_ADMIN_TOKEN أو رمز pxa_ محدود النطاق.",
         },
       },
       {
@@ -2484,6 +2802,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "POST /api/v1/plugins/carddav/query връща display_name, най-много 8 разрешени полета и 10 тага; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER и X-* се отхвърлят, home/private TEL и EMAIL се изхвърлят, а UID, href и суров vCard не се връщат.",
           tr: "POST /api/v1/plugins/carddav/query display_name ile en fazla 8 izinli alan ve 10 etiket döndürür; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER ve X-* reddedilir, home/private TEL ve EMAIL atılır, UID, href ve ham vCard geri dönmez.",
           hu: "A POST /api/v1/plugins/carddav/query display_name-t, legfeljebb 8 engedélyezett mezőt és 10 címkét ad vissza; a NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER és X-* elutasításra kerül, a home/private TEL és EMAIL kimarad, UID, href és nyers vCard pedig nem jön vissza.",
+          "pt-BR": "POST /api/v1/plugins/carddav/query retorna display_name mais no máximo 8 campos permitidos e 10 tags; NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER e X-* são recusados, TEL e EMAIL de casa/particulares são descartados, e nenhum UID, href ou vCard bruto volta.",
+          ko: "POST /api/v1/plugins/carddav/query는 display_name과 허용된 필드 최대 8개, 태그 최대 10개를 반환합니다. NOTE, ADR, BDAY, PHOTO, KEY, GEO, TZ, LABEL, GENDER, X-*는 거부되고, 집/개인 TEL과 EMAIL은 제거되며, UID, href, 원본 vCard는 반환되지 않습니다.",
+          ar: "يعيد POST /api/v1/plugins/carddav/query الحقل display_name مع 8 حقول مسموحة على الأكثر و10 وسوم؛ وتُرفض NOTE وADR وBDAY وPHOTO وKEY وGEO وTZ وLABEL وGENDER وX-*، وتُسقَط TEL وEMAIL المنزلية/الخاصة، ولا يعود أي UID أو href أو vCard خام.",
         },
       },
       {
@@ -2507,6 +2828,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Пет контакта на заявка, дума за търсене до 80 знака и стойности на полетата до 240 знака; нищо не се кешира и неуспешната заявка се възстановява.",
           tr: "Sorgu başına beş kişi, 80 karakterlik arama terimi ve 240 karakterlik alan değerleri; hiçbir şey önbelleğe alınmaz ve başarısız sorgu iade edilir.",
           hu: "Lekérdezésenként öt névjegy, 80 karakteres keresőkifejezés és 240 karakteres mezőértékek; semmi nem kerül gyorsítótárba, a sikertelen lekérdezés pedig visszatérítésre kerül.",
+          "pt-BR": "Cinco contatos por consulta, um termo de busca de 80 caracteres e valores de campo de 240 caracteres; nada é armazenado em cache, e uma consulta que falha é reembolsada.",
+          ko: "조회당 연락처 5개, 검색어 80자, 필드 값 240자입니다. 아무것도 캐시되지 않으며, 실패한 조회는 환불됩니다.",
+          ar: "خمس جهات اتصال لكل استعلام، ومصطلح بحث من 80 حرفًا وقيم حقول من 240 حرفًا؛ ولا يُخزَّن أي شيء مؤقتًا، والاستعلام الفاشل يُسترد مبلغه.",
         },
       },
     ],
@@ -2542,6 +2866,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "CalDAV проба за свободно/заето",
       tr: "CalDAV boş/dolu sorgusu",
       hu: "CalDAV szabad/foglalt próba",
+      "pt-BR": "Sondagem livre/ocupado do CalDAV",
+      ko: "CalDAV 한가함/바쁨 조회",
+      ar: "فحص الأوقات المتاحة والمشغولة في CalDAV",
     },
     hook: {
       en: "It answers when you are free, not what you are doing: titles, guests, descriptions and rooms never leave the calendar.",
@@ -2562,6 +2889,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Отговаря кога сте свободни, а не какво правите: заглавия, гости, описания и стаи никога не напускат календара.",
       tr: "Ne yaptığınızı değil, ne zaman müsait olduğunuzu yanıtlar: başlıklar, konuklar, açıklamalar ve odalar takvimden hiç çıkmaz.",
       hu: "Azt válaszolja meg, mikor vagy szabad, nem azt, hogy mit csinálsz: címek, vendégek, leírások és helyiségek soha nem hagyják el a naptárt.",
+      "pt-BR": "Ela responde quando você está livre, não o que você está fazendo: títulos, convidados, descrições e salas nunca saem do calendário.",
+      ko: "무엇을 하는지가 아니라 언제 한가한지를 응답합니다. 제목, 참석자, 설명, 회의실은 캘린더를 떠나지 않습니다.",
+      ar: "يجيب عن متى تكون متاحًا، لا عمّا تفعله: فالعناوين والمدعوون والأوصاف والقاعات لا تغادر التقويم أبدًا.",
     },
     facts: [
       {
@@ -2585,6 +2915,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "PUT /api/v1/plugins/caldav/config пази паролата за CalDAV, запечатана с POPOPX_VAULT_KEY; админ повикванията използват корен bearer POPOPX_ADMIN_TOKEN или scoped токен pxa_.",
           tr: "PUT /api/v1/plugins/caldav/config, CalDAV parolasını POPOPX_VAULT_KEY ile mühürleyerek saklar; yönetici çağrıları kök POPOPX_ADMIN_TOKEN bearer’ını veya kapsamlı pxa_ tokenını kullanır.",
           hu: "A PUT /api/v1/plugins/caldav/config a CalDAV-jelszót a POPOPX_VAULT_KEY kulccsal lepecsételve tárolja; az admin hívások a gyökér POPOPX_ADMIN_TOKEN bearert vagy egy hatókörrel ellátott pxa_ tokent használnak.",
+          "pt-BR": "PUT /api/v1/plugins/caldav/config armazena a senha do CalDAV selada por POPOPX_VAULT_KEY; chamadas administrativas usam o bearer POPOPX_ADMIN_TOKEN raiz ou um token pxa_ com escopo.",
+          ko: "PUT /api/v1/plugins/caldav/config는 POPOPX_VAULT_KEY로 봉인된 CalDAV 비밀번호를 저장합니다. 관리자 호출은 루트 POPOPX_ADMIN_TOKEN bearer 또는 범위가 지정된 pxa_ 토큰을 사용합니다.",
+          ar: "يخزّن PUT /api/v1/plugins/caldav/config كلمة مرور CalDAV مختومة بـ POPOPX_VAULT_KEY؛ وتستخدم الاستدعاءات الإدارية رمز bearer الجذري POPOPX_ADMIN_TOKEN أو رمز pxa_ محدود النطاق.",
         },
       },
       {
@@ -2608,6 +2941,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "POST /api/v1/plugins/caldav/freebusy запазва само DTSTART, DTEND, DURATION, STATUS, TRANSP и RRULE, изхвърля SUMMARY, DESCRIPTION, LOCATION, ATTENDEE и ORGANIZER, пропуска повтарящите се събития, като ги брои, и маркира свободните слотове като 可预约.",
           tr: "POST /api/v1/plugins/caldav/freebusy yalnızca DTSTART, DTEND, DURATION, STATUS, TRANSP ve RRULE alanlarını tutar; SUMMARY, DESCRIPTION, LOCATION, ATTENDEE ve ORGANIZER alanlarını atar, yinelenen etkinlikleri sayarak atlar ve boş dilimleri 可预约 olarak işaretler.",
           hu: "A POST /api/v1/plugins/caldav/freebusy csak a DTSTART, DTEND, DURATION, STATUS, TRANSP és RRULE mezőket tartja meg, a SUMMARY, DESCRIPTION, LOCATION, ATTENDEE és ORGANIZER mezőket eldobja, az ismétlődő eseményeket megszámolva kihagyja, a szabad sávokat pedig 可预约 jelöléssel adja.",
+          "pt-BR": "POST /api/v1/plugins/caldav/freebusy mantém apenas DTSTART, DTEND, DURATION, STATUS, TRANSP e RRULE, descarta SUMMARY, DESCRIPTION, LOCATION, ATTENDEE e ORGANIZER, pula eventos recorrentes enquanto os conta, e rotula os horários livres como 可预约.",
+          ko: "POST /api/v1/plugins/caldav/freebusy는 DTSTART, DTEND, DURATION, STATUS, TRANSP, RRULE만 유지하고 SUMMARY, DESCRIPTION, LOCATION, ATTENDEE, ORGANIZER를 제거하며, 반복 일정은 집계만 하고 건너뛰며, 비어 있는 시간대에 可预约 레이블을 붙입니다.",
+          ar: "لا يحتفظ POST /api/v1/plugins/caldav/freebusy إلا بـ DTSTART وDTEND وDURATION وSTATUS وTRANSP وRRULE، ويُسقط SUMMARY وDESCRIPTION وLOCATION وATTENDEE وORGANIZER، ويتجاوز الأحداث المتكررة مع احتسابها، ويسمّي الفترات المتاحة 可预约.",
         },
       },
       {
@@ -2631,6 +2967,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Прозорец от 31 дни и най-много 500 слота по 15–240 минути; нищо не се кешира и неуспешната заявка се възстановява.",
           tr: "31 günlük pencere ve 15–240 dakikalık en fazla 500 dilim; hiçbir şey önbelleğe alınmaz ve başarısız sorgu iade edilir.",
           hu: "31 napos ablak és legfeljebb 500, egyenként 15–240 perces sáv; semmi nem kerül gyorsítótárba, a sikertelen lekérdezés pedig visszatérítésre kerül.",
+          "pt-BR": "Uma janela de 31 dias e no máximo 500 horários de 15–240 minutos; nada é armazenado em cache, e uma consulta que falha é reembolsada.",
+          ko: "31일 범위, 15~240분 길이의 슬롯 최대 500개입니다. 아무것도 캐시되지 않으며, 실패한 조회는 환불됩니다.",
+          ar: "نافذة من 31 يومًا و500 فترة على الأكثر من 15–240 دقيقة؛ ولا يُخزَّن أي شيء مؤقتًا، والاستعلام الفاشل يُسترد مبلغه.",
         },
       },
     ],
@@ -2666,6 +3005,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Известия в Slack и Discord",
       tr: "Slack ve Discord bildirimleri",
       hu: "Slack- és Discord-értesítések",
+      "pt-BR": "Notificações no Slack e no Discord",
+      ko: "Slack 및 Discord 알림",
+      ar: "إشعارات Slack وDiscord",
     },
     hook: {
       en: "Webhook URLs are sealed as bearer secrets, and only the text you write leaves the gateway.",
@@ -2686,6 +3028,9 @@ const PLUGINS: readonly PluginModel[] = [
       bg: "Webhook URL адресите са запечатани като bearer тайни и от шлюза излиза само текстът, който напишете.",
       tr: "Webhook URL’leri bearer sır olarak mühürlenir ve ağ geçidinden yalnızca sizin yazdığınız metin çıkar.",
       hu: "A webhook URL-ek bearer titokként vannak lezárva, és csak az általad írt szöveg hagyja el az átjárót.",
+      "pt-BR": "As URLs de webhook são seladas como segredos de bearer, e só o texto que você escreve sai do gateway.",
+      ko: "웹훅 URL은 bearer 시크릿으로 봉인되며, 작성한 텍스트만 게이트웨이를 떠납니다.",
+      ar: "تُختَم عناوين URL للويب هوك كأسرار bearer، ولا يغادر البوابة إلا النص الذي تكتبه.",
     },
     facts: [
       {
@@ -2709,6 +3054,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "Входящият webhook URL на Slack или Discord е bearer тайна, запечатана с POPOPX_VAULT_KEY и никога не се връща; всяко работно пространство получава и еднократна, ротираща се HMAC тайна. Админ повикванията използват корен bearer или scoped токен pxa_.",
           tr: "Slack veya Discord gelen webhook URL’si, POPOPX_VAULT_KEY ile mühürlenen ve asla geri döndürülmeyen bir bearer sırdır; her çalışma alanı ayrıca tek kullanımlık, döndürülebilir bir HMAC sırrı alır. Yönetici çağrıları kök bearer’ı veya kapsamlı pxa_ tokenını kullanır.",
           hu: "A Slack vagy Discord bejövő webhook URL-je bearer titok, amelyet a POPOPX_VAULT_KEY pecsétel le, és soha nem kerül visszaadásra; minden munkaterület ezenfelül egyszer használatos, forgatható HMAC titkot kap. Az admin hívások a gyökér bearert vagy egy hatókörrel ellátott pxa_ tokent használják.",
+          "pt-BR": "A URL de webhook de entrada do Slack ou do Discord é um segredo de bearer selado por POPOPX_VAULT_KEY e nunca retornado; cada espaço de trabalho também recebe um segredo HMAC de uso único e rotacionável. Chamadas administrativas usam o bearer raiz ou um token pxa_ com escopo.",
+          ko: "Slack 또는 Discord 인커밍 웹훅 URL은 POPOPX_VAULT_KEY로 봉인되고 절대 반환되지 않는 bearer 시크릿입니다. 각 워크스페이스에는 한 번만 표시되고 교체 가능한 HMAC 시크릿도 발급됩니다. 관리자 호출은 루트 bearer 또는 범위가 지정된 pxa_ 토큰을 사용합니다.",
+          ar: "عنوان URL للويب هوك الوارد في Slack أو Discord سر bearer مختوم بـ POPOPX_VAULT_KEY ولا يُعاد أبدًا؛ ويحصل كل مساحة عمل أيضًا على سر HMAC لمرة واحدة قابل للتدوير. والاستدعاءات الإدارية تستخدم رمز bearer الجذري أو رمز pxa_ محدود النطاق.",
         },
       },
       {
@@ -2732,6 +3080,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "POST /api/v1/plugins/slackdiscord/send изпраща текст и заглавие по HTTPS със закрепен DNS и без пренасочвания към hooks.slack.com или белия списък с хостове на Discord; всяка заявка носи X-Popopx-Timestamp и X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, а одитът пази само действие, резултат и статус.",
           tr: "POST /api/v1/plugins/slackdiscord/send metin ve başlığı HTTPS üzerinden, sabitlenmiş DNS ile ve yönlendirme izlemeden yalnızca hooks.slack.com veya Discord host izin listesine gönderir; her istek X-Popopx-Timestamp ve X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> taşır, denetimde yalnızca işlem, sonuç ve durum kalır.",
           hu: "A POST /api/v1/plugins/slackdiscord/send a szöveget és a címet HTTPS-en, rögzített DNS-sel és átirányítások követése nélkül, kizárólag a hooks.slack.com vagy a Discord engedélyezett hosztlistája felé küldi; minden kérés X-Popopx-Timestamp és X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")> fejlécet hordoz, az audit pedig csak a műveletet, az eredményt és az állapotot őrzi meg.",
+          "pt-BR": "POST /api/v1/plugins/slackdiscord/send envia texto e título via HTTPS com DNS fixado e sem redirecionamentos para hooks.slack.com ou para a lista de hosts permitidos do Discord; toda requisição carrega X-Popopx-Timestamp e X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>, e a trilha de auditoria guarda apenas ação, resultado e status.",
+          ko: "POST /api/v1/plugins/slackdiscord/send는 DNS를 고정하고 리다이렉트 없이 HTTPS로 text와 title을 hooks.slack.com 또는 Discord 호스트 허용 목록에 게시합니다. 모든 요청은 X-Popopx-Timestamp와 X-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>를 담고, 감사 추적에는 action, outcome, status만 보관됩니다.",
+          ar: "ينشر POST /api/v1/plugins/slackdiscord/send النص والعنوان عبر HTTPS مع DNS مثبّت وبلا إعادات توجيه إلى hooks.slack.com أو قائمة المضيفين المسموح بها في Discord؛ وكل طلب يحمل X-Popopx-Timestamp وX-Popopx-Signature: v1=<hex HMAC-SHA256(secret, \"<ts>.<body>\")>، وسجل التدقيق لا يحتفظ إلا بالإجراء والنتيجة والحالة.",
         },
       },
       {
@@ -2755,6 +3106,9 @@ const PLUGINS: readonly PluginModel[] = [
           bg: "10 работни пространства, 2 000 знака текст, заглавие до 200 знака и таймаут 10 s; неуспешната доставка се възстановява, а самоличност и история на канала не се четат.",
           tr: "10 çalışma alanı, 2.000 karakter metin, 200 karakter başlık ve 10 s zaman aşımı; başarısız teslimat iade edilir, kimlik veya kanal geçmişi okunmaz.",
           hu: "10 munkaterület, 2 000 karakteres szöveg, 200 karakteres cím és 10 másodperces időtúllépés; a sikertelen kézbesítés visszatérítésre kerül, személyazonosságot vagy csatornatörténetet pedig nem olvas.",
+          "pt-BR": "10 espaços de trabalho, texto de 2.000 caracteres, título de 200 caracteres e tempo limite de 10 s; uma entrega que falha é reembolsada, e nenhuma identidade ou histórico de canal é lido.",
+          ko: "워크스페이스 10개, 텍스트 2,000자, 제목 200자, 타임아웃 10초입니다. 실패한 전달은 환불되며, 신원이나 채널 기록은 읽지 않습니다.",
+          ar: "10 مساحات عمل، ونص من 2,000 حرف، وعنوان من 200 حرف، ومهلة 10 ثوانٍ؛ والتسليم الفاشل يُسترد مبلغه، ولا تُقرأ أي هوية أو سجل قناة.",
         },
       },
     ],
@@ -2802,6 +3156,9 @@ const CREDENTIAL_NOTE: Localized<string> = {
   bg: "Всяко извикване под /api/v1/plugins/* се оторизира от bearer токен в заглавката Authorization. Това е или основният POPOPX_ADMIN_TOKEN, или токен pxa_ с обхват, издаден в POST /api/v1/admin/tokens: обхватите му са core:<resource>:ro|rw, plugin:<id>:ro|rw или *, на диска се пази само хеш, а откритият текст се връща веднъж. Собствените тайни на модула са само изброените по-долу променливи на средата.",
   tr: "/api/v1/plugins/* altındaki her çağrıyı Authorization başlığındaki bearer token yetkilendirir. Bu ya kök POPOPX_ADMIN_TOKEN ya da POST /api/v1/admin/tokens üzerinden üretilen kapsamlı bir pxa_ tokenıdır: kapsamları core:<resource>:ro|rw, plugin:<id>:ro|rw ya da * olur, diskte yalnızca hash tutulur ve açık metin bir kez döner. Modülün kendine ait sırları yalnızca aşağıda listelenen ortam değişkenleridir.",
   hu: "A /api/v1/plugins/* alatti minden hívást az Authorization fejlécben küldött bearer token jogosít. Ez vagy a gyökér POPOPX_ADMIN_TOKEN, vagy a POST /api/v1/admin/tokens végponton kiadott hatókörű pxa_ token: hatókörei core:<resource>:ro|rw, plugin:<id>:ro|rw vagy *, a lemezen csak hash marad, a nyílt szöveg pedig egyszer jön vissza. A modul saját titkai csak az alább felsorolt környezeti változók.",
+  "pt-BR": "Toda chamada sob /api/v1/plugins/* é autorizada por um token bearer no header Authorization. Esse token é o POPOPX_ADMIN_TOKEN raiz ou um token pxa_ com escopo emitido em POST /api/v1/admin/tokens: seus escopos são core:<resource>:ro|rw, plugin:<id>:ro|rw ou *, ele é armazenado apenas como hash e o texto claro é retornado uma única vez. O que o módulo traz por conta própria são apenas as chaves de ambiente listadas abaixo.",
+  ko: "/api/v1/plugins/* 아래의 모든 호출은 Authorization 헤더의 bearer 토큰으로 승인됩니다. 이는 루트 POPOPX_ADMIN_TOKEN이거나 POST /api/v1/admin/tokens에서 발급된 범위 지정 pxa_ 토큰입니다: 그 범위는 core:<resource>:ro|rw, plugin:<id>:ro|rw 또는 *이며, 해시로만 저장되고 평문은 한 번만 반환됩니다. 모듈이 자체적으로 제공하는 것은 아래에 나열된 환경 키뿐입니다.",
+  ar: "كل استدعاء تحت /api/v1/plugins/* يُخوَّل برمز bearer في ترويسة Authorization. وهو إما POPOPX_ADMIN_TOKEN الجذري وإما رمز pxa_ محدود النطاق مُصدر عند POST /api/v1/admin/tokens: نطاقاته هي core:<resource>:ro|rw أو plugin:<id>:ro|rw أو *، ويُخزَّن كتجزئة فقط ويُعاد النص الواضح مرة واحدة. وما تجلبه الوحدة من عندها ليس إلا مفاتيح البيئة المسرودة أدناه.",
 };
 
 const REVOKE_NOTE: Localized<string> = {
@@ -2823,6 +3180,9 @@ const REVOKE_NOTE: Localized<string> = {
   bg: "Отменянето е превключвател, не списък с ключове: сложете булевата POPOPX_PLUGIN_* на модула на 0 и рестартирайте шлюза; след това GET /api/v1/plugins отчита модула като изключен и маршрутите му спират да отговарят. Няма какво да се отменя на ниво връзка, защото никога не се издават удостоверения за конкретна връзка.",
   tr: "İptal bir anahtardır, anahtar listesi değil: modülün POPOPX_PLUGIN_* boolean değerini 0 yapın ve ağ geçidini yeniden başlatın; ardından GET /api/v1/plugins modülü disabled olarak bildirir ve rotaları yanıt vermeyi bırakır. Bağlantı bazında iptal edilecek bir şey yok, çünkü bağlantı bazında hiçbir kimlik bilgisi dağıtılmıyor.",
   hu: "A visszavonás kapcsoló, nem kulcslista: állítsd a modul POPOPX_PLUGIN_* logikai értékét 0-ra, és indítsd újra az átkapcsolót; ezután a GET /api/v1/plugins letiltottként jelzi a modult, az útvonalai pedig nem válaszolnak többé. Kapcsolatonként nincs visszavonható dolog, mert kapcsolatonként sosem adunk ki hitelesítőt.",
+  "pt-BR": "A revogação é um interruptor, não uma lista de chaves: defina o booleano POPOPX_PLUGIN_* do módulo como 0 e reinicie o gateway; o GET /api/v1/plugins então informa o módulo como desativado e as rotas dele param de responder. Não há nada a revogar por conexão, porque nenhuma credencial por conexão chega a ser entregue.",
+  ko: "철회는 키 목록이 아니라 스위치입니다. 모듈의 POPOPX_PLUGIN_* 불리언을 0으로 설정하고 게이트웨이를 재시작하면, GET /api/v1/plugins가 해당 모듈을 비활성으로 보고하고 그 라우트가 응답을 멈춥니다. 연결별로 발급되는 자격 증명이 없으므로 연결 단위로 철회할 대상도 없습니다.",
+  ar: "الإبطال مفتاح تشغيل لا قائمة مفاتيح: اضبط القيمة المنطقية POPOPX_PLUGIN_* للوحدة على 0 وأعد تشغيل البوابة؛ وعندها يبلّغ GET /api/v1/plugins بأن الوحدة معطّلة وتتوقف مساراتها عن الاستجابة. ولا يوجد ما يُبطَل لكل اتصال، لأن أي بيانات اعتماد لكل اتصال لا تُمنح أبدًا.",
 };
 
 function CardRow({
@@ -2869,9 +3229,9 @@ function PluginPanel({ model, index }: { model: PluginModel; index: number }): R
         {/* A full-width basis below sm: the pill is a long word in German or Italian, and with
             flex-1's 0% basis the title column was left holding the 7px that the pill did not take. */}
         <div className="min-w-0 flex-1 basis-full sm:basis-0">
-          <p className="font-mono text-[11px] tracking-[0.18em] text-faint">
+          <p className="font-mono text-[11px] tracking-[0.18em] text-faint"><bdi dir="ltr">
             {number} / {model.code}
-          </p>
+            </bdi></p>
           <h3 className="mt-1.5 text-[17px] font-semibold leading-snug text-white">{name}</h3>
         </div>
         <span className="pill min-w-0 sm:shrink-0 sm:whitespace-nowrap">
@@ -2916,12 +3276,12 @@ function PluginPanel({ model, index }: { model: PluginModel; index: number }): R
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
           <span>
             {routeLabel}
-            <code className="ml-1.5 font-mono text-mesh-soft">{model.route}</code>
+            <code className="ms-1.5 font-mono text-mesh-soft">{model.route}</code>
           </span>
           <span aria-hidden>|</span>
           <span>
             {fileLabel}
-            <code className="ml-1.5 font-mono">{model.file}</code>
+            <code className="ms-1.5 font-mono">{model.file}</code>
           </span>
         </div>
       </div>
@@ -2940,7 +3300,7 @@ function StepCard({
 }): ReactElement {
   return (
     <li className="glass-inset relative p-4">
-      <p className="font-mono text-[11px] tracking-[0.18em] text-brand-soft">{number}</p>
+      <p className="font-mono text-[11px] tracking-[0.18em] text-brand-soft"><bdi dir="ltr">{number}</bdi></p>
       <h4 className="mt-1.5 text-[13.5px] font-semibold leading-snug text-white">{title}</h4>
       <p className="mt-2 text-[12.5px] leading-relaxed text-mute">{copy}</p>
     </li>
@@ -3011,7 +3371,7 @@ export function PluginsShowcase(): ReactElement {
           aria-label={filterAria}
           className="mt-8 flex flex-wrap items-center gap-2"
         >
-          <span className="eyebrow mr-1">{filterLabel}</span>
+          <span className="eyebrow me-1">{filterLabel}</span>
           {FILTER_CHIPS.map((chip) => {
             const active = chip.value === filter;
             return (
