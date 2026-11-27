@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactElement } from "react";
-import { pick, useCopy, type Localized } from "@/lib/i18n";
+import { pick, useCopy, useLocale, type Localized } from "@/lib/i18n";
 import { CodeBlock, SectionHeading, StatusDot } from "@/components/ui";
 
 /**
@@ -1362,6 +1362,7 @@ const PORTAL_MANUAL_BODY: Localized<string> = {
 };
 
 export function StatusChangelogSection(): ReactElement {
+  const { locale } = useLocale();
   const pillAsof = useCopy(PILL_ASOF);
   const pillStatic = useCopy(PILL_STATIC);
   const pillRecipe = useCopy(PILL_RECIPE);
@@ -1402,7 +1403,7 @@ export function StatusChangelogSection(): ReactElement {
                 <span aria-hidden className="absolute inset-x-0 top-0 h-px bg-brand-soft opacity-60" />
                 <p className="font-mono text-[11px] tracking-[0.18em] text-faint"><bdi dir="ltr">{stat.source}</bdi></p>
                 <p className="mt-1.5 text-[22px] font-semibold leading-tight text-white">{stat.value}</p>
-                <p className="mt-2 text-[12.5px] leading-relaxed text-mute">{pick(stat.caption, "en")}</p>
+                <p className="mt-2 text-[12.5px] leading-relaxed text-mute">{pick(stat.caption, locale)}</p>
               </div>
             ))}
           </div>

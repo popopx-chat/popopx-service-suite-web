@@ -1627,7 +1627,7 @@ export function BusinessScenarios(): ReactElement {
                   ))}
                 </ol>
 
-                <p className="font-mono text-[10.5px] leading-relaxed text-faint">
+                <p dir="ltr" className="font-mono text-[10.5px] leading-relaxed text-faint">
                   {scenario.tech}
                 </p>
 

@@ -243,15 +243,15 @@ export function LanguageMenu({
           role="group"
           aria-label={groupLabel}
           className={`glass animate-rise-in absolute z-50 mt-2 w-[min(92vw,420px)] p-2 ${
-            align === "right" ? "end-0" : "start-0"
-          }`}
+            compact ? "max-w-full" : ""
+          } ${align === "right" ? "end-0" : "start-0"}`}
         >
           <p className="eyebrow px-2 pb-1 pt-1.5">
             {groupLabel} · {LOCALE_COUNT}
           </p>
           <div
             ref={listRef}
-            className="grid max-h-[52vh] grid-cols-2 gap-1 overflow-y-auto sm:grid-cols-3"
+            className="grid max-h-[52vh] grid-cols-1 gap-1 overflow-y-auto sm:grid-cols-2"
           >
             {LOCALES.map((code) => {
               const active = code === locale;
