@@ -200,7 +200,11 @@ The engine is `src/lib/i18n.tsx`, mounted as the `<LocaleProvider>` that wraps t
   or `<bdi dir="ltr">` (keeping the surrounding logical alignment), the directory's address and
   contact inputs take `dir="ltr"`, and the dropdown anchors with `start`/`end`. The hero's decorative
   topology keeps physical `left`/`right` on purpose — its labels are attached to hand-drawn lines —
-  and the RTL gate allowlists exactly those classes.
+  and the RTL gate allowlists exactly those classes. Translated prose keeps its technical tokens LTR
+  too: `pick()` passes every string rendered for `ar` through `isolateBidiRuns()`, which wraps each
+  ASCII run in U+2066/U+2069 (LRI/PDI), so `/api/v1/…`, `?token=`, `POPX-CP_*` and `>=` cannot have
+  their leading punctuation flipped by the bidi algorithm. The language menu's endonyms carry `<bdi>`
+  for the same reason.
 - The language menu calls each language by its own name (`LOCALE_NATIVE`: English, Deutsch, 日本語,
   简体中文, Português (Brasil), 한국어, العربية and so on); the compact capsule uses `LOCALE_SHORT`,
   at most three characters per tag (`简`, `繁`, `EN`, `PT`, `KO`, `AR` and the like).
@@ -218,8 +222,9 @@ The engine is `src/lib/i18n.tsx`, mounted as the `<LocaleProvider>` that wraps t
 - `npm run check:rtl` (`tools/check-rtl.mjs`) proves the right-to-left contract in the source: the
   21-locale registry agrees with `check-i18n.mjs`, `ar` is in the RTL list, `LocaleProvider` writes
   `dir` and `lang`, the SSR document carries the default `lang="zh-Hans" dir="ltr"`, code surfaces are
-  isolated LTR, and no physical direction utility appears outside the allowlist. `--self-test` proves
-  the predicates reject bad input (12/12 on this tree).
+  isolated LTR, `pick()` routes `ar` strings through the LRI/PDI isolation, and no physical direction
+  utility appears outside the allowlist. `--self-test` proves the predicates reject bad input
+  (13/13 on this tree).
 
 ## Privacy and self-host guarantees
 

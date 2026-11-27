@@ -177,7 +177,10 @@ vhost 的 `error_page` 指的就是它），带内容指纹的打包产物在 `o
   状态徽章随页面镜像。技术性内容保持 LTR：`code`、`pre`、`kbd`、`samp` 由 `globals.css` 统一隔离，
   代码块与等宽值用 `dir="ltr"` 或 `<bdi dir="ltr">`（后者保留外层的逻辑对齐），目录的地址与联系人
   输入框带 `dir="ltr"`，下拉菜单用 `start`/`end` 锚定。英雄区的装饰拓扑有意保留物理 `left`/`right`
-  ——标签是贴着画出来的连线摆放的——RTL 门禁只放行这几个类。
+  ——标签是贴着画出来的连线摆放的——RTL 门禁只放行这几个类。翻译正文里的技术 token 也保持 LTR：
+  `pick()` 会把 `ar` 渲染的每个字符串交给 `isolateBidiRuns()`，把每段 ASCII 用 U+2066/U+2069
+  （LRI/PDI）包起来，所以 `/api/v1/…`、`?token=`、`POPX-CP_*`、`>=` 的首尾标点不会被双向算法翻到
+  错误一端。语言菜单里的自称同样包了 `<bdi>`。
 - 语言菜单用自己的文字称呼自己（`LOCALE_NATIVE`：English、Deutsch、日本語、简体中文、
   Português (Brasil)、한국어、العربية 等），紧凑胶囊用 `LOCALE_SHORT`（`简` / `繁` / `EN` / `PT` /
   `KO` / `AR` 这种最多三字符的写法）。
@@ -192,8 +195,8 @@ vhost 的 `error_page` 指的就是它），带内容指纹的打包产物在 `o
   28 warning。加 `--quiet` 就只打印最后两行汇总，不打印逐条明细。
 - `npm run check:rtl`（`tools/check-rtl.mjs`）在源码层证明 RTL 契约：21 语言注册表与
   `check-i18n.mjs` 一致、`ar` 在 RTL 列表里、`LocaleProvider` 会写 `dir` 与 `lang`、首屏文档带着
-  默认的 `lang="zh-Hans" dir="ltr"`、代码类表面隔离为 LTR、允许名单之外不出现物理方向工具类；
-  `--self-test` 先证明判定器本身能拒绝坏输入（当前代码树 12/12）。
+  默认的 `lang="zh-Hans" dir="ltr"`、代码类表面隔离为 LTR、`pick()` 对 `ar` 字符串做 LRI/PDI 隔离、
+  允许名单之外不出现物理方向工具类；`--self-test` 先证明判定器本身能拒绝坏输入（当前代码树 13/13）。
 
 ## 隐私与自托管保证
 

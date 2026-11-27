@@ -70,6 +70,21 @@ function rtlLocales(source) {
   return m ? quotedList(m[0]) : [];
 }
 
+function bidiIsolation(source) {
+  const m = source.match(/export function isolateBidiRuns[\s\S]*?\n\}/);
+  if (!m) return false;
+  return (
+    m[0].includes('if (locale !== "ar")') &&
+    /\[!-~\]\+/.test(m[0]) &&
+    m[0].includes("\\u2066") &&
+    m[0].includes("\\u2069")
+  );
+}
+
+function pickAppliesIsolation(source) {
+  return /const result = resolved[\s\S]*?typeof result === "string"[\s\S]*?isolateBidiRuns\(result, locale\)/.test(source);
+}
+
 function ssrTag(html) {
   // Comments in layout.tsx quote `<html lang>`; only a tag that actually
   // carries a lang attribute is the document element.
@@ -98,6 +113,17 @@ function selfTest() {
       true,
     ],
     ["css without direction", cssIsolation("code, pre { color: red; }"), false],
+    [
+      "bidi run isolation",
+      (() => {
+        const wrap = (text) => text.replace(/[!-~]+/g, (run) => `\u2066${run}\u2069`);
+        return (
+          wrap("افتح /api/v1 ثم") === "افتح \u2066/api/v1\u2069 ثم" &&
+          wrap("نص عربي") === "نص عربي"
+        );
+      })(),
+      true,
+    ],
     ["ssr tag keeps lang", ssrTag('<html lang="zh-Hans" dir="ltr">')?.lang === "zh-Hans", true],
     ["ssr tag skips a comment mention", ssrTag('`<html lang>` then <html lang="zh-Hans" dir="ltr">')?.lang === "zh-Hans", true],
     ["ssr tag without lang", ssrTag('<html dir="ltr">') === null, true],
@@ -130,6 +156,15 @@ if (process.argv.includes("--self-test")) {
   }
   if (!/tag === "pt" \|\| tag\.startsWith\("pt-"\)/.test(i18n)) {
     errors.push('src/lib/i18n.tsx: detectLocale has no pt/pt-* → pt-BR branch');
+  }
+  if (!bidiIsolation(i18n)) {
+    errors.push("src/lib/i18n.tsx: isolateBidiRuns is missing or no longer wraps ASCII runs for ar");
+  }
+  if (!pickAppliesIsolation(i18n)) {
+    errors.push("src/lib/i18n.tsx: pick() does not route rendered ar strings through isolateBidiRuns");
+  }
+  if (!/<bdi>\{LOCALE_NATIVE\[code\]\}<\/bdi>/.test(read("src/components/LanguageMenu.tsx"))) {
+    errors.push("src/components/LanguageMenu.tsx: menu endonyms are not isolated with <bdi>");
   }
   if (!squash(i18n).includes('root.dir = isRightToLeft(locale) ? "rtl" : "ltr";')) {
     errors.push("src/lib/i18n.tsx: LocaleProvider does not write root.dir from isRightToLeft");
